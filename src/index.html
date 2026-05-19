@@ -1,993 +1,588 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Investor Profiling by Your MFD</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --gold: #C9982A; --gold-light: #F0C84A; --gold-pale: rgba(201,152,42,0.12);
-  --cream: #FBF6EC; --dark: #1A1208; --mid: #4A2E0A; --muted: #8C7355;
-  --card: #FFFDF7; --border: rgba(201,152,42,0.25); --shadow: 0 8px 40px rgba(26,18,8,0.12);
-  --green: #2E7D52; --blue: #1E5FA8; --red: #B84040;
-}
-html { scroll-behavior: smooth; }
-body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--dark); min-height: 100vh; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
-body::before { content: ''; position: fixed; inset: 0; z-index: 0; background: radial-gradient(ellipse 80% 60% at 10% 0%, rgba(201,152,42,0.07) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 90% 100%, rgba(201,152,42,0.06) 0%, transparent 60%); pointer-events: none; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About · Vegi Ramesh · ARN-349739</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:         #0b0f1a;
+      --surface:    #111827;
+      --surface2:   #1a2236;
+      --border:     rgba(255,255,255,0.07);
+      --accent:     #c8a96e;
+      --accent-dim: rgba(200,169,110,0.15);
+      --accent-glow:rgba(200,169,110,0.08);
+      --text:       #e8e4dc;
+      --muted:      #8a9ab5;
+      --danger:     #e05c5c;
+      --safe:       #4caf82;
+      --neutral:    #6b8cba;
+      --warn:       #e0a34a;
+      --serif:      'Cormorant Garamond', Georgia, serif;
+      --sans:       'DM Sans', sans-serif;
+    }
 
-/* HEADER */
-header { width: 100%; background: linear-gradient(135deg, #1A1208 0%, #3A2208 60%, #1A1208 100%); border-bottom: 2px solid var(--gold); padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; position: relative; overflow: hidden; z-index: 10; }
-header::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 24px, rgba(201,152,42,0.04) 24px, rgba(201,152,42,0.04) 25px); pointer-events: none; }
-.logo { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px,4vw,28px); font-weight: 700; color: #fff; position: relative; z-index: 1; }
-.logo span { color: var(--gold-light); }
-.logo-sub { font-size: clamp(8px,1.5vw,10px); font-weight: 300; color: rgba(255,255,255,0.5); letter-spacing: 3px; text-transform: uppercase; margin-top: 2px; }
-.arn { font-size: 10px; font-weight: 500; color: var(--gold-light); border: 1px solid rgba(201,152,42,0.4); background: rgba(201,152,42,0.1); padding: 4px 12px; border-radius: 20px; letter-spacing: 1px; position: relative; z-index: 1; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-main { width: 100%; max-width: 780px; padding: 40px 20px 60px; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+    html { scroll-behavior: smooth; }
 
-/* INTRO */
-#sectionIntro { width: 100%; display: flex; flex-direction: column; align-items: center; animation: fadeUp 0.6s ease both; }
-.intro-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; text-align: center; }
-.intro-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,6vw,52px); font-weight: 700; line-height: 1.1; color: var(--dark); text-align: center; margin-bottom: 14px; }
-.intro-title em { font-style: italic; color: var(--mid); }
-.intro-sub { font-size: 14px; color: var(--muted); font-weight: 300; text-align: center; margin-bottom: 36px; max-width: 520px; line-height: 1.7; }
-.intro-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; width: 100%; margin-bottom: 36px; }
-@media(max-width:480px){ .intro-stats { grid-template-columns: 1fr; } }
-.intro-stat { background: var(--card); border: 1.5px solid var(--border); border-radius: 14px; padding: 18px 16px; text-align: center; }
-.intro-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: var(--gold); }
-.intro-stat-label { font-size: 11px; color: var(--muted); margin-top: 3px; font-weight: 300; line-height: 1.4; }
-.start-btn { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--dark); font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; padding: 14px 40px; border-radius: 40px; border: none; cursor: pointer; box-shadow: 0 6px 24px rgba(201,152,42,0.35); transition: all 0.2s; letter-spacing: 0.5px; }
-.start-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(201,152,42,0.5); }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* QUIZ */
-#sectionQuiz { width: 100%; display: none; flex-direction: column; align-items: center; }
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11,15,26,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-brand {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.03em;
+    }
+    .nav-brand span { color: var(--accent); font-style: italic; }
+    .nav-arn {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
 
-/* PROGRESS */
-.progress-shell { width: 100%; margin-bottom: 32px; }
-.progress-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.progress-label { font-size: 11px; font-weight: 600; color: var(--gold); letter-spacing: 1px; }
-.progress-pct { font-size: 11px; color: var(--muted); }
-.progress-track { height: 4px; background: rgba(201,152,42,0.18); border-radius: 2px; overflow: hidden; }
-.progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 2px; transition: width 0.5s ease; width: 0%; }
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: clamp(4rem, 10vw, 7rem) clamp(1.5rem, 5vw, 4rem) clamp(3rem, 7vw, 5rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(200,169,110,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after { content: ' ✦ '; opacity: 0.6; }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: 1.4rem;
+      color: var(--text);
+    }
+    .hero h1 em { color: var(--accent); font-style: italic; }
+    .hero-sub {
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+      font-weight: 300;
+    }
+    .divider-star {
+      color: var(--accent);
+      opacity: 0.4;
+      font-size: 1.2rem;
+      letter-spacing: 0.5rem;
+      margin: 2rem 0;
+    }
 
-/* STEP DOTS */
-.step-dots { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
-.step-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(201,152,42,0.2); transition: all 0.3s; }
-.step-dot.done { background: var(--gold); }
-.step-dot.active { background: var(--gold-light); width: 24px; border-radius: 4px; }
+    /* ── SECTION WRAPPER ── */
+    .section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 2rem);
+    }
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .section h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 1.8rem;
+      color: var(--text);
+    }
+    .section h2 em { color: var(--accent); font-style: italic; }
 
-/* Q CARD */
-.q-wrap { width: 100%; animation: fadeUp 0.45s ease both; }
-.q-category-pill { display: inline-flex; align-items: center; gap: 7px; background: linear-gradient(135deg, rgba(201,152,42,0.15), rgba(201,152,42,0.05)); border: 1px solid rgba(201,152,42,0.3); color: var(--gold); font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 18px; }
-.q-card { background: var(--card); border: 1.5px solid var(--border); border-radius: 18px; padding: 28px 28px 24px; box-shadow: var(--shadow); margin-bottom: 20px; }
-.q-num { font-size: 10px; font-weight: 600; color: var(--gold); letter-spacing: 2px; margin-bottom: 8px; }
-.q-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px,3.5vw,24px); font-weight: 700; color: var(--dark); line-height: 1.35; margin-bottom: 6px; }
-.q-hint { font-size: 12px; color: var(--muted); font-weight: 300; margin-bottom: 20px; line-height: 1.5; font-style: italic; }
-.q-options { display: flex; flex-direction: column; gap: 10px; }
-.q-opt {
-  display: flex; align-items: flex-start; gap: 12px; cursor: pointer;
-  padding: 13px 16px; border-radius: 10px; border: 1.5px solid transparent;
-  background: rgba(201,152,42,0.04); transition: all 0.18s;
-  user-select: none; position: relative; overflow: hidden;
-}
-.q-opt::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, var(--gold-pale), transparent); opacity: 0; transition: opacity 0.2s; }
-.q-opt:hover { border-color: rgba(201,152,42,0.4); background: rgba(201,152,42,0.07); }
-.q-opt:hover::before { opacity: 1; }
-.q-opt.selected { border-color: var(--gold); background: linear-gradient(90deg, rgba(201,152,42,0.12), rgba(201,152,42,0.03)); }
-.q-opt.selected::before { opacity: 1; }
-.q-opt-radio { width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(201,152,42,0.4); flex-shrink: 0; margin-top: 1px; background: #fff; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
-.q-opt.selected .q-opt-radio { border-color: var(--gold); background: var(--gold); }
-.q-opt.selected .q-opt-radio::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff; display: block; }
-.q-opt-body { flex: 1; position: relative; z-index: 1; }
-.q-opt-label { font-size: 14px; font-weight: 500; color: var(--dark); line-height: 1.35; }
-.q-opt-sub { font-size: 11px; color: var(--muted); font-weight: 300; margin-top: 2px; line-height: 1.4; }
+    /* ── PROSE BLOCKS ── */
+    .prose p {
+      color: #b8bfcc;
+      font-weight: 300;
+      font-size: 1.02rem;
+      margin-bottom: 1.1rem;
+    }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+    .prose em { color: var(--accent); font-style: italic; }
 
-/* NAV */
-.q-nav { display: flex; align-items: center; width: 100%; margin-top: 4px; }
-.nav-btn { font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; padding: 11px 28px; border-radius: 30px; cursor: pointer; transition: all 0.2s; outline: none; border: none; }
-.btn-back { background: transparent; border: 1.5px solid var(--border); color: var(--muted); }
-.btn-back:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-pale); }
+    /* ── PILLAR CARDS ── */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+    .pillar {
+      background: var(--surface);
+      padding: 1.8rem 1.6rem;
+      transition: background 0.2s;
+    }
+    .pillar:hover { background: var(--surface2); }
+    .pillar-icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+    .pillar h3 {
+      font-family: var(--serif);
+      font-size: 1.18rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .pillar p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.6;
+    }
 
-/* RESULT */
-#sectionResult { width: 100%; display: none; flex-direction: column; align-items: center; gap: 22px; animation: fadeUp 0.6s ease both; }
+    /* ── HIGHLIGHT QUOTE ── */
+    .quote-block {
+      border-left: 3px solid var(--accent);
+      background: var(--accent-glow);
+      border-radius: 0 10px 10px 0;
+      padding: 1.4rem 1.8rem;
+      margin: 2rem 0;
+    }
+    .quote-block p {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.5;
+    }
 
-.res-banner { width: 100%; background: linear-gradient(135deg, #1A1208, #3A2208); border-radius: 20px; border: 2px solid var(--gold); overflow: hidden; box-shadow: 0 12px 48px rgba(26,18,8,0.2); position: relative; animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
-.res-banner::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 22px, rgba(201,152,42,0.04) 22px, rgba(201,152,42,0.04) 23px); pointer-events: none; }
-.res-banner-inner { position: relative; z-index: 1; padding: 28px 32px 24px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-.res-icon { width: 60px; height: 60px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; box-shadow: 0 6px 20px rgba(201,152,42,0.4); }
-.res-text-block { flex: 1; min-width: 200px; }
-.res-eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 4px; }
-.res-profile-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px,4.5vw,30px); font-weight: 700; color: #fff; line-height: 1.15; }
-.res-profile-tag { font-size: 11.5px; color: var(--gold-light); opacity: 0.85; margin-top: 4px; font-weight: 300; letter-spacing: 0.5px; }
-.res-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-.res-badge { background: rgba(201,152,42,0.18); border: 1px solid rgba(201,152,42,0.35); color: var(--gold-light); font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; }
+    /* ── SEPARATOR ── */
+    hr.section-sep {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
 
-/* PIE + ALLOC */
-.alloc-card { width: 100%; background: var(--card); border: 1.5px solid var(--border); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow); }
-.alloc-card-head { padding: 18px 24px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
-.alloc-card-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
-.alloc-card-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: var(--dark); }
-.alloc-card-sub { font-size: 11px; color: var(--muted); font-weight: 300; }
-.alloc-body { padding: 24px; display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; }
-@media(max-width:480px){ .alloc-body { grid-template-columns: 1fr; justify-items: center; } }
-.pie-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-#pieCanvas { border-radius: 50%; filter: drop-shadow(0 4px 16px rgba(26,18,8,0.12)); }
-.pie-cap { font-size: 9px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
-.alloc-rows { display: flex; flex-direction: column; gap: 12px; width: 100%; }
-.alloc-row { display: flex; align-items: center; gap: 10px; }
-.alloc-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.alloc-meta { display: flex; justify-content: space-between; width: 140px; flex-shrink: 0; }
-.alloc-name { font-size: 13px; font-weight: 500; color: var(--dark); }
-.alloc-pct { font-size: 13px; font-weight: 700; color: var(--mid); }
-.alloc-bar-wrap { flex: 1; height: 6px; background: rgba(0,0,0,0.06); border-radius: 3px; overflow: hidden; }
-.alloc-bar { height: 100%; border-radius: 3px; width: 0; transition: width 1.2s cubic-bezier(0.22,1,0.36,1); }
-.alloc-ideal { margin: 0 24px 20px; background: linear-gradient(90deg, rgba(201,152,42,0.1), transparent); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: 13px; color: var(--mid); font-style: italic; line-height: 1.5; }
+    /* ── WHY MF TABLE ── */
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      min-width: 680px;
+    }
+    thead tr {
+      background: var(--surface2);
+    }
+    thead th {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+    thead th:first-child { color: var(--text); }
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface2); }
+    tbody td {
+      padding: 0.95rem 1rem;
+      vertical-align: top;
+      color: #b8bfcc;
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    tbody td:first-child {
+      font-weight: 500;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .tag {
+      display: inline-block;
+      padding: 0.18rem 0.55rem;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+    .tag-bad   { background: rgba(224,92,92,0.15);  color: #e07a7a; }
+    .tag-warn  { background: rgba(224,163,74,0.15); color: #e0b86a; }
+    .tag-ok    { background: rgba(107,140,186,0.15);color: #8aaad4; }
+    .tag-good  { background: rgba(76,175,130,0.15); color: #5ec99a; }
 
+    /* ── STOPPER SECTION ── */
+    .stopper-card {
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+      border: 1px solid rgba(200,169,110,0.2);
+      border-radius: 14px;
+      padding: clamp(2rem, 5vw, 3rem);
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .stopper-card::before {
+      content: '✦';
+      position: absolute;
+      right: 2rem;
+      top: 1.5rem;
+      font-size: 5rem;
+      color: var(--accent);
+      opacity: 0.06;
+      line-height: 1;
+    }
 
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+      text-align: center;
+    }
+    .footer-brand {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-disc {
+      font-size: 0.72rem;
+      color: #4a5568;
+      max-width: 700px;
+      margin: 1rem auto 0;
+      line-height: 1.6;
+    }
 
-/* START STRIP */
-.start-strip { width: 100%; background: var(--dark); border-radius: 12px; padding: 16px 24px; text-align: center; font-size: clamp(13px,2.5vw,15px); font-weight: 500; color: var(--gold-light); line-height: 1.5; }
-.start-strip span { color: #fff; font-weight: 600; }
-
-/* CONTACT */
-.contact-banner { width: 100%; background: linear-gradient(135deg, #1A1208 0%, #3D2509 50%, #1A1208 100%); border-radius: 16px; border: 1.5px solid var(--gold); overflow: hidden; box-shadow: 0 8px 32px rgba(26,18,8,0.18); position: relative; }
-.contact-banner::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 22px, rgba(201,152,42,0.04) 22px, rgba(201,152,42,0.04) 23px); pointer-events: none; }
-.contact-banner-top { padding: 20px 28px 16px; text-align: center; border-bottom: 1px solid rgba(201,152,42,0.2); position: relative; z-index: 1; }
-.contact-banner-eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 6px; }
-.contact-banner-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px,4.5vw,28px); font-weight: 700; color: #fff; }
-.contact-banner-title span { color: var(--gold-light); }
-.contact-banner-sub { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 5px; font-weight: 300; }
-.contact-banner-items { display: flex; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
-.contact-banner-item { flex: 1; min-width: 160px; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 18px 20px; border-right: 1px solid rgba(201,152,42,0.15); transition: background 0.2s; text-decoration: none; }
-.contact-banner-item:last-child { border-right: none; }
-.contact-banner-item:hover { background: rgba(201,152,42,0.07); }
-.contact-banner-item a { color: inherit; text-decoration: none; }
-.cbi-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; color: #1A1208; font-weight: 700; box-shadow: 0 3px 10px rgba(201,152,42,0.35); }
-.cbi-label { font-size: 9px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); }
-.cbi-value { font-size: 13px; font-weight: 600; color: #fff; text-align: center; }
-@media(max-width:480px){ .contact-banner-items { flex-direction: column; } .contact-banner-item { border-right: none; border-bottom: 1px solid rgba(201,152,42,0.15); } .contact-banner-item:last-child { border-bottom: none; } }
-
-/* DOCS */
-.docs-section { width: 100%; background: var(--card); border: 1.5px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(26,18,8,0.08); }
-.docs-header { padding: 18px 24px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
-.docs-header-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; box-shadow: 0 3px 10px rgba(201,152,42,0.3); }
-.docs-eyebrow { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 2px; }
-.docs-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: var(--dark); }
-.docs-subtitle { font-size: 11.5px; color: var(--muted); font-weight: 300; padding: 10px 24px 14px; border-bottom: 1px solid var(--border); line-height: 1.5; }
-.docs-body { padding: 16px 24px 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; }
-@media(max-width:500px){ .docs-body { grid-template-columns: 1fr; } }
-.docs-item { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px dashed rgba(201,152,42,0.15); }
-.docs-check { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 5px; flex-shrink: 0; margin-top: 1px; position: relative; background: #fff; cursor: pointer; transition: all 0.2s; }
-.docs-check:hover { border-color: var(--gold); }
-.docs-check.checked { background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-color: var(--gold); }
-.docs-check.checked::after { content: '✓'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #1A1208; }
-.docs-item-name { font-size: 13px; font-weight: 600; color: var(--dark); }
-.docs-item-hint { font-size: 10.5px; color: var(--muted); font-weight: 300; margin-top: 1px; }
-.docs-nominee-block { grid-column: 1/-1; background: linear-gradient(135deg, rgba(201,152,42,0.06), rgba(201,152,42,0.02)); border: 1px solid rgba(201,152,42,0.2); border-radius: 10px; overflow: hidden; margin-top: 8px; }
-.docs-nominee-header { padding: 8px 14px; background: rgba(201,152,42,0.1); border-bottom: 1px solid rgba(201,152,42,0.15); display: flex; align-items: center; gap: 7px; }
-.docs-nominee-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); }
-.docs-nominee-grid { display: grid; grid-template-columns: 1fr 1fr; padding: 8px 14px 12px; gap: 0 20px; }
-@media(max-width:400px){ .docs-nominee-grid { grid-template-columns: 1fr; } }
-.docs-nominee-item { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px dashed rgba(201,152,42,0.1); }
-.docs-nominee-item:last-child { border-bottom: none; }
-.docs-progress-wrap { padding: 12px 24px 16px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
-.docs-progress-bar-outer { flex: 1; height: 6px; background: rgba(0,0,0,0.07); border-radius: 3px; overflow: hidden; }
-.docs-progress-bar-inner { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 3px; width: 0%; transition: width 0.4s ease; }
-.docs-progress-label { font-size: 11px; font-weight: 600; color: var(--gold); white-space: nowrap; }
-
-.kyc-section-label { font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:16px 0 8px;padding-top:14px;border-top:1px dashed rgba(201,152,42,0.2); }
-.kyc-section-label:first-of-type { border-top:none; margin-top:12px; }
-.kyc-grid { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
-@media(max-width:500px){ .kyc-grid { grid-template-columns:1fr; } }
-.kyc-field { display:flex;flex-direction:column;gap:4px; }
-.kyc-field--full { grid-column:1/-1; }
-.kyc-label { font-size:11px;font-weight:600;color:var(--mid);display:flex;align-items:baseline;gap:5px; }
-.kyc-hint { font-size:10px;font-weight:300;color:var(--muted);font-style:italic; }
-.kyc-input { font-family:'Outfit',sans-serif;font-size:13px;font-weight:400;color:var(--dark);background:#fff;border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;outline:none;transition:border-color 0.2s,box-shadow 0.2s;width:100%; }
-.kyc-input:focus { border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,152,42,0.12); }
-.kyc-input::placeholder { color:rgba(140,115,85,0.45); }
-.kyc-privacy-note { font-size:11.5px;color:var(--muted);font-style:italic;line-height:1.6;background:var(--gold-pale);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:9px 13px;margin-top:16px; }
-
-.investor-type-btn { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600; padding: 13px 28px; border-radius: 40px; cursor: pointer; transition: all 0.2s; border: none; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--dark); box-shadow: 0 4px 16px rgba(201,152,42,0.3); flex: 1; min-width: 200px; }
-.investor-type-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,152,42,0.45); }
-.investor-type-btn--secondary { background: transparent; border: 1.5px solid var(--border); color: var(--muted); box-shadow: none; }
-.investor-type-btn--secondary:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-pale); box-shadow: none; }
-
-.reset-btn { background: transparent; border: 1.5px solid var(--border); color: var(--muted); font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500; padding: 10px 24px; border-radius: 30px; cursor: pointer; transition: all 0.2s; }
-.reset-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-pale); }
-
-/* SHARE CARD */
-.share-card { width: 100%; background: var(--card); border: 1.5px solid var(--border); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow); }
-.share-card-head { padding: 18px 24px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
-.share-card-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
-.share-card-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: var(--dark); }
-.share-card-sub { font-size: 11px; color: var(--muted); font-weight: 300; }
-.share-card-body { padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 12px; }
-.share-note { font-size: 12.5px; color: var(--muted); font-weight: 300; line-height: 1.6; background: var(--gold-pale); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: 10px 14px; }
-.share-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-.share-btn { display: inline-flex; align-items: center; gap: 9px; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600; padding: 13px 24px; border-radius: 40px; cursor: pointer; text-decoration: none; border: none; transition: all 0.2s; flex: 1; justify-content: center; min-width: 160px; }
-.share-btn-wa { background: #25D366; color: #fff; box-shadow: 0 4px 16px rgba(37,211,102,0.3); }
-.share-btn-wa:hover { background: #20c05c; box-shadow: 0 6px 22px rgba(37,211,102,0.45); transform: translateY(-1px); }
-.share-btn-gmail { background: #fff; color: #3c4043; border: 1.5px solid #dadce0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-.share-btn-gmail:hover { background: #f8f9fa; box-shadow: 0 4px 14px rgba(0,0,0,0.13); transform: translateY(-1px); }
-.share-btn-email { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--dark); box-shadow: 0 4px 16px rgba(201,152,42,0.3); }
-.share-btn-email:hover { box-shadow: 0 6px 22px rgba(201,152,42,0.45); transform: translateY(-1px); }
-.share-btn-icon { font-size: 18px; line-height: 1; }
-
-footer { width: 100%; background: linear-gradient(135deg, #1A1208, #3A2208); border-top: 2px solid var(--gold); padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; position: relative; z-index: 10; margin-top: auto; }
-.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 700; color: #fff; }
-.footer-brand span { color: var(--gold-light); }
-.footer-contacts { display: flex; gap: 18px; flex-wrap: wrap; }
-.fci { display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.75); font-size: 11px; }
-.fcicon { width: 18px; height: 18px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; color: #1A1208; }
-.footer-disc { width: 100%; font-size: 8px; color: rgba(255,255,255,0.3); text-align: center; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 8px; margin-top: 4px; line-height: 1.6; }
-
-@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes popIn { 0% { opacity: 0; transform: scale(0.88); } 70% { transform: scale(1.02); } 100% { opacity: 1; transform: scale(1); } }
-</style>
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up {
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+    }
+    .fade-up:nth-child(1) { animation-delay: 0.1s; }
+    .fade-up:nth-child(2) { animation-delay: 0.25s; }
+    .fade-up:nth-child(3) { animation-delay: 0.4s; }
+  </style>
 </head>
 <body>
 
-<header>
-  <div>
-    <div class="logo">Mutual Fund and NPS distribution services by <span>Vegi</span> Ramesh</div>
-    <div class="logo-sub">Smart Investing · Bright Futures</div>
-  </div>
-  <div class="arn">ARN-349739</div>
-  <div class="arn"><a href="" target="_blank">About Me</a></div>
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Vegi <span>Ramesh</span></div>
+  <div class="nav-arn">✦ ARN-349739</div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">About Me & The Ecosystem</div>
+  <h1>Your wealth,<br>protected from <em>hype & fear.</em></h1>
+  <p class="hero-sub">Not just a distributor. Someone who puts your money's growth before his own commissions.</p>
+  <div class="divider-star">✦ ✦ ✦</div>
 </header>
 
-<main>
+<hr class="section-sep">
 
-<!-- INTRO -->
-<div id="sectionIntro">
-  <div class="intro-eyebrow">Investor Profiling</div>
-  <h1 class="intro-title">Find Your <em>Perfect Portfolio</em></h1>
-  <p class="intro-sub">Answer 10 carefully chosen questions. We'll identify your risk profile, investing style, and recommend the right funds — built specifically for how you think about money.</p>
-  <div class="intro-stats">
-    <div class="intro-stat"><div class="intro-stat-num">10</div><div class="intro-stat-label">Smart questions<br>by an MFD, for investors</div></div>
-    <div class="intro-stat"><div class="intro-stat-num">4</div><div class="intro-stat-label">Investor profiles<br>to match your mindset</div></div>
-    <div class="intro-stat"><div class="intro-stat-num">~3</div><div class="intro-stat-label">Minutes to complete<br>&amp; get your portfolio</div></div>
+<!-- WHO IS AN MFD -->
+<section class="section">
+  <div class="section-label">The Role</div>
+  <h2>Who is an <em>MFD?</em></h2>
+  <div class="prose">
+    <p>An MFD — a Mutual Fund Distributor — is someone who helps you invest in mutual funds. Officially, we are registered intermediaries who guide investors toward fund choices and facilitate transactions. But that's the regulatory definition. The human one is more layered.</p>
+    <p>Because here's the truth: most of the world will keep pitching active funds — often with glossy brochures and last year's return charts. The industry runs on commissions, and higher-cost funds often pay higher commissions. <strong>That's the reality no one puts in a brochure.</strong></p>
   </div>
-  <button class="start-btn" id="startBtn">Begin Profiling ✦</button>
-</div>
+</section>
 
-<!-- QUIZ -->
-<div id="sectionQuiz">
-  <div class="progress-shell">
-    <div class="progress-top">
-      <span class="progress-label" id="progLabel">Question 1 of 10</span>
-      <span class="progress-pct" id="progPct">0% complete</span>
+<hr class="section-sep">
+
+<!-- WHY MFD AT ALL -->
+<section class="section">
+  <div class="section-label">Why you need one</div>
+  <h2>Why an MFD <em>at all?</em></h2>
+  <p class="prose" style="color:#8a9ab5; font-weight:300; margin-bottom:1.8rem; font-size:1.02rem;">
+    Yes — you can open a Zerodha or Groww account, pick a Nifty 50 index fund, set up an SIP, and you're done. It is not complicated. So why would you need anyone?
+    <br><br>
+    Because the hardest part of investing is never the steps. <strong style="color:var(--text)">It is always what goes on in your head.</strong>
+  </p>
+
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-icon">⚖️</div>
+      <h3>Your costs, watched closely</h3>
+      <p>Fund costs can quietly change over time. New, cheaper options keep coming. Most people invest once and never check again — and slowly, money leaks out in fees they did not notice. I keep an eye on that so you do not have to.</p>
     </div>
-    <div class="progress-track"><div class="progress-fill" id="progFill"></div></div>
-  </div>
-  <div class="step-dots" id="stepDots"></div>
-  <div id="qArea"></div>
-  <div class="q-nav">
-    <button class="nav-btn btn-back" id="backBtn">← Back</button>
-  </div>
-</div>
-
-<!-- RESULT -->
-<div id="sectionResult">
-  <div class="res-banner">
-    <div class="res-banner-inner">
-      <div class="res-icon" id="resIcon">🌱</div>
-      <div class="res-text-block">
-        <div class="res-eyebrow">Your Investor Profile</div>
-        <div class="res-profile-name" id="resName">—</div>
-        <div class="res-profile-tag" id="resTag">—</div>
-        <div class="res-badges" id="resBadges"></div>
-      </div>
+    <div class="pillar">
+      <div class="pillar-icon">🔇</div>
+      <h3>Protection from the hype</h3>
+      <p>Every few months, there is a new "star" fund manager or a hot new theme. The story sounds exciting. But the hype builds, money pours in at the top, and ordinary investors are left with losses when the story fades. I am the calm voice that says: <em>we do not need this.</em></p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🧭</div>
+      <h3>Keeping your plan on track</h3>
+      <p>When markets fall, most people want to run. When markets rise, most people want to put everything in. Both choices feel right in the moment — but both tend to hurt returns. Someone outside the emotion needs to keep the plan steady. That is my job.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">📵</div>
+      <h3>Turn off investment YouTube</h3>
+      <p>The more investment videos you watch on media, the more investment ads follow you. This is not a coincidence — it is the algorithm doing exactly what it is designed to do. <strong>You are not being taught. You are being sold to.</strong> Keep investment decisions to one trusted conversation — here.</p>
     </div>
   </div>
-	
-  <!-- UNIFIED SHARE + KYC CARD -->
-  <div class="share-card" id="shareCard">
-    <div class="share-card-head">
-      <div class="share-card-icon">📤</div>
-      <div>
-        <div class="share-card-title">Share Your Profile</div>
-        <div class="share-card-sub">Send your results to Vegi Ramesh</div>
-      </div>
-    </div>
-    <div class="share-card-body">
+</section>
 
-      <!-- STEP 1: Are you new? -->
-      <div id="stepInvestorType">
-        <div class="share-note">First, let us know — are you investing with Vegi Ramesh for the first time?</div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">
-          <button class="investor-type-btn" onclick="setInvestorType('new')">🌱 Yes, I'm New</button>
-          <button class="investor-type-btn investor-type-btn--secondary" onclick="setInvestorType('existing')">✅ Already Invested</button>
-        </div>
-      </div>
+<hr class="section-sep">
 
-      <!-- STEP 2a: NEW investor — fill KYC details -->
-      <div id="stepNewKyc" style="display:none;">
-        <div class="share-note">Fill in your details below. Once done, click <strong>Send via Gmail</strong> — the email will be ready to send, no editing needed.</div>
+<!-- WHY RAMESH -->
+<section class="section">
+  <div class="section-label">The difference</div>
+  <h2>So why <em>Ramesh?</em></h2>
 
-        <!-- Aadhaar -->
-        <div class="kyc-section-label">🪪 Aadhaar Card</div>
-        <div class="kyc-grid">
-          <div class="kyc-field"><label class="kyc-label">Full Name <span class="kyc-hint">as per Aadhaar</span></label><input class="kyc-input" id="kycAadhaarName" type="text" placeholder="e.g. Ramesh Kumar"></div>
-          <div class="kyc-field"><label class="kyc-label">Aadhaar Number <span class="kyc-hint">12 digits</span></label><input class="kyc-input" id="kycAadhaarNum" type="text" placeholder="XXXX XXXX XXXX" maxlength="14"></div>
-          <div class="kyc-field"><label class="kyc-label">Date of Birth <span class="kyc-hint">as per Aadhaar</span></label><input class="kyc-input" id="kycDob" type="text" placeholder="DD/MM/YYYY"></div>
-          <div class="kyc-field kyc-field--full"><label class="kyc-label">Registered Address <span class="kyc-hint">as per Aadhaar</span></label><input class="kyc-input" id="kycAddress" type="text" placeholder="Full address as on Aadhaar"></div>
-        </div>
-
-        <!-- PAN -->
-        <div class="kyc-section-label">🗂️ PAN Card</div>
-        <div class="kyc-grid">
-          <div class="kyc-field"><label class="kyc-label">PAN Number</label><input class="kyc-input" id="kycPan" type="text" placeholder="ABCDE1234F" maxlength="10" style="text-transform:uppercase;"></div>
-          <div class="kyc-field"><label class="kyc-label">Name on PAN <span class="kyc-hint">as printed</span></label><input class="kyc-input" id="kycPanName" type="text" placeholder="e.g. RAMESH KUMAR"></div>
-          <div class="kyc-field"><label class="kyc-label">Date of Birth <span class="kyc-hint">as per PAN</span></label><input class="kyc-input" id="kycPanDob" type="text" placeholder="DD/MM/YYYY"></div>
-        </div>
-
-        <!-- Bank -->
-        <div class="kyc-section-label">🏦 Bank Account Details</div>
-        <div class="kyc-grid">
-          <div class="kyc-field"><label class="kyc-label">Account Number</label><input class="kyc-input" id="kycAccNo" type="text" placeholder="Full account number"></div>
-          <div class="kyc-field"><label class="kyc-label">IFSC Code</label><input class="kyc-input" id="kycIfsc" type="text" placeholder="e.g. SBIN0001234" style="text-transform:uppercase;"></div>
-          <div class="kyc-field"><label class="kyc-label">Bank Name</label><input class="kyc-input" id="kycBankName" type="text" placeholder="e.g. State Bank of India"></div>
-        </div>
-
-        <!-- Contact -->
-        <div class="kyc-section-label">📬 Contact Details</div>
-        <div class="kyc-grid">
-          <div class="kyc-field"><label class="kyc-label">Email ID</label><input class="kyc-input" id="kycEmail" type="email" placeholder="your@email.com"></div>
-          <div class="kyc-field"><label class="kyc-label">Mobile Number <span class="kyc-hint">Aadhaar-linked preferred</span></label><input class="kyc-input" id="kycMobile" type="tel" placeholder="10-digit mobile number"></div>
-        </div>
-
-        <!-- Nominee -->
-        <div class="kyc-section-label">👤 Nominee Details</div>
-        <div class="kyc-grid">
-          <div class="kyc-field"><label class="kyc-label">Nominee Full Name</label><input class="kyc-input" id="kycNomName" type="text" placeholder="As per official ID"></div>
-          <div class="kyc-field"><label class="kyc-label">Nominee Email ID</label><input class="kyc-input" id="kycNomEmail" type="email" placeholder="Nominee's email"></div>
-          <div class="kyc-field"><label class="kyc-label">Nominee Mobile Number</label><input class="kyc-input" id="kycNomMobile" type="tel" placeholder="Nominee's contact"></div>
-          <div class="kyc-field"><label class="kyc-label">Nominee Aadhaar (Last 4)</label><input class="kyc-input" id="kycNomAadhaar" type="text" placeholder="XXXX" maxlength="4"></div>
-          <div class="kyc-field kyc-field--full"><label class="kyc-label">Nominee Address</label><input class="kyc-input" id="kycNomAddress" type="text" placeholder="Nominee's current residential address"></div>
-        </div>
-
-        <div class="kyc-privacy-note">🔒 Your details are used solely for KYC registration and handled with complete confidentiality as per SEBI &amp; AMFI guidelines.</div>
-
-        <div class="share-btns" style="margin-top:16px;">
-          <a class="share-btn share-btn-wa" id="shareWa" href="#" target="_blank" rel="noopener" onclick="return buildAndOpenWa()">
-            <span class="share-btn-icon">💬</span> Share on WhatsApp
-          </a>
-		  <a class="share-btn share-btn-email" id="shareEmail" href="#" onclick="return buildAndOpenEmail()">
-            <span class="share-btn-icon">✉️</span> Send via Gmail - Mobile App
-          </a>
-          <a class="share-btn share-btn-gmail" id="shareGmail" href="#" target="_blank" rel="noopener" onclick="return buildAndOpenGmail()">
-            <span class="share-btn-icon">📧</span> Send via Gmail - Browser
-          </a>
-        </div>
-      </div>
-
-      <!-- STEP 2b: EXISTING investor — just share profile -->
-      <div id="stepExisting" style="display:none;">
-        <div class="share-note">Welcome back! Your investor profile and answers will be shared with <strong>Vegi Ramesh</strong> so he can review your updated allocation.</div>
-        <div class="share-btns">
-          <a class="share-btn share-btn-wa" id="shareWaEx" href="#" target="_blank" rel="noopener">
-            <span class="share-btn-icon">💬</span> Share on WhatsApp
-          </a>
-          <a class="share-btn share-btn-email" id="shareEmailEx" href="#">
-            <span class="share-btn-icon">✉️</span> Send via Gmail - Mobile App
-          </a>
-			<a class="share-btn share-btn-gmail" id="shareGmailEx" href="#" target="_blank" rel="noopener">
-            <span class="share-btn-icon">📧</span> Send via Gmail - Browser
-          </a>
-        </div>
-      </div>
-
+  <div class="stopper-card">
+    <div class="prose">
+      <p>Not every MFD works the same way. This is where the difference matters.</p>
+      <p><strong>SEBI — India's market regulator — puts a strict limit on how much a fund can charge you</strong> for managing your money. This rule exists to protect you. But even within that limit, there is a wide range. Many distributors push higher-cost funds — not because those funds perform better, but because higher costs mean bigger commissions for them.</p>
+      <p><strong>I work differently.</strong></p>
+      <p>I keep your costs below average — on purpose. Not by picking the cheapest fund blindly, because that is lazy and wrong. But by finding funds that <em>perform well and still cost less.</em> That combination is real. It just takes honest work to find it.</p>
+      <p>I also go beyond plain index funds. I study fund types like <strong>Smart Beta</strong> — a category that follows clear, rule-based strategies instead of a fund manager's gut feeling. These funds can give you better returns for the risk you take, and they often cost less than actively managed funds. Most distributors never talk about this. I do — because my job is to find what actually works for you, not what pays me more.</p>
     </div>
   </div>
 
-  <div class="alloc-card">
-    <div class="alloc-card-head">
-      <div class="alloc-card-icon">📊</div>
-      <div>
-        <div class="alloc-card-title">Model Asset Allocation</div>
-        <div class="alloc-card-sub" id="allocSub">Based on your profile</div>
-      </div>
-    </div>
-    <div class="alloc-body">
-      <div class="pie-wrap"><canvas id="pieCanvas" width="180" height="180"></canvas><div class="pie-cap">Portfolio Mix</div></div>
-      <div class="alloc-rows" id="allocRows"></div>
-    </div>
-    <div class="alloc-ideal" id="resIdeal"></div>
+  <div class="quote-block">
+    <p>"I would rather you grow more wealth and I earn a smaller commission, than the other way around. That is not me being selfless — it is the only way I can honestly call myself your advisor."</p>
   </div>
 
-  <div class="start-strip">✦ &nbsp;Start with as low as <span>₹1,000 per month</span> — your future self will thank you &nbsp;✦</div>
+  <div class="prose">
+    <p>I have sat with people who came to me after being badly burned. Not by bad luck — by bad advice. A fund that had done very well for three years. A story that made total sense emotionally. They put in their money. And then the market reminded them that past returns mean nothing about the future.</p>
+    <p>That experience changed how I think about this work.</p>
+    <p>My role is to be your safeguard — not a wall that stops you from investing, but the steady voice that asks <em>"does this actually make sense for you?"</em> before your money moves. The one who protects you from paying for hype, and guides you toward steady, boring, powerful compounding that shows up as real wealth in your life.</p>
+    <p><strong>That is who I am. That is why Ramesh.</strong></p>
+  </div>
+</section>
 
-  <div class="contact-banner">
-    <div class="contact-banner-top">
-      <div class="contact-banner-eyebrow">Ready to Begin?</div>
-      <div class="contact-banner-title">Reach out to <span>Vegi Ramesh</span></div>
-      <div class="contact-banner-sub">Our experts will help you kickstart your investment journey today</div>
+<hr class="section-sep">
+
+<!-- WHY MUTUAL FUNDS -->
+<section class="section">
+  <div class="section-label">The case for mutual funds</div>
+  <h2>Why <em>Mutual Funds?</em></h2>
+  <div class="prose">
+    <p>There are many ways people save and grow money in India. Most of them come with hidden costs, hidden risks, or hidden motives. Here is a straight, honest comparison — so you can choose with a clear head, not under sales pressure.</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Option</th>
+          <th>Returns</th>
+          <th>Liquidity</th>
+          <th>Transparency</th>
+          <th>Risk</th>
+          <th>Verdict</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>📈 Mutual Funds</td>
+          <td>Market-linked, inflation-beating over long term</td>
+          <td>T+2 to T+3 redemption</td>
+          <td>SEBI-regulated, fully disclosed</td>
+          <td>Market risk, managed with diversification</td>
+          <td><span class="tag tag-good">Best all-rounder</span></td>
+        </tr>
+        <tr>
+          <td>🏠 Real Estate</td>
+          <td>Can be good, but uneven and illiquid gains</td>
+          <td>Months to sell; locked capital</td>
+          <td>Opaque pricing, black money prevalent</td>
+          <td>High concentration, maintenance costs, legal disputes</td>
+          <td><span class="tag tag-warn">Illiquid & opaque</span></td>
+        </tr>
+        <tr>
+          <td>🏦 Fixed Deposits</td>
+          <td>4–7% — often below inflation after tax</td>
+          <td>Premature withdrawal penalty</td>
+          <td>Clear but low-yield</td>
+          <td>Low market risk, high inflation risk</td>
+          <td><span class="tag tag-ok">Safe but erodes wealth</span></td>
+        </tr>
+        <tr>
+          <td>🤝 Chit Funds / Money Peddlers</td>
+          <td>Promises of high returns, rarely delivered fairly</td>
+          <td>Very low; locked in schemes</td>
+          <td>Completely opaque</td>
+          <td>Fraud risk, black money, illegal activity</td>
+          <td><span class="tag tag-bad">Illegal & dangerous</span></td>
+        </tr>
+        <tr>
+          <td>📊 Direct Stocks</td>
+          <td>Can be high — but even experienced investors with years of study regularly lose money. There is no guaranteed formula.</td>
+          <td>High liquidity</td>
+          <td>Exchange-listed, regulated</td>
+          <td>High concentration risk; needs constant tracking. Expertise helps but does not guarantee success.</td>
+          <td><span class="tag tag-warn">No safety net, even for experts</span></td>
+        </tr>
+        <tr>
+          <td>🎲 F&amp;O Trading</td>
+          <td>90%+ retail traders lose money — statistically</td>
+          <td>Daily settlement</td>
+          <td>Exchange-listed but complex</td>
+          <td>Extremely high; can lose more than invested</td>
+          <td><span class="tag tag-bad">Not investing — gambling</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-family:var(--serif); font-size:1.5rem; font-weight:600; color:var(--text); margin: 2rem 0 1rem;">What makes Mutual Funds stand out</h3>
+
+  <div class="pillars" style="margin-bottom:1.5rem;">
+    <div class="pillar">
+      <div class="pillar-icon">🔒</div>
+      <h3>SEBI regulated</h3>
+      <p>Every rupee, every fund, every transaction is governed and audited. No room for the kind of opacity that real estate or chit funds thrive on.</p>
     </div>
-    <div class="contact-banner-items">
-      <div class="contact-banner-item"><div class="cbi-icon">☎</div><div class="cbi-label">Call Us</div><div class="cbi-value"><a href="tel:8329450580">8329450580</a></div></div>
-      <div class="contact-banner-item"><div class="cbi-icon">@</div><div class="cbi-label">Email Us</div><div class="cbi-value"><a href="mailto:rameshvegi94@gmail.com">rameshvegi94@gmail.com</a></div></div>
-      <div class="contact-banner-item"><div class="cbi-icon">✦</div><div class="cbi-label">AMFI Reg. No.</div><div class="cbi-value">ARN-349739</div></div>
+    <div class="pillar">
+      <div class="pillar-icon">💧</div>
+      <h3>Liquid when you need it</h3>
+      <p>Unlike real estate or chit schemes, your money is accessible. Life doesn't wait for a property to sell.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">📉</div>
+      <h3>Diversification built in</h3>
+      <p>A single index fund gives you exposure to 50–500 companies. No single stock collapse can wipe you out.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🌱</div>
+      <h3>Start with ₹1,000</h3>
+      <p>No minimum. No lock-in. No need for a large lump sum. Wealth-building is not a privilege of the wealthy here.</p>
     </div>
   </div>
 
-  <button class="reset-btn" id="resetBtn">← Retake Questionnaire</button>
-</div>
 
-</main>
+</section>
 
+<hr class="section-sep">
+
+<!-- CTA -->
+<section class="section" style="text-align:center; padding-bottom: 4rem;">
+  <div class="divider-star" style="margin-bottom:1.8rem;">✦ ✦ ✦</div>
+  <h2 style="font-family:var(--serif); font-size:clamp(1.6rem,4vw,2.4rem); margin-bottom:1rem;">
+    Ready to invest with <em>discipline?</em>
+  </h2>
+  <p style="color:var(--muted); font-weight:300; max-width:480px; margin:0 auto 2rem;">
+    Start with your investor profile. 10 questions. 3 minutes. A portfolio that actually fits you.
+  </p>
+  <a href="https://mfd-risk-profiler-arn-349739.netlify.app/" style="display:inline-block; background:var(--accent); color:#0b0f1a; padding:0.85rem 2.2rem; border-radius:8px; font-weight:500; font-size:0.95rem; text-decoration:none; letter-spacing:0.04em; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+    Begin Profiling ✦
+  </a>
+  <div style="margin-top:1.8rem; display:flex; justify-content:center; gap:2.5rem; flex-wrap:wrap;">
+    <div style="text-align:center;">
+      <div style="font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:0.3rem;">☎</div>
+      <a href="tel:8329450580" style="color:var(--muted); text-decoration:none; font-size:0.9rem;">8329450580</a>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:0.3rem;">@</div>
+      <a href="mailto:rameshvegi94@gmail.com" style="color:var(--muted); text-decoration:none; font-size:0.9rem;">rameshvegi94@gmail.com</a>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:0.3rem;">✦</div>
+      <span style="color:var(--muted); font-size:0.9rem;">ARN-349739</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <div class="footer-brand">Mutual Fund and NPS distribution services by <span>Vegi</span> Ramesh</div>
-  <div class="footer-contacts">
-    <div class="fci"><div class="fcicon">☎</div><span>8329450580</span></div>
-    <div class="fci"><div class="fcicon">@</div><span>rameshvegi94@gmail.com</span></div>
-    <div class="fci"><div class="fcicon">✦</div><span>ARN-349739</span></div>
+  <div class="footer-brand">Mutual Fund and NPS distribution services by Vegi Ramesh</div>
+  <div class="footer-links">
+    <a href="https://mfd-risk-profiler-arn-349739.netlify.app/">Investor Profiling</a>
+    <a href="tel:8329450580">Call Us</a>
+    <a href="mailto:rameshvegi94@gmail.com">Email Us</a>
   </div>
-  <div class="footer-disc">Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Past performance is not indicative of future results. This material is for informational purposes only and does not constitute financial advice. Vegi Ramesh is registered with AMFI as a Mutual Fund Distributor – ARN-349739.</div>
+  <div class="footer-disc">
+    Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Past performance is not indicative of future results. This material is for informational purposes only and does not constitute financial advice. Vegi Ramesh is registered with AMFI as a Mutual Fund Distributor – ARN-349739.
+  </div>
 </footer>
 
-<script>
-(function(){
-'use strict';
-
-/* ═══════════════════════════════════════════════════
-   QUESTIONS — 10 MFD-grade profiling questions
-   Each option scores: risk (A/B/C/S) & style (Ac/Hy/Pa)
-   ═══════════════════════════════════════════════════ */
-var QUESTIONS = [
-  {
-    category: 'Financial Situation',
-    icon: '💼',
-    q: 'Are you currently investing in any mutual funds or financial products?',
-    hint: 'This helps us understand where you are in your investment journey.',
-    options: [
-      { label: 'No, I am completely new to investing', sub: 'I want to start fresh with guidance', risk: 'S', style: 'Ac' },
-      { label: 'Yes, but I have never reviewed or planned my portfolio', sub: 'I invest but without a clear strategy', risk: 'C', style: 'Hy' },
-      { label: 'Yes, and I actively track and manage my investments', sub: 'I stay involved and informed', risk: 'A', style: 'Ac' }
-    ]
-  },
-  {
-    category: 'Investment Goal',
-    icon: '🎯',
-    q: 'What is your primary financial goal for this investment?',
-    hint: 'Understanding your goal shapes the entire portfolio strategy.',
-    options: [
-      { label: 'Build a safety net / emergency fund', sub: 'Capital protection is my priority', risk: 'C', style: 'Pa' },
-      { label: 'Grow wealth steadily over the medium term', sub: '3–7 years, balanced approach', risk: 'B', style: 'Hy' },
-      { label: 'Maximise long-term wealth creation', sub: '7+ years, I can tolerate ups and downs', risk: 'A', style: 'Ac' }
-    ]
-  },
-  {
-    category: 'Time Horizon',
-    icon: '⏳',
-    q: 'For how long can you comfortably stay invested without needing this money?',
-    hint: 'Longer horizons unlock more powerful growth opportunities.',
-    options: [
-      { label: 'Less than 2 years', sub: 'I may need access to funds soon', risk: 'S', style: 'Pa' },
-      { label: '2 to 5 years', sub: 'Medium-term, some flexibility', risk: 'C', style: 'Hy' },
-      { label: '5 to 10 years', sub: 'Long-term, focused on compounding', risk: 'B', style: 'Hy' },
-      { label: 'More than 10 years', sub: 'I am investing for the very long term', risk: 'A', style: 'Ac' }
-    ]
-  },
-  {
-    category: 'Risk Reaction',
-    icon: '📉',
-    q: 'Your portfolio drops 20% in 3 months due to a market correction. What do you do?',
-    hint: 'Your gut reaction to losses reveals your true risk comfort.',
-    options: [
-      { label: 'I panic and want to withdraw immediately', sub: 'Capital safety comes first', risk: 'S', style: 'Pa' },
-      { label: 'I am worried but will wait for recovery', sub: 'Stay invested, hope for the best', risk: 'C', style: 'Hy' },
-      { label: 'I stay calm — corrections are temporary', sub: 'I trust the long-term story', risk: 'B', style: 'Hy' },
-      { label: 'I invest more — it is a buying opportunity', sub: 'I welcome volatility as an advantage', risk: 'A', style: 'Ac' }
-    ]
-  },
-  {
-    category: 'Income & Surplus',
-    icon: '💰',
-    q: 'How would you describe your monthly savings available for investment?',
-    hint: 'Investment amounts shape which funds and strategies are practical.',
-    options: [
-      { label: 'I can invest ₹500–₹2,000 per month', sub: 'Just starting, keeping it minimal', risk: 'S', style: 'Pa' },
-      { label: 'I can invest ₹2,000–₹10,000 per month', sub: 'Regular SIPs, growing steadily', risk: 'C', style: 'Hy' },
-      { label: 'I can invest ₹10,000–₹50,000 per month', sub: 'Committed investor, diversified approach', risk: 'B', style: 'Hy' },
-      { label: 'More than ₹50,000 per month or large lump sums', sub: 'Serious wealth creation focus', risk: 'A', style: 'Ac' }
-    ]
-  },
-  {
-    category: 'Fund Management Preference',
-    icon: '🧠',
-    q: 'When it comes to who manages your money, what do you prefer?',
-    hint: 'This determines whether active or passive funds suit you better.',
-    options: [
-      { label: 'I trust index funds — low cost, market returns', sub: 'No fund manager needed, keep it simple', risk: null, style: 'Pa' },
-      { label: 'I believe skilled managers can beat the market', sub: 'Willing to pay for expertise and alpha', risk: null, style: 'Ac' },
-      { label: 'A mix of both — best of active and passive', sub: 'Flexibility and diversification of approach', risk: null, style: 'Hy' },
-      { label: 'I have no strong preference — advise me', sub: 'I rely on my MFD\'s guidance', risk: null, style: 'Hy' }
-    ]
-  },
-  {
-    category: 'Market Knowledge',
-    icon: '📚',
-    q: 'How do you describe your knowledge of financial markets and mutual funds?',
-    hint: 'Honest self-assessment helps us recommend the right complexity.',
-    options: [
-      { label: 'Complete beginner — I need everything explained', sub: 'I am new to financial products', risk: 'S', style: 'Pa' },
-      { label: 'Basic understanding — I know SIPs and FDs', sub: 'Familiar with simple products', risk: 'C', style: 'Hy' },
-      { label: 'Moderate — I understand equity, debt, NAV', sub: 'Comfortable with standard concepts', risk: 'B', style: 'Hy' },
-      { label: 'Advanced — I track markets and fund categories', sub: 'I can evaluate factors, multifactor ETFs', risk: 'A', style: 'Ac' }
-    ]
-  },
-  {
-    category: 'Return Expectation',
-    icon: '📈',
-    q: 'What return expectation do you have from your mutual fund portfolio?',
-    hint: 'Higher expected returns come with higher risk — let us calibrate this.',
-    options: [
-      { label: 'Slightly better than a Fixed Deposit (6–8% p.a.)', sub: 'Safety and certainty over returns', risk: 'C', style: 'Pa' },
-      { label: '10–13% p.a. — steady, market-linked growth', sub: 'Comfortable with moderate fluctuation', risk: 'B', style: 'Hy' },
-      { label: '14–18% p.a. — willing to ride out volatility', sub: 'Long horizon, equity-heavy approach', risk: 'A', style: 'Ac' },
-      { label: 'I want to beat the index consistently', sub: 'Active management and factor strategies', risk: 'A', style: 'Ac' }
-    ]
-  },
-  {
-    category: 'Portfolio Involvement',
-    icon: '🔍',
-    q: 'How involved do you want to be in monitoring your portfolio?',
-    hint: 'This shapes whether active or passive management suits your lifestyle.',
-    options: [
-      { label: 'Minimal — set it and forget it', sub: 'I want automation and simplicity', risk: null, style: 'Pa' },
-      { label: 'Occasional check — quarterly or half-yearly review', sub: 'Hands-off but like to stay informed', risk: null, style: 'Hy' },
-      { label: 'Active — I enjoy tracking and rebalancing', sub: 'I like being hands-on with decisions', risk: null, style: 'Ac' }
-    ]
-  },
-  {
-    category: 'Liquidity Needs',
-    icon: '🔓',
-    q: 'How important is it that you can withdraw your money quickly if needed?',
-    hint: 'Liquidity requirements affect which funds can be included in your plan.',
-    options: [
-      { label: 'Very important — I may need funds any time', sub: 'I need to keep money accessible', risk: 'C', style: 'Pa' },
-      { label: 'Moderately important — small emergency buffer needed', sub: 'Core portfolio can stay locked longer', risk: 'B', style: 'Hy' },
-      { label: 'Not important — I can lock money for 5+ years', sub: 'I have other sources for emergencies', risk: 'A', style: 'Ac' }
-    ]
-  }
-];
-
-/* ═══════════════════════════════════════════════════
-   PROFILES
-   ═══════════════════════════════════════════════════ */
-var PROFILES = {
-  'Starters-Conservative': {
-    icon: '🌱', name: 'Starter Conservative Plan', tag: 'Begin your journey — safely & simply',
-    badges: ['Starters Plan','Conservative','Guided Entry'],
-    ideal: 'Perfect for first-time investors. Start with minimum amounts, build confidence gradually, and let your money grow without the pressure of complex decisions.',
-    alloc: [{label:'Liquid/Arbitrage',pct:50,color:'#8A9BAD'},{label:'Large Cap Equity',pct:30,color:'#2E6DB4'},{label:'Gold',pct:20,color:'#C9982A'}],
-    sub: 'Capital protection with a gentle start into equity'
-  },
-  'Active-Aggressive': {
-    icon: '🚀', name: 'Active Aggressive Portfolio', tag: 'High conviction — actively managed growth',
-    badges: ['Active','Aggressive','Long Term'],
-    ideal: 'For high-risk investors who trust skilled fund managers to generate alpha. You enjoy being involved, have a long horizon, and want maximum wealth creation.',
-    alloc: [{label:'Flexi Cap Equity',pct:50,color:'#2E6DB4'},{label:'Multi Asset',pct:25,color:'#3A9B5C'},{label:'Arbitrage',pct:15,color:'#8A9BAD'},{label:'Gold',pct:10,color:'#C9982A'}],
-    sub: 'Equity-heavy, actively managed for maximum alpha'
-  },
-  'Passive-Aggressive': {
-    icon: '⚡', name: 'Passive Aggressive Portfolio', tag: 'Index-driven, factor-powered growth',
-    badges: ['Passive','Aggressive','Factor Based'],
-    ideal: 'For cost-conscious, growth-oriented investors who believe in market efficiency. Factor ETFs capture momentum, quality, value, and low-volatility premia systematically.',
-    alloc: [{label:'Nifty 500 Index',pct:30,color:'#2E6DB4'},{label:'Factor ETFs',pct:30,color:'#6B3FA0'},{label:'Arbitrage',pct:20,color:'#8A9BAD'},{label:'Gold ETF',pct:20,color:'#C9982A'}],
-    sub: 'Smart beta & index funds for systematic factor exposure'
-  },
-  'Hybrid-Aggressive': {
-    icon: '⚖️', name: 'Hybrid Aggressive Portfolio', tag: 'Best of active and passive — growth focus',
-    badges: ['Hybrid','Aggressive','Diversified'],
-    ideal: 'You want the alpha potential of active funds combined with the efficiency of multi-factor strategies. A sophisticated, diversified approach for serious wealth builders.',
-    alloc: [{label:'Flexi Cap (Active)',pct:40,color:'#2E6DB4'},{label:'Multifactor FoF',pct:35,color:'#6B3FA0'},{label:'Arbitrage',pct:25,color:'#8A9BAD'}],
-    sub: 'Active alpha meets factor-based systematic investing'
-  },
-  'Active-Balanced': {
-    icon: '📊', name: 'Active Balanced Portfolio', tag: 'Steady growth, actively managed',
-    badges: ['Active','Balanced','Medium Risk'],
-    ideal: 'A steady investor who wants the expertise of active fund managers but with a measured approach to risk. Multi asset allocation provides natural rebalancing.',
-    alloc: [{label:'Flexi Cap Equity',pct:35,color:'#2E6DB4'},{label:'Multi Asset',pct:30,color:'#3A9B5C'},{label:'Arbitrage',pct:25,color:'#8A9BAD'},{label:'Gold',pct:10,color:'#C9982A'}],
-    sub: 'Actively managed, balanced across asset classes'
-  },
-  'Passive-Balanced': {
-    icon: '🌊', name: 'Passive Balanced Portfolio', tag: 'Low-cost index approach with stability',
-    badges: ['Passive','Balanced','Index Based'],
-    ideal: 'You want simplicity, low costs, and balanced exposure. Index funds with gold and arbitrage provide efficient, well-rounded growth without the need for manager selection.',
-    alloc: [{label:'Nifty 500 Index',pct:30,color:'#2E6DB4'},{label:'Factor ETFs',pct:20,color:'#6B3FA0'},{label:'Arbitrage',pct:30,color:'#8A9BAD'},{label:'Gold ETF',pct:20,color:'#C9982A'}],
-    sub: 'Index efficiency with balanced risk management'
-  },
-  'Hybrid-Balanced': {
-    icon: '🎯', name: 'Hybrid Balanced Portfolio', tag: 'Flexible blend — growth with stability',
-    badges: ['Hybrid','Balanced','Flexible'],
-    ideal: 'You appreciate flexibility and want a curated blend of active selection and factor-based strategies. A practical, all-weather approach for the thoughtful investor.',
-    alloc: [{label:'Flexi Cap (Active)',pct:35,color:'#2E6DB4'},{label:'Multifactor FoF',pct:30,color:'#6B3FA0'},{label:'Arbitrage',pct:35,color:'#8A9BAD'}],
-    sub: 'Active + factor blend for balanced growth'
-  },
-  'Active-Conservative': {
-    icon: '🛡️', name: 'Active Conservative Portfolio', tag: 'Safety-first, actively guided',
-    badges: ['Active','Conservative','Capital Safe'],
-    ideal: 'You value capital protection but still want a skilled manager choosing your equity allocation. The multi-asset structure provides stability with professional oversight.',
-    alloc: [{label:'Arbitrage/Debt',pct:45,color:'#8A9BAD'},{label:'Multi Asset',pct:30,color:'#3A9B5C'},{label:'Flexi Cap',pct:15,color:'#2E6DB4'},{label:'Gold',pct:10,color:'#C9982A'}],
-    sub: 'Professionally managed with a conservative tilt'
-  },
-  'Passive-Conservative': {
-    icon: '🏦', name: 'Passive Conservative Portfolio', tag: 'Low-cost, low-risk index approach',
-    badges: ['Passive','Conservative','Stable'],
-    ideal: 'You prefer predictable, transparent, and low-cost investing. Index funds and arbitrage provide market-linked returns with capital protection at the core.',
-    alloc: [{label:'Arbitrage',pct:40,color:'#8A9BAD'},{label:'Nifty 500 Index',pct:25,color:'#2E6DB4'},{label:'Gold ETF',pct:25,color:'#C9982A'},{label:'Factor ETFs',pct:10,color:'#6B3FA0'}],
-    sub: 'Index-based safety with transparent low-cost structure'
-  },
-  'Hybrid-Conservative': {
-    icon: '⚓', name: 'Hybrid Conservative Portfolio', tag: 'Stability with structured growth',
-    badges: ['Hybrid','Conservative','Structured'],
-    ideal: 'You want the comfort of a conservative approach but with structured, systematic exposure to equity through a multi-factor fund. Disciplined and well-diversified.',
-    alloc: [{label:'Arbitrage',pct:40,color:'#8A9BAD'},{label:'Flexi Cap',pct:30,color:'#2E6DB4'},{label:'Multifactor FoF',pct:30,color:'#6B3FA0'}],
-    sub: 'Conservative base with systematic equity growth'
-  }
-};
-
-/* ═══════════════════════════════════════════════════
-   STATE
-   ═══════════════════════════════════════════════════ */
-var current = 0;
-var answers = new Array(QUESTIONS.length).fill(null);
-
-/* ═══════════════════════════════════════════════════
-   RENDERING
-   ═══════════════════════════════════════════════════ */
-function buildDots(){
-  var c = document.getElementById('stepDots'); c.innerHTML='';
-  QUESTIONS.forEach(function(_,i){
-    var d=document.createElement('div'); d.className='step-dot'; d.id='dot'+i; c.appendChild(d);
-  });
-}
-function refreshDots(){
-  QUESTIONS.forEach(function(_,i){
-    var d=document.getElementById('dot'+i);
-    if(!d) return;
-    d.className='step-dot'+(i<current?' done':i===current?' active':'');
-  });
-}
-function refreshProgress(){
-  var done=answers.filter(function(a){return a!==null;}).length;
-  var pct=Math.round(done/QUESTIONS.length*100);
-  document.getElementById('progFill').style.width=pct+'%';
-  document.getElementById('progPct').textContent=pct+'% complete';
-  document.getElementById('progLabel').textContent='Question '+(current+1)+' of '+QUESTIONS.length;
-  refreshDots();
-}
-
-function renderQuestion(idx){
-  var q=QUESTIONS[idx];
-  var area=document.getElementById('qArea');
-  area.innerHTML='';
-  var wrap=document.createElement('div'); wrap.className='q-wrap';
-
-  var pill=document.createElement('div'); pill.className='q-category-pill';
-  pill.innerHTML=q.icon+' '+q.category;
-  wrap.appendChild(pill);
-
-  var card=document.createElement('div'); card.className='q-card';
-  var num=document.createElement('div'); num.className='q-num'; num.textContent='QUESTION '+(idx+1);
-  var qtext=document.createElement('div'); qtext.className='q-text'; qtext.textContent=q.q;
-  var hint=document.createElement('div'); hint.className='q-hint'; hint.textContent=q.hint;
-  var opts=document.createElement('div'); opts.className='q-options';
-  card.appendChild(num); card.appendChild(qtext); card.appendChild(hint); card.appendChild(opts);
-  wrap.appendChild(card);
-  area.appendChild(wrap);
-
-  q.options.forEach(function(opt, oi){
-    var lbl=document.createElement('div'); lbl.className='q-opt'+(answers[idx]===oi?' selected':'');
-    lbl.innerHTML='<div class="q-opt-radio">'+(answers[idx]===oi?'<span style="width:6px;height:6px;border-radius:50%;background:#fff;display:block;"></span>':'')+'</div><div class="q-opt-body"><div class="q-opt-label">'+opt.label+'</div>'+(opt.sub?'<div class="q-opt-sub">'+opt.sub+'</div>':'')+'</div>';
-    lbl.addEventListener('click', function(){
-      if(answers[idx]===oi) return;
-      answers[idx]=oi;
-      document.querySelectorAll('.q-opt').forEach(function(o){
-        o.classList.remove('selected');
-        var r=o.querySelector('.q-opt-radio'); r.innerHTML='';
-      });
-      lbl.classList.add('selected');
-      lbl.querySelector('.q-opt-radio').innerHTML='<span style="width:6px;height:6px;border-radius:50%;background:#fff;display:block;"></span>';
-      refreshProgress();
-      // Auto-advance after a brief delay so the selection is visible
-      setTimeout(function(){
-        if(current<QUESTIONS.length-1){
-          current++; renderQuestion(current); window.scrollTo({top:0,behavior:'smooth'});
-        } else {
-          showResult();
-        }
-      }, 320);
-    });
-    opts.appendChild(lbl);
-  });
-
-  document.getElementById('backBtn').style.visibility = idx===0?'hidden':'visible';
-  refreshProgress();
-}
-
-/* ═══════════════════════════════════════════════════
-   SCORING
-   ═══════════════════════════════════════════════════ */
-function calcProfile(){
-  var riskScore={S:0,C:0,B:0,A:0};
-  var styleScore={Pa:0,Hy:0,Ac:0};
-  var starterCount=0;
-
-  answers.forEach(function(ans, qi){
-    if(ans===null) return;
-    var opt=QUESTIONS[qi].options[ans];
-    if(opt.risk){
-      riskScore[opt.risk]++;
-      if(opt.risk==='S') starterCount++;
-    }
-    if(opt.style) styleScore[opt.style]++;
-  });
-
-  // If 3+ Starter answers → Starters plan
-  if(starterCount>=3) return 'Starters-Conservative';
-
-  // Risk: A=Aggressive, B=Balanced, C=Conservative (S already handled)
-  var risk;
-  var riskABC = {Aggressive:riskScore.A, Balanced:riskScore.B, Conservative:riskScore.C+riskScore.S};
-  risk = Object.keys(riskABC).reduce(function(a,b){ return riskABC[a]>=riskABC[b]?a:b; });
-
-  // Style
-  var style;
-  style = Object.keys(styleScore).reduce(function(a,b){ return styleScore[a]>=styleScore[b]?a:b; });
-  var styleMap={Pa:'Passive',Hy:'Hybrid',Ac:'Active'};
-
-  return styleMap[style]+'-'+risk;
-}
-
-/* ═══════════════════════════════════════════════════
-   SHOW RESULT
-   ═══════════════════════════════════════════════════ */
-function showResult(){
-  var key=calcProfile();
-  // fallback
-  if(!PROFILES[key]) key='Hybrid-Balanced';
-  var p=PROFILES[key];
-
-  document.getElementById('resIcon').textContent=p.icon;
-  document.getElementById('resName').textContent=p.name;
-  document.getElementById('resTag').textContent=p.tag;
-  document.getElementById('resIdeal').textContent=p.ideal;
-  document.getElementById('allocSub').textContent=p.sub;
-
-  // Badges
-  var bd=document.getElementById('resBadges'); bd.innerHTML='';
-  p.badges.forEach(function(b){ var s=document.createElement('span'); s.className='res-badge'; s.textContent=b; bd.appendChild(s); });
-
-  // Alloc rows
-  var rows=document.getElementById('allocRows'); rows.innerHTML='';
-  p.alloc.forEach(function(item){
-    var row=document.createElement('div'); row.className='alloc-row';
-    row.innerHTML='<span class="alloc-dot" style="background:'+item.color+'"></span>'+
-      '<div class="alloc-meta"><span class="alloc-name">'+item.label+'</span><span class="alloc-pct">'+item.pct+'%</span></div>'+
-      '<div class="alloc-bar-wrap"><div class="alloc-bar" style="background:'+item.color+'" data-pct="'+item.pct+'"></div></div>';
-    rows.appendChild(row);
-  });
-
-  // Reset share card to step 1
-  document.getElementById('stepInvestorType').style.display='block';
-  document.getElementById('stepNewKyc').style.display='none';
-  document.getElementById('stepExisting').style.display='none';
-
-  // Switch sections
-  document.getElementById('sectionQuiz').style.display='none';
-  document.getElementById('sectionIntro').style.display='none';
-  var sr=document.getElementById('sectionResult'); sr.style.display='flex';
-
-  // Animate
-  setTimeout(function(){
-    drawPie('pieCanvas', p.alloc);
-    document.querySelectorAll('.alloc-bar').forEach(function(bar){
-      var pct=bar.getAttribute('data-pct');
-      setTimeout(function(){bar.style.width=pct+'%';},80);
-    });
-  },60);
-
-  window.scrollTo({top:0,behavior:'smooth'});
-
-  // Build share text
-  var lines = [];
-  lines.push('✦ Investor Profile ✦');
-  lines.push('');
-  lines.push('Profile: ' + p.name);
-  lines.push('Type: ' + p.tag);
-  lines.push('');
-  lines.push('My Answers:');
-  QUESTIONS.forEach(function(q, i){
-    var ans = answers[i];
-    var optLabel = (ans !== null) ? q.options[ans].label : '(skipped)';
-    lines.push((i+1) + '. ' + q.category + ': ' + optLabel);
-  });
-  lines.push('');
-  lines.push('Model Allocation:');
-  p.alloc.forEach(function(item){ lines.push('  • ' + item.label + ' — ' + item.pct + '%'); });
-  lines.push('');
-  lines.push('Please help me build this portfolio. Thank you!');
-
-  var shareText = lines.join('\n');
-  var waUrl = 'https://wa.me/918329450580?text=' + encodeURIComponent(shareText);
-  var emailSubject = 'My Investor Profile: ' + p.name;
-  var mailtoUrl = 'mailto:rameshvegi94@gmail.com?subject=' + encodeURIComponent(emailSubject) + '&body=' + encodeURIComponent(shareText);
-  var gmailUrl = 'https://mail.google.com/mail/?view=cm&to=rameshvegi94@gmail.com&su=' + encodeURIComponent(emailSubject) + '&body=' + encodeURIComponent(shareText);
-
-  // Store share text globally for use when buttons are clicked
-  window._shareText = shareText;
-  window._emailSubject = emailSubject;
-
-  // Populate existing-investor share buttons immediately
-  document.getElementById('shareWaEx').href = waUrl;
-  document.getElementById('shareGmailEx').href = gmailUrl;
-  document.getElementById('shareEmailEx').href = mailtoUrl;
-
-  // Reset the share card to step 1
-  document.getElementById('stepInvestorType').style.display = 'block';
-  document.getElementById('stepNewKyc').style.display = 'none';
-  document.getElementById('stepExisting').style.display = 'none';
-}
-
-/* ═══════════════════════════════════════════════════
-   PIE
-   ═══════════════════════════════════════════════════ */
-function drawPie(id, alloc){
-  var canvas=document.getElementById(id); if(!canvas)return;
-  var dpr=window.devicePixelRatio||1, size=180;
-  canvas.width=size*dpr; canvas.height=size*dpr;
-  canvas.style.width=size+'px'; canvas.style.height=size+'px';
-  var ctx=canvas.getContext('2d'); ctx.scale(dpr,dpr);
-  var cx=size/2, cy=size/2, r=size/2-5;
-  var total=alloc.reduce(function(a,b){return a+b.pct;},0);
-  var dur=900, t0=performance.now();
-  function ease(t){return 1-Math.pow(1-t,3);}
-  function frame(now){
-    var t=Math.min((now-t0)/dur,1), p=ease(t);
-    ctx.clearRect(0,0,size,size);
-    var angle=-Math.PI/2;
-    alloc.forEach(function(item){
-      var fs=(item.pct/total)*2*Math.PI, s=fs*p;
-      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,r,angle,angle+s); ctx.closePath();
-      ctx.fillStyle=item.color; ctx.fill();
-      ctx.strokeStyle='#FFFDF7'; ctx.lineWidth=2; ctx.stroke();
-      if(p>0.85){
-        var mid=angle+s/2, al=Math.min((p-0.85)/0.15,1);
-        var lx=cx+r*0.64*Math.cos(mid), ly=cy+r*0.64*Math.sin(mid);
-        ctx.globalAlpha=al; ctx.fillStyle='#fff';
-        ctx.font='bold 10px Outfit,sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
-        ctx.fillText(item.pct+'%',lx,ly); ctx.globalAlpha=1;
-      }
-      angle+=s;
-    });
-    ctx.beginPath(); ctx.arc(cx,cy,r*0.36,0,2*Math.PI); ctx.fillStyle='#FFFDF7'; ctx.fill();
-    if(p>0.9){
-      var a2=Math.min((p-0.9)/0.1,1); ctx.globalAlpha=a2;
-      ctx.fillStyle='#4A2E0A'; ctx.font='bold 10px Outfit,sans-serif';
-      ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('Portfolio',cx,cy-6);
-      ctx.font='500 9px Outfit,sans-serif'; ctx.fillStyle='#8C7355'; ctx.fillText('Mix',cx,cy+6);
-      ctx.globalAlpha=1;
-    }
-    if(t<1) requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-}
-
-/* ═══════════════════════════════════════════════════
-   INIT
-   ═══════════════════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded',function(){
-  buildDots();
-
-  document.getElementById('startBtn').addEventListener('click',function(){
-    document.getElementById('sectionIntro').style.display='none';
-    var sq=document.getElementById('sectionQuiz'); sq.style.display='flex';
-    current=0; answers=new Array(QUESTIONS.length).fill(null);
-    renderQuestion(current);
-    window.scrollTo({top:0,behavior:'smooth'});
-  });
-
-  document.getElementById('backBtn').addEventListener('click',function(){
-    if(current>0){ current--; renderQuestion(current); window.scrollTo({top:0,behavior:'smooth'}); }
-  });
-
-  document.getElementById('resetBtn').addEventListener('click',function(){
-    answers=new Array(QUESTIONS.length).fill(null); current=0;
-    document.getElementById('sectionResult').style.display='none';
-    document.getElementById('sectionQuiz').style.display='none';
-    // Reset share card
-    document.getElementById('stepInvestorType').style.display='block';
-    document.getElementById('stepNewKyc').style.display='none';
-    document.getElementById('stepExisting').style.display='none';
-    var si=document.getElementById('sectionIntro'); si.style.display='flex';
-    si.style.animation='none'; void si.offsetWidth; si.style.animation='';
-    window.scrollTo({top:0,behavior:'smooth'});
-  });
-
-});
-
-}());
-
-/* ═══════════════════════════════════════════════════
-   INVESTOR TYPE + KYC EMAIL BUILDERS (global for onclick)
-   ═══════════════════════════════════════════════════ */
-window.setInvestorType = function(type) {
-  document.getElementById('stepInvestorType').style.display = 'none';
-  if (type === 'new') {
-    document.getElementById('stepNewKyc').style.display = 'block';
-    document.getElementById('stepExisting').style.display = 'none';
-  } else {
-    document.getElementById('stepNewKyc').style.display = 'none';
-    document.getElementById('stepExisting').style.display = 'block';
-  }
-};
-
-function buildCombinedEmail() {
-  var v = function(id){ return (document.getElementById(id)||{}).value || ''; };
-  var profileText = window._shareText || '';
-  var kycLines = [
-    '',
-    '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-    '✦ KYC & DOCUMENT DETAILS ✦',
-    '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-    '',
-    '── AADHAAR CARD ──',
-    'Full Name       : ' + v('kycAadhaarName'),
-    'Aadhaar Number  : ' + v('kycAadhaarNum'),
-    'Date of Birth   : ' + v('kycDob'),
-    'Address         : ' + v('kycAddress'),
-    '',
-    '── PAN CARD ──',
-    'PAN Number      : ' + v('kycPan').toUpperCase(),
-    'Name on PAN     : ' + v('kycPanName'),
-    'Date of Birth   : ' + v('kycPanDob'),
-    '',
-    '── BANK ACCOUNT ──',
-    'Account Number  : ' + v('kycAccNo'),
-    'IFSC Code       : ' + v('kycIfsc').toUpperCase(),
-    'Bank Name       : ' + v('kycBankName'),
-    '',
-    '── CONTACT ──',
-    'Email ID        : ' + v('kycEmail'),
-    'Mobile Number   : ' + v('kycMobile'),
-    '',
-    '── NOMINEE ──',
-    'Full Name       : ' + v('kycNomName'),
-    'Email ID        : ' + v('kycNomEmail'),
-    'Mobile Number   : ' + v('kycNomMobile'),
-    'Aadhaar (Last 4): ' + v('kycNomAadhaar'),
-    'Address         : ' + v('kycNomAddress'),
-    '',
-    'Thank you!'
-  ];
-  return profileText + kycLines.join('\n');
-}
-
-window.buildAndOpenGmail = function() {
-  var body = buildCombinedEmail();
-  var subj = window._emailSubject || 'My Investor Profile';
-  window.open('https://mail.google.com/mail/?view=cm&to=rameshvegi94@gmail.com&su=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body), '_blank');
-  return false;
-};
-
-window.buildAndOpenEmail = function() {
-  var body = buildCombinedEmail();
-  var subj = window._emailSubject || 'My Investor Profile';
-  window.location.href = 'mailto:rameshvegi94@gmail.com?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
-  return false;
-};
-
-window.buildAndOpenWa = function() {
-  var body = buildCombinedEmail();
-  window.open('https://wa.me/918329450580?text=' + encodeURIComponent(body), '_blank');
-  return false;
-};
-</script>
 </body>
 </html>
