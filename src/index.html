@@ -527,7 +527,7 @@
         border: 1px solid var(--border);
         color: var(--muted);
         border-radius: 20px;
-        padding: 0.3rem 0.75rem;
+        padding: 0.3rem 0.55rem;
         font-size: 0.78rem;
         font-family: var(--sans);
         cursor: pointer;
@@ -580,6 +580,38 @@
       @media (max-width: 480px) {
         .nav-profiling-btn {
           display: none;
+        }
+      }
+
+      /* ── MOBILE FAB ── */
+      .fab-profiling {
+        display: none;
+      }
+      @media (max-width: 480px) {
+        .fab-profiling {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          position: fixed;
+          bottom: 1.4rem;
+          right: 1.2rem;
+          z-index: 200;
+          background: var(--accent);
+          color: var(--bg);
+          text-decoration: none;
+          font-family: var(--sans);
+          font-size: 0.88rem;
+          font-weight: 500;
+          letter-spacing: 0.04em;
+          padding: 0.7rem 1.2rem;
+          border-radius: 999px;
+          box-shadow: 0 4px 20px rgba(200, 169, 110, 0.35);
+          transition: opacity 0.2s, transform 0.2s;
+          white-space: nowrap;
+        }
+        .fab-profiling:active {
+          opacity: 0.85;
+          transform: scale(0.97);
         }
       }
 
@@ -762,8 +794,8 @@
         >
           <span class="icon-dark">☀️</span>
           <span class="icon-light">🌙</span>
-          <span class="icon-dark">Light</span>
-          <span class="icon-light">Dark</span>
+          <span class="icon-dark">🌙</span>
+          <span class="icon-light">☀️</span>
         </button>
       </div>
     </nav>
@@ -3790,6 +3822,15 @@
         registered with AMFI as a Mutual Fund Distributor – ARN-349739.
       </div>
     </footer>
+
+    <!-- Mobile FAB: Begin Profiling -->
+    <a
+      href="https://mfd-risk-profiler-arn-349739.netlify.app/"
+      class="fab-profiling"
+      aria-label="Begin Profiling"
+    >
+      <span>📋</span> Begin Profiling
+    </a>
 
     <script>
       // ── THEME TOGGLE ──
