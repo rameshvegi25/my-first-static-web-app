@@ -1312,8 +1312,8 @@
               "
             >
               I submit your investment instruction directly to the AMC (the fund
-              house) through the official SEBI Compliant platforms. I am just
-              the facilitator — a bridge between you and the AMC.
+              house) through the SEBI Compliant platforms. I am just the
+              facilitator — a bridge between you and the AMC.
               <strong style="color: var(--text)"
                 >No money comes to me at any point.</strong
               >
@@ -3627,7 +3627,7 @@
           <p>
             Once you're comfortable, I help you complete KYC (if not already
             done), set up your folio, and place your first investment — through
-            the SEBI compliant platforms. The whole process typically takes one
+            the SEBI Compliant platforms. The whole process typically takes one
             working day.
           </p>
         </div>
@@ -3811,19 +3811,31 @@
 
       // ── SUBNAV ACTIVE HIGHLIGHT ──
       (function () {
+        var subnav = document.getElementById("subnav");
         var links = document.querySelectorAll(".subnav a");
         var sections = Array.from(links).map(function (a) {
           return document.querySelector(a.getAttribute("href"));
         });
+        var lastActive = -1;
         function onScroll() {
           var scrollY = window.scrollY + 120;
           var active = null;
           sections.forEach(function (sec, i) {
             if (sec && sec.offsetTop <= scrollY) active = i;
           });
+          if (active === lastActive) return;
+          lastActive = active;
           links.forEach(function (a, i) {
             a.classList.toggle("active", i === active);
           });
+          // Scroll the active link into view within the subnav bar
+          if (active !== null && links[active]) {
+            links[active].scrollIntoView({
+              behavior: "smooth",
+              block: "nearest",
+              inline: "center",
+            });
+          }
         }
         window.addEventListener("scroll", onScroll, { passive: true });
         onScroll();
