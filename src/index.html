@@ -1,585 +1,3836 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About · Vegi Ramesh · ARN-349739</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg:         #0b0f1a;
-      --surface:    #111827;
-      --surface2:   #1a2236;
-      --border:     rgba(255,255,255,0.07);
-      --accent:     #c8a96e;
-      --accent-dim: rgba(200,169,110,0.15);
-      --accent-glow:rgba(200,169,110,0.08);
-      --text:       #e8e4dc;
-      --muted:      #8a9ab5;
-      --danger:     #e05c5c;
-      --safe:       #4caf82;
-      --neutral:    #6b8cba;
-      --warn:       #e0a34a;
-      --serif:      'Cormorant Garamond', Georgia, serif;
-      --sans:       'DM Sans', sans-serif;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About · Vegi Ramesh · ARN-349739</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b0f1a;
+        --surface: #111827;
+        --surface2: #1a2236;
+        --border: rgba(255, 255, 255, 0.07);
+        --accent: #c8a96e;
+        --accent-dim: rgba(200, 169, 110, 0.15);
+        --accent-glow: rgba(200, 169, 110, 0.08);
+        --text: #e8e4dc;
+        --muted: #8a9ab5;
+        --danger: #e05c5c;
+        --safe: #4caf82;
+        --neutral: #6b8cba;
+        --warn: #e0a34a;
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --sans: "DM Sans", sans-serif;
+        --nav-bg: rgba(11, 15, 26, 0.92);
+        --prose-text: #b8bfcc;
+        --footer-disc: #6b7280;
+        --subnav-bg: rgba(17, 24, 39, 0.95);
+      }
+      [data-theme="light"] {
+        --bg: #f7f4ef;
+        --surface: #ffffff;
+        --surface2: #f0ebe0;
+        --border: rgba(0, 0, 0, 0.09);
+        --accent: #a67c32;
+        --accent-dim: rgba(166, 124, 50, 0.12);
+        --accent-glow: rgba(166, 124, 50, 0.06);
+        --text: #1c1a14;
+        --muted: #6b6353;
+        --danger: #c0392b;
+        --safe: #2e7d5e;
+        --neutral: #3d6491;
+        --warn: #b5780a;
+        --nav-bg: rgba(247, 244, 239, 0.94);
+        --prose-text: #4a4535;
+        --footer-disc: #7a7060;
+        --subnav-bg: rgba(240, 235, 224, 0.97);
+      }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    html { scroll-behavior: smooth; }
+      html {
+        scroll-behavior: smooth;
+      }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: 16px;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+      }
 
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(11,15,26,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 clamp(1.5rem, 5vw, 4rem);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-    }
-    .nav-brand {
-      font-family: var(--serif);
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--text);
-      letter-spacing: 0.03em;
-    }
-    .nav-brand span { color: var(--accent); font-style: italic; }
-    .nav-arn {
-      font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
+      /* ── NAV ── */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--nav-bg);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 0 clamp(1.5rem, 5vw, 4rem);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+      }
+      .nav-brand {
+        font-family: var(--serif);
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--text);
+        letter-spacing: 0.03em;
+      }
+      .nav-brand span {
+        color: var(--accent);
+        font-style: italic;
+      }
+      .nav-arn {
+        font-size: 0.72rem;
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
 
-    /* ── HERO ── */
-    .hero {
-      text-align: center;
-      padding: clamp(4rem, 10vw, 7rem) clamp(1.5rem, 5vw, 4rem) clamp(3rem, 7vw, 5rem);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(200,169,110,0.07) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-eyebrow {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.2rem;
-    }
-    .hero-eyebrow::before, .hero-eyebrow::after { content: ' ✦ '; opacity: 0.6; }
-    .hero h1 {
-      font-family: var(--serif);
-      font-size: clamp(2.4rem, 6vw, 4.2rem);
-      font-weight: 600;
-      line-height: 1.15;
-      margin-bottom: 1.4rem;
-      color: var(--text);
-    }
-    .hero h1 em { color: var(--accent); font-style: italic; }
-    .hero-sub {
-      max-width: 600px;
-      margin: 0 auto 2.5rem;
-      color: var(--muted);
-      font-size: 1.05rem;
-      font-weight: 300;
-    }
-    .divider-star {
-      color: var(--accent);
-      opacity: 0.4;
-      font-size: 1.2rem;
-      letter-spacing: 0.5rem;
-      margin: 2rem 0;
-    }
+      /* ── HERO ── */
+      .hero {
+        text-align: center;
+        padding: clamp(4rem, 10vw, 7rem) clamp(1.5rem, 5vw, 4rem)
+          clamp(3rem, 7vw, 5rem);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 70% 60% at 50% 0%,
+          rgba(200, 169, 110, 0.07) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .hero-eyebrow {
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.2rem;
+      }
+      .hero-eyebrow::before,
+      .hero-eyebrow::after {
+        content: " ✦ ";
+        opacity: 0.6;
+      }
+      .hero h1 {
+        font-family: var(--serif);
+        font-size: clamp(2.4rem, 6vw, 4.2rem);
+        font-weight: 600;
+        line-height: 1.15;
+        margin-bottom: 1.4rem;
+        color: var(--text);
+      }
+      .hero h1 em {
+        color: var(--accent);
+        font-style: italic;
+      }
+      .hero-sub {
+        max-width: 600px;
+        margin: 0 auto 2.5rem;
+        color: var(--muted);
+        font-size: 1.05rem;
+        font-weight: 300;
+      }
+      .divider-star {
+        color: var(--accent);
+        opacity: 0.4;
+        font-size: 1.2rem;
+        letter-spacing: 0.5rem;
+        margin: 2rem 0;
+      }
 
-    /* ── SECTION WRAPPER ── */
-    .section {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 2rem);
-    }
-    .section-label {
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.8rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-    .section h2 {
-      font-family: var(--serif);
-      font-size: clamp(1.7rem, 4vw, 2.6rem);
-      font-weight: 600;
-      line-height: 1.2;
-      margin-bottom: 1.8rem;
-      color: var(--text);
-    }
-    .section h2 em { color: var(--accent); font-style: italic; }
+      /* ── SECTION WRAPPER ── */
+      .section {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 2rem);
+      }
+      .section-label {
+        font-size: 0.68rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .section-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+      .section h2 {
+        font-family: var(--serif);
+        font-size: clamp(1.7rem, 4vw, 2.6rem);
+        font-weight: 600;
+        line-height: 1.2;
+        margin-bottom: 1.8rem;
+        color: var(--text);
+      }
+      .section h2 em {
+        color: var(--accent);
+        font-style: italic;
+      }
 
-    /* ── PROSE BLOCKS ── */
-    .prose p {
-      color: #b8bfcc;
-      font-weight: 300;
-      font-size: 1.02rem;
-      margin-bottom: 1.1rem;
-    }
-    .prose p:last-child { margin-bottom: 0; }
-    .prose strong {
-      color: var(--text);
-      font-weight: 500;
-    }
-    .prose em { color: var(--accent); font-style: italic; }
+      /* ── PROSE BLOCKS ── */
+      .prose p {
+        color: var(--prose-text);
+        font-weight: 300;
+        font-size: 1.02rem;
+        margin-bottom: 1.1rem;
+      }
+      .prose p:last-child {
+        margin-bottom: 0;
+      }
+      .prose strong {
+        color: var(--text);
+        font-weight: 500;
+      }
+      .prose em {
+        color: var(--accent);
+        font-style: italic;
+      }
 
-    /* ── PILLAR CARDS ── */
-    .pillars {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      margin: 2rem 0;
-    }
-    .pillar {
-      background: var(--surface);
-      padding: 1.8rem 1.6rem;
-      transition: background 0.2s;
-    }
-    .pillar:hover { background: var(--surface2); }
-    .pillar-icon {
-      font-size: 1.4rem;
-      margin-bottom: 0.8rem;
-    }
-    .pillar h3 {
-      font-family: var(--serif);
-      font-size: 1.18rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.6rem;
-    }
-    .pillar p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      font-weight: 300;
-      line-height: 1.6;
-    }
+      /* ── PILLAR CARDS ── */
+      .pillars {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        margin: 2rem 0;
+      }
+      .pillar {
+        background: var(--surface);
+        padding: 1.8rem 1.6rem;
+        transition: background 0.2s;
+      }
+      .pillar:hover {
+        background: var(--surface2);
+      }
+      .pillar-icon {
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+      }
+      .pillar h3 {
+        font-family: var(--serif);
+        font-size: 1.18rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.6rem;
+      }
+      .pillar p {
+        font-size: 0.9rem;
+        color: var(--muted);
+        font-weight: 300;
+        line-height: 1.6;
+      }
 
-    /* ── HIGHLIGHT QUOTE ── */
-    .quote-block {
-      border-left: 3px solid var(--accent);
-      background: var(--accent-glow);
-      border-radius: 0 10px 10px 0;
-      padding: 1.4rem 1.8rem;
-      margin: 2rem 0;
-    }
-    .quote-block p {
-      font-family: var(--serif);
-      font-size: 1.25rem;
-      font-style: italic;
-      color: var(--text);
-      line-height: 1.5;
-    }
+      /* ── HIGHLIGHT QUOTE ── */
+      .quote-block {
+        border-left: 3px solid var(--accent);
+        background: var(--accent-glow);
+        border-radius: 0 10px 10px 0;
+        padding: 1.4rem 1.8rem;
+        margin: 2rem 0;
+      }
+      .quote-block p {
+        font-family: var(--serif);
+        font-size: 1.25rem;
+        font-style: italic;
+        color: var(--text);
+        line-height: 1.5;
+      }
 
-    /* ── SEPARATOR ── */
-    hr.section-sep {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0;
-    }
+      /* ── SEPARATOR ── */
+      hr.section-sep {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 0;
+      }
 
-    /* ── WHY MF TABLE ── */
-    .table-wrap {
-      overflow-x: auto;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      margin: 2rem 0;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.88rem;
-      min-width: 680px;
-    }
-    thead tr {
-      background: var(--surface2);
-    }
-    thead th {
-      padding: 0.85rem 1rem;
-      text-align: left;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      color: var(--muted);
-      border-bottom: 1px solid var(--border);
-    }
-    thead th:first-child { color: var(--text); }
-    tbody tr {
-      border-bottom: 1px solid var(--border);
-      transition: background 0.15s;
-    }
-    tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: var(--surface2); }
-    tbody td {
-      padding: 0.95rem 1rem;
-      vertical-align: top;
-      color: #b8bfcc;
-      font-weight: 300;
-      line-height: 1.5;
-    }
-    tbody td:first-child {
-      font-weight: 500;
-      color: var(--text);
-      white-space: nowrap;
-    }
-    .tag {
-      display: inline-block;
-      padding: 0.18rem 0.55rem;
-      border-radius: 4px;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-    }
-    .tag-bad   { background: rgba(224,92,92,0.15);  color: #e07a7a; }
-    .tag-warn  { background: rgba(224,163,74,0.15); color: #e0b86a; }
-    .tag-ok    { background: rgba(107,140,186,0.15);color: #8aaad4; }
-    .tag-good  { background: rgba(76,175,130,0.15); color: #5ec99a; }
+      /* ── WHY MF TABLE ── */
+      .table-wrap {
+        overflow-x: auto;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        margin: 2rem 0;
+        -webkit-overflow-scrolling: touch;
+      }
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 0.88rem;
+        min-width: 520px;
+        table-layout: fixed;
+      }
+      /* Column widths: Option frozen narrow, others equal */
+      table colgroup .col-option {
+        width: 110px;
+      }
+      table colgroup .col-data {
+        width: 140px;
+      }
+      table colgroup .col-verdict {
+        width: 150px;
+      }
 
-    /* ── STOPPER SECTION ── */
-    .stopper-card {
-      background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
-      border: 1px solid rgba(200,169,110,0.2);
-      border-radius: 14px;
-      padding: clamp(2rem, 5vw, 3rem);
-      margin: 2rem 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .stopper-card::before {
-      content: '✦';
-      position: absolute;
-      right: 2rem;
-      top: 1.5rem;
-      font-size: 5rem;
-      color: var(--accent);
-      opacity: 0.06;
-      line-height: 1;
-    }
+      thead tr {
+        background: var(--surface2);
+      }
+      thead th {
+        padding: 0.85rem 0.9rem;
+        text-align: left;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        color: var(--muted);
+        border-bottom: 1px solid var(--border);
+        white-space: normal;
+        vertical-align: bottom;
+      }
+      /* Sticky header first cell */
+      thead th:first-child {
+        color: var(--text);
+        position: sticky;
+        left: 0;
+        z-index: 3;
+        background: var(--surface2);
+        box-shadow: 2px 0 6px rgba(0, 0, 0, 0.18);
+      }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+      tbody tr:hover td {
+        background: var(--surface2);
+      }
+      tbody tr:hover td:first-child {
+        background: var(--surface2);
+      }
+      tbody td {
+        padding: 0.9rem;
+        vertical-align: top;
+        color: var(--prose-text);
+        font-weight: 300;
+        line-height: 1.55;
+        border-bottom: 1px solid var(--border);
+        word-wrap: break-word;
+        white-space: normal;
+      }
+      /* Sticky first column */
+      tbody td:first-child {
+        font-weight: 500;
+        color: var(--text);
+        white-space: normal;
+        word-break: break-word;
+        position: sticky;
+        left: 0;
+        z-index: 2;
+        background: var(--surface);
+        box-shadow: 2px 0 6px rgba(0, 0, 0, 0.18);
+      }
+      /* Remove double borders due to separate border model */
+      thead th:not(:first-child) {
+        border-left: 1px solid var(--border);
+      }
+      tbody td:not(:first-child) {
+        border-left: 1px solid var(--border);
+      }
+      .tag {
+        display: inline-block;
+        padding: 0.18rem 0.55rem;
+        border-radius: 4px;
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+      }
+      .tag-bad {
+        background: rgba(224, 92, 92, 0.15);
+        color: #e07a7a;
+      }
+      .tag-warn {
+        background: rgba(224, 163, 74, 0.15);
+        color: #e0b86a;
+      }
+      .tag-ok {
+        background: rgba(107, 140, 186, 0.15);
+        color: #8aaad4;
+      }
+      .tag-good {
+        background: rgba(76, 175, 130, 0.15);
+        color: #5ec99a;
+      }
 
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
-      text-align: center;
-    }
-    .footer-brand {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-    }
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-    }
-    .footer-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.82rem;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--accent); }
-    .footer-disc {
-      font-size: 0.82rem;
-      color: #6b7280;
-      max-width: 700px;
-      margin: 1rem auto 0;
-      line-height: 1.6;
-    }
+      /* ── STOPPER SECTION ── */
+      .stopper-card {
+        background: linear-gradient(
+          135deg,
+          var(--surface) 0%,
+          var(--surface2) 100%
+        );
+        border: 1px solid rgba(200, 169, 110, 0.2);
+        border-radius: 14px;
+        padding: clamp(2rem, 5vw, 3rem);
+        margin: 2rem 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .stopper-card::before {
+        content: "✦";
+        position: absolute;
+        right: 2rem;
+        top: 1.5rem;
+        font-size: 5rem;
+        color: var(--accent);
+        opacity: 0.06;
+        line-height: 1;
+      }
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .fade-up {
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards;
-    }
-    .fade-up:nth-child(1) { animation-delay: 0.1s; }
-    .fade-up:nth-child(2) { animation-delay: 0.25s; }
-    .fade-up:nth-child(3) { animation-delay: 0.4s; }
-  </style>
-</head>
-<body>
+      /* ── FOOTER ── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+        text-align: center;
+      }
+      .footer-brand {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        color: var(--text);
+        margin-bottom: 0.5rem;
+      }
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+      .footer-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.82rem;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+      .footer-disc {
+        font-size: 0.82rem;
+        color: var(--footer-disc);
+        max-width: 700px;
+        margin: 1rem auto 0;
+        line-height: 1.6;
+      }
 
-<!-- NAV -->
-<nav>
-  <div class="nav-brand">Vegi <span>Ramesh</span></div>
-  <div class="nav-arn">✦ ARN-349739</div>
-</nav>
+      /* ── NEW SECTIONS RESPONSIVE ── */
+      @media (max-width: 640px) {
+        .risk-spectrum-grid {
+          grid-template-columns: 1fr !important;
+        }
+        .earn-explainer-grid {
+          grid-template-columns: 1fr !important;
+        }
+        .flow-diagram {
+          flex-direction: column !important;
+          align-items: center !important;
+          gap: 0.4rem !important;
+        }
+        .flow-arrow {
+          transform: rotate(90deg);
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        .usecase-card {
+          flex-direction: column !important;
+        }
+      }
 
-<!-- HERO -->
-<header class="hero">
-  <div class="hero-eyebrow">About Me & The Ecosystem</div>
-  <h1>Your wealth,<br>protected from <em>hype & fear.</em></h1>
-  <p class="hero-sub">Not just a distributor. Someone whose success depends on yours.</p>
-  <div class="divider-star">✦ ✦ ✦</div>
-</header>
+      /* ── IN-PAGE SUBNAV ── */
+      .subnav {
+        position: sticky;
+        top: 60px;
+        z-index: 90;
+        background: var(--subnav-bg);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding: 0 clamp(1rem, 4vw, 3rem);
+        gap: 0;
+        -webkit-overflow-scrolling: touch;
+      }
+      .subnav::-webkit-scrollbar {
+        display: none;
+      }
+      .subnav a {
+        flex-shrink: 0;
+        padding: 0 1rem;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        font-size: 0.74rem;
+        font-weight: 500;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-decoration: none;
+        border-bottom: 2px solid transparent;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+        white-space: nowrap;
+      }
+      .subnav a:hover,
+      .subnav a.active {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+      }
 
-<hr class="section-sep">
+      /* ── THEME TOGGLE ── */
+      .theme-toggle {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        border-radius: 20px;
+        padding: 0.3rem 0.75rem;
+        font-size: 0.78rem;
+        font-family: var(--sans);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition:
+          color 0.2s,
+          background 0.2s;
+        white-space: nowrap;
+      }
+      .theme-toggle:hover {
+        color: var(--accent);
+      }
+      .theme-toggle .icon-dark {
+        display: inline;
+      }
+      .theme-toggle .icon-light {
+        display: none;
+      }
+      [data-theme="light"] .theme-toggle .icon-dark {
+        display: none;
+      }
+      [data-theme="light"] .theme-toggle .icon-light {
+        display: inline;
+      }
 
-<!-- WHO IS AN MFD -->
-<section class="section">
-  <div class="section-label">The Role</div>
-  <h2>Who is an <em>MFD?</em></h2>
-  <div class="prose">
-    <p>An MFD — a Mutual Fund Distributor — is someone who helps you invest in mutual funds. Officially, we are registered intermediaries who guide investors toward fund choices and facilitate transactions. But that's the regulatory definition. The human one is more layered.</p>
-    <p>In simple terms, an MFD is like a guide — someone who sits between you and the overwhelming world of mutual funds, and helps you make sense of it. They understand your goals, explain your options, and help you put your money to work. <strong>Not a fund manager, not a banker — just someone who helps you invest with clarity.</strong></p>
-  </div>
-</section>
+      /* ── NAV ACTIONS ── */
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .nav-profiling-btn {
+        background: var(--accent);
+        color: var(--bg);
+        border-radius: 6px;
+        padding: 0.35rem 0.9rem;
+        font-size: 0.78rem;
+        font-weight: 500;
+        font-family: var(--sans);
+        text-decoration: none;
+        letter-spacing: 0.04em;
+        transition: opacity 0.2s;
+        white-space: nowrap;
+      }
+      .nav-profiling-btn:hover {
+        opacity: 0.82;
+      }
+      @media (max-width: 480px) {
+        .nav-profiling-btn {
+          display: none;
+        }
+      }
 
-<hr class="section-sep">
+      /* ── USE CASE CARD HOVER (CSS, not inline JS) ── */
+      .usecase-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.8rem;
+        display: flex;
+        gap: 1.4rem;
+        align-items: flex-start;
+        transition: background 0.2s;
+      }
+      .usecase-card:hover {
+        background: var(--surface2);
+      }
 
-<!-- WHY MFD AT ALL -->
-<section class="section">
-  <div class="section-label">Why you need one</div>
-  <h2>Why an MFD <em>at all?</em></h2>
-  <p class="prose" style="color:#8a9ab5; font-weight:300; margin-bottom:1.8rem; font-size:1.02rem;">
-    Yes — you can open a Zerodha or Groww account, pick a Nifty 50 index fund, set up an SIP, and you're done. It is not complicated. So why would you need anyone?
-    <br><br>
-    Because the hardest part of investing is never the steps. <strong style="color:var(--text)">It is always what goes on in your head.</strong>
-  </p>
+      /* ── RISK SPECTRUM MOBILE LABELS ── */
+      .risk-labels-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2.4rem;
+      }
+      .risk-label-low {
+        font-size: 0.72rem;
+        color: #4caf82;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .risk-label-mid {
+        font-size: 0.72rem;
+        color: var(--muted);
+        font-weight: 300;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .risk-label-high {
+        font-size: 0.72rem;
+        color: #e05c5c;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      @media (max-width: 640px) {
+        .risk-labels-row {
+          justify-content: space-between;
+        }
+        .risk-label-low::before {
+          content: "";
+        }
+        .risk-label-low::after {
+          content: "";
+        }
+        .risk-label-high::before {
+          content: "";
+        }
+        .risk-label-high::after {
+          content: "";
+        }
+        .risk-label-low {
+          font-size: 0.65rem;
+        }
+        .risk-label-mid {
+          display: none;
+        }
+        .risk-label-high {
+          font-size: 0.65rem;
+        }
+      }
 
-  <div class="pillars">
-    <div class="pillar">
-      <div class="pillar-icon">⚖️</div>
-      <h3>Your costs, watched closely</h3>
-      <p>Fund costs can quietly change over time. New, cheaper options keep coming. Most people invest once and never check again — and slowly, money leaks out in fees they did not notice. I keep an eye on that so you do not have to.</p>
-    </div>
-    <div class="pillar">
-      <div class="pillar-icon">🔇</div>
-      <h3>Protection from the hype</h3>
-      <p>Every few months, there is a new "star" fund manager or a hot new theme. The story sounds exciting. But the hype builds, money pours in at the top, and ordinary investors are left with losses when the story fades. I am the calm voice that says: <em>we do not need this.</em></p>
-    </div>
-    <div class="pillar">
-      <div class="pillar-icon">🧭</div>
-      <h3>Keeping your plan on track</h3>
-      <p>When markets fall, most people want to run. When markets rise, most people want to put everything in. Both choices feel right in the moment — but both tend to hurt returns. Someone outside the emotion needs to keep the plan steady. That is my job.</p>
-    </div>
-    <div class="pillar">
-      <div class="pillar-icon">📵</div>
-      <h3>Turn off investment YouTube</h3>
-      <p>The more investment content you consume, the more investment ads follow you. This is not a coincidence — it is the algorithm at work. <strong>That video is not advice. It is an advertisement in disguise.</strong></p>
-    </div>
-  </div>
-</section>
+      /* ── WHAT HAPPENS NEXT ── */
+      .next-steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.2rem;
+        margin: 2rem 0;
+      }
+      @media (max-width: 640px) {
+        .next-steps {
+          grid-template-columns: 1fr;
+        }
+      }
+      .next-step-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.6rem 1.4rem;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.2s;
+      }
+      .next-step-card:hover {
+        border-color: rgba(200, 169, 110, 0.35);
+      }
+      .next-step-num {
+        font-family: var(--serif);
+        font-size: 3rem;
+        font-weight: 600;
+        color: var(--accent);
+        opacity: 0.18;
+        position: absolute;
+        top: 0.5rem;
+        right: 1rem;
+        line-height: 1;
+      }
+      .next-step-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0.8rem;
+      }
+      .next-step-card h4 {
+        font-family: var(--serif);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.45rem;
+      }
+      .next-step-card p {
+        font-size: 0.85rem;
+        color: var(--muted);
+        font-weight: 300;
+        line-height: 1.6;
+      }
 
-<hr class="section-sep">
+      /* ── HOLDINGS PATHS MOBILE ORDER ── */
+      @media (max-width: 640px) {
+        .path-discouraged {
+          order: 2;
+        }
+        .path-recommended {
+          order: 1;
+        }
+        .holdings-heading {
+          font-size: 1.3rem !important;
+        }
+      }
 
-<!-- WHY RAMESH -->
-<section class="section">
-  <div class="section-label">The difference</div>
-  <h2>So why <em>Ramesh?</em></h2>
-  <div class="stopper-card">
-    <div class="prose">
-      <p>Not every MFD works the same way. This is where the difference matters.</p>
-      <p><strong>SEBI — India's market regulator — puts a strict limit on how much a fund can charge you</strong> for managing your money. This rule exists to protect you. But even within that limit, there is a wide range. The industry's structure naturally makes higher-cost funds more visible — and most investors never realise they have a choice within that range.</p>
-      <p><strong>I work within that choice — deliberately.</strong></p>
-      <p>I keep your costs below average — on purpose. Not by picking the cheapest fund blindly, because that is lazy and wrong. But by finding funds that <em>perform well and still cost less.</em> That combination is real. It just takes honest work to find it.</p>
-      <p>I also go beyond plain index funds. I study fund types like <strong>Smart Beta</strong> — a category that follows clear, rule-based strategies instead of a fund manager's gut feeling. These funds aim to give you better returns for the risk you take, and they often cost less than actively managed funds. It is a space not many investors know about — and helping you understand it is part of what I do.</p>
-    </div>
-  </div>
-  <div class="quote-block">
-    <p>"I would rather you grow more wealth and I earn a smaller commission, than the other way around. That is not me being selfless — it is the only way I can look you in the eye and say I am genuinely on your side."</p>
-  </div>
-  <div class="prose">
-    <p>I have sat with people who came to me after being badly burned. Not by bad luck — by bad advice. A fund that had done very well for three years. A story that made total sense emotionally. They put in their money. And then the market reminded them that past returns mean nothing about the future.</p>
-    <p>That experience changed how I think about this work.</p>
-    <p>My role is to be your safeguard — not a wall that stops you from investing, but the steady voice that asks <em>"does this actually make sense for you?"</em> before your money moves. The one who protects you from paying for hype, and guides you toward steady, boring, powerful compounding that shows up as real wealth in your life.</p>
-    <p><strong>That is who I am. That is why Ramesh.</strong></p>
-  </div>
-</section>
+      /* ── ANIMATIONS ── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .fade-up {
+        opacity: 0;
+        animation: fadeUp 0.7s ease forwards;
+      }
+      .fade-up:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .fade-up:nth-child(2) {
+        animation-delay: 0.25s;
+      }
+      .fade-up:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <div class="nav-brand">Vegi <span>Ramesh</span></div>
+      <div class="nav-actions">
+        <div class="nav-arn">✦ ARN-349739</div>
+        <a
+          href="https://mfd-risk-profiler-arn-349739.netlify.app/"
+          class="nav-profiling-btn"
+          >Begin Profiling ✦</a
+        >
+        <button
+          class="theme-toggle"
+          onclick="toggleTheme()"
+          aria-label="Toggle theme"
+        >
+          <span class="icon-dark">☀️</span>
+          <span class="icon-light">🌙</span>
+          <span class="icon-dark">Light</span>
+          <span class="icon-light">Dark</span>
+        </button>
+      </div>
+    </nav>
 
-<hr class="section-sep">
+    <!-- IN-PAGE SUBNAV -->
+    <nav class="subnav" id="subnav">
+      <a href="#who-is-mfd">The Role</a>
+      <a href="#why-mfd">Why an MFD</a>
+      <a href="#why-ramesh">Why Me</a>
+      <a href="#why-mf">Mutual Funds</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#how-i-earn">How I Earn</a>
+      <a href="#use-cases">Use Cases</a>
+      <a href="#risk-spectrum">Risk Spectrum</a>
+      <a href="#whats-next">Get Started</a>
+    </nav>
 
-<!-- WHY MUTUAL FUNDS -->
-<section class="section">
-  <div class="section-label">The case for mutual funds</div>
-  <h2>Why <em>Mutual Funds?</em></h2>
-  <div class="prose">
-    <p>There are many ways people save and grow money in India. Most of them come with hidden costs, hidden risks, or hidden motives. Here is a straight, honest comparison — so you can choose with a clear head, not under sales pressure.</p>
-  </div>
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-eyebrow">About Me & The Ecosystem</div>
+      <h1>Your wealth,<br />protected from <em>hype and fear.</em></h1>
+      <p class="hero-sub">
+        Not just a distributor. Someone whose success depends on yours.
+      </p>
+      <div class="divider-star">✦ ✦ ✦</div>
+    </header>
 
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Option</th>
-          <th>Returns</th>
-          <th>Liquidity</th>
-          <th>Transparency</th>
-          <th>Risk</th>
-          <th>Verdict</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>📈 Mutual Funds</td>
-          <td>Market-linked, Potentially inflation-beating over long term</td>
-          <td>Max 3 working Days redemption</td>
-          <td>SEBI-regulated, fully disclosed</td>
-          <td>Market risk, managed with diversification</td>
-          <td><span class="tag tag-good">Best all-rounder in general comparison.</span></td>
-        </tr>
-        <tr>
-          <td>🏠 Real Estate</td>
-          <td>Can be good, but uneven and illiquid gains</td>
-          <td>Months to sell; locked capital</td>
-          <td>Opaque pricing, black money prevalent</td>
-          <td>High concentration, maintenance costs, legal disputes</td>
-          <td><span class="tag tag-warn">Illiquid & opaque</span></td>
-        </tr>
-        <tr>
-          <td>🏦 Fixed Deposits</td>
-          <td>4–7% — often below inflation after tax</td>
-          <td>Premature withdrawal penalty</td>
-          <td>Clear but low-yield</td>
-          <td>Low market risk, high inflation risk</td>
-          <td><span class="tag tag-ok">Safe but erodes wealth</span></td>
-        </tr>
-        <tr>
-          <td>🤝 Chit Funds / Informal Schemes</td>
-          <td>Promises of high returns, rarely delivered fairly</td>
-          <td>Very low; locked in schemes</td>
-          <td>Completely opaque</td>
-          <td>Fraud risk, black money, illegal activity</td>
-          <td><span class="tag tag-bad">High risk; unregulated ones are illegal</span></td>
-        </tr>
-        <tr>
-          <td>📊 Direct Stocks</td>
-          <td>Can be high — but even experienced investors with years of study regularly lose money. There is no guaranteed formula.</td>
-          <td>High liquidity</td>
-          <td>Exchange-listed, regulated</td>
-          <td>High concentration risk; needs constant tracking. Expertise helps but does not guarantee success.</td>
-          <td><span class="tag tag-warn">No safety net, even for experts</span></td>
-        </tr>
-        <tr>
-          <td>🎲 F&amp;O Trading</td>
-          <td>90%+ retail traders lose money — statistically</td>
-          <td>Daily settlement</td>
-          <td>Exchange-listed but complex</td>
-          <td>Extremely high; can lose more than invested</td>
-          <td><span class="tag tag-bad">Not investing — gambling</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <hr class="section-sep" />
 
-  <h3 style="font-family:var(--serif); font-size:1.5rem; font-weight:600; color:var(--text); margin: 2rem 0 1rem;">What makes Mutual Funds stand out</h3>
+    <!-- WHO IS AN MFD -->
+    <section class="section" id="who-is-mfd">
+      <div class="section-label">The Role</div>
+      <h2>Who is an <em>MFD?</em></h2>
+      <div class="prose">
+        <p>
+          An MFD — a Mutual Fund Distributor — is someone who helps you invest
+          in mutual funds. Officially, we are registered intermediaries who
+          guide investors toward fund choices and facilitate transactions. But
+          that's the regulatory definition. The human one is more layered.
+        </p>
+        <p>
+          In simple terms, an MFD is like a guide — someone who sits between you
+          and the overwhelming world of mutual funds, and helps you make sense
+          of it. They understand your goals, explain your options, and help you
+          put your money to work.
+          <strong
+            >Not a fund manager, not a banker — just someone who helps you
+            invest with clarity.</strong
+          >
+        </p>
+      </div>
+    </section>
 
-  <div class="pillars" style="margin-bottom:1.5rem;">
-    <div class="pillar">
-      <div class="pillar-icon">🔒</div>
-      <h3>SEBI regulated</h3>
-      <p>Every rupee, every fund, every transaction is governed and audited. No room for the kind of opacity that real estate or chit funds thrive on.</p>
-    </div>
-    <div class="pillar">
-      <div class="pillar-icon">💧</div>
-      <h3>Liquid when you need it</h3>
-      <p>Unlike real estate or chit schemes, your money is accessible. Life doesn't wait for a property to sell.</p>
-    </div>
-    <div class="pillar">
-      <div class="pillar-icon">📉</div>
-      <h3>Diversification built in</h3>
-      <p>A single index fund gives you exposure to 50–500 companies. No single stock collapse can wipe you out.</p>
-    </div>
-    <div class="pillar">
-      <div class="pillar-icon">🌱</div>
-      <h3>Start with ₹1,000</h3>
-      <p>No minimum. No lock-in. No need for a large lump sum. Wealth-building is not a privilege of the wealthy here.</p>
-    </div>
-  </div>
+    <hr class="section-sep" />
 
+    <!-- WHY MFD AT ALL -->
+    <section class="section" id="why-mfd">
+      <div class="section-label">Why you need one</div>
+      <h2>Why an MFD <em>at all?</em></h2>
+      <p
+        class="prose"
+        style="
+          color: #8a9ab5;
+          font-weight: 300;
+          margin-bottom: 1.8rem;
+          font-size: 1.02rem;
+        "
+      >
+        Yes — you can open a Zerodha or Groww account, pick a Nifty 50 index
+        fund, set up an SIP, and you're done. It is not complicated. So why
+        would you need anyone?
+        <br /><br />
+        Because the hardest part of investing is never the steps.
+        <strong style="color: var(--text)"
+          >It is always what goes on in your head.</strong
+        >
+      </p>
 
-</section>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-icon">⚖️</div>
+          <h3>Your costs, watched closely</h3>
+          <p>
+            Fund costs can quietly change over time. New, cheaper options keep
+            coming. Most people invest once and never check again — and slowly,
+            money leaks out in fees they did not notice. I keep an eye on that
+            so you do not have to.
+          </p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🔇</div>
+          <h3>Protection from the hype</h3>
+          <p>
+            Every few months, there is a new "star" fund manager or a hot new
+            theme. The story sounds exciting. But the hype builds, money pours
+            in at the top, and ordinary investors are left with losses when the
+            story fades. I am the calm voice that says:
+            <em>we do not need this.</em>
+          </p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🧭</div>
+          <h3>Keeping your plan on track</h3>
+          <p>
+            When markets fall, most people want to run. When markets rise, most
+            people want to put everything in. Both choices feel right in the
+            moment — but both tend to hurt returns. Someone outside the emotion
+            needs to keep the plan steady. That is my job.
+          </p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">📵</div>
+          <h3>Turn off investment YouTube</h3>
+          <p>
+            The more investment content you consume, the more investment ads
+            follow you. This is not a coincidence — it is the algorithm at work.
+            <strong
+              >That video is not advice. It is an advertisement in
+              disguise.</strong
+            >
+          </p>
+        </div>
+      </div>
+    </section>
 
-<hr class="section-sep">
+    <hr class="section-sep" />
 
-<!-- CTA -->
-<section class="section" style="text-align:center; padding-bottom: 4rem;">
-  <div class="divider-star" style="margin-bottom:1.8rem;">✦ ✦ ✦</div>
-  <h2 style="font-family:var(--serif); font-size:clamp(1.6rem,4vw,2.4rem); margin-bottom:1rem;">
-    Ready to invest with <em>discipline?</em>
-  </h2>
-  <p style="color:var(--muted); font-weight:300; max-width:480px; margin:0 auto 2rem;">
-    Start with your investor profile. 10 questions. 3 minutes. A portfolio that actually fits you.
-  </p>
-  <a href="https://mfd-risk-profiler-arn-349739.netlify.app/" style="display:inline-block; background:var(--accent); color:#0b0f1a; padding:0.85rem 2.2rem; border-radius:8px; font-weight:500; font-size:0.95rem; text-decoration:none; letter-spacing:0.04em; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-    Begin Profiling ✦
-  </a>
-  <div style="margin-top:1.8rem; display:flex; justify-content:center; gap:2.5rem; flex-wrap:wrap;">
-    <div style="text-align:center;">
-      <div style="font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:0.3rem;">☎</div>
-      <a href="tel:8329450580" style="color:var(--muted); text-decoration:none; font-size:0.9rem;">8329450580</a>
-    </div>
-    <div style="text-align:center;">
-      <div style="font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:0.3rem;">@</div>
-      <a href="mailto:rameshvegi94@gmail.com" style="color:var(--muted); text-decoration:none; font-size:0.9rem;">rameshvegi94@gmail.com</a>
-    </div>
-    <div style="text-align:center;">
-      <div style="font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:0.3rem;">✦</div>
-      <span style="color:var(--muted); font-size:0.9rem;">ARN-349739</span>
-    </div>
-  </div>
-</section>
+    <!-- WHY RAMESH -->
+    <section class="section" id="why-ramesh">
+      <div class="section-label">The difference</div>
+      <h2>So why <em>Ramesh?</em></h2>
+      <div class="stopper-card">
+        <div class="prose">
+          <p>
+            Not every MFD works the same way. This is where the difference
+            matters.
+          </p>
+          <p>
+            <strong
+              >SEBI — India's market regulator — puts a strict limit on how much
+              a fund can charge you</strong
+            >
+            for managing your money. This rule exists to protect you. But even
+            within that limit, there is a wide range. The industry's structure
+            naturally makes higher-cost funds more visible — and most investors
+            never realise they have a choice within that range.
+          </p>
+          <p><strong>I work within that choice — deliberately.</strong></p>
+          <p>
+            I keep your costs below average — on purpose. Not by picking the
+            cheapest fund blindly, because that is lazy and wrong. But by
+            finding funds that <em>perform well and still cost less.</em> That
+            combination is real. It just takes honest work to find it.
+          </p>
+          <p>
+            I also go beyond plain index funds. I study fund types like
+            <strong>Smart Beta</strong> — a category that follows clear,
+            rule-based strategies instead of a fund manager's gut feeling. These
+            funds aim to give you better returns for the risk you take, and they
+            often cost less than actively managed funds. It is a space not many
+            investors know about — and helping you understand it is part of what
+            I do.
+          </p>
+        </div>
+      </div>
+      <div class="quote-block">
+        <p>
+          "I would rather you grow more wealth and I earn a smaller commission,
+          than the other way around. That is not me being selfless — it is the
+          only way I can look you in the eye and say I am genuinely on your
+          side."
+        </p>
+      </div>
+      <div class="prose">
+        <p>
+          I have sat with people who came to me after being badly burned. Not by
+          bad luck — by bad advice. A fund that had done very well for three
+          years. A story that made total sense emotionally. They put in their
+          money. And then the market reminded them that past returns mean
+          nothing about the future.
+        </p>
+        <p>That experience changed how I think about this work.</p>
+        <p>
+          My role is to be your safeguard — not a wall that stops you from
+          investing, but the steady voice that asks
+          <em>"does this actually make sense for you?"</em> before your money
+          moves. The one who protects you from paying for hype, and guides you
+          toward steady, boring, powerful compounding that shows up as real
+          wealth in your life.
+        </p>
+        <p><strong>That is who I am. That is why Ramesh.</strong></p>
+      </div>
+    </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-brand">Mutual Fund and NPS distribution services by Vegi Ramesh</div>
-  <div class="footer-links">
-    <a href="https://mfd-risk-profiler-arn-349739.netlify.app/">Investor Profiling</a>
-    <a href="tel:8329450580">Call Us</a>
-    <a href="mailto:rameshvegi94@gmail.com">Email Us</a>
-  </div>
-  <div class="footer-disc">
-    Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Past performance is not indicative of future results. This material is for informational purposes only and does not constitute financial advice. Vegi Ramesh is registered with AMFI as a Mutual Fund Distributor – ARN-349739.
-  </div>
-</footer>
+    <hr class="section-sep" />
 
-</body>
+    <!-- WHY MUTUAL FUNDS -->
+    <section class="section" id="why-mf">
+      <div class="section-label">The case for mutual funds</div>
+      <h2>Why <em>Mutual Funds?</em></h2>
+      <div class="prose">
+        <p>
+          There are many ways people save and grow money in India. Most of them
+          come with hidden costs, hidden risks, or hidden motives. Here is a
+          straight, honest comparison — so you can choose with a clear head, not
+          under sales pressure.
+        </p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col class="col-option" />
+            <col class="col-data" />
+            <col class="col-data" />
+            <col class="col-data" />
+            <col class="col-data" />
+            <col class="col-verdict" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Returns</th>
+              <th>Liquidity</th>
+              <th>Transparency</th>
+              <th>Risk</th>
+              <th>Verdict</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>📈 Mutual Funds</td>
+              <td>
+                Market-linked, Potentially inflation-beating over long term
+              </td>
+              <td>Max 3 working Days redemption</td>
+              <td>SEBI-regulated, fully disclosed</td>
+              <td>Market risk, managed with diversification</td>
+              <td>
+                <span class="tag tag-good"
+                  >Best all-rounder in general comparison.</span
+                >
+              </td>
+            </tr>
+            <tr>
+              <td>🏠 Real Estate</td>
+              <td>Can be good, but uneven and illiquid gains</td>
+              <td>Months to sell; locked capital</td>
+              <td>Opaque pricing, black money prevalent</td>
+              <td>High concentration, maintenance costs, legal disputes</td>
+              <td><span class="tag tag-warn">Illiquid & opaque</span></td>
+            </tr>
+            <tr>
+              <td>🏦 Fixed Deposits</td>
+              <td>4–7% — often below inflation after tax</td>
+              <td>Premature withdrawal penalty</td>
+              <td>Clear but low-yield</td>
+              <td>Low market risk, high inflation risk</td>
+              <td><span class="tag tag-ok">Safe but erodes wealth</span></td>
+            </tr>
+            <tr>
+              <td>🤝 Chit Funds / Informal Schemes</td>
+              <td>Promises of high returns, rarely delivered fairly</td>
+              <td>Very low; locked in schemes</td>
+              <td>Completely opaque</td>
+              <td>Fraud risk, black money, illegal activity</td>
+              <td>
+                <span class="tag tag-bad"
+                  >High risk; unregulated ones are illegal</span
+                >
+              </td>
+            </tr>
+            <tr>
+              <td>📊 Direct Stocks</td>
+              <td>
+                Can be high — but even experienced investors with years of study
+                regularly lose money. There is no guaranteed formula.
+              </td>
+              <td>High liquidity</td>
+              <td>Exchange-listed, regulated</td>
+              <td>
+                High concentration risk; needs constant tracking. Expertise
+                helps but does not guarantee success.
+              </td>
+              <td>
+                <span class="tag tag-warn"
+                  >No safety net, even for experts</span
+                >
+              </td>
+            </tr>
+            <tr>
+              <td>🎲 F&amp;O Trading</td>
+              <td>
+                Over 90% of individual F&amp;O traders incur losses — per SEBI's
+                own study on the F&amp;O segment (Jan 2023)
+              </td>
+              <td>Daily settlement</td>
+              <td>Exchange-listed but complex</td>
+              <td>Extremely high; can lose more than invested</td>
+              <td><span class="tag tag-bad">Not investing — gambling</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3
+        style="
+          font-family: var(--serif);
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: var(--text);
+          margin: 2rem 0 1rem;
+        "
+      >
+        What makes Mutual Funds stand out
+      </h3>
+
+      <div class="pillars" style="margin-bottom: 1.5rem">
+        <div class="pillar">
+          <div class="pillar-icon">🔒</div>
+          <h3>SEBI regulated</h3>
+          <p>
+            Every rupee, every fund, every transaction is governed and audited.
+            No room for the kind of opacity that real estate or chit funds
+            thrive on.
+          </p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">💧</div>
+          <h3>Liquid when you need it</h3>
+          <p>
+            Unlike real estate or chit schemes, your money is accessible. Life
+            doesn't wait for a property to sell.
+          </p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">📉</div>
+          <h3>Diversification built in</h3>
+          <p>
+            A single index fund gives you exposure to 50–500 companies. No
+            single stock collapse can wipe you out.
+          </p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🌱</div>
+          <h3>Start with ₹1,000</h3>
+          <p>
+            No minimum. No lock-in. No need for a large lump sum.
+            Wealth-building is not a privilege of the wealthy here.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- HOW THE TRANSACTION WORKS -->
+    <section class="section" id="how-it-works">
+      <div class="section-label">Your money's journey</div>
+      <h2>How the <em>Transaction Works</em></h2>
+      <div class="prose">
+        <p>
+          One of the most common concerns people have before investing through a
+          distributor is simple:
+          <strong>"Does my money pass through you?"</strong> The answer is no —
+          and here is exactly how it works.
+        </p>
+      </div>
+
+      <!-- Step-by-step flow -->
+      <div
+        style="margin: 2.2rem 0; display: flex; flex-direction: column; gap: 0"
+      >
+        <!-- Step 1 -->
+        <div
+          style="
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+            position: relative;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              flex-shrink: 0;
+            "
+          >
+            <div
+              style="
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+                background: var(--accent-dim);
+                border: 1.5px solid var(--accent);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                z-index: 1;
+              "
+            >
+              🧑‍💼
+            </div>
+            <div
+              style="
+                width: 2px;
+                flex: 1;
+                min-height: 32px;
+                background: var(--border);
+                margin-top: 4px;
+              "
+            ></div>
+          </div>
+          <div
+            style="
+              background: var(--surface);
+              border: 1px solid var(--border);
+              border-radius: 12px;
+              padding: 1.2rem 1.4rem;
+              flex: 1;
+              margin-bottom: 8px;
+            "
+          >
+            <div
+              style="
+                font-size: 0.68rem;
+                color: var(--accent);
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 0.12em;
+                margin-bottom: 0.35rem;
+              "
+            >
+              Step 1 — You decide to invest
+            </div>
+            <div
+              style="
+                font-family: var(--serif);
+                font-size: 1.05rem;
+                font-weight: 600;
+                color: var(--text);
+                margin-bottom: 0.35rem;
+              "
+            >
+              You tell me the amount and the fund
+            </div>
+            <div
+              style="
+                font-size: 0.88rem;
+                color: var(--muted);
+                font-weight: 300;
+                line-height: 1.6;
+              "
+            >
+              You choose how much to invest and in which fund. I help you pick
+              the right one for your goal — that's my role. Nothing moves yet.
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div
+          style="
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+            position: relative;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              flex-shrink: 0;
+            "
+          >
+            <div
+              style="
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+                background: var(--accent-dim);
+                border: 1.5px solid var(--accent);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                z-index: 1;
+              "
+            >
+              📋
+            </div>
+            <div
+              style="
+                width: 2px;
+                flex: 1;
+                min-height: 32px;
+                background: var(--border);
+                margin-top: 4px;
+              "
+            ></div>
+          </div>
+          <div
+            style="
+              background: var(--surface);
+              border: 1px solid var(--border);
+              border-radius: 12px;
+              padding: 1.2rem 1.4rem;
+              flex: 1;
+              margin-bottom: 8px;
+            "
+          >
+            <div
+              style="
+                font-size: 0.68rem;
+                color: var(--accent);
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 0.12em;
+                margin-bottom: 0.35rem;
+              "
+            >
+              Step 2 — I submit the transaction
+            </div>
+            <div
+              style="
+                font-family: var(--serif);
+                font-size: 1.05rem;
+                font-weight: 600;
+                color: var(--text);
+                margin-bottom: 0.35rem;
+              "
+            >
+              I place the order on your behalf — like a bridge
+            </div>
+            <div
+              style="
+                font-size: 0.88rem;
+                color: var(--muted);
+                font-weight: 300;
+                line-height: 1.6;
+              "
+            >
+              I submit your investment instruction directly to the AMC (the fund
+              house) through the official SEBI Compliant platforms. I am just
+              the facilitator — a bridge between you and the AMC.
+              <strong style="color: var(--text)"
+                >No money comes to me at any point.</strong
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 — money goes directly -->
+        <div
+          style="
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+            position: relative;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              flex-shrink: 0;
+            "
+          >
+            <div
+              style="
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+                background: rgba(76, 175, 130, 0.15);
+                border: 1.5px solid #4caf82;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                z-index: 1;
+              "
+            >
+              💸
+            </div>
+            <div
+              style="
+                width: 2px;
+                flex: 1;
+                min-height: 32px;
+                background: var(--border);
+                margin-top: 4px;
+              "
+            ></div>
+          </div>
+          <div
+            style="
+              background: var(--surface);
+              border: 1px solid rgba(76, 175, 130, 0.2);
+              border-radius: 12px;
+              padding: 1.2rem 1.4rem;
+              flex: 1;
+              margin-bottom: 8px;
+            "
+          >
+            <div
+              style="
+                font-size: 0.68rem;
+                color: #4caf82;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 0.12em;
+                margin-bottom: 0.35rem;
+              "
+            >
+              Step 3 — Your money goes directly to the AMC
+            </div>
+            <div
+              style="
+                font-family: var(--serif);
+                font-size: 1.05rem;
+                font-weight: 600;
+                color: var(--text);
+                margin-bottom: 0.35rem;
+              "
+            >
+              Your bank → AMC's bank. I am not in the middle.
+            </div>
+            <div
+              style="
+                font-size: 0.88rem;
+                color: var(--muted);
+                font-weight: 300;
+                line-height: 1.6;
+              "
+            >
+              Your payment (via UPI, net banking, or mandate) goes
+              <strong style="color: var(--text)"
+                >directly from your bank account to the AMC's registered bank
+                account.</strong
+              >
+              It never touches my account. There is no intermediary holding your
+              money — ever.
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div style="display: flex; gap: 1.2rem; align-items: flex-start">
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              flex-shrink: 0;
+            "
+          >
+            <div
+              style="
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+                background: rgba(76, 175, 130, 0.15);
+                border: 1.5px solid #4caf82;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+              "
+            >
+              ✅
+            </div>
+          </div>
+          <div
+            style="
+              background: var(--surface);
+              border: 1px solid rgba(76, 175, 130, 0.2);
+              border-radius: 12px;
+              padding: 1.2rem 1.4rem;
+              flex: 1;
+            "
+          >
+            <div
+              style="
+                font-size: 0.68rem;
+                color: #4caf82;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 0.12em;
+                margin-bottom: 0.35rem;
+              "
+            >
+              Step 4 — Units are allotted to you
+            </div>
+            <div
+              style="
+                font-family: var(--serif);
+                font-size: 1.05rem;
+                font-weight: 600;
+                color: var(--text);
+                margin-bottom: 0.35rem;
+              "
+            >
+              The AMC confirms your investment directly
+            </div>
+            <div
+              style="
+                font-size: 0.88rem;
+                color: var(--muted);
+                font-weight: 300;
+                line-height: 1.6;
+              "
+            >
+              The AMC allots mutual fund units to your folio and sends you a
+              confirmation by email and SMS — directly. Your investment is
+              registered in your name, with your PAN, linked to your bank. I can
+              see it, but I cannot touch it.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Big callout -->
+      <div
+        style="
+          background: rgba(76, 175, 130, 0.07);
+          border: 1.5px solid rgba(76, 175, 130, 0.25);
+          border-radius: 14px;
+          padding: 1.6rem 1.8rem;
+          margin-top: 0.6rem;
+          display: flex;
+          gap: 1.1rem;
+          align-items: flex-start;
+        "
+      >
+        <div style="font-size: 1.6rem; flex-shrink: 0; margin-top: 2px">🔐</div>
+        <div>
+          <div
+            style="
+              font-weight: 500;
+              color: var(--text);
+              margin-bottom: 0.5rem;
+              font-size: 1rem;
+            "
+          >
+            Your money is always yours — only yours
+          </div>
+          <div
+            style="
+              font-size: 0.9rem;
+              color: var(--muted);
+              font-weight: 300;
+              line-height: 1.7;
+            "
+          >
+            I hold no custody over your funds at any stage. I cannot initiate a
+            redemption without your instruction. I cannot transfer your units.
+            All I do is submit your instructions to the AMC — the same way a
+            travel agent books a flight for you, but cannot spend your money or
+            take your seat.
+          </div>
+        </div>
+      </div>
+
+      <!-- Simple visual summary -->
+      <div
+        style="
+          margin-top: 2rem;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          padding: 1.4rem 1.6rem;
+        "
+      >
+        <div
+          style="
+            font-size: 0.72rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 1.1rem;
+            font-weight: 500;
+          "
+        >
+          In plain English — where your money goes
+        </div>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+          "
+        >
+          <div style="text-align: center; flex: 1; min-width: 80px">
+            <div style="font-size: 1.4rem; margin-bottom: 0.3rem">🏦</div>
+            <div
+              style="font-size: 0.8rem; font-weight: 500; color: var(--text)"
+            >
+              Your Bank
+            </div>
+            <div
+              style="font-size: 0.72rem; color: var(--muted); font-weight: 300"
+            >
+              Origin
+            </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              flex: 1;
+              min-width: 60px;
+            "
+          >
+            <div
+              style="
+                font-size: 0.62rem;
+                color: #4caf82;
+                margin-bottom: 2px;
+                white-space: nowrap;
+                font-weight: 500;
+              "
+            >
+              Direct transfer
+            </div>
+            <div
+              style="
+                color: #4caf82;
+                font-size: 1rem;
+                line-height: 1;
+                white-space: nowrap;
+              "
+            >
+              ────▶
+            </div>
+          </div>
+          <div style="text-align: center; flex: 1; min-width: 80px">
+            <div style="font-size: 1.4rem; margin-bottom: 0.3rem">🏛️</div>
+            <div
+              style="font-size: 0.8rem; font-weight: 500; color: var(--text)"
+            >
+              AMC's Bank
+            </div>
+            <div
+              style="font-size: 0.72rem; color: var(--muted); font-weight: 300"
+            >
+              Destination
+            </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              flex: 1;
+              min-width: 60px;
+            "
+          >
+            <div
+              style="
+                font-size: 0.62rem;
+                color: var(--muted);
+                margin-bottom: 2px;
+                white-space: nowrap;
+              "
+            >
+              Units credited
+            </div>
+            <div
+              style="
+                color: var(--accent);
+                font-size: 1rem;
+                line-height: 1;
+                white-space: nowrap;
+              "
+            >
+              ────▶
+            </div>
+          </div>
+          <div style="text-align: center; flex: 1; min-width: 80px">
+            <div style="font-size: 1.4rem; margin-bottom: 0.3rem">📁</div>
+            <div
+              style="font-size: 0.8rem; font-weight: 500; color: var(--text)"
+            >
+              Your Folio
+            </div>
+            <div
+              style="font-size: 0.72rem; color: var(--muted); font-weight: 300"
+            >
+              In your name
+            </div>
+          </div>
+        </div>
+        <div
+          style="
+            margin-top: 1.1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+          "
+        >
+          <div
+            style="
+              width: 28px;
+              height: 28px;
+              border-radius: 50%;
+              background: var(--accent-dim);
+              border: 1px solid rgba(200, 169, 110, 0.3);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 0.85rem;
+              flex-shrink: 0;
+            "
+          >
+            🤝
+          </div>
+          <div
+            style="
+              font-size: 0.82rem;
+              color: var(--muted);
+              font-weight: 300;
+              line-height: 1.5;
+            "
+          >
+            Me (Distributor) — I submit your instruction and stay alongside your
+            journey.
+            <strong style="color: var(--text)"
+              >I never hold or touch your money.</strong
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- ── VIEWING & SELLING ── -->
+      <div style="margin-top: 2.8rem">
+        <div
+          style="
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+          "
+        >
+          Viewing &amp; Redeeming your holdings
+          <span style="flex: 1; height: 1px; background: var(--border)"></span>
+        </div>
+        <h3
+          class="holdings-heading"
+          style="
+            font-family: var(--serif);
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.6rem;
+          "
+        >
+          Your holdings, <em>always in your control</em>
+        </h3>
+        <p
+          style="
+            font-size: 0.95rem;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+          "
+        >
+          Once invested, you never need to log into anything or track a number
+          daily. When you need an update or want to redeem — just ask me. Here
+          is why that matters, and how both options work.
+        </p>
+
+        <!-- Two path cards -->
+        <div
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+          "
+          class="earn-explainer-grid"
+        >
+          <!-- Path A — MFCentral (discouraged) -->
+          <div
+            class="path-discouraged"
+            style="
+              background: var(--surface);
+              border: 1px solid var(--border);
+              border-radius: 14px;
+              overflow: hidden;
+              opacity: 0.82;
+            "
+          >
+            <div
+              style="
+                background: var(--surface2);
+                padding: 1.1rem 1.4rem;
+                border-bottom: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+                gap: 0.7rem;
+              "
+            >
+              <div style="font-size: 1.2rem">📱</div>
+              <div>
+                <div
+                  style="
+                    font-size: 0.7rem;
+                    font-weight: 600;
+                    color: var(--muted);
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                  "
+                >
+                  You can — but probably shouldn't
+                </div>
+                <div
+                  style="
+                    font-family: var(--serif);
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: var(--text);
+                    margin-top: 0.1rem;
+                  "
+                >
+                  Check it yourself via MFCentral
+                </div>
+              </div>
+            </div>
+            <div
+              style="
+                padding: 1.2rem 1.4rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.8rem;
+              "
+            >
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: var(--muted);
+                  font-weight: 300;
+                  line-height: 1.65;
+                "
+              >
+                MFCentral is a free, official app backed by CAMS and KFintech —
+                the two registrars that maintain all mutual fund records in
+                India. It links directly to your PAN, so every fund you hold
+                across every AMC shows up in one place automatically.
+              </div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: var(--muted);
+                  font-weight: 300;
+                  line-height: 1.65;
+                "
+              >
+                But here is the honest problem with checking your portfolio
+                frequently:
+                <strong style="color: var(--text)"
+                  >it rarely gives you useful information — and it almost always
+                  triggers an emotion.</strong
+                >
+                A red number makes you want to exit. A green number makes you
+                want to add more. Neither impulse tends to be the right one.
+              </div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: var(--muted);
+                  font-weight: 300;
+                  line-height: 1.65;
+                "
+              >
+                The hour you spend watching your NAV move is an hour not spent
+                on your work, your family, or whatever you are actually good at.
+                <strong style="color: var(--text)"
+                  >Your primary skill earns you far more than any market-timing
+                  decision ever will.</strong
+                >
+              </div>
+              <div
+                style="
+                  background: rgba(224, 163, 74, 0.08);
+                  border: 1px solid rgba(224, 163, 74, 0.2);
+                  border-radius: 8px;
+                  padding: 0.75rem 0.9rem;
+                  font-size: 0.8rem;
+                  color: var(--warn);
+                  font-weight: 400;
+                  line-height: 1.55;
+                "
+              >
+                ⚠️ &nbsp;Frequent portfolio checks are one of the most common
+                reasons investors make avoidable mistakes.
+              </div>
+            </div>
+          </div>
+
+          <!-- Path B — Through Ramesh (recommended) -->
+          <div
+            class="path-recommended"
+            style="
+              background: var(--surface);
+              border: 1.5px solid rgba(200, 169, 110, 0.35);
+              border-radius: 14px;
+              overflow: hidden;
+              position: relative;
+            "
+          >
+            <div
+              style="
+                position: absolute;
+                top: 0.8rem;
+                right: 0.9rem;
+                font-size: 0.62rem;
+                font-weight: 600;
+                color: var(--bg);
+                background: var(--accent);
+                border-radius: 4px;
+                padding: 0.18rem 0.5rem;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+              "
+            >
+              Recommended
+            </div>
+            <div
+              style="
+                background: var(--accent-dim);
+                padding: 1.1rem 1.4rem;
+                border-bottom: 1px solid rgba(200, 169, 110, 0.15);
+                display: flex;
+                align-items: center;
+                gap: 0.7rem;
+              "
+            >
+              <div style="font-size: 1.2rem">🤝</div>
+              <div>
+                <div
+                  style="
+                    font-size: 0.7rem;
+                    font-weight: 600;
+                    color: var(--accent);
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                  "
+                >
+                  The better way
+                </div>
+                <div
+                  style="
+                    font-family: var(--serif);
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: var(--text);
+                    margin-top: 0.1rem;
+                  "
+                >
+                  Just ask me
+                </div>
+              </div>
+            </div>
+            <div
+              style="
+                padding: 1.2rem 1.4rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.9rem;
+              "
+            >
+              <div style="display: flex; gap: 0.9rem; align-items: flex-start">
+                <div
+                  style="
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 50%;
+                    background: var(--accent-dim);
+                    border: 1px solid rgba(200, 169, 110, 0.3);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    color: var(--accent);
+                    flex-shrink: 0;
+                  "
+                >
+                  1
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-size: 0.85rem;
+                      font-weight: 500;
+                      color: var(--text);
+                      margin-bottom: 0.2rem;
+                    "
+                  >
+                    Send me a message
+                  </div>
+                  <div
+                    style="
+                      font-size: 0.8rem;
+                      color: var(--muted);
+                      font-weight: 300;
+                      line-height: 1.5;
+                    "
+                  >
+                    Call, WhatsApp, or email — ask whatever you need. Current
+                    value, returns, a specific fund, or a redemption.
+                  </div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.9rem; align-items: flex-start">
+                <div
+                  style="
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 50%;
+                    background: var(--accent-dim);
+                    border: 1px solid rgba(200, 169, 110, 0.3);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    color: var(--accent);
+                    flex-shrink: 0;
+                  "
+                >
+                  2
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-size: 0.85rem;
+                      font-weight: 500;
+                      color: var(--text);
+                      margin-bottom: 0.2rem;
+                    "
+                  >
+                    I get back to you within one business day
+                  </div>
+                  <div
+                    style="
+                      font-size: 0.8rem;
+                      color: var(--muted);
+                      font-weight: 300;
+                      line-height: 1.5;
+                    "
+                  >
+                    I'll share exactly the numbers you asked for — or raise the
+                    redemption request, which the AMC will confirm with an OTP
+                    to your mobile.
+                  </div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.9rem; align-items: flex-start">
+                <div
+                  style="
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 50%;
+                    background: var(--accent-dim);
+                    border: 1px solid rgba(200, 169, 110, 0.3);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    color: var(--accent);
+                    flex-shrink: 0;
+                  "
+                >
+                  3
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-size: 0.85rem;
+                      font-weight: 500;
+                      color: var(--text);
+                      margin-bottom: 0.2rem;
+                    "
+                  >
+                    You stay in control — without the noise
+                  </div>
+                  <div
+                    style="
+                      font-size: 0.8rem;
+                      color: var(--muted);
+                      font-weight: 300;
+                      line-height: 1.5;
+                    "
+                  >
+                    You get the information when you actually need it, not a
+                    drip of daily numbers that adds anxiety without adding
+                    value.
+                  </div>
+                </div>
+              </div>
+
+              <div
+                style="
+                  background: var(--accent-glow);
+                  border-radius: 8px;
+                  padding: 0.75rem 0.9rem;
+                  font-size: 0.8rem;
+                  color: var(--accent);
+                  font-weight: 400;
+                  line-height: 1.55;
+                "
+              >
+                ✦ &nbsp;Spend your energy on what you do best. I'll keep an eye
+                on what I do best.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Control callout -->
+        <div
+          style="
+            background: rgba(76, 175, 130, 0.07);
+            border: 1.5px solid rgba(76, 175, 130, 0.2);
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            gap: 0.9rem;
+            align-items: flex-start;
+          "
+        >
+          <div style="font-size: 1.3rem; flex-shrink: 0">🔑</div>
+          <div
+            style="
+              font-size: 0.88rem;
+              color: var(--muted);
+              font-weight: 300;
+              line-height: 1.7;
+            "
+          >
+            Either way,
+            <strong style="color: var(--text)"
+              >no redemption can happen without your OTP approval.</strong
+            >
+            Not by me, not by anyone. Your registered mobile number is the final
+            key — and only you hold it.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- HOW I EARN -->
+    <section class="section" id="how-i-earn">
+      <div class="section-label">Transparency</div>
+      <h2>How I <em>Earn</em></h2>
+      <div class="prose">
+        <p>
+          A question worth asking — and one most distributors avoid answering
+          clearly. Here is the honest answer.
+        </p>
+        <p>
+          When you invest in a mutual fund through me, the AMC (Asset Management
+          Company) pays me a <strong>trail commission</strong> — a small
+          percentage of your invested amount, every year, as long as you remain
+          invested. This is called a <em>trail commission</em>.
+        </p>
+      </div>
+
+      <!-- Flow diagram -->
+      <div
+        style="
+          margin: 2.2rem 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0;
+          flex-wrap: wrap;
+        "
+        class="flow-diagram"
+      >
+        <!-- Node 1 -->
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 120px;
+          "
+        >
+          <div
+            style="
+              width: 64px;
+              height: 64px;
+              border-radius: 50%;
+              background: var(--accent-dim);
+              border: 1.5px solid var(--accent);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.6rem;
+            "
+          >
+            🧑‍💼
+          </div>
+          <div
+            style="
+              font-size: 0.78rem;
+              font-weight: 500;
+              color: var(--text);
+              text-align: center;
+              letter-spacing: 0.03em;
+            "
+          >
+            You<br /><span style="color: var(--muted); font-weight: 300"
+              >Investor</span
+            >
+          </div>
+        </div>
+        <!-- Arrow 1 -->
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 0.6rem;
+            margin-bottom: 1.2rem;
+          "
+        >
+          <div
+            style="
+              font-size: 0.62rem;
+              color: var(--muted);
+              margin-bottom: 2px;
+              white-space: nowrap;
+            "
+          >
+            Invests in
+          </div>
+          <div style="color: var(--accent); font-size: 1.1rem; line-height: 1">
+            ──────▶
+          </div>
+        </div>
+        <!-- Node 2 -->
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 120px;
+          "
+        >
+          <div
+            style="
+              width: 64px;
+              height: 64px;
+              border-radius: 50%;
+              background: var(--accent-dim);
+              border: 1.5px solid var(--accent);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.6rem;
+            "
+          >
+            🏛️
+          </div>
+          <div
+            style="
+              font-size: 0.78rem;
+              font-weight: 500;
+              color: var(--text);
+              text-align: center;
+              letter-spacing: 0.03em;
+            "
+          >
+            AMC<br /><span style="color: var(--muted); font-weight: 300"
+              >Fund House</span
+            >
+          </div>
+        </div>
+        <!-- Arrow 2 -->
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 0.6rem;
+            margin-bottom: 1.2rem;
+          "
+        >
+          <div
+            style="
+              font-size: 0.62rem;
+              color: var(--accent);
+              margin-bottom: 2px;
+              white-space: nowrap;
+              font-weight: 500;
+            "
+          >
+            Trail commission
+          </div>
+          <div style="color: var(--accent); font-size: 1.1rem; line-height: 1">
+            ──────▶
+          </div>
+        </div>
+        <!-- Node 3 -->
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 120px;
+          "
+        >
+          <div
+            style="
+              width: 64px;
+              height: 64px;
+              border-radius: 50%;
+              background: var(--accent-dim);
+              border: 1.5px solid var(--accent);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.6rem;
+            "
+          >
+            🤝
+          </div>
+          <div
+            style="
+              font-size: 0.78rem;
+              font-weight: 500;
+              color: var(--text);
+              text-align: center;
+              letter-spacing: 0.03em;
+            "
+          >
+            Me<br /><span style="color: var(--muted); font-weight: 300"
+              >Distributor</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Key callout -->
+      <div
+        style="
+          background: var(--accent-glow);
+          border: 1px solid rgba(200, 169, 110, 0.2);
+          border-radius: 12px;
+          padding: 1.4rem 1.8rem;
+          margin: 1.5rem 0;
+          display: flex;
+          gap: 1rem;
+          align-items: flex-start;
+        "
+      >
+        <div style="font-size: 1.5rem; flex-shrink: 0; margin-top: 2px">💡</div>
+        <div>
+          <div
+            style="font-weight: 500; color: var(--text); margin-bottom: 0.4rem"
+          >
+            Built into the expense ratio — nothing extra from you
+          </div>
+          <div
+            style="
+              font-size: 0.9rem;
+              color: var(--muted);
+              font-weight: 300;
+              line-height: 1.6;
+            "
+          >
+            Every mutual fund has an expense ratio — a small annual cost for
+            managing your money. The trail commission I receive is already
+            included in this expense ratio.
+            <strong style="color: var(--text)"
+              >You do not pay anything extra. There are no hidden charges from
+              my side.</strong
+            >
+            SEBI caps the maximum expense ratio — so the total cost is regulated
+            and disclosed.
+          </div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        <p>
+          "My income grows when your investment grows — and disappears if you
+          leave. That is the only commission model that keeps my interests truly
+          aligned with yours."
+        </p>
+      </div>
+
+      <!-- Two-column explainer -->
+      <div
+        style="
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1px;
+          background: var(--border);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          overflow: hidden;
+          margin-top: 1.8rem;
+        "
+        class="earn-explainer-grid"
+      >
+        <div style="background: var(--surface); padding: 1.4rem 1.5rem">
+          <div style="font-size: 1.1rem; margin-bottom: 0.6rem">✅</div>
+          <div
+            style="
+              font-size: 0.82rem;
+              font-weight: 500;
+              color: var(--safe);
+              margin-bottom: 0.5rem;
+              text-transform: uppercase;
+              letter-spacing: 0.06em;
+            "
+          >
+            What this means for you
+          </div>
+          <ul
+            style="
+              list-style: none;
+              display: flex;
+              flex-direction: column;
+              gap: 0.5rem;
+            "
+          >
+            <li
+              style="
+                font-size: 0.88rem;
+                color: var(--muted);
+                font-weight: 300;
+                display: flex;
+                gap: 0.5rem;
+              "
+            >
+              <span style="color: var(--safe)">✦</span>No separate advisory fee
+              or hidden charge
+            </li>
+            <li
+              style="
+                font-size: 0.88rem;
+                color: var(--muted);
+                font-weight: 300;
+                display: flex;
+                gap: 0.5rem;
+              "
+            >
+              <span style="color: var(--safe)">✦</span>Commission is
+              SEBI-regulated and disclosed
+            </li>
+            <li
+              style="
+                font-size: 0.88rem;
+                color: var(--muted);
+                font-weight: 300;
+                display: flex;
+                gap: 0.5rem;
+              "
+            >
+              <span style="color: var(--safe)">✦</span>I earn more only when
+              your corpus grows
+            </li>
+          </ul>
+        </div>
+        <div
+          style="
+            background: var(--surface);
+            padding: 1.4rem 1.5rem;
+            border-left: 1px solid var(--border);
+          "
+        >
+          <div style="font-size: 1.1rem; margin-bottom: 0.6rem">⚖️</div>
+          <div
+            style="
+              font-size: 0.82rem;
+              font-weight: 500;
+              color: var(--neutral);
+              margin-bottom: 0.5rem;
+              text-transform: uppercase;
+              letter-spacing: 0.06em;
+            "
+          >
+            The honest trade-off
+          </div>
+          <ul
+            style="
+              list-style: none;
+              display: flex;
+              flex-direction: column;
+              gap: 0.5rem;
+            "
+          >
+            <li
+              style="
+                font-size: 0.88rem;
+                color: var(--muted);
+                font-weight: 300;
+                display: flex;
+                gap: 0.5rem;
+              "
+            >
+              <span style="color: var(--neutral)">✦</span>Regular plans cost
+              slightly more than direct
+            </li>
+            <li
+              style="
+                font-size: 0.88rem;
+                color: var(--muted);
+                font-weight: 300;
+                display: flex;
+                gap: 0.5rem;
+              "
+            >
+              <span style="color: var(--neutral)">✦</span>The difference is the
+              cost of ongoing guidance
+            </li>
+            <li
+              style="
+                font-size: 0.88rem;
+                color: var(--muted);
+                font-weight: 300;
+                display: flex;
+                gap: 0.5rem;
+              "
+            >
+              <span style="color: var(--neutral)">✦</span>Good advice easily
+              outweighs the gap
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- MUTUAL FUND USE CASES -->
+    <section class="section" id="use-cases">
+      <div class="section-label">Real-life stories</div>
+      <h2>Mutual Fund <em>Use Cases</em></h2>
+      <div class="prose">
+        <p>
+          Mutual funds are not just for "wealth creation" in the abstract sense.
+          They quietly power some very specific, very real goals. Here are four
+          stories that show what that looks like in practice.
+        </p>
+      </div>
+
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          gap: 1.2rem;
+          margin-top: 2rem;
+        "
+      >
+        <!-- Use Case 1 -->
+        <div class="usecase-card">
+          <div
+            style="
+              width: 52px;
+              height: 52px;
+              border-radius: 12px;
+              background: var(--accent-dim);
+              border: 1px solid rgba(200, 169, 110, 0.25);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.5rem;
+              flex-shrink: 0;
+            "
+          >
+            🏠
+          </div>
+          <div style="flex: 1">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 0.7rem;
+                flex-wrap: wrap;
+                margin-bottom: 0.5rem;
+              "
+            >
+              <div
+                style="
+                  font-family: var(--serif);
+                  font-size: 1.15rem;
+                  font-weight: 600;
+                  color: var(--text);
+                "
+              >
+                Buying a dream home — using mutual funds smartly
+              </div>
+              <span
+                style="
+                  font-size: 0.68rem;
+                  padding: 0.2rem 0.6rem;
+                  border-radius: 4px;
+                  background: rgba(76, 175, 130, 0.12);
+                  color: #5ec99a;
+                  font-weight: 500;
+                  letter-spacing: 0.05em;
+                  text-transform: uppercase;
+                "
+                >Section 54F</span
+              >
+            </div>
+            <p
+              style="
+                font-size: 0.92rem;
+                color: var(--muted);
+                font-weight: 300;
+                line-height: 1.7;
+                margin-bottom: 0.8rem;
+              "
+            >
+              Priya had been investing in equity mutual funds for several years.
+              Her portfolio had grown significantly — and she decided it was
+              finally time to buy the home she had been dreaming of. She
+              redeemed her equity mutual funds and made a substantial long-term
+              capital gain.
+            </p>
+            <p
+              style="
+                font-size: 0.92rem;
+                color: var(--muted);
+                font-weight: 300;
+                line-height: 1.7;
+                margin-bottom: 0.8rem;
+              "
+            >
+              Here is where most people make a costly mistake — they pay the
+              full capital gains tax without realising there is a legal way to
+              avoid it. Priya reinvested her entire sale proceeds into a
+              residential property and claimed a
+              <strong style="color: var(--text)"
+                >full capital gains exemption under Section 54F of the Income
+                Tax Act.</strong
+              >
+              The tax she would have paid — lakhs — stayed in her pocket
+              instead.
+            </p>
+            <div
+              style="
+                background: var(--accent-glow);
+                border-radius: 8px;
+                padding: 0.8rem 1rem;
+                font-size: 0.85rem;
+                color: var(--accent);
+                font-weight: 400;
+                line-height: 1.5;
+              "
+            >
+              ✦ &nbsp;Her mutual funds built the corpus. Section 54F — a
+              provision designed exactly for this — let her keep every rupee of
+              it for her home.
+            </div>
+            <div
+              style="
+                margin-top: 0.7rem;
+                padding: 0.65rem 0.9rem;
+                border-radius: 8px;
+                background: rgba(224, 163, 74, 0.07);
+                border: 1px solid rgba(224, 163, 74, 0.2);
+                font-size: 0.8rem;
+                color: var(--warn);
+                font-weight: 300;
+                line-height: 1.5;
+              "
+            >
+              ⚠️ <strong>Eligibility note:</strong> Section 54F exemption
+              applies only if you do not own more than one residential property
+              (other than the new one) at the time of sale. Please consult a tax
+              advisor to confirm your eligibility before relying on this
+              provision.
+            </div>
+          </div>
+        </div>
+
+        <!-- Use Case 2 -->
+        <div class="usecase-card">
+          <div
+            style="
+              width: 52px;
+              height: 52px;
+              border-radius: 12px;
+              background: var(--accent-dim);
+              border: 1px solid rgba(200, 169, 110, 0.25);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.5rem;
+              flex-shrink: 0;
+            "
+          >
+            🛡️
+          </div>
+          <div style="flex: 1">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 0.7rem;
+                flex-wrap: wrap;
+                margin-bottom: 0.5rem;
+              "
+            >
+              <div
+                style="
+                  font-family: var(--serif);
+                  font-size: 1.15rem;
+                  font-weight: 600;
+                  color: var(--text);
+                "
+              >
+                Building a safety buffer
+              </div>
+              <span
+                style="
+                  font-size: 0.68rem;
+                  padding: 0.2rem 0.6rem;
+                  border-radius: 4px;
+                  background: rgba(107, 140, 186, 0.12);
+                  color: #8aaad4;
+                  font-weight: 500;
+                  letter-spacing: 0.05em;
+                  text-transform: uppercase;
+                "
+                >Liquid Funds</span
+              >
+            </div>
+            <p
+              style="
+                font-size: 0.92rem;
+                color: var(--muted);
+                font-weight: 300;
+                line-height: 1.7;
+                margin-bottom: 0.8rem;
+              "
+            >
+              Arun kept six months of salary in a savings account — "just in
+              case." It felt safe, but it was earning 3.5% and slowly losing
+              value to inflation. He moved it to a
+              <strong style="color: var(--text)">Liquid Mutual Fund</strong>.
+            </p>
+            <p
+              style="
+                font-size: 0.92rem;
+                color: var(--muted);
+                font-weight: 300;
+                line-height: 1.7;
+                margin-bottom: 0.8rem;
+              "
+            >
+              Same-day redemption available (T+1 for most liquid funds). No
+              lock-in. No penalty. And returns that consistently beat savings
+              accounts. His emergency fund is now his money — not the bank's.
+            </p>
+            <div
+              style="
+                background: var(--accent-glow);
+                border-radius: 8px;
+                padding: 0.8rem 1rem;
+                font-size: 0.85rem;
+                color: var(--accent);
+                font-weight: 400;
+                line-height: 1.5;
+              "
+            >
+              ✦ &nbsp;Accessible in an emergency. Earning better returns
+              quietly, every single day.
+            </div>
+          </div>
+        </div>
+
+        <!-- Use Case 3 -->
+        <div class="usecase-card">
+          <div
+            style="
+              width: 52px;
+              height: 52px;
+              border-radius: 12px;
+              background: var(--accent-dim);
+              border: 1px solid rgba(200, 169, 110, 0.25);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.5rem;
+              flex-shrink: 0;
+            "
+          >
+            🌅
+          </div>
+          <div style="flex: 1">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 0.7rem;
+                flex-wrap: wrap;
+                margin-bottom: 0.5rem;
+              "
+            >
+              <div
+                style="
+                  font-family: var(--serif);
+                  font-size: 1.15rem;
+                  font-weight: 600;
+                  color: var(--text);
+                "
+              >
+                Retirement — without depending on anyone
+              </div>
+              <span
+                style="
+                  font-size: 0.68rem;
+                  padding: 0.2rem 0.6rem;
+                  border-radius: 4px;
+                  background: rgba(76, 175, 130, 0.12);
+                  color: #5ec99a;
+                  font-weight: 500;
+                  letter-spacing: 0.05em;
+                  text-transform: uppercase;
+                "
+                >SIP · Equity Funds</span
+              >
+            </div>
+            <p
+              style="
+                font-size: 0.92rem;
+                color: var(--muted);
+                font-weight: 300;
+                line-height: 1.7;
+                margin-bottom: 0.8rem;
+              "
+            >
+              Suresh started a ₹10,000/month SIP in a Flexi Cap equity fund at
+              age 32. Not because he had a lot of money — he didn't. But because
+              he understood one thing:
+              <strong style="color: var(--text)"
+                >time is the most powerful ingredient in compounding.</strong
+              >
+            </p>
+            <p
+              style="
+                font-size: 0.92rem;
+                color: var(--muted);
+                font-weight: 300;
+                line-height: 1.7;
+                margin-bottom: 0.8rem;
+              "
+            >
+              By 55, assuming a modest 12% annual return, his corpus would cross
+              ₹1.6 crore — built entirely from disciplined, automated monthly
+              contributions. No market timing. No stress. Just consistency.
+            </p>
+            <div
+              style="
+                background: var(--accent-glow);
+                border-radius: 8px;
+                padding: 0.8rem 1rem;
+                font-size: 0.85rem;
+                color: var(--accent);
+                font-weight: 400;
+                line-height: 1.5;
+              "
+            >
+              ✦ &nbsp;₹10,000/month × 23 years → ₹1.6 Cr+. Retirement funded by
+              discipline, not luck.
+            </div>
+          </div>
+        </div>
+
+        <!-- Use Case 4 -->
+        <div class="usecase-card">
+          <div
+            style="
+              width: 52px;
+              height: 52px;
+              border-radius: 12px;
+              background: var(--accent-dim);
+              border: 1px solid rgba(200, 169, 110, 0.25);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.5rem;
+              flex-shrink: 0;
+            "
+          >
+            🎓
+          </div>
+          <div style="flex: 1">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 0.7rem;
+                flex-wrap: wrap;
+                margin-bottom: 0.5rem;
+              "
+            >
+              <div
+                style="
+                  font-family: var(--serif);
+                  font-size: 1.15rem;
+                  font-weight: 600;
+                  color: var(--text);
+                "
+              >
+                Children's education — the gift that compounds
+              </div>
+              <span
+                style="
+                  font-size: 0.68rem;
+                  padding: 0.2rem 0.6rem;
+                  border-radius: 4px;
+                  background: rgba(107, 140, 186, 0.12);
+                  color: #8aaad4;
+                  font-weight: 500;
+                  letter-spacing: 0.05em;
+                  text-transform: uppercase;
+                "
+                >Hybrid Funds</span
+              >
+            </div>
+            <p
+              style="
+                font-size: 0.92rem;
+                color: var(--muted);
+                font-weight: 300;
+                line-height: 1.7;
+                margin-bottom: 0.8rem;
+              "
+            >
+              Meena's daughter was 4. College felt distant. But education costs
+              in India have been rising at 10–12% per year — meaning today's
+              ₹10L degree becomes ₹28L in 10 years. Meena started a
+              <strong style="color: var(--text)">Hybrid Mutual Fund SIP</strong>
+              — blending equity growth with debt stability.
+            </p>
+            <p
+              style="
+                font-size: 0.92rem;
+                color: var(--muted);
+                font-weight: 300;
+                line-height: 1.7;
+                margin-bottom: 0.8rem;
+              "
+            >
+              As her daughter's college year approached, the portfolio was
+              gradually shifted toward safer debt funds — protecting gains while
+              staying accessible. The degree was paid for, in full, without a
+              loan.
+            </p>
+            <div
+              style="
+                background: var(--accent-glow);
+                border-radius: 8px;
+                padding: 0.8rem 1rem;
+                font-size: 0.85rem;
+                color: var(--accent);
+                font-weight: 400;
+                line-height: 1.5;
+              "
+            >
+              ✦ &nbsp;Start when the child is young. Shift to safety as the goal
+              gets closer. No education loan needed.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- And many more -->
+      <div
+        style="
+          text-align: center;
+          margin-top: 1.6rem;
+          padding: 1.2rem 1.8rem;
+          border: 1px dashed rgba(200, 169, 110, 0.25);
+          border-radius: 12px;
+          background: var(--accent-glow);
+        "
+      >
+        <span
+          style="
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--muted);
+          "
+          >… and many more — tax-saving investments, wedding funds, business
+          capital, foreign education, early retirement.</span
+        >
+        <div
+          style="
+            margin-top: 0.5rem;
+            font-size: 0.82rem;
+            color: var(--muted);
+            font-weight: 300;
+          "
+        >
+          Every goal is different. The right fund for it usually exists — it
+          just needs to be matched correctly.
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- RISK SPECTRUM -->
+    <section class="section" id="risk-spectrum">
+      <div class="section-label">Know your options</div>
+      <h2>Risk Spectrum of <em>Fund Categories</em></h2>
+      <div class="prose">
+        <p>
+          Not all mutual funds carry the same risk. The spectrum below shows
+          where each category sits — from the safest options to the
+          highest-risk, highest-potential ones. Understanding this helps you
+          pick the right tool for each goal.
+        </p>
+      </div>
+
+      <!-- Spectrum bar -->
+      <div
+        style="
+          margin: 2.2rem 0 0.8rem;
+          position: relative;
+          height: 12px;
+          border-radius: 6px;
+          background: linear-gradient(
+            90deg,
+            #4caf82 0%,
+            #6b8cba 50%,
+            #e05c5c 100%
+          );
+          box-shadow: 0 0 20px rgba(200, 169, 110, 0.1);
+        "
+      ></div>
+      <div class="risk-labels-row">
+        <span class="risk-label-low">◀ Lower Risk</span>
+        <span class="risk-label-mid">Moderate</span>
+        <span class="risk-label-high">Higher Risk ▶</span>
+      </div>
+
+      <!-- Fund cards grid -->
+      <div
+        style="
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1px;
+          background: var(--border);
+          border: 1px solid var(--border);
+          border-radius: 14px;
+          overflow: hidden;
+        "
+        class="risk-spectrum-grid"
+      >
+        <!-- Low Risk -->
+        <div
+          style="
+            background: var(--surface);
+            padding: 1.5rem 1.3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+          "
+        >
+          <div style="display: flex; align-items: center; gap: 0.6rem">
+            <div
+              style="
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: #4caf82;
+                flex-shrink: 0;
+              "
+            ></div>
+            <div
+              style="
+                font-size: 0.7rem;
+                font-weight: 500;
+                color: #4caf82;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+              "
+            >
+              Low Risk
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.8rem">
+            <div
+              style="
+                background: rgba(76, 175, 130, 0.07);
+                border: 1px solid rgba(76, 175, 130, 0.15);
+                border-radius: 10px;
+                padding: 1rem;
+              "
+            >
+              <div style="font-size: 1.2rem; margin-bottom: 0.4rem">💧</div>
+              <div
+                style="
+                  font-family: var(--serif);
+                  font-size: 1rem;
+                  font-weight: 600;
+                  color: var(--text);
+                  margin-bottom: 0.3rem;
+                "
+              >
+                Liquid Funds
+              </div>
+              <div
+                style="
+                  font-size: 0.8rem;
+                  color: var(--muted);
+                  font-weight: 300;
+                  line-height: 1.5;
+                "
+              >
+                Park your emergency fund or short-term cash here. Redeemable
+                within 1 day. Beats savings accounts.
+              </div>
+              <div
+                style="
+                  margin-top: 0.6rem;
+                  font-size: 0.72rem;
+                  color: #4caf82;
+                  font-weight: 500;
+                "
+              >
+                Ideal for: 1 day – 3 months
+              </div>
+            </div>
+            <div
+              style="
+                background: rgba(76, 175, 130, 0.07);
+                border: 1px solid rgba(76, 175, 130, 0.15);
+                border-radius: 10px;
+                padding: 1rem;
+              "
+            >
+              <div style="font-size: 1.2rem; margin-bottom: 0.4rem">⚖️</div>
+              <div
+                style="
+                  font-family: var(--serif);
+                  font-size: 1rem;
+                  font-weight: 600;
+                  color: var(--text);
+                  margin-bottom: 0.3rem;
+                "
+              >
+                Arbitrage Funds
+              </div>
+              <div
+                style="
+                  font-size: 0.8rem;
+                  color: var(--muted);
+                  font-weight: 300;
+                  line-height: 1.5;
+                "
+              >
+                Equity taxation with debt-like risk. Profits from price
+                differences between cash and futures markets.
+              </div>
+              <div
+                style="
+                  margin-top: 0.6rem;
+                  font-size: 0.72rem;
+                  color: #4caf82;
+                  font-weight: 500;
+                "
+              >
+                Ideal for: 3 – 12 months
+              </div>
+            </div>
+            <div
+              style="
+                background: rgba(76, 175, 130, 0.07);
+                border: 1px solid rgba(76, 175, 130, 0.15);
+                border-radius: 10px;
+                padding: 1rem;
+              "
+            >
+              <div style="font-size: 1.2rem; margin-bottom: 0.4rem">🏦</div>
+              <div
+                style="
+                  font-family: var(--serif);
+                  font-size: 1rem;
+                  font-weight: 600;
+                  color: var(--text);
+                  margin-bottom: 0.3rem;
+                "
+              >
+                Money Market Funds
+              </div>
+              <div
+                style="
+                  font-size: 0.8rem;
+                  color: var(--muted);
+                  font-weight: 300;
+                  line-height: 1.5;
+                "
+              >
+                Invest in short-term instruments like T-bills and commercial
+                paper. Slightly better yields than liquid funds with marginally
+                longer maturity — still very low risk.
+              </div>
+              <div
+                style="
+                  margin-top: 0.6rem;
+                  font-size: 0.72rem;
+                  color: #4caf82;
+                  font-weight: 500;
+                "
+              >
+                Ideal for: 3 – 12 months
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Moderate Risk -->
+        <div
+          style="
+            background: var(--surface);
+            padding: 1.5rem 1.3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+          "
+        >
+          <div style="display: flex; align-items: center; gap: 0.6rem">
+            <div
+              style="
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: #6b8cba;
+                flex-shrink: 0;
+              "
+            ></div>
+            <div
+              style="
+                font-size: 0.7rem;
+                font-weight: 500;
+                color: #6b8cba;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+              "
+            >
+              Moderate Risk
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.8rem">
+            <div
+              style="
+                background: rgba(107, 140, 186, 0.07);
+                border: 1px solid rgba(107, 140, 186, 0.15);
+                border-radius: 10px;
+                padding: 1rem;
+              "
+            >
+              <div style="font-size: 1.2rem; margin-bottom: 0.4rem">🌗</div>
+              <div
+                style="
+                  font-family: var(--serif);
+                  font-size: 1rem;
+                  font-weight: 600;
+                  color: var(--text);
+                  margin-bottom: 0.3rem;
+                "
+              >
+                Hybrid Funds
+              </div>
+              <div
+                style="
+                  font-size: 0.8rem;
+                  color: var(--muted);
+                  font-weight: 300;
+                  line-height: 1.5;
+                "
+              >
+                A blend of equity and debt in one fund. Smooth out the bumps
+                while still participating in market growth.
+              </div>
+              <div
+                style="
+                  margin-top: 0.6rem;
+                  font-size: 0.72rem;
+                  color: #6b8cba;
+                  font-weight: 500;
+                "
+              >
+                Ideal for: 3 – 5 years
+              </div>
+            </div>
+            <div
+              style="
+                background: rgba(107, 140, 186, 0.07);
+                border: 1px solid rgba(107, 140, 186, 0.15);
+                border-radius: 10px;
+                padding: 1rem;
+              "
+            >
+              <div style="font-size: 1.2rem; margin-bottom: 0.4rem">📊</div>
+              <div
+                style="
+                  font-family: var(--serif);
+                  font-size: 1rem;
+                  font-weight: 600;
+                  color: var(--text);
+                  margin-bottom: 0.3rem;
+                "
+              >
+                Index Funds
+              </div>
+              <div
+                style="
+                  font-size: 0.8rem;
+                  color: var(--muted);
+                  font-weight: 300;
+                  line-height: 1.5;
+                "
+              >
+                Track a market index like Nifty 50. Low cost, transparent, no
+                fund manager risk. The intelligent default.
+              </div>
+              <div
+                style="
+                  margin-top: 0.6rem;
+                  font-size: 0.72rem;
+                  color: #6b8cba;
+                  font-weight: 500;
+                "
+              >
+                Ideal for: 5+ years
+              </div>
+            </div>
+            <div
+              style="
+                background: rgba(107, 140, 186, 0.07);
+                border: 1px solid rgba(107, 140, 186, 0.15);
+                border-radius: 10px;
+                padding: 1rem;
+              "
+            >
+              <div style="font-size: 1.2rem; margin-bottom: 0.4rem">🔀</div>
+              <div
+                style="
+                  font-family: var(--serif);
+                  font-size: 1rem;
+                  font-weight: 600;
+                  color: var(--text);
+                  margin-bottom: 0.3rem;
+                "
+              >
+                Equity Savings Funds
+              </div>
+              <div
+                style="
+                  font-size: 0.8rem;
+                  color: var(--muted);
+                  font-weight: 300;
+                  line-height: 1.5;
+                "
+              >
+                A three-way blend of equity, arbitrage, and debt. Delivers
+                equity taxation with meaningfully lower volatility — a smart
+                middle ground for conservative equity investors.
+              </div>
+              <div
+                style="
+                  margin-top: 0.6rem;
+                  font-size: 0.72rem;
+                  color: #6b8cba;
+                  font-weight: 500;
+                "
+              >
+                Ideal for: 1 – 3 years
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- High Risk -->
+        <div
+          style="
+            background: var(--surface);
+            padding: 1.5rem 1.3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+          "
+        >
+          <div style="display: flex; align-items: center; gap: 0.6rem">
+            <div
+              style="
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: #e05c5c;
+                flex-shrink: 0;
+              "
+            ></div>
+            <div
+              style="
+                font-size: 0.7rem;
+                font-weight: 500;
+                color: #e05c5c;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+              "
+            >
+              High Risk
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.8rem">
+            <div
+              style="
+                background: rgba(224, 92, 92, 0.07);
+                border: 1px solid rgba(224, 92, 92, 0.15);
+                border-radius: 10px;
+                padding: 1rem;
+              "
+            >
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 0.5rem;
+                  margin-bottom: 0.4rem;
+                "
+              >
+                <div style="font-size: 1.2rem">🎯</div>
+                <span
+                  style="
+                    font-size: 0.65rem;
+                    font-weight: 600;
+                    color: #e05c5c;
+                    background: rgba(224, 92, 92, 0.15);
+                    border: 1px solid rgba(224, 92, 92, 0.3);
+                    padding: 0.15rem 0.5rem;
+                    border-radius: 4px;
+                    letter-spacing: 0.07em;
+                    text-transform: uppercase;
+                  "
+                  >⚠ Extreme Risk</span
+                >
+              </div>
+              <div
+                style="
+                  font-family: var(--serif);
+                  font-size: 1rem;
+                  font-weight: 600;
+                  color: var(--text);
+                  margin-bottom: 0.3rem;
+                "
+              >
+                Sectoral / Thematic
+              </div>
+              <div
+                style="
+                  font-size: 0.8rem;
+                  color: var(--muted);
+                  font-weight: 300;
+                  line-height: 1.5;
+                "
+              >
+                Concentrated bets on one industry (tech, pharma, infra). High
+                upside when the theme wins — high pain when it doesn't.
+              </div>
+              <div
+                style="
+                  margin-top: 0.8rem;
+                  padding: 0.65rem 0.8rem;
+                  background: rgba(224, 92, 92, 0.08);
+                  border-left: 2px solid #e05c5c;
+                  border-radius: 0 6px 6px 0;
+                  font-size: 0.78rem;
+                  color: #e07a7a;
+                  line-height: 1.5;
+                "
+              >
+                These funds can fall
+                <strong style="color: #e05c5c">50–70% in a downturn</strong> and
+                take years to recover. They require deep understanding of the
+                sector, perfect timing, and the ability to stay invested through
+                severe losses. Not suitable for most investors.
+              </div>
+              <div
+                style="
+                  margin-top: 0.6rem;
+                  font-size: 0.72rem;
+                  color: #e05c5c;
+                  font-weight: 500;
+                "
+              >
+                Only with conviction + 7+ year horizon
+              </div>
+            </div>
+            <div
+              style="
+                background: rgba(224, 92, 92, 0.07);
+                border: 1px solid rgba(224, 92, 92, 0.15);
+                border-radius: 10px;
+                padding: 1rem;
+              "
+            >
+              <div style="font-size: 1.2rem; margin-bottom: 0.4rem">🚀</div>
+              <div
+                style="
+                  font-family: var(--serif);
+                  font-size: 1rem;
+                  font-weight: 600;
+                  color: var(--text);
+                  margin-bottom: 0.3rem;
+                "
+              >
+                Small Cap Funds
+              </div>
+              <div
+                style="
+                  font-size: 0.8rem;
+                  color: var(--muted);
+                  font-weight: 300;
+                  line-height: 1.5;
+                "
+              >
+                The highest growth potential in mutual funds — and the sharpest
+                drawdowns. Can fall 40–60% in a bad year. Patience is
+                non-negotiable.
+              </div>
+              <div
+                style="
+                  margin-top: 0.6rem;
+                  font-size: 0.72rem;
+                  color: #e05c5c;
+                  font-weight: 500;
+                "
+              >
+                Only with strong stomach + 10+ years
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Disclaimer note -->
+      <div
+        style="
+          margin-top: 1.4rem;
+          padding: 1rem 1.2rem;
+          border-radius: 10px;
+          border: 1px solid var(--border);
+          background: var(--surface);
+          display: flex;
+          gap: 0.8rem;
+          align-items: flex-start;
+        "
+      >
+        <span style="color: var(--warn); font-size: 1rem; flex-shrink: 0"
+          >⚠️</span
+        >
+        <p
+          style="
+            font-size: 0.82rem;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.6;
+            margin: 0;
+          "
+        >
+          Risk categorisation above is indicative and educational. Actual risk
+          depends on specific fund mandates, market conditions, and your
+          investment horizon. Always read the Scheme Information Document (SID)
+          before investing.
+          <strong style="color: var(--text)"
+            >Mutual Fund investments are subject to market risks.</strong
+          >
+        </p>
+      </div>
+
+      <!-- Mobile responsive fix for 3-col grid -->
+      <style>
+        @media (max-width: 640px) {
+          .risk-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      </style>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- WHAT HAPPENS NEXT -->
+    <section class="section" id="whats-next">
+      <div class="section-label">Getting started</div>
+      <h2>What happens <em>after you reach out?</em></h2>
+      <div class="prose">
+        <p>
+          First-time conversations about investing can feel uncertain —
+          especially if you're not sure what to expect. Here is exactly what our
+          first interaction looks like, step by step.
+        </p>
+      </div>
+
+      <div class="next-steps">
+        <div class="next-step-card">
+          <div class="next-step-num">1</div>
+          <div class="next-step-icon">🗓️</div>
+          <h4>The Profiling Call</h4>
+          <p>
+            You fill out the risk profiler (~15 minutes) or we schedule a
+            20-minute call. No jargon. No pressure. I want to understand your
+            goals, your horizon, and how you feel about risk — not sell you
+            something.
+          </p>
+        </div>
+        <div class="next-step-card">
+          <div class="next-step-num">2</div>
+          <div class="next-step-icon">📊</div>
+          <h4>Your Personalised Plan</h4>
+          <p>
+            Based on what I learn, I put together a simple, written
+            recommendation — which fund categories suit you, a suggested
+            allocation, and why. You read it at your own pace. No obligation to
+            act immediately.
+          </p>
+        </div>
+        <div class="next-step-card">
+          <div class="next-step-num">3</div>
+          <div class="next-step-icon">✅</div>
+          <h4>Onboarding & First Investment</h4>
+          <p>
+            Once you're comfortable, I help you complete KYC (if not already
+            done), set up your folio, and place your first investment — through
+            the SEBI compliant platforms. The whole process typically takes one
+            working day.
+          </p>
+        </div>
+      </div>
+
+      <div
+        style="
+          background: var(--accent-glow);
+          border: 1px solid rgba(200, 169, 110, 0.2);
+          border-radius: 12px;
+          padding: 1.3rem 1.6rem;
+          display: flex;
+          gap: 0.9rem;
+          align-items: center;
+        "
+      >
+        <div style="font-size: 1.3rem; flex-shrink: 0">💬</div>
+        <div
+          style="
+            font-size: 0.9rem;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.6;
+          "
+        >
+          No commitment, no fee, no hurry — just an honest conversation. Most
+          people leave the first call with more clarity than they expected.
+          <strong style="color: var(--text)">
+            Reach out whenever you're ready.</strong
+          >
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- CTA -->
+    <section class="section" style="text-align: center; padding-bottom: 4rem">
+      <div class="divider-star" style="margin-bottom: 1.8rem">✦ ✦ ✦</div>
+      <h2
+        style="
+          font-family: var(--serif);
+          font-size: clamp(1.6rem, 4vw, 2.4rem);
+          margin-bottom: 1rem;
+        "
+      >
+        Ready to invest with <em>discipline?</em>
+      </h2>
+      <p
+        style="
+          color: var(--muted);
+          font-weight: 300;
+          max-width: 480px;
+          margin: 0 auto 2rem;
+        "
+      >
+        Start with your investor profile. About 15 minutes. A portfolio that
+        actually fits you.
+      </p>
+      <a
+        href="https://mfd-risk-profiler-arn-349739.netlify.app/"
+        class="nav-profiling-btn"
+        style="
+          display: inline-block;
+          padding: 0.85rem 2.2rem;
+          border-radius: 8px;
+          font-size: 0.95rem;
+          letter-spacing: 0.04em;
+        "
+      >
+        Begin Profiling ✦
+      </a>
+      <div
+        style="
+          margin-top: 1.8rem;
+          display: flex;
+          justify-content: center;
+          gap: 2.5rem;
+          flex-wrap: wrap;
+        "
+      >
+        <div style="text-align: center">
+          <div
+            style="
+              font-size: 0.72rem;
+              letter-spacing: 0.12em;
+              text-transform: uppercase;
+              color: var(--accent);
+              margin-bottom: 0.3rem;
+            "
+          >
+            ☎
+          </div>
+          <a
+            href="tel:8329450580"
+            style="
+              color: var(--muted);
+              text-decoration: none;
+              font-size: 0.9rem;
+            "
+            >8329450580</a
+          >
+        </div>
+        <div style="text-align: center">
+          <div
+            style="
+              font-size: 0.72rem;
+              letter-spacing: 0.12em;
+              text-transform: uppercase;
+              color: var(--accent);
+              margin-bottom: 0.3rem;
+            "
+          >
+            @
+          </div>
+          <a
+            href="mailto:rameshvegi94@gmail.com"
+            style="
+              color: var(--muted);
+              text-decoration: none;
+              font-size: 0.9rem;
+            "
+            >rameshvegi94@gmail.com</a
+          >
+        </div>
+        <div style="text-align: center">
+          <div
+            style="
+              font-size: 0.72rem;
+              letter-spacing: 0.12em;
+              text-transform: uppercase;
+              color: var(--accent);
+              margin-bottom: 0.3rem;
+            "
+          >
+            ✦
+          </div>
+          <span style="color: var(--muted); font-size: 0.9rem">ARN-349739</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-brand">
+        Mutual Fund and NPS distribution services by Vegi Ramesh
+      </div>
+      <div class="footer-links">
+        <a href="https://mfd-risk-profiler-arn-349739.netlify.app/"
+          >Investor Profiling</a
+        >
+        <a href="tel:8329450580">Call Us</a>
+        <a href="mailto:rameshvegi94@gmail.com">Email Us</a>
+      </div>
+      <div class="footer-disc">
+        Mutual Fund investments are subject to market risks. Please read all
+        scheme-related documents carefully before investing. Past performance is
+        not indicative of future results. This material is for informational
+        purposes only and does not constitute financial advice. Vegi Ramesh is
+        registered with AMFI as a Mutual Fund Distributor – ARN-349739.
+      </div>
+    </footer>
+
+    <script>
+      // ── THEME TOGGLE ──
+      function toggleTheme() {
+        var html = document.documentElement;
+        var isDark = html.getAttribute("data-theme") !== "light";
+        html.setAttribute("data-theme", isDark ? "light" : "dark");
+        try {
+          localStorage.setItem("theme", isDark ? "light" : "dark");
+        } catch (e) {}
+      }
+      // Restore saved theme
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t) document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+
+      // ── SUBNAV ACTIVE HIGHLIGHT ──
+      (function () {
+        var links = document.querySelectorAll(".subnav a");
+        var sections = Array.from(links).map(function (a) {
+          return document.querySelector(a.getAttribute("href"));
+        });
+        function onScroll() {
+          var scrollY = window.scrollY + 120;
+          var active = null;
+          sections.forEach(function (sec, i) {
+            if (sec && sec.offsetTop <= scrollY) active = i;
+          });
+          links.forEach(function (a, i) {
+            a.classList.toggle("active", i === active);
+          });
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+      })();
+    </script>
+  </body>
 </html>
