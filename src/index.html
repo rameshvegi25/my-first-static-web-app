@@ -592,8 +592,13 @@
         gap: 0.4rem;
         transition:
           color 0.2s,
-          background 0.2s;
+          background 0.2s,
+          opacity 0.15s;
         white-space: nowrap;
+        opacity: 0;
+      }
+      .theme-toggle.ready {
+        opacity: 1;
       }
       .theme-toggle:hover {
         color: var(--accent);
@@ -633,14 +638,34 @@
       .nav-profiling-btn:hover {
         opacity: 0.82;
       }
+      .nav-whatsapp-btn {
+        background: rgba(37, 211, 102, 0.12);
+        color: #25d366;
+        border: 1px solid rgba(37, 211, 102, 0.3);
+        border-radius: 6px;
+        padding: 0.35rem 0.9rem;
+        font-size: 0.78rem;
+        font-weight: 500;
+        font-family: var(--sans);
+        text-decoration: none;
+        letter-spacing: 0.04em;
+        transition: background 0.2s;
+        white-space: nowrap;
+      }
+      .nav-whatsapp-btn:hover {
+        background: rgba(37, 211, 102, 0.2);
+      }
       @media (max-width: 480px) {
-        .nav-profiling-btn {
+        .nav-profiling-btn, .nav-whatsapp-btn {
           display: none;
         }
       }
 
       /* ── MOBILE FAB ── */
       .fab-profiling {
+        display: none;
+      }
+      .fab-whatsapp-mobile {
         display: none;
       }
       @media (max-width: 480px) {
@@ -666,6 +691,32 @@
           white-space: nowrap;
         }
         .fab-profiling:active {
+          opacity: 0.85;
+          transform: scale(0.97);
+        }
+        .fab-whatsapp-mobile {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          position: fixed;
+          bottom: 1.4rem;
+          left: 1.2rem;
+          z-index: 200;
+          background: #25d366;
+          color: #fff;
+          border: none;
+          text-decoration: none;
+          font-family: var(--sans);
+          font-size: 0.88rem;
+          font-weight: 500;
+          letter-spacing: 0.04em;
+          padding: 0.7rem 1.2rem;
+          border-radius: 999px;
+          box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+          transition: opacity 0.2s, transform 0.2s;
+          white-space: nowrap;
+        }
+        .fab-whatsapp-mobile:active {
           opacity: 0.85;
           transform: scale(0.97);
         }
@@ -839,6 +890,13 @@
       <div class="nav-actions">
         <div class="nav-arn">✦ ARN-349739</div>
         <a
+          href="https://wa.me/918329450580"
+          class="nav-whatsapp-btn"
+          target="_blank"
+          rel="noopener"
+          >💬 WhatsApp</a
+        >
+        <a
           href="https://mfd-risk-profiler-arn-349739.netlify.app/"
           class="nav-profiling-btn"
           >Begin Profiling ✦</a
@@ -850,17 +908,15 @@
         >
           <span class="icon-dark">☀️</span>
           <span class="icon-light">🌙</span>
-          <span class="icon-dark">🌙</span>
-          <span class="icon-light">☀️</span>
         </button>
       </div>
     </nav>
 
     <!-- IN-PAGE SUBNAV -->
     <nav class="subnav" id="subnav">
-      <a href="#who-is-mfd">The Role</a>
+      <a href="#who-is-mfd">What is an MFD</a>
       <a href="#why-mfd">Why an MFD</a>
-      <a href="#why-ramesh">Why Me</a>
+      <a href="#why-ramesh">Why Ramesh</a>
       <a href="#why-mf">Mutual Funds</a>
       <a href="#how-it-works">How It Works</a>
       <a href="#how-i-earn">How I Earn</a>
@@ -876,6 +932,20 @@
       <p class="hero-sub">
         Not just a distributor. Someone whose success depends on yours.
       </p>
+      <div style="display:flex; gap:0.9rem; justify-content:center; flex-wrap:wrap; margin-bottom:2rem;">
+        <a
+          href="https://mfd-risk-profiler-arn-349739.netlify.app/"
+          class="nav-profiling-btn"
+          style="padding:0.75rem 1.8rem; font-size:0.92rem; border-radius:8px;"
+        >Begin Profiling ✦</a>
+        <a
+          href="https://wa.me/918329450580"
+          class="nav-whatsapp-btn"
+          target="_blank"
+          rel="noopener"
+          style="padding:0.75rem 1.8rem; font-size:0.92rem; border-radius:8px;"
+        >💬 Chat on WhatsApp</a>
+      </div>
       <div class="divider-star">✦ ✦ ✦</div>
     </header>
 
@@ -1061,14 +1131,106 @@
         </p>
       </div>
 
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.2rem; align-items:center;">
+        <span style="font-size:0.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; font-weight:500;">How to read:</span>
+        <span style="font-size:0.75rem; color:var(--safe); display:flex; align-items:center; gap:0.35rem;"><span style="width:8px;height:8px;border-radius:50%;background:var(--safe);display:inline-block;"></span>MF advantage</span>
+        <span style="font-size:0.75rem; color:var(--warn); display:flex; align-items:center; gap:0.35rem;"><span style="width:8px;height:8px;border-radius:50%;background:var(--warn);display:inline-block;"></span>Nuanced / mixed</span>
+        <span style="font-size:0.75rem; color:var(--danger); display:flex; align-items:center; gap:0.35rem;"><span style="width:8px;height:8px;border-radius:50%;background:var(--danger);display:inline-block;"></span>Significant concern</span>
+      </div>
       <div class="mf-acc-wrap" id="mf-accordion" role="list"></div>
 
       <script>
         (function () {
           var instruments = [
             {
+              name: "Fixed Deposits",
+              verdict: "Capital-safe but wealth-eroding",
+              badgeClass: "mv-ok",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Market-linked. No guaranteed return — can be negative in the short term. Over 10+ years, equity mutual funds have historically outpaced inflation, though this is not assured.",
+                  them: "Currently 6.5–7.5% p.a. (major banks, 2024). After 30% tax slab, effective yield drops to ~4.5–5.25%. India's retail inflation has averaged ~5–6% historically — meaning real returns are near zero or negative for many investors.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Liquidity",
+                  mf: "Redeemable any business day. No penalty for redemption.",
+                  them: "Premature withdrawal attracts a penalty of 0.5–1% on the interest rate. Some tax-saving FDs (5-year) have a full lock-in with zero early exit.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Transparency",
+                  mf: "SEBI-regulated. All costs, holdings, and NAVs are publicly disclosed.",
+                  them: "Interest rates are clearly stated upfront. Tax treatment is straightforward. No hidden costs — this is genuinely transparent.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Risk",
+                  mf: "Market risk — NAV can fall in the short term, especially in equity funds. Not suitable for money you need within 1–2 years.",
+                  them: "Deposits up to ₹5 lakh insured by DICGC. Principal is safe in scheduled banks. The real risk is inflation silently eroding purchasing power — your balance grows but buys less.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio 0.1%–1.5% per year. Debt mutual funds may suit short-to-medium horizons at lower cost.",
+                  them: "No direct cost. But TDS is deducted at source on interest above ₹40,000/year, and full interest is taxable as per income slab — a hidden tax burden that compounds over time.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Verdict",
+                  mf: "Better suited for long-term wealth building. For short-term parking (under 1 year), liquid or ultra-short debt funds can be a comparable alternative.",
+                  them: "FDs are not bad — they are the right tool for emergency funds, short-term goals, and capital preservation. They are the wrong tool for 10–20 year wealth building.",
+                  themClass: "mf-cell-ok"
+                }
+              ]
+            },
+            {
+              name: "Gold",
+              verdict: "Useful diversifier — size it right",
+              badgeClass: "mv-ok",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Market-linked. Equity funds have historically delivered 10–13% CAGR over 10+ year periods. Not guaranteed, and past performance does not predict the future.",
+                  them: "Gold has delivered roughly 10–11% CAGR in INR over the last 20 years — partly because a weakening rupee flatters gold's price in India. Over shorter 5-year windows, gold can go sideways for years and then spike. It produces no income (no dividends, no interest); all return is price appreciation only.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Liquidity",
+                  mf: "Redemption credited within 1–3 working days. Partial redemption is possible.",
+                  them: "Depends heavily on the form. Physical gold and jewellery carry making charges (8–20%) and dealers discount on buyback — you lose on both ends. Gold ETFs are liquid on the exchange during market hours. Sovereign Gold Bonds (SGBs) have an 8-year maturity; premature exit on the secondary market is often at a discount due to low trading volumes.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Transparency",
+                  mf: "SEBI-regulated. NAV, holdings, and expense ratio are publicly disclosed every day.",
+                  them: "Gold spot price is globally visible and genuinely transparent. SGBs and Gold ETFs are well-regulated. Physical gold has purity risk (hallmarking helps but is not universal). Digital gold platforms (Paytm, PhonePe gold) have faced regulatory scrutiny and are not covered under any investor protection scheme.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Risk",
+                  mf: "Market risk — equity funds can be volatile in the short term. Diversified across 50–500 companies, so single-company failures have limited impact.",
+                  them: "Gold is driven by global macro forces — USD strength, geopolitical tension, central bank demand, and real interest rates. It is a genuine hedge against equity market crashes and currency debasement. However, during prolonged equity bull runs, gold can underperform significantly. It is a diversifier, not a primary wealth-builder.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio 0.1%–1.5% per year. No transaction tax per trade.",
+                  them: "Physical gold: 3% GST on purchase + making charges + storage/insurance. Gold ETFs: ~0.5% expense ratio + brokerage per trade. Digital gold: 3% GST + platform spread (typically 2–3%). SGBs: zero expense ratio and a 2.5% annual interest coupon — the most cost-efficient form if you can hold to maturity.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Verdict",
+                  mf: "Better suited for systematic long-term wealth building. No storage risk, no purity concerns, and professional management.",
+                  them: "Gold is a legitimate and time-tested asset — especially for Indian households. A 5–15% portfolio allocation is widely recommended as a hedge. SGBs are the best form for most investors. But gold jewellery is cultural wealth, not investment-grade wealth — the making charges and buyback discounts make it a poor financial instrument.",
+                  themClass: "mf-cell-ok"
+                }
+              ]
+            },
+            {
               name: "Real Estate",
-              verdict: "Illiquid, opaque & illiquid gains",
+              verdict: "Illiquid, opaque &amp; high-cost",
               badgeClass: "mv-warn",
               attrs: [
                 {
@@ -1110,45 +1272,174 @@
               ]
             },
             {
-              name: "Fixed Deposits",
-              verdict: "Capital-safe but wealth-eroding",
+              name: "LIC &amp; Insurance Policies",
+              verdict: "Insurance ≠ Investment — keep them separate",
+              badgeClass: "mv-bad",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Market-linked. Equity funds have historically delivered 10–13% CAGR over 10+ years. Your entire premium goes to work from day one.",
+                  them: "ULIPs deduct premium allocation charges (1–7%), policy administration charges, mortality charges, and fund management charges before investing. In the first 3–5 years, a significant portion of your premium pays charges, not investments. Endowment and money-back plans typically deliver an IRR of 4–5.5% — rarely disclosed upfront by agents. This often fails to beat inflation.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Liquidity",
+                  mf: "Redeemable any business day. No lock-in except ELSS (3 years). No penalty for exit.",
+                  them: "ULIPs have a mandatory 5-year lock-in (IRDAI regulation). Surrendering an endowment plan in the first 3 years typically means losing all premiums paid — surrender value is zero or near-zero. Even after 5 years, surrender values are a fraction of total premiums paid.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Transparency",
+                  mf: "SEBI-regulated. Expense ratio, NAV, and holdings are publicly disclosed daily. No hidden charges.",
+                  them: "Post-2010 IRDAI reforms improved ULIP disclosure. Benefit illustrations are now mandatory. However, the layers of charges (6–8 different charge types) are genuinely complex and difficult to evaluate. Endowment plans rarely show the internal rate of return in agent conversations — the \u20b9X maturity amount sounds large without context of what it is in real terms.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Insurance",
+                  mf: "Mutual funds do not provide life cover. This is not a flaw — it is a feature. Keep insurance and investment separate so each can be optimised.",
+                  them: "ULIPs and endowment plans do provide life cover — but the sum assured is typically 10–15x the annual premium. A \u20b91 lakh/year ULIP gives \u20b910–15 lakh cover. A plain term insurance policy gives \u20b91 crore cover for \u20b98,000–12,000/year. You are paying a high price for inadequate cover.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio 0.1%–1.5% per year. For ELSS, no charge beyond the expense ratio.",
+                  them: "ULIPs combine: premium allocation charge + mortality charge + policy administration charge + fund management charge (up to 1.35%) + surrender charge. Total effective cost in early years can exceed 5–7% of premium annually. Endowment plans have opaque costs baked into the low IRR.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Verdict",
+                  mf: "Pair with a separate term insurance policy. Buy the right amount of cover cheaply; invest the rest in mutual funds.",
+                  them: "LIC and endowment plans are not scams — they are misused. Sold as investment products, they underperform. As insurance vehicles, they are overpriced. <span style=\"color:var(--safe)\">The honest recommendation: buy a pure term plan for life cover + invest separately in mutual funds. This combination almost always results in better cover and better returns.</span>",
+                  themClass: "mf-cell-bad"
+                }
+              ]
+            },
+            {
+              name: "PPF",
+              verdict: "Excellent debt instrument — not an equity substitute",
               badgeClass: "mv-ok",
               attrs: [
                 {
                   label: "Returns",
-                  mf: "Market-linked. No guaranteed return — can be negative in the short term. Over 10+ years, equity mutual funds have historically outpaced inflation, though this is not assured.",
-                  them: "Currently 6.5–7.5% p.a. (major banks, 2024). After 30% tax slab, effective yield drops to ~4.5–5.25%. India's retail inflation has averaged ~5–6% historically — meaning real returns are near zero or negative for many investors.",
-                  themClass: "mf-cell-warn"
-                },
-                {
-                  label: "Liquidity",
-                  mf: "Redeemable any business day. No penalty for redemption.",
-                  them: "Premature withdrawal attracts a penalty of 0.5–1% on the interest rate. Some tax-saving FDs (5-year) have a full lock-in with zero early exit.",
+                  mf: "Market-linked. Not guaranteed. Equity funds have historically delivered 10–13% CAGR over 10+ years. Can underperform or be negative in the short term.",
+                  them: "Currently 7.1% p.a., compounded annually, set by the government quarterly. Returns are tax-free (EEE status). However, the rate has declined from 12% in the late 1990s to 7.1% today — rate revision risk is real. After adjusting for inflation (~5–6% historically), real returns are modest.",
                   themClass: "mf-cell-ok"
                 },
                 {
-                  label: "Transparency",
-                  mf: "SEBI-regulated. All costs, holdings, and NAVs are publicly disclosed.",
-                  them: "Interest rates are clearly stated upfront. Tax treatment is straightforward. No hidden costs — this is genuinely transparent.",
+                  label: "Liquidity",
+                  mf: "Redeemable any business day. No minimum holding period (except ELSS at 3 years).",
+                  them: "15-year lock-in with an extension option in blocks of 5 years. Partial withdrawals permitted from the 7th financial year onwards (up to 50% of the balance at the end of the 4th preceding year). Loans against PPF balance are available from the 3rd year. This is genuinely illiquid for medium-term needs.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Tax",
+                  mf: "ELSS qualifies for \u20b91.5 lakh deduction under 80C. Long-term capital gains taxed at 12.5% above \u20b91.25 lakh on equity funds. Debt fund gains taxed as per income slab.",
+                  them: "EEE — Exempt at investment (80C deduction up to \u20b91.5 lakh), exempt on accumulation (interest is not taxable), and exempt on maturity (full withdrawal is tax-free). This triple exemption is one of the best tax treatments available to individual investors in India.",
                   themClass: "mf-cell-ok"
                 },
                 {
                   label: "Risk",
-                  mf: "Market risk — NAV can fall in the short term, especially in equity funds. Not suitable for money you need within 1–2 years.",
-                  them: "Deposits up to ₹5 lakh insured by DICGC. Principal is safe in scheduled banks. The real risk is inflation silently eroding purchasing power — your balance grows but buys less.",
+                  mf: "Market risk — equity NAV can fall. Volatility is visible and historically recoverable over long horizons.",
+                  them: "Sovereign guarantee — backed by the Government of India. Zero default risk on principal or interest. The real risk is that returns may not significantly outpace inflation over long periods, particularly if the rate continues to trend downward.",
                   themClass: "mf-cell-ok"
                 },
                 {
                   label: "Costs",
-                  mf: "Expense ratio 0.1%–1.5% per year. Debt mutual funds may suit short-to-medium horizons at lower cost.",
-                  them: "No direct cost. But TDS is deducted at source on interest above ₹40,000/year, and full interest is taxable as per income slab — a hidden tax burden that compounds over time.",
+                  mf: "Expense ratio 0.1%–1.5% per year, deducted from NAV.",
+                  them: "Zero direct costs. No account charges, no management fees, no transaction charges. Annual contribution limit: \u20b9500 minimum, \u20b91.5 lakh maximum.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Verdict",
+                  mf: "Better suited for long-term equity wealth building. For short-to-medium goals, debt mutual funds offer more flexibility.",
+                  them: "PPF is a genuinely excellent instrument — but for the fixed-income, capital-safe portion of your portfolio. It is not a substitute for equity mutual funds if your goal is long-term wealth compounding. Used together — equity MF for growth, PPF for safe debt allocation — they complement each other well.",
+                  themClass: "mf-cell-ok"
+                }
+              ]
+            },
+            {
+              name: "NPS",
+              verdict: "Strong retirement tool — but 60-year lock-in is the defining constraint",
+              badgeClass: "mv-ok",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Market-linked with flexible fund and asset class choice at any time. Equity, debt, or hybrid — you decide, and can change.",
+                  them: "Market-linked across equity (E), corporate bonds (C), and government securities (G). The equity (E) tier has historically delivered ~12–14% CAGR — comparable to equity mutual funds. However, equity allocation is capped at 75% up to age 50 and reduces automatically thereafter, so you cannot stay 100% equity even if you want to.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Lock-in",
+                  mf: "No lock-in except ELSS (3 years). You retain full control of your money and can redeem at any time for any reason.",
+                  them: "Tier-1 NPS is locked until age 60 — this is the defining characteristic. You cannot access this money for a medical emergency, business opportunity, or family need before 60 (partial withdrawals are allowed only after 3 years for specific purposes: children's education, critical illness, home purchase). This lock-in enforces retirement discipline — which is a genuine feature, not a flaw, if you are building a retirement corpus.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Exit at 60",
+                  mf: "No restrictions on how you use your money at any age. No compulsory annuity purchase.",
+                  them: "At 60, you can withdraw 60% as a tax-free lump sum. The remaining 40% must be used to purchase an annuity from a PFRDA-empanelled insurer — this is mandatory. Annuity rates in India are currently modest (~5–6% per year). This forced annuity reduces the flexibility of your retirement corpus, and the income it generates is fully taxable.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Tax",
+                  mf: "ELSS gives 80C deduction. Equity fund LTCG taxed at 12.5% above \u20b91.25 lakh. No additional deduction beyond 80C.",
+                  them: "Additional \u20b950,000 deduction under Section 80CCD(1B) — over and above the \u20b91.5 lakh 80C limit. This alone can save \u20b915,000–\u20b917,500 per year in tax at the 30% slab. Employer contributions under 80CCD(2) are also deductible. The 60% lump sum withdrawal at exit is tax-free. This is a meaningful tax advantage.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio 0.1%–1.5% per year depending on fund type.",
+                  them: "Among the lowest fund management charges in the world — 0.09% per year for government-sector NPS funds, up to ~0.2% for private sector. Point of Presence (PoP) charges apply on contributions but are capped. On a large retirement corpus, the low cost compounds significantly in your favour.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Verdict",
+                  mf: "Better for goals before retirement, or when you want full flexibility over your money. Ideal complement to NPS for medium-term goals.",
+                  them: "NPS is one of the best retirement-specific instruments available in India — low cost, reasonable returns, and a strong tax benefit. The 60-year lock-in and mandatory 40% annuity are real constraints that suit retirement savings specifically. Best approach: use NPS for retirement corpus (leveraging the tax benefit), and mutual funds for everything else.",
+                  themClass: "mf-cell-ok"
+                }
+              ]
+            },
+            {
+              name: "Direct Stocks",
+              verdict: "High potential, high demand on your time &amp; skill",
+              badgeClass: "mv-warn",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Equity mutual funds pool stocks selected and monitored by professional fund managers. Historical long-term CAGR of 10–13% for broad market index funds — without requiring you to pick individual winners.",
+                  them: "Individual stocks can deliver extraordinary returns — or catastrophic losses. SEBI's own data shows the majority of individual equity investors underperform broad market indices over 5+ year periods. Stock picking requires skill, time, and discipline that most people underestimate.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Liquidity",
+                  mf: "Redemption in 1–3 working days. Can redeem partial amounts.",
+                  them: "Exchange-traded — highly liquid during market hours for large-cap stocks. Illiquid for small/micro-caps where your own sell order can move the price against you.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Transparency",
+                  mf: "Fund holdings disclosed monthly. Expense ratio disclosed. SEBI-regulated.",
+                  them: "Listed company disclosures are mandated by SEBI. Financial results, shareholding, and corporate actions are publicly available. Transparency is genuinely good for large-caps.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Risk",
+                  mf: "Diversified across 50–500 companies. Single company failure has limited portfolio impact.",
+                  them: "Concentration risk is the central problem. A 10-stock portfolio means each stock is 10% of your wealth. One fraud, one sector collapse, one bad management decision — and the damage is severe. Requires constant monitoring.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio 0.1%–1.5% per year. No transaction cost per trade.",
+                  them: "Brokerage per trade (even at \u20b920 flat, frequent traders pay meaningfully). STT, stamp duty, SEBI charges, and GST on every transaction. Tax on short-term gains at 20%; long-term at 12.5% above \u20b91.25 lakh. Costs add up quickly for active traders.",
                   themClass: "mf-cell-warn"
                 },
                 {
                   label: "Verdict",
-                  mf: "Better suited for long-term wealth building. For short-term parking (under 1 year), liquid or ultra-short debt funds can be a comparable alternative.",
-                  them: "FDs are not bad — they are the right tool for emergency funds, short-term goals, and capital preservation. They are the wrong tool for 10–20 year wealth building.",
-                  themClass: "mf-cell-ok"
+                  mf: "Better diversification and professional management for investors who do not want to dedicate significant time to research.",
+                  them: "Direct stocks are a legitimate path for investors who enjoy research, can handle volatility, and have the discipline to hold through downturns. Not better or worse — just a different skill set required.",
+                  themClass: "mf-cell-warn"
                 }
               ]
             },
@@ -1194,92 +1485,6 @@
                   themClass: "mf-cell-bad"
                 }
               ]
-            },
-            {
-              name: "Direct Stocks",
-              verdict: "High potential, high demand on your time &amp; skill",
-              badgeClass: "mv-warn",
-              attrs: [
-                {
-                  label: "Returns",
-                  mf: "Equity mutual funds pool stocks selected and monitored by professional fund managers. Historical long-term CAGR of 10–13% for broad market index funds — without requiring you to pick individual winners.",
-                  them: "Individual stocks can deliver extraordinary returns — or catastrophic losses. SEBI's own data shows the majority of individual equity investors underperform broad market indices over 5+ year periods. Stock picking requires skill, time, and discipline that most people underestimate.",
-                  themClass: "mf-cell-warn"
-                },
-                {
-                  label: "Liquidity",
-                  mf: "Redemption in 1–3 working days. Can redeem partial amounts.",
-                  them: "Exchange-traded — highly liquid during market hours for large-cap stocks. Illiquid for small/micro-caps where your own sell order can move the price against you.",
-                  themClass: "mf-cell-ok"
-                },
-                {
-                  label: "Transparency",
-                  mf: "Fund holdings disclosed monthly. Expense ratio disclosed. SEBI-regulated.",
-                  them: "Listed company disclosures are mandated by SEBI. Financial results, shareholding, and corporate actions are publicly available. Transparency is genuinely good for large-caps.",
-                  themClass: "mf-cell-ok"
-                },
-                {
-                  label: "Risk",
-                  mf: "Diversified across 50–500 companies. Single company failure has limited portfolio impact.",
-                  them: "Concentration risk is the central problem. A 10-stock portfolio means each stock is 10% of your wealth. One fraud, one sector collapse, one bad management decision — and the damage is severe. Requires constant monitoring.",
-                  themClass: "mf-cell-warn"
-                },
-                {
-                  label: "Costs",
-                  mf: "Expense ratio 0.1%–1.5% per year. No transaction cost per trade.",
-                  them: "Brokerage per trade (even at ₹20 flat, frequent traders pay meaningfully). STT, stamp duty, SEBI charges, and GST on every transaction. Tax on short-term gains at 20%; long-term at 12.5% above ₹1.25 lakh. Costs add up quickly for active traders.",
-                  themClass: "mf-cell-warn"
-                },
-                {
-                  label: "Verdict",
-                  mf: "Better diversification and professional management for investors who do not want to dedicate significant time to research.",
-                  them: "Direct stocks are a legitimate path for investors who enjoy research, can handle volatility, and have the discipline to hold through downturns. Not better or worse — just a different skill set required.",
-                  themClass: "mf-cell-warn"
-                }
-              ]
-            },
-            {
-              name: "F&amp;O Trading",
-              verdict: "Not investing — statistically, a wealth destroyer",
-              badgeClass: "mv-bad",
-              attrs: [
-                {
-                  label: "Returns",
-                  mf: "Long-term equity mutual fund investors have historically built wealth by staying invested through cycles. Returns are not guaranteed but the mechanism is sound.",
-                  them: "SEBI's study (Jan 2023) found that 89% of individual F&amp;O traders incurred losses over FY19–FY22. Average loss per losing trader: ₹1.1 lakh per year. Only 11% were profitable — and of those, many were high-frequency or institutional players.",
-                  themClass: "mf-cell-bad"
-                },
-                {
-                  label: "Liquidity",
-                  mf: "Redemption in 1–3 working days.",
-                  them: "Daily mark-to-market settlement. Highly liquid — but this liquidity also means losses are realised immediately and margin calls can force exits at the worst moment.",
-                  themClass: "mf-cell-ok"
-                },
-                {
-                  label: "Transparency",
-                  mf: "All fund costs and holdings are disclosed and regulated.",
-                  them: "Exchange-traded and regulated. Pricing is transparent. However, the complexity of options pricing (Greeks, implied volatility) means most retail participants do not fully understand what they are buying or selling.",
-                  themClass: "mf-cell-warn"
-                },
-                {
-                  label: "Risk",
-                  mf: "Market risk — bounded. You can lose what you invest, but not more.",
-                  them: "Unlimited loss potential in certain positions (e.g. naked short options). Leverage amplifies both gains and losses. Margin calls can wipe an account within hours. This is not hyperbole — it is the documented experience of the majority of retail participants.",
-                  themClass: "mf-cell-bad"
-                },
-                {
-                  label: "Costs",
-                  mf: "Expense ratio 0.1%–1.5% per year.",
-                  them: "STT on options is 0.0625% of premium on buy side. Brokerage, exchange charges, SEBI fees, GST, and stamp duty apply per leg. Frequent trading can consume 15–30% of notional profits in costs alone — before tax.",
-                  themClass: "mf-cell-bad"
-                },
-                {
-                  label: "Verdict",
-                  mf: "A vehicle for long-term wealth creation with professional management and regulatory oversight.",
-                  them: "F&amp;O is a legitimate hedging and risk-management tool for institutions and sophisticated investors. For the vast majority of retail participants, the data is unambiguous: it destroys wealth. If you are drawn to it, treat it as entertainment with money you can afford to lose entirely — not as investing.",
-                  themClass: "mf-cell-bad"
-                }
-              ]
             }
           ];
 
@@ -1318,7 +1523,7 @@
               '<div class="mf-acc-body">' +
                 '<div class="mf-attr-header">' +
                   '<div>Attribute</div>' +
-                  '<div style="color:var(--safe)">Mutual Funds</div>' +
+                  '<div style="color:var(--safe)">Mutual Funds <span style="font-size:0.62rem;font-weight:400;opacity:0.6;letter-spacing:0.04em;text-transform:none;font-style:italic;">— consistent across all</span></div>' +
                   '<div>' + inst.name + '</div>' +
                 '</div>' +
                 rowsHtml +
@@ -1326,8 +1531,22 @@
 
             var header = item.querySelector(".mf-acc-header");
             function toggle() {
-              var isOpen = item.classList.toggle("open");
-              header.setAttribute("aria-expanded", isOpen ? "true" : "false");
+              var isOpen = item.classList.contains("open");
+              // Snapshot where the clicked header sits in the viewport
+              var headerTop = header.getBoundingClientRect().top;
+              // Close all accordions
+              wrap.querySelectorAll(".mf-acc-item").forEach(function (el) {
+                el.classList.remove("open");
+                el.querySelector(".mf-acc-header").setAttribute("aria-expanded", "false");
+              });
+              // If it wasn't open, open it now (click-to-close also works)
+              if (!isOpen) {
+                item.classList.add("open");
+                header.setAttribute("aria-expanded", "true");
+              }
+              // Correct for any scroll shift caused by closing other accordions
+              var newHeaderTop = header.getBoundingClientRect().top;
+              window.scrollBy({ top: newHeaderTop - headerTop, behavior: "instant" });
             }
             header.addEventListener("click", toggle);
             header.addEventListener("keydown", function (e) {
@@ -1336,6 +1555,13 @@
 
             wrap.appendChild(item);
           });
+
+          // Open first accordion by default
+          var firstItem = wrap.querySelector(".mf-acc-item");
+          if (firstItem) {
+            firstItem.classList.add("open");
+            firstItem.querySelector(".mf-acc-header").setAttribute("aria-expanded", "true");
+          }
         })();
       </script>
 
@@ -4217,63 +4443,56 @@
           flex-wrap: wrap;
         "
       >
-        <div style="text-align: center">
-          <div
-            style="
-              font-size: 0.72rem;
-              letter-spacing: 0.12em;
-              text-transform: uppercase;
-              color: var(--accent);
-              margin-bottom: 0.3rem;
-            "
-          >
-            ☎
+        <!-- WhatsApp -->
+        <a
+          href="https://wa.me/918329450580"
+          target="_blank"
+          rel="noopener"
+          style="text-align: center; text-decoration: none;"
+        >
+          <div style="display:flex; justify-content:center; margin-bottom: 0.3rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#25d366">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
           </div>
-          <a
-            href="tel:8329450580"
-            style="
-              color: var(--muted);
-              text-decoration: none;
-              font-size: 0.9rem;
-            "
-            >8329450580</a
-          >
-        </div>
-        <div style="text-align: center">
-          <div
-            style="
-              font-size: 0.72rem;
-              letter-spacing: 0.12em;
-              text-transform: uppercase;
-              color: var(--accent);
-              margin-bottom: 0.3rem;
-            "
-          >
-            @
+          <span style="color: var(--muted); font-size: 0.9rem;">WhatsApp</span>
+        </a>
+
+        <!-- Phone -->
+        <a
+          href="tel:8329450580"
+          style="text-align: center; text-decoration: none;"
+        >
+          <div style="display:flex; justify-content:center; margin-bottom: 0.3rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.69A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
           </div>
-          <a
-            href="mailto:rameshvegi94@gmail.com"
-            style="
-              color: var(--muted);
-              text-decoration: none;
-              font-size: 0.9rem;
-            "
-            >rameshvegi94@gmail.com</a
-          >
-        </div>
-        <div style="text-align: center">
-          <div
-            style="
-              font-size: 0.72rem;
-              letter-spacing: 0.12em;
-              text-transform: uppercase;
-              color: var(--accent);
-              margin-bottom: 0.3rem;
-            "
-          >
-            ✦
+          <span style="color: var(--muted); font-size: 0.9rem;">8329450580</span>
+        </a>
+
+        <!-- Email -->
+        <a
+          href="mailto:rameshvegi94@gmail.com"
+          style="text-align: center; text-decoration: none;"
+        >
+          <div style="display:flex; justify-content:center; margin-bottom: 0.3rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
           </div>
-          <span style="color: var(--muted); font-size: 0.9rem">ARN-349739</span>
+          <span style="color: var(--muted); font-size: 0.9rem;">rameshvegi94@gmail.com</span>
+        </a>
+
+        <!-- ARN -->
+        <div style="text-align: center;">
+          <div style="display:flex; justify-content:center; margin-bottom: 0.3rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0112 0v2"/>
+            </svg>
+          </div>
+          <span style="color: var(--muted); font-size: 0.9rem;">ARN-349739</span>
         </div>
       </div>
     </section>
@@ -4287,6 +4506,7 @@
         <a href="https://mfd-risk-profiler-arn-349739.netlify.app/"
           >Investor Profiling</a
         >
+        <a href="https://wa.me/918329450580" target="_blank" rel="noopener">WhatsApp</a>
         <a href="tel:8329450580">Call Us</a>
         <a href="mailto:rameshvegi94@gmail.com">Email Us</a>
       </div>
@@ -4308,6 +4528,17 @@
       <span>📋</span> Begin Profiling
     </a>
 
+    <!-- Mobile FAB: WhatsApp -->
+    <a
+      href="https://wa.me/918329450580"
+      class="fab-whatsapp-mobile"
+      target="_blank"
+      rel="noopener"
+      aria-label="Chat on WhatsApp"
+    >
+      <span>💬</span> WhatsApp
+    </a>
+
     <script>
       // ── THEME TOGGLE ──
       function toggleTheme() {
@@ -4324,6 +4555,9 @@
           var t = localStorage.getItem("theme");
           if (t) document.documentElement.setAttribute("data-theme", t);
         } catch (e) {}
+        // Reveal toggle only after theme is correctly set — prevents flash
+        var btn = document.querySelector(".theme-toggle");
+        if (btn) btn.classList.add("ready");
       })();
 
       // ── SUBNAV ACTIVE HIGHLIGHT ──
