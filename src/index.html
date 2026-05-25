@@ -277,99 +277,167 @@
         margin: 0;
       }
 
-      /* ── WHY MF TABLE ── */
-      .table-wrap {
-        overflow-x: auto;
-        border-radius: 12px;
-        border: 1px solid var(--border);
+      /* ── WHY MF ACCORDION ── */
+      .mf-acc-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
         margin: 2rem 0;
-        -webkit-overflow-scrolling: touch;
       }
-      table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        font-size: 0.88rem;
-        min-width: 520px;
-        table-layout: fixed;
+      .mf-acc-item {
+        border: 1px solid var(--border);
+        border-radius: 12px;
       }
-      /* Column widths: Option frozen narrow, others equal */
-      table colgroup .col-option {
-        width: 110px;
+      .mf-acc-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 18px;
+        cursor: pointer;
+        background: var(--surface);
+        gap: 12px;
+        transition: background 0.15s;
+        list-style: none;
+        border-radius: 12px;
       }
-      table colgroup .col-data {
-        width: 140px;
+      .mf-acc-item.open .mf-acc-header {
+        border-radius: 12px 12px 0 0;
+        border-bottom: 1px solid var(--border);
       }
-      table colgroup .col-verdict {
-        width: 150px;
+      .mf-acc-header:hover {
+        background: var(--surface2);
+      }
+      .mf-acc-header-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        min-width: 0;
+      }
+      .mf-acc-name {
+        font-family: var(--serif);
+        font-size: 1.08rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .mf-verdict-badge {
+        font-size: 0.72rem;
+        font-weight: 500;
+        padding: 3px 10px;
+        border-radius: 20px;
+        letter-spacing: 0.03em;
+      }
+      .mv-warn { background: rgba(224,163,74,0.15); color: var(--warn); }
+      .mv-ok   { background: rgba(107,140,186,0.15); color: var(--neutral); }
+      .mv-bad  { background: rgba(224,92,92,0.15);   color: var(--danger); }
+      .mv-good { background: rgba(76,175,130,0.15);  color: var(--safe); }
+      .mf-acc-chevron {
+        font-size: 1.1rem;
+        color: var(--muted);
+        transition: transform 0.25s;
+        flex-shrink: 0;
+      }
+      .mf-acc-item.open .mf-acc-chevron {
+        transform: rotate(180deg);
+      }
+      .mf-acc-body {
+        display: none;
+        border-top: 1px solid var(--border);
+        border-radius: 0 0 12px 12px;
+      }
+      .mf-acc-item.open .mf-acc-body {
+        display: block;
       }
 
-      thead tr {
+      /* Desktop: 3-column grid */
+      .mf-attr-header {
+        display: grid;
+        grid-template-columns: 110px 1fr 1fr;
+        padding: 8px 18px;
         background: var(--surface2);
-      }
-      thead th {
-        padding: 0.85rem 0.9rem;
-        text-align: left;
+        font-size: 0.7rem;
         font-weight: 500;
-        letter-spacing: 0.05em;
-        font-size: 0.78rem;
         text-transform: uppercase;
+        letter-spacing: 0.1em;
         color: var(--muted);
         border-bottom: 1px solid var(--border);
-        white-space: normal;
-        vertical-align: bottom;
+        gap: 12px;
       }
-      /* Sticky header first cell */
-      thead th:first-child {
-        color: var(--text);
-        position: sticky;
-        left: 0;
-        z-index: 3;
-        background: var(--surface2);
-        box-shadow: 2px 0 6px rgba(0, 0, 0, 0.18);
-      }
-      tbody tr {
+
+
+      .mf-attr-row {
+        display: grid;
+        grid-template-columns: 110px 1fr 1fr;
+        padding: 13px 18px;
         border-bottom: 1px solid var(--border);
-        transition: background 0.15s;
+        gap: 12px;
+        align-items: start;
       }
-      tbody tr:last-child td {
-        border-bottom: none;
+      .mf-attr-row:last-child { border-bottom: none; }
+      .mf-attr-label {
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--muted);
+        padding-top: 3px;
       }
-      tbody tr:hover td {
-        background: var(--surface2);
-      }
-      tbody tr:hover td:first-child {
-        background: var(--surface2);
-      }
-      tbody td {
-        padding: 0.9rem;
-        vertical-align: top;
-        color: var(--prose-text);
+      .mf-cell {
+        font-size: 0.88rem;
         font-weight: 300;
         line-height: 1.55;
-        border-bottom: 1px solid var(--border);
-        word-wrap: break-word;
-        white-space: normal;
+        color: var(--prose-text);
       }
-      /* Sticky first column */
-      tbody td:first-child {
-        font-weight: 500;
-        color: var(--text);
-        white-space: normal;
-        word-break: break-word;
-        position: sticky;
-        left: 0;
-        z-index: 2;
-        background: var(--surface);
-        box-shadow: 2px 0 6px rgba(0, 0, 0, 0.18);
+      .mf-cell-mf {
+        color: var(--safe);
+        font-weight: 400;
       }
-      /* Remove double borders due to separate border model */
-      thead th:not(:first-child) {
-        border-left: 1px solid var(--border);
+      .mf-cell-warn { color: var(--warn); }
+      .mf-cell-bad  { color: var(--danger); }
+      .mf-cell-ok   { color: var(--neutral); }
+
+      /* Mobile: stacked layout */
+      @media (max-width: 600px) {
+        .mf-attr-header { display: none; }
+        .mf-attr-row {
+          display: block;
+          padding: 12px 16px;
+        }
+        .mf-attr-label {
+          margin-bottom: 8px;
+          display: block;
+        }
+        .mf-compare-pair {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        .mf-compare-row {
+          display: flex;
+          gap: 8px;
+          align-items: flex-start;
+        }
+        .mf-pill-tag {
+          font-size: 0.68rem;
+          font-weight: 600;
+          padding: 2px 7px;
+          border-radius: 4px;
+          white-space: nowrap;
+          flex-shrink: 0;
+          margin-top: 2px;
+          letter-spacing: 0.04em;
+        }
+        .pill-mf   { background: rgba(76,175,130,0.15); color: var(--safe); min-width: 56px; text-align: center; }
+        .pill-vs   { background: var(--surface2); color: var(--muted); min-width: 56px; text-align: center; }
       }
-      tbody td:not(:first-child) {
-        border-left: 1px solid var(--border);
+
+      /* Hide mobile pair wrapper on desktop */
+      @media (min-width: 601px) {
+        .mf-compare-pair { display: contents; }
+        .mf-compare-row  { display: contents; }
+        .mf-pill-tag     { display: none; }
       }
+
       .tag {
         display: inline-block;
         padding: 0.18rem 0.55rem;
@@ -378,22 +446,10 @@
         font-weight: 500;
         letter-spacing: 0.04em;
       }
-      .tag-bad {
-        background: rgba(224, 92, 92, 0.15);
-        color: #e07a7a;
-      }
-      .tag-warn {
-        background: rgba(224, 163, 74, 0.15);
-        color: #e0b86a;
-      }
-      .tag-ok {
-        background: rgba(107, 140, 186, 0.15);
-        color: #8aaad4;
-      }
-      .tag-good {
-        background: rgba(76, 175, 130, 0.15);
-        color: #5ec99a;
-      }
+      .tag-bad  { background: rgba(224,92,92,0.15);   color: #e07a7a; }
+      .tag-warn { background: rgba(224,163,74,0.15);  color: #e0b86a; }
+      .tag-ok   { background: rgba(107,140,186,0.15); color: #8aaad4; }
+      .tag-good { background: rgba(76,175,130,0.15);  color: #5ec99a; }
 
       /* ── STOPPER SECTION ── */
       .stopper-card {
@@ -1005,101 +1061,283 @@
         </p>
       </div>
 
-      <div class="table-wrap">
-        <table>
-          <colgroup>
-            <col class="col-option" />
-            <col class="col-data" />
-            <col class="col-data" />
-            <col class="col-data" />
-            <col class="col-data" />
-            <col class="col-verdict" />
-          </colgroup>
-          <thead>
-            <tr>
-              <th>Option</th>
-              <th>Returns</th>
-              <th>Liquidity</th>
-              <th>Transparency</th>
-              <th>Risk</th>
-              <th>Verdict</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>📈 Mutual Funds</td>
-              <td>
-                Market-linked, Potentially inflation-beating over long term
-              </td>
-              <td>Max 3 working Days redemption</td>
-              <td>SEBI-regulated, fully disclosed</td>
-              <td>Market risk, managed with diversification</td>
-              <td>
-                <span class="tag tag-good"
-                  >Best all-rounder in general comparison.</span
-                >
-              </td>
-            </tr>
-            <tr>
-              <td>🏠 Real Estate</td>
-              <td>Can be good, but uneven and illiquid gains</td>
-              <td>Months to sell; locked capital</td>
-              <td>Opaque pricing, black money prevalent</td>
-              <td>High concentration, maintenance costs, legal disputes</td>
-              <td><span class="tag tag-warn">Illiquid & opaque</span></td>
-            </tr>
-            <tr>
-              <td>🏦 Fixed Deposits</td>
-              <td>4–7% — often below inflation after tax</td>
-              <td>Premature withdrawal penalty</td>
-              <td>Clear but low-yield</td>
-              <td>Low market risk, high inflation risk</td>
-              <td><span class="tag tag-ok">Safe but erodes wealth</span></td>
-            </tr>
-            <tr>
-              <td>🤝 Chit Funds / Informal Schemes</td>
-              <td>Promises of high returns, rarely delivered fairly</td>
-              <td>Very low; locked in schemes</td>
-              <td>Completely opaque</td>
-              <td>Fraud risk, black money, illegal activity</td>
-              <td>
-                <span class="tag tag-bad"
-                  >High risk; unregulated ones are illegal</span
-                >
-              </td>
-            </tr>
-            <tr>
-              <td>📊 Direct Stocks</td>
-              <td>
-                Can be high — but even experienced investors with years of study
-                regularly lose money. There is no guaranteed formula.
-              </td>
-              <td>High liquidity</td>
-              <td>Exchange-listed, regulated</td>
-              <td>
-                High concentration risk; needs constant tracking. Expertise
-                helps but does not guarantee success.
-              </td>
-              <td>
-                <span class="tag tag-warn"
-                  >No safety net, even for experts</span
-                >
-              </td>
-            </tr>
-            <tr>
-              <td>🎲 F&amp;O Trading</td>
-              <td>
-                Over 90% of individual F&amp;O traders incur losses — per SEBI's
-                own study on the F&amp;O segment (Jan 2023)
-              </td>
-              <td>Daily settlement</td>
-              <td>Exchange-listed but complex</td>
-              <td>Extremely high; can lose more than invested</td>
-              <td><span class="tag tag-bad">Not investing — gambling</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <div class="mf-acc-wrap" id="mf-accordion" role="list"></div>
+
+      <script>
+        (function () {
+          var instruments = [
+            {
+              name: "Real Estate",
+              verdict: "Illiquid, opaque & illiquid gains",
+              badgeClass: "mv-warn",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Market-linked. Equity funds have historically delivered 10–13% CAGR over 10+ year periods — but this is not guaranteed and past performance does not predict the future.",
+                  them: "Can appreciate significantly in some cities and periods. But gains are uneven, location-dependent, and you cannot sell a portion. Many investors overestimate returns by ignoring maintenance, property tax, vacant periods, and brokerage.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Liquidity",
+                  mf: "Redemption credited within 1–3 working days for most funds. You can redeem exactly what you need — no forced full exit.",
+                  them: "Selling typically takes weeks to months. You cannot exit partially. Capital is fully locked until a buyer is found, deals are negotiated, and registration is complete.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Transparency",
+                  mf: "Every fund's NAV, portfolio holdings, expense ratio, and fund manager track record are publicly disclosed daily under SEBI regulations.",
+                  them: "Pricing is opaque — the same property can be quoted at very different prices. Undisclosed cash components are still common in many markets. No regulatory body monitors individual transaction pricing.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Risk",
+                  mf: "Subject to market risk. However, diversification across 50–500 companies means no single failure wipes you out. Volatility is visible and measurable.",
+                  them: "Highly concentrated — often one asset worth years of savings. Also carries title disputes, tenant risk, regulatory changes, structural defects, and neighbourhood decline. These risks are invisible until they hit.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio typically 0.1%–1.5% per year, deducted automatically. No entry/exit loads on most funds. Tax on gains is straightforward.",
+                  them: "Stamp duty (5–7%), registration charges, brokerage (1–2%), annual maintenance, society charges, property tax, home loan interest if leveraged. Total acquisition cost routinely exceeds 10% of property value.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Verdict",
+                  mf: "Better liquidity, transparency, lower entry cost, and partial exit flexibility.",
+                  them: "Real estate has a genuine place in a portfolio — but as a primary wealth-building tool it is costly, illiquid, and opaque for most salaried investors.",
+                  themClass: "mf-cell-warn"
+                }
+              ]
+            },
+            {
+              name: "Fixed Deposits",
+              verdict: "Capital-safe but wealth-eroding",
+              badgeClass: "mv-ok",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Market-linked. No guaranteed return — can be negative in the short term. Over 10+ years, equity mutual funds have historically outpaced inflation, though this is not assured.",
+                  them: "Currently 6.5–7.5% p.a. (major banks, 2024). After 30% tax slab, effective yield drops to ~4.5–5.25%. India's retail inflation has averaged ~5–6% historically — meaning real returns are near zero or negative for many investors.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Liquidity",
+                  mf: "Redeemable any business day. No penalty for redemption.",
+                  them: "Premature withdrawal attracts a penalty of 0.5–1% on the interest rate. Some tax-saving FDs (5-year) have a full lock-in with zero early exit.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Transparency",
+                  mf: "SEBI-regulated. All costs, holdings, and NAVs are publicly disclosed.",
+                  them: "Interest rates are clearly stated upfront. Tax treatment is straightforward. No hidden costs — this is genuinely transparent.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Risk",
+                  mf: "Market risk — NAV can fall in the short term, especially in equity funds. Not suitable for money you need within 1–2 years.",
+                  them: "Deposits up to ₹5 lakh insured by DICGC. Principal is safe in scheduled banks. The real risk is inflation silently eroding purchasing power — your balance grows but buys less.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio 0.1%–1.5% per year. Debt mutual funds may suit short-to-medium horizons at lower cost.",
+                  them: "No direct cost. But TDS is deducted at source on interest above ₹40,000/year, and full interest is taxable as per income slab — a hidden tax burden that compounds over time.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Verdict",
+                  mf: "Better suited for long-term wealth building. For short-term parking (under 1 year), liquid or ultra-short debt funds can be a comparable alternative.",
+                  them: "FDs are not bad — they are the right tool for emergency funds, short-term goals, and capital preservation. They are the wrong tool for 10–20 year wealth building.",
+                  themClass: "mf-cell-ok"
+                }
+              ]
+            },
+            {
+              name: "Chit Funds &amp; Informal Schemes",
+              verdict: "Unregulated; serious legal &amp; fraud risk",
+              badgeClass: "mv-bad",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Market-linked with historical long-term outperformance of inflation. No guaranteed return.",
+                  them: "Registered chit funds under the Chit Funds Act, 1982 can work as intended for members. Unregistered and informal schemes routinely promise 20–40% returns — these are almost universally unsustainable and many are Ponzi structures.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Liquidity",
+                  mf: "Redeemable within 1–3 working days at any time.",
+                  them: "Money is locked for the duration of the chit cycle (typically 1–5 years). Early exit is difficult, often penalised, and sometimes impossible in informal schemes.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Transparency",
+                  mf: "Every rupee tracked, reported, and regulated by SEBI.",
+                  them: "Registered chit funds file returns with state governments. Unregistered ones have zero external oversight — no audited accounts, no regulatory scrutiny, no investor protection.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Risk",
+                  mf: "Market risk — measurable, visible, and historically recoverable over long horizons.",
+                  them: "Fraud risk is very real — operator absconding with funds is a documented and recurring pattern. Even legitimate registered chits carry forfeiture risk if you miss a payment. Your legal recourse in informal schemes is near zero.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio 0.1%–1.5% per year, deducted from NAV.",
+                  them: "Chit funds typically deduct a foreman's commission of up to 5% of the chit value. Hidden charges in informal schemes vary and are rarely disclosed upfront.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Verdict",
+                  mf: "Fully regulated, transparent, and liquid.",
+                  them: "Registered chit funds are legal and serve a social purpose for communities. Unregistered informal schemes are illegal under the Chit Funds Act and the Prize Chits &amp; Money Circulation Schemes (Banning) Act. Avoid entirely.",
+                  themClass: "mf-cell-bad"
+                }
+              ]
+            },
+            {
+              name: "Direct Stocks",
+              verdict: "High potential, high demand on your time &amp; skill",
+              badgeClass: "mv-warn",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Equity mutual funds pool stocks selected and monitored by professional fund managers. Historical long-term CAGR of 10–13% for broad market index funds — without requiring you to pick individual winners.",
+                  them: "Individual stocks can deliver extraordinary returns — or catastrophic losses. SEBI's own data shows the majority of individual equity investors underperform broad market indices over 5+ year periods. Stock picking requires skill, time, and discipline that most people underestimate.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Liquidity",
+                  mf: "Redemption in 1–3 working days. Can redeem partial amounts.",
+                  them: "Exchange-traded — highly liquid during market hours for large-cap stocks. Illiquid for small/micro-caps where your own sell order can move the price against you.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Transparency",
+                  mf: "Fund holdings disclosed monthly. Expense ratio disclosed. SEBI-regulated.",
+                  them: "Listed company disclosures are mandated by SEBI. Financial results, shareholding, and corporate actions are publicly available. Transparency is genuinely good for large-caps.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Risk",
+                  mf: "Diversified across 50–500 companies. Single company failure has limited portfolio impact.",
+                  them: "Concentration risk is the central problem. A 10-stock portfolio means each stock is 10% of your wealth. One fraud, one sector collapse, one bad management decision — and the damage is severe. Requires constant monitoring.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio 0.1%–1.5% per year. No transaction cost per trade.",
+                  them: "Brokerage per trade (even at ₹20 flat, frequent traders pay meaningfully). STT, stamp duty, SEBI charges, and GST on every transaction. Tax on short-term gains at 20%; long-term at 12.5% above ₹1.25 lakh. Costs add up quickly for active traders.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Verdict",
+                  mf: "Better diversification and professional management for investors who do not want to dedicate significant time to research.",
+                  them: "Direct stocks are a legitimate path for investors who enjoy research, can handle volatility, and have the discipline to hold through downturns. Not better or worse — just a different skill set required.",
+                  themClass: "mf-cell-warn"
+                }
+              ]
+            },
+            {
+              name: "F&amp;O Trading",
+              verdict: "Not investing — statistically, a wealth destroyer",
+              badgeClass: "mv-bad",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Long-term equity mutual fund investors have historically built wealth by staying invested through cycles. Returns are not guaranteed but the mechanism is sound.",
+                  them: "SEBI's study (Jan 2023) found that 89% of individual F&amp;O traders incurred losses over FY19–FY22. Average loss per losing trader: ₹1.1 lakh per year. Only 11% were profitable — and of those, many were high-frequency or institutional players.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Liquidity",
+                  mf: "Redemption in 1–3 working days.",
+                  them: "Daily mark-to-market settlement. Highly liquid — but this liquidity also means losses are realised immediately and margin calls can force exits at the worst moment.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Transparency",
+                  mf: "All fund costs and holdings are disclosed and regulated.",
+                  them: "Exchange-traded and regulated. Pricing is transparent. However, the complexity of options pricing (Greeks, implied volatility) means most retail participants do not fully understand what they are buying or selling.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Risk",
+                  mf: "Market risk — bounded. You can lose what you invest, but not more.",
+                  them: "Unlimited loss potential in certain positions (e.g. naked short options). Leverage amplifies both gains and losses. Margin calls can wipe an account within hours. This is not hyperbole — it is the documented experience of the majority of retail participants.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio 0.1%–1.5% per year.",
+                  them: "STT on options is 0.0625% of premium on buy side. Brokerage, exchange charges, SEBI fees, GST, and stamp duty apply per leg. Frequent trading can consume 15–30% of notional profits in costs alone — before tax.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Verdict",
+                  mf: "A vehicle for long-term wealth creation with professional management and regulatory oversight.",
+                  them: "F&amp;O is a legitimate hedging and risk-management tool for institutions and sophisticated investors. For the vast majority of retail participants, the data is unambiguous: it destroys wealth. If you are drawn to it, treat it as entertainment with money you can afford to lose entirely — not as investing.",
+                  themClass: "mf-cell-bad"
+                }
+              ]
+            }
+          ];
+
+          var wrap = document.getElementById("mf-accordion");
+
+          instruments.forEach(function (inst) {
+            var item = document.createElement("div");
+            item.className = "mf-acc-item";
+            item.setAttribute("role", "listitem");
+
+            var shortName = inst.name.split(" ")[0];
+            var rowsHtml = inst.attrs.map(function (a) {
+              return '<div class="mf-attr-row">' +
+                '<div class="mf-attr-label">' + a.label + '</div>' +
+                '<div class="mf-compare-pair">' +
+                  '<div class="mf-compare-row">' +
+                    '<span class="mf-pill-tag pill-mf">MF</span>' +
+                    '<span class="mf-cell mf-cell-mf">' + a.mf + '</span>' +
+                  '</div>' +
+                  '<div class="mf-compare-row">' +
+                    '<span class="mf-pill-tag pill-vs">' + shortName + '</span>' +
+                    '<span class="mf-cell ' + a.themClass + '">' + a.them + '</span>' +
+                  '</div>' +
+                '</div>' +
+              '</div>';
+            }).join("");
+
+            item.innerHTML =
+              '<div class="mf-acc-header" role="button" tabindex="0" aria-expanded="false">' +
+                '<div class="mf-acc-header-left">' +
+                  '<span class="mf-acc-name">' + inst.name + '</span>' +
+                  '<span class="mf-verdict-badge ' + inst.badgeClass + '">' + inst.verdict + '</span>' +
+                '</div>' +
+                '<span class="mf-acc-chevron">&#8964;</span>' +
+              '</div>' +
+              '<div class="mf-acc-body">' +
+                '<div class="mf-attr-header">' +
+                  '<div>Attribute</div>' +
+                  '<div style="color:var(--safe)">Mutual Funds</div>' +
+                  '<div>' + inst.name + '</div>' +
+                '</div>' +
+                rowsHtml +
+              '</div>';
+
+            var header = item.querySelector(".mf-acc-header");
+            function toggle() {
+              var isOpen = item.classList.toggle("open");
+              header.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            }
+            header.addEventListener("click", toggle);
+            header.addEventListener("keydown", function (e) {
+              if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+            });
+
+            wrap.appendChild(item);
+          });
+        })();
+      </script>
 
       <h3
         style="
