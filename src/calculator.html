@@ -1,0 +1,1395 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Goal Calculator · Vegi Ramesh · ARN-349739</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+      :root {
+        --bg: #0b0f1a;
+        --surface: #111827;
+        --surface2: #1a2236;
+        --border: rgba(255, 255, 255, 0.07);
+        --accent: #c8a96e;
+        --accent-dim: rgba(200, 169, 110, 0.15);
+        --accent-glow: rgba(200, 169, 110, 0.08);
+        --text: #e8e4dc;
+        --muted: #8a9ab5;
+        --danger: #e05c5c;
+        --safe: #4caf82;
+        --neutral: #6b8cba;
+        --warn: #e0a34a;
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --sans: "DM Sans", sans-serif;
+        --nav-bg: rgba(11, 15, 26, 0.92);
+        --prose-text: #b8bfcc;
+        --footer-disc: #6b7280;
+        --subnav-bg: rgba(17, 24, 39, 0.95);
+      }
+      [data-theme="light"] {
+        --bg: #f7f4ef;
+        --surface: #ffffff;
+        --surface2: #f0ebe0;
+        --border: rgba(0, 0, 0, 0.09);
+        --accent: #a67c32;
+        --accent-dim: rgba(166, 124, 50, 0.12);
+        --accent-glow: rgba(166, 124, 50, 0.06);
+        --text: #1c1a14;
+        --muted: #6b6353;
+        --danger: #c0392b;
+        --safe: #2e7d5e;
+        --neutral: #3d6491;
+        --warn: #b5780a;
+        --nav-bg: rgba(247, 244, 239, 0.94);
+        --prose-text: #4a4535;
+        --footer-disc: #7a7060;
+        --subnav-bg: rgba(240, 235, 224, 0.97);
+      }
+
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--nav-bg);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 0 clamp(1.5rem, 5vw, 4rem);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+      }
+      .nav-brand {
+        font-family: var(--serif);
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--text);
+        letter-spacing: 0.03em;
+        text-decoration: none;
+      }
+      .nav-brand span { color: var(--accent); font-style: italic; }
+      .nav-arn {
+        font-size: 0.72rem;
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .nav-profiling-btn {
+        background: var(--accent);
+        color: var(--bg);
+        border-radius: 6px;
+        padding: 0.35rem 0.9rem;
+        font-size: 0.78rem;
+        font-weight: 500;
+        font-family: var(--sans);
+        text-decoration: none;
+        letter-spacing: 0.04em;
+        transition: opacity 0.2s;
+        white-space: nowrap;
+      }
+      .nav-profiling-btn:hover { opacity: 0.82; }
+      .nav-whatsapp-btn {
+        background: rgba(37, 211, 102, 0.12);
+        color: #25d366;
+        border: 1px solid rgba(37, 211, 102, 0.3);
+        border-radius: 6px;
+        padding: 0.35rem 0.9rem;
+        font-size: 0.78rem;
+        font-weight: 500;
+        font-family: var(--sans);
+        text-decoration: none;
+        letter-spacing: 0.04em;
+        transition: background 0.2s;
+        white-space: nowrap;
+      }
+      .nav-whatsapp-btn:hover { background: rgba(37, 211, 102, 0.2); }
+      @media (max-width: 480px) {
+        .nav-profiling-btn, .nav-whatsapp-btn { display: none; }
+      }
+
+      /* ── THEME TOGGLE ── */
+      .theme-toggle {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        border-radius: 20px;
+        padding: 0.3rem 0.55rem;
+        font-size: 0.78rem;
+        font-family: var(--sans);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: color 0.2s, background 0.2s, opacity 0.15s;
+        white-space: nowrap;
+        opacity: 0;
+      }
+      .theme-toggle.ready { opacity: 1; }
+      .theme-toggle:hover { color: var(--accent); }
+      .theme-toggle .icon-dark { display: inline; }
+      .theme-toggle .icon-light { display: none; }
+      [data-theme="light"] .theme-toggle .icon-dark { display: none; }
+      [data-theme="light"] .theme-toggle .icon-light { display: inline; }
+
+      /* ── HERO ── */
+      .hero {
+        text-align: center;
+        padding: clamp(3.5rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem) clamp(2.5rem, 5vw, 4rem);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(200, 169, 110, 0.07) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      .hero-eyebrow {
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.2rem;
+      }
+      .hero-eyebrow::before, .hero-eyebrow::after { content: " ✦ "; opacity: 0.6; }
+      .hero h1 {
+        font-family: var(--serif);
+        font-size: clamp(2.2rem, 5vw, 3.6rem);
+        font-weight: 600;
+        line-height: 1.15;
+        margin-bottom: 1rem;
+        color: var(--text);
+      }
+      .hero h1 em { color: var(--accent); font-style: italic; }
+      .hero-sub {
+        max-width: 540px;
+        margin: 0 auto;
+        color: var(--muted);
+        font-size: 1rem;
+        font-weight: 300;
+      }
+
+      /* ── SECTION ── */
+      .section {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 5vw, 2rem);
+      }
+      .section-label {
+        font-size: 0.68rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .section-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+      .section h2 {
+        font-family: var(--serif);
+        font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+        font-weight: 600;
+        line-height: 1.2;
+        margin-bottom: 1.8rem;
+      }
+      .section h2 em { color: var(--accent); font-style: italic; }
+
+      /* ── CALCULATOR CARD ── */
+      .calc-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+        margin-bottom: 1.5rem;
+      }
+      .calc-card-title {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 1.6rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .calc-card-title-icon {
+        width: 30px;
+        height: 30px;
+        background: var(--accent-dim);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+        flex-shrink: 0;
+      }
+
+      /* ── FORM GRID ── */
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem 2rem;
+      }
+      @media (max-width: 600px) {
+        .form-grid { grid-template-columns: 1fr; }
+      }
+      .form-field { display: flex; flex-direction: column; gap: 0.45rem; }
+      .form-field.full-width { grid-column: 1 / -1; }
+      .field-label {
+        font-size: 0.74rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      /* ── INFO TOOLTIP ── */
+      .info-tip {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: var(--accent-dim);
+        border: 1px solid rgba(200, 169, 110, 0.3);
+        color: var(--accent);
+        font-size: 0.62rem;
+        font-weight: 600;
+        font-style: italic;
+        font-family: Georgia, serif;
+        cursor: default;
+        flex-shrink: 0;
+        text-transform: none;
+        letter-spacing: 0;
+        line-height: 1;
+        transition: background 0.2s;
+      }
+      .info-tip:hover { background: rgba(200, 169, 110, 0.28); }
+      .info-tip .tip-bubble {
+        display: none;
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--surface);
+        border: 1px solid rgba(200, 169, 110, 0.25);
+        border-radius: 8px;
+        padding: 0.55rem 0.8rem;
+        font-size: 0.75rem;
+        font-family: var(--sans);
+        font-weight: 300;
+        color: var(--prose-text);
+        white-space: nowrap;
+        max-width: 220px;
+        white-space: normal;
+        width: max-content;
+        max-width: 200px;
+        z-index: 50;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+        line-height: 1.5;
+        text-transform: none;
+        letter-spacing: 0;
+        pointer-events: none;
+      }
+      .info-tip .tip-bubble::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 5px solid transparent;
+        border-top-color: rgba(200, 169, 110, 0.25);
+      }
+      .info-tip .tip-bubble::before {
+        content: "";
+        position: absolute;
+        top: calc(100% - 1px);
+        left: 50%;
+        transform: translateX(-50%);
+        border: 5px solid transparent;
+        border-top-color: var(--surface);
+        z-index: 1;
+      }
+      .info-tip:hover .tip-bubble { display: block; }
+      /* Mobile: tap to show */
+      .info-tip.active .tip-bubble { display: block; }
+
+      /* Text inputs */
+      .text-input {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.65rem 0.9rem;
+        font-size: 0.95rem;
+        font-family: var(--sans);
+        color: var(--text);
+        width: 100%;
+        transition: border-color 0.2s;
+        outline: none;
+      }
+      .text-input:focus { border-color: var(--accent); }
+      .text-input::placeholder { color: var(--muted); opacity: 0.6; }
+      .input-prefix-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .input-prefix {
+        position: absolute;
+        left: 0.9rem;
+        color: var(--accent);
+        font-weight: 500;
+        font-size: 0.95rem;
+        pointer-events: none;
+      }
+      .input-prefix-wrap .text-input { padding-left: 1.9rem; }
+
+      /* Sliders */
+      .slider-wrap { display: flex; flex-direction: column; gap: 0.5rem; }
+      .slider-row {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        flex: 1;
+        height: 4px;
+        border-radius: 2px;
+        background: var(--border);
+        outline: none;
+        cursor: pointer;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--accent);
+        border: 2px solid var(--bg);
+        box-shadow: 0 0 0 1px var(--accent);
+        cursor: pointer;
+        transition: transform 0.15s;
+      }
+      input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+      input[type="range"]::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--accent);
+        border: 2px solid var(--bg);
+        cursor: pointer;
+      }
+      .slider-value {
+        min-width: 52px;
+        text-align: right;
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: var(--accent);
+        font-family: var(--sans);
+      }
+      .slider-limits {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.68rem;
+        color: var(--muted);
+        opacity: 0.7;
+      }
+
+      /* ── RESULTS CARD ── */
+      .results-card {
+        background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+        border: 1px solid rgba(200, 169, 110, 0.2);
+        border-radius: 16px;
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+        margin-bottom: 1.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .results-card::before {
+        content: "✦";
+        position: absolute;
+        right: 1.8rem;
+        top: 1rem;
+        font-size: 5rem;
+        color: var(--accent);
+        opacity: 0.05;
+        line-height: 1;
+        pointer-events: none;
+      }
+      .results-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        margin-top: 1.4rem;
+      }
+      @media (max-width: 500px) {
+        .results-grid { grid-template-columns: 1fr; }
+      }
+      .result-cell {
+        background: var(--surface);
+        padding: 1.3rem 1.4rem;
+        transition: background 0.2s;
+      }
+      .result-cell:hover { background: var(--surface2); }
+      .result-label {
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.4rem;
+      }
+      .result-value {
+        font-family: var(--serif);
+        font-size: clamp(1.4rem, 3vw, 1.9rem);
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.1;
+      }
+      .result-value.accent { color: var(--accent); }
+      .result-value.safe   { color: var(--safe); }
+      .result-sub {
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-top: 0.25rem;
+        font-weight: 300;
+      }
+
+      /* ── CHART CARD ── */
+      .chart-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+        margin-bottom: 1.5rem;
+      }
+      .chart-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-bottom: 1.4rem;
+      }
+      .chart-title {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .chart-legend {
+        display: flex;
+        gap: 1.2rem;
+        flex-wrap: wrap;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.75rem;
+        color: var(--muted);
+        font-weight: 400;
+      }
+      .legend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+      .chart-wrap { position: relative; height: 300px; }
+
+      /* ── SHARE CARD ── */
+      .share-card {
+        background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+        border: 1px solid rgba(200, 169, 110, 0.25);
+        border-radius: 16px;
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+        margin-bottom: 1.5rem;
+      }
+      .share-heading {
+        font-family: var(--serif);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.4rem;
+      }
+      .share-sub {
+        font-size: 0.88rem;
+        color: var(--muted);
+        font-weight: 300;
+        margin-bottom: 1.4rem;
+        line-height: 1.5;
+      }
+      .share-btns {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+      }
+      .share-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.72rem 1.4rem;
+        border-radius: 8px;
+        font-size: 0.88rem;
+        font-family: var(--sans);
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+        letter-spacing: 0.03em;
+        transition: opacity 0.2s, transform 0.15s;
+        text-decoration: none;
+      }
+      .share-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+      .share-btn:active { transform: scale(0.97); }
+      .share-btn-wa {
+        background: #25d366;
+        color: #fff;
+      }
+      .share-btn-gmail {
+        background: var(--surface2);
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+      .share-btn-email {
+        background: var(--surface2);
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+      @media (max-width: 480px) {
+        .share-btn-gmail-desktop { display: none !important; }
+      }
+      @media (min-width: 481px) {
+        .share-btn-gmail-mobile { display: none !important; }
+      }
+
+      /* ── TOAST ── */
+      .toast {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: var(--surface);
+        border: 1px solid rgba(200, 169, 110, 0.3);
+        color: var(--text);
+        border-radius: 8px;
+        padding: 0.65rem 1.3rem;
+        font-size: 0.88rem;
+        font-family: var(--sans);
+        z-index: 999;
+        opacity: 0;
+        transition: opacity 0.25s, transform 0.25s;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+      .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+      /* ── SEPARATOR ── */
+      hr.section-sep {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 0;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+        text-align: center;
+      }
+      .footer-brand {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        color: var(--text);
+        margin-bottom: 0.5rem;
+      }
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+      .footer-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.82rem;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover { color: var(--accent); }
+      .footer-disc {
+        font-size: 0.82rem;
+        color: var(--footer-disc);
+        max-width: 700px;
+        margin: 1rem auto 0;
+        line-height: 1.6;
+      }
+
+      /* ── MOBILE FAB ── */
+      .fab-profiling { display: none; }
+      .fab-whatsapp-mobile { display: none; }
+      @media (max-width: 480px) {
+        .fab-profiling {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          position: fixed;
+          bottom: 1.4rem;
+          right: 1.2rem;
+          z-index: 200;
+          background: var(--accent);
+          color: var(--bg);
+          text-decoration: none;
+          font-family: var(--sans);
+          font-size: 0.88rem;
+          font-weight: 500;
+          letter-spacing: 0.04em;
+          padding: 0.7rem 1.2rem;
+          border-radius: 999px;
+          box-shadow: 0 4px 20px rgba(200, 169, 110, 0.35);
+          transition: opacity 0.2s, transform 0.2s;
+          white-space: nowrap;
+        }
+        .fab-profiling:active { opacity: 0.85; transform: scale(0.97); }
+        .fab-whatsapp-mobile {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          position: fixed;
+          bottom: 1.4rem;
+          left: 1.2rem;
+          z-index: 200;
+          background: #25d366;
+          color: #fff;
+          border: none;
+          text-decoration: none;
+          font-family: var(--sans);
+          font-size: 0.88rem;
+          font-weight: 500;
+          letter-spacing: 0.04em;
+          padding: 0.7rem 1.2rem;
+          border-radius: 999px;
+          box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+          transition: opacity 0.2s, transform 0.2s;
+          white-space: nowrap;
+        }
+        .fab-whatsapp-mobile:active { opacity: 0.85; transform: scale(0.97); }
+      }
+
+      /* ── EMPTY STATE ── */
+      .results-placeholder {
+        text-align: center;
+        padding: 2.5rem 1rem;
+        color: var(--muted);
+        font-size: 0.92rem;
+        font-weight: 300;
+      }
+      .results-placeholder .placeholder-icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.8rem;
+        opacity: 0.4;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- ── NAV ── -->
+    <nav>
+      <a href="index.html" class="nav-brand">Vegi <span>Ramesh</span></a>
+      <div class="nav-actions">
+        <div class="nav-arn">✦ ARN-349739</div>
+        <a
+          href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments."
+          class="nav-whatsapp-btn"
+          target="_blank"
+          rel="noopener"
+        ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="currentColor" style="vertical-align:middle;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+        <a href="https://mfd-risk-profiler-arn-349739.netlify.app/" class="nav-profiling-btn">Begin Profiling ✦</a>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <span class="icon-dark">☀️</span>
+          <span class="icon-light">🌙</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <header class="hero">
+      <div class="hero-eyebrow">Goal Planning Calculator</div>
+      <h1>Plan today.<br /><em>Buy it when ready.</em></h1>
+      <p class="hero-sub">
+        Enter your goal, expected costs, and investment return — find out exactly how much to invest every month.
+      </p>
+    </header>
+
+    <hr class="section-sep" />
+
+    <!-- ── CALCULATOR SECTION ── -->
+    <section class="section">
+
+      <!-- Inputs Card -->
+      <div class="calc-card">
+        <div class="calc-card-title">
+          <div class="calc-card-title-icon">🎯</div>
+          Your Goal Details
+        </div>
+        <div class="form-grid">
+
+          <!-- Your Name -->
+          <div class="form-field">
+            <label class="field-label" for="userName">Your Name</label>
+            <input
+              class="text-input"
+              id="userName"
+              type="text"
+              placeholder="e.g. Priya Sharma"
+              autocomplete="off"
+              oninput="onAnyInput()"
+            />
+          </div>
+
+          <!-- Goal Name -->
+          <div class="form-field">
+            <label class="field-label" for="goalName">Goal Name</label>
+            <input
+              class="text-input"
+              id="goalName"
+              type="text"
+              placeholder="e.g. Buy a Car, Europe Trip"
+              autocomplete="off"
+              oninput="onAnyInput()"
+            />
+          </div>
+
+          <!-- Current Cost -->
+          <div class="form-field full-width">
+            <label class="field-label" for="currentCost">
+              Current Cost of Goal (in Rupees)
+              <span class="info-tip" onclick="toggleTip(this)">i
+                <span class="tip-bubble">What would this goal cost you if you were to buy or achieve it today? Enter the amount in Indian Rupees (₹).</span>
+              </span>
+            </label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">₹</span>
+              <input
+                class="text-input"
+                id="currentCost"
+                type="text"
+                placeholder="e.g. 8,50,000"
+                autocomplete="off"
+                inputmode="numeric"
+                oninput="formatCostInput(this); onAnyInput();"
+              />
+            </div>
+          </div>
+
+          <!-- Years to Goal -->
+          <div class="form-field">
+            <label class="field-label" for="yearsToGoal">
+              Years to Goal
+              <span class="info-tip" onclick="toggleTip(this)">i
+                <span class="tip-bubble">How many years from now do you plan to make this purchase? A longer horizon means smaller monthly savings needed.</span>
+              </span>
+            </label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="yearsToGoal" min="1" max="30" value="7" oninput="syncSlider('yearsToGoal','yearsVal'); onAnyInput();" />
+                <span class="slider-value" id="yearsVal">7 yrs</span>
+              </div>
+              <div class="slider-limits"><span>1 yr</span><span>30 yrs</span></div>
+            </div>
+          </div>
+
+          <!-- Price Inflation Rate -->
+          <div class="form-field">
+            <label class="field-label" for="priceInflation">
+              Expected Price Inflation
+              <span class="info-tip" onclick="toggleTip(this)">i
+                <span class="tip-bubble">The rate at which the cost of your goal will rise each year. E.g. a car costing ₹8L today may cost ₹14L in 7 years at 8% inflation.</span>
+              </span>
+            </label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="priceInflation" min="1" max="20" value="8" step="0.5" oninput="syncSlider('priceInflation','inflationVal'); onAnyInput();" />
+                <span class="slider-value" id="inflationVal">8%</span>
+              </div>
+              <div class="slider-limits"><span>1% p.a.</span><span>20% p.a.</span></div>
+            </div>
+          </div>
+
+          <!-- Expected Return on Investment -->
+          <div class="form-field full-width">
+            <label class="field-label" for="investmentReturn">
+              Expected Return on Investment
+              <span class="info-tip" onclick="toggleTip(this)">i
+                <span class="tip-bubble">The annual return you expect from your monthly SIP. Equity mutual funds have historically delivered 10–14% p.a. over long periods.</span>
+              </span>
+            </label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="investmentReturn" min="1" max="30" value="12" step="0.5" oninput="syncSlider('investmentReturn','returnVal'); onAnyInput();" />
+                <span class="slider-value" id="returnVal">12%</span>
+              </div>
+              <div class="slider-limits"><span>1% p.a.</span><span>30% p.a.</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Card -->
+      <div class="results-card" id="resultsCard">
+        <div class="section-label">Results</div>
+        <div class="section h2" style="padding:0;margin:0;">
+          <h2 id="resultsHeading" style="font-family:var(--serif);font-size:clamp(1.4rem,3vw,2rem);margin-bottom:0;">
+            <em>Enter your details above</em>
+          </h2>
+        </div>
+
+        <div id="resultsBody">
+          <div class="results-placeholder">
+            <div class="placeholder-icon">📊</div>
+            <div>Fill in your goal details to see<br/>your personalised investment plan.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart Card -->
+      <div class="chart-card" id="chartCard" style="display:none;">
+        <div class="chart-header">
+          <div class="chart-title" style="font-family:var(--serif);">Corpus Growth Over Time</div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#6b8cba;"></div>
+              Amount Invested
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#c8a96e;"></div>
+              Corpus Value
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#e05c5c; opacity:0.7;"></div>
+              Target Cost
+            </div>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="growthChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Share Card -->
+      <div class="share-card" id="shareCard" style="display:none;">
+        <div class="share-heading">Share Your Results</div>
+        <div class="share-sub">
+          Send these results to Ramesh — he can help you pick the right fund to reach your goal.
+        </div>
+        <div class="share-btns">
+          <button class="share-btn share-btn-wa" onclick="buildAndOpenWa()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Send via WhatsApp
+          </button>
+          <button class="share-btn share-btn-email share-btn-gmail-mobile" onclick="buildAndOpenEmail()">
+            ✉️ Send via Gmail
+          </button>
+          <button class="share-btn share-btn-gmail share-btn-gmail-desktop" onclick="buildAndOpenGmail()">
+            ✉️ Send via Gmail
+          </button>
+        </div>
+      </div>
+
+      <!-- Disclaimer -->
+      <div style="
+        border-left: 3px solid var(--accent);
+        background: var(--accent-glow);
+        border-radius: 0 10px 10px 0;
+        padding: 1.1rem 1.4rem;
+        margin-bottom: 2.5rem;
+      ">
+        <div style="
+          font-size: 0.7rem;
+          font-weight: 500;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--accent);
+          margin-bottom: 0.45rem;
+        ">✦ A Note on These Numbers</div>
+        <p style="font-size:0.88rem; color:var(--prose-text); font-weight:300; line-height:1.65; margin-bottom:0.6rem;">
+          These figures are <strong style="color:var(--text); font-weight:500;">approximate estimates</strong> based on the assumptions you've entered. Real-world inflation and investment returns will vary year to year — this calculator gives you a direction, not a guarantee.
+        </p>
+        <p style="font-size:0.88rem; color:var(--prose-text); font-weight:300; line-height:1.65; margin-bottom:0;">
+          That said — <strong style="color:var(--text); font-weight:500;">an imperfect plan started today beats a perfect plan that never begins.</strong> Even a rough monthly SIP gets your money working. You can always refine the amount as you go.
+        </p>
+      </div>
+
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-brand">Mutual Fund and NPS distribution services by Vegi Ramesh</div>
+      <div class="footer-links">
+        <a href="https://mfd-risk-profiler-arn-349739.netlify.app/">Investor Profiling</a>
+        <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments." target="_blank" rel="noopener">WhatsApp</a>
+        <a href="tel:8329450580">Call Us</a>
+        <a href="mailto:rameshvegi94@gmail.com">Email Us</a>
+      </div>
+      <div class="footer-disc">
+        Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Past performance is not indicative of future results. This material is for informational purposes only and does not constitute financial advice. Vegi Ramesh is registered with AMFI as a Mutual Fund Distributor – ARN-349739.
+      </div>
+    </footer>
+
+    <!-- Mobile FABs -->
+    <a href="https://mfd-risk-profiler-arn-349739.netlify.app/" class="fab-profiling" aria-label="Begin Profiling">
+      <span>📋</span> Begin Profiling
+    </a>
+    <a
+      href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments."
+      class="fab-whatsapp-mobile"
+      target="_blank"
+      rel="noopener"
+      aria-label="Chat on WhatsApp"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+
+    <!-- Toast -->
+    <div class="toast" id="shareToast"></div>
+
+    <script>
+      // ── INFO TOOLTIP (mobile tap) ──
+      function toggleTip(el) {
+        var wasActive = el.classList.contains("active");
+        // Close all open tips
+        document.querySelectorAll(".info-tip.active").forEach(function(t) { t.classList.remove("active"); });
+        if (!wasActive) el.classList.add("active");
+      }
+      // Close tip on outside tap
+      document.addEventListener("click", function(e) {
+        if (!e.target.closest(".info-tip")) {
+          document.querySelectorAll(".info-tip.active").forEach(function(t) { t.classList.remove("active"); });
+        }
+      });
+
+      // ── THEME TOGGLE ──
+      function toggleTheme() {
+        var html = document.documentElement;
+        var isDark = html.getAttribute("data-theme") !== "light";
+        html.setAttribute("data-theme", isDark ? "light" : "dark");
+        try { localStorage.setItem("theme", isDark ? "light" : "dark"); } catch(e){}
+        if (window._chartInstance) updateChartColors();
+      }
+      (function() {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t) document.documentElement.setAttribute("data-theme", t);
+        } catch(e){}
+        var btn = document.querySelector(".theme-toggle");
+        if (btn) btn.classList.add("ready");
+      })();
+
+      // ── SLIDER SYNC ──
+      function syncSlider(sliderId, valId) {
+        var slider = document.getElementById(sliderId);
+        var val = parseFloat(slider.value);
+        var display = sliderId === "yearsToGoal"
+          ? val + (val === 1 ? " yr" : " yrs")
+          : val + "%";
+        document.getElementById(valId).textContent = display;
+        // track fill
+        var min = parseFloat(slider.min), max = parseFloat(slider.max);
+        var pct = ((val - min) / (max - min)) * 100;
+        slider.style.background = "linear-gradient(to right, var(--accent) " + pct + "%, var(--border) " + pct + "%)";
+      }
+      // Init slider fills
+      ["yearsToGoal","priceInflation","investmentReturn"].forEach(function(id) {
+        var slider = document.getElementById(id);
+        var valIds = { yearsToGoal:"yearsVal", priceInflation:"inflationVal", investmentReturn:"returnVal" };
+        syncSlider(id, valIds[id]);
+      });
+
+      // ── COST INPUT FORMATTER ──
+      function formatCostInput(el) {
+        var raw = el.value.replace(/[^0-9]/g, "");
+        if (!raw) { el.value = ""; return; }
+        // Indian number format
+        var num = parseInt(raw, 10);
+        el.value = formatIndian(num);
+      }
+
+      function formatIndian(n) {
+        if (isNaN(n)) return "";
+        var s = n.toString();
+        if (s.length <= 3) return s;
+        var last3 = s.slice(-3);
+        var rest = s.slice(0, -3);
+        rest = rest.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+        return rest + "," + last3;
+      }
+
+      function parseCost(val) {
+        return parseInt(val.replace(/[^0-9]/g, ""), 10) || 0;
+      }
+
+      // ── CALCULATION CORE ──
+      function calculate() {
+        var currentCost    = parseCost(document.getElementById("currentCost").value);
+        var yearsToGoal    = parseFloat(document.getElementById("yearsToGoal").value);
+        var priceInflation = parseFloat(document.getElementById("priceInflation").value);
+        var investReturn   = parseFloat(document.getElementById("investmentReturn").value);
+
+        if (!currentCost || currentCost <= 0) return null;
+
+        // Future cost after inflation
+        var futureCost = currentCost * Math.pow(1 + priceInflation / 100, yearsToGoal);
+
+        // Monthly SIP needed: SIP = FV * r / [(1+r)^m - 1]
+        var months = yearsToGoal * 12;
+        var monthlyRate = investReturn / 1200;
+        var monthlySIP;
+        if (monthlyRate === 0) {
+          monthlySIP = futureCost / months;
+        } else {
+          monthlySIP = futureCost * monthlyRate / (Math.pow(1 + monthlyRate, months) - 1);
+        }
+
+        var totalInvested = monthlySIP * months;
+        var totalGain = futureCost - totalInvested;
+
+        return {
+          currentCost:   currentCost,
+          futureCost:    futureCost,
+          monthlySIP:    monthlySIP,
+          totalInvested: totalInvested,
+          totalGain:     totalGain,
+          months:        months,
+          yearsToGoal:   yearsToGoal,
+          monthlyRate:   monthlyRate,
+          investReturn:  investReturn,
+          priceInflation: priceInflation
+        };
+      }
+
+      // ── BUILD CHART DATA ──
+      function buildChartData(result) {
+        var labels = [];
+        var invested = [];
+        var corpus = [];
+        var target = [];
+        var r = result.monthlyRate;
+        var sip = result.monthlySIP;
+        var months = result.months;
+        var totalYears = result.yearsToGoal;
+
+        // Thin out data points on smaller screens
+        var isMobile = window.innerWidth < 480;
+        var isTablet = window.innerWidth < 720;
+        var step;
+        if (isMobile) {
+          step = totalYears <= 5 ? 1 : totalYears <= 10 ? 2 : totalYears <= 20 ? 4 : 5;
+        } else if (isTablet) {
+          step = totalYears <= 10 ? 1 : totalYears <= 20 ? 2 : 3;
+        } else {
+          step = totalYears <= 15 ? 1 : totalYears <= 25 ? 2 : 3;
+        }
+
+        for (var m = 1; m <= months; m++) {
+          var yr = m / 12;
+          var isStep = (m % 12 === 0 && Math.round(yr) % step === 0);
+          var isLast = (m === months);
+          if (isStep || isLast) {
+            labels.push("Yr " + Math.round(yr));
+            var corpusVal = r === 0
+              ? sip * m
+              : sip * (Math.pow(1 + r, m) - 1) / r * (1 + r);
+            invested.push(Math.round(sip * m));
+            corpus.push(Math.round(corpusVal));
+            target.push(Math.round(result.futureCost));
+          }
+        }
+        return { labels: labels, invested: invested, corpus: corpus, target: target };
+      }
+
+      var _chartInstance = null;
+
+      function renderChart(result) {
+        var card = document.getElementById("chartCard");
+        card.style.display = "block";
+        var data = buildChartData(result);
+        var ctx = document.getElementById("growthChart").getContext("2d");
+        var isDark = document.documentElement.getAttribute("data-theme") !== "light";
+        var gridColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)";
+        var tickColor = isDark ? "#8a9ab5" : "#6b6353";
+
+        if (_chartInstance) { _chartInstance.destroy(); }
+
+        _chartInstance = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: data.labels,
+            datasets: [
+              {
+                label: "Amount Invested",
+                data: data.invested,
+                backgroundColor: "rgba(107,140,186,0.55)",
+                borderColor: "rgba(107,140,186,0.9)",
+                borderWidth: 1,
+                borderRadius: 3,
+                order: 2
+              },
+              {
+                label: "Corpus Value",
+                data: data.corpus,
+                backgroundColor: "rgba(200,169,110,0.55)",
+                borderColor: "rgba(200,169,110,0.9)",
+                borderWidth: 1,
+                borderRadius: 3,
+                order: 2
+              },
+              {
+                label: "Target Cost",
+                data: data.target,
+                type: "line",
+                borderColor: "rgba(224,92,92,0.7)",
+                borderWidth: 2,
+                borderDash: [6, 4],
+                pointRadius: 0,
+                fill: false,
+                tension: 0,
+                order: 1
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "index", intersect: false },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: isDark ? "#111827" : "#fff",
+                titleColor: isDark ? "#e8e4dc" : "#1c1a14",
+                bodyColor: isDark ? "#8a9ab5" : "#6b6353",
+                borderColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+                borderWidth: 1,
+                padding: 12,
+                callbacks: {
+                  label: function(ctx) {
+                    return " " + ctx.dataset.label + ": ₹" + formatIndian(ctx.parsed.y);
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: { color: gridColor },
+                ticks: { color: tickColor, font: { size: 11, family: "'DM Sans', sans-serif" } }
+              },
+              y: {
+                grid: { color: gridColor },
+                ticks: {
+                  color: tickColor,
+                  font: { size: 11, family: "'DM Sans', sans-serif" },
+                  callback: function(v) {
+                    if (v >= 10000000) return "₹" + (v/10000000).toFixed(1) + "Cr";
+                    if (v >= 100000)   return "₹" + (v/100000).toFixed(1) + "L";
+                    if (v >= 1000)     return "₹" + (v/1000).toFixed(0) + "K";
+                    return "₹" + v;
+                  }
+                }
+              }
+            }
+          }
+        });
+        window._chartInstance = _chartInstance;
+      }
+
+      function updateChartColors() {
+        if (!_chartInstance) return;
+        var isDark = document.documentElement.getAttribute("data-theme") !== "light";
+        var gridColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)";
+        var tickColor = isDark ? "#8a9ab5" : "#6b6353";
+        _chartInstance.options.scales.x.grid.color = gridColor;
+        _chartInstance.options.scales.x.ticks.color = tickColor;
+        _chartInstance.options.scales.y.grid.color = gridColor;
+        _chartInstance.options.scales.y.ticks.color = tickColor;
+        _chartInstance.options.plugins.tooltip.backgroundColor = isDark ? "#111827" : "#fff";
+        _chartInstance.options.plugins.tooltip.titleColor = isDark ? "#e8e4dc" : "#1c1a14";
+        _chartInstance.options.plugins.tooltip.bodyColor = isDark ? "#8a9ab5" : "#6b6353";
+        _chartInstance.update();
+      }
+
+      // ── FORMAT HELPERS ──
+      function fmtINR(n) {
+        return "₹" + formatIndian(Math.round(n));
+      }
+
+      function shortINR(n) {
+        if (n >= 10000000) return "₹" + (n/10000000).toFixed(2) + " Cr";
+        if (n >= 100000)   return "₹" + (n/100000).toFixed(2) + " L";
+        if (n >= 1000)     return "₹" + (n/1000).toFixed(1) + "K";
+        return fmtINR(n);
+      }
+
+      // ── RENDER RESULTS ──
+      function renderResults(result) {
+        var goalName = document.getElementById("goalName").value.trim() || "Your Goal";
+        var heading  = document.getElementById("resultsHeading");
+        heading.innerHTML = "Save <em>" + fmtINR(result.monthlySIP) + "</em> / month for " + result.yearsToGoal + " years";
+
+        var html = '<div class="results-grid">'
+          + resultCell("Monthly SIP Needed", fmtINR(result.monthlySIP), "accent", "Invest this every month")
+          + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "After " + result.priceInflation + "% p.a. inflation")
+          + resultCell("Total You'll Invest", fmtINR(result.totalInvested), "", "Over " + result.yearsToGoal * 12 + " months")
+          + resultCell("Expected Corpus Gain", fmtINR(result.totalGain > 0 ? result.totalGain : 0), "safe", "Investment returns above cost")
+          + '</div>';
+
+        document.getElementById("resultsBody").innerHTML = html;
+        document.getElementById("shareCard").style.display = "block";
+      }
+
+      function resultCell(label, value, colorClass, sub) {
+        return '<div class="result-cell">'
+          + '<div class="result-label">' + label + '</div>'
+          + '<div class="result-value' + (colorClass ? ' ' + colorClass : '') + '">' + value + '</div>'
+          + '<div class="result-sub">' + sub + '</div>'
+          + '</div>';
+      }
+
+      // ── MAIN INPUT HANDLER ──
+      function onAnyInput() {
+        var result = calculate();
+        if (!result) {
+          document.getElementById("resultsHeading").innerHTML = "<em>Enter your details above</em>";
+          document.getElementById("resultsBody").innerHTML = '<div class="results-placeholder"><div class="placeholder-icon">📊</div><div>Fill in your goal details to see<br/>your personalised investment plan.</div></div>';
+          document.getElementById("chartCard").style.display = "none";
+          document.getElementById("shareCard").style.display = "none";
+          return;
+        }
+        renderResults(result);
+        renderChart(result);
+      }
+
+      // ── BUILD SHARE MESSAGE ──
+      function buildShareMessage() {
+        var name    = document.getElementById("userName").value.trim() || "A user";
+        var goal    = document.getElementById("goalName").value.trim() || "My Goal";
+        var result  = calculate();
+        if (!result) return "";
+
+        var lines = [
+          "Hi Ramesh, I'm " + name + ".",
+          "",
+          "I used your Goal Planning Calculator and here are my results:",
+          "",
+          "── GOAL DETAILS ──",
+          "Goal Name            : " + goal,
+          "Current Cost         : " + fmtINR(result.currentCost),
+          "Years to Goal        : " + result.yearsToGoal + " years",
+          "Expected Price Rise  : " + result.priceInflation + "% p.a.",
+          "Expected Return on Investment : " + result.investReturn + "% p.a.",
+          "",
+          "── RESULTS ──",
+          "Future Cost of Goal  : " + fmtINR(result.futureCost),
+          "Monthly SIP Needed   : " + fmtINR(result.monthlySIP),
+          "Total I'll Invest    : " + fmtINR(result.totalInvested),
+          "Expected Corpus Gain : " + fmtINR(result.totalGain > 0 ? result.totalGain : 0),
+          "",
+          "Could you help me plan this investment?",
+          "Thank you!"
+        ];
+        return lines.join("\n");
+      }
+
+      // ── SHARE FUNCTIONS ──
+      window.buildAndOpenWa = function() {
+        var body = buildShareMessage();
+        if (!body) { showToast("⚠ Please fill in your details first."); return false; }
+        var url = "https://wa.me/918329450580?text=" + encodeURIComponent(body);
+        var a = document.createElement("a");
+        a.href = url; a.target = "_blank"; a.rel = "noopener";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        showToast("✓ Opening WhatsApp…");
+        return false;
+      };
+
+      window.buildAndOpenGmail = function() {
+        var body = buildShareMessage();
+        if (!body) { showToast("⚠ Please fill in your details first."); return false; }
+        var goal = document.getElementById("goalName").value.trim() || "My Goal";
+        var name = document.getElementById("userName").value.trim() || "User";
+        var subj = "Goal Calculator Results — " + goal + " (" + name + ")";
+        var url = "https://mail.google.com/mail/?view=cm&to=rameshvegi94@gmail.com&su="
+          + encodeURIComponent(subj) + "&body=" + encodeURIComponent(body);
+        var a = document.createElement("a");
+        a.href = url; a.target = "_blank"; a.rel = "noopener";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        showToast("✓ Opening Gmail in browser…");
+        return false;
+      };
+
+      window.buildAndOpenEmail = function() {
+        var body = buildShareMessage();
+        if (!body) { showToast("⚠ Please fill in your details first."); return false; }
+        var goal = document.getElementById("goalName").value.trim() || "My Goal";
+        var name = document.getElementById("userName").value.trim() || "User";
+        var subj = "Goal Calculator Results — " + goal + " (" + name + ")";
+        window.location.href = "mailto:rameshvegi94@gmail.com?subject="
+          + encodeURIComponent(subj) + "&body=" + encodeURIComponent(body);
+        showToast("✓ Opening email app…");
+        return false;
+      };
+
+      function showToast(msg) {
+        var t = document.getElementById("shareToast");
+        if (!t) return;
+        t.textContent = msg;
+        t.classList.add("show");
+        setTimeout(function() { t.classList.remove("show"); }, 3000);
+      }
+    </script>
+  </body>
+</html>
