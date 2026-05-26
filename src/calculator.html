@@ -279,91 +279,12 @@
       }
 
       /* ── INFO TOOLTIP ── */
-      .info-tip {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 15px;
-        height: 15px;
-        border-radius: 50%;
-        background: var(--accent-dim);
-        border: 1px solid rgba(200, 169, 110, 0.3);
-        color: var(--accent);
-        font-size: 0.62rem;
-        font-weight: 600;
-        font-style: italic;
-        font-family: Georgia, serif;
-        cursor: default;
-        flex-shrink: 0;
-        text-transform: none;
-        letter-spacing: 0;
-        line-height: 1;
-        transition: background 0.2s;
-      }
-      .info-tip:hover { background: rgba(200, 169, 110, 0.28); }
-      .info-tip .tip-bubble {
-        display: none;
-        position: absolute;
-        bottom: calc(100% + 8px);
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--surface);
-        border: 1px solid rgba(200, 169, 110, 0.25);
-        border-radius: 8px;
-        padding: 0.55rem 0.8rem;
-        font-size: 0.75rem;
-        font-family: var(--sans);
+      .field-hint {
+        font-size: 0.78rem;
+        color: var(--muted);
         font-weight: 300;
-        color: var(--prose-text);
-        white-space: nowrap;
-        max-width: 220px;
-        white-space: normal;
-        width: max-content;
-        max-width: 200px;
-        z-index: 50;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+        margin: 0.2rem 0 0.6rem;
         line-height: 1.5;
-        text-transform: none;
-        letter-spacing: 0;
-        pointer-events: none;
-      }
-      .info-tip .tip-bubble::after {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        border: 5px solid transparent;
-        border-top-color: rgba(200, 169, 110, 0.25);
-      }
-      .info-tip .tip-bubble::before {
-        content: "";
-        position: absolute;
-        top: calc(100% - 1px);
-        left: 50%;
-        transform: translateX(-50%);
-        border: 5px solid transparent;
-        border-top-color: var(--surface);
-        z-index: 1;
-      }
-      .info-tip:hover .tip-bubble { display: block; }
-      /* Mobile: tap to show */
-      .info-tip.active .tip-bubble { display: block; }
-      /* Prevent tooltip overflow on mobile */
-      @media (max-width: 480px) {
-        .info-tip .tip-bubble {
-          left: 50%;
-          right: auto;
-          transform: translateX(-50%);
-          max-width: min(240px, 78vw);
-        }
-        .info-tip .tip-bubble::after,
-        .info-tip .tip-bubble::before {
-          left: 50%;
-          right: auto;
-          transform: translateX(-50%);
-        }
       }
 
       /* Text inputs */
@@ -1049,7 +970,7 @@
       </div>
     </nav>
 
-    <!-- ── HERO Banner── -->
+    <!-- ── HERO ── -->
     <header class="hero">
       <div class="hero-eyebrow">Goal Planning Calculator</div>
       <h1>Plan today.<br /><em>Buy it when ready.</em></h1>
@@ -1078,10 +999,8 @@
             <button class="mode-btn" id="btnLumpsum" onclick="setMode('lumpsum')">💰</button>
             <button class="mode-btn" id="btnBoth" onclick="setMode('both')">💰+📅</button>
           </div>
-          <span class="info-tip" onclick="toggleTip(this)" style="flex-shrink:0;">i
-            <span class="tip-bubble" style="max-width:260px;white-space:normal;"><strong style="font-style:normal;font-weight:600;">SIP</strong> — Invest a fixed amount every month.<br/><br/><strong style="font-style:normal;font-weight:600;">Lumpsum</strong> — Invest the full amount once today.<br/><br/><strong style="font-style:normal;font-weight:600;">Both</strong> — Put in a lumpsum today, then top it up with a monthly SIP to cover the rest.</span>
-          </span>
         </div>
+        <p class="field-hint">📅 SIP — monthly investing &nbsp;·&nbsp; 💰 Lumpsum — one-time today &nbsp;·&nbsp; 💰+📅 Both — lumpsum now, top up monthly</p>
 
         <!-- Goal Presets -->
         <div style="margin-bottom:0.4rem;">
@@ -1105,19 +1024,15 @@
               class="text-input"
               id="goalName"
               type="text"
-              placeholder="e.g. Buy a Car, Europe Trip"
+              placeholder="e.g. Child's Education, Own a House"
               autocomplete="off"
               oninput="onAnyInput(); clearFieldError('goalName')"
             />
             <div class="field-error-msg" id="goalNameErr">Please name your goal so I can understand your plan.</div>
           </div>
           <div class="form-field full-width">
-            <label class="field-label" for="currentCost">
-              Current Cost of Goal (in Rupees)
-              <span class="info-tip" onclick="toggleTip(this)">i
-                <span class="tip-bubble">What would this goal cost you if you were to buy or achieve it today? Enter the amount in Indian Rupees (₹).</span>
-              </span>
-            </label>
+            <label class="field-label" for="currentCost">Current Cost of Goal (in Rupees)</label>
+            <p class="field-hint">What it would cost today if you bought it right now.</p>
             <div class="input-prefix-wrap">
               <span class="input-prefix">₹</span>
               <input
@@ -1134,12 +1049,8 @@
 
           <!-- Lumpsum Amount (Both mode only) -->
           <div class="form-field full-width" id="lumpsumAmountField" style="display:none;">
-            <label class="field-label" for="lumpsumAmount">
-              Lumpsum I Can Invest Today
-              <span class="info-tip" onclick="toggleTip(this)">i
-                <span class="tip-bubble">This amount will be invested today and grow over your goal period. The SIP will only cover whatever gap remains.</span>
-              </span>
-            </label>
+            <label class="field-label" for="lumpsumAmount">Lumpsum I Can Invest Today</label>
+            <p class="field-hint">Invested now and grows at your expected return. SIP covers the remaining gap.</p>
             <div class="input-prefix-wrap">
               <span class="input-prefix">₹</span>
               <input
@@ -1155,13 +1066,9 @@
           </div>
 
           <!-- Years to Goal -->
-          <div class="form-field">
-            <label class="field-label" for="yearsToGoal">
-              Years to Goal
-              <span class="info-tip" onclick="toggleTip(this)">i
-                <span class="tip-bubble">How many years from now do you plan to make this purchase? A longer horizon means smaller monthly savings needed.</span>
-              </span>
-            </label>
+          <div class="form-field full-width">
+            <label class="field-label" for="yearsToGoal">Years to Goal</label>
+            <p class="field-hint">Longer horizon = smaller monthly savings needed.</p>
             <div class="slider-wrap">
               <div class="slider-row">
                 <input type="range" id="yearsToGoal" min="1" max="30" value="7" oninput="syncSlider('yearsToGoal','yearsVal'); onAnyInput();" />
@@ -1172,13 +1079,9 @@
           </div>
 
           <!-- Price Inflation Rate -->
-          <div class="form-field">
-            <label class="field-label" for="priceInflation">
-              Expected Price Inflation
-              <span class="info-tip" onclick="toggleTip(this)">i
-                <span class="tip-bubble">The rate at which the cost of your goal will rise each year. E.g. a car costing ₹8L today may cost ₹14L in 7 years at 8% inflation.</span>
-              </span>
-            </label>
+          <div class="form-field full-width">
+            <label class="field-label" for="priceInflation">Expected Price Inflation</label>
+            <p class="field-hint">How much costlier this goal gets each year. E.g. ₹8L car today → ₹14L in 7 yrs at 8%.</p>
             <div class="slider-wrap">
               <div class="slider-row">
                 <input type="range" id="priceInflation" min="1" max="20" value="8" step="0.5" oninput="syncSlider('priceInflation','inflationVal'); onAnyInput();" />
@@ -1190,12 +1093,8 @@
 
           <!-- Expected Return on Investment -->
           <div class="form-field full-width">
-            <label class="field-label" for="investmentReturn">
-              Expected Return on Investment
-              <span class="info-tip" onclick="toggleTip(this)">i
-                <span class="tip-bubble">The annual return you expect from your monthly SIP. Equity mutual funds have historically delivered 10–14% p.a. over long periods.</span>
-              </span>
-            </label>
+            <label class="field-label" for="investmentReturn">Expected Return on Investment</label>
+            <p class="field-hint">Equity mutual funds have historically delivered 10–14% p.a. over long periods.</p>
             <div class="slider-wrap">
               <div class="slider-row">
                 <input type="range" id="investmentReturn" min="1" max="30" value="12" step="0.5" oninput="syncSlider('investmentReturn','returnVal'); onAnyInput();" />
@@ -1207,12 +1106,8 @@
 
           <!-- Step-Up (SIP only) -->
           <div class="form-field full-width" id="stepUpField">
-            <label class="field-label" for="stepUp">
-              Approx. Annual Increase in SIP
-              <span class="info-tip" onclick="toggleTip(this)">i
-                <span class="tip-bubble">As your income grows each year, you can increase your SIP by this %. This lowers your starting SIP significantly. E.g. at 10% step-up, ₹5,000/mo becomes ₹5,500 in Year 2, ₹6,050 in Year 3, and so on.</span>
-              </span>
-            </label>
+            <label class="field-label" for="stepUp">Approx. Annual Increase in SIP</label>
+            <p class="field-hint">Increase SIP each year as income grows — lowers your starting amount significantly. E.g. ₹5,000 at 10% → ₹5,500 in Year 2.</p>
             <div class="slider-wrap">
               <div class="slider-row">
                 <input type="range" id="stepUp" min="0" max="25" value="0" step="1" oninput="syncSlider('stepUp','stepUpVal'); onAnyInput();" />
@@ -1485,43 +1380,6 @@
         if (typeof _activePreset !== "undefined" && _activePreset) { _activePreset.classList.remove("selected"); _activePreset = null; }
         hideScrollHint();
       }
-
-      // ── INFO TOOLTIP (mobile tap) ──
-      function clampTipBubble(el) {
-        var bubble = el.querySelector(".tip-bubble");
-        if (!bubble) return;
-        // reset any previous nudge
-        bubble.style.marginLeft = "";
-        var rect = bubble.getBoundingClientRect();
-        var pad = 10;
-        if (rect.left < pad) {
-          bubble.style.marginLeft = (pad - rect.left) + "px";
-        } else if (rect.right > window.innerWidth - pad) {
-          bubble.style.marginLeft = -(rect.right - window.innerWidth + pad) + "px";
-        }
-      }
-
-      function toggleTip(el) {
-        var wasActive = el.classList.contains("active");
-        document.querySelectorAll(".info-tip.active").forEach(function(t) {
-          t.classList.remove("active");
-          var b = t.querySelector(".tip-bubble");
-          if (b) b.style.marginLeft = "";
-        });
-        if (!wasActive) {
-          el.classList.add("active");
-          requestAnimationFrame(function() { clampTipBubble(el); });
-        }
-      }
-      document.addEventListener("click", function(e) {
-        if (!e.target.closest(".info-tip")) {
-          document.querySelectorAll(".info-tip.active").forEach(function(t) {
-            t.classList.remove("active");
-            var b = t.querySelector(".tip-bubble");
-            if (b) b.style.marginLeft = "";
-          });
-        }
-      });
 
       // ── THEME TOGGLE ──
       function toggleTheme() {
