@@ -1074,7 +1074,7 @@
 
         <!-- Goal Presets -->
         <div style="margin-bottom:0.4rem;">
-          <div class="field-label" style="margin-bottom:0.6rem;">Popular Goals — all numbers are yours to change</div>
+          <div class="field-label" style="margin-bottom:0.6rem;">Not sure where to start? Pick a goal below and adjust from there.</div>
           <div class="presets-wrap" id="presetsWrap">
             <button class="preset-chip" onclick="applyPreset(this,'🚗 Car','8,00,000',8,5)">🚗 Car</button>
             <button class="preset-chip" onclick="applyPreset(this,'🏠 Down Payment','15,00,000',10,7)">🏠 Down Payment</button>
@@ -1082,6 +1082,7 @@
             <button class="preset-chip" onclick="applyPreset(this,'🎓 Education','10,00,000',10,10)">🎓 Education</button>
             <button class="preset-chip" onclick="applyPreset(this,'💍 Wedding','12,00,000',8,3)">💍 Wedding</button>
             <button class="preset-chip" onclick="applyPreset(this,'🏦 Emergency Fund','3,00,000',5,1)">🏦 Emergency Fund</button>
+            <button class="preset-chip" onclick="applyCustomPreset(this)">✏️ Other</button>
           </div>
         </div>
 
@@ -1174,7 +1175,7 @@
             <label class="field-label" for="stepUp">Approx. Annual Increase in SIP <span class="tip-icon" data-tip="As your salary grows, you can increase your SIP a little each year. This lets you start with a smaller amount today. E.g. start at ₹5,000, increase by 10% → pay ₹5,500 next year, ₹6,050 the year after.">ℹ</span></label>
             <div class="slider-wrap">
               <div class="slider-row">
-                <input type="range" id="stepUp" min="0" max="25" value="0" step="1" oninput="syncSlider('stepUp','stepUpVal'); onAnyInput();" />
+                <input type="range" id="stepUp" min="0" max="25" value="10" step="1" oninput="syncSlider('stepUp','stepUpVal'); onAnyInput();" />
                 <span class="slider-value" id="stepUpVal">0%</span>
               </div>
               <div class="slider-limits"><span>0% (flat SIP)</span><span>25% p.a.</span></div>
@@ -1433,7 +1434,7 @@
         document.getElementById("yearsToGoal").value = 7;    syncSlider("yearsToGoal","yearsVal");
         document.getElementById("priceInflation").value = 8; syncSlider("priceInflation","inflationVal");
         document.getElementById("investmentReturn").value = 12; syncSlider("investmentReturn","returnVal");
-        document.getElementById("stepUp").value = 0;         syncSlider("stepUp","stepUpVal");
+        document.getElementById("stepUp").value = 10;        syncSlider("stepUp","stepUpVal");
         // Reset results
         document.getElementById("resultsHeading").innerHTML = "<em>Enter your details above</em>";
         document.getElementById("resultsBody").innerHTML = '<div class="results-placeholder"><div class="placeholder-icon">📊</div><div>Fill in your goal details to see<br/>your personalised investment plan.</div></div>';
@@ -2118,6 +2119,14 @@
       }
       // ── GOAL PRESETS ──
       var _activePreset = null;
+      function applyCustomPreset(el) {
+        if (_activePreset) _activePreset.classList.remove("selected");
+        el.classList.add("selected");
+        _activePreset = el;
+        clearAll();
+        document.getElementById("goalName").focus();
+      }
+
       function applyPreset(el, name, cost, inflation, years) {
         // toggle off if same chip clicked again
         if (_activePreset === el) {
