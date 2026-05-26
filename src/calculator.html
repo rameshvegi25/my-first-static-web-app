@@ -1162,7 +1162,7 @@
             <label class="field-label" for="investmentReturn">Expected Return on Investment <span class="tip-icon" data-tip="How much do you expect your investments to grow each year? Equity mutual funds have historically given 10–14% over long periods. If unsure, 12% is a reasonable starting point.">ℹ</span></label>
             <div class="slider-wrap">
               <div class="slider-row">
-                <input type="range" id="investmentReturn" min="1" max="30" value="12" step="0.5" oninput="syncSlider('investmentReturn','returnVal'); onAnyInput();" />
+                <input type="range" id="investmentReturn" min="1" max="30" value="12" step="0.1" oninput="syncSlider('investmentReturn','returnVal'); onAnyInput();" />
                 <span class="slider-value" id="returnVal">12%</span>
               </div>
               <div class="slider-limits"><span>1% p.a.</span><span>30% p.a.</span></div>
@@ -2200,37 +2200,39 @@
           tier  = "green";
           icon  = "✅";
           title = "Very Achievable — " + pct.toFixed(0) + "% of your income";
-          msg   = "This " + (modeIsLumpsum ? "investment" : "SIP") + " fits comfortably within your income. You're in a strong position to reach this goal without financial strain.";
+          msg   = "This fits your income well. You can reach this goal without any strain.";
           skills = null;
 
         } else if (pct <= 35) {
           tier  = "amber";
           icon  = "🟡";
           title = "Manageable — " + pct.toFixed(0) + "% of your income";
-          msg   = "This is doable but leaves less breathing room. Make sure your daily expenses are covered before committing.";
           if (!modeIsLumpsum && stepUp === 0) {
-            msg += " <br><br>💡 <strong>Try the step-up SIP slider above</strong> — starting smaller and increasing yearly could ease the pressure today.";
+            msg = "Doable, but tight. Cover your fixed expenses first."
+              + "<br><br>💡 <strong>A step-up SIP lets you start smaller and increase each year</strong> — <span class='scroll-up-link' onclick='scrollToStepUp()'>↑ try the slider above</span>. Growing your income will make this easier over time.";
+          } else {
+            msg = "Doable, but tight. Cover your fixed expenses first. Growing your income will make this easier over time.";
           }
-          skills = "<strong>A small nudge:</strong> A skill upgrade or side income stream today could make this goal feel effortless in 1–2 years. You don't have to stretch forever.";
+          skills = null;
 
         } else if (pct <= 50) {
           tier  = "orange";
           icon  = "⚠️";
           title = "Heavy Commitment — " + pct.toFixed(0) + "% of your income";
           if (!modeIsLumpsum && stepUp === 0) {
-            // suggest step-up: calculate what SIP would be at 10% step-up
             var r = result.monthlyRate;
             var suggestedSIP = calcStepUpSIP(result.futureCost, result.yearsToGoal, r, 10);
             var suggestedPct = (suggestedSIP / income) * 100;
-            msg = "Committing " + pct.toFixed(0) + "% of your income is a stretch. "
+            msg = pct.toFixed(0) + "% of your income is a stretch."
               + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + fmtINR(suggestedSIP) + " — that's " + suggestedPct.toFixed(0) + "% of your income.</strong> "
-              + "<span class='scroll-up-link' onclick='scrollToStepUp()'>↑ Try the step-up slider</span>";
+              + "<span class='scroll-up-link' onclick='scrollToStepUp()'>↑ Try the step-up slider</span>"
+              + "<br><br>To make this truly affordable, your income needs to grow. Upskilling or a side income is the most direct path.";
           } else if (!modeIsLumpsum && stepUp > 0) {
-            msg = "Even with a " + stepUp + "% step-up, this is a heavy commitment. Consider <strong>extending your timeline</strong> by 1–2 years to ease the monthly burden.";
+            msg = "Even with a " + stepUp + "% step-up, " + pct.toFixed(0) + "% of your income is heavy. Try extending your timeline by 1–2 years. Or focus on growing your income — that's what will actually change the math.";
           } else {
-            msg = "This lumpsum is a significant chunk of your income. Consider if you can build this corpus over time with a SIP instead.";
+            msg = "This lumpsum is " + pct.toFixed(0) + "% of your monthly income — a big commitment. Consider building it over time with a SIP. Growing your income will help more than adjusting the amount.";
           }
-          skills = "<strong>Remember:</strong> The fastest way to make a goal feel lighter isn't to shrink the goal — it's to grow your income. A skill, a course, or a side project today can change the math entirely in 2–3 years.";
+          skills = null;
 
         } else {
           tier  = "red";
@@ -2241,16 +2243,17 @@
             var suggestedSIP2 = calcStepUpSIP(result.futureCost, result.yearsToGoal, r2, 10);
             var suggestedPct2 = (suggestedSIP2 / income) * 100;
             if (suggestedPct2 <= 40) {
-              msg = "At " + pct.toFixed(0) + "% of your income, this goal is currently out of reach on a flat SIP. "
+              msg = "At " + pct.toFixed(0) + "% of your income, a flat SIP won't reach this goal."
                 + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + fmtINR(suggestedSIP2) + " — that's " + suggestedPct2.toFixed(0) + "% of your income.</strong> "
-                + "<span class='scroll-up-link' onclick='scrollToStepUp()'>↑ Try the step-up slider</span>";
+                + "<span class='scroll-up-link' onclick='scrollToStepUp()'>↑ Try the step-up slider</span>"
+                + "<br><br>Affording this goal needs your income to grow. Upskilling is the most direct path.";
             } else {
-              msg = "At " + pct.toFixed(0) + "% of your income, this goal is beyond what your current income can support — even with a step-up SIP. Consider extending your timeline or adjusting the goal cost.";
+              msg = "At " + pct.toFixed(0) + "% of your income, this goal is beyond what your current earnings can support — even with a step-up SIP. Extend your timeline, adjust the goal, or work on growing your income.";
             }
           } else {
-            msg = "You've already optimised the plan. At " + pct.toFixed(0) + "% of your income, the gap is real — but so is your awareness of it. That's the first step.";
+            msg = "At " + pct.toFixed(0) + "% of your income, the gap is real. The plan is as optimised as it can be. Growing your income is what will actually close it.";
           }
-          skills = "<strong>The real unlock is your income.</strong> The gap between your goal and your earnings is not a dead end — it's a direction. Invest in a skill, a certification, a side project. When your income grows, your SIP grows with it — and goals stop feeling like sacrifices. <em>— Ramesh</em>";
+          skills = null;
         }
 
         verdict.className = "afford-verdict show " + tier;
