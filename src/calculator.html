@@ -1098,7 +1098,7 @@
               autocomplete="off"
               oninput="onAnyInput(); clearFieldError('goalName')"
             />
-            <div class="field-error-msg" id="goalNameErr">Please name your goal so I can understand your plan.</div>
+            <div class="field-error-msg" id="goalNameErr">Please name your goal to continue.</div>
           </div>
           <div class="form-field full-width">
             <label class="field-label" for="currentCost">Current Cost of Goal (in Rupees) <span class="tip-icon" data-tip="How much would this cost if you had to pay for it today? E.g. if you want a car that costs ₹8 lakh right now, enter 8,00,000.">ℹ</span></label>
@@ -1138,10 +1138,10 @@
             <label class="field-label" for="yearsToGoal">Years to Goal <span class="tip-icon" data-tip="How many years from now do you want to reach this goal? The more time you give yourself, the smaller your monthly investment needs to be.">ℹ</span></label>
             <div class="slider-wrap">
               <div class="slider-row">
-                <input type="range" id="yearsToGoal" min="1" max="30" value="7" oninput="syncSlider('yearsToGoal','yearsVal'); onAnyInput();" />
+                <input type="range" id="yearsToGoal" min="1" max="35" value="7" oninput="syncSlider('yearsToGoal','yearsVal'); onAnyInput();" />
                 <span class="slider-value" id="yearsVal">7 yrs</span>
               </div>
-              <div class="slider-limits"><span>1 yr</span><span>30 yrs</span></div>
+              <div class="slider-limits"><span>1 yr</span><span>35 yrs</span></div>
             </div>
           </div>
 
@@ -1159,7 +1159,7 @@
 
           <!-- Expected Return on Investment -->
           <div class="form-field full-width">
-            <label class="field-label" for="investmentReturn">Expected Return on Investment <span class="tip-icon" data-tip="How much do you expect your investments to grow each year? Equity mutual funds have historically given 10–14% over long periods. If unsure, 12% is a reasonable starting point.">ℹ</span></label>
+            <label class="field-label" for="investmentReturn">Expected Return on Investment <span class="tip-icon" data-tip="How much do you expect your investments to grow each year? Equity mutual fund returns have varied significantly over time. Past performance is not a reliable guide to future returns — use a number you're comfortable with, and consult your distributor if unsure.">ℹ</span></label>
             <div class="slider-wrap">
               <div class="slider-row">
                 <input type="range" id="investmentReturn" min="1" max="30" value="12" step="0.1" oninput="syncSlider('investmentReturn','returnVal'); onAnyInput();" />
@@ -1217,7 +1217,7 @@
               />
             </div>
           </div>
-          <div class="afford-nudge" id="affordNudge">↑ Enter your income to see if this plan fits your life</div>
+          <div class="afford-nudge" id="affordNudge">↑ Enter your income to see if this plan is within your means</div>
           <div class="afford-verdict" id="affordVerdict">
             <div class="afford-verdict-icon" id="affordIcon"></div>
             <div class="afford-verdict-body">
@@ -1257,7 +1257,7 @@
       <div class="share-card" id="shareCard" style="display:none;">
         <div class="share-heading">Share Your Results</div>
         <div class="share-sub">
-          Send these results to me — I can help you pick the right Mutual fund(s) to reach your goal.
+          Share your results with me and we can discuss suitable options to help you work towards your goal.
         </div>
         <div style="margin-bottom:1.2rem;">
           <label class="field-label" for="userName" style="margin-bottom:0.45rem;display:flex;">Your Name</label>
