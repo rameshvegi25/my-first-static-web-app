@@ -647,8 +647,24 @@
         transition: opacity 0.25s, transform 0.25s;
         pointer-events: none;
         white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
       }
-      .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+      .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+      .toast-undo {
+        color: var(--accent);
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+        background: none;
+        font-family: var(--sans);
+        font-size: 0.88rem;
+        padding: 0;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+      .toast-undo:hover { opacity: 0.8; }
 
       /* ── MODE TOGGLE ── */
       .mode-toggle-wrap {
@@ -779,56 +795,7 @@
         line-height: 1.6;
       }
 
-      /* ── MOBILE FAB ── */
-      .fab-profiling { display: none; }
-      .fab-whatsapp-mobile { display: none; }
-      @media (max-width: 480px) {
-        .fab-profiling {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          position: fixed;
-          bottom: 1.4rem;
-          right: 1.2rem;
-          z-index: 200;
-          background: var(--accent);
-          color: var(--bg);
-          text-decoration: none;
-          font-family: var(--sans);
-          font-size: 0.88rem;
-          font-weight: 500;
-          letter-spacing: 0.04em;
-          padding: 0.7rem 1.2rem;
-          border-radius: 999px;
-          box-shadow: 0 4px 20px rgba(200, 169, 110, 0.35);
-          transition: opacity 0.2s, transform 0.2s;
-          white-space: nowrap;
-        }
-        .fab-profiling:active { opacity: 0.85; transform: scale(0.97); }
-        .fab-whatsapp-mobile {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          position: fixed;
-          bottom: 1.4rem;
-          left: 1.2rem;
-          z-index: 200;
-          background: #25d366;
-          color: #fff;
-          border: none;
-          text-decoration: none;
-          font-family: var(--sans);
-          font-size: 0.88rem;
-          font-weight: 500;
-          letter-spacing: 0.04em;
-          padding: 0.7rem 1.2rem;
-          border-radius: 999px;
-          box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
-          transition: opacity 0.2s, transform 0.2s;
-          white-space: nowrap;
-        }
-        .fab-whatsapp-mobile:active { opacity: 0.85; transform: scale(0.97); }
-      }
+
 
       /* ── GOAL PRESETS ── */
       .presets-wrap {
@@ -1032,9 +999,9 @@
         .afford-verdict-msg { font-size: 0.82rem; }
         .afford-skills-nudge { font-size: 0.8rem; }
 
-        /* Scroll hint — keep above mobile FABs (FABs are at bottom:1.4rem) */
+        /* Scroll hint — restore normal bottom position */
         .scroll-hint {
-          bottom: 5rem;
+          bottom: 1.6rem;
           font-size: 0.78rem;
           padding: 0.5rem 1.1rem 0.5rem 0.9rem;
         }
@@ -1138,7 +1105,7 @@
               class="text-input"
               id="goalName"
               type="text"
-              placeholder="e.g. Child's Education, Own a Home"
+              placeholder="e.g. Buy a Car, Europe Trip"
               autocomplete="off"
               oninput="onAnyInput(); clearFieldError('goalName')"
             />
@@ -1360,7 +1327,8 @@
       </div>
 
       <!-- Disclaimer -->
-      <div style="
+      <div id="noteCard" style="
+        display: none;
         border-left: 3px solid var(--accent);
         background: var(--accent-glow);
         border-radius: 0 10px 10px 0;
@@ -1386,18 +1354,6 @@
     </section>
 
     <!-- ── MODE SWITCH MODAL ── -->
-    <div id="modeSwitchModal" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.65);backdrop-filter:blur(6px);align-items:center;justify-content:center;">
-      <div style="background:var(--surface);border:1px solid rgba(200,169,110,0.3);border-radius:16px;padding:2rem 2rem 1.8rem;max-width:380px;width:90%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,0.4);">
-        <div style="font-size:2rem;margin-bottom:0.8rem;">⚠️</div>
-        <div style="font-family:var(--serif);font-size:1.25rem;font-weight:600;margin-bottom:0.6rem;color:var(--text);">Switch to <span id="modalTargetModeName"></span>?</div>
-        <div style="font-size:0.86rem;color:var(--muted);margin-bottom:1.8rem;line-height:1.65;">This will clear your current inputs.<br/>Or open a new tab with your same goal values in the new mode.</div>
-        <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
-          <button onclick="modalOpenNewTab()" style="flex:1;min-width:130px;padding:0.65rem 1rem;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:var(--sans);font-size:0.85rem;font-weight:500;cursor:pointer;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">↗ Open in New Tab</button>
-          <button onclick="modalConfirm()" style="flex:1;min-width:130px;padding:0.65rem 1rem;border-radius:8px;border:none;background:var(--accent);color:var(--bg);font-family:var(--sans);font-size:0.85rem;font-weight:500;cursor:pointer;opacity:1;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Switch & Clear</button>
-        </div>
-        <button onclick="modalDismiss()" style="margin-top:1rem;background:none;border:none;color:var(--muted);font-size:0.78rem;font-family:var(--sans);cursor:pointer;padding:0.2rem;">Keep current mode</button>
-      </div>
-    </div>
 
     <hr class="section-sep" />
 
@@ -1415,20 +1371,6 @@
       </div>
     </footer>
 
-    <!-- Mobile FABs -->
-    <a href="https://mfd-risk-profiler-arn-349739.netlify.app/" class="fab-profiling" aria-label="Begin Profiling">
-      <span>📋</span> Begin Profiling
-    </a>
-    <a
-      href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments."
-      class="fab-whatsapp-mobile"
-      target="_blank"
-      rel="noopener"
-      aria-label="Chat on WhatsApp"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-    </a>
-
     <!-- Scroll Hint -->
     <div class="scroll-hint" id="scrollHint" onclick="scrollToShare()">
       <div class="scroll-hint-icon">↓</div>
@@ -1441,19 +1383,42 @@
     <script>
       // ── CURRENT MODE ──
       var _mode = "sip"; // "sip" | "lumpsum" | "both"
-      var _pendingMode = null;
+      var _undoSnapshot = null;
+      var _undoTimer = null;
+
+      function captureSnapshot() {
+        return {
+          mode:      _mode,
+          goalName:  document.getElementById("goalName").value,
+          cost:      document.getElementById("currentCost").value,
+          income:    document.getElementById("monthlyIncome").value,
+          lumpsum:   document.getElementById("lumpsumAmount").value,
+          years:     document.getElementById("yearsToGoal").value,
+          inflation: document.getElementById("priceInflation").value,
+          ret:       document.getElementById("investmentReturn").value,
+          stepUp:    document.getElementById("stepUp").value
+        };
+      }
+
+      function restoreSnapshot(snap) {
+        applyMode(snap.mode);
+        document.getElementById("goalName").value      = snap.goalName;
+        document.getElementById("currentCost").value   = snap.cost;
+        document.getElementById("monthlyIncome").value = snap.income;
+        document.getElementById("lumpsumAmount").value = snap.lumpsum;
+        document.getElementById("yearsToGoal").value   = snap.years;    syncSlider("yearsToGoal","yearsVal");
+        document.getElementById("priceInflation").value= snap.inflation; syncSlider("priceInflation","inflationVal");
+        document.getElementById("investmentReturn").value = snap.ret;    syncSlider("investmentReturn","returnVal");
+        document.getElementById("stepUp").value        = snap.stepUp;   syncSlider("stepUp","stepUpVal");
+        onAnyInput();
+      }
 
       function setMode(mode) {
         if (_mode === mode) return;
-        var hasCost = parseCost(document.getElementById("currentCost").value) > 0;
-        if (hasCost) {
-          _pendingMode = mode;
-          var modeNames = { sip: "SIP", lumpsum: "Lumpsum", both: "Lumpsum + SIP" };
-          document.getElementById("modalTargetModeName").textContent = modeNames[mode] || mode;
-          document.getElementById("modeSwitchModal").style.display = "flex";
-          return;
-        }
+        var snap = captureSnapshot();
         applyMode(mode);
+        var modeNames = { sip: "Monthly SIP", lumpsum: "One-Time Lumpsum", both: "SIP + Lumpsum" };
+        showUndoToast("Switched to " + modeNames[mode] + ".", snap);
       }
 
       var _modeTitles = { sip: "Monthly SIP", lumpsum: "One-Time Lumpsum", both: "SIP + Lumpsum" };
@@ -1474,39 +1439,28 @@
         clearAll();
       }
 
-      function modalConfirm() {
-        var mode = _pendingMode;
-        _pendingMode = null;
-        document.getElementById("modeSwitchModal").style.display = "none";
-        applyMode(mode);
+      function showUndoToast(msg, snap) {
+        if (_undoTimer) clearTimeout(_undoTimer);
+        var t = document.getElementById("shareToast");
+        if (!t) return;
+        t.innerHTML = '<span>' + msg + '</span><button class="toast-undo" onclick="undoModeSwitch()">Undo</button>';
+        _undoSnapshot = snap;
+        t.classList.add("show");
+        _undoTimer = setTimeout(function() {
+          t.classList.remove("show");
+          _undoSnapshot = null;
+        }, 5000);
       }
 
-      function modalOpenNewTab() {
-        var mode = _pendingMode;
-        _pendingMode = null;
-        document.getElementById("modeSwitchModal").style.display = "none";
-        var params = new URLSearchParams();
-        params.set("mode", mode);
-        var cost = document.getElementById("currentCost").value.replace(/,/g, "");
-        if (cost) params.set("cost", cost);
-        var goal = document.getElementById("goalName").value.trim();
-        if (goal) params.set("goal", goal);
-        params.set("years", document.getElementById("yearsToGoal").value);
-        params.set("inflation", document.getElementById("priceInflation").value);
-        params.set("ret", document.getElementById("investmentReturn").value);
-        params.set("stepup", document.getElementById("stepUp").value);
-        window.open(window.location.pathname + "?" + params.toString(), "_blank");
+      function undoModeSwitch() {
+        if (!_undoSnapshot) return;
+        if (_undoTimer) clearTimeout(_undoTimer);
+        var snap = _undoSnapshot;
+        _undoSnapshot = null;
+        var t = document.getElementById("shareToast");
+        if (t) t.classList.remove("show");
+        restoreSnapshot(snap);
       }
-
-      function modalDismiss() {
-        _pendingMode = null;
-        document.getElementById("modeSwitchModal").style.display = "none";
-      }
-
-      // Close modal on backdrop click
-      document.getElementById("modeSwitchModal").addEventListener("click", function(e) {
-        if (e.target === this) modalDismiss();
-      });
 
       function clearAll() {
         document.getElementById("goalName").value = "";
@@ -1522,6 +1476,7 @@
         document.getElementById("resultsHeading").innerHTML = "<em>Enter your details above</em>";
         document.getElementById("resultsBody").innerHTML = '<div class="results-placeholder"><div class="placeholder-icon">📊</div><div>Fill in your goal details to see<br/>your personalised investment plan.</div></div>';
         document.getElementById("shareCard").style.display = "none";
+        document.getElementById("noteCard").style.display = "none";
         document.getElementById("affordCard").classList.add("hidden");
         document.getElementById("affordVerdict").className = "afford-verdict";
         document.getElementById("affordNudge").style.display = "";
@@ -2021,6 +1976,7 @@
 
         document.getElementById("resultsBody").innerHTML = html;
         document.getElementById("shareCard").style.display = "block";
+        document.getElementById("noteCard").style.display = "block";
 
         // Income affordability: only for SIP and Both modes
         if (result.mode === "lumpsum") {
@@ -2048,6 +2004,7 @@
           document.getElementById("resultsBody").innerHTML = '<div class="results-placeholder"><div class="placeholder-icon">📊</div><div>Fill in your goal details to see<br/>your personalised investment plan.</div></div>';
           document.getElementById("chartCard").style.display = "none";
           document.getElementById("shareCard").style.display = "none";
+          document.getElementById("noteCard").style.display = "none";
           document.getElementById("affordCard").classList.add("hidden");
           hideScrollHint();
           return;
@@ -2227,9 +2184,10 @@
       };
 
       function showToast(msg) {
+        if (_undoTimer) return; // don't clobber an active undo toast
         var t = document.getElementById("shareToast");
         if (!t) return;
-        t.textContent = msg;
+        t.innerHTML = '<span>' + msg + '</span>';
         t.classList.add("show");
         setTimeout(function() { t.classList.remove("show"); }, 3000);
       }
