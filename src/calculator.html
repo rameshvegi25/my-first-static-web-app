@@ -1380,11 +1380,11 @@
         if (_mode === mode) return;
         var snap = captureSnapshot();
         applyMode(mode);
-        var modeNames = { sip: "Monthly SIP", lumpsum: "One-Time Lumpsum", both: "SIP + Lumpsum" };
+        var modeNames = { sip: "Monthly SIP", lumpsum: "One-Time Lumpsum", both: "Lumpsum + SIP" };
         showUndoToast("Switched to " + modeNames[mode] + ".", snap);
       }
 
-      var _modeTitles = { sip: "Monthly SIP", lumpsum: "One-Time Lumpsum", both: "SIP + Lumpsum" };
+      var _modeTitles = { sip: "Monthly SIP", lumpsum: "One-Time Lumpsum", both: "Lumpsum + SIP" };
 
       function updateGoalCardTitle(mode) {
         var el = document.getElementById("goalCardMode");
