@@ -286,6 +286,76 @@
         margin: 0.2rem 0 0.6rem;
         line-height: 1.5;
       }
+      .tip-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 0.62rem;
+        font-style: normal;
+        font-weight: 600;
+        cursor: pointer;
+        vertical-align: middle;
+        margin-left: 0.3rem;
+        flex-shrink: 0;
+        transition: background 0.15s, color 0.15s, border-color 0.15s;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      .tip-icon:hover,
+      .tip-icon.tip-open {
+        background: var(--accent-dim);
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      #tipPopover {
+        position: fixed;
+        z-index: 9999;
+        max-width: min(280px, calc(100vw - 24px));
+        background: var(--surface);
+        border: 1px solid rgba(200,169,110,0.35);
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        font-size: 0.8rem;
+        font-family: var(--sans);
+        font-weight: 300;
+        line-height: 1.6;
+        color: var(--prose-text);
+        box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+        pointer-events: none;
+        opacity: 0;
+        transform: translateY(4px);
+        transition: opacity 0.15s, transform 0.15s;
+      }
+      #tipPopover.tip-visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      #tipPopover::before {
+        content: "";
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: var(--surface);
+        border: 1px solid rgba(200,169,110,0.35);
+        transform: rotate(45deg);
+      }
+      #tipPopover.arrow-top::before {
+        top: -5px;
+        border-bottom: none;
+        border-right: none;
+      }
+      #tipPopover.arrow-bottom::before {
+        bottom: -5px;
+        border-top: none;
+        border-left: none;
+      }
 
       /* Text inputs */
       .text-input {
@@ -1000,7 +1070,7 @@
             <button class="mode-btn" id="btnBoth" onclick="setMode('both')">💰+📅</button>
           </div>
         </div>
-        <p class="field-hint">📅 SIP — monthly investing &nbsp;·&nbsp; 💰 Lumpsum — one-time today &nbsp;·&nbsp; 💰+📅 Both — lumpsum now, top up monthly</p>
+
 
         <!-- Goal Presets -->
         <div style="margin-bottom:0.4rem;">
@@ -1031,8 +1101,7 @@
             <div class="field-error-msg" id="goalNameErr">Please name your goal so I can understand your plan.</div>
           </div>
           <div class="form-field full-width">
-            <label class="field-label" for="currentCost">Current Cost of Goal (in Rupees)</label>
-            <p class="field-hint">What it would cost today if you bought it right now.</p>
+            <label class="field-label" for="currentCost">Current Cost of Goal (in Rupees) <span class="tip-icon" data-tip="How much would this cost if you had to pay for it today? E.g. if you want a car that costs ₹8 lakh right now, enter 8,00,000.">ℹ</span></label>
             <div class="input-prefix-wrap">
               <span class="input-prefix">₹</span>
               <input
@@ -1049,8 +1118,7 @@
 
           <!-- Lumpsum Amount (Both mode only) -->
           <div class="form-field full-width" id="lumpsumAmountField" style="display:none;">
-            <label class="field-label" for="lumpsumAmount">Lumpsum I Can Invest Today</label>
-            <p class="field-hint">Invested now and grows at your expected return. SIP covers the remaining gap.</p>
+            <label class="field-label" for="lumpsumAmount">Lumpsum I Can Invest Today <span class="tip-icon" data-tip="A one-time amount you can put in right now. This money starts growing immediately, and your monthly SIP fills the rest of the gap.">ℹ</span></label>
             <div class="input-prefix-wrap">
               <span class="input-prefix">₹</span>
               <input
@@ -1067,8 +1135,7 @@
 
           <!-- Years to Goal -->
           <div class="form-field full-width">
-            <label class="field-label" for="yearsToGoal">Years to Goal</label>
-            <p class="field-hint">Longer horizon = smaller monthly savings needed.</p>
+            <label class="field-label" for="yearsToGoal">Years to Goal <span class="tip-icon" data-tip="How many years from now do you want to reach this goal? The more time you give yourself, the smaller your monthly investment needs to be.">ℹ</span></label>
             <div class="slider-wrap">
               <div class="slider-row">
                 <input type="range" id="yearsToGoal" min="1" max="30" value="7" oninput="syncSlider('yearsToGoal','yearsVal'); onAnyInput();" />
@@ -1080,8 +1147,7 @@
 
           <!-- Price Inflation Rate -->
           <div class="form-field full-width">
-            <label class="field-label" for="priceInflation">Expected Price Inflation</label>
-            <p class="field-hint">How much costlier this goal gets each year. E.g. ₹8L car today → ₹14L in 7 yrs at 8%.</p>
+            <label class="field-label" for="priceInflation">Expected Price Inflation <span class="tip-icon" data-tip="Prices rise every year. This is how much more expensive your goal will get annually. E.g. a ₹8L car today costs ₹14L in 7 years at 8% inflation. For most goals, 6–8% is a safe estimate.">ℹ</span></label>
             <div class="slider-wrap">
               <div class="slider-row">
                 <input type="range" id="priceInflation" min="1" max="20" value="8" step="0.5" oninput="syncSlider('priceInflation','inflationVal'); onAnyInput();" />
@@ -1093,8 +1159,7 @@
 
           <!-- Expected Return on Investment -->
           <div class="form-field full-width">
-            <label class="field-label" for="investmentReturn">Expected Return on Investment</label>
-            <p class="field-hint">Equity mutual funds have historically delivered 10–14% p.a. over long periods.</p>
+            <label class="field-label" for="investmentReturn">Expected Return on Investment <span class="tip-icon" data-tip="How much do you expect your investments to grow each year? Equity mutual funds have historically given 10–14% over long periods. If unsure, 12% is a reasonable starting point.">ℹ</span></label>
             <div class="slider-wrap">
               <div class="slider-row">
                 <input type="range" id="investmentReturn" min="1" max="30" value="12" step="0.5" oninput="syncSlider('investmentReturn','returnVal'); onAnyInput();" />
@@ -1106,8 +1171,7 @@
 
           <!-- Step-Up (SIP only) -->
           <div class="form-field full-width" id="stepUpField">
-            <label class="field-label" for="stepUp">Approx. Annual Increase in SIP</label>
-            <p class="field-hint">Increase SIP each year as income grows — lowers your starting amount significantly. E.g. ₹5,000 at 10% → ₹5,500 in Year 2.</p>
+            <label class="field-label" for="stepUp">Approx. Annual Increase in SIP <span class="tip-icon" data-tip="As your salary grows, you can increase your SIP a little each year. This lets you start with a smaller amount today. E.g. start at ₹5,000, increase by 10% → pay ₹5,500 next year, ₹6,050 the year after.">ℹ</span></label>
             <div class="slider-wrap">
               <div class="slider-row">
                 <input type="range" id="stepUp" min="0" max="25" value="0" step="1" oninput="syncSlider('stepUp','stepUpVal'); onAnyInput();" />
@@ -1274,6 +1338,9 @@
 
     <!-- Toast -->
     <div class="toast" id="shareToast"></div>
+
+    <!-- Tooltip Popover -->
+    <div id="tipPopover"></div>
 
     <script>
       // ── CURRENT MODE ──
@@ -2248,6 +2315,96 @@
         if (stepup) { document.getElementById("stepUp").value = stepup; syncSlider("stepUp","stepUpVal"); }
 
         onAnyInput();
+      })();
+    </script>
+
+    <script>
+      // ── SMART TOOLTIP ──
+      (function() {
+        var popover = document.getElementById("tipPopover");
+        var currentIcon = null;
+
+        function showTip(icon) {
+          if (currentIcon === icon) { hideTip(); return; }
+          if (currentIcon) currentIcon.classList.remove("tip-open");
+          currentIcon = icon;
+          icon.classList.add("tip-open");
+
+          popover.textContent = icon.getAttribute("data-tip");
+
+          // Make it visible offscreen first to measure its size
+          popover.style.left = "-9999px";
+          popover.style.top = "-9999px";
+          popover.classList.remove("tip-visible", "arrow-top", "arrow-bottom");
+          popover.style.display = "block";
+
+          var iconRect = icon.getBoundingClientRect();
+          var popW = popover.offsetWidth;
+          var popH = popover.offsetHeight;
+          var viewW = window.innerWidth;
+          var viewH = window.innerHeight;
+          var margin = 8;
+          var arrowOffset = 12; // px from left edge of popover to arrow centre
+
+          // Decide vertical: prefer below, flip above if not enough room
+          var spaceBelow = viewH - iconRect.bottom;
+          var spaceAbove = iconRect.top;
+          var below = spaceBelow >= popH + margin || spaceBelow >= spaceAbove;
+
+          var top, arrowClass;
+          if (below) {
+            top = iconRect.bottom + margin;
+            arrowClass = "arrow-top";
+          } else {
+            top = iconRect.top - popH - margin;
+            arrowClass = "arrow-bottom";
+          }
+
+          // Horizontal: centre on icon, then clamp to screen
+          var idealLeft = iconRect.left + (iconRect.width / 2) - (popW / 2);
+          var left = Math.max(margin, Math.min(idealLeft, viewW - popW - margin));
+
+          // Arrow horizontal position (relative to popover)
+          var arrowLeft = (iconRect.left + iconRect.width / 2) - left - 4;
+          arrowLeft = Math.max(10, Math.min(arrowLeft, popW - 20));
+          popover.style.setProperty("--arrow-left", arrowLeft + "px");
+
+          popover.style.left = left + "px";
+          popover.style.top = top + "px";
+          popover.classList.add(arrowClass);
+
+          requestAnimationFrame(function() {
+            popover.classList.add("tip-visible");
+          });
+        }
+
+        function hideTip() {
+          if (currentIcon) { currentIcon.classList.remove("tip-open"); currentIcon = null; }
+          popover.classList.remove("tip-visible");
+        }
+
+        // Apply arrow left position via CSS var
+        var style = document.createElement("style");
+        style.textContent = "#tipPopover::before { left: var(--arrow-left, 16px); }";
+        document.head.appendChild(style);
+
+        // Desktop: hover
+        document.addEventListener("mouseover", function(e) {
+          var icon = e.target.closest(".tip-icon");
+          if (icon) { showTip(icon); return; }
+          if (!popover.contains(e.target)) hideTip();
+        });
+
+        // Mobile: tap
+        document.addEventListener("click", function(e) {
+          var icon = e.target.closest(".tip-icon");
+          if (icon) { e.stopPropagation(); showTip(icon); return; }
+          if (!popover.contains(e.target)) hideTip();
+        });
+
+        // Close on scroll or resize
+        window.addEventListener("scroll", hideTip, { passive: true });
+        window.addEventListener("resize", hideTip, { passive: true });
       })();
     </script>
   </body>
