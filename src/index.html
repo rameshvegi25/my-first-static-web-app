@@ -476,6 +476,53 @@
         line-height: 1;
       }
 
+      /* ── ORIGIN CARDS ── */
+      .origin-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+      @media (max-width: 640px) {
+        .origin-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .origin-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.4rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        transition: border-color 0.2s;
+      }
+      .origin-card:hover {
+        border-color: rgba(200, 169, 110, 0.25);
+      }
+      .origin-card-icon {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--accent-dim);
+        border-radius: 8px;
+        flex-shrink: 0;
+      }
+      .origin-card-title {
+        font-family: var(--sans);
+        font-size: 0.92rem;
+        font-weight: 500;
+        color: var(--text);
+      }
+      .origin-card-body {
+        font-size: 0.84rem;
+        color: var(--prose-text);
+        line-height: 1.6;
+      }
+
       /* ── FOOTER ── */
       footer {
         border-top: 1px solid var(--border);
@@ -917,6 +964,7 @@
       <a href="#who-is-mfd">What is an MFD</a>
       <a href="#why-mfd">Why an MFD</a>
       <a href="#why-ramesh">Why Ramesh</a>
+      <a href="#why-i-chose-this">Why This Role</a>
       <a href="#why-mf">Mutual Funds</a>
       <a href="#how-it-works">How It Works</a>
       <a href="#how-i-earn">How I Earn</a>
@@ -1113,6 +1161,106 @@
           wealth in your life.
         </p>
         <p><strong>That is who I am. That is why Ramesh.</strong></p>
+      </div>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- WHY I CHOSE THIS -->
+    <section class="section" id="why-i-chose-this">
+      <div class="section-label">The origin story</div>
+      <h2>Why I chose <em>this.</em></h2>
+      <div class="prose">
+        <p>I didn't plan to become an MFD. I got here because of what I kept seeing around me.</p>
+      </div>
+
+      <div class="origin-grid">
+
+        <div class="origin-card">
+          <div class="origin-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
+            </svg>
+          </div>
+          <div class="origin-card-title">Salary, no savings</div>
+          <div class="origin-card-body">People earning good salaries — sometimes more than me — with nothing left at month end. No idea where the money went.</div>
+        </div>
+
+        <div class="origin-card">
+          <div class="origin-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="9" y1="12" x2="15" y2="12"/>
+            </svg>
+          </div>
+          <div class="origin-card-title">LIC as investment</div>
+          <div class="origin-card-body">People showing their money-back policy like they'd done something smart. It was overpriced insurance with returns that barely beat a savings account.</div>
+        </div>
+
+        <div class="origin-card">
+          <div class="origin-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><line x1="12" y1="15" x2="12" y2="17"/>
+            </svg>
+          </div>
+          <div class="origin-card-title">FDs losing to inflation</div>
+          <div class="origin-card-body">Life savings in FDs, feeling safe. The balance was growing — but quietly buying less every year. Inflation was eating it slowly.</div>
+        </div>
+
+        <div class="origin-card">
+          <div class="origin-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="origin-card-title">Long-term, wrong instrument</div>
+          <div class="origin-card-body">Money locked in government savings schemes for 15 years. Long term is exactly when equity makes the difference. Even a 50-50 split would have helped.</div>
+        </div>
+
+        <div class="origin-card">
+          <div class="origin-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/>
+            </svg>
+          </div>
+          <div class="origin-card-title">MFDs who skip the conversation</div>
+          <div class="origin-card-body">I saw people go to an MFD, hand over money, and just be asked "How much do you want to invest?" No goals discussion, no risk profiling. Just take the money and move on.</div>
+        </div>
+
+        <div class="origin-card">
+          <div class="origin-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="6" y1="4" x2="18" y2="4"/><line x1="6" y1="9" x2="18" y2="9"/><path d="M9 4a4 4 0 000 8"/><line x1="15" y1="20" x2="6" y2="9"/>
+            </svg>
+          </div>
+          <div class="origin-card-title">Direct funds, higher cost</div>
+          <div class="origin-card-body">Switched to direct funds to "avoid the middleman" — but picked a fund that cost more than the regular fund I would have suggested. Paid extra, felt clever. Were actually losing.</div>
+        </div>
+
+        <div class="origin-card">
+          <div class="origin-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
+          <div class="origin-card-title">Chasing last year's returns</div>
+          <div class="origin-card-body">Heard about 40% returns, jumped in at the peak, suffered losses, said "mutual funds are a scam." The fund was fine. The timing was wrong. Nobody told them that.</div>
+        </div>
+
+        <div class="origin-card">
+          <div class="origin-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <div class="origin-card-title">100% wealth in one flat</div>
+          <div class="origin-card-body">Everything in one property, one area, one pin code. Convinced property always goes up. That is not a portfolio — that is a bet.</div>
+        </div>
+
+      </div>
+
+      <div class="prose">
+        <p>And people around me who, when I started explaining all this, said — "this is exactly the conversation I needed."</p>
+        <p>That told me enough. I decided to do this properly — not as free advice over chai, which is actually against SEBI and AMFI rules. I cleared the NISM Series V-A exam, got registered with AMFI under ARN-349739, and got here.</p>
       </div>
     </section>
 
