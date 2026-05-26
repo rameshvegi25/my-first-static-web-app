@@ -353,16 +353,16 @@
       /* Prevent tooltip overflow on mobile */
       @media (max-width: 480px) {
         .info-tip .tip-bubble {
-          left: auto;
-          right: -8px;
-          transform: none;
-          max-width: 220px;
+          left: 50%;
+          right: auto;
+          transform: translateX(-50%);
+          max-width: min(240px, 78vw);
         }
         .info-tip .tip-bubble::after,
         .info-tip .tip-bubble::before {
-          left: auto;
-          right: 14px;
-          transform: none;
+          left: 50%;
+          right: auto;
+          transform: translateX(-50%);
         }
       }
 
@@ -1532,14 +1532,39 @@
       }
 
       // ── INFO TOOLTIP (mobile tap) ──
+      function clampTipBubble(el) {
+        var bubble = el.querySelector(".tip-bubble");
+        if (!bubble) return;
+        // reset any previous nudge
+        bubble.style.marginLeft = "";
+        var rect = bubble.getBoundingClientRect();
+        var pad = 10;
+        if (rect.left < pad) {
+          bubble.style.marginLeft = (pad - rect.left) + "px";
+        } else if (rect.right > window.innerWidth - pad) {
+          bubble.style.marginLeft = -(rect.right - window.innerWidth + pad) + "px";
+        }
+      }
+
       function toggleTip(el) {
         var wasActive = el.classList.contains("active");
-        document.querySelectorAll(".info-tip.active").forEach(function(t) { t.classList.remove("active"); });
-        if (!wasActive) el.classList.add("active");
+        document.querySelectorAll(".info-tip.active").forEach(function(t) {
+          t.classList.remove("active");
+          var b = t.querySelector(".tip-bubble");
+          if (b) b.style.marginLeft = "";
+        });
+        if (!wasActive) {
+          el.classList.add("active");
+          requestAnimationFrame(function() { clampTipBubble(el); });
+        }
       }
       document.addEventListener("click", function(e) {
         if (!e.target.closest(".info-tip")) {
-          document.querySelectorAll(".info-tip.active").forEach(function(t) { t.classList.remove("active"); });
+          document.querySelectorAll(".info-tip.active").forEach(function(t) {
+            t.classList.remove("active");
+            var b = t.querySelector(".tip-bubble");
+            if (b) b.style.marginLeft = "";
+          });
         }
       });
 
