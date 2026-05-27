@@ -1393,9 +1393,9 @@
             </div>
           </div>
 
-          <!-- Expected Annual Return on Investment -->
+          <!-- Expected Annual Return -->
           <div class="form-field full-width">
-            <label class="field-label" for="investmentReturn">Expected Annual Return on Investment <span class="tip-icon" data-tip="How much do you expect your investments to grow each year? Equity mutual fund returns have varied significantly over time. Past performance is not a reliable guide to future returns — use a number you're comfortable with, and consult me if unsure.">ℹ</span></label>
+            <label class="field-label" for="investmentReturn">Expected Annual Return <span class="tip-icon" data-tip="How much do you expect your investments to grow each year? Equity mutual fund returns have varied significantly over time. Past performance is not a reliable guide to future returns — use a number you're comfortable with, and consult me if unsure.">ℹ</span></label>
             <div class="slider-wrap">
               <div class="slider-row">
                 <input type="range" id="investmentReturn" min="3" max="25" value="12" step="0.1" oninput="syncSlider('investmentReturn','returnVal'); onAnyInput();" />
@@ -2304,6 +2304,7 @@
         document.getElementById("resultsBody").innerHTML = html;
         document.getElementById("shareCard").style.display = "block";
         document.getElementById("noteCard").style.display = "block";
+        autoOpenPhilosophy();
 
         // Income affordability: only for SIP and Both modes
         if (result.mode === "lumpsum") {
@@ -2971,8 +2972,22 @@
 
 
     <script>
+      var _philosophyAutoOpened = false;
+
+      function autoOpenPhilosophy() {
+        if (_philosophyAutoOpened) return;
+        var body = document.getElementById("philosophyBody");
+        var btn  = document.getElementById("philosophyAccordion").querySelector(".philosophy-trigger");
+        if (body.classList.contains("open")) { _philosophyAutoOpened = true; return; }
+        setTimeout(function() {
+          body.classList.add("open");
+          body.style.maxHeight = body.scrollHeight + "px";
+          btn.setAttribute("aria-expanded", "true");
+          _philosophyAutoOpened = true;
+        }, 800);
+      }
+
       function togglePhilosophy() {
-        var btn = document.getElementById("philosophyAccordion").querySelector(".philosophy-trigger");
         var body = document.getElementById("philosophyBody");
         var isOpen = body.classList.contains("open");
         if (!isOpen) {
