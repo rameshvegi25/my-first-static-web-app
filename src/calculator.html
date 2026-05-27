@@ -466,6 +466,16 @@
         color: var(--muted);
         opacity: 0.7;
       }
+      .return-zone-label {
+        font-size: 0.67rem;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        font-weight: 500;
+        text-align: right;
+        margin-top: 0.1rem;
+        transition: color 0.35s ease;
+        opacity: 0.85;
+      }
 
       /* ── RESULTS CARD ── */
       .results-card {
@@ -1376,6 +1386,7 @@
                 <input class="slider-value-input" id="returnVal" type="number" min="1" max="30" step="0.1" value="12" oninput="syncValInput('investmentReturn','returnVal'); onAnyInput();" onblur="clampValInput('investmentReturn','returnVal'); onAnyInput();" />
               </div>
               <div class="slider-limits"><span>1% p.a.</span><span>30% p.a.</span></div>
+              <div class="return-zone-label" id="returnZoneLabel"></div>
             </div>
           </div>
 
@@ -1725,6 +1736,45 @@
         if (btn) btn.classList.add("ready");
       })();
 
+      // ── RETURN SLIDER COLOUR LOGIC ──
+      function lerpColor(c1, c2, t) {
+        t = Math.max(0, Math.min(1, t));
+        return [
+          Math.round(c1[0] + (c2[0] - c1[0]) * t),
+          Math.round(c1[1] + (c2[1] - c1[1]) * t),
+          Math.round(c1[2] + (c2[2] - c1[2]) * t)
+        ];
+      }
+
+      function getReturnColor(val) {
+        // Anchors: tarnished → gold → orangish-gold → golden-red
+        var muted  = [105, 90, 58];   // tarnished gold  (0–9%)
+        var gold   = [200, 169, 110]; // accent gold      (9–14%)
+        var orange = [212, 120, 45];  // orangish gold    (14–20%)
+        var red    = [192, 52, 40];   // golden red       (20%+)
+        var rgb;
+        if (val <= 8)       rgb = lerpColor(muted, gold, (val - 1) / 7);
+        else if (val <= 14) rgb = gold;
+        else if (val <= 20) rgb = lerpColor(gold, orange, (val - 14) / 6);
+        else                rgb = lerpColor(orange, red, Math.min(1, (val - 20) / 8));
+        return "rgb(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ")";
+      }
+
+      function getReturnZoneLabel(val) {
+        if (val <= 8)  return "Good for short-term goals";
+        if (val <= 14) return "Historically, this is where most investors have landed";
+        if (val <= 20) return "Only a few funds have done this, for a few years";
+        return "⚠ Extremely rare — risky to plan around";
+      }
+
+      function applyReturnColor(val) {
+        var color = getReturnColor(val);
+        var returnValEl = document.getElementById("returnVal");
+        if (returnValEl) returnValEl.style.color = color;
+        var label = document.getElementById("returnZoneLabel");
+        if (label) { label.textContent = getReturnZoneLabel(val); label.style.color = color; }
+      }
+
       // ── SLIDER SYNC ──
       function syncSlider(sliderId, valId) {
         var slider = document.getElementById(sliderId);
@@ -1733,7 +1783,9 @@
         if (valInput) valInput.value = val;
         var min = parseFloat(slider.min), max = parseFloat(slider.max);
         var pct = ((val - min) / (max - min)) * 100;
-        slider.style.background = "linear-gradient(to right, var(--accent) " + pct + "%, var(--border) " + pct + "%)";
+        var fillColor = (sliderId === "investmentReturn") ? getReturnColor(val) : "var(--accent)";
+        slider.style.background = "linear-gradient(to right, " + fillColor + " " + pct + "%, var(--border) " + pct + "%)";
+        if (sliderId === "investmentReturn") applyReturnColor(val);
       }
 
       function clampValInput(sliderId, valId) {
@@ -1749,7 +1801,9 @@
         slider.value = num;
         valInput.value = num;
         var pct = ((num - min) / (max - min)) * 100;
-        slider.style.background = "linear-gradient(to right, var(--accent) " + pct + "%, var(--border) " + pct + "%)";
+        var fillColor = (sliderId === "investmentReturn") ? getReturnColor(num) : "var(--accent)";
+        slider.style.background = "linear-gradient(to right, " + fillColor + " " + pct + "%, var(--border) " + pct + "%)";
+        if (sliderId === "investmentReturn") applyReturnColor(num);
       }
 
       function syncValInput(sliderId, valId) {
@@ -1769,7 +1823,9 @@
         num = parseFloat(num.toFixed(10));
         slider.value = num;
         var pct = ((num - min) / (max - min)) * 100;
-        slider.style.background = "linear-gradient(to right, var(--accent) " + pct + "%, var(--border) " + pct + "%)";
+        var fillColor = (sliderId === "investmentReturn") ? getReturnColor(num) : "var(--accent)";
+        slider.style.background = "linear-gradient(to right, " + fillColor + " " + pct + "%, var(--border) " + pct + "%)";
+        if (sliderId === "investmentReturn") applyReturnColor(num);
       }
       ["yearsToGoal","priceInflation","investmentReturn","stepUp"].forEach(function(id) {
         var valIds = { yearsToGoal:"yearsVal", priceInflation:"inflationVal", investmentReturn:"returnVal", stepUp:"stepUpVal" };
