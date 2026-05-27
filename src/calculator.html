@@ -507,6 +507,14 @@
         transition: background 0.2s;
       }
       .result-cell:hover { background: var(--surface2); }
+      .result-cell.primary {
+        background: var(--accent-dim);
+        border-bottom: 2px solid var(--accent);
+        position: relative;
+      }
+      .result-cell.primary:hover { background: rgba(200,169,110,0.22); }
+      .result-cell.primary .result-label { color: var(--accent); opacity: 0.85; }
+      .result-cell.primary .result-value { font-size: clamp(1.7rem, 4vw, 2.3rem); }
       .result-label {
         font-size: 0.68rem;
         font-weight: 500;
@@ -522,13 +530,33 @@
         color: var(--text);
         line-height: 1.1;
       }
-      .result-value.accent { color: var(--accent); }
-      .result-value.safe   { color: var(--safe); }
+      .result-value.accent   { color: var(--accent); }
+      .result-value.safe     { color: var(--safe); }
+      .result-value.neutral  { color: var(--neutral); }
       .result-sub {
         font-size: 0.75rem;
         color: var(--muted);
         margin-top: 0.25rem;
         font-weight: 300;
+      }
+      .result-sub.split {
+        margin-top: 0.35rem;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .result-sub.split .split-yours {
+        color: var(--neutral);
+        font-weight: 400;
+      }
+      .result-sub.split .split-returns {
+        color: var(--safe);
+        font-weight: 400;
+      }
+      .delay-delta {
+        color: var(--danger);
+        font-weight: 500;
+        font-size: 0.82rem;
       }
 
       /* ── CHART CARD ── */
@@ -715,54 +743,25 @@
       }
       .mode-btn:not(.active):hover { color: var(--text); }
 
-      /* ── SCROLL HOVERCARD ── */
-      .scroll-hint {
-        position: fixed;
-        bottom: 1.6rem;
-        left: 50%;
-        transform: translateX(-50%) translateY(16px);
-        background: var(--surface);
-        border: 1px solid rgba(200,169,110,0.35);
-        border-radius: 40px;
-        padding: 0.6rem 1.4rem 0.6rem 1.1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
+      /* ── SEND RESULTS LINK ── */
+      .send-results-link {
+        display: none;
+        text-align: center;
+        margin-top: 0.75rem;
+        margin-bottom: 0.5rem;
+      }
+      .send-results-link a {
         font-size: 0.82rem;
+        color: var(--accent);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        cursor: pointer;
         font-family: var(--sans);
-        font-weight: 500;
-        color: var(--text);
-        box-shadow: 0 8px 28px rgba(0,0,0,0.28);
-        z-index: 300;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s, transform 0.3s;
-        white-space: nowrap;
+        font-weight: 400;
+        opacity: 0.85;
+        transition: opacity 0.2s;
       }
-      .scroll-hint.visible {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-        pointer-events: auto;
-      }
-      .scroll-hint-icon {
-        width: 26px;
-        height: 26px;
-        background: var(--accent);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.75rem;
-        color: var(--bg);
-        flex-shrink: 0;
-        animation: bounceDown 1.4s ease-in-out infinite;
-      }
-      @keyframes bounceDown {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(3px); }
-      }
-      .scroll-hint-text { color: var(--text); }
-      .scroll-hint-text span { color: var(--accent); font-weight: 600; }
+      .send-results-link a:hover { opacity: 1; }
 
       /* ── SEPARATOR ── */
       hr.section-sep {
@@ -868,6 +867,12 @@
         color: var(--accent) !important;
         font-style: italic;
         margin-top: 1.4rem !important;
+      }
+      .philosophy-caution {
+        font-size: 0.95rem !important;
+        font-weight: 500 !important;
+        color: #c8734a !important;
+        font-style: italic;
       }
       .philosophy-header {
         display: flex;
@@ -1030,6 +1035,40 @@
         box-shadow: 0 0 0 3px rgba(200,169,110,0.18);
       }
       .afford-income-input::placeholder { color: var(--muted); opacity: 0.6; }
+      .afford-income-input.field-error {
+        border-color: var(--danger) !important;
+        box-shadow: 0 0 0 3px rgba(224,92,92,0.15);
+      }
+      .afford-expenses-error {
+        font-size: 0.72rem;
+        color: var(--danger);
+        margin-top: 0.3rem;
+        display: none;
+        font-style: normal;
+      }
+      .afford-expenses-error.show { display: block; }
+      .afford-surplus-row {
+        display: none;
+        align-items: center;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        margin-top: 0.9rem;
+      }
+      .afford-surplus-row.show { display: flex; }
+      .afford-surplus-input {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.6rem 0.9rem 0.6rem 1.9rem;
+        font-size: 0.95rem;
+        font-family: var(--sans);
+        color: var(--safe);
+        font-weight: 500;
+        width: 100%;
+        outline: none;
+        cursor: default;
+        pointer-events: none;
+      }
       .afford-nudge {
         font-size: 0.78rem;
         color: var(--muted);
@@ -1133,6 +1172,11 @@
         .afford-income-row + .afford-income-row {
           margin-top: 1.2rem;
         }
+        .afford-surplus-row {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0.5rem;
+        }
         .afford-income-input-wrap { min-width: unset; width: 100%; }
         .afford-income-label { font-size: 0.75rem; }
 
@@ -1144,13 +1188,7 @@
         .afford-verdict-msg { font-size: 0.82rem; }
         .afford-skills-nudge { font-size: 0.8rem; }
 
-        /* Scroll hint — restore normal bottom position */
-        .scroll-hint {
-          bottom: 1.6rem;
-          font-size: 0.78rem;
-          padding: 0.5rem 1.1rem 0.5rem 0.9rem;
-        }
-        .scroll-hint-icon { width: 22px; height: 22px; font-size: 0.68rem; }
+
       }
 
       @media (max-width: 360px) {
@@ -1383,8 +1421,16 @@
                 placeholder="e.g. 30,000"
                 autocomplete="off"
                 inputmode="numeric"
-                oninput="formatIncomeInput(this); onIncomeInput();"
+                oninput="formatIncomeInput(this); clearExpensesError(); onIncomeInput();"
               />
+            </div>
+          </div>
+          <div class="afford-expenses-error" id="expensesError">Please enter your monthly commitments to calculate your surplus.</div>
+          <div class="afford-surplus-row" id="surplusRow">
+            <div class="afford-income-label">Monthly Surplus <span class="tip-icon" data-tip="Your surplus is what's left after all monthly commitments — this is the pool your SIP comes from. A healthy goal uses 50% or less of this amount.">ℹ</span></div>
+            <div class="afford-income-input-wrap">
+              <span class="afford-income-prefix">₹</span>
+              <input class="afford-surplus-input" id="surplusDisplay" type="text" readonly tabindex="-1" value="" />
             </div>
           </div>
           <div class="afford-nudge" id="affordNudge">↑ Enter your income (and expenses) to see if this plan is within your means</div>
@@ -1397,6 +1443,11 @@
           </div>
         </div>
 
+      </div>
+
+      <!-- Send Results Link -->
+      <div class="send-results-link" id="sendResultsLink">
+        <a onclick="scrollToShare()">↓ Send results to me</a>
       </div>
 
       <!-- Chart Card -->
@@ -1462,7 +1513,7 @@
         background: var(--accent-glow);
         border-radius: 0 10px 10px 0;
         padding: 1.1rem 1.4rem;
-        margin-bottom: 2.5rem;
+        margin-bottom: 1.2rem;
       ">
         <div style="
           font-size: 0.7rem;
@@ -1482,12 +1533,10 @@
 
     </section>
 
-    <!-- ── MODE SWITCH MODAL ── -->
-
     <hr class="section-sep" />
 
     <!-- PHILOSOPHY ACCORDION -->
-    <section class="section" style="padding-top:0;">
+    <section class="section" style="padding-top:1rem;">
       <div class="philosophy-accordion" id="philosophyAccordion">
         <button class="philosophy-trigger" onclick="togglePhilosophy()" aria-expanded="false">
           <span>The thinking behind this</span>
@@ -1500,10 +1549,13 @@
             <p>Nobody lies awake thinking about SIPs. They think about the house they want to come home to, the college they want their child to walk into, the day they can finally stop worrying about money. The goal comes first. The money is just how you get there.</p>
             <p>So I built this the other way around.</p>
             <p>Tell me what you want. When you need it. I'll work out what it might cost by then — and what you need to start doing today. Not someday, not when you're ready, but today.</p>
-            <div class="philosophy-pull">
-              <p>The most expensive thing in investing isn't a bad fund. It's a late start.</p>
-            </div>
             <p>The step-up option is there for the same reason. You don't need to be a big investor today. You just need to start. Your income will grow, your SIP will grow with it, and your goal will be waiting right where you left it.</p>
+            <p>One number deserves more of your attention than the rest. <span class="philosophy-closing" style="margin-top:0!important;">The years.</span></p>
+            <p>Move it by two. Watch what happens.</p>
+            <p>The return percentage? You can adjust it — but understand what it means. <span class="philosophy-caution">Every extra percent of return comes with extra uncertainty.</span> What looks better on the calculator may rarely happen in real life. A realistic return will keep you invested. An inflated one may leave you unprepared when reality hits.</p>
+            <div class="philosophy-pull">
+              <p>A year of delay will cost you more than chasing an extra percent will ever give back.</p>
+            </div>
             <p class="philosophy-closing">The goal was always yours. Now the plan is too.</p>
           </div>
         </div>
@@ -1523,12 +1575,6 @@
         Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Past performance is not indicative of future results. This material is for informational purposes only and does not constitute financial advice. Vegi Ramesh is registered with AMFI as a Mutual Fund Distributor – ARN-349739.
       </div>
     </footer>
-
-    <!-- Scroll Hint -->
-    <div class="scroll-hint" id="scrollHint" onclick="scrollToShare()">
-      <div class="scroll-hint-icon">↓</div>
-      <div class="scroll-hint-text">Scroll down to <span>send results to me</span></div>
-    </div>
 
     <!-- Toast -->
     <div class="toast" id="shareToast"></div>
@@ -2078,55 +2124,72 @@
 
         if (result.mode === "lumpsum") {
           heading.innerHTML = "Invest <em>" + fmtINR(result.lumpsum) + "</em> today for " + result.yearsToGoal + " years";
+          var lumpsumMultiple = (result.futureCost / result.lumpsum).toFixed(1);
+          var lumpsumGain = result.totalGain > 0 ? result.totalGain : 0;
+          var lumpsumYoursPct = Math.round((result.lumpsum / result.futureCost) * 100);
+          var lumpsumReturnsPct = 100 - lumpsumYoursPct;
+          var lumpsumAbsMultiple = Math.pow(1 + result.investReturn / 100, result.yearsToGoal).toFixed(1);
+          var realRateL = (result.investReturn - result.priceInflation) / 100;
+          var lumpsumRealMultiple = Math.pow(1 + realRateL, result.yearsToGoal).toFixed(2);
           html = '<div class="results-grid">'
-            + resultCell("Lumpsum to Invest Today", fmtINR(result.lumpsum), "accent", "One-time investment needed now")
+            + resultCellPrimary("Lumpsum to Invest Today", fmtINR(result.lumpsum), "accent", "One-time investment needed now")
             + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "After " + result.priceInflation + "% p.a. inflation")
-            + resultCell("Return Multiple", (result.futureCost / result.lumpsum).toFixed(1) + "×", "safe", "Your money grows this many times")
-            + resultCell("Expected Corpus Gain", fmtINR(result.totalGain > 0 ? result.totalGain : 0), "safe", "Returns above your investment")
+            + resultCellDual("Return Multiple", lumpsumAbsMultiple + "×", "Absolute", lumpsumRealMultiple + "×", "Real")
+            + resultCellSplit(result.lumpsum, lumpsumGain, result.futureCost, lumpsumYoursPct, lumpsumReturnsPct)
             + '</div>';
 
         } else if (result.mode === "both") {
           if (result.lumpsumCoversGoal) {
             heading.innerHTML = "Your lumpsum alone is <em>enough</em> — no SIP needed!";
             var surplus = result.lumpsumFV - result.futureCost;
+            var bothMultiple = (result.lumpsumFV / result.lumpsumAmount).toFixed(1);
             html = '<div class="results-grid">'
-              + resultCell("Lumpsum Invested Today", fmtINR(result.lumpsumAmount), "accent", "Your one-time investment")
+              + resultCellPrimary("Lumpsum Invested Today", fmtINR(result.lumpsumAmount), "accent", "Your one-time investment")
               + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "After " + result.priceInflation + "% p.a. inflation")
-              + resultCell("Your Lumpsum Grows To", fmtINR(result.lumpsumFV), "safe", "At " + result.investReturn + "% p.a. return")
+              + resultCell("Your Lumpsum Grows To", fmtINR(result.lumpsumFV), "safe", "At " + result.investReturn + "% p.a. — " + bothMultiple + "× return")
               + resultCell("Surplus Above Goal", fmtINR(surplus > 0 ? surplus : 0), "safe", "Extra corpus beyond your goal")
               + '</div>'
               + '<div style="margin-top:1rem;padding:0.9rem 1.1rem;background:rgba(76,175,130,0.08);border:1px solid rgba(76,175,130,0.25);border-radius:10px;font-size:0.85rem;color:var(--safe);">✅ Your lumpsum of ' + fmtINR(result.lumpsumAmount) + ' is enough to meet this goal. No monthly SIP required.</div>';
           } else {
             var stepUp = result.stepUp || 0;
             if (stepUp > 0) {
-              heading.innerHTML = "Invest <em>" + fmtINR(result.lumpsumAmount) + "</em> today + <em>" + fmtINR(result.monthlySIP) + "</em>/mo (growing " + stepUp + "% yearly)";
+              heading.innerHTML = "Invest <em>" + fmtINR(result.lumpsumAmount) + "</em> today + <em>" + fmtINR(result.monthlySIP) + "</em>/mo SIP, increasing by " + stepUp + "% each year";
             } else {
               heading.innerHTML = "Invest <em>" + fmtINR(result.lumpsumAmount) + "</em> today + <em>" + fmtINR(result.monthlySIP) + "</em> / month";
             }
             var sipSubLabel = stepUp > 0 ? "Starting SIP, grows " + stepUp + "% yearly" : "Invest this every month";
+            var bothYoursPct = Math.round((result.totalInvested / result.futureCost) * 100);
+            var bothReturnsPct = 100 - bothYoursPct;
+            var sipContrib = result.futureCost - result.lumpsumFV;
             html = '<div class="results-grid">'
-              + resultCell("Lumpsum Invested Today", fmtINR(result.lumpsumAmount), "accent", "Your one-time investment")
-              + resultCell("Monthly SIP Needed", fmtINR(result.monthlySIP), "accent", sipSubLabel)
+              + resultCellPrimary("Lumpsum Invested Today", fmtINR(result.lumpsumAmount), "accent", "Your one-time investment")
+              + resultCellPrimary("Monthly SIP Needed", fmtINR(result.monthlySIP), "accent", sipSubLabel)
               + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "After " + result.priceInflation + "% p.a. inflation")
-              + resultCell("Total You'll Invest", fmtINR(result.totalInvested), "", "Lumpsum + all SIP payments")
-              + resultCell("Expected Corpus Gain", fmtINR(result.totalGain), "safe", "Returns above your total investment")
-              + resultCell("SIP Covers", fmtINR(result.futureCost - result.lumpsumFV), "", "Gap your SIP fills at goal date")
+              + resultCell("Total You'll Invest", fmtINR(result.totalInvested), "", null,
+                  { yours: bothYoursPct + "% your money", returns: bothReturnsPct + "% returns" })
+              + resultCell("Investment Growth", fmtINR(result.totalGain > 0 ? result.totalGain : 0), "safe", "Returns above your total investment")
+              + resultCell("SIP's Contribution", fmtINR(sipContrib > 0 ? sipContrib : 0), "", "What your SIP builds toward the goal")
               + '</div>';
           }
 
         } else {
           var stepUp = result.stepUp || 0;
           if (stepUp > 0) {
-            heading.innerHTML = "Start with <em>" + fmtINR(result.monthlySIP) + "</em> / month, growing " + stepUp + "% yearly";
+            heading.innerHTML = "Start with <em>" + fmtINR(result.monthlySIP) + "</em> / month, increasing your SIP by " + stepUp + "% each year";
           } else {
             heading.innerHTML = "Save <em>" + fmtINR(result.monthlySIP) + "</em> / month for " + result.yearsToGoal + " years";
           }
-          var sipSubLabel = stepUp > 0 ? "Starting SIP, grows " + stepUp + "% each year" : "Invest this every month";
+          var sipSubLabel = stepUp > 0 ? "Starting SIP — you increase this amount by " + stepUp + "% each year" : "Invest this every month";
+          var sipYoursPct = Math.round((result.totalInvested / result.futureCost) * 100);
+          var sipReturnsPct = 100 - sipYoursPct;
+          var sipAbsMultiple = Math.pow(1 + result.investReturn / 100, result.yearsToGoal).toFixed(1);
+          var realRate = (result.investReturn - result.priceInflation) / 100;
+          var sipRealMultiple = Math.pow(1 + realRate, result.yearsToGoal).toFixed(2);
           html = '<div class="results-grid">'
-            + resultCell("Monthly SIP Needed", fmtINR(result.monthlySIP), "accent", sipSubLabel)
+            + resultCellPrimary("Monthly SIP Needed", fmtINR(result.monthlySIP), "accent", sipSubLabel)
             + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "After " + result.priceInflation + "% p.a. inflation")
-            + resultCell("Total You'll Invest", fmtINR(result.totalInvested), "", "Over " + result.yearsToGoal * 12 + " months")
-            + resultCell("Expected Corpus Gain", fmtINR(result.totalGain > 0 ? result.totalGain : 0), "safe", "Investment returns above cost")
+            + resultCellSplit(result.totalInvested, result.totalGain > 0 ? result.totalGain : 0, result.futureCost, sipYoursPct, sipReturnsPct)
+            + resultCellDual("Return Multiple", sipAbsMultiple + "×", "Absolute", sipRealMultiple + "×", "Real")
             + '</div>';
         }
 
@@ -2134,12 +2197,15 @@
         if (result.mode !== "lumpsum" && result.yearsToGoal >= 3) {
           var r = result.monthlyRate;
           var su = result.stepUp || 0;
+          var currentSIP = result.monthlySIP || 0;
           var sip1yr = calcStepUpSIP(result.futureCost, result.yearsToGoal - 1, r, su);
           var sip2yr = calcStepUpSIP(result.futureCost, result.yearsToGoal - 2, r, su);
+          var delta1 = sip1yr - currentSIP;
+          var delta2 = sip2yr - currentSIP;
           html += '<div class="delay-callout">'
-            + '<div class="delay-title">If you start later</div>'
-            + '<div class="delay-line">Start 1 year from now — <strong>' + fmtINR(sip1yr) + '/month</strong></div>'
-            + (result.yearsToGoal >= 4 ? '<div class="delay-line">Start 2 years from now — <strong>' + fmtINR(sip2yr) + '/month</strong></div>' : '')
+            + '<div class="delay-title">Cost of waiting</div>'
+            + '<div class="delay-line">If you delay starting by 1 year, your SIP would be <strong>' + fmtINR(sip1yr) + '/month</strong> <span class="delay-delta">(+' + fmtINR(delta1) + ' more)</span>.</div>'
+            + (result.yearsToGoal >= 4 ? '<div class="delay-line">If you delay starting by 2 years, it rises to <strong>' + fmtINR(sip2yr) + '/month</strong> <span class="delay-delta">(+' + fmtINR(delta2) + ' more)</span>.</div>' : '')
             + '</div>';
         }
 
@@ -2150,18 +2216,61 @@
         // Income affordability: only for SIP and Both modes
         if (result.mode === "lumpsum") {
           document.getElementById("affordCard").classList.add("hidden");
+          // Lumpsum has no affordability step — show link straight away
+          showScrollHint();
         } else {
           document.getElementById("affordCard").classList.remove("hidden");
+          hideScrollHint(); // wait for income + expenses before showing
           renderAffordability(result);
         }
-        showScrollHint();
       }
 
-      function resultCell(label, value, colorClass, sub) {
+      function resultCell(label, value, colorClass, sub, splitSub) {
+        var subHtml;
+        if (splitSub) {
+          subHtml = '<div class="result-sub split">'
+            + '<span class="split-yours">' + splitSub.yours + '</span>'
+            + '<span>·</span>'
+            + '<span class="split-returns">' + splitSub.returns + '</span>'
+            + '</div>';
+        } else {
+          subHtml = '<div class="result-sub">' + sub + '</div>';
+        }
         return '<div class="result-cell">'
           + '<div class="result-label">' + label + '</div>'
           + '<div class="result-value' + (colorClass ? ' ' + colorClass : '') + '">' + value + '</div>'
+          + subHtml
+          + '</div>';
+      }
+      function resultCellPrimary(label, value, colorClass, sub) {
+        return '<div class="result-cell primary">'
+          + '<div class="result-label">' + label + '</div>'
+          + '<div class="result-value' + (colorClass ? ' ' + colorClass : '') + '">' + value + '</div>'
           + '<div class="result-sub">' + sub + '</div>'
+          + '</div>';
+      }
+      function resultCellSplit(invested, gains, futureCost, yoursPct, returnsPct) {
+        var tipInvested = 'This is every rupee you put in yourself — through discipline, every single month. No magic here, just your commitment showing up.';
+        var tipGains = 'This is the bonus your money earned by being invested. The market did this work for you, while you slept. The longer you stay invested, the bigger this gets.';
+        return '<div class="result-cell">'          + '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;">'          +   '<div>'          +     '<div class="result-label">You Put In <i class="tip-icon" data-tip="' + tipInvested + '">i</i></div>'          +     '<div class="result-value neutral">' + fmtINR(invested) + '</div>'          +   '</div>'          +   '<div style="text-align:right;">'          +     '<div class="result-label">Projected Gains <i class="tip-icon" data-tip="' + tipGains + '">i</i></div>'          +     '<div class="result-value safe">' + fmtINR(gains) + '</div>'          +   '</div>'          + '</div>'          + '<div style="height:4px;border-radius:3px;overflow:hidden;display:flex;margin-top:0.7rem;">'          +   '<div style="width:' + yoursPct + '%;background:var(--neutral);transition:width 0.5s ease;"></div>'          +   '<div style="width:' + returnsPct + '%;background:var(--safe);transition:width 0.5s ease;"></div>'          + '</div>'          + '</div>';
+      }
+
+      function resultCellDual(label, val1, label1, val2, label2) {
+        var tip1 = 'If you invest \u20b91 today at this return rate, it grows to ' + val1 + ' over these years \u2014 no inflation adjustment. Just the raw growth of your money.';
+        var tip2 = 'Inflation-adjusted. Prices rise every year, so your money buys less over time. After removing that effect, ' + val2 + ' is how much your real purchasing power actually grows. This is what truly matters.';
+        return '<div class="result-cell">'
+          + '<div class="result-label">' + label + '</div>'
+          + '<div style="display:flex;gap:2.5rem;align-items:baseline;flex-wrap:wrap;margin-top:0.15rem;">'
+          + '<div>'
+          +   '<div class="result-value accent">' + val1 + '</div>'
+          +   '<div class="result-sub">' + label1 + ' <i class="tip-icon" data-tip="' + tip1 + '">i</i></div>'
+          + '</div>'
+          + '<div style="color:var(--border);font-size:1.2rem;align-self:center;">|</div>'
+          + '<div>'
+          +   '<div class="result-value safe">' + val2 + '</div>'
+          +   '<div class="result-sub">' + label2 + ' <i class="tip-icon" data-tip="' + tip2 + '">i</i></div>'
+          + '</div>'
+          + '</div>'
           + '</div>';
       }
 
@@ -2182,22 +2291,18 @@
         renderChart(result);
       }
 
-      // ── SCROLL HINT ──
-      var _scrollHintDismissed = false;
+      // ── SEND RESULTS LINK ──
       function showScrollHint() {
-        if (_scrollHintDismissed) return;
         var shareCard = document.getElementById("shareCard");
         var rect = shareCard.getBoundingClientRect();
-        // Only show if share card is below the viewport
         if (rect.top > window.innerHeight) {
-          document.getElementById("scrollHint").classList.add("visible");
+          document.getElementById("sendResultsLink").style.display = "block";
         }
       }
       function hideScrollHint() {
-        document.getElementById("scrollHint").classList.remove("visible");
+        document.getElementById("sendResultsLink").style.display = "none";
       }
       function scrollToShare() {
-        _scrollHintDismissed = true;
         hideScrollHint();
         document.getElementById("shareCard").scrollIntoView({ behavior: "smooth", block: "start" });
       }
@@ -2263,7 +2368,7 @@
           "Investment Type      : " + (result.mode === "lumpsum" ? "Lumpsum (One-Time)" : result.mode === "both" ? "Lumpsum + SIP (Combined)" : "SIP (Monthly)"),
           "Current Cost         : " + fmtINR(result.currentCost),
           "Years to Goal        : " + result.yearsToGoal + " years",
-          "Expected Price Rise  : " + result.priceInflation + "% p.a.",
+          "Inflation Rate       : " + result.priceInflation + "% p.a.",
           "Expected Return      : " + result.investReturn + "% p.a.",
         ];
 
@@ -2287,24 +2392,24 @@
 
         if (result.mode === "lumpsum") {
           lines.push("Lumpsum Needed Today : " + fmtINR(result.lumpsum));
-          lines.push("Expected Corpus Gain : " + fmtINR(result.totalGain > 0 ? result.totalGain : 0));
+          lines.push("Projected Gains       : " + fmtINR(result.totalGain > 0 ? result.totalGain : 0));
         } else if (result.mode === "both") {
-          lines.push("Lumpsum Invested     : " + fmtINR(result.lumpsumAmount));
+          lines.push("Lumpsum You'll Put In: " + fmtINR(result.lumpsumAmount));
           if (result.lumpsumCoversGoal) {
             lines.push("Monthly SIP Needed   : Not required — lumpsum covers the goal");
           } else {
             var sipLabel2 = result.stepUp > 0 ? "Starting SIP (grows " + result.stepUp + "% yearly)" : "Monthly SIP Needed";
             lines.push(sipLabel2 + "   : " + fmtINR(result.monthlySIP));
-            lines.push("Total I'll Invest    : " + fmtINR(result.totalInvested));
+            lines.push("You'll Put In        : " + fmtINR(result.totalInvested));
           }
-          lines.push("Expected Corpus Gain : " + fmtINR(result.totalGain));
+          lines.push("Projected Gains       : " + fmtINR(result.totalGain));
         } else {
           var sipLabel = result.stepUp > 0
             ? "Starting SIP (grows " + result.stepUp + "% yearly)"
             : "Monthly SIP Needed";
           lines.push(sipLabel + "   : " + fmtINR(result.monthlySIP));
-          lines.push("Total I'll Invest    : " + fmtINR(result.totalInvested));
-          lines.push("Expected Corpus Gain : " + fmtINR(result.totalGain > 0 ? result.totalGain : 0));
+          lines.push("You'll Put In        : " + fmtINR(result.totalInvested));
+          lines.push("Projected Gains       : " + fmtINR(result.totalGain > 0 ? result.totalGain : 0));
         }
 
         if (income > 0 && result.mode !== "lumpsum") {
@@ -2457,33 +2562,50 @@
         renderAffordability(result);
       }
 
+      function clearExpensesError() {
+        document.getElementById("monthlyExpenses").classList.remove("field-error");
+        document.getElementById("expensesError").classList.remove("show");
+      }
+
       function renderAffordability(result) {
         var incomeRaw = document.getElementById("monthlyIncome").value.replace(/[^0-9]/g, "");
         var income = parseInt(incomeRaw, 10) || 0;
         var expensesRaw = document.getElementById("monthlyExpenses").value.replace(/[^0-9]/g, "");
         var expenses = parseInt(expensesRaw, 10) || 0;
-        var verdict = document.getElementById("affordVerdict");
-        var nudge   = document.getElementById("affordNudge");
+        var verdict  = document.getElementById("affordVerdict");
+        var nudge    = document.getElementById("affordNudge");
+        var surplusRow = document.getElementById("surplusRow");
+        var surplusDisplay = document.getElementById("surplusDisplay");
 
+        // No income — reset everything
         if (!income) {
           verdict.className = "afford-verdict";
           nudge.style.display = "";
+          surplusRow.classList.remove("show");
+          clearExpensesError();
           return;
         }
         nudge.style.display = "none";
 
-        var surplus = income - expenses;
-
-        // Hold verdict until expenses are entered
+        // Income entered but no expenses — make expenses mandatory
         if (!expenses) {
           verdict.className = "afford-verdict";
           document.getElementById("affordMsg").innerHTML = "";
           document.getElementById("affordIcon").textContent = "";
           document.getElementById("affordTitle").textContent = "";
+          surplusRow.classList.remove("show");
+          document.getElementById("monthlyExpenses").classList.add("field-error");
+          document.getElementById("expensesError").classList.add("show");
           return;
         }
 
-        // If expenses >= income, savings capacity is zero — flag immediately
+        var surplus = income - expenses;
+
+        // Show surplus read-only field
+        surplusRow.classList.add("show");
+        surplusDisplay.value = surplus > 0 ? formatIndian(surplus) : "0";
+
+        // If expenses >= income — no capacity
         if (surplus <= 0) {
           verdict.className = "afford-verdict show red";
           document.getElementById("affordIcon").textContent = "🔴";
@@ -2496,7 +2618,6 @@
 
         var base = surplus;
 
-        // For lumpsum, use annual EMI equivalent for affordability
         var sipAmount, modeIsLumpsum;
         if (result.mode === "lumpsum") {
           sipAmount = result.lumpsum / (result.yearsToGoal * 12);
@@ -2511,53 +2632,53 @@
 
         var pct = (sipAmount / base) * 100;
         var stepUp = result.stepUp || 0;
-        var baseLabel = "your savings capacity";
+        var baseLabel = "your monthly surplus";
 
         var tier, icon, title, msg, skills;
 
-        if (pct <= 20) {
+        if (pct <= 50) {
           tier  = "green";
           icon  = "✅";
-          title = "Very Achievable — " + pct.toFixed(0) + "% of " + baseLabel;
-          msg   = "This fits " + baseLabel + " well. You can reach this goal without any strain.";
+          title = "Comfortable — " + pct.toFixed(0) + "% of " + baseLabel;
+          msg   = "This goal fits well within your surplus. You can reach it without putting pressure on your lifestyle.";
           skills = null;
 
-        } else if (pct <= 35) {
+        } else if (pct <= 80) {
           tier  = "amber";
           icon  = "🟡";
-          title = "Manageable — " + pct.toFixed(0) + "% of " + baseLabel;
+          title = "Moderate — " + pct.toFixed(0) + "% of " + baseLabel;
           if (!modeIsLumpsum && stepUp === 0) {
-            msg = "Doable, but tight. Cover your fixed expenses first."
+            msg = "Doable with discipline — you'll need to be intentional about spending."
               + "<br><br>💡 <strong>A step-up SIP lets you start smaller and increase each year</strong> — <span class='scroll-up-link' onclick='scrollToStepUp()'>↑ try the slider above</span>. Growing your income will make this easier over time.";
           } else {
-            msg = "Doable, but tight. Growing your income will make this easier over time.";
+            msg = "Doable with discipline — you'll need to be intentional about spending. Growing your income will give you more breathing room.";
           }
           skills = null;
 
-        } else if (pct <= 50) {
+        } else if (pct <= 100) {
           tier  = "orange";
           icon  = "⚠️";
-          title = "Heavy Commitment — " + pct.toFixed(0) + "% of " + baseLabel;
+          title = "Challenging — " + pct.toFixed(0) + "% of " + baseLabel;
           var r = result.monthlyRate;
           var sip2yr = calcStepUpSIP(result.futureCost, result.yearsToGoal + 2, r, stepUp);
           var sip5yr = calcStepUpSIP(result.futureCost, result.yearsToGoal + 5, r, stepUp);
           var pct2yr = (sip2yr / base) * 100;
           var pct5yr = (sip5yr / base) * 100;
-          var delayMsg = "<br><br>⏳ <strong>Delaying your goal also helps:</strong> Adding 2 years brings your SIP down to " + fmtINR(sip2yr) + " (" + pct2yr.toFixed(0) + "% of " + baseLabel + "). Adding 5 years brings it to " + fmtINR(sip5yr) + " (" + pct5yr.toFixed(0) + "% of " + baseLabel + ").";
+          var delayMsg = "<br><br>⏳ <strong>Extending your timeline helps:</strong> Adding 2 years brings your SIP to " + fmtINR(sip2yr) + " (" + pct2yr.toFixed(0) + "% of " + baseLabel + "). Adding 5 years brings it to " + fmtINR(sip5yr) + " (" + pct5yr.toFixed(0) + "% of " + baseLabel + ").";
           if (!modeIsLumpsum && stepUp === 0) {
             var suggestedSIP = calcStepUpSIP(result.futureCost, result.yearsToGoal, r, 10);
             var suggestedPct = (suggestedSIP / base) * 100;
-            msg = pct.toFixed(0) + "% of " + baseLabel + " is a stretch."
+            msg = pct.toFixed(0) + "% of " + baseLabel + " leaves very little buffer."
               + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + fmtINR(suggestedSIP) + " — that's " + suggestedPct.toFixed(0) + "% of " + baseLabel + ".</strong> "
               + "<span class='scroll-up-link' onclick='scrollToStepUp()'>↑ Try the step-up slider</span>"
               + delayMsg
-              + "<br><br>Growing your income is the most direct path to making this truly comfortable.";
+              + "<br><br>Growing your income is the most direct path to making this comfortable.";
           } else if (!modeIsLumpsum && stepUp > 0) {
-            msg = "Even with a " + stepUp + "% step-up, " + pct.toFixed(0) + "% of " + baseLabel + " is heavy."
+            msg = "Even with a " + stepUp + "% step-up, " + pct.toFixed(0) + "% of " + baseLabel + " leaves very little room."
               + delayMsg
               + "<br><br>Growing your income will change the math more than anything else.";
           } else {
-            msg = "This lumpsum is " + pct.toFixed(0) + "% of " + baseLabel + " — a big commitment. Consider building it over time with a SIP."
+            msg = "This lumpsum is " + pct.toFixed(0) + "% of " + baseLabel + " — a significant commitment. Consider building it over time with a SIP."
               + delayMsg;
           }
           skills = null;
@@ -2565,7 +2686,7 @@
         } else {
           tier  = "red";
           icon  = "🔴";
-          title = "Goal Needs More Firepower — " + pct.toFixed(0) + "% of " + baseLabel;
+          title = "Exceeds Your Surplus";
           var r2 = result.monthlyRate;
           var sip2yrR = calcStepUpSIP(result.futureCost, result.yearsToGoal + 2, r2, stepUp);
           var sip5yrR = calcStepUpSIP(result.futureCost, result.yearsToGoal + 5, r2, stepUp);
@@ -2575,19 +2696,19 @@
           if (!modeIsLumpsum && stepUp === 0) {
             var suggestedSIP2 = calcStepUpSIP(result.futureCost, result.yearsToGoal, r2, 10);
             var suggestedPct2 = (suggestedSIP2 / base) * 100;
-            if (suggestedPct2 <= 40) {
-              msg = "At " + pct.toFixed(0) + "% of " + baseLabel + ", a flat SIP won't reach this goal."
+            if (suggestedPct2 <= 80) {
+              msg = "This SIP exceeds your current surplus — it can't be funded from what's left after expenses."
                 + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + fmtINR(suggestedSIP2) + " — that's " + suggestedPct2.toFixed(0) + "% of " + baseLabel + ".</strong> "
                 + "<span class='scroll-up-link' onclick='scrollToStepUp()'>↑ Try the step-up slider</span>"
                 + delayMsgR
                 + "<br><br>Growing your income is the most direct path to closing this gap.";
             } else {
-              msg = "At " + pct.toFixed(0) + "% of " + baseLabel + ", this goal is a stretch even with a step-up SIP."
+              msg = "This SIP exceeds your current surplus. Even a step-up approach would be a stretch."
                 + delayMsgR
-                + "<br><br>Adjusting the goal amount or growing your income will also help.";
+                + "<br><br>Adjusting the goal amount or growing your income will make the biggest difference.";
             }
           } else {
-            msg = "At " + pct.toFixed(0) + "% of " + baseLabel + ", the gap is significant."
+            msg = "This SIP exceeds your current surplus — the goal can't be funded from what's left after expenses."
               + delayMsgR
               + "<br><br>Growing your income is the most direct path to closing this gap.";
           }
@@ -2615,6 +2736,9 @@
           skillsEl.innerHTML = skills;
           verdict.querySelector(".afford-verdict-body").appendChild(skillsEl);
         }
+
+        // All details filled — show send link
+        showScrollHint();
       }
 
       function scrollToStepUp() {
