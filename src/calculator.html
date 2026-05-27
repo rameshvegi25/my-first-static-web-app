@@ -1209,9 +1209,26 @@
         margin-bottom: 0.8rem;
         opacity: 0.4;
       }
+
+      /* ── EMBED MODE (hide chrome when loaded inside iframe) ── */
+      body.embedded nav,
+      body.embedded header.hero,
+      body.embedded footer {
+        display: none !important;
+      }
+      body.embedded {
+        background: transparent;
+      }
     </style>
   </head>
   <body>
+
+    <script>
+      // Apply .embedded instantly to avoid flash of nav/footer
+      if (new URLSearchParams(window.location.search).get('embed') === 'true') {
+        document.body.classList.add('embedded');
+      }
+    </script>
 
     <!-- ── NAV ── -->
     <nav>
