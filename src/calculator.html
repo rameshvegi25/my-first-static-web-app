@@ -771,6 +771,69 @@
         margin: 0;
       }
 
+      /* ── PHILOSOPHY ACCORDION ── */
+      .philosophy-accordion {
+        border: 1px solid rgba(200,169,110,0.2);
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--surface);
+      }
+      .philosophy-trigger {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.2rem 1.6rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: var(--sans);
+        font-size: 0.88rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: var(--accent);
+        text-align: left;
+        gap: 1rem;
+        transition: background 0.15s;
+      }
+      .philosophy-trigger:hover { background: var(--accent-glow); }
+      .philosophy-chevron {
+        font-size: 1rem;
+        color: var(--accent);
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+      }
+      .philosophy-trigger[aria-expanded="true"] .philosophy-chevron {
+        transform: rotate(180deg);
+      }
+      .philosophy-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
+      .philosophy-body.open {
+        max-height: 600px;
+      }
+      .philosophy-content {
+        padding: 0 1.6rem 1.6rem;
+        border-top: 1px solid rgba(200,169,110,0.12);
+      }
+      .philosophy-content p {
+        font-size: 0.92rem;
+        font-weight: 300;
+        line-height: 1.75;
+        color: var(--prose-text);
+        margin: 0 0 1rem;
+      }
+      .philosophy-content p:last-child { margin-bottom: 0; }
+      .philosophy-closing {
+        font-size: 0.95rem !important;
+        font-weight: 500 !important;
+        color: var(--accent) !important;
+        font-style: italic;
+        margin-top: 1.4rem !important;
+      }
+
       /* ── FOOTER ── */
       footer {
         border-top: 1px solid var(--border);
@@ -1357,7 +1420,27 @@
 
     <hr class="section-sep" />
 
-    <!-- FOOTER -->
+    <!-- PHILOSOPHY ACCORDION -->
+    <section class="section" style="padding-top:0;">
+      <div class="philosophy-accordion" id="philosophyAccordion">
+        <button class="philosophy-trigger" onclick="togglePhilosophy()" aria-expanded="false">
+          <span>Why I built this calculator differently</span>
+          <span class="philosophy-chevron">▾</span>
+        </button>
+        <div class="philosophy-body" id="philosophyBody">
+          <div class="philosophy-content">
+            <p>Most calculators start by asking how much you can invest. I never understood why.</p>
+            <p>Nobody lies awake thinking about SIPs. They think about the house they want to come home to, the college they want their child to walk into, the day they can finally stop worrying about money. The goal comes first. The money is just how you get there.</p>
+            <p>So I built this the other way around.</p>
+            <p>Tell me what you want. When you need it. I'll work out what it might cost by then — and what you need to start doing today. Not someday, not when you're ready, but today. Because the most expensive thing in investing isn't a bad fund. It's a late start.</p>
+            <p>The step-up option is there for the same reason. You don't need to be a big investor today. You just need to start. Your income will grow, your SIP will grow with it, and your goal will be waiting right where you left it.</p>
+            <p class="philosophy-closing">The goal was always yours. Now the plan is too.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-sep" />
     <footer>
       <div class="footer-brand">Mutual Fund and NPS distribution services by Vegi Ramesh</div>
       <div class="footer-links">
@@ -2585,6 +2668,15 @@
         window.addEventListener("scroll", hideTip, { passive: true });
         window.addEventListener("resize", hideTip, { passive: true });
       })();
+    </script>
+    <script>
+      function togglePhilosophy() {
+        var btn = document.getElementById("philosophyAccordion").querySelector(".philosophy-trigger");
+        var body = document.getElementById("philosophyBody");
+        var isOpen = body.classList.contains("open");
+        body.classList.toggle("open", !isOpen);
+        btn.setAttribute("aria-expanded", String(!isOpen));
+      }
     </script>
   </body>
 </html>
