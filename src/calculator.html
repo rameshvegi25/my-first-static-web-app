@@ -771,6 +771,32 @@
         margin: 0;
       }
 
+      .delay-callout {
+        margin-top: 1.2rem;
+        padding: 0.9rem 1.1rem;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+      .delay-title {
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.5rem;
+      }
+      .delay-line {
+        font-size: 0.88rem;
+        font-weight: 300;
+        color: var(--prose-text);
+        line-height: 1.7;
+      }
+      .delay-line strong {
+        font-weight: 500;
+        color: var(--text);
+      }
+
       /* ── PHILOSOPHY ACCORDION ── */
       .philosophy-accordion {
         border: 1px solid rgba(200,169,110,0.2);
@@ -2057,6 +2083,19 @@
             + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "After " + result.priceInflation + "% p.a. inflation")
             + resultCell("Total You'll Invest", fmtINR(result.totalInvested), "", "Over " + result.yearsToGoal * 12 + " months")
             + resultCell("Expected Corpus Gain", fmtINR(result.totalGain > 0 ? result.totalGain : 0), "safe", "Investment returns above cost")
+            + '</div>';
+        }
+
+        // Delay cost — only for SIP/both modes and years >= 3
+        if (result.mode !== "lumpsum" && result.yearsToGoal >= 3) {
+          var r = result.monthlyRate;
+          var su = result.stepUp || 0;
+          var sip1yr = calcStepUpSIP(result.futureCost, result.yearsToGoal - 1, r, su);
+          var sip2yr = calcStepUpSIP(result.futureCost, result.yearsToGoal - 2, r, su);
+          html += '<div class="delay-callout">'
+            + '<div class="delay-title">If you start later</div>'
+            + '<div class="delay-line">Start 1 year from now — <strong>' + fmtINR(sip1yr) + '/month</strong></div>'
+            + (result.yearsToGoal >= 4 ? '<div class="delay-line">Start 2 years from now — <strong>' + fmtINR(sip2yr) + '/month</strong></div>' : '')
             + '</div>';
         }
 
