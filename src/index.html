@@ -946,6 +946,29 @@
       .fade-up:nth-child(3) {
         animation-delay: 0.4s;
       }
+
+      /* ── GOAL CALCULATOR RESPONSIVE ── */
+      .calc-mobile-cta {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 3rem 1.5rem;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: var(--surface);
+      }
+      .calc-desktop-embed {
+        display: block;
+      }
+      @media (max-width: 768px) {
+        .calc-mobile-cta {
+          display: flex;
+        }
+        .calc-desktop-embed {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -962,8 +985,7 @@
           ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="currentColor" style="vertical-align:middle;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a
         >
         <a
-          href="https://yellow-mud-047def500.7.azurestaticapps.net/calculator.html"
-		  target = "_blank"
+          href="#calculator"
           class="nav-calculator-btn"
           title="Goal Planning Calculator"
           aria-label="Goal Planning Calculator"
@@ -997,7 +1019,7 @@
       <a href="#use-cases">Use Cases</a>
       <a href="#risk-spectrum">Risk Spectrum</a>
       <a href="#whats-next">Get Started</a>
-      <a href="https://yellow-mud-047def500.7.azurestaticapps.net/calculator.html" target = "_blank">Goal Calculator</a>
+      <a href="#calculator">Goal Calculator</a>
     </nav>
 
     <!-- HERO -->
@@ -4580,6 +4602,70 @@
 
     <hr class="section-sep" />
 
+    <!-- GOAL CALCULATOR -->
+    <section class="section" id="calculator">
+      <div class="section-label">🧮 Plan Ahead</div>
+      <h2>Goal <em>Calculator</em></h2>
+      <div class="prose" style="margin-bottom: 1.8rem;">
+        <p>Map your financial goals — retirement, education, a home — to a monthly SIP. Adjust the numbers and see your plan take shape.</p>
+      </div>
+      <!-- Mobile: show a prominent open-in-app button instead of iframe -->
+      <div class="calc-mobile-cta">
+        <div style="font-size: 2.5rem; margin-bottom: 0.8rem;">🧮</div>
+        <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 1.4rem; font-weight: 300;">
+          The calculator works best in full screen on mobile.
+        </p>
+        <a
+          href="https://yellow-mud-047def500.7.azurestaticapps.net/calculator.html"
+          target="_blank"
+          rel="noopener"
+          class="nav-profiling-btn"
+          style="padding: 0.85rem 2.2rem; font-size: 0.95rem; border-radius: 8px; display: inline-block;"
+        >Open Goal Calculator ↗</a>
+      </div>
+
+      <!-- Desktop: embedded iframe -->
+      <div class="calc-desktop-embed" style="
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--surface);
+        position: relative;
+      ">
+        <div id="calc-loader" style="
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 0.8rem;
+          background: var(--surface);
+          z-index: 2;
+          pointer-events: none;
+          transition: opacity 0.4s;
+        ">
+          <div style="color: var(--accent); font-size: 1.6rem;">🧮</div>
+          <div style="color: var(--muted); font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;">Loading Calculator…</div>
+        </div>
+        <iframe
+          src="https://yellow-mud-047def500.7.azurestaticapps.net/calculator.html"
+          title="Goal Planning Calculator"
+          width="100%"
+          height="700"
+          style="display: block; border: none;"
+          loading="lazy"
+          onload="var l=document.getElementById('calc-loader'); if(l){l.style.opacity='0'; setTimeout(function(){l.style.display='none'},400);}"
+        ></iframe>
+      </div>
+      <p style="font-size:0.78rem; color: var(--muted); margin-top: 0.8rem; text-align: center;" class="calc-desktop-embed">
+        Having trouble viewing?
+        <a href="https://yellow-mud-047def500.7.azurestaticapps.net/calculator.html" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none;">Open in a new tab ↗</a>
+      </p>
+    </section>
+
+    <hr class="section-sep" />
+
     <!-- CTA -->
     <section class="section" style="text-align: center; padding-bottom: 4rem">
       <div class="divider-star" style="margin-bottom: 1.8rem">✦ ✦ ✦</div>
@@ -4772,22 +4858,31 @@
         var subnav = document.getElementById("subnav");
         var links = document.querySelectorAll(".subnav a");
         var sections = Array.from(links).map(function (a) {
-          return document.querySelector(a.getAttribute("href"));
+          var href = a.getAttribute("href");
+          if (!href || !href.startsWith("#")) return null;
+          try { return document.querySelector(href); } catch (e) { return null; }
         });
         var lastActive = -1;
+        var OFFSET = 110; // height of sticky nav (60px) + subnav (42px) + a little buffer
         function onScroll() {
-          var scrollY = window.scrollY + 120;
           var active = null;
+          var closestDist = Infinity;
           sections.forEach(function (sec, i) {
-            if (sec && sec.offsetTop <= scrollY) active = i;
+            if (!sec) return;
+            var top = sec.getBoundingClientRect().top;
+            if (top <= OFFSET) {
+              var dist = OFFSET - top; // how far past the line
+              if (dist < closestDist) {
+                closestDist = dist;
+                active = i;
+              }
+            }
           });
           if (active === lastActive) return;
           lastActive = active;
-          links.forEach(function (a, i) {
-            a.classList.toggle("active", i === active);
-          });
-          // Scroll the active link into view within the subnav bar
+          links.forEach(function (a) { a.classList.remove("active"); });
           if (active !== null && links[active]) {
+            links[active].classList.add("active");
             links[active].scrollIntoView({
               behavior: "smooth",
               block: "nearest",
