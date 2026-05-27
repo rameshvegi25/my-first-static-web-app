@@ -432,13 +432,32 @@
         border: 2px solid var(--bg);
         cursor: pointer;
       }
-      .slider-value {
+      .slider-value-input {
         min-width: 52px;
-        text-align: right;
+        width: 58px;
+        text-align: center;
         font-size: 0.88rem;
         font-weight: 500;
         color: var(--accent);
         font-family: var(--sans);
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 0.15rem 0.4rem;
+        outline: none;
+        cursor: text;
+        transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+        -moz-appearance: textfield;
+      }
+      .slider-value-input::-webkit-outer-spin-button,
+      .slider-value-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+      .slider-value-input:hover {
+        border-color: var(--accent);
+      }
+      .slider-value-input:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(200,169,110,0.18);
+        background: var(--surface);
       }
       .slider-limits {
         display: flex;
@@ -839,6 +858,9 @@
         gap: 0.8rem;
         flex-wrap: wrap;
       }
+      .afford-income-row + .afford-income-row {
+        margin-top: 0.9rem;
+      }
       .afford-income-label {
         font-size: 0.78rem;
         font-weight: 500;
@@ -978,6 +1000,9 @@
           flex-direction: column;
           align-items: stretch;
           gap: 0.5rem;
+        }
+        .afford-income-row + .afford-income-row {
+          margin-top: 1.2rem;
         }
         .afford-income-input-wrap { min-width: unset; width: 100%; }
         .afford-income-label { font-size: 0.75rem; }
@@ -1140,7 +1165,7 @@
             <div class="slider-wrap">
               <div class="slider-row">
                 <input type="range" id="yearsToGoal" min="1" max="35" value="7" oninput="syncSlider('yearsToGoal','yearsVal'); onAnyInput();" />
-                <span class="slider-value" id="yearsVal">7 yrs</span>
+                <input class="slider-value-input" id="yearsVal" type="number" min="1" max="35" step="1" value="7" oninput="syncValInput('yearsToGoal','yearsVal'); onAnyInput();" onblur="clampValInput('yearsToGoal','yearsVal'); onAnyInput();" />
               </div>
               <div class="slider-limits"><span>1 yr</span><span>35 yrs</span></div>
             </div>
@@ -1152,7 +1177,7 @@
             <div class="slider-wrap">
               <div class="slider-row">
                 <input type="range" id="priceInflation" min="1" max="20" value="8" step="0.5" oninput="syncSlider('priceInflation','inflationVal'); onAnyInput();" />
-                <span class="slider-value" id="inflationVal">8%</span>
+                <input class="slider-value-input" id="inflationVal" type="number" min="1" max="20" step="0.5" value="8" oninput="syncValInput('priceInflation','inflationVal'); onAnyInput();" onblur="clampValInput('priceInflation','inflationVal'); onAnyInput();" />
               </div>
               <div class="slider-limits"><span>1% p.a.</span><span>20% p.a.</span></div>
             </div>
@@ -1164,7 +1189,7 @@
             <div class="slider-wrap">
               <div class="slider-row">
                 <input type="range" id="investmentReturn" min="1" max="30" value="12" step="0.1" oninput="syncSlider('investmentReturn','returnVal'); onAnyInput();" />
-                <span class="slider-value" id="returnVal">12%</span>
+                <input class="slider-value-input" id="returnVal" type="number" min="1" max="30" step="0.1" value="12" oninput="syncValInput('investmentReturn','returnVal'); onAnyInput();" onblur="clampValInput('investmentReturn','returnVal'); onAnyInput();" />
               </div>
               <div class="slider-limits"><span>1% p.a.</span><span>30% p.a.</span></div>
             </div>
@@ -1176,7 +1201,7 @@
             <div class="slider-wrap">
               <div class="slider-row">
                 <input type="range" id="stepUp" min="0" max="25" value="10" step="1" oninput="syncSlider('stepUp','stepUpVal'); onAnyInput();" />
-                <span class="slider-value" id="stepUpVal">0%</span>
+                <input class="slider-value-input" id="stepUpVal" type="number" min="0" max="25" step="1" value="10" oninput="syncValInput('stepUp','stepUpVal'); onAnyInput();" onblur="clampValInput('stepUp','stepUpVal'); onAnyInput();" />
               </div>
               <div class="slider-limits"><span>0% (flat SIP)</span><span>25% p.a.</span></div>
             </div>
@@ -1204,7 +1229,7 @@
         <!-- Affordability Check -->
         <div class="afford-card hidden" id="affordCard">
           <div class="afford-income-row">
-            <div class="afford-income-label">Your Monthly Income</div>
+            <div class="afford-income-label">Your Monthly Income <span class="tip-icon" data-tip="Enter your take-home salary after all deductions — tax, PF, and any other amounts deducted at source. Use the amount that actually reaches your bank account.">i</span></div>
             <div class="afford-income-input-wrap">
               <span class="afford-income-prefix">₹</span>
               <input
@@ -1218,7 +1243,22 @@
               />
             </div>
           </div>
-          <div class="afford-nudge" id="affordNudge">↑ Enter your income to see if this plan is within your means</div>
+          <div class="afford-income-row" id="expensesRow">
+            <div class="afford-income-label">Monthly Commitments <span class="tip-icon" data-tip="Include all regular outgoings — rent, EMIs, groceries, utilities, subscriptions, and entertainment. The more accurate this is, the better your savings capacity reflects reality.">i</span></div>
+            <div class="afford-income-input-wrap">
+              <span class="afford-income-prefix">₹</span>
+              <input
+                class="afford-income-input"
+                id="monthlyExpenses"
+                type="text"
+                placeholder="e.g. 30,000"
+                autocomplete="off"
+                inputmode="numeric"
+                oninput="formatIncomeInput(this); onIncomeInput();"
+              />
+            </div>
+          </div>
+          <div class="afford-nudge" id="affordNudge">↑ Enter your income (and expenses) to see if this plan is within your means</div>
           <div class="afford-verdict" id="affordVerdict">
             <div class="afford-verdict-icon" id="affordIcon"></div>
             <div class="afford-verdict-body">
@@ -1355,6 +1395,7 @@
           goalName:  document.getElementById("goalName").value,
           cost:      document.getElementById("currentCost").value,
           income:    document.getElementById("monthlyIncome").value,
+          expenses:  document.getElementById("monthlyExpenses").value,
           lumpsum:   document.getElementById("lumpsumAmount").value,
           years:     document.getElementById("yearsToGoal").value,
           inflation: document.getElementById("priceInflation").value,
@@ -1368,6 +1409,7 @@
         document.getElementById("goalName").value      = snap.goalName;
         document.getElementById("currentCost").value   = snap.cost;
         document.getElementById("monthlyIncome").value = snap.income;
+        if (snap.expenses) { document.getElementById("monthlyExpenses").value = snap.expenses; }
         document.getElementById("lumpsumAmount").value = snap.lumpsum;
         document.getElementById("yearsToGoal").value   = snap.years;    syncSlider("yearsToGoal","yearsVal");
         document.getElementById("priceInflation").value= snap.inflation; syncSlider("priceInflation","inflationVal");
@@ -1429,6 +1471,7 @@
         document.getElementById("goalName").value = "";
         document.getElementById("currentCost").value = "";
         document.getElementById("monthlyIncome").value = "";
+        document.getElementById("monthlyExpenses").value = "";
         document.getElementById("lumpsumAmount").value = "";
         // Reset sliders
         document.getElementById("yearsToGoal").value = 7;    syncSlider("yearsToGoal","yearsVal");
@@ -1470,12 +1513,46 @@
       function syncSlider(sliderId, valId) {
         var slider = document.getElementById(sliderId);
         var val = parseFloat(slider.value);
-        var display = sliderId === "yearsToGoal"
-          ? val + (val === 1 ? " yr" : " yrs")
-          : val + "%";
-        document.getElementById(valId).textContent = display;
+        var valInput = document.getElementById(valId);
+        if (valInput) valInput.value = val;
         var min = parseFloat(slider.min), max = parseFloat(slider.max);
         var pct = ((val - min) / (max - min)) * 100;
+        slider.style.background = "linear-gradient(to right, var(--accent) " + pct + "%, var(--border) " + pct + "%)";
+      }
+
+      function clampValInput(sliderId, valId) {
+        var slider = document.getElementById(sliderId);
+        var valInput = document.getElementById(valId);
+        var min = parseFloat(slider.min), max = parseFloat(slider.max);
+        var step = parseFloat(slider.step) || 1;
+        var num = parseFloat(valInput.value);
+        if (isNaN(num)) num = parseFloat(slider.value);
+        num = Math.round(num / step) * step;
+        num = Math.min(max, Math.max(min, num));
+        num = parseFloat(num.toFixed(10));
+        slider.value = num;
+        valInput.value = num;
+        var pct = ((num - min) / (max - min)) * 100;
+        slider.style.background = "linear-gradient(to right, var(--accent) " + pct + "%, var(--border) " + pct + "%)";
+      }
+
+      function syncValInput(sliderId, valId) {
+        var slider = document.getElementById(sliderId);
+        var valInput = document.getElementById(valId);
+        var raw = valInput.value.trim();
+        // Don't process empty or incomplete input — let user finish typing
+        if (raw === "" || raw === "-") return;
+        var num = parseFloat(raw);
+        if (isNaN(num)) return;
+        var min = parseFloat(slider.min), max = parseFloat(slider.max);
+        var step = parseFloat(slider.step) || 1;
+        // Round to nearest step
+        num = Math.round(num / step) * step;
+        // Clamp to range
+        num = Math.min(max, Math.max(min, num));
+        num = parseFloat(num.toFixed(10));
+        slider.value = num;
+        var pct = ((num - min) / (max - min)) * 100;
         slider.style.background = "linear-gradient(to right, var(--accent) " + pct + "%, var(--border) " + pct + "%)";
       }
       ["yearsToGoal","priceInflation","investmentReturn","stepUp"].forEach(function(id) {
@@ -2006,6 +2083,9 @@
 
         var incomeRaw = document.getElementById("monthlyIncome").value.replace(/[^0-9]/g, "");
         var income = parseInt(incomeRaw, 10) || 0;
+        var expensesRaw = document.getElementById("monthlyExpenses").value.replace(/[^0-9]/g, "");
+        var expenses = parseInt(expensesRaw, 10) || 0;
+        var savingsCapacity = income > expenses ? income - expenses : 0;
 
         var lines = [
           "Hi Ramesh, I'm " + name + ".",
@@ -2027,6 +2107,12 @@
 
         if (income > 0) {
           lines.push("Monthly Income        : " + fmtINR(income));
+        }
+        if (expenses > 0) {
+          lines.push("Monthly Commitments  : " + fmtINR(expenses));
+        }
+        if (income > 0 && expenses > 0) {
+          lines.push("Savings Capacity     : " + fmtINR(savingsCapacity));
         }
 
         lines.push("");
@@ -2058,8 +2144,10 @@
         if (income > 0 && result.mode !== "lumpsum") {
           var sipAmt = result.monthlySIP || 0;
           if (sipAmt > 0) {
-            var pct = ((sipAmt / income) * 100).toFixed(0);
-            lines.push("SIP as % of Income   : " + pct + "%");
+            var base = savingsCapacity > 0 ? savingsCapacity : income;
+            var baseLabel = savingsCapacity > 0 ? "Savings Capacity" : "Income";
+            var pct = ((sipAmt / base) * 100).toFixed(0);
+            lines.push("SIP as % of " + baseLabel + "  : " + pct + "%");
           }
         }
 
@@ -2070,6 +2158,35 @@
       }
 
       // ── SHARE FUNCTIONS ──
+      window.copyShareLink = function() {
+        var result = calculate();
+        if (!result) { showToast("⚠ Please fill in your goal details first."); return; }
+        var params = new URLSearchParams();
+        params.set("mode", _mode);
+        params.set("goal", document.getElementById("goalName").value.trim());
+        params.set("cost", document.getElementById("currentCost").value.replace(/,/g,""));
+        params.set("years", document.getElementById("yearsToGoal").value);
+        params.set("inflation", document.getElementById("priceInflation").value);
+        params.set("ret", document.getElementById("investmentReturn").value);
+        params.set("stepup", document.getElementById("stepUp").value);
+        var income = document.getElementById("monthlyIncome").value.replace(/,/g,"");
+        if (income) params.set("income", income);
+        var expenses = document.getElementById("monthlyExpenses").value.replace(/,/g,"");
+        if (expenses) params.set("expenses", expenses);
+        var lumpsum = document.getElementById("lumpsumAmount").value.replace(/,/g,"");
+        if (lumpsum) params.set("lumpsum", lumpsum);
+        var url = window.location.origin + window.location.pathname + "?" + params.toString();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(function() {
+            showToast("✓ Link copied to clipboard!");
+          }).catch(function() {
+            prompt("Copy this link:", url);
+          });
+        } else {
+          prompt("Copy this link:", url);
+        }
+      };
+
       window.buildAndOpenWa = function() {
         if (!validateShareFields()) return false;
         var body = buildShareMessage();
@@ -2177,6 +2294,8 @@
       function renderAffordability(result) {
         var incomeRaw = document.getElementById("monthlyIncome").value.replace(/[^0-9]/g, "");
         var income = parseInt(incomeRaw, 10) || 0;
+        var expensesRaw = document.getElementById("monthlyExpenses").value.replace(/[^0-9]/g, "");
+        var expenses = parseInt(expensesRaw, 10) || 0;
         var verdict = document.getElementById("affordVerdict");
         var nudge   = document.getElementById("affordNudge");
 
@@ -2186,6 +2305,30 @@
           return;
         }
         nudge.style.display = "none";
+
+        var surplus = income - expenses;
+
+        // Hold verdict until expenses are entered
+        if (!expenses) {
+          verdict.className = "afford-verdict";
+          document.getElementById("affordMsg").innerHTML = "";
+          document.getElementById("affordIcon").textContent = "";
+          document.getElementById("affordTitle").textContent = "";
+          return;
+        }
+
+        // If expenses >= income, savings capacity is zero — flag immediately
+        if (surplus <= 0) {
+          verdict.className = "afford-verdict show red";
+          document.getElementById("affordIcon").textContent = "🔴";
+          document.getElementById("affordTitle").textContent = "No Savings Capacity";
+          document.getElementById("affordMsg").innerHTML = "Your expenses equal or exceed your income, leaving nothing to invest. Reducing expenses or growing your income is the first step before planning for this goal.";
+          var existingSkills = verdict.querySelector(".afford-skills-nudge");
+          if (existingSkills) existingSkills.remove();
+          return;
+        }
+
+        var base = surplus;
 
         // For lumpsum, use annual EMI equivalent for affordability
         var sipAmount, modeIsLumpsum;
@@ -2200,67 +2343,87 @@
           modeIsLumpsum = false;
         }
 
-        var pct = (sipAmount / income) * 100;
+        var pct = (sipAmount / base) * 100;
         var stepUp = result.stepUp || 0;
+        var baseLabel = "your savings capacity";
 
         var tier, icon, title, msg, skills;
 
         if (pct <= 20) {
           tier  = "green";
           icon  = "✅";
-          title = "Very Achievable — " + pct.toFixed(0) + "% of your income";
-          msg   = "This fits your income well. You can reach this goal without any strain.";
+          title = "Very Achievable — " + pct.toFixed(0) + "% of " + baseLabel;
+          msg   = "This fits " + baseLabel + " well. You can reach this goal without any strain.";
           skills = null;
 
         } else if (pct <= 35) {
           tier  = "amber";
           icon  = "🟡";
-          title = "Manageable — " + pct.toFixed(0) + "% of your income";
+          title = "Manageable — " + pct.toFixed(0) + "% of " + baseLabel;
           if (!modeIsLumpsum && stepUp === 0) {
             msg = "Doable, but tight. Cover your fixed expenses first."
               + "<br><br>💡 <strong>A step-up SIP lets you start smaller and increase each year</strong> — <span class='scroll-up-link' onclick='scrollToStepUp()'>↑ try the slider above</span>. Growing your income will make this easier over time.";
           } else {
-            msg = "Doable, but tight. Cover your fixed expenses first. Growing your income will make this easier over time.";
+            msg = "Doable, but tight. Growing your income will make this easier over time.";
           }
           skills = null;
 
         } else if (pct <= 50) {
           tier  = "orange";
           icon  = "⚠️";
-          title = "Heavy Commitment — " + pct.toFixed(0) + "% of your income";
+          title = "Heavy Commitment — " + pct.toFixed(0) + "% of " + baseLabel;
+          var r = result.monthlyRate;
+          var sip2yr = calcStepUpSIP(result.futureCost, result.yearsToGoal + 2, r, stepUp);
+          var sip5yr = calcStepUpSIP(result.futureCost, result.yearsToGoal + 5, r, stepUp);
+          var pct2yr = (sip2yr / base) * 100;
+          var pct5yr = (sip5yr / base) * 100;
+          var delayMsg = "<br><br>⏳ <strong>Delaying your goal also helps:</strong> Adding 2 years brings your SIP down to " + fmtINR(sip2yr) + " (" + pct2yr.toFixed(0) + "% of " + baseLabel + "). Adding 5 years brings it to " + fmtINR(sip5yr) + " (" + pct5yr.toFixed(0) + "% of " + baseLabel + ").";
           if (!modeIsLumpsum && stepUp === 0) {
-            var r = result.monthlyRate;
             var suggestedSIP = calcStepUpSIP(result.futureCost, result.yearsToGoal, r, 10);
-            var suggestedPct = (suggestedSIP / income) * 100;
-            msg = pct.toFixed(0) + "% of your income is a stretch."
-              + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + fmtINR(suggestedSIP) + " — that's " + suggestedPct.toFixed(0) + "% of your income.</strong> "
+            var suggestedPct = (suggestedSIP / base) * 100;
+            msg = pct.toFixed(0) + "% of " + baseLabel + " is a stretch."
+              + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + fmtINR(suggestedSIP) + " — that's " + suggestedPct.toFixed(0) + "% of " + baseLabel + ".</strong> "
               + "<span class='scroll-up-link' onclick='scrollToStepUp()'>↑ Try the step-up slider</span>"
-              + "<br><br>To make this truly affordable, your income needs to grow. Upskilling or a side income is the most direct path.";
+              + delayMsg
+              + "<br><br>Growing your income is the most direct path to making this truly comfortable.";
           } else if (!modeIsLumpsum && stepUp > 0) {
-            msg = "Even with a " + stepUp + "% step-up, " + pct.toFixed(0) + "% of your income is heavy. Try extending your timeline by 1–2 years. Or focus on growing your income — that's what will actually change the math.";
+            msg = "Even with a " + stepUp + "% step-up, " + pct.toFixed(0) + "% of " + baseLabel + " is heavy."
+              + delayMsg
+              + "<br><br>Growing your income will change the math more than anything else.";
           } else {
-            msg = "This lumpsum is " + pct.toFixed(0) + "% of your monthly income — a big commitment. Consider building it over time with a SIP. Growing your income will help more than adjusting the amount.";
+            msg = "This lumpsum is " + pct.toFixed(0) + "% of " + baseLabel + " — a big commitment. Consider building it over time with a SIP."
+              + delayMsg;
           }
           skills = null;
 
         } else {
           tier  = "red";
           icon  = "🔴";
-          title = "Goal Needs More Firepower — " + pct.toFixed(0) + "% of your income";
+          title = "Goal Needs More Firepower — " + pct.toFixed(0) + "% of " + baseLabel;
+          var r2 = result.monthlyRate;
+          var sip2yrR = calcStepUpSIP(result.futureCost, result.yearsToGoal + 2, r2, stepUp);
+          var sip5yrR = calcStepUpSIP(result.futureCost, result.yearsToGoal + 5, r2, stepUp);
+          var pct2yrR = (sip2yrR / base) * 100;
+          var pct5yrR = (sip5yrR / base) * 100;
+          var delayMsgR = "<br><br>⏳ <strong>Extending your timeline helps significantly:</strong> Adding 2 years brings your SIP to " + fmtINR(sip2yrR) + " (" + pct2yrR.toFixed(0) + "% of " + baseLabel + "). Adding 5 years brings it to " + fmtINR(sip5yrR) + " (" + pct5yrR.toFixed(0) + "% of " + baseLabel + ").";
           if (!modeIsLumpsum && stepUp === 0) {
-            var r2 = result.monthlyRate;
             var suggestedSIP2 = calcStepUpSIP(result.futureCost, result.yearsToGoal, r2, 10);
-            var suggestedPct2 = (suggestedSIP2 / income) * 100;
+            var suggestedPct2 = (suggestedSIP2 / base) * 100;
             if (suggestedPct2 <= 40) {
-              msg = "At " + pct.toFixed(0) + "% of your income, a flat SIP won't reach this goal."
-                + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + fmtINR(suggestedSIP2) + " — that's " + suggestedPct2.toFixed(0) + "% of your income.</strong> "
+              msg = "At " + pct.toFixed(0) + "% of " + baseLabel + ", a flat SIP won't reach this goal."
+                + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + fmtINR(suggestedSIP2) + " — that's " + suggestedPct2.toFixed(0) + "% of " + baseLabel + ".</strong> "
                 + "<span class='scroll-up-link' onclick='scrollToStepUp()'>↑ Try the step-up slider</span>"
-                + "<br><br>Affording this goal needs your income to grow. Upskilling is the most direct path.";
+                + delayMsgR
+                + "<br><br>Growing your income is the most direct path to closing this gap.";
             } else {
-              msg = "At " + pct.toFixed(0) + "% of your income, this goal is beyond what your current earnings can support — even with a step-up SIP. Extend your timeline, adjust the goal, or work on growing your income.";
+              msg = "At " + pct.toFixed(0) + "% of " + baseLabel + ", this goal is a stretch even with a step-up SIP."
+                + delayMsgR
+                + "<br><br>Adjusting the goal amount or growing your income will also help.";
             }
           } else {
-            msg = "At " + pct.toFixed(0) + "% of your income, the gap to goal is really huge. The plan is as optimised as it can be. Growing your income is the only way to reach closer to it.";
+            msg = "At " + pct.toFixed(0) + "% of " + baseLabel + ", the gap is significant."
+              + delayMsgR
+              + "<br><br>Growing your income is the most direct path to closing this gap.";
           }
           skills = null;
         }
@@ -2325,6 +2488,10 @@
         if (ret) { document.getElementById("investmentReturn").value = ret; syncSlider("investmentReturn","returnVal"); }
         var stepup = params.get("stepup");
         if (stepup) { document.getElementById("stepUp").value = stepup; syncSlider("stepUp","stepUpVal"); }
+        var income = params.get("income");
+        if (income) document.getElementById("monthlyIncome").value = formatIndian(parseInt(income.replace(/,/g,""), 10));
+        var expenses = params.get("expenses");
+        if (expenses) document.getElementById("monthlyExpenses").value = formatIndian(parseInt(expenses.replace(/,/g,""), 10));
 
         onAnyInput();
       })();
