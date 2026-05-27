@@ -838,11 +838,19 @@
         transition: max-height 0.4s ease;
       }
       .philosophy-body.open {
-        max-height: 600px;
+        max-height: 2000px;
       }
       .philosophy-content {
-        padding: 0 1.6rem 1.6rem;
+        padding: 1.2rem 1.6rem 1.6rem;
         border-top: 1px solid rgba(200,169,110,0.12);
+      }
+      @media (max-width: 480px) {
+        .philosophy-content {
+          padding: 1rem 1.1rem 1.3rem;
+        }
+        .philosophy-trigger {
+          padding: 1rem 1.1rem;
+        }
       }
       .philosophy-content p {
         font-size: 0.92rem;
@@ -850,6 +858,8 @@
         line-height: 1.75;
         color: var(--prose-text);
         margin: 0 0 1rem;
+        overflow-wrap: break-word;
+        word-break: break-word;
       }
       .philosophy-content p:last-child { margin-bottom: 0; }
       .philosophy-closing {
@@ -858,6 +868,36 @@
         color: var(--accent) !important;
         font-style: italic;
         margin-top: 1.4rem !important;
+      }
+      .philosophy-header {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        margin-bottom: 1.1rem;
+        color: var(--accent);
+        font-size: 0.68rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        opacity: 0.65;
+      }
+      .philosophy-header::before,
+      .philosophy-header::after {
+        content: "✦";
+        font-size: 0.58rem;
+      }
+      .philosophy-pull {
+        border-left: 2px solid var(--accent);
+        margin: 1.3rem 0;
+        padding: 0.4rem 0 0.4rem 1.1rem;
+      }
+      .philosophy-pull p {
+        font-family: var(--serif) !important;
+        font-size: 1.05rem !important;
+        font-weight: 400 !important;
+        font-style: italic;
+        color: var(--text) !important;
+        line-height: 1.55 !important;
+        margin: 0 !important;
       }
 
       /* ── FOOTER ── */
@@ -1274,7 +1314,7 @@
 
           <!-- Expected Return on Investment -->
           <div class="form-field full-width">
-            <label class="field-label" for="investmentReturn">Expected Return on Investment <span class="tip-icon" data-tip="How much do you expect your investments to grow each year? Equity mutual fund returns have varied significantly over time. Past performance is not a reliable guide to future returns — use a number you're comfortable with, and consult your distributor if unsure.">ℹ</span></label>
+            <label class="field-label" for="investmentReturn">Expected Return on Investment <span class="tip-icon" data-tip="How much do you expect your investments to grow each year? Equity mutual fund returns have varied significantly over time. Past performance is not a reliable guide to future returns — use a number you're comfortable with, and consult me if unsure.">ℹ</span></label>
             <div class="slider-wrap">
               <div class="slider-row">
                 <input type="range" id="investmentReturn" min="1" max="30" value="12" step="0.1" oninput="syncSlider('investmentReturn','returnVal'); onAnyInput();" />
@@ -1450,15 +1490,19 @@
     <section class="section" style="padding-top:0;">
       <div class="philosophy-accordion" id="philosophyAccordion">
         <button class="philosophy-trigger" onclick="togglePhilosophy()" aria-expanded="false">
-          <span>Why I built this calculator differently</span>
+          <span>The thinking behind this</span>
           <span class="philosophy-chevron">▾</span>
         </button>
         <div class="philosophy-body" id="philosophyBody">
           <div class="philosophy-content">
+            <div class="philosophy-header">A note on the thinking behind this</div>
             <p>Most calculators start by asking how much you can invest. I never understood why.</p>
             <p>Nobody lies awake thinking about SIPs. They think about the house they want to come home to, the college they want their child to walk into, the day they can finally stop worrying about money. The goal comes first. The money is just how you get there.</p>
             <p>So I built this the other way around.</p>
-            <p>Tell me what you want. When you need it. I'll work out what it might cost by then — and what you need to start doing today. Not someday, not when you're ready, but today. Because the most expensive thing in investing isn't a bad fund. It's a late start.</p>
+            <p>Tell me what you want. When you need it. I'll work out what it might cost by then — and what you need to start doing today. Not someday, not when you're ready, but today.</p>
+            <div class="philosophy-pull">
+              <p>The most expensive thing in investing isn't a bad fund. It's a late start.</p>
+            </div>
             <p>The step-up option is there for the same reason. You don't need to be a big investor today. You just need to start. Your income will grow, your SIP will grow with it, and your goal will be waiting right where you left it.</p>
             <p class="philosophy-closing">The goal was always yours. Now the plan is too.</p>
           </div>
@@ -2708,12 +2752,23 @@
         window.addEventListener("resize", hideTip, { passive: true });
       })();
     </script>
+
+
     <script>
       function togglePhilosophy() {
         var btn = document.getElementById("philosophyAccordion").querySelector(".philosophy-trigger");
         var body = document.getElementById("philosophyBody");
         var isOpen = body.classList.contains("open");
-        body.classList.toggle("open", !isOpen);
+        if (!isOpen) {
+          body.classList.add("open");
+          body.style.maxHeight = body.scrollHeight + "px";
+        } else {
+          body.style.maxHeight = body.scrollHeight + "px";
+          requestAnimationFrame(function() {
+            body.style.maxHeight = "0px";
+            body.classList.remove("open");
+          });
+        }
         btn.setAttribute("aria-expanded", String(!isOpen));
       }
     </script>
