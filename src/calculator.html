@@ -3288,32 +3288,28 @@
       (function() {
         var popover = document.getElementById("tipPopover");
         var currentIcon = null;
+        var _justShown = false;   // guard: prevents scroll/resize from closing tooltip immediately after open
+        var _justShownTimer = null;
 
-        function showTip(icon) {
-          if (currentIcon === icon) { hideTip(); return; }
-          if (currentIcon) currentIcon.classList.remove("tip-open");
-          currentIcon = icon;
-          icon.classList.add("tip-open");
-
-          popover.textContent = icon.getAttribute("data-tip");
-
-          // Make it visible offscreen first to measure its size
-          popover.style.left = "-9999px";
-          popover.style.top = "-9999px";
-          popover.classList.remove("tip-visible", "arrow-top", "arrow-bottom");
-          popover.style.display = "block";
+        function positionAndShow(icon) {
+          // Use visualViewport when available (accurate on mobile with keyboard open)
+          var vvp = window.visualViewport;
+          var viewW = vvp ? vvp.width  : window.innerWidth;
+          var viewH = vvp ? vvp.height : window.innerHeight;
+          var vvpOffsetX = vvp ? vvp.offsetLeft : 0;
+          var vvpOffsetY = vvp ? vvp.offsetTop  : 0;
 
           var iconRect = icon.getBoundingClientRect();
           var popW = popover.offsetWidth;
           var popH = popover.offsetHeight;
-          var viewW = window.innerWidth;
-          var viewH = window.innerHeight;
           var margin = 8;
-          var arrowOffset = 12; // px from left edge of popover to arrow centre
 
           // Decide vertical: prefer below, flip above if not enough room
-          var spaceBelow = viewH - iconRect.bottom;
-          var spaceAbove = iconRect.top;
+          // Adjust iconRect relative to visualViewport offset
+          var iconBottom = iconRect.bottom - vvpOffsetY;
+          var iconTop    = iconRect.top    - vvpOffsetY;
+          var spaceBelow = viewH - iconBottom;
+          var spaceAbove = iconTop;
           var below = spaceBelow >= popH + margin || spaceBelow >= spaceAbove;
 
           var top, arrowClass;
@@ -3326,21 +3322,46 @@
           }
 
           // Horizontal: centre on icon, then clamp to screen
-          var idealLeft = iconRect.left + (iconRect.width / 2) - (popW / 2);
-          var left = Math.max(margin, Math.min(idealLeft, viewW - popW - margin));
+          var iconCentreX = iconRect.left + iconRect.width / 2 - vvpOffsetX;
+          var idealLeft   = iconCentreX - popW / 2 + vvpOffsetX;
+          var left = Math.max(margin + vvpOffsetX, Math.min(idealLeft, vvpOffsetX + viewW - popW - margin));
 
           // Arrow horizontal position (relative to popover)
           var arrowLeft = (iconRect.left + iconRect.width / 2) - left - 4;
           arrowLeft = Math.max(10, Math.min(arrowLeft, popW - 20));
           popover.style.setProperty("--arrow-left", arrowLeft + "px");
 
+          popover.classList.remove("arrow-top", "arrow-bottom");
           popover.style.left = left + "px";
-          popover.style.top = top + "px";
+          popover.style.top  = top  + "px";
           popover.classList.add(arrowClass);
 
           requestAnimationFrame(function() {
             popover.classList.add("tip-visible");
           });
+        }
+
+        function showTip(icon) {
+          if (currentIcon === icon) { hideTip(); return; }
+          if (currentIcon) currentIcon.classList.remove("tip-open");
+          currentIcon = icon;
+          icon.classList.add("tip-open");
+
+          popover.textContent = icon.getAttribute("data-tip");
+
+          // Make it visible offscreen first to measure its size
+          popover.style.left = "-9999px";
+          popover.style.top  = "-9999px";
+          popover.classList.remove("tip-visible", "arrow-top", "arrow-bottom");
+          popover.style.display = "block";
+
+          // Guard: ignore resize/scroll events fired immediately after showing
+          // (e.g. soft keyboard dismissing when another element loses focus)
+          clearTimeout(_justShownTimer);
+          _justShown = true;
+          _justShownTimer = setTimeout(function() { _justShown = false; }, 350);
+
+          positionAndShow(icon);
         }
 
         function hideTip() {
@@ -3360,16 +3381,26 @@
           if (!popover.contains(e.target)) hideTip();
         });
 
-        // Mobile: tap
+        // ── MOBILE FIX ──
+        // Intercept touchstart on tip icons with preventDefault.
+        // This stops the browser from blurring the currently focused input,
+        // which prevents the soft keyboard from dismissing and firing a
+        // resize event that would immediately close the tooltip.
+        document.addEventListener("touchstart", function(e) {
+          var icon = e.target.closest(".tip-icon");
+          if (icon) { e.preventDefault(); }
+        }, { passive: false });
+
+        // Mobile tap / desktop click
         document.addEventListener("click", function(e) {
           var icon = e.target.closest(".tip-icon");
           if (icon) { e.stopPropagation(); showTip(icon); return; }
           if (!popover.contains(e.target)) hideTip();
         });
 
-        // Close on scroll or resize
-        window.addEventListener("scroll", hideTip, { passive: true });
-        window.addEventListener("resize", hideTip, { passive: true });
+        // Close on scroll or resize — but not if we just opened the tooltip
+        window.addEventListener("scroll", function() { if (!_justShown) hideTip(); }, { passive: true });
+        window.addEventListener("resize", function() { if (!_justShown) hideTip(); }, { passive: true });
       })();
     </script>
 
