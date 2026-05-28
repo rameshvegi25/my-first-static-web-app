@@ -1694,7 +1694,7 @@
             </div>
           </div>
           <div class="afford-income-row" id="expensesRow">
-            <div class="afford-income-label">Monthly Commitments <span class="tip-icon" data-tip="Include all regular outgoings — rent, EMIs, groceries, utilities, subscriptions, and entertainment. The more accurate this is, the better your savings capacity reflects reality.">i</span></div>
+            <div class="afford-income-label">Monthly Commitments <span class="tip-icon" data-tip="Everything that goes out monthly — rent, EMIs, groceries, utilities, subscriptions, existing SIPs, and anything else you spend regularly.">i</span></div>
             <div class="afford-income-input-wrap">
               <span class="afford-income-prefix">₹</span>
               <input
@@ -2382,7 +2382,7 @@
               }
               invested.push(Math.round(inv2));
               corpus.push(Math.round(corpusVal2));
-              target.push(Math.round(result.futureCost));
+              target.push(Math.round(result.currentCost * Math.pow(1 + result.priceInflation / 100, yr)));
             }
           }
         }
@@ -2405,7 +2405,7 @@
         // update chart legend label for lumpsum vs sip vs both
         var investedLabel = result.mode === "lumpsum" ? "Lumpsum Invested" : result.mode === "both" ? "Total Invested" : "Amount Invested";
         document.getElementById("legendInvested").textContent = investedLabel;
-        var targetLabel = result.mode === "sip" ? "Target Cost" : "Inflating Goal Cost";
+        var targetLabel = "Inflating Goal Cost";
         document.getElementById("legendTarget").textContent = targetLabel;
 
         _chartInstance = new Chart(ctx, {
@@ -2501,6 +2501,7 @@
         _chartInstance.options.plugins.tooltip.backgroundColor = isDark ? "#111827" : "#fff";
         _chartInstance.options.plugins.tooltip.titleColor = isDark ? "#e8e4dc" : "#1c1a14";
         _chartInstance.options.plugins.tooltip.bodyColor = isDark ? "#8a9ab5" : "#6b6353";
+        _chartInstance.options.plugins.tooltip.borderColor = isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)";
         _chartInstance.update();
       }
 
@@ -2531,7 +2532,7 @@
           var lumpsumRealMultiple = Math.pow(1 + realRateL, result.yearsToGoal).toFixed(2);
           html = '<div class="results-grid">'
             + resultCellPrimary("Lumpsum to Invest Today", fmtINR(result.lumpsum), "accent", "One-time investment needed now")
-            + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "After " + result.priceInflation + "% p.a. inflation")
+            + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "What it'll cost in " + result.yearsToGoal + " years (" + result.priceInflation + "% inflation/yr)")
             + resultCellDual("Return Multiple", lumpsumAbsMultiple + "×", "Absolute", lumpsumRealMultiple + "×", "Real")
             + resultCellSplit(result.lumpsum, lumpsumGain, result.futureCost, lumpsumYoursPct, lumpsumReturnsPct)
             + '</div>';
@@ -2543,7 +2544,7 @@
             var bothMultiple = (result.lumpsumFV / result.lumpsumAmount).toFixed(1);
             html = '<div class="results-grid">'
               + resultCellPrimary("Lumpsum Invested Today", fmtINR(result.lumpsumAmount), "accent", "Your one-time investment")
-              + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "After " + result.priceInflation + "% p.a. inflation")
+              + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "What it'll cost in " + result.yearsToGoal + " years (" + result.priceInflation + "% inflation/yr)")
               + resultCell("Your Lumpsum Grows To", fmtINR(result.lumpsumFV), "safe", "At " + result.investReturn + "% p.a. — " + bothMultiple + "× return")
               + resultCell("Surplus Above Goal", fmtINR(surplus > 0 ? surplus : 0), "safe", "Extra corpus beyond your goal")
               + '</div>'
@@ -2562,7 +2563,7 @@
             html = '<div class="results-grid">'
               + resultCellPrimary("Lumpsum Invested Today", fmtINR(result.lumpsumAmount), "accent", "Your one-time investment")
               + resultCellPrimary("Monthly SIP Needed", fmtINR(result.monthlySIP), "accent", sipSubLabel)
-              + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "After " + result.priceInflation + "% p.a. inflation")
+              + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "What it'll cost in " + result.yearsToGoal + " years (" + result.priceInflation + "% inflation/yr)")
               + resultCell("Total You'll Invest", fmtINR(result.totalInvested), "", null,
                   { yours: bothYoursPct + "% your money", returns: bothReturnsPct + "% returns" })
               + resultCell("Investment Growth", fmtINR(result.totalGain > 0 ? result.totalGain : 0), "safe", "Returns above your total investment")
@@ -2585,7 +2586,7 @@
           var sipRealMultiple = Math.pow(1 + realRate, result.yearsToGoal).toFixed(2);
           html = '<div class="results-grid">'
             + resultCellPrimary("Monthly SIP Needed", fmtINR(result.monthlySIP), "accent", sipSubLabel)
-            + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "After " + result.priceInflation + "% p.a. inflation")
+            + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "What it'll cost in " + result.yearsToGoal + " years (" + result.priceInflation + "% inflation/yr)")
             + resultCellSplit(result.totalInvested, result.totalGain > 0 ? result.totalGain : 0, result.futureCost, sipYoursPct, sipReturnsPct)
             + resultCellDual("Return Multiple", sipAbsMultiple + "×", "Absolute", sipRealMultiple + "×", "Real")
             + '</div>';
