@@ -3382,17 +3382,34 @@
         });
 
         // ── MOBILE FIX ──
-        // Intercept touchstart on tip icons with preventDefault.
-        // This stops the browser from blurring the currently focused input,
-        // which prevents the soft keyboard from dismissing and firing a
-        // resize event that would immediately close the tooltip.
+        // On touchstart: preventDefault stops the browser blurring the focused
+        // input (which would dismiss the keyboard and fire a resize → hideTip).
+        // Because preventDefault also cancels the synthetic click, we fire
+        // showTip ourselves on touchend instead.
+        var _touchHandled = false;
+
         document.addEventListener("touchstart", function(e) {
           var icon = e.target.closest(".tip-icon");
-          if (icon) { e.preventDefault(); }
+          if (icon) {
+            e.preventDefault();   // keep input focus / keyboard open
+            _touchHandled = true;
+          }
         }, { passive: false });
 
-        // Mobile tap / desktop click
+        document.addEventListener("touchend", function(e) {
+          var icon = e.target.closest(".tip-icon");
+          if (icon) {
+            e.preventDefault();
+            showTip(icon);
+            _touchHandled = true; // suppress the fallback click below
+            return;
+          }
+          if (!popover.contains(e.target)) hideTip();
+        }, { passive: false });
+
+        // Desktop click (and mobile fallback when touch events weren't involved)
         document.addEventListener("click", function(e) {
+          if (_touchHandled) { _touchHandled = false; return; } // already handled via touchend
           var icon = e.target.closest(".tip-icon");
           if (icon) { e.stopPropagation(); showTip(icon); return; }
           if (!popover.contains(e.target)) hideTip();
