@@ -35,6 +35,7 @@
       .hide-mobile { display: block; }
       @media (max-width: 600px) { .hide-mobile { display: none !important; } }
 
+      [data-theme="light"] {
         --bg: #f7f4ef;
         --surface: #ffffff;
         --surface2: #f0ebe0;
@@ -1144,9 +1145,9 @@
 
     <!-- IN-PAGE SUBNAV -->
     <nav class="subnav" id="subnav">
-      <a href="#who-is-mfd">What is an MFD</a>
+      <a href="#who-is-mfd">Who is an MFD</a>
       <a href="#why-mfd">Why an MFD</a>
-      <a href="#why-ramesh">Why Ramesh</a>
+      <a href="#why-ramesh">Why Me</a>
       <a href="#why-i-chose-this">Why This Role</a>
       <a href="#why-mf">Mutual Funds</a>
       <a href="#how-it-works">How It Works</a>
@@ -1162,7 +1163,7 @@
       <div class="hero-eyebrow">About Me & The Ecosystem</div>
       <h1>Your wealth,<br />protected from <em>hype and fear.</em></h1>
       <p class="hero-sub">
-        Not just a distributor. Someone whose success depends on yours.
+        Someone whose success depends on yours.
       </p>
       <div style="display:flex; gap:0.9rem; justify-content:center; flex-wrap:wrap; margin-bottom:2rem;">
         <a
@@ -1189,20 +1190,15 @@
       <h2>Who is an <em>MFD?</em></h2>
       <div class="prose">
         <p>
-          An MFD — a Mutual Fund Distributor — is someone who helps you invest
-          in mutual funds. Officially, we are registered intermediaries who
-          guide investors toward fund choices and facilitate transactions. But
-          that's the regulatory definition. The human one is more layered.
+          Officially, I am a Mutual Fund Distributor — registered with AMFI,
+          bound by SEBI rules, authorised to facilitate your investments.
         </p>
         <p>
-          In simple terms, an MFD is like a guide — someone who sits between you
-          and the overwhelming world of mutual funds, and helps you make sense
-          of it. They understand your goals, explain your options, and help you
-          put your money to work.
-          <strong
-            >Not a fund manager, not a banker — just someone who helps you
-            invest with clarity.</strong
-          >
+          But the actual job is this: I sit between you and a very noisy
+          financial world, and I help you ignore most of it. I do not manage
+          your money. I do not predict markets.
+          <strong>I help you stay invested, stay calm, and stay on course —
+          especially when everything around you is saying otherwise.</strong>
         </p>
       </div>
     </section>
@@ -1228,8 +1224,8 @@
         <br /><br />
         Because the hardest part of investing is never the steps.
         <strong style="color: var(--text)"
-          >It is always what goes on in your head.</strong
-        >
+          >It is staying the course when everything around you feels uncertain.</strong
+        > Below are My Value adds to You as Your MFD.
       </p>
 
       <!-- Show Details toggle for Why MFD pillars -->
@@ -1300,7 +1296,7 @@
             The more investment content you consume, the more investment ads
             follow you. This is not a coincidence — it is the algorithm at work.
             <strong
-              >That video is not advice. It is an advertisement in
+              >The videos aren't advice. They are advertisement in
               disguise.</strong
             >
           </p>
@@ -1326,7 +1322,7 @@
     <!-- WHY RAMESH -->
     <section class="section" id="why-ramesh">
       <div class="section-label">The difference</div>
-      <h2>So why <em>Ramesh?</em></h2>
+      <h2>So why <em>Me?</em></h2>
       <div class="stopper-card">
         <div class="prose">
           <p>
@@ -1353,10 +1349,10 @@
           <p>
             I also go beyond plain index funds. I study fund types like
             <strong>Smart Beta</strong> — a category that follows clear,
-            rule-based strategies instead of a fund manager's gut feeling. These
+            rule-based strategies instead of a anyone's gut feeling. These
             funds aim to give you better returns for the risk you take, and they
             often cost less than actively managed funds. It is a space not many
-            investors know about — and helping you understand it is part of what
+            investors explore — and helping you understand it is part of what
             I do.
           </p>
         </div>
@@ -1370,14 +1366,6 @@
         </p>
       </div>
       <div class="prose">
-        <p>
-          I have sat with people who came to me after being badly burned. Not by
-          bad luck — by bad advice. A fund that had done very well for three
-          years. A story that made total sense emotionally. They put in their
-          money. And then the market reminded them that past returns mean
-          nothing about the future.
-        </p>
-        <p>That experience changed how I think about this work.</p>
         <p>
           My role is to be your safeguard — not a wall that stops you from
           investing, but the steady voice that asks
@@ -1500,7 +1488,7 @@
                 <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
               </svg>
             </div>
-            <div class="origin-card-title">One flat, zero diversification</div>
+            <div class="origin-card-title">One Flat, zero diversification</div>
             <span class="origin-card-chevron">▾</span>
           </div>
           <div class="origin-card-body"><div class="origin-card-body-inner">Every rupee in one property, one city, one pin code. Absolutely certain it would keep going up. That's not investing — that's a bet.</div></div>
@@ -2828,7 +2816,6 @@
       <div class="section-label">Transparency</div>
       <h2>How I <em>Earn</em></h2>
       <div class="prose">
-        <p>A fair question — and one you deserve a straight answer to.</p>
         <p>
           When you invest in a mutual fund through me, the AMC (Asset Management
           Company) pays me a <strong>trail commission</strong> — a small
@@ -3366,7 +3353,7 @@
           function formatINR(n) {
             if (n >= 10000000) return '₹' + (n / 10000000).toFixed(n % 10000000 === 0 ? 0 : 2) + ' Cr';
             if (n >= 100000)   return '₹' + (n / 100000).toFixed(n % 100000 === 0 ? 0 : 2) + ' L';
-            if (n >= 1000)     return '₹' + (n / 1000).toFixed(n % 1000 === 0 ? 0 : 1) + 'K';
+            if (n >= 1000)     return '₹' + (n / 1000).toFixed(n % 1000 === 0 ? 0 : 1) + ' K';
             return '₹' + n.toLocaleString('en-IN');
           }
 
@@ -3396,11 +3383,11 @@
 
             // corpus & commission text cards
             document.getElementById('corpus-value-display').textContent = formatINR(corpus);
-            document.getElementById('corpus-commission-display').textContent = formatINRFull(commission) + ' / yr';
+            document.getElementById('corpus-commission-display').textContent = '~' + formatINR(commission) + ' / yr';
 
             // callout
             var corpusStr = formatINR(corpus);
-            var commStr = formatINRFull(commission);
+            var commStr = formatINR(commission);
             document.getElementById('corpus-callout').innerHTML =
               'When your corpus reaches ' + corpusStr + ', ' +
               '<strong style="color:var(--text)">that ' + corpusStr + ' is entirely yours</strong>' +
@@ -4011,7 +3998,7 @@
             line-height: 1.6;
           "
         >
-          No commitment, no fee, no hurry — just an honest conversation. Most
+          No commitment, no upfront fee, no hurry — just an honest conversation. Most
           people leave the first call with more clarity than they expected.
           <strong style="color: var(--text)">
             Reach out whenever you're ready.</strong
