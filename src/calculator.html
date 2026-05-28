@@ -194,6 +194,26 @@
         font-size: 1rem;
         font-weight: 300;
       }
+      /* ── HERO SUBTITLE PHRASE ANIMATION ── */
+      @keyframes hero-phrase-in {
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .hero-sub .phrase {
+        display: inline;
+        opacity: 0;
+        animation: hero-phrase-in 0.55s ease forwards;
+      }
+      .hero-sub .phrase-1 { animation-delay: 0.3s; }
+      .hero-sub .phrase-2 { animation-delay: 0.85s; }
+      .hero-sub .phrase .key { color: var(--accent); font-weight: 400; }
+      .hero-sub .phrase .hero-icon {
+        display: inline-block;
+        font-size: 0.85em;
+        vertical-align: middle;
+        margin-right: 0.1em;
+        opacity: 0.85;
+      }
 
       /* ── SECTION ── */
       .section {
@@ -477,6 +497,171 @@
         opacity: 0.85;
       }
 
+      /* ── INFLATION BREAKDOWN ACCORDION ── */
+      .inflation-accordion {
+        border: 1px solid rgba(200,169,110,0.2);
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--surface);
+        margin-bottom: 1.5rem;
+        display: none;
+      }
+      .inflation-accordion.visible { display: block; }
+      .inflation-trigger {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.2rem 1.6rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: var(--sans);
+        font-size: 0.88rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: var(--accent);
+        text-align: left;
+        gap: 1rem;
+        transition: background 0.15s;
+      }
+      .inflation-trigger:hover { background: var(--accent-glow); }
+      .inflation-chevron {
+        font-size: 1rem;
+        color: var(--accent);
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+      }
+      .inflation-trigger[aria-expanded="true"] .inflation-chevron {
+        transform: rotate(180deg);
+      }
+      .inflation-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
+      .inflation-body.open { max-height: 600px; }
+      .inflation-content {
+        padding: 1.2rem 1.6rem 1.6rem;
+        border-top: 1px solid rgba(200,169,110,0.12);
+      }
+      @media (max-width: 480px) {
+        .inflation-content { padding: 1rem 1.1rem 1.3rem; }
+        .inflation-trigger { padding: 1rem 1.1rem; }
+      }
+      .inflation-bar-wrap {
+        margin: 0.6rem 0 1.2rem;
+      }
+      .inflation-bar {
+        height: 10px;
+        border-radius: 5px;
+        overflow: hidden;
+        display: flex;
+        margin-bottom: 0.85rem;
+      }
+      .inflation-bar-segment {
+        transition: width 0.6s ease;
+        height: 100%;
+      }
+      .inflation-bar-segment.yours   { background: var(--neutral); }
+      .inflation-bar-segment.infl    { background: #c8734a; }
+      .inflation-bar-segment.real    { background: var(--safe); }
+      .inflation-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.2rem;
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+      @media (max-width: 600px) {
+        .inflation-legend { gap: 0.45rem 1rem; font-size: 0.74rem; }
+      }
+      .inflation-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .inflation-legend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 3px;
+        flex-shrink: 0;
+      }
+      .inflation-legend-dot.yours { background: var(--neutral); }
+      .inflation-legend-dot.infl  { background: #c8734a; }
+      .inflation-legend-dot.real  { background: var(--safe); }
+      .inflation-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: visible;
+        margin-top: 1.2rem;
+      }
+      @media (max-width: 600px) {
+        .inflation-stats {
+          grid-template-columns: 1fr;
+          overflow: hidden;
+          border-radius: 10px;
+        }
+      }
+      .inflation-stat {
+        background: var(--surface);
+        padding: 1rem 1.1rem;
+        min-width: 0;
+      }
+      .inflation-stat-label {
+        font-size: 0.67rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.35rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .inflation-stat-value {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        font-weight: 600;
+        line-height: 1.1;
+        word-break: break-word;
+      }
+      .inflation-stat-value.yours { color: var(--neutral); }
+      .inflation-stat-value.infl  { color: #c8734a; }
+      .inflation-stat-value.real  { color: var(--safe); }
+      .inflation-stat-sub {
+        font-size: 0.72rem;
+        color: var(--muted);
+        margin-top: 0.2rem;
+        font-weight: 300;
+      }
+      .inflation-note {
+        font-size: 0.8rem;
+        color: var(--muted);
+        font-weight: 300;
+        line-height: 1.6;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border);
+      }
+
+      /* ── INFLATION ACCORDION PULSE ── */
+      @keyframes accordion-pulse {
+        0%   { box-shadow: 0 0 0 0 rgba(200, 169, 110, 0.35); }
+        60%  { box-shadow: 0 0 0 6px rgba(200, 169, 110, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(200, 169, 110, 0); }
+      }
+      .inflation-accordion.pulse-once {
+        animation: accordion-pulse 0.8s ease 5;
+      }
+
       /* ── DANGER TINT (return > 22%) ── */
       #mainCalcCard {
         transition: border-color 0.5s ease, box-shadow 0.5s ease, background 0.5s ease;
@@ -491,6 +676,33 @@
         box-shadow:
           0 0 0 1px rgba(192, 52, 40, 0.25),
           0 4px 32px rgba(192, 52, 40, 0.12);
+      }
+
+      /* ── EXTREME ZONE (return > 24.5%) ── */
+      #mainCalcCard.extreme-zone {
+        border-color: rgba(192, 52, 40, 0.85);
+        background: linear-gradient(
+          135deg,
+          rgba(192, 52, 40, 0.08) 0%,
+          rgba(192, 52, 40, 0.05) 100%
+        );
+        box-shadow:
+          0 0 0 2px rgba(192, 52, 40, 0.45),
+          0 4px 40px rgba(192, 52, 40, 0.22);
+      }
+
+      /* ── SHAKE ANIMATION ── */
+      @keyframes danger-shake {
+        0%, 100% { transform: translateX(0); }
+        15%       { transform: translateX(-6px); }
+        30%       { transform: translateX(6px); }
+        45%       { transform: translateX(-5px); }
+        60%       { transform: translateX(5px); }
+        75%       { transform: translateX(-3px); }
+        90%       { transform: translateX(3px); }
+      }
+      #mainCalcCard.danger-shake {
+        animation: danger-shake 0.5s ease;
       }
 
       /* ── RESULTS CARD ── */
@@ -1280,7 +1492,8 @@
       <div class="hero-eyebrow">Goal Planning Calculator</div>
       <h1>Plan today.<br /><em>Buy it when ready.</em></h1>
       <p class="hero-sub">
-        Enter your goal and expected costs — then find out how much to invest monthly via SIP, as a one-time lumpsum, or a combination of both.
+        <span class="phrase phrase-1">Enter your goal and expected costs —</span>
+        <span class="phrase phrase-2"> then find out <span class="key">how much to invest</span> monthly via <span class="key"><span class="hero-icon">📅</span> SIP</span>, as a one-time <span class="key"><span class="hero-icon">💰</span> lumpsum</span>, or a <span class="key"><span class="hero-icon">💰+📅</span> combination of both</span>.</span>
       </p>
     </header>
 
@@ -1386,10 +1599,10 @@
             <label class="field-label" for="priceInflation">Expected Price Inflation <span class="tip-icon" data-tip="Prices rise every year. This is how much more expensive your goal will get annually. E.g. a ₹8L car today costs ₹14L in 7 years at 8% inflation. For most goals, 6–8% is a safe estimate.">ℹ</span></label>
             <div class="slider-wrap">
               <div class="slider-row">
-                <input type="range" id="priceInflation" min="1" max="20" value="8" step="0.5" oninput="syncSlider('priceInflation','inflationVal'); onAnyInput();" />
-                <input class="slider-value-input" id="inflationVal" type="number" min="1" max="20" step="0.5" value="8" oninput="syncValInput('priceInflation','inflationVal'); onAnyInput();" onblur="clampValInput('priceInflation','inflationVal'); onAnyInput();" />
+                <input type="range" id="priceInflation" min="2" max="12" value="8" step="0.5" oninput="syncSlider('priceInflation','inflationVal'); onAnyInput();" />
+                <input class="slider-value-input" id="inflationVal" type="number" min="2" max="12" step="0.5" value="8" oninput="syncValInput('priceInflation','inflationVal'); onAnyInput();" onblur="clampValInput('priceInflation','inflationVal'); onAnyInput();" />
               </div>
-              <div class="slider-limits"><span>1% p.a.</span><span>20% p.a.</span></div>
+              <div class="slider-limits"><span>2% p.a.</span><span>12% p.a.</span></div>
             </div>
           </div>
 
@@ -1411,10 +1624,10 @@
             <label class="field-label" for="stepUp">Approx. Annual Increase in SIP <span class="tip-icon" data-tip="As your salary grows, you can increase your SIP a little each year. This lets you start with a smaller amount today. E.g. start at ₹5,000, increase by 10% → pay ₹5,500 next year, ₹6,050 the year after.">ℹ</span></label>
             <div class="slider-wrap">
               <div class="slider-row">
-                <input type="range" id="stepUp" min="0" max="25" value="10" step="1" oninput="syncSlider('stepUp','stepUpVal'); onAnyInput();" />
-                <input class="slider-value-input" id="stepUpVal" type="number" min="0" max="25" step="1" value="10" oninput="syncValInput('stepUp','stepUpVal'); onAnyInput();" onblur="clampValInput('stepUp','stepUpVal'); onAnyInput();" />
+                <input type="range" id="stepUp" min="0" max="20" value="10" step="1" oninput="syncSlider('stepUp','stepUpVal'); onAnyInput();" />
+                <input class="slider-value-input" id="stepUpVal" type="number" min="0" max="20" step="1" value="10" oninput="syncValInput('stepUp','stepUpVal'); onAnyInput();" onblur="clampValInput('stepUp','stepUpVal'); onAnyInput();" />
               </div>
-              <div class="slider-limits"><span>0% (flat SIP)</span><span>25% p.a.</span></div>
+              <div class="slider-limits"><span>0% (flat SIP)</span><span>20% p.a.</span></div>
             </div>
           </div>
 
@@ -1515,6 +1728,57 @@
         </div>
         <div class="chart-wrap">
           <canvas id="growthChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Inflation Breakdown Accordion -->
+      <div class="inflation-accordion" id="inflationAccordion">
+        <button class="inflation-trigger" onclick="toggleInflation()" aria-expanded="false">
+          <span>🔍 Curious what inflation does to your plan?</span>
+          <span class="inflation-chevron">▾</span>
+        </button>
+        <div class="inflation-body" id="inflationBody">
+          <div class="inflation-content">
+            <div class="inflation-bar-wrap">
+              <div class="inflation-bar" id="inflationBar">
+                <div class="inflation-bar-segment yours" id="inflBarYours" style="width:0%"></div>
+                <div class="inflation-bar-segment infl"  id="inflBarInfl"  style="width:0%"></div>
+                <div class="inflation-bar-segment real"  id="inflBarReal"  style="width:0%"></div>
+              </div>
+              <div class="inflation-legend">
+                <div class="inflation-legend-item">
+                  <div class="inflation-legend-dot yours"></div>
+                  <span>You put in</span>
+                </div>
+                <div class="inflation-legend-item">
+                  <div class="inflation-legend-dot infl"></div>
+                  <span>Inflation's cut</span>
+                </div>
+                <div class="inflation-legend-item">
+                  <div class="inflation-legend-dot real"></div>
+                  <span>Projected real gains</span>
+                </div>
+              </div>
+            </div>
+            <div class="inflation-stats">
+              <div class="inflation-stat">
+                <div class="inflation-stat-label">You Put In <i class="tip-icon" data-tip="Every rupee you contributed through your SIP — your discipline, month after month.">i</i></div>
+                <div class="inflation-stat-value yours" id="inflStatYours">—</div>
+                <div class="inflation-stat-sub" id="inflStatYoursPct">—</div>
+              </div>
+              <div class="inflation-stat">
+                <div class="inflation-stat-label">Inflation Adjustment <i class="tip-icon" data-tip="Inflation silently reduces what your money can buy over time. This is how much of your corpus simply keeps pace with rising prices — not real growth.">i</i></div>
+                <div class="inflation-stat-value infl" id="inflStatInfl">—</div>
+                <div class="inflation-stat-sub" id="inflStatInflPct">—</div>
+              </div>
+              <div class="inflation-stat">
+                <div class="inflation-stat-label">Real Gains <i class="tip-icon" data-tip="Genuine wealth created above and beyond inflation. The market did this work for you, compounding at a rate higher than inflation.">i</i></div>
+                <div class="inflation-stat-value real" id="inflStatReal">—</div>
+                <div class="inflation-stat-sub" id="inflStatRealPct">—</div>
+              </div>
+            </div>
+            <div class="inflation-note" id="inflationNote"></div>
+          </div>
         </div>
       </div>
 
@@ -1791,7 +2055,22 @@
         if (label) { label.textContent = getReturnZoneLabel(val); label.style.color = color; }
         // Danger tint on calculator card above 22%
         var card = document.getElementById("mainCalcCard");
-        if (card) card.classList.toggle("danger-zone", val > 22);
+        if (card) {
+          card.classList.toggle("danger-zone", val > 22);
+          // Extreme zone: intensified red above 24.5%
+          var wasExtreme = card.classList.contains("extreme-zone");
+          var isExtreme  = val > 24.5;
+          card.classList.toggle("extreme-zone", isExtreme);
+          // One-shot shake when crossing INTO extreme zone
+          if (isExtreme && !wasExtreme) {
+            card.classList.remove("danger-shake");
+            void card.offsetWidth; // force reflow to restart animation
+            card.classList.add("danger-shake");
+            card.addEventListener("animationend", function() {
+              card.classList.remove("danger-shake");
+            }, { once: true });
+          }
+        }
       }
 
       // ── SLIDER SYNC ──
@@ -2382,6 +2661,7 @@
         }
         renderResults(result);
         renderChart(result);
+        renderInflationBreakdown(result);
       }
 
       // ── SEND RESULTS LINK ──
@@ -2838,6 +3118,129 @@
         document.getElementById("stepUpField").scrollIntoView({ behavior: "smooth", block: "center" });
       }
 
+      // ── INFLATION BREAKDOWN ──
+      function toggleInflation() {
+        var body = document.getElementById("inflationBody");
+        var btn  = document.getElementById("inflationAccordion").querySelector(".inflation-trigger");
+        var isOpen = body.classList.contains("open");
+        if (!isOpen) {
+          body.classList.add("open");
+          body.style.maxHeight = body.scrollHeight + "px";
+          // Animate bar segments in after open
+          setTimeout(renderInflationBar, 50);
+        } else {
+          body.style.maxHeight = body.scrollHeight + "px";
+          requestAnimationFrame(function() {
+            body.style.maxHeight = "0px";
+            body.classList.remove("open");
+          });
+        }
+        btn.setAttribute("aria-expanded", String(!isOpen));
+      }
+
+      var _inflationData = null;
+
+      function renderInflationBreakdown(result) {
+        var accordion = document.getElementById("inflationAccordion");
+        if (!result) { accordion.classList.remove("visible"); return; }
+        var wasVisible = accordion.classList.contains("visible");
+        accordion.classList.add("visible");
+
+        // Set up IntersectionObserver to pulse once when scrolled into view
+        if (!wasVisible && !accordion._pulseObserverSet) {
+          accordion._pulseObserverSet = true;
+          var observer = new IntersectionObserver(function(entries, obs) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                accordion.classList.remove("pulse-once");
+                void accordion.offsetWidth;
+                accordion.classList.add("pulse-once");
+                accordion.addEventListener("animationend", function() {
+                  accordion.classList.remove("pulse-once");
+                }, { once: true });
+                obs.disconnect();
+              }
+            });
+          }, { threshold: 0.5 });
+          observer.observe(accordion);
+        }
+
+        var futureCost  = result.futureCost;
+        var currentCost = result.currentCost;
+        var totalInvested, fvAtInflation, inflationCut, realGain;
+
+        if (result.mode === "lumpsum") {
+          // Lumpsum: FV at inflation rate = lumpsum * (1+inflation)^years
+          totalInvested = result.lumpsum;
+          var fvLumpsumAtInflation = result.lumpsum * Math.pow(1 + result.priceInflation / 100, result.yearsToGoal);
+          inflationCut = fvLumpsumAtInflation - totalInvested;
+          if (inflationCut < 0) inflationCut = 0;
+          realGain = futureCost - fvLumpsumAtInflation;
+          if (realGain < 0) realGain = 0;
+        } else {
+          // SIP / Both: FV of contributions compounded at inflation rate
+          totalInvested = result.totalInvested;
+          var inflMonthlyRate = result.priceInflation / 1200;
+          var months = result.yearsToGoal * 12;
+          var startingSIP = result.monthlySIP || 0;
+          var stepUpRate  = (result.stepUp || 0) / 100;
+          fvAtInflation = 0;
+          for (var m = 1; m <= months; m++) {
+            var yi = Math.floor((m - 1) / 12);
+            var mSIP = startingSIP * Math.pow(1 + stepUpRate, yi);
+            fvAtInflation += mSIP * Math.pow(1 + inflMonthlyRate, months - m + 1);
+          }
+          // Also include lumpsum component for "both" mode
+          if (result.mode === "both" && result.lumpsumAmount) {
+            fvAtInflation += result.lumpsumAmount * Math.pow(1 + result.priceInflation / 100, result.yearsToGoal);
+          }
+          inflationCut = fvAtInflation - totalInvested;
+          if (inflationCut < 0) inflationCut = 0;
+          realGain = futureCost - fvAtInflation;
+          if (realGain < 0) realGain = 0;
+        }
+
+        var total = totalInvested + inflationCut + realGain;
+        var yoursPct = Math.round((totalInvested / total) * 100);
+        var inflPct  = Math.round((inflationCut  / total) * 100);
+        var realPct  = 100 - yoursPct - inflPct;
+        if (realPct < 0) realPct = 0;
+
+        _inflationData = { yoursPct, inflPct, realPct, totalInvested, inflationCut, realGain, result };
+
+        // Update stat cells
+        document.getElementById("inflStatYours").textContent    = fmtINR(totalInvested);
+        document.querySelector("#inflationAccordion .inflation-stat-label").childNodes[0].textContent = result.mode === "lumpsum" ? "Lumpsum Invested " : "You Put In ";
+        document.getElementById("inflStatYoursPct").textContent = yoursPct + "% of corpus";
+        document.getElementById("inflStatInfl").textContent     = fmtINR(inflationCut);
+        document.getElementById("inflStatInflPct").textContent  = inflPct + "% of corpus";
+        document.getElementById("inflStatReal").textContent     = fmtINR(realGain);
+        document.getElementById("inflStatRealPct").textContent  = realPct + "% of corpus";
+
+        // Note
+        var noteEl = document.getElementById("inflationNote");
+        var realReturn = ((( 1 + result.investReturn / 100) / (1 + result.priceInflation / 100)) - 1) * 100;
+        noteEl.innerHTML = "At " + result.investReturn + "% return and " + result.priceInflation + "% inflation, your real return is roughly <strong>" + realReturn.toFixed(1) + "% p.a.</strong>. Of your <strong>" + fmtINR(futureCost) + "</strong> corpus, <strong>" + fmtINR(Math.round(inflationCut)) + "</strong> is what inflation accounts for — and <strong>" + fmtINR(Math.round(realGain)) + "</strong> is genuine wealth created above and beyond inflation.";
+
+        // If body is already open, update bar directly (no animation delay needed)
+        var body = document.getElementById("inflationBody");
+        if (body.classList.contains("open")) {
+          renderInflationBar();
+        } else {
+          // Reset bar to 0 so it animates fresh on next open
+          document.getElementById("inflBarYours").style.width = "0%";
+          document.getElementById("inflBarInfl").style.width  = "0%";
+          document.getElementById("inflBarReal").style.width  = "0%";
+        }
+      }
+
+      function renderInflationBar() {
+        if (!_inflationData) return;
+        document.getElementById("inflBarYours").style.width = _inflationData.yoursPct + "%";
+        document.getElementById("inflBarInfl").style.width  = _inflationData.inflPct  + "%";
+        document.getElementById("inflBarReal").style.width  = _inflationData.realPct  + "%";
+      }
+
       // ── RESET FORM ──
       function resetForm() {
         clearAll();
@@ -2989,6 +3392,7 @@
 
       function togglePhilosophy() {
         var body = document.getElementById("philosophyBody");
+        var btn  = document.getElementById("philosophyAccordion").querySelector(".philosophy-trigger");
         var isOpen = body.classList.contains("open");
         if (!isOpen) {
           body.classList.add("open");
