@@ -1752,7 +1752,7 @@
                 </div>
                 <div class="inflation-legend-item">
                   <div class="inflation-legend-dot infl"></div>
-                  <span>Inflation's cut</span>
+                  <span>Growth eaten by inflation</span>
                 </div>
                 <div class="inflation-legend-item">
                   <div class="inflation-legend-dot real"></div>
@@ -1864,7 +1864,7 @@
             <div class="philosophy-pull">
               <p>A year of delay will cost you more than chasing an extra percent will ever give back.</p>
             </div>
-            <p>Here's something most calculators don't tell you. Not all of that corpus is really yours. Some of it just covers the rising cost of things over the years — that's inflation quietly eating into your money. The breakdown below your result shows you exactly how much is inflation's share, and how much is wealth you actually built. The final number looks very different once you know that.</p>
+            <p>Here's something most calculators don't tell you. Not all of that corpus is really yours. Some of it just covers the rising cost of things over the years — that's inflation quietly eating into your money. <a id="inflationPhilosophyLink" href="#inflationAccordion" onclick="var b=document.getElementById('inflationBody');if(!b.classList.contains('open'))toggleInflation();setTimeout(function(){document.getElementById('inflationAccordion').scrollIntoView({behavior:'smooth',block:'center'});},50);return false;" style="color:var(--muted);text-decoration:none;cursor:default;pointer-events:none;">The inflation breakdown</a> shows you exactly how much is inflation's share, and how much is wealth you actually built. The final number looks very different once you know that.</p>
             <p class="philosophy-closing">The goal was always yours. Now the plan is too.</p>
           </div>
         </div>
@@ -3455,6 +3455,30 @@
         }
         btn.setAttribute("aria-expanded", String(!isOpen));
       }
+    </script>
+
+    <script>
+      // ── INFLATION PHILOSOPHY LINK ACTIVATION ──
+      (function() {
+        var accordion = document.getElementById("inflationAccordion");
+        var link = document.getElementById("inflationPhilosophyLink");
+        if (!accordion || !link) return;
+        var observer = new MutationObserver(function() {
+          if (accordion.classList.contains("visible")) {
+            link.style.color = "var(--accent)";
+            link.style.textDecoration = "underline";
+            link.style.textUnderlineOffset = "3px";
+            link.style.cursor = "pointer";
+            link.style.pointerEvents = "auto";
+          } else {
+            link.style.color = "var(--muted)";
+            link.style.textDecoration = "none";
+            link.style.cursor = "default";
+            link.style.pointerEvents = "none";
+          }
+        });
+        observer.observe(accordion, { attributes: true, attributeFilter: ["class"] });
+      })();
     </script>
   </body>
 </html>
