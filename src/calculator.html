@@ -2,8 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Goal Calculator · Vegi Ramesh · ARN-349739</title>
+    <meta name="description" content="Plan any financial goal with clarity — home, education, retirement, or anything else. Calculate your SIP, lumpsum, or a combination, with inflation-adjusted projections and affordability insights." />
+    <meta name="keywords" content="SIP calculator, goal based investment, lumpsum calculator, mutual fund goal planner, financial goal calculator, inflation adjusted SIP, investment planner India" />
+    <meta name="author" content="Vegi Ramesh" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Goal Calculator · Vegi Ramesh" />
+    <meta property="og:description" content="Plan any financial goal with clarity — calculate your SIP, lumpsum, or both, with inflation-adjusted projections and affordability insights." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Goal Calculator · Vegi Ramesh" />
+    <meta name="twitter:description" content="Plan any financial goal with clarity — calculate your SIP, lumpsum, or both, with inflation-adjusted projections and affordability insights." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -2559,15 +2574,18 @@
             var sipSubLabel = stepUp > 0 ? "Starting SIP, grows " + stepUp + "% yearly" : "Invest this every month";
             var bothYoursPct = Math.round((result.totalInvested / result.futureCost) * 100);
             var bothReturnsPct = 100 - bothYoursPct;
-            var sipContrib = result.futureCost - result.lumpsumFV;
+            var bothAbsMultiple = Math.pow(1 + result.investReturn / 100, result.yearsToGoal).toFixed(1);
+            var bothRealRate = (result.investReturn - result.priceInflation) / 100;
+            var bothRealMultiple = Math.pow(1 + bothRealRate, result.yearsToGoal).toFixed(2);
+            var pureSIP = calcStepUpSIP(result.futureCost, result.yearsToGoal, result.monthlyRate, stepUp);
+            var monthlySaving = Math.round(pureSIP - result.monthlySIP);
             html = '<div class="results-grid">'
               + resultCellPrimary("Lumpsum Invested Today", fmtINR(result.lumpsumAmount), "accent", "Your one-time investment")
               + resultCellPrimary("Monthly SIP Needed", fmtINR(result.monthlySIP), "accent", sipSubLabel)
               + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "What it'll cost in " + result.yearsToGoal + " years (" + result.priceInflation + "% inflation/yr)")
-              + resultCell("Total You'll Invest", fmtINR(result.totalInvested), "", null,
-                  { yours: bothYoursPct + "% your money", returns: bothReturnsPct + "% returns" })
-              + resultCell("Investment Growth", fmtINR(result.totalGain > 0 ? result.totalGain : 0), "safe", "Returns above your total investment")
-              + resultCell("SIP's Contribution", fmtINR(sipContrib > 0 ? sipContrib : 0), "", "What your SIP builds toward the goal")
+              + resultCellSplit(result.totalInvested, result.totalGain > 0 ? result.totalGain : 0, result.futureCost, bothYoursPct, bothReturnsPct)
+              + resultCellDual("Return Multiple", bothAbsMultiple + "×", "Absolute", bothRealMultiple + "×", "Real")
+              + resultCell("SIP Relief from Lumpsum", fmtINR(monthlySaving), "safe", "Without it, you'd need " + fmtINR(Math.round(pureSIP)) + "/month")
               + '</div>';
           }
 
@@ -2590,6 +2608,21 @@
             + resultCellSplit(result.totalInvested, result.totalGain > 0 ? result.totalGain : 0, result.futureCost, sipYoursPct, sipReturnsPct)
             + resultCellDual("Return Multiple", sipAbsMultiple + "×", "Absolute", sipRealMultiple + "×", "Real")
             + '</div>';
+        }
+
+        // Delay cost — lumpsum mode
+        if (result.mode === "lumpsum" && result.yearsToGoal >= 3) {
+          var annualRate = result.investReturn / 100;
+          var lumpsum1yr = result.futureCost / Math.pow(1 + annualRate, result.yearsToGoal - 1);
+          var delta1L = lumpsum1yr - result.lumpsum;
+          var lumpsum2yr = result.futureCost / Math.pow(1 + annualRate, result.yearsToGoal - 2);
+          var delta2L = lumpsum2yr - result.lumpsum;
+          html += '<div class="delay-callout">'
+            + '<div class="delay-title">Cost of waiting</div>'
+            + '<div class="delay-line">If you delay investing by 1 year, you\'d need <strong>' + fmtINR(Math.round(lumpsum1yr)) + ' as lumpsum</strong> <span class="delay-delta">(+' + fmtINR(Math.round(delta1L)) + ' more)</span>.</div>'
+            + (result.yearsToGoal >= 4 ? '<div class="delay-line">If you delay by 2 years, it rises to <strong>' + fmtINR(Math.round(lumpsum2yr)) + '</strong> <span class="delay-delta">(+' + fmtINR(Math.round(delta2L)) + ' more)</span>.</div>' : '')
+            + '</div>';
+          document.getElementById("resultsBody").innerHTML = html;
         }
 
         // Delay cost — only for SIP/both modes and years >= 3
