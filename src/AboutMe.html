@@ -1,0 +1,4394 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>About · Vegi Ramesh · ARN-349739</title>
+    <meta name="description" content="Vegi Ramesh is a SEBI-registered mutual fund distributor (ARN-349739) who helps investors stay calm, invested, and on course — free from hype, fear, and noise." />
+    <meta name="keywords" content="Vegi Ramesh, mutual fund distributor, ARN-349739, SEBI registered, mutual fund advisor India, goal based investing, financial advisor" />
+    <meta name="author" content="Vegi Ramesh" />
+    <meta name="robots" content="index, follow" />
+    <meta name="google-site-verification" content="kZ0XtTXaSK68U4Ga6u6XQICiito_vsGN4Gw432yEPYw" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Vegi Ramesh · Mutual Fund Distributor" />
+    <meta property="og:description" content="SEBI-registered mutual fund distributor helping investors stay calm, invested, and on course — free from hype, fear, and noise." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Vegi Ramesh · Mutual Fund Distributor" />
+    <meta name="twitter:description" content="SEBI-registered mutual fund distributor helping investors stay calm, invested, and on course — free from hype, fear, and noise." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b0f1a;
+        --surface: #111827;
+        --surface2: #1a2236;
+        --border: rgba(255, 255, 255, 0.07);
+        --accent: #c8a96e;
+        --accent-dim: rgba(200, 169, 110, 0.15);
+        --accent-glow: rgba(200, 169, 110, 0.08);
+        --text: #e8e4dc;
+        --muted: #8a9ab5;
+        --danger: #e05c5c;
+        --safe: #4caf82;
+        --neutral: #6b8cba;
+        --warn: #e0a34a;
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --sans: "DM Sans", sans-serif;
+        --nav-bg: rgba(11, 15, 26, 0.92);
+        --prose-text: #b8bfcc;
+        --footer-disc: #6b7280;
+        --subnav-bg: rgba(17, 24, 39, 0.95);
+      }
+      .hide-mobile { display: block; }
+      @media (max-width: 600px) { .hide-mobile { display: none !important; } }
+
+      [data-theme="light"] {
+        --bg: #f7f4ef;
+        --surface: #ffffff;
+        --surface2: #f0ebe0;
+        --border: rgba(0, 0, 0, 0.09);
+        --accent: #a67c32;
+        --accent-dim: rgba(166, 124, 50, 0.12);
+        --accent-glow: rgba(166, 124, 50, 0.06);
+        --text: #1c1a14;
+        --muted: #6b6353;
+        --danger: #c0392b;
+        --safe: #2e7d5e;
+        --neutral: #3d6491;
+        --warn: #b5780a;
+        --nav-bg: rgba(247, 244, 239, 0.94);
+        --prose-text: #4a4535;
+        --footer-disc: #7a7060;
+        --subnav-bg: rgba(240, 235, 224, 0.97);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        /* Firefox */
+        scrollbar-width: thin;
+        scrollbar-color: var(--accent) var(--bg);
+      }
+
+      /* ── GOLDEN SCROLLBAR (Chromium / Safari) ── */
+      ::-webkit-scrollbar {
+        width: 7px;
+        height: 7px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--accent);
+        border-radius: 99px;
+        border: 2px solid var(--bg);   /* creates a floating-pill look */
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: color-mix(in srgb, var(--accent) 80%, white 20%);
+      }
+      ::-webkit-scrollbar-corner {
+        background: var(--bg);
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--nav-bg);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 0 clamp(1.5rem, 5vw, 4rem);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+      }
+      .nav-brand {
+        font-family: var(--serif);
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--text);
+        letter-spacing: 0.03em;
+        text-decoration: none;
+      }
+      .nav-brand span {
+        color: var(--accent);
+        font-style: italic;
+      }
+      .nav-arn {
+        font-size: 0.72rem;
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      /* ── HERO ── */
+      .hero {
+        text-align: center;
+        padding: clamp(4rem, 10vw, 7rem) clamp(1.5rem, 5vw, 4rem)
+          clamp(3rem, 7vw, 5rem);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 70% 60% at 50% 0%,
+          rgba(200, 169, 110, 0.07) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .hero-eyebrow {
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.2rem;
+      }
+      .hero-eyebrow::before,
+      .hero-eyebrow::after {
+        content: " ✦ ";
+        opacity: 0.6;
+      }
+      .hero h1 {
+        font-family: var(--serif);
+        font-size: clamp(2.4rem, 6vw, 4.2rem);
+        font-weight: 600;
+        line-height: 1.15;
+        margin-bottom: 1.4rem;
+        color: var(--text);
+      }
+      .hero h1 em {
+        color: var(--accent);
+        font-style: italic;
+      }
+      .hero-sub {
+        max-width: 600px;
+        margin: 0 auto 2.5rem;
+        color: var(--muted);
+        font-size: 1.05rem;
+        font-weight: 300;
+      }
+      .divider-star {
+        color: var(--accent);
+        opacity: 0.4;
+        font-size: 1.2rem;
+        letter-spacing: 0.5rem;
+        margin: 2rem 0;
+      }
+
+      /* ── SECTION WRAPPER ── */
+      .section {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 2rem);
+      }
+      .section-label {
+        font-size: 0.68rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .section-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+      .section h2 {
+        font-family: var(--serif);
+        font-size: clamp(1.7rem, 4vw, 2.6rem);
+        font-weight: 600;
+        line-height: 1.2;
+        margin-bottom: 1.8rem;
+        color: var(--text);
+      }
+      .section h2 em {
+        color: var(--accent);
+        font-style: italic;
+      }
+
+      /* ── PROSE BLOCKS ── */
+      .prose p {
+        color: var(--prose-text);
+        font-weight: 300;
+        font-size: 1.02rem;
+        margin-bottom: 1.1rem;
+      }
+      .prose p:last-child {
+        margin-bottom: 0;
+      }
+      .prose strong {
+        color: var(--text);
+        font-weight: 500;
+      }
+      .prose em {
+        color: var(--accent);
+        font-style: italic;
+      }
+
+      /* ── PILLAR CARDS ── */
+      .pillars {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        margin: 2rem 0;
+      }
+      .pillar {
+        background: var(--surface);
+        padding: 1.8rem 1.6rem;
+        transition: background 0.2s;
+      }
+      .pillar:hover {
+        background: var(--surface2);
+      }
+      .pillar-icon {
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+      }
+      .pillar h3 {
+        font-family: var(--serif);
+        font-size: 1.18rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.6rem;
+      }
+      .pillar p {
+        font-size: 0.9rem;
+        color: var(--muted);
+        font-weight: 300;
+        line-height: 1.6;
+      }
+
+      /* ── HIGHLIGHT QUOTE ── */
+      .quote-block {
+        border-left: 3px solid var(--accent);
+        background: var(--accent-glow);
+        border-radius: 0 10px 10px 0;
+        padding: 1.4rem 1.8rem;
+        margin: 2rem 0;
+      }
+      .quote-block p {
+        font-family: var(--serif);
+        font-size: 1.25rem;
+        font-style: italic;
+        color: var(--text);
+        line-height: 1.5;
+      }
+
+      /* ── SEPARATOR ── */
+      hr.section-sep {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 0;
+      }
+
+      /* ── WHY MF ACCORDION ── */
+      .mf-acc-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 2rem 0;
+      }
+      .mf-acc-item {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+      }
+      .mf-acc-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 18px;
+        cursor: pointer;
+        background: var(--surface);
+        gap: 12px;
+        transition: background 0.15s;
+        list-style: none;
+        border-radius: 12px;
+      }
+      .mf-acc-item.open .mf-acc-header {
+        border-radius: 12px 12px 0 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .mf-acc-header:hover {
+        background: var(--surface2);
+      }
+      .mf-acc-header-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        min-width: 0;
+      }
+      .mf-acc-name {
+        font-family: var(--serif);
+        font-size: 1.08rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .mf-verdict-badge {
+        font-size: 0.72rem;
+        font-weight: 500;
+        padding: 3px 10px;
+        border-radius: 20px;
+        letter-spacing: 0.03em;
+      }
+      .mv-warn { background: rgba(224,163,74,0.15); color: var(--warn); }
+      .mv-ok   { background: rgba(107,140,186,0.15); color: var(--neutral); }
+      .mv-bad  { background: rgba(224,92,92,0.15);   color: var(--danger); }
+      .mv-good { background: rgba(76,175,130,0.15);  color: var(--safe); }
+      .mf-acc-chevron {
+        font-size: 1.1rem;
+        color: var(--muted);
+        transition: transform 0.25s;
+        flex-shrink: 0;
+      }
+      .mf-acc-item.open .mf-acc-chevron {
+        transform: rotate(180deg);
+      }
+      .mf-acc-body {
+        display: none;
+        border-top: 1px solid var(--border);
+        border-radius: 0 0 12px 12px;
+      }
+      .mf-acc-item.open .mf-acc-body {
+        display: block;
+      }
+
+      /* Desktop: 3-column grid */
+      .mf-attr-header {
+        display: grid;
+        grid-template-columns: 110px 1fr 1fr;
+        padding: 8px 18px;
+        background: var(--surface2);
+        font-size: 0.7rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        border-bottom: 1px solid var(--border);
+        gap: 12px;
+      }
+
+
+      .mf-attr-row {
+        display: grid;
+        grid-template-columns: 110px 1fr 1fr;
+        padding: 13px 18px;
+        border-bottom: 1px solid var(--border);
+        gap: 12px;
+        align-items: start;
+      }
+      .mf-attr-row:last-child { border-bottom: none; }
+      .mf-attr-label {
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--muted);
+        padding-top: 3px;
+      }
+      .mf-cell {
+        font-size: 0.88rem;
+        font-weight: 300;
+        line-height: 1.55;
+        color: var(--prose-text);
+      }
+      .mf-cell-mf {
+        color: var(--safe);
+        font-weight: 400;
+      }
+      .mf-cell-warn { color: var(--warn); }
+      .mf-cell-bad  { color: var(--danger); }
+      .mf-cell-ok   { color: var(--neutral); }
+
+      /* Mobile: stacked layout */
+      @media (max-width: 600px) {
+        .mf-attr-header { display: none; }
+        .mf-attr-row {
+          display: block;
+          padding: 12px 16px;
+        }
+        .mf-attr-label {
+          margin-bottom: 8px;
+          display: block;
+        }
+        .mf-compare-pair {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        .mf-compare-row {
+          display: flex;
+          gap: 8px;
+          align-items: flex-start;
+        }
+        .mf-pill-tag {
+          font-size: 0.68rem;
+          font-weight: 600;
+          padding: 2px 7px;
+          border-radius: 4px;
+          white-space: nowrap;
+          flex-shrink: 0;
+          margin-top: 2px;
+          letter-spacing: 0.04em;
+        }
+        .pill-mf   { background: rgba(76,175,130,0.15); color: var(--safe); min-width: 56px; text-align: center; }
+        .pill-vs   { background: var(--surface2); color: var(--muted); min-width: 56px; text-align: center; }
+      }
+
+      /* Hide mobile pair wrapper on desktop */
+      @media (min-width: 601px) {
+        .mf-compare-pair { display: contents; }
+        .mf-compare-row  { display: contents; }
+        .mf-pill-tag     { display: none; }
+      }
+
+      .tag {
+        display: inline-block;
+        padding: 0.18rem 0.55rem;
+        border-radius: 4px;
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+      }
+      .tag-bad  { background: rgba(224,92,92,0.15);   color: #e07a7a; }
+      .tag-warn { background: rgba(224,163,74,0.15);  color: #e0b86a; }
+      .tag-ok   { background: rgba(107,140,186,0.15); color: #8aaad4; }
+      .tag-good { background: rgba(76,175,130,0.15);  color: #5ec99a; }
+
+      /* ── STOPPER SECTION ── */
+      .stopper-card {
+        background: linear-gradient(
+          135deg,
+          var(--surface) 0%,
+          var(--surface2) 100%
+        );
+        border: 1px solid rgba(200, 169, 110, 0.2);
+        border-radius: 14px;
+        padding: clamp(2rem, 5vw, 3rem);
+        margin: 2rem 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .stopper-card::before {
+        content: "✦";
+        position: absolute;
+        right: 2rem;
+        top: 1.5rem;
+        font-size: 5rem;
+        color: var(--accent);
+        opacity: 0.06;
+        line-height: 1;
+      }
+
+      /* ── ORIGIN CARDS ── */
+      .origin-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+      @media (max-width: 640px) {
+        .origin-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .origin-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: border-color 0.2s;
+      }
+      .origin-card:hover {
+        border-color: rgba(200, 169, 110, 0.25);
+      }
+      .origin-card.open {
+        border-color: rgba(200, 169, 110, 0.3);
+      }
+      .origin-card-trigger {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1.1rem 1.2rem;
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .origin-card-icon {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--accent-dim);
+        border-radius: 8px;
+        flex-shrink: 0;
+      }
+      .origin-card-title {
+        font-family: var(--sans);
+        font-size: 0.92rem;
+        font-weight: 500;
+        color: var(--text);
+        flex: 1;
+      }
+      .origin-card-chevron {
+        font-size: 0.75rem;
+        color: var(--muted);
+        transition: transform 0.25s ease;
+        flex-shrink: 0;
+        line-height: 1;
+      }
+      .origin-card.open .origin-card-chevron {
+        transform: rotate(180deg);
+      }
+      .origin-card-body {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.28s ease;
+      }
+      .origin-card.open .origin-card-body {
+        grid-template-rows: 1fr;
+      }
+      .origin-card-body-inner {
+        overflow: hidden;
+        font-size: 0.84rem;
+        color: var(--prose-text);
+        line-height: 1.6;
+        padding: 0 1.2rem;
+        border-top: 0px solid transparent;
+        transition: padding 0.28s ease, border-color 0.28s ease;
+      }
+      .origin-card.open .origin-card-body-inner {
+        padding: 0.85rem 1.2rem 1.1rem;
+        border-top: 1px solid var(--border);
+      }
+
+      /* ── TABLE ── */
+      .table-wrap {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 1rem 0;
+      }
+      .table-wrap table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .table-wrap thead tr {
+        background: var(--surface2);
+      }
+      .table-wrap th {
+        padding: 10px 16px;
+        font-size: 0.78rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--muted);
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+      }
+      .table-wrap td {
+        padding: 11px 16px;
+        font-size: 0.88rem;
+        color: var(--prose-text);
+        border-bottom: 1px solid var(--border);
+      }
+      .table-wrap tr:last-child td {
+        border-bottom: none;
+      }
+      .table-wrap tbody tr:hover {
+        background: var(--surface2);
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+        text-align: center;
+      }
+      .footer-brand {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        color: var(--text);
+        margin-bottom: 0.5rem;
+      }
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+      .footer-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.82rem;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+      .footer-disc {
+        font-size: 0.82rem;
+        color: var(--footer-disc);
+        max-width: 700px;
+        margin: 1rem auto 0;
+        line-height: 1.6;
+      }
+
+      /* ── NEW SECTIONS RESPONSIVE ── */
+      @media (max-width: 640px) {
+        .risk-spectrum-grid {
+          grid-template-columns: 1fr !important;
+        }
+        .earn-explainer-grid {
+          grid-template-columns: 1fr !important;
+        }
+        .flow-diagram {
+          flex-direction: column !important;
+          align-items: center !important;
+          gap: 0.4rem !important;
+        }
+        .flow-arrow {
+          transform: rotate(90deg);
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        .usecase-card {
+          flex-direction: column !important;
+        }
+      }
+
+      /* ── IN-PAGE SUBNAV ── */
+      .subnav {
+        position: sticky;
+        top: 60px;
+        z-index: 90;
+        background: var(--subnav-bg);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding: 0 clamp(1rem, 4vw, 3rem);
+        gap: 0;
+        -webkit-overflow-scrolling: touch;
+      }
+      .subnav::-webkit-scrollbar {
+        display: none;
+      }
+      .subnav a {
+        flex-shrink: 0;
+        padding: 0 1rem;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        font-size: 0.74rem;
+        font-weight: 500;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-decoration: none;
+        border-bottom: 2px solid transparent;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+        white-space: nowrap;
+      }
+      .subnav a:hover,
+      .subnav a.active {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+      }
+
+      /* ── THEME TOGGLE ── */
+      .theme-toggle {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        border-radius: 20px;
+        padding: 0.3rem 0.55rem;
+        font-size: 0.78rem;
+        font-family: var(--sans);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition:
+          color 0.2s,
+          background 0.2s,
+          opacity 0.15s;
+        white-space: nowrap;
+        opacity: 0;
+      }
+      .theme-toggle.ready {
+        opacity: 1;
+      }
+      .theme-toggle:hover {
+        color: var(--accent);
+      }
+      .theme-toggle .icon-dark {
+        display: inline;
+      }
+      .theme-toggle .icon-light {
+        display: none;
+      }
+      [data-theme="light"] .theme-toggle .icon-dark {
+        display: none;
+      }
+      [data-theme="light"] .theme-toggle .icon-light {
+        display: inline;
+      }
+
+      /* ── NAV ACTIONS ── */
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .nav-profiling-btn {
+        background: var(--accent);
+        color: var(--bg);
+        border-radius: 6px;
+        padding: 0.35rem 0.9rem;
+        font-size: 0.78rem;
+        font-weight: 500;
+        font-family: var(--sans);
+        text-decoration: none;
+        letter-spacing: 0.04em;
+        transition: opacity 0.2s;
+        white-space: nowrap;
+      }
+      .nav-profiling-btn:hover {
+        opacity: 0.82;
+      }
+      .nav-whatsapp-btn {
+        background: rgba(37, 211, 102, 0.12);
+        color: #25d366;
+        border: 1px solid rgba(37, 211, 102, 0.3);
+        border-radius: 6px;
+        padding: 0.35rem 0.9rem;
+        font-size: 0.78rem;
+        font-weight: 500;
+        font-family: var(--sans);
+        text-decoration: none;
+        letter-spacing: 0.04em;
+        transition: background 0.2s;
+        white-space: nowrap;
+      }
+      .nav-whatsapp-btn:hover {
+        background: rgba(37, 211, 102, 0.2);
+      }
+      .nav-calculator-btn {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        border-radius: 6px;
+        padding: 0.35rem 0.55rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: color 0.2s, background 0.2s;
+        line-height: 1;
+      }
+      .nav-calculator-btn:hover {
+        color: var(--accent);
+        background: var(--accent-dim);
+        border-color: rgba(200,169,110,0.3);
+      }
+      @media (max-width: 480px) {
+        .nav-profiling-btn, .nav-whatsapp-btn {
+          display: none;
+        }
+      }
+
+      /* ── MOBILE FAB ── */
+      .fab-profiling {
+        display: none;
+      }
+      .fab-whatsapp-mobile {
+        display: none;
+      }
+      @media (max-width: 480px) {
+        .fab-profiling {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          position: fixed;
+          bottom: 1.4rem;
+          right: 1.2rem;
+          z-index: 200;
+          background: var(--accent);
+          color: var(--bg);
+          text-decoration: none;
+          font-family: var(--sans);
+          font-size: 0.88rem;
+          font-weight: 500;
+          letter-spacing: 0.04em;
+          padding: 0.7rem 1.2rem;
+          border-radius: 999px;
+          box-shadow: 0 4px 20px rgba(200, 169, 110, 0.35);
+          transition: opacity 0.2s, transform 0.2s;
+          white-space: nowrap;
+        }
+        .fab-profiling:active {
+          opacity: 0.85;
+          transform: scale(0.97);
+        }
+        .fab-whatsapp-mobile {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          position: fixed;
+          bottom: 1.4rem;
+          left: 1.2rem;
+          z-index: 200;
+          background: #25d366;
+          color: #fff;
+          border: none;
+          text-decoration: none;
+          font-family: var(--sans);
+          font-size: 0.88rem;
+          font-weight: 500;
+          letter-spacing: 0.04em;
+          padding: 0.7rem 1.2rem;
+          border-radius: 999px;
+          box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+          transition: opacity 0.2s, transform 0.2s;
+          white-space: nowrap;
+        }
+        .fab-whatsapp-mobile:active {
+          opacity: 0.85;
+          transform: scale(0.97);
+        }
+      }
+
+      /* ── USE CASE CARD HOVER (CSS, not inline JS) ── */
+      .usecase-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        transition: border-color 0.2s;
+      }
+      .usecase-card.open {
+        border-color: rgba(200, 169, 110, 0.3);
+      }
+      .usecase-card-trigger {
+        display: flex;
+        align-items: center;
+        gap: 1.1rem;
+        padding: 1.2rem 1.4rem;
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        transition: background 0.15s;
+      }
+      .usecase-card-trigger:hover {
+        background: var(--surface2);
+      }
+      .usecase-card-trigger-text {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        flex-wrap: wrap;
+      }
+      .usecase-card-chevron {
+        font-size: 0.75rem;
+        color: var(--muted);
+        transition: transform 0.25s ease;
+        flex-shrink: 0;
+      }
+      .usecase-card.open .usecase-card-chevron {
+        transform: rotate(180deg);
+      }
+      .usecase-card-body {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.28s ease;
+      }
+      .usecase-card.open .usecase-card-body {
+        grid-template-rows: 1fr;
+      }
+      .usecase-card-body-inner {
+        overflow: hidden;
+        padding: 0 1.4rem;
+        border-top: 0px solid transparent;
+      }
+      .usecase-card.open .usecase-card-body-inner {
+        padding: 1.2rem 1.4rem 1.4rem;
+        border-top: 1px solid var(--border);
+      }
+
+      /* ── RISK SPECTRUM MOBILE LABELS ── */
+      .risk-labels-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2.4rem;
+      }
+      .risk-label-low {
+        font-size: 0.72rem;
+        color: #4caf82;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .risk-label-mid {
+        font-size: 0.72rem;
+        color: var(--muted);
+        font-weight: 300;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .risk-label-high {
+        font-size: 0.72rem;
+        color: #e05c5c;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      @media (max-width: 640px) {
+        .risk-labels-row {
+          justify-content: space-between;
+        }
+        .risk-label-low::before {
+          content: "";
+        }
+        .risk-label-low::after {
+          content: "";
+        }
+        .risk-label-high::before {
+          content: "";
+        }
+        .risk-label-high::after {
+          content: "";
+        }
+        .risk-label-low {
+          font-size: 0.65rem;
+        }
+        .risk-label-mid {
+          display: none;
+        }
+        .risk-label-high {
+          font-size: 0.65rem;
+        }
+      }
+
+      /* ── WHAT HAPPENS NEXT ── */
+      .next-steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.2rem;
+        margin: 2rem 0;
+      }
+      @media (max-width: 640px) {
+        .next-steps {
+          grid-template-columns: 1fr;
+        }
+      }
+      .next-step-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.6rem 1.4rem;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.2s;
+      }
+      .next-step-card:hover {
+        border-color: rgba(200, 169, 110, 0.35);
+      }
+      .next-step-num {
+        font-family: var(--serif);
+        font-size: 3rem;
+        font-weight: 600;
+        color: var(--accent);
+        opacity: 0.18;
+        position: absolute;
+        top: 0.5rem;
+        right: 1rem;
+        line-height: 1;
+      }
+      .next-step-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0.8rem;
+      }
+      .next-step-card h4 {
+        font-family: var(--serif);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.45rem;
+      }
+      .next-step-card p {
+        font-size: 0.85rem;
+        color: var(--muted);
+        font-weight: 300;
+        line-height: 1.6;
+      }
+
+      /* ── HOLDINGS PATHS ── */
+      @media (max-width: 640px) {
+        .holdings-heading {
+          font-size: 1.3rem !important;
+        }
+      }
+
+      /* ── ANIMATIONS ── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .fade-up {
+        opacity: 0;
+        animation: fadeUp 0.7s ease forwards;
+      }
+      .fade-up:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .fade-up:nth-child(2) {
+        animation-delay: 0.25s;
+      }
+      .fade-up:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      /* ── GOAL CALCULATOR RESPONSIVE ── */
+      .calc-mobile-cta {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 3rem 1.5rem;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: var(--surface);
+      }
+      .calc-desktop-embed {
+        display: block;
+      }
+      @media (max-width: 768px) {
+        .calc-mobile-cta {
+          display: flex;
+        }
+        .calc-desktop-embed {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <a href="index.html" class="nav-brand">Vegi <span>Ramesh</span></a>
+      <div class="nav-actions">
+        <div class="nav-arn">✦ ARN-349739</div>
+        <a
+          href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments."
+          class="nav-whatsapp-btn"
+          target="_blank"
+          rel="noopener"
+          ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="currentColor" style="vertical-align:middle;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a
+        >
+        <a
+          href="#calculator"
+          class="nav-calculator-btn"
+          title="Goal Planning Calculator"
+          aria-label="Goal Planning Calculator"
+        ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;flex-shrink:0;display:inline-block;"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="12" y1="18" x2="14" y2="18"/><line x1="16" y1="18" x2="16" y2="18"/></svg></a
+        >
+        <a
+          href="./RiskProfiler.html"
+          class="nav-profiling-btn"
+          >Begin Profiling ✦</a
+        >
+        <button
+          class="theme-toggle"
+          onclick="toggleTheme()"
+          aria-label="Toggle theme"
+        >
+          <span class="icon-dark">☀️</span>
+          <span class="icon-light">🌙</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- IN-PAGE SUBNAV -->
+    <nav class="subnav" id="subnav">
+      <a href="#who-is-mfd">Who is an MFD</a>
+      <a href="#why-mfd">Why an MFD</a>
+      <a href="#why-ramesh">Why Me</a>
+      <a href="#why-i-chose-this">Why This Role</a>
+      <a href="#why-mf">Mutual Funds</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#how-i-earn">How I Earn</a>
+      <a href="#use-cases">Use Cases</a>
+      <a href="#risk-spectrum">Risk Spectrum</a>
+      <a href="#whats-next">Get Started</a>
+      <a href="#calculator">Goal Calculator</a>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-eyebrow">About Me & The Ecosystem</div>
+      <h1>Your wealth,<br />protected from <em>hype and fear.</em></h1>
+      <p class="hero-sub">
+        Someone whose success depends on yours.
+      </p>
+      <div style="display:flex; gap:0.9rem; justify-content:center; flex-wrap:wrap; margin-bottom:2rem;">
+        <a
+          href="./RiskProfiler.html"
+          class="nav-profiling-btn"
+          style="padding:0.75rem 1.8rem; font-size:0.92rem; border-radius:8px;"
+        >Begin Profiling ✦</a>
+        <a
+          href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments."
+          class="nav-whatsapp-btn"
+          target="_blank"
+          rel="noopener"
+          style="padding:0.75rem 1.8rem; font-size:0.92rem; border-radius:8px;"
+        ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="currentColor" style="vertical-align:middle;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+      </div>
+      <div class="divider-star">✦ ✦ ✦</div>
+    </header>
+
+    <hr class="section-sep" />
+
+    <!-- WHO IS AN MFD -->
+    <section class="section" id="who-is-mfd">
+      <div class="section-label">The Role</div>
+      <h2>Who is an <em>MFD?</em></h2>
+      <div class="prose">
+        <p>
+          Officially, I am a Mutual Fund Distributor — registered with AMFI,
+          bound by SEBI rules, authorised to facilitate your investments.
+        </p>
+        <p>
+          But the actual job is this: I sit between you and a very noisy
+          financial world, and I help you ignore most of it. I do not manage
+          your money. I do not predict markets.
+          <strong>I help you stay invested, stay calm, and stay on course —
+          especially when everything around you is saying otherwise.</strong>
+        </p>
+      </div>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- WHY MFD AT ALL -->
+    <section class="section" id="why-mfd">
+      <div class="section-label">Why you need one</div>
+      <h2>Why an MFD <em>at all?</em></h2>
+      <p
+        class="prose"
+        style="
+          color: #8a9ab5;
+          font-weight: 300;
+          margin-bottom: 1.8rem;
+          font-size: 1.02rem;
+        "
+      >
+        Yes — you can open a Zerodha or Groww account, pick a Nifty 50 index
+        fund, set up an SIP, and you're done. It is not complicated. So why
+        would you need anyone?
+        <br /><br />
+        Because the hardest part of investing is never the steps.
+        <strong style="color: var(--text)"
+          >It is staying the course when everything around you feels uncertain.</strong
+        > Below are My Value adds to You as Your MFD.
+      </p>
+
+      <!-- Show Details toggle for Why MFD pillars -->
+      <div style="display:flex;justify-content:flex-end;margin-bottom:0.8rem;">
+        <button
+          id="mfd-pillars-toggle"
+          onclick="toggleMfdPillars()"
+          style="
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.45rem 1rem;
+            font-size: 0.78rem;
+            font-family: var(--sans);
+            font-weight: 500;
+            color: var(--accent);
+            cursor: pointer;
+            letter-spacing: 0.04em;
+            transition: background 0.15s, border-color 0.15s;
+          "
+          onmouseover="this.style.background='var(--surface2)';this.style.borderColor='rgba(200,169,110,0.35)'"
+          onmouseout="this.style.background='var(--surface)';this.style.borderColor='var(--border)'"
+        >
+          <span id="mfd-pillars-toggle-icon" style="font-size:0.85rem;transition:transform 0.25s;">▶</span>
+          <span id="mfd-pillars-toggle-label">Show Details</span>
+        </button>
+      </div>
+
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-icon">⚖️</div>
+          <h3>Your costs, watched closely</h3>
+          <p class="mfd-pillar-details" style="display:none;">
+            Fund costs can quietly change over time. New, cheaper options keep
+            coming. Most people invest once and never check again — and slowly,
+            money leaks out in fees they did not notice. I keep an eye on that
+            so you do not have to.
+          </p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🔇</div>
+          <h3>Protection from the hype</h3>
+          <p class="mfd-pillar-details" style="display:none;">
+            Every few months, there is a new "star" fund manager or a hot new
+            theme. The story sounds exciting. But the hype builds, money pours
+            in at the top, and ordinary investors are left with losses when the
+            story fades. I am the calm voice that says:
+            <em>we do not need this.</em>
+          </p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🧭</div>
+          <h3>Keeping your plan on track</h3>
+          <p class="mfd-pillar-details" style="display:none;">
+            When markets fall, most people want to run. When markets rise, most
+            people want to put everything in. Both choices feel right in the
+            moment — but both tend to hurt returns. Someone outside the emotion
+            needs to keep the plan steady. That is my job.
+          </p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">📵</div>
+          <h3>Turn off investment Social Media</h3>
+          <p class="mfd-pillar-details" style="display:none;">
+            The more investment content you consume, the more investment ads
+            follow you. This is not a coincidence — it is the algorithm at work.
+            <strong
+              >The videos aren't advice. They are advertisement in
+              disguise.</strong
+            >
+          </p>
+        </div>
+      </div>
+
+      <script>
+        (function() {
+          var expanded = false;
+          window.toggleMfdPillars = function() {
+            expanded = !expanded;
+            var details = document.querySelectorAll('.mfd-pillar-details');
+            details.forEach(function(el) { el.style.display = expanded ? 'block' : 'none'; });
+            document.getElementById('mfd-pillars-toggle-label').textContent = expanded ? 'Hide Details' : 'Show Details';
+            document.getElementById('mfd-pillars-toggle-icon').style.transform = expanded ? 'rotate(90deg)' : '';
+          };
+        })();
+      </script>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- WHY RAMESH -->
+    <section class="section" id="why-ramesh">
+      <div class="section-label">The difference</div>
+      <h2>So why <em>Me?</em></h2>
+      <div class="stopper-card">
+        <div class="prose">
+          <p>
+            Not every MFD works the same way. This is where the difference
+            matters.
+          </p>
+          <p>
+            <strong
+              >SEBI — India's market regulator — puts a strict limit on how much
+              a fund can charge you</strong
+            >
+            for managing your money. This rule exists to protect you. But even
+            within that limit, there is a wide range. The industry's structure
+            naturally makes higher-cost funds more visible — and most investors
+            never realise they have a choice within that range.
+          </p>
+          <p><strong>I work within that choice — deliberately.</strong></p>
+          <p>
+            I keep your costs below average — on purpose. Not by picking the
+            cheapest fund blindly, because that is lazy and wrong. But by
+            finding funds that <em>perform well and still cost less.</em> That
+            combination is real. It just takes honest work to find it.
+          </p>
+          <p>
+            I also go beyond plain index funds. I study fund types like
+            <strong>Smart Beta</strong> — a category that follows clear,
+            rule-based strategies instead of a anyone's gut feeling. These
+            funds aim to give you better returns for the risk you take, and they
+            often cost less than actively managed funds. It is a space not many
+            investors explore — and helping you understand it is part of what
+            I do.
+          </p>
+        </div>
+      </div>
+      <div class="quote-block">
+        <p>
+          "I would rather you grow more wealth and I earn a smaller commission,
+          than the other way around. That is not me being selfless — it is the
+          only way I can look you in the eye and say I am genuinely on your
+          side."
+        </p>
+      </div>
+      <div class="prose">
+        <p>
+          My role is to be your safeguard — not a wall that stops you from
+          investing, but the steady voice that asks
+          <em>"does this actually make sense for you?"</em> before your money
+          moves. The one who protects you from paying for hype, and guides you
+          toward steady, boring, powerful compounding that shows up as real
+          wealth in your life.
+        </p>
+        <p><strong>That is who I am. That is why <span style="color: var(--accent);">Ramesh</span>.</strong></p>
+      </div>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- WHY I CHOSE THIS -->
+    <section class="section" id="why-i-chose-this">
+      <div class="section-label">The origin story</div>
+      <h2>Why I chose <em>this.</em></h2>
+      <div class="prose">
+        <p>I didn't plan to become an MFD. I got here because of what I kept seeing around me.</p>
+      </div>
+
+      <div class="origin-grid">
+
+        <div class="origin-card">
+          <div class="origin-card-trigger">
+            <div class="origin-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
+              </svg>
+            </div>
+            <div class="origin-card-title">Good salaries yet empty accounts</div>
+            <span class="origin-card-chevron">▾</span>
+          </div>
+          <div class="origin-card-body"><div class="origin-card-body-inner">Good salary, nothing saved. If asked where the money went — people genuinely didn't know.</div></div>
+        </div>
+
+        <div class="origin-card">
+          <div class="origin-card-trigger">
+            <div class="origin-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="9" y1="12" x2="15" y2="12"/>
+              </svg>
+            </div>
+            <div class="origin-card-title">LIC policy, savings account returns</div>
+            <span class="origin-card-chevron">▾</span>
+          </div>
+          <div class="origin-card-body"><div class="origin-card-body-inner">They'd show me their money-back policy like they'd cracked the code. Overpriced insurance — with returns that barely beat a savings account.</div></div>
+        </div>
+
+        <div class="origin-card">
+          <div class="origin-card-trigger">
+            <div class="origin-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><line x1="12" y1="15" x2="12" y2="17"/>
+              </svg>
+            </div>
+            <div class="origin-card-title">FD balance growing, wealth shrinking</div>
+            <span class="origin-card-chevron">▾</span>
+          </div>
+          <div class="origin-card-body"><div class="origin-card-body-inner">The number in the passbook kept going up. What it could actually buy kept going down. They felt safe. They weren't.</div></div>
+        </div>
+
+        <div class="origin-card">
+          <div class="origin-card-trigger">
+            <div class="origin-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div class="origin-card-title">15 years in the wrong scheme</div>
+            <span class="origin-card-chevron">▾</span>
+          </div>
+          <div class="origin-card-body"><div class="origin-card-body-inner">Long-duration government schemes for 15 years — committed, disciplined, totally mismatched. That time horizon is exactly where equity earns its keep.</div></div>
+        </div>
+
+        <div class="origin-card">
+          <div class="origin-card-trigger">
+            <div class="origin-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/>
+              </svg>
+            </div>
+            <div class="origin-card-title">Just one question, no advice</div>
+            <span class="origin-card-chevron">▾</span>
+          </div>
+          <div class="origin-card-body"><div class="origin-card-body-inner">I saw people get off a call with an MFD with a fund chosen in minutes. No goals discussed, no risk assessed. Just — how much do you want to invest?</div></div>
+        </div>
+
+        <div class="origin-card">
+          <div class="origin-card-trigger">
+            <div class="origin-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="6" y1="4" x2="18" y2="4"/><line x1="6" y1="9" x2="18" y2="9"/><path d="M9 4a4 4 0 000 8"/><line x1="15" y1="20" x2="6" y2="9"/>
+              </svg>
+            </div>
+            <div class="origin-card-title">Went direct, paid more</div>
+            <span class="origin-card-chevron">▾</span>
+          </div>
+          <div class="origin-card-body"><div class="origin-card-body-inner">Cut out the middleman — and picked a fund with a higher expense ratio than what I'd have suggested. Felt clever. Was losing.</div></div>
+        </div>
+
+        <div class="origin-card">
+          <div class="origin-card-trigger">
+            <div class="origin-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+              </svg>
+            </div>
+            <div class="origin-card-title">Bought the peak, blamed the fund</div>
+            <span class="origin-card-chevron">▾</span>
+          </div>
+          <div class="origin-card-body"><div class="origin-card-body-inner">40% returns on the news. Invested at the top. Lost money. "Mutual funds are a scam." The fund was fine. The timing wasn't. Nobody told them.</div></div>
+        </div>
+
+        <div class="origin-card">
+          <div class="origin-card-trigger">
+            <div class="origin-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <div class="origin-card-title">One Flat, zero diversification</div>
+            <span class="origin-card-chevron">▾</span>
+          </div>
+          <div class="origin-card-body"><div class="origin-card-body-inner">Every rupee in one property, one city, one pin code. Absolutely certain it would keep going up. That's not investing — that's a bet.</div></div>
+        </div>
+
+      </div>
+
+      <div class="prose">
+        <p>And people around me who, when I started explaining all this, said — "this is exactly the conversation I needed."</p>
+        <p>That told me enough. I decided to do this properly — not as free advice over chai, which is actually against SEBI and AMFI rules. I cleared the NISM Series V-A exam, got registered with AMFI under ARN-349739, and got here.</p>
+      </div>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- WHY MUTUAL FUNDS -->
+    <section class="section" id="why-mf">
+      <div class="section-label">The case for mutual funds</div>
+      <h2>Why <em>Mutual Funds?</em></h2>
+      <div class="prose">
+        <p>
+          There are many ways people save and grow money in India. Most of them
+          come with hidden costs, hidden risks, or hidden motives. Here is a
+          straight, honest comparison — so you can choose with a clear head, not
+          under sales pressure.
+        </p>
+      </div>
+
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.2rem; align-items:center;">
+        <span style="font-size:0.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; font-weight:500;">How to read:</span>
+        <span style="font-size:0.75rem; color:var(--safe); display:flex; align-items:center; gap:0.35rem;"><span style="width:8px;height:8px;border-radius:50%;background:var(--safe);display:inline-block;"></span>MF advantage</span>
+        <span style="font-size:0.75rem; color:var(--neutral); display:flex; align-items:center; gap:0.35rem;"><span style="width:8px;height:8px;border-radius:50%;background:var(--neutral);display:inline-block;"></span>Comparable / context-dependent</span>
+        <span style="font-size:0.75rem; color:var(--warn); display:flex; align-items:center; gap:0.35rem;"><span style="width:8px;height:8px;border-radius:50%;background:var(--warn);display:inline-block;"></span>Nuanced / mixed</span>
+        <span style="font-size:0.75rem; color:var(--danger); display:flex; align-items:center; gap:0.35rem;"><span style="width:8px;height:8px;border-radius:50%;background:var(--danger);display:inline-block;"></span>Significant concern</span>
+      </div>
+      <div class="mf-acc-wrap" id="mf-accordion" role="list"></div>
+
+      <script>
+        (function () {
+          var instruments = [
+            {
+              name: "Fixed Deposits",
+              verdict: "Capital-safe but wealth-eroding",
+              badgeClass: "mv-ok",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Market-linked. No guaranteed return — can be negative in the short term. Over 10+ years, equity mutual funds have historically outpaced inflation, though this is not assured.",
+                  them: "Currently 6.5–7.5% p.a. (major banks, 2024). After 30% tax slab, effective yield drops to ~4.5–5.25%. India's retail inflation has averaged ~5–6% historically — meaning real returns are near zero or negative for many investors.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Liquidity",
+                  mf: "Redeemable any business day. No penalty for redemption.",
+                  them: "Premature withdrawal attracts a penalty of 0.5–1% on the interest rate. Some tax-saving FDs (5-year) have a full lock-in with zero early exit.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Transparency",
+                  mf: "SEBI-regulated. All costs, holdings, and NAVs are publicly disclosed.",
+                  them: "Interest rates are clearly stated upfront. Tax treatment is straightforward. No hidden costs — this is genuinely transparent.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Risk",
+                  mf: "Market risk — NAV can fall in the short term, especially in equity funds. Not suitable for money you need within 1–2 years.",
+                  them: "Deposits up to ₹5 lakh insured by DICGC. Principal is safe in scheduled banks. The real risk is inflation silently eroding purchasing power — your balance grows but buys less.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio 0.1%–1.5% per year. Debt mutual funds may suit short-to-medium horizons at lower cost.",
+                  them: "No direct cost. But TDS is deducted at source on interest above ₹40,000/year, and full interest is taxable as per income slab — a hidden tax burden that compounds over time.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Verdict",
+                  mf: "Better suited for long-term wealth building. For short-term parking (under 1 year), liquid or ultra-short debt funds can be a comparable alternative.",
+                  them: "FDs are not bad — they are the right tool for emergency funds, short-term goals, and capital preservation. They are the wrong tool for 10–20 year wealth building.",
+                  themClass: "mf-cell-ok"
+                }
+              ]
+            },
+            {
+              name: "Gold",
+              verdict: "Useful diversifier — size it right",
+              badgeClass: "mv-ok",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Market-linked. Equity funds have historically delivered 10–13% CAGR over 10+ year periods. Not guaranteed, and past performance does not predict the future.",
+                  them: "Gold has delivered roughly 10–11% CAGR in INR over the last 20 years — partly because a weakening rupee flatters gold's price in India. Over shorter 5-year windows, gold can go sideways for years and then spike. It produces no income (no dividends, no interest); all return is price appreciation only.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Liquidity",
+                  mf: "Redemption credited within 1–3 working days. Partial redemption is possible.",
+                  them: "Depends heavily on the form. Physical gold and jewellery carry making charges (8–20%) and dealers discount on buyback — you lose on both ends. Gold ETFs are liquid on the exchange during market hours. Sovereign Gold Bonds (SGBs) have an 8-year maturity; premature exit on the secondary market is often at a discount due to low trading volumes.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Transparency",
+                  mf: "SEBI-regulated. NAV, holdings, and expense ratio are publicly disclosed every day.",
+                  them: "Gold spot price is globally visible and genuinely transparent. SGBs and Gold ETFs are well-regulated. Physical gold has purity risk (hallmarking helps but is not universal). Digital gold platforms (Paytm, PhonePe gold) have faced regulatory scrutiny and are not covered under any investor protection scheme.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Risk",
+                  mf: "Market risk — equity funds can be volatile in the short term. Diversified across 50–500 companies, so single-company failures have limited impact.",
+                  them: "Gold is driven by global macro forces — USD strength, geopolitical tension, central bank demand, and real interest rates. It is a genuine hedge against equity market crashes and currency debasement. However, during prolonged equity bull runs, gold can underperform significantly. It is a diversifier, not a primary wealth-builder.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio 0.1%–1.5% per year. No transaction tax per trade.",
+                  them: "Physical gold: 3% GST on purchase + making charges + storage/insurance. Gold ETFs: ~0.5% expense ratio + brokerage per trade. Digital gold: 3% GST + platform spread (typically 2–3%). SGBs: zero expense ratio and a 2.5% annual interest coupon — the most cost-efficient form if you can hold to maturity.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Verdict",
+                  mf: "Better suited for systematic long-term wealth building. No storage risk, no purity concerns, and professional management.",
+                  them: "Gold is a legitimate and time-tested asset — especially for Indian households. A 5–15% portfolio allocation is widely recommended as a hedge. SGBs are the best form for most investors. But gold jewellery is cultural wealth, not investment-grade wealth — the making charges and buyback discounts make it a poor financial instrument.",
+                  themClass: "mf-cell-ok"
+                }
+              ]
+            },
+            {
+              name: "Real Estate",
+              verdict: "Illiquid, opaque &amp; high-cost",
+              badgeClass: "mv-warn",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Market-linked. Equity funds have historically delivered 10–13% CAGR over 10+ year periods — but this is not guaranteed and past performance does not predict the future.",
+                  them: "Can appreciate significantly in some cities and periods. But gains are uneven, location-dependent, and you cannot sell a portion. Many investors overestimate returns by ignoring maintenance, property tax, vacant periods, and brokerage.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Liquidity",
+                  mf: "Redemption credited within 1–3 working days for most funds. You can redeem exactly what you need — no forced full exit.",
+                  them: "Selling typically takes weeks to months. You cannot exit partially. Capital is fully locked until a buyer is found, deals are negotiated, and registration is complete.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Transparency",
+                  mf: "Every fund's NAV, portfolio holdings, expense ratio, and fund manager track record are publicly disclosed daily under SEBI regulations.",
+                  them: "Pricing is opaque — the same property can be quoted at very different prices. Undisclosed cash components are still common in many markets. No regulatory body monitors individual transaction pricing.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Risk",
+                  mf: "Subject to market risk. However, diversification across 50–500 companies means no single failure wipes you out. Volatility is visible and measurable.",
+                  them: "Highly concentrated — often one asset worth years of savings. Also carries title disputes, tenant risk, regulatory changes, structural defects, and neighbourhood decline. These risks are invisible until they hit.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio typically 0.1%–1.5% per year, deducted automatically. No entry/exit loads on most funds. Tax on gains is straightforward.",
+                  them: "Stamp duty (5–7%), registration charges, brokerage (1–2%), annual maintenance, society charges, property tax, home loan interest if leveraged. Total acquisition cost routinely exceeds 10% of property value.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Verdict",
+                  mf: "Better liquidity, transparency, lower entry cost, and partial exit flexibility.",
+                  them: "Real estate has a genuine place in a portfolio — but as a primary wealth-building tool it is costly, illiquid, and opaque for most salaried investors.",
+                  themClass: "mf-cell-warn"
+                }
+              ]
+            },
+            {
+              name: "LIC &amp; Insurance Policies",
+              verdict: "Insurance ≠ Investment — keep them separate",
+              badgeClass: "mv-bad",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Market-linked. Equity funds have historically delivered 10–13% CAGR over 10+ years. Your entire premium goes to work from day one.",
+                  them: "ULIPs deduct premium allocation charges (1–7%), policy administration charges, mortality charges, and fund management charges before investing. In the first 3–5 years, a significant portion of your premium pays charges, not investments. Endowment and money-back plans typically deliver an IRR of 4–5.5% — rarely disclosed upfront by agents. This often fails to beat inflation.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Liquidity",
+                  mf: "Redeemable any business day. No lock-in except ELSS (3 years). No penalty for exit.",
+                  them: "ULIPs have a mandatory 5-year lock-in (IRDAI regulation). Surrendering an endowment plan in the first 3 years typically means losing all premiums paid — surrender value is zero or near-zero. Even after 5 years, surrender values are a fraction of total premiums paid.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Transparency",
+                  mf: "SEBI-regulated. Expense ratio, NAV, and holdings are publicly disclosed daily. No hidden charges.",
+                  them: "Post-2010 IRDAI reforms improved ULIP disclosure. Benefit illustrations are now mandatory. However, the layers of charges (6–8 different charge types) are genuinely complex and difficult to evaluate. Endowment plans rarely show the internal rate of return in agent conversations — the \u20b9X maturity amount sounds large without context of what it is in real terms.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Insurance",
+                  mf: "Mutual funds do not provide life cover. This is not a flaw — it is a feature. Keep insurance and investment separate so each can be optimised.",
+                  them: "ULIPs and endowment plans do provide life cover — but the sum assured is typically 10–15x the annual premium. A \u20b91 lakh/year ULIP gives \u20b910–15 lakh cover. A plain term insurance policy gives \u20b91 crore cover for \u20b98,000–12,000/year. You are paying a high price for inadequate cover.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio 0.1%–1.5% per year. For ELSS, no charge beyond the expense ratio.",
+                  them: "ULIPs combine: premium allocation charge + mortality charge + policy administration charge + fund management charge (up to 1.35%) + surrender charge. Total effective cost in early years can exceed 5–7% of premium annually. Endowment plans have opaque costs baked into the low IRR.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Verdict",
+                  mf: "Pair with a separate term insurance policy. Buy the right amount of cover cheaply; invest the rest in mutual funds.",
+                  them: "LIC and endowment plans are not scams — they are misused. Sold as investment products, they underperform. As insurance vehicles, they are overpriced. <span style=\"color:var(--safe)\">The honest recommendation: buy a pure term plan for life cover + invest separately in mutual funds. This combination almost always results in better cover and better returns.</span>",
+                  themClass: "mf-cell-bad"
+                }
+              ]
+            },
+            {
+              name: "PPF",
+              verdict: "Excellent debt instrument — not an equity substitute",
+              badgeClass: "mv-ok",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Market-linked. Not guaranteed. Equity funds have historically delivered 10–13% CAGR over 10+ years. Can underperform or be negative in the short term.",
+                  them: "Currently 7.1% p.a., compounded annually, set by the government quarterly. Returns are tax-free (EEE status). However, the rate has declined from 12% in the late 1990s to 7.1% today — rate revision risk is real. After adjusting for inflation (~5–6% historically), real returns are modest.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Liquidity",
+                  mf: "Redeemable any business day. No minimum holding period (except ELSS at 3 years).",
+                  them: "15-year lock-in with an extension option in blocks of 5 years. Partial withdrawals permitted from the 7th financial year onwards (up to 50% of the balance at the end of the 4th preceding year). Loans against PPF balance are available from the 3rd year. This is genuinely illiquid for medium-term needs.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Tax",
+                  mf: "ELSS qualifies for \u20b91.5 lakh deduction under 80C. Long-term capital gains taxed at 12.5% above \u20b91.25 lakh on equity funds. Debt fund gains taxed as per income slab.",
+                  them: "EEE — Exempt at investment (80C deduction up to \u20b91.5 lakh), exempt on accumulation (interest is not taxable), and exempt on maturity (full withdrawal is tax-free). This triple exemption is one of the best tax treatments available to individual investors in India.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Risk",
+                  mf: "Market risk — equity NAV can fall. Volatility is visible and historically recoverable over long horizons.",
+                  them: "Sovereign guarantee — backed by the Government of India. Zero default risk on principal or interest. The real risk is that returns may not significantly outpace inflation over long periods, particularly if the rate continues to trend downward.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio 0.1%–1.5% per year, deducted from NAV.",
+                  them: "Zero direct costs. No account charges, no management fees, no transaction charges. Annual contribution limit: \u20b9500 minimum, \u20b91.5 lakh maximum.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Verdict",
+                  mf: "Better suited for long-term equity wealth building. For short-to-medium goals, debt mutual funds offer more flexibility.",
+                  them: "PPF is a genuinely excellent instrument — but for the fixed-income, capital-safe portion of your portfolio. It is not a substitute for equity mutual funds if your goal is long-term wealth compounding. Used together — equity MF for growth, PPF for safe debt allocation — they complement each other well.",
+                  themClass: "mf-cell-ok"
+                }
+              ]
+            },
+            {
+              name: "NPS",
+              verdict: "Strong retirement tool — but 60-year lock-in is the defining constraint",
+              badgeClass: "mv-ok",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Market-linked with flexible fund and asset class choice at any time. Equity, debt, or hybrid — you decide, and can change.",
+                  them: "Market-linked across equity (E), corporate bonds (C), and government securities (G). The equity (E) tier has historically delivered ~12–14% CAGR — comparable to equity mutual funds. However, equity allocation is capped at 75% up to age 50 and reduces automatically thereafter, so you cannot stay 100% equity even if you want to.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Lock-in",
+                  mf: "No lock-in except ELSS (3 years). You retain full control of your money and can redeem at any time for any reason.",
+                  them: "Tier-1 NPS is locked until age 60 — this is the defining characteristic. You cannot access this money for a medical emergency, business opportunity, or family need before 60 (partial withdrawals are allowed only after 3 years for specific purposes: children's education, critical illness, home purchase). This lock-in enforces retirement discipline — which is a genuine feature, not a flaw, if you are building a retirement corpus.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Exit at 60",
+                  mf: "No restrictions on how you use your money at any age. No compulsory annuity purchase.",
+                  them: "At 60, you can withdraw 60% as a tax-free lump sum. The remaining 40% must be used to purchase an annuity from a PFRDA-empanelled insurer — this is mandatory. Annuity rates in India are currently modest (~5–6% per year). This forced annuity reduces the flexibility of your retirement corpus, and the income it generates is fully taxable.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Tax",
+                  mf: "ELSS gives 80C deduction. Equity fund LTCG taxed at 12.5% above \u20b91.25 lakh. No additional deduction beyond 80C.",
+                  them: "Additional \u20b950,000 deduction under Section 80CCD(1B) — over and above the \u20b91.5 lakh 80C limit. This alone can save \u20b915,000–\u20b917,500 per year in tax at the 30% slab. Employer contributions under 80CCD(2) are also deductible. The 60% lump sum withdrawal at exit is tax-free. This is a meaningful tax advantage.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio 0.1%–1.5% per year depending on fund type.",
+                  them: "Among the lowest fund management charges in the world — 0.09% per year for government-sector NPS funds, up to ~0.2% for private sector. Point of Presence (PoP) charges apply on contributions but are capped. On a large retirement corpus, the low cost compounds significantly in your favour.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Verdict",
+                  mf: "Better for goals before retirement, or when you want full flexibility over your money. Ideal complement to NPS for medium-term goals.",
+                  them: "NPS is one of the best retirement-specific instruments available in India — low cost, reasonable returns, and a strong tax benefit. The 60-year lock-in and mandatory 40% annuity are real constraints that suit retirement savings specifically. Best approach: use NPS for retirement corpus (leveraging the tax benefit), and mutual funds for everything else.",
+                  themClass: "mf-cell-ok"
+                }
+              ]
+            },
+            {
+              name: "Direct Stocks",
+              verdict: "High potential, high demand on your time &amp; skill",
+              badgeClass: "mv-warn",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Equity mutual funds pool stocks selected and monitored by professional fund managers. Historical long-term CAGR of 10–13% for broad market index funds — without requiring you to pick individual winners.",
+                  them: "Individual stocks can deliver extraordinary returns — or catastrophic losses. SEBI's own data shows the majority of individual equity investors underperform broad market indices over 5+ year periods. Stock picking requires skill, time, and discipline that most people underestimate.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Liquidity",
+                  mf: "Redemption in 1–3 working days. Can redeem partial amounts.",
+                  them: "Exchange-traded — highly liquid during market hours for large-cap stocks. Illiquid for small/micro-caps where your own sell order can move the price against you.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Transparency",
+                  mf: "Fund holdings disclosed monthly. Expense ratio disclosed. SEBI-regulated.",
+                  them: "Listed company disclosures are mandated by SEBI. Financial results, shareholding, and corporate actions are publicly available. Transparency is genuinely good for large-caps.",
+                  themClass: "mf-cell-ok"
+                },
+                {
+                  label: "Risk",
+                  mf: "Diversified across 50–500 companies. Single company failure has limited portfolio impact.",
+                  them: "Concentration risk is the central problem. A 10-stock portfolio means each stock is 10% of your wealth. One fraud, one sector collapse, one bad management decision — and the damage is severe. Requires constant monitoring.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio 0.1%–1.5% per year. No transaction cost per trade.",
+                  them: "Brokerage per trade (even at \u20b920 flat, frequent traders pay meaningfully). STT, stamp duty, SEBI charges, and GST on every transaction. Tax on short-term gains at 20%; long-term at 12.5% above \u20b91.25 lakh. Costs add up quickly for active traders.",
+                  themClass: "mf-cell-warn"
+                },
+                {
+                  label: "Verdict",
+                  mf: "Better diversification and professional management for investors who do not want to dedicate significant time to research.",
+                  them: "Direct stocks are a legitimate path for investors who enjoy research, can handle volatility, and have the discipline to hold through downturns. Not better or worse — just a different skill set required.",
+                  themClass: "mf-cell-warn"
+                }
+              ]
+            },
+            {
+              name: "Chit Funds &amp; Informal Schemes",
+              verdict: "Unregulated; serious legal &amp; fraud risk",
+              badgeClass: "mv-bad",
+              attrs: [
+                {
+                  label: "Returns",
+                  mf: "Market-linked with historical long-term outperformance of inflation. No guaranteed return.",
+                  them: "Registered chit funds under the Chit Funds Act, 1982 can work as intended for members. Unregistered and informal schemes routinely promise 20–40% returns — these are almost universally unsustainable and many are Ponzi structures.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Liquidity",
+                  mf: "Redeemable within 1–3 working days at any time.",
+                  them: "Money is locked for the duration of the chit cycle (typically 1–5 years). Early exit is difficult, often penalised, and sometimes impossible in informal schemes.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Transparency",
+                  mf: "Every rupee tracked, reported, and regulated by SEBI.",
+                  them: "Registered chit funds file returns with state governments. Unregistered ones have zero external oversight — no audited accounts, no regulatory scrutiny, no investor protection.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Risk",
+                  mf: "Market risk — measurable, visible, and historically recoverable over long horizons.",
+                  them: "Fraud risk is very real — operator absconding with funds is a documented and recurring pattern. Even legitimate registered chits carry forfeiture risk if you miss a payment. Your legal recourse in informal schemes is near zero.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Costs",
+                  mf: "Expense ratio 0.1%–1.5% per year, deducted from NAV.",
+                  them: "Chit funds typically deduct a foreman's commission of up to 5% of the chit value. Hidden charges in informal schemes vary and are rarely disclosed upfront.",
+                  themClass: "mf-cell-bad"
+                },
+                {
+                  label: "Verdict",
+                  mf: "Fully regulated, transparent, and liquid.",
+                  them: "Registered chit funds are legal and serve a social purpose for communities. Unregistered informal schemes are illegal under the Chit Funds Act and the Prize Chits &amp; Money Circulation Schemes (Banning) Act. Avoid entirely.",
+                  themClass: "mf-cell-bad"
+                }
+              ]
+            }
+          ];
+
+          var wrap = document.getElementById("mf-accordion");
+
+          instruments.forEach(function (inst) {
+            var item = document.createElement("div");
+            item.className = "mf-acc-item";
+            item.setAttribute("role", "listitem");
+
+            var shortName = inst.name.split(" ")[0];
+            var rowsHtml = inst.attrs.map(function (a) {
+              return '<div class="mf-attr-row">' +
+                '<div class="mf-attr-label">' + a.label + '</div>' +
+                '<div class="mf-compare-pair">' +
+                  '<div class="mf-compare-row">' +
+                    '<span class="mf-pill-tag pill-mf">MF</span>' +
+                    '<span class="mf-cell mf-cell-mf">' + a.mf + '</span>' +
+                  '</div>' +
+                  '<div class="mf-compare-row">' +
+                    '<span class="mf-pill-tag pill-vs">' + shortName + '</span>' +
+                    '<span class="mf-cell ' + a.themClass + '">' + a.them + '</span>' +
+                  '</div>' +
+                '</div>' +
+              '</div>';
+            }).join("");
+
+            item.innerHTML =
+              '<div class="mf-acc-header" role="button" tabindex="0" aria-expanded="false">' +
+                '<div class="mf-acc-header-left">' +
+                  '<span class="mf-acc-name">' + inst.name + '</span>' +
+                  '<span class="mf-verdict-badge ' + inst.badgeClass + '">' + inst.verdict + '</span>' +
+                '</div>' +
+                '<span class="mf-acc-chevron">&#8964;</span>' +
+              '</div>' +
+              '<div class="mf-acc-body">' +
+                '<div class="mf-attr-header">' +
+                  '<div>Attribute</div>' +
+                  '<div style="color:var(--safe)">Mutual Funds <span style="font-size:0.62rem;font-weight:400;opacity:0.6;letter-spacing:0.04em;text-transform:none;font-style:italic;">— consistent across all</span></div>' +
+                  '<div>' + inst.name + '</div>' +
+                '</div>' +
+                rowsHtml +
+              '</div>';
+
+            var header = item.querySelector(".mf-acc-header");
+            function toggle() {
+              var isOpen = item.classList.contains("open");
+              // Snapshot where the clicked header sits in the viewport
+              var headerTop = header.getBoundingClientRect().top;
+              // Close all accordions
+              wrap.querySelectorAll(".mf-acc-item").forEach(function (el) {
+                el.classList.remove("open");
+                el.querySelector(".mf-acc-header").setAttribute("aria-expanded", "false");
+              });
+              // If it wasn't open, open it now (click-to-close also works)
+              if (!isOpen) {
+                item.classList.add("open");
+                header.setAttribute("aria-expanded", "true");
+              }
+              // Correct for any scroll shift caused by closing other accordions
+              var newHeaderTop = header.getBoundingClientRect().top;
+              window.scrollBy({ top: newHeaderTop - headerTop, behavior: "instant" });
+            }
+            header.addEventListener("click", toggle);
+            header.addEventListener("keydown", function (e) {
+              if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+            });
+
+            wrap.appendChild(item);
+          });
+
+        })();
+      </script>
+
+      <h3
+        style="
+          font-family: var(--serif);
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: var(--text);
+          margin: 2rem 0 1rem;
+        "
+      >
+        What makes Mutual Funds stand out
+      </h3>
+
+      <!-- Show Details toggle for MF standout pillars -->
+      <div style="display:flex;justify-content:flex-end;margin-bottom:0.8rem;">
+        <button
+          id="mf-standout-toggle"
+          onclick="toggleMfStandout()"
+          style="
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.45rem 1rem;
+            font-size: 0.78rem;
+            font-family: var(--sans);
+            font-weight: 500;
+            color: var(--accent);
+            cursor: pointer;
+            letter-spacing: 0.04em;
+            transition: background 0.15s, border-color 0.15s;
+          "
+          onmouseover="this.style.background='var(--surface2)';this.style.borderColor='rgba(200,169,110,0.35)'"
+          onmouseout="this.style.background='var(--surface)';this.style.borderColor='var(--border)'"
+        >
+          <span id="mf-standout-toggle-icon" style="font-size:0.85rem;transition:transform 0.25s;">▶</span>
+          <span id="mf-standout-toggle-label">Show Details</span>
+        </button>
+      </div>
+
+      <div class="pillars" style="margin-bottom: 1.5rem">
+        <div class="pillar">
+          <div class="pillar-icon">🔒</div>
+          <h3>SEBI regulated</h3>
+          <p class="mf-standout-details" style="display:none;">
+            Every rupee, every fund, every transaction is governed and audited.
+            No room for the kind of opacity that real estate or chit funds
+            thrive on.
+          </p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">💧</div>
+          <h3>Liquid when you need it</h3>
+          <p class="mf-standout-details" style="display:none;">
+            Unlike real estate or chit schemes, your money is accessible. Life
+            doesn't wait for a property to sell.
+          </p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">📉</div>
+          <h3>Diversification built in</h3>
+          <p class="mf-standout-details" style="display:none;">
+            A single index fund gives you exposure to 50–500 companies. No
+            single stock collapse can wipe you out.
+          </p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🌱</div>
+          <h3>Start with ₹100</h3>
+          <p class="mf-standout-details" style="display:none;">
+            No minimum. No lock-in. No need for a large lump sum.
+            Wealth-building is not a privilege of the wealthy here.
+          </p>
+        </div>
+      </div>
+
+      <script>
+        (function() {
+          var expanded = false;
+          window.toggleMfStandout = function() {
+            expanded = !expanded;
+            var details = document.querySelectorAll('.mf-standout-details');
+            details.forEach(function(el) { el.style.display = expanded ? 'block' : 'none'; });
+            document.getElementById('mf-standout-toggle-label').textContent = expanded ? 'Hide Details' : 'Show Details';
+            document.getElementById('mf-standout-toggle-icon').style.transform = expanded ? 'rotate(90deg)' : '';
+          };
+        })();
+      </script>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- HOW THE TRANSACTION WORKS -->
+    <section class="section" id="how-it-works">
+      <div class="section-label">Your money's journey</div>
+      <h2>How the <em>Transaction Works</em></h2>
+      <div class="prose">
+        <p>
+          One of the most common concerns people have before investing through a
+          distributor is simple:
+          <strong>"Does my money pass through you?"</strong> The answer is no —
+          and here is exactly how it works.
+        </p>
+      </div>
+
+      <!-- Step-by-step flow -->
+      <div style="margin: 2.2rem 0; display: flex; flex-direction: column; gap: 0">
+
+        <!-- Step 1 -->
+        <div style="display:flex;gap:1.2rem;align-items:flex-start;position:relative;">
+          <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
+            <div style="width:44px;height:44px;border-radius:50%;background:var(--accent-dim);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.2rem;z-index:1;">🧑‍💼</div>
+            <div style="width:2px;flex:1;min-height:32px;background:var(--border);margin-top:4px;"></div>
+          </div>
+          <div class="txn-step" onclick="toggleStep(this)" style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;flex:1;margin-bottom:8px;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='var(--surface)'">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+              <div style="font-size:0.68rem;color:var(--accent);font-weight:500;text-transform:uppercase;letter-spacing:0.12em;">Step 1 — You decide to invest</div>
+              <span class="txn-chevron" style="font-size:0.75rem;color:var(--muted);transition:transform 0.25s;flex-shrink:0;">▶</span>
+            </div>
+            <div class="txn-details" style="display:none;margin-top:0.7rem;">
+              <div style="font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--text);margin-bottom:0.35rem;">You tell me the amount and the fund</div>
+              <div style="font-size:0.88rem;color:var(--muted);font-weight:300;line-height:1.6;">You choose how much to invest and in which fund. I help you pick the right one for your goal — that's my role. Nothing moves yet.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div style="display:flex;gap:1.2rem;align-items:flex-start;position:relative;">
+          <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
+            <div style="width:44px;height:44px;border-radius:50%;background:var(--accent-dim);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.2rem;z-index:1;">📋</div>
+            <div style="width:2px;flex:1;min-height:32px;background:var(--border);margin-top:4px;"></div>
+          </div>
+          <div class="txn-step" onclick="toggleStep(this)" style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;flex:1;margin-bottom:8px;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='var(--surface)'">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+              <div style="font-size:0.68rem;color:var(--accent);font-weight:500;text-transform:uppercase;letter-spacing:0.12em;">Step 2 — I submit the transaction</div>
+              <span class="txn-chevron" style="font-size:0.75rem;color:var(--muted);transition:transform 0.25s;flex-shrink:0;">▶</span>
+            </div>
+            <div class="txn-details" style="display:none;margin-top:0.7rem;">
+              <div style="font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--text);margin-bottom:0.35rem;">I place the order on your behalf — like a bridge</div>
+              <div style="font-size:0.88rem;color:var(--muted);font-weight:300;line-height:1.6;">I submit your investment instruction directly to the AMC (the fund house) through the SEBI Compliant platforms. I am just the facilitator — a bridge between you and the AMC.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div style="display:flex;gap:1.2rem;align-items:flex-start;position:relative;">
+          <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
+            <div style="width:44px;height:44px;border-radius:50%;background:rgba(76,175,130,0.15);border:1.5px solid #4caf82;display:flex;align-items:center;justify-content:center;font-size:1.2rem;z-index:1;">💸</div>
+            <div style="width:2px;flex:1;min-height:32px;background:var(--border);margin-top:4px;"></div>
+          </div>
+          <div class="txn-step" onclick="toggleStep(this)" style="background:var(--surface);border:1px solid rgba(76,175,130,0.2);border-radius:12px;padding:1.2rem 1.4rem;flex:1;margin-bottom:8px;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='var(--surface)'">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+              <div style="font-size:0.68rem;color:#4caf82;font-weight:500;text-transform:uppercase;letter-spacing:0.12em;">Step 3 — Your money goes directly to the AMC</div>
+              <span class="txn-chevron" style="font-size:0.75rem;color:var(--muted);transition:transform 0.25s;flex-shrink:0;">▶</span>
+            </div>
+            <div class="txn-details" style="display:none;margin-top:0.7rem;">
+              <div style="font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--text);margin-bottom:0.35rem;">Your bank → AMC's bank. I am not in the middle.</div>
+              <div style="font-size:0.88rem;color:var(--muted);font-weight:300;line-height:1.6;">Your payment (via UPI, net banking, or mandate) goes <strong style="color:var(--text)">directly from your bank account to the AMC's registered bank account.</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div style="display:flex;gap:1.2rem;align-items:flex-start;">
+          <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
+            <div style="width:44px;height:44px;border-radius:50%;background:rgba(76,175,130,0.15);border:1.5px solid #4caf82;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">✅</div>
+          </div>
+          <div class="txn-step" onclick="toggleStep(this)" style="background:var(--surface);border:1px solid rgba(76,175,130,0.2);border-radius:12px;padding:1.2rem 1.4rem;flex:1;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='var(--surface)'">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+              <div style="font-size:0.68rem;color:#4caf82;font-weight:500;text-transform:uppercase;letter-spacing:0.12em;">Step 4 — Units are allotted to you</div>
+              <span class="txn-chevron" style="font-size:0.75rem;color:var(--muted);transition:transform 0.25s;flex-shrink:0;">▶</span>
+            </div>
+            <div class="txn-details" style="display:none;margin-top:0.7rem;">
+              <div style="font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--text);margin-bottom:0.35rem;">The AMC confirms your investment directly</div>
+              <div style="font-size:0.88rem;color:var(--muted);font-weight:300;line-height:1.6;">The AMC allots mutual fund units to your folio and sends you a confirmation by email and SMS — directly. Your investment is registered in your name, with your PAN, linked to your bank. I can see it, but I cannot touch it.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <script>
+        function toggleStep(card) {
+          var details = card.querySelector('.txn-details');
+          var chevron = card.querySelector('.txn-chevron');
+          var open = details.style.display === 'block';
+          var cardTop = card.getBoundingClientRect().top;
+          document.querySelectorAll('.txn-step').forEach(function(c) {
+            c.querySelector('.txn-details').style.display = 'none';
+            c.querySelector('.txn-chevron').style.transform = '';
+          });
+          if (!open) {
+            details.style.display = 'block';
+            chevron.style.transform = 'rotate(90deg)';
+          }
+          var newCardTop = card.getBoundingClientRect().top;
+          window.scrollBy({ top: newCardTop - cardTop, behavior: 'instant' });
+        }
+      </script>
+
+      <!-- Big callout -->
+      <div
+        style="
+          background: rgba(76, 175, 130, 0.07);
+          border: 1.5px solid rgba(76, 175, 130, 0.25);
+          border-radius: 14px;
+          padding: 1.6rem 1.8rem;
+          margin-top: 0.6rem;
+          display: flex;
+          gap: 1.1rem;
+          align-items: flex-start;
+        "
+      >
+        <div style="font-size: 1.6rem; flex-shrink: 0; margin-top: 2px">🔐</div>
+        <div>
+          <div
+            style="
+              font-weight: 500;
+              color: var(--text);
+              margin-bottom: 0.5rem;
+              font-size: 1rem;
+            "
+          >
+            Your money is always yours — only yours
+          </div>
+          <div
+            style="
+              font-size: 0.9rem;
+              color: var(--muted);
+              font-weight: 300;
+              line-height: 1.7;
+            "
+          >
+            I hold no custody over your funds at any stage. I cannot initiate a
+            redemption without your instruction. I cannot transfer your units.
+            All I do is submit your instructions to the AMC — the same way a
+            travel agent books a flight for you, but cannot spend your money or
+            take your seat.
+          </div>
+        </div>
+      </div>
+
+      <!-- Simple visual summary -->
+      <div
+        class="hide-mobile"
+        style="
+          margin-top: 2rem;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          padding: 1.4rem 1.6rem;
+        "
+      >
+        <div
+          style="
+            font-size: 0.72rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 1.1rem;
+            font-weight: 500;
+          "
+        >
+          In plain English — where your money goes
+        </div>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+          "
+        >
+          <div style="text-align: center; flex: 1; min-width: 80px">
+            <div style="font-size: 1.4rem; margin-bottom: 0.3rem">🏦</div>
+            <div
+              style="font-size: 0.8rem; font-weight: 500; color: var(--text)"
+            >
+              Your Bank
+            </div>
+            <div
+              style="font-size: 0.72rem; color: var(--muted); font-weight: 300"
+            >
+              Origin
+            </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              flex: 1;
+              min-width: 60px;
+            "
+          >
+            <div
+              style="
+                font-size: 0.62rem;
+                color: #4caf82;
+                margin-bottom: 2px;
+                white-space: nowrap;
+                font-weight: 500;
+              "
+            >
+              Direct transfer
+            </div>
+            <div
+              style="
+                color: #4caf82;
+                font-size: 1rem;
+                line-height: 1;
+                white-space: nowrap;
+              "
+            >
+              ────▶
+            </div>
+          </div>
+          <div style="text-align: center; flex: 1; min-width: 80px">
+            <div style="font-size: 1.4rem; margin-bottom: 0.3rem">🏛️</div>
+            <div
+              style="font-size: 0.8rem; font-weight: 500; color: var(--text)"
+            >
+              AMC's Bank
+            </div>
+            <div
+              style="font-size: 0.72rem; color: var(--muted); font-weight: 300"
+            >
+              Destination
+            </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              flex: 1;
+              min-width: 60px;
+            "
+          >
+            <div
+              style="
+                font-size: 0.62rem;
+                color: var(--muted);
+                margin-bottom: 2px;
+                white-space: nowrap;
+              "
+            >
+              Units credited
+            </div>
+            <div
+              style="
+                color: var(--accent);
+                font-size: 1rem;
+                line-height: 1;
+                white-space: nowrap;
+              "
+            >
+              ────▶
+            </div>
+          </div>
+          <div style="text-align: center; flex: 1; min-width: 80px">
+            <div style="font-size: 1.4rem; margin-bottom: 0.3rem">📁</div>
+            <div
+              style="font-size: 0.8rem; font-weight: 500; color: var(--text)"
+            >
+              Your Folio
+            </div>
+            <div
+              style="font-size: 0.72rem; color: var(--muted); font-weight: 300"
+            >
+              In your name
+            </div>
+          </div>
+        </div>
+        <div
+          style="
+            margin-top: 1.1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+          "
+        >
+          <div
+            style="
+              width: 28px;
+              height: 28px;
+              border-radius: 50%;
+              background: var(--accent-dim);
+              border: 1px solid rgba(200, 169, 110, 0.3);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 0.85rem;
+              flex-shrink: 0;
+            "
+          >
+            🤝
+          </div>
+          <div
+            style="
+              font-size: 0.82rem;
+              color: var(--muted);
+              font-weight: 300;
+              line-height: 1.5;
+            "
+          >
+            Me (Distributor) — I submit your instruction and stay alongside your
+            journey.
+            <strong style="color: var(--text)"
+              >I never hold or touch your money.</strong
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- ── VIEWING & SELLING ── -->
+      <div style="margin-top: 2.8rem">
+        <div
+          style="
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+          "
+        >
+          Viewing &amp; Redeeming your holdings
+          <span style="flex: 1; height: 1px; background: var(--border)"></span>
+        </div>
+        <h3
+          class="holdings-heading"
+          style="
+            font-family: var(--serif);
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.6rem;
+          "
+        >
+          Your holdings, <em>always in your control</em>
+        </h3>
+        <p
+          style="
+            font-size: 0.95rem;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+          "
+        >
+          Once invested, you never need to log into anything or track a number
+          daily. When you need an update or want to redeem — just ask me. Here
+          is why that matters, and how both options work.
+        </p>
+
+        <!-- Two path cards -->
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+          "
+        >
+          <!-- Path B — Through Ramesh (recommended) -->
+          <div
+            class="path-recommended"
+            style="
+              background: var(--surface);
+              border: 1.5px solid rgba(200, 169, 110, 0.35);
+              border-radius: 14px;
+              overflow: hidden;
+              position: relative;
+            "
+          >
+            <div
+              style="
+                position: absolute;
+                top: 0.8rem;
+                right: 0.9rem;
+                font-size: 0.62rem;
+                font-weight: 600;
+                color: var(--bg);
+                background: var(--accent);
+                border-radius: 4px;
+                padding: 0.18rem 0.5rem;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+              "
+            >
+              Recommended
+            </div>
+            <div
+              class="holdings-trigger"
+              style="
+                background: var(--accent-dim);
+                padding: 1.1rem 1.4rem;
+                border-bottom: 1px solid rgba(200, 169, 110, 0.15);
+                display: flex;
+                align-items: center;
+                gap: 0.7rem;
+                cursor: pointer;
+                user-select: none;
+                -webkit-tap-highlight-color: transparent;
+              "
+            >
+              <div style="font-size: 1.2rem">🤝</div>
+              <div style="flex:1">
+                <div
+                  style="
+                    font-size: 0.7rem;
+                    font-weight: 600;
+                    color: var(--accent);
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                  "
+                >
+                  The better way
+                </div>
+                <div
+                  style="
+                    font-family: var(--serif);
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: var(--text);
+                    margin-top: 0.1rem;
+                  "
+                >
+                  Just ask me
+                </div>
+              </div>
+              <span class="holdings-chevron" style="font-size:0.75rem;color:var(--accent);transition:transform 0.25s ease;flex-shrink:0;">▾</span>
+            </div>
+            <div class="holdings-body" style="display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.28s ease;">
+            <div class="holdings-body-inner" style="overflow:hidden;">
+            <div
+              style="
+                padding: 1.2rem 1.4rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.9rem;
+              "
+            >
+              <div style="display: flex; gap: 0.9rem; align-items: flex-start">
+                <div
+                  style="
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 50%;
+                    background: var(--accent-dim);
+                    border: 1px solid rgba(200, 169, 110, 0.3);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    color: var(--accent);
+                    flex-shrink: 0;
+                  "
+                >
+                  1
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-size: 0.85rem;
+                      font-weight: 500;
+                      color: var(--text);
+                      margin-bottom: 0.2rem;
+                    "
+                  >
+                    Send me a message
+                  </div>
+                  <div
+                    style="
+                      font-size: 0.8rem;
+                      color: var(--muted);
+                      font-weight: 300;
+                      line-height: 1.5;
+                    "
+                  >
+                    Call, WhatsApp, or email — ask whatever you need. Current
+                    value, returns, a specific fund, or a redemption.
+                  </div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.9rem; align-items: flex-start">
+                <div
+                  style="
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 50%;
+                    background: var(--accent-dim);
+                    border: 1px solid rgba(200, 169, 110, 0.3);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    color: var(--accent);
+                    flex-shrink: 0;
+                  "
+                >
+                  2
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-size: 0.85rem;
+                      font-weight: 500;
+                      color: var(--text);
+                      margin-bottom: 0.2rem;
+                    "
+                  >
+                    I get back to you within one business day
+                  </div>
+                  <div
+                    style="
+                      font-size: 0.8rem;
+                      color: var(--muted);
+                      font-weight: 300;
+                      line-height: 1.5;
+                    "
+                  >
+                    I'll share exactly the numbers you asked for — or raise the
+                    redemption request, which the AMC will confirm with an OTP
+                    to your mobile.
+                  </div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.9rem; align-items: flex-start">
+                <div
+                  style="
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 50%;
+                    background: var(--accent-dim);
+                    border: 1px solid rgba(200, 169, 110, 0.3);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    color: var(--accent);
+                    flex-shrink: 0;
+                  "
+                >
+                  3
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-size: 0.85rem;
+                      font-weight: 500;
+                      color: var(--text);
+                      margin-bottom: 0.2rem;
+                    "
+                  >
+                    You stay in control — without the noise
+                  </div>
+                  <div
+                    style="
+                      font-size: 0.8rem;
+                      color: var(--muted);
+                      font-weight: 300;
+                      line-height: 1.5;
+                    "
+                  >
+                    You get the information when you actually need it, not a
+                    drip of daily numbers that adds anxiety without adding
+                    value.
+                  </div>
+                </div>
+              </div>
+
+              <div
+                style="
+                  background: var(--accent-glow);
+                  border-radius: 8px;
+                  padding: 0.75rem 0.9rem;
+                  font-size: 0.8rem;
+                  color: var(--accent);
+                  font-weight: 400;
+                  line-height: 1.55;
+                "
+              >
+                ✦ &nbsp;Spend your energy on what you do best. I'll keep an eye
+                on what I do best.
+              </div>
+            </div>
+            </div></div>
+          </div>
+
+          <!-- Path A — MFCentral (discouraged) -->
+          <div
+            class="path-discouraged"
+            style="
+              background: var(--surface);
+              border: 1px solid var(--border);
+              border-radius: 14px;
+              overflow: hidden;
+              opacity: 0.82;
+            "
+          >
+            <div
+              class="holdings-trigger"
+              style="
+                background: var(--surface2);
+                padding: 1.1rem 1.4rem;
+                border-bottom: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+                gap: 0.7rem;
+                cursor: pointer;
+                user-select: none;
+                -webkit-tap-highlight-color: transparent;
+              "
+            >
+              <div style="font-size: 1.2rem">📱</div>
+              <div style="flex:1">
+                <div
+                  style="
+                    font-size: 0.7rem;
+                    font-weight: 600;
+                    color: var(--muted);
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                  "
+                >
+                  You can — but probably shouldn't
+                </div>
+                <div
+                  style="
+                    font-family: var(--serif);
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: var(--text);
+                    margin-top: 0.1rem;
+                  "
+                >
+                  Check it yourself via MFCentral
+                </div>
+              </div>
+              <span class="holdings-chevron" style="font-size:0.75rem;color:var(--muted);transition:transform 0.25s ease;flex-shrink:0;">▾</span>
+            </div>
+            <div class="holdings-body" style="display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.28s ease;">
+            <div class="holdings-body-inner" style="overflow:hidden;">
+            <div
+              style="
+                padding: 1.2rem 1.4rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.8rem;
+              "
+            >
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: var(--muted);
+                  font-weight: 300;
+                  line-height: 1.65;
+                "
+              >
+                MFCentral is a free, official app backed by CAMS and KFintech —
+                the two registrars that maintain all mutual fund records in
+                India. It links directly to your PAN, so every fund you hold
+                across every AMC shows up in one place automatically.
+              </div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: var(--muted);
+                  font-weight: 300;
+                  line-height: 1.65;
+                "
+              >
+                But here is the honest problem with checking your portfolio
+                frequently:
+                <strong style="color: var(--text)"
+                  >it rarely gives you useful information — and it almost always
+                  triggers an emotion.</strong
+                >
+                A red number makes you want to exit. A green number makes you
+                want to add more. Neither impulse tends to be the right one.
+              </div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: var(--muted);
+                  font-weight: 300;
+                  line-height: 1.65;
+                "
+              >
+                The hour you spend watching your NAV move is an hour not spent
+                on your work, your family, or whatever you are actually good at.
+                <strong style="color: var(--text)"
+                  >Your primary skill earns you far more than any market-timing
+                  decision ever will.</strong
+                >
+              </div>
+              <div
+                style="
+                  background: rgba(224, 163, 74, 0.08);
+                  border: 1px solid rgba(224, 163, 74, 0.2);
+                  border-radius: 8px;
+                  padding: 0.75rem 0.9rem;
+                  font-size: 0.8rem;
+                  color: var(--warn);
+                  font-weight: 400;
+                  line-height: 1.55;
+                "
+              >
+                ⚠️ &nbsp;Frequent portfolio checks are one of the most common
+                reasons investors make avoidable mistakes.
+              </div>
+            </div>
+            </div></div>
+          </div>
+
+
+        </div>
+
+        <!-- Control callout -->
+        <div
+          style="
+            background: rgba(76, 175, 130, 0.07);
+            border: 1.5px solid rgba(76, 175, 130, 0.2);
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            gap: 0.9rem;
+            align-items: flex-start;
+          "
+        >
+          <div style="font-size: 1.3rem; flex-shrink: 0">🔑</div>
+          <div
+            style="
+              font-size: 0.88rem;
+              color: var(--muted);
+              font-weight: 300;
+              line-height: 1.7;
+            "
+          >
+            Either way,
+            <strong style="color: var(--text)"
+              >no redemption can happen without your OTP approval.</strong
+            >
+            Not by me, not by anyone. Your registered mobile number is the final
+            key — and only you hold it.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- HOW I EARN -->
+    <section class="section" id="how-i-earn">
+      <div class="section-label">Transparency</div>
+      <h2>How I <em>Earn</em></h2>
+      <div class="prose">
+        <p>
+          When you invest in a mutual fund through me, the AMC (Asset Management
+          Company) pays me a <strong>trail commission</strong> — a small
+          percentage of your invested amount, every year, as long as you remain
+          invested. This is called a <em>trail commission</em>.
+        </p>
+      </div>
+
+      <!-- Flow diagram -->
+      <div
+        style="
+          margin: 2.2rem 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0;
+          flex-wrap: wrap;
+        "
+        class="flow-diagram hide-mobile"
+      >
+        <!-- Node 1 -->
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 120px;
+          "
+        >
+          <div
+            style="
+              width: 64px;
+              height: 64px;
+              border-radius: 50%;
+              background: var(--accent-dim);
+              border: 1.5px solid var(--accent);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.6rem;
+            "
+          >
+            🧑‍💼
+          </div>
+          <div
+            style="
+              font-size: 0.78rem;
+              font-weight: 500;
+              color: var(--text);
+              text-align: center;
+              letter-spacing: 0.03em;
+            "
+          >
+            You<br /><span style="color: var(--muted); font-weight: 300"
+              >Investor</span
+            >
+          </div>
+        </div>
+        <!-- Arrow 1 -->
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 0.6rem;
+            margin-bottom: 1.2rem;
+          "
+        >
+          <div
+            style="
+              font-size: 0.62rem;
+              color: var(--muted);
+              margin-bottom: 2px;
+              white-space: nowrap;
+            "
+          >
+            Invests in
+          </div>
+          <div style="color: var(--accent); font-size: 1.1rem; line-height: 1">
+            ──────▶
+          </div>
+        </div>
+        <!-- Node 2 -->
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 120px;
+          "
+        >
+          <div
+            style="
+              width: 64px;
+              height: 64px;
+              border-radius: 50%;
+              background: var(--accent-dim);
+              border: 1.5px solid var(--accent);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.6rem;
+            "
+          >
+            🏛️
+          </div>
+          <div
+            style="
+              font-size: 0.78rem;
+              font-weight: 500;
+              color: var(--text);
+              text-align: center;
+              letter-spacing: 0.03em;
+            "
+          >
+            AMC<br /><span style="color: var(--muted); font-weight: 300"
+              >Fund House</span
+            >
+          </div>
+        </div>
+        <!-- Arrow 2 -->
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 0.6rem;
+            margin-bottom: 1.2rem;
+          "
+        >
+          <div
+            style="
+              font-size: 0.62rem;
+              color: var(--accent);
+              margin-bottom: 2px;
+              white-space: nowrap;
+              font-weight: 500;
+            "
+          >
+            Trail commission
+          </div>
+          <div style="color: var(--accent); font-size: 1.1rem; line-height: 1">
+            ──────▶
+          </div>
+        </div>
+        <!-- Node 3 -->
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 120px;
+          "
+        >
+          <div
+            style="
+              width: 64px;
+              height: 64px;
+              border-radius: 50%;
+              background: var(--accent-dim);
+              border: 1.5px solid var(--accent);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.6rem;
+            "
+          >
+            🤝
+          </div>
+          <div
+            style="
+              font-size: 0.78rem;
+              font-weight: 500;
+              color: var(--text);
+              text-align: center;
+              letter-spacing: 0.03em;
+            "
+          >
+            Me<br /><span style="color: var(--muted); font-weight: 300"
+              >Distributor</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Key callout — accordion -->
+      <div
+        id="expense-acc"
+        style="
+          background: var(--accent-glow);
+          border: 1px solid rgba(200, 169, 110, 0.2);
+          border-radius: 12px;
+          margin: 1.5rem 0;
+          overflow: hidden;
+        "
+      >
+        <!-- Trigger row -->
+        <div
+          onclick="toggleExpenseAcc()"
+          style="
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.4rem 1.8rem;
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+          "
+          onmouseover="this.style.background='rgba(200,169,110,0.06)'"
+          onmouseout="this.style.background=''"
+        >
+          <div style="font-size: 1.5rem; flex-shrink: 0;">💡</div>
+          <div style="font-weight: 500; color: var(--text); flex: 1;">
+            Built into the expense ratio — nothing extra from you
+          </div>
+          <span id="expense-acc-icon" style="font-size:0.85rem;color:var(--accent);transition:transform 0.25s;flex-shrink:0;">▶</span>
+        </div>
+        <!-- Body -->
+        <div id="expense-acc-body" style="display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.28s ease;">
+          <div style="overflow:hidden;">
+            <div
+              style="
+                font-size: 0.9rem;
+                color: var(--muted);
+                font-weight: 300;
+                line-height: 1.6;
+                padding: 0 1.8rem 1.4rem 4rem;
+                border-top: 1px solid rgba(200,169,110,0.15);
+                padding-top: 1rem;
+              "
+            >
+              Every mutual fund has an expense ratio — a small annual cost for
+              managing your money. The trail commission I receive is already
+              included in this expense ratio.
+              <strong style="color: var(--text)"
+                >You do not pay anything extra. There are no hidden charges from
+                my side.</strong
+              >
+              SEBI caps the maximum expense ratio — so the total cost is regulated
+              and disclosed.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function() {
+          var open = false;
+          window.toggleExpenseAcc = function() {
+            open = !open;
+            document.getElementById('expense-acc-body').style.gridTemplateRows = open ? '1fr' : '0fr';
+            document.getElementById('expense-acc-icon').style.transform = open ? 'rotate(90deg)' : '';
+          };
+        })();
+      </script>
+
+      <div class="quote-block">
+        <p>
+          "My income grows when your investment grows — and disappears if you
+          leave. That is the only commission model that keeps my interests truly
+          aligned with yours."
+        </p>
+      </div>
+
+      <!-- Two-column explainer -->
+      <div
+        style="
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1px;
+          background: var(--border);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          overflow: hidden;
+          margin-top: 1.8rem;
+        "
+        class="earn-explainer-grid"
+      >
+        <div style="background: var(--surface); padding: 1.4rem 1.5rem">
+          <div style="font-size: 1.1rem; margin-bottom: 0.6rem">✅</div>
+          <div
+            style="
+              font-size: 0.82rem;
+              font-weight: 500;
+              color: var(--safe);
+              margin-bottom: 0.5rem;
+              text-transform: uppercase;
+              letter-spacing: 0.06em;
+            "
+          >
+            What this means for you
+          </div>
+          <ul
+            style="
+              list-style: none;
+              display: flex;
+              flex-direction: column;
+              gap: 0.5rem;
+            "
+          >
+            <li
+              style="
+                font-size: 0.88rem;
+                color: var(--muted);
+                font-weight: 300;
+                display: flex;
+                gap: 0.5rem;
+              "
+            >
+              <span style="color: var(--safe)">✦</span>No separate advisory fee
+              or hidden charge
+            </li>
+            <li
+              style="
+                font-size: 0.88rem;
+                color: var(--muted);
+                font-weight: 300;
+                display: flex;
+                gap: 0.5rem;
+              "
+            >
+              <span style="color: var(--safe)">✦</span>Commission is
+              SEBI-regulated and disclosed
+            </li>
+            <li
+              style="
+                font-size: 0.88rem;
+                color: var(--muted);
+                font-weight: 300;
+                display: flex;
+                gap: 0.5rem;
+              "
+            >
+              <span style="color: var(--safe)">✦</span>I earn more only when
+              your corpus grows
+            </li>
+          </ul>
+        </div>
+        <div
+          style="
+            background: var(--surface);
+            padding: 1.4rem 1.5rem;
+            border-left: 1px solid var(--border);
+          "
+        >
+          <div style="font-size: 1.1rem; margin-bottom: 0.6rem">⚖️</div>
+          <div
+            style="
+              font-size: 0.82rem;
+              font-weight: 500;
+              color: var(--neutral);
+              margin-bottom: 0.5rem;
+              text-transform: uppercase;
+              letter-spacing: 0.06em;
+            "
+          >
+            The honest trade-off
+          </div>
+          <ul
+            style="
+              list-style: none;
+              display: flex;
+              flex-direction: column;
+              gap: 0.5rem;
+            "
+          >
+            <li
+              style="
+                font-size: 0.88rem;
+                color: var(--muted);
+                font-weight: 300;
+                display: flex;
+                gap: 0.5rem;
+              "
+            >
+              <span style="color: var(--neutral)">✦</span>Regular plans cost
+              slightly more than direct
+            </li>
+            <li
+              style="
+                font-size: 0.88rem;
+                color: var(--muted);
+                font-weight: 300;
+                display: flex;
+                gap: 0.5rem;
+              "
+            >
+              <span style="color: var(--neutral)">✦</span>The difference is the
+              cost of ongoing guidance
+            </li>
+            <li
+              style="
+                font-size: 0.88rem;
+                color: var(--muted);
+                font-weight: 300;
+                display: flex;
+                gap: 0.5rem;
+              "
+            >
+              <span style="color: var(--neutral)">✦</span>Good advice easily
+              outweighs the gap
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Commission Scale Table -->
+      <div style="margin-top: 2rem">
+        <div
+          style="
+            font-family: var(--serif);
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 1rem;
+          "
+        >
+          Transparency, <em style="color: var(--accent)">down to the rupee.</em>
+        </div>
+        <div
+          style="
+            font-size: 0.88rem;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.65;
+            margin-bottom: 1.2rem;
+            padding: 0.9rem 1.2rem;
+            border-left: 2px solid var(--border);
+          "
+        >
+          Trail commissions across fund categories typically range from
+          <strong style="color: var(--text)">0.2% to 1% per annum</strong>.
+          For this illustration, I've used
+          <strong style="color: var(--accent)">0.6%</strong> — a conservative
+          middle-ground figure.
+        </div>
+
+        <div
+          style="
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+          "
+        >
+          You keep the corpus. I earn a small share, every year.
+          <span
+            style="flex: 1; height: 1px; background: var(--border); display: block"
+          ></span>
+        </div>
+
+        <!-- Corpus slider -->
+        <div style="margin-bottom: 1.4rem;">
+          <label style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;font-weight:500;display:block;margin-bottom:0.6rem;">
+            Choose your corpus amount
+          </label>
+          <div style="display:none;align-items:center;gap:0.8rem;flex-wrap:wrap;">
+            <span style="font-size:1rem;color:var(--accent);font-weight:500;">₹</span>
+            <input
+              id="corpus-input"
+              type="number"
+              min="1000"
+              max="10000000"
+              step="1000"
+              value="1000"
+              style="
+                background: var(--surface2);
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                padding: 0.5rem 0.8rem;
+                font-size: 1rem;
+                color: var(--text);
+                font-family: var(--sans);
+                width: 180px;
+                outline: none;
+                transition: border-color 0.2s;
+              "
+              oninput="updateCorpus()"
+              onfocus="this.style.borderColor='rgba(200,169,110,0.5)'"
+              onblur="this.style.borderColor='var(--border)'"
+            />
+            <span id="corpus-display" style="font-size:0.88rem;color:var(--muted);font-weight:300;display:none;"></span>
+          </div>
+          <input
+            id="corpus-slider"
+            type="range"
+            min="1000"
+            max="10000000"
+            step="1000"
+            value="1000"
+            oninput="syncSlider(this.value)"
+            style="width:100%;margin-top:0.8rem;accent-color:var(--accent);"
+          />
+          <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--muted);margin-top:0.2rem;">
+            <span>₹1,000</span><span>₹1 Crore</span>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem;">
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;">
+            <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);font-weight:500;margin-bottom:0.5rem;">Your Corpus — yours entirely</div>
+            <div id="corpus-value-display" style="font-family:var(--serif);font-size:1.6rem;font-weight:600;color:var(--text);"></div>
+            <div style="font-size:0.75rem;color:var(--safe);margin-top:0.3rem;">This is yours. You build it to grow.</div>
+          </div>
+          <div style="background:var(--accent-glow);border:1px solid rgba(200,169,110,0.18);border-radius:12px;padding:1.2rem 1.4rem;">
+            <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);font-weight:500;margin-bottom:0.5rem;">My Annual Commission</div>
+            <div id="corpus-commission-display" style="font-family:var(--serif);font-size:1.6rem;font-weight:600;color:var(--accent);"></div>
+            <div style="font-size:0.75rem;color:var(--muted);margin-top:0.3rem;">paid by the AMC, per annum</div>
+          </div>
+        </div>
+
+        <div
+          id="corpus-callout"
+          style="
+            background: var(--accent-glow);
+            border: 1px solid rgba(200, 169, 110, 0.18);
+            border-radius: 10px;
+            padding: 1.3rem 1.6rem;
+            margin-top: 1.2rem;
+            font-size: 0.92rem;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.7;
+          "
+        ></div>
+
+        <script>
+          function formatINR(n) {
+            if (n >= 10000000) return '₹' + (n / 10000000).toFixed(n % 10000000 === 0 ? 0 : 2) + ' Cr';
+            if (n >= 100000)   return '₹' + (n / 100000).toFixed(n % 100000 === 0 ? 0 : 2) + ' L';
+            if (n >= 1000)     return '₹' + (n / 1000).toFixed(n % 1000 === 0 ? 0 : 1) + ' K';
+            return '₹' + n.toLocaleString('en-IN');
+          }
+
+          function formatINRFull(n) {
+            return '₹' + n.toLocaleString('en-IN');
+          }
+
+          function updateCorpus() {
+            var raw = parseInt(document.getElementById('corpus-input').value) || 10000000;
+            raw = Math.min(10000000, Math.max(1000, raw));
+            document.getElementById('corpus-slider').value = raw;
+            render(raw);
+          }
+
+          function syncSlider(val) {
+            val = parseInt(val);
+            document.getElementById('corpus-input').value = val;
+            render(val);
+          }
+
+          function render(corpus) {
+            var rate = 0.006;
+            var commission = Math.round(corpus * rate);
+
+            // display label next to input
+            document.getElementById('corpus-display').textContent = formatINR(corpus);
+
+            // corpus & commission text cards
+            document.getElementById('corpus-value-display').textContent = formatINR(corpus);
+            document.getElementById('corpus-commission-display').textContent = '~' + formatINR(commission) + ' / yr';
+
+            // callout
+            var corpusStr = formatINR(corpus);
+            var commStr = formatINR(commission);
+            document.getElementById('corpus-callout').innerHTML =
+              'When your corpus reaches ' + corpusStr + ', ' +
+              '<strong style="color:var(--text)">that ' + corpusStr + ' is entirely yours</strong>' +
+              ' — growing steadily, quietly building your future. I earn ' + commStr + ' that year, ' +
+              'not as a separate charge from you, but as a small annual share the fund house pays me for staying by your side.' +
+              '<br/><br/>You keep the ' + corpusStr + '. ' +
+              '<strong style="color:var(--accent)">The ' + commStr + ' a year and my passion for helping people reach their goal — that is my reason to keep showing up for you, every single day.</strong>';
+          }
+
+          // init
+          render(1000);
+        </script>
+      </div>
+
+      <!-- CAS Transparency -->
+      <div
+        style="
+          margin-top: 1.8rem;
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          overflow: hidden;
+        "
+      >
+        <div
+          id="verify-trigger"
+          style="
+            background: var(--surface2);
+            padding: 0.9rem 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+          "
+        >
+          <span style="font-size: 1.1rem">🔍</span>
+          <span
+            style="
+              font-size: 0.78rem;
+              font-weight: 500;
+              color: var(--text);
+              letter-spacing: 0.04em;
+              text-transform: uppercase;
+              flex: 1;
+            "
+            >You can verify this yourself — no need to ask me</span
+          >
+          <span id="verify-chevron" style="font-size:0.75rem;color:var(--muted);transition:transform 0.25s ease;flex-shrink:0;">▾</span>
+        </div>
+        <div id="verify-body" style="display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.28s ease;">
+        <div style="overflow:hidden;">
+        <div
+          style="
+            padding: 1.2rem 1.4rem;
+            background: var(--surface);
+            font-size: 0.9rem;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.7;
+          "
+        >
+          Every investor in India can download a
+          <strong style="color: var(--text)"
+            >CAS — Consolidated Account Statement</strong
+          >
+          — a full record of your investments and the exact commission earned by
+          your distributor. <strong style="color: var(--text)">MF Central</strong>
+          is the easiest place to do this — one login, all your folios, complete picture.
+          It is free, official, and takes two minutes.
+          <br /><br />
+          <div
+            style="
+              display: flex;
+              gap: 0.8rem;
+              flex-wrap: wrap;
+              margin-top: 0.4rem;
+            "
+          >
+            <a
+              href="https://www.mfcentral.com"
+              target="_blank"
+              rel="noopener"
+              style="
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                background: var(--surface2);
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                padding: 0.45rem 1rem;
+                font-size: 0.82rem;
+                color: var(--accent);
+                text-decoration: none;
+                font-weight: 500;
+                transition: border-color 0.2s;
+              "
+              >mfcentral.com ↗</a
+            >
+          </div>
+          <div
+            style="
+              margin-top: 1rem;
+              font-size: 0.82rem;
+              color: var(--muted);
+              font-weight: 300;
+            "
+          >
+            Log in with your PAN and registered email. If you ever have
+            questions about what you see there,
+            <strong style="color: var(--text)">I am happy to walk you through it.</strong>
+          </div>
+        </div>
+        </div></div>
+      </div>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- MUTUAL FUND USE CASES -->
+    <section class="section" id="use-cases">
+      <div class="section-label">Real-life stories</div>
+      <h2>Mutual Fund <em>Use Cases</em></h2>
+      <div class="prose">
+        <p>
+          Mutual funds are not just for "wealth creation" in the abstract sense.
+          They quietly power some very specific, very real goals. Here are four
+          stories that show what that looks like in practice.
+        </p>
+      </div>
+
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          gap: 1.2rem;
+          margin-top: 2rem;
+        "
+      >
+        <!-- Use Case 1 -->
+        <div class="usecase-card">
+          <div class="usecase-card-trigger">
+            <div style="width:44px;height:44px;border-radius:10px;background:var(--accent-dim);border:1px solid rgba(200,169,110,0.25);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">🏠</div>
+            <div class="usecase-card-trigger-text">
+              <div style="font-family:var(--serif);font-size:1.08rem;font-weight:600;color:var(--text);">Buying a dream home — using mutual funds smartly</div>
+              <span style="font-size:0.68rem;padding:0.2rem 0.6rem;border-radius:4px;background:rgba(76,175,130,0.12);color:#5ec99a;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;">Section 54F</span>
+            </div>
+            <span class="usecase-card-chevron">▾</span>
+          </div>
+          <div class="usecase-card-body"><div class="usecase-card-body-inner">
+            <p style="font-size:0.92rem;color:var(--muted);font-weight:300;line-height:1.7;margin-bottom:0.8rem;">Priya had been investing in equity mutual funds for several years. Her portfolio had grown significantly — and she decided it was finally time to buy the home she had been dreaming of. She redeemed her equity mutual funds and made a substantial long-term capital gain.</p>
+            <p style="font-size:0.92rem;color:var(--muted);font-weight:300;line-height:1.7;margin-bottom:0.8rem;">Here is where most people make a costly mistake — they pay the full capital gains tax without realising there is a legal way to avoid it. Priya reinvested her entire sale proceeds into a residential property and claimed a <strong style="color:var(--text)">full capital gains exemption under Section 54F of the Income Tax Act.</strong> The tax she would have paid — lakhs — stayed in her pocket instead.</p>
+            <div style="background:var(--accent-glow);border-radius:8px;padding:0.8rem 1rem;font-size:0.85rem;color:var(--accent);font-weight:400;line-height:1.5;margin-bottom:0.7rem;">✦ &nbsp;Her mutual funds built the corpus. Section 54F — a provision designed exactly for this — let her keep every rupee of it for her home.</div>
+            <div style="padding:0.65rem 0.9rem;border-radius:8px;background:rgba(224,163,74,0.07);border:1px solid rgba(224,163,74,0.2);font-size:0.8rem;color:var(--warn);font-weight:300;line-height:1.5;">⚠️ <strong>Eligibility note:</strong> Section 54F exemption applies only if you do not own more than one residential property (other than the new one) at the time of sale. Please consult a tax advisor to confirm your eligibility before relying on this provision.</div>
+          </div></div>
+        </div>
+
+        <!-- Use Case 2 -->
+        <div class="usecase-card">
+          <div class="usecase-card-trigger">
+            <div style="width:44px;height:44px;border-radius:10px;background:var(--accent-dim);border:1px solid rgba(200,169,110,0.25);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">🛡️</div>
+            <div class="usecase-card-trigger-text">
+              <div style="font-family:var(--serif);font-size:1.08rem;font-weight:600;color:var(--text);">Building a safety buffer</div>
+              <span style="font-size:0.68rem;padding:0.2rem 0.6rem;border-radius:4px;background:rgba(107,140,186,0.12);color:#8aaad4;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;">Liquid Funds</span>
+            </div>
+            <span class="usecase-card-chevron">▾</span>
+          </div>
+          <div class="usecase-card-body"><div class="usecase-card-body-inner">
+            <p style="font-size:0.92rem;color:var(--muted);font-weight:300;line-height:1.7;margin-bottom:0.8rem;">Arun kept six months of salary in a savings account — "just in case." It felt safe, but it was earning 3.5% and slowly losing value to inflation. He moved it to a <strong style="color:var(--text)">Liquid Mutual Fund</strong>.</p>
+            <p style="font-size:0.92rem;color:var(--muted);font-weight:300;line-height:1.7;margin-bottom:0.8rem;">Same-day redemption available (T+1 for most liquid funds). No lock-in. No penalty. And returns that consistently beat savings accounts. His emergency fund is now his money — not the bank's.</p>
+            <div style="background:var(--accent-glow);border-radius:8px;padding:0.8rem 1rem;font-size:0.85rem;color:var(--accent);font-weight:400;line-height:1.5;">✦ &nbsp;Accessible in an emergency. Earning better returns quietly, every single day.</div>
+          </div></div>
+        </div>
+
+        <!-- Use Case 3 -->
+        <div class="usecase-card">
+          <div class="usecase-card-trigger">
+            <div style="width:44px;height:44px;border-radius:10px;background:var(--accent-dim);border:1px solid rgba(200,169,110,0.25);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">🌅</div>
+            <div class="usecase-card-trigger-text">
+              <div style="font-family:var(--serif);font-size:1.08rem;font-weight:600;color:var(--text);">Retirement — without depending on anyone</div>
+              <span style="font-size:0.68rem;padding:0.2rem 0.6rem;border-radius:4px;background:rgba(76,175,130,0.12);color:#5ec99a;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;">SIP · Equity Funds</span>
+            </div>
+            <span class="usecase-card-chevron">▾</span>
+          </div>
+          <div class="usecase-card-body"><div class="usecase-card-body-inner">
+            <p style="font-size:0.92rem;color:var(--muted);font-weight:300;line-height:1.7;margin-bottom:0.8rem;">Suresh started a ₹10,000/month SIP in a Flexi Cap equity fund at age 32. Not because he had a lot of money — he didn't. But because he understood one thing: <strong style="color:var(--text)">time is the most powerful ingredient in compounding.</strong></p>
+            <p style="font-size:0.92rem;color:var(--muted);font-weight:300;line-height:1.7;margin-bottom:0.8rem;">By 55, assuming a modest 12% annual return, his corpus would cross ₹1.6 crore — built entirely from disciplined, automated monthly contributions. No market timing. No stress. Just consistency.</p>
+            <div style="background:var(--accent-glow);border-radius:8px;padding:0.8rem 1rem;font-size:0.85rem;color:var(--accent);font-weight:400;line-height:1.5;">✦ &nbsp;₹10,000/month × 23 years → ₹1.6 Cr+. Retirement funded by discipline, not luck.</div>
+          </div></div>
+        </div>
+
+        <!-- Use Case 4 -->
+        <div class="usecase-card">
+          <div class="usecase-card-trigger">
+            <div style="width:44px;height:44px;border-radius:10px;background:var(--accent-dim);border:1px solid rgba(200,169,110,0.25);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">🎓</div>
+            <div class="usecase-card-trigger-text">
+              <div style="font-family:var(--serif);font-size:1.08rem;font-weight:600;color:var(--text);">Children's education — the gift that compounds</div>
+              <span style="font-size:0.68rem;padding:0.2rem 0.6rem;border-radius:4px;background:rgba(107,140,186,0.12);color:#8aaad4;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;">Hybrid Funds</span>
+            </div>
+            <span class="usecase-card-chevron">▾</span>
+          </div>
+          <div class="usecase-card-body"><div class="usecase-card-body-inner">
+            <p style="font-size:0.92rem;color:var(--muted);font-weight:300;line-height:1.7;margin-bottom:0.8rem;">Meena's daughter was 4. College felt distant. But education costs in India have been rising at 10–12% per year — meaning today's ₹10L degree becomes ₹28L in 10 years. Meena started a <strong style="color:var(--text)">Hybrid Mutual Fund SIP</strong> — blending equity growth with debt stability.</p>
+            <p style="font-size:0.92rem;color:var(--muted);font-weight:300;line-height:1.7;margin-bottom:0.8rem;">As her daughter's college year approached, the portfolio was gradually shifted toward safer debt funds — protecting gains while staying accessible. The degree was paid for, in full, without a loan.</p>
+            <div style="background:var(--accent-glow);border-radius:8px;padding:0.8rem 1rem;font-size:0.85rem;color:var(--accent);font-weight:400;line-height:1.5;">✦ &nbsp;Start when the child is young. Shift to safety as the goal gets closer. No education loan needed.</div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- And many more -->
+      <div
+        style="
+          text-align: center;
+          margin-top: 1.6rem;
+          padding: 1.2rem 1.8rem;
+          border: 1px dashed rgba(200, 169, 110, 0.25);
+          border-radius: 12px;
+          background: var(--accent-glow);
+        "
+      >
+        <span
+          style="
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--muted);
+          "
+          >… and many more — tax-saving investments, wedding funds, business
+          capital, foreign education, early retirement.</span
+        >
+        <div
+          style="
+            margin-top: 0.5rem;
+            font-size: 0.82rem;
+            color: var(--muted);
+            font-weight: 300;
+          "
+        >
+          Every goal is different. The right fund for it usually exists — it
+          just needs to be matched correctly.
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- RISK SPECTRUM -->
+    <section class="section" id="risk-spectrum">
+      <div class="section-label">Know your options</div>
+      <h2>Risk Spectrum of <em>Fund Categories</em></h2>
+      <div class="prose">
+        <p>
+          Not all mutual funds carry the same risk. The spectrum below shows
+          where each category sits — from the safest options to the
+          highest-risk, highest-potential ones. Understanding this helps you
+          pick the right tool for each goal.
+        </p>
+      </div>
+
+      <!-- Spectrum bar -->
+      <div
+        style="
+          margin: 2.2rem 0 0.8rem;
+          position: relative;
+          height: 12px;
+          border-radius: 6px;
+          background: linear-gradient(
+            90deg,
+            #4caf82 0%,
+            #6b8cba 50%,
+            #e05c5c 100%
+          );
+          box-shadow: 0 0 20px rgba(200, 169, 110, 0.1);
+        "
+      ></div>
+      <div class="risk-labels-row">
+        <span class="risk-label-low">◀ Lower Risk</span>
+        <span class="risk-label-mid">Moderate</span>
+        <span class="risk-label-high">Higher Risk ▶</span>
+      </div>
+
+      <!-- Expand / Collapse toggle -->
+      <div style="display:flex;justify-content:flex-end;margin-bottom:0.8rem;">
+        <button
+          id="spectrum-toggle"
+          onclick="toggleSpectrum()"
+          style="
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.45rem 1rem;
+            font-size: 0.78rem;
+            font-family: var(--sans);
+            font-weight: 500;
+            color: var(--accent);
+            cursor: pointer;
+            letter-spacing: 0.04em;
+            transition: background 0.15s, border-color 0.15s;
+          "
+          onmouseover="this.style.background='var(--surface2)';this.style.borderColor='rgba(200,169,110,0.35)'"
+          onmouseout="this.style.background='var(--surface)';this.style.borderColor='var(--border)'"
+        >
+          <span id="spectrum-toggle-icon" style="font-size:0.85rem;transition:transform 0.25s;">▶</span>
+          <span id="spectrum-toggle-label">Show Details</span>
+        </button>
+      </div>
+
+      <!-- Fund cards grid -->
+      <div
+        style="
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1px;
+          background: var(--border);
+          border: 1px solid var(--border);
+          border-radius: 14px;
+          overflow: hidden;
+        "
+        class="risk-spectrum-grid"
+      >
+        <!-- Low Risk -->
+        <div
+          style="
+            background: var(--surface);
+            padding: 1.5rem 1.3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+          "
+        >
+          <div style="display: flex; align-items: center; gap: 0.6rem">
+            <div style="width:8px;height:8px;border-radius:50%;background:#4caf82;flex-shrink:0;"></div>
+            <div style="font-size:0.7rem;font-weight:500;color:#4caf82;text-transform:uppercase;letter-spacing:0.1em;">Low Risk</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.8rem">
+
+            <!-- Liquid Funds -->
+            <div style="background:rgba(76,175,130,0.07);border:1px solid rgba(76,175,130,0.15);border-radius:10px;padding:1rem;">
+              <div style="display:flex;align-items:center;gap:0.5rem;">
+                <div style="font-size:1.2rem;">💧</div>
+                <div style="font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--text);">Liquid Funds</div>
+              </div>
+              <div class="spectrum-details" style="display:none;">
+                <div style="font-size:0.8rem;color:var(--muted);font-weight:300;line-height:1.5;margin-top:0.4rem;">Park your emergency fund or short-term cash here. Redeemable within 1 day. Beats savings accounts.</div>
+                <div style="margin-top:0.6rem;font-size:0.72rem;color:#4caf82;font-weight:500;">Ideal for: 1 day – 3 months</div>
+              </div>
+            </div>
+
+            <!-- Arbitrage Funds -->
+            <div style="background:rgba(76,175,130,0.07);border:1px solid rgba(76,175,130,0.15);border-radius:10px;padding:1rem;">
+              <div style="display:flex;align-items:center;gap:0.5rem;">
+                <div style="font-size:1.2rem;">⚖️</div>
+                <div style="font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--text);">Arbitrage Funds</div>
+              </div>
+              <div class="spectrum-details" style="display:none;">
+                <div style="font-size:0.8rem;color:var(--muted);font-weight:300;line-height:1.5;margin-top:0.4rem;">Equity taxation with debt-like risk. Profits from price differences between cash and futures markets.</div>
+                <div style="margin-top:0.6rem;font-size:0.72rem;color:#4caf82;font-weight:500;">Ideal for: 3 – 12 months</div>
+              </div>
+            </div>
+
+            <!-- Money Market Funds -->
+            <div style="background:rgba(76,175,130,0.07);border:1px solid rgba(76,175,130,0.15);border-radius:10px;padding:1rem;">
+              <div style="display:flex;align-items:center;gap:0.5rem;">
+                <div style="font-size:1.2rem;">🏦</div>
+                <div style="font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--text);">Money Market Funds</div>
+              </div>
+              <div class="spectrum-details" style="display:none;">
+                <div style="font-size:0.8rem;color:var(--muted);font-weight:300;line-height:1.5;margin-top:0.4rem;">Invest in short-term instruments like T-bills and commercial paper. Slightly better yields than liquid funds with marginally longer maturity — still very low risk.</div>
+                <div style="margin-top:0.6rem;font-size:0.72rem;color:#4caf82;font-weight:500;">Ideal for: 3 – 12 months</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Moderate Risk -->
+        <div
+          style="
+            background: var(--surface);
+            padding: 1.5rem 1.3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+          "
+        >
+          <div style="display: flex; align-items: center; gap: 0.6rem">
+            <div style="width:8px;height:8px;border-radius:50%;background:#6b8cba;flex-shrink:0;"></div>
+            <div style="font-size:0.7rem;font-weight:500;color:#6b8cba;text-transform:uppercase;letter-spacing:0.1em;">Moderate Risk</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.8rem">
+
+            <!-- Hybrid Funds -->
+            <div style="background:rgba(107,140,186,0.07);border:1px solid rgba(107,140,186,0.15);border-radius:10px;padding:1rem;">
+              <div style="display:flex;align-items:center;gap:0.5rem;">
+                <div style="font-size:1.2rem;">🌗</div>
+                <div style="font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--text);">Hybrid Funds</div>
+              </div>
+              <div class="spectrum-details" style="display:none;">
+                <div style="font-size:0.8rem;color:var(--muted);font-weight:300;line-height:1.5;margin-top:0.4rem;">A blend of equity and debt in one fund. Smooth out the bumps while still participating in market growth.</div>
+                <div style="margin-top:0.6rem;font-size:0.72rem;color:#6b8cba;font-weight:500;">Ideal for: 3 – 5 years</div>
+              </div>
+            </div>
+
+            <!-- Index Funds -->
+            <div style="background:rgba(107,140,186,0.07);border:1px solid rgba(107,140,186,0.15);border-radius:10px;padding:1rem;">
+              <div style="display:flex;align-items:center;gap:0.5rem;">
+                <div style="font-size:1.2rem;">📊</div>
+                <div style="font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--text);">Index Funds</div>
+              </div>
+              <div class="spectrum-details" style="display:none;">
+                <div style="font-size:0.8rem;color:var(--muted);font-weight:300;line-height:1.5;margin-top:0.4rem;">Track a market index like Nifty 50. Low cost, transparent, no fund manager risk. The intelligent default.</div>
+                <div style="margin-top:0.6rem;font-size:0.72rem;color:#6b8cba;font-weight:500;">Ideal for: 5+ years</div>
+              </div>
+            </div>
+
+            <!-- Equity Savings Funds -->
+            <div style="background:rgba(107,140,186,0.07);border:1px solid rgba(107,140,186,0.15);border-radius:10px;padding:1rem;">
+              <div style="display:flex;align-items:center;gap:0.5rem;">
+                <div style="font-size:1.2rem;">🔀</div>
+                <div style="font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--text);">Equity Savings Funds</div>
+              </div>
+              <div class="spectrum-details" style="display:none;">
+                <div style="font-size:0.8rem;color:var(--muted);font-weight:300;line-height:1.5;margin-top:0.4rem;">A three-way blend of equity, arbitrage, and debt. Delivers equity taxation with meaningfully lower volatility — a smart middle ground for conservative equity investors.</div>
+                <div style="margin-top:0.6rem;font-size:0.72rem;color:#6b8cba;font-weight:500;">Ideal for: 1 – 3 years</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- High Risk -->
+        <div
+          style="
+            background: var(--surface);
+            padding: 1.5rem 1.3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+          "
+        >
+          <div style="display: flex; align-items: center; gap: 0.6rem">
+            <div style="width:8px;height:8px;border-radius:50%;background:#e05c5c;flex-shrink:0;"></div>
+            <div style="font-size:0.7rem;font-weight:500;color:#e05c5c;text-transform:uppercase;letter-spacing:0.1em;">High Risk</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.8rem">
+
+            <!-- Sectoral / Thematic -->
+            <div style="background:rgba(224,92,92,0.07);border:1px solid rgba(224,92,92,0.15);border-radius:10px;padding:1rem;">
+              <div style="display:flex;align-items:center;gap:0.5rem;">
+                <div style="font-size:1.2rem;">🎯</div>
+                <div style="font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--text);">Sectoral / Thematic</div>
+                <span style="font-size:0.6rem;font-weight:600;color:#e05c5c;background:rgba(224,92,92,0.15);border:1px solid rgba(224,92,92,0.3);padding:0.1rem 0.4rem;border-radius:4px;letter-spacing:0.07em;text-transform:uppercase;white-space:nowrap;">⚠ Extreme</span>
+              </div>
+              <div class="spectrum-details" style="display:none;">
+                <div style="font-size:0.8rem;color:var(--muted);font-weight:300;line-height:1.5;margin-top:0.4rem;">Concentrated bets on one industry (tech, pharma, infra). High upside when the theme wins — high pain when it doesn't.</div>
+                <div style="margin-top:0.8rem;padding:0.65rem 0.8rem;background:rgba(224,92,92,0.08);border-left:2px solid #e05c5c;border-radius:0 6px 6px 0;font-size:0.78rem;color:#e07a7a;line-height:1.5;">These funds can fall <strong style="color:#e05c5c">50–70% in a downturn</strong> and take years to recover. Not suitable for most investors.</div>
+                <div style="margin-top:0.6rem;font-size:0.72rem;color:#e05c5c;font-weight:500;">Only with conviction + 7+ year horizon</div>
+              </div>
+            </div>
+
+            <!-- Small Cap Funds -->
+            <div style="background:rgba(224,92,92,0.07);border:1px solid rgba(224,92,92,0.15);border-radius:10px;padding:1rem;">
+              <div style="display:flex;align-items:center;gap:0.5rem;">
+                <div style="font-size:1.2rem;">🚀</div>
+                <div style="font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--text);">Small Cap Funds</div>
+              </div>
+              <div class="spectrum-details" style="display:none;">
+                <div style="font-size:0.8rem;color:var(--muted);font-weight:300;line-height:1.5;margin-top:0.4rem;">The highest growth potential in mutual funds — and the sharpest drawdowns. Can fall 40–60% in a bad year. Patience is non-negotiable.</div>
+                <div style="margin-top:0.6rem;font-size:0.72rem;color:#e05c5c;font-weight:500;">Only with strong stomach + 10+ years</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function() {
+          var expanded = false;
+          window.toggleSpectrum = function() {
+            expanded = !expanded;
+            var details = document.querySelectorAll('.spectrum-details');
+            details.forEach(function(el) { el.style.display = expanded ? 'block' : 'none'; });
+            document.getElementById('spectrum-toggle-label').textContent = expanded ? 'Hide Details' : 'Show Details';
+            document.getElementById('spectrum-toggle-icon').style.transform = expanded ? 'rotate(90deg)' : '';
+          };
+        })();
+      </script>
+
+      <!-- Disclaimer note -->
+      <div
+        style="
+          margin-top: 1.4rem;
+          padding: 1rem 1.2rem;
+          border-radius: 10px;
+          border: 1px solid var(--border);
+          background: var(--surface);
+          display: flex;
+          gap: 0.8rem;
+          align-items: flex-start;
+        "
+      >
+        <span style="color: var(--warn); font-size: 1rem; flex-shrink: 0"
+          >⚠️</span
+        >
+        <p
+          style="
+            font-size: 0.82rem;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.6;
+            margin: 0;
+          "
+        >
+          Risk categorisation above is indicative and educational. Actual risk
+          depends on specific fund mandates, market conditions, and your
+          investment horizon. Always read the Scheme Information Document (SID)
+          before investing.
+          <strong style="color: var(--text)"
+            >Mutual Fund investments are subject to market risks.</strong
+          >
+        </p>
+      </div>
+
+      <!-- Mobile responsive fix for 3-col grid -->
+      <style>
+        @media (max-width: 640px) {
+          .risk-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      </style>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- WHAT HAPPENS NEXT -->
+    <section class="section" id="whats-next">
+      <div class="section-label">Getting started</div>
+      <h2>What happens <em>after you reach out?</em></h2>
+      <div class="prose">
+        <p>
+          First-time conversations about investing can feel uncertain —
+          especially if you're not sure what to expect. Here is exactly what our
+          first interaction looks like, step by step.
+        </p>
+      </div>
+
+      <div class="next-steps">
+        <div class="next-step-card">
+          <div class="next-step-num">1</div>
+          <div class="next-step-icon">🗓️</div>
+          <h4>The Profiling Call</h4>
+          <p>
+            You fill out the risk profiler (~15 minutes) or we schedule a
+            20-minute call. No jargon. No pressure. I want to understand your
+            goals, your horizon, and how you feel about risk — not sell you
+            something.
+          </p>
+        </div>
+        <div class="next-step-card">
+          <div class="next-step-num">2</div>
+          <div class="next-step-icon">📊</div>
+          <h4>Your Personalised Plan</h4>
+          <p>
+            Based on what I learn, I put together a simple, written
+            recommendation — which fund categories suit you, a suggested
+            allocation, and why. You read it at your own pace. No obligation to
+            act immediately.
+          </p>
+        </div>
+        <div class="next-step-card">
+          <div class="next-step-num">3</div>
+          <div class="next-step-icon">✅</div>
+          <h4>Onboarding & First Investment</h4>
+          <p>
+            Once you're comfortable, I help you complete KYC (if not already
+            done), set up your folio, and place your first investment — through
+            the SEBI Compliant platforms. The whole process typically takes one
+            working day.
+          </p>
+        </div>
+      </div>
+
+      <div
+        style="
+          background: var(--accent-glow);
+          border: 1px solid rgba(200, 169, 110, 0.2);
+          border-radius: 12px;
+          padding: 1.3rem 1.6rem;
+          display: flex;
+          gap: 0.9rem;
+          align-items: center;
+        "
+      >
+        <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></div>
+        <div
+          style="
+            font-size: 0.9rem;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.6;
+          "
+        >
+          No commitment, no upfront fee, no hurry — just an honest conversation. Most
+          people leave the first call with more clarity than they expected.
+          <strong style="color: var(--text)">
+            Reach out whenever you're ready.</strong
+          >
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- GOAL CALCULATOR -->
+    <section class="section" id="calculator">
+      <div class="section-label">🧮 Plan Ahead</div>
+      <h2>Goal <em>Calculator</em></h2>
+      <div class="prose" style="margin-bottom: 1.8rem;">
+        <p>Map your financial goals — retirement, education, a home — to a monthly SIP, Lumpsum, or a combination of both. Tweak the numbers and watch your plan come together.</p>
+      </div>
+      <!-- Mobile: show a prominent open-in-app button instead of iframe -->
+      <div class="calc-mobile-cta">
+        <div style="font-size: 2.5rem; margin-bottom: 0.8rem;">🧮</div>
+        <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 1.4rem; font-weight: 300;">
+          The calculator works best in full screen on mobile.
+        </p>
+        <a
+          href="./calculator.html"
+          target="_blank"
+          rel="noopener"
+          class="nav-profiling-btn"
+          style="padding: 0.85rem 2.2rem; font-size: 0.95rem; border-radius: 8px; display: inline-block;"
+        >Open Goal Calculator ↗</a>
+      </div>
+
+      <!-- Desktop: embedded iframe -->
+      <div class="calc-desktop-embed" style="
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--surface);
+        position: relative;
+      ">
+        <div id="calc-loader" style="
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 0.8rem;
+          background: var(--surface);
+          z-index: 2;
+          pointer-events: none;
+          transition: opacity 0.4s;
+        ">
+          <div style="color: var(--accent); font-size: 1.6rem;">🧮</div>
+          <div style="color: var(--muted); font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;">Loading Calculator…</div>
+        </div>
+        <iframe
+          src="./calculator.html?embed=true"
+          title="Goal Planning Calculator"
+          width="100%"
+          height="700"
+          style="display: block; border: none;"
+          loading="lazy"
+          onload="var l=document.getElementById('calc-loader'); if(l){l.style.opacity='0'; setTimeout(function(){l.style.display='none'},400);}"
+        ></iframe>
+      </div>
+      <p style="font-size:0.78rem; color: var(--muted); margin-top: 0.8rem; text-align: center;" class="calc-desktop-embed">
+        Having trouble viewing?
+        <a href="./calculator.html" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none;">Open in a new tab ↗</a>
+      </p>
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- CTA -->
+    <section class="section" style="text-align: center; padding-bottom: 4rem">
+      <div class="divider-star" style="margin-bottom: 1.8rem">✦ ✦ ✦</div>
+      <h2
+        style="
+          font-family: var(--serif);
+          font-size: clamp(1.6rem, 4vw, 2.4rem);
+          margin-bottom: 1rem;
+        "
+      >
+        Ready to invest with <em>discipline?</em>
+      </h2>
+      <p
+        style="
+          color: var(--muted);
+          font-weight: 300;
+          max-width: 480px;
+          margin: 0 auto 2rem;
+        "
+      >
+        Start with your investor profile. About 15 minutes. A portfolio that
+        actually fits you.
+      </p>
+      <div style="display:inline-flex; gap:0.8rem; flex-wrap:wrap; justify-content:center;">
+        <a
+          href="./RiskProfiler.html"
+          class="nav-profiling-btn"
+          style="
+            display: inline-block;
+            padding: 0.85rem 2.2rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            letter-spacing: 0.04em;
+          "
+        >
+          Begin Profiling ✦
+        </a>
+        <a
+          href="#calculator"
+          style="
+            display: inline-block;
+            padding: 0.85rem 2.2rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: var(--sans);
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            background: var(--surface2);
+            color: var(--text);
+            border: 1px solid var(--border);
+            transition: border-color 0.2s, color 0.2s;
+          "
+          onmouseover="this.style.borderColor='rgba(200,169,110,0.4)';this.style.color='var(--accent)'"
+          onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'"
+        >
+          🧮 Plan a Goal
+        </a>
+      </div>
+      <div
+        style="
+          margin-top: 1.8rem;
+          display: flex;
+          justify-content: center;
+          gap: 2.5rem;
+          flex-wrap: wrap;
+        "
+      >
+        <!-- WhatsApp -->
+        <a
+          href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments."
+          target="_blank"
+          rel="noopener"
+          style="text-align: center; text-decoration: none;"
+        >
+          <div style="display:flex; justify-content:center; margin-bottom: 0.3rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#25d366">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+          </div>
+          <span style="color: var(--muted); font-size: 0.9rem;">Chat on Whatsapp</span>
+        </a>
+
+        <!-- Phone -->
+        <a
+          href="tel:8329450580"
+          style="text-align: center; text-decoration: none;"
+        >
+          <div style="display:flex; justify-content:center; margin-bottom: 0.3rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.69A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+          </div>
+          <span style="color: var(--muted); font-size: 0.9rem;">8329450580</span>
+        </a>
+
+        <!-- Email -->
+        <a
+          href="mailto:rameshvegi94@gmail.com"
+          style="text-align: center; text-decoration: none;"
+        >
+          <div style="display:flex; justify-content:center; margin-bottom: 0.3rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <span style="color: var(--muted); font-size: 0.9rem;">rameshvegi94@gmail.com</span>
+        </a>
+
+        <!-- ARN -->
+        <div style="text-align: center;">
+          <div style="display:flex; justify-content:center; margin-bottom: 0.3rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0112 0v2"/>
+            </svg>
+          </div>
+          <span style="color: var(--muted); font-size: 0.9rem;">ARN-349739</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-brand">
+        Mutual Fund and NPS distribution services by Vegi Ramesh
+      </div>
+      <div class="footer-links">
+        <a href="./RiskProfiler.html"
+          >Investor Profiling</a
+        >
+        <a href="./calculator.html" target = "_blank">Goal Calculator</a>
+        <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments." target="_blank" rel="noopener">WhatsApp</a>
+        <a href="tel:8329450580">Call Us</a>
+        <a href="mailto:rameshvegi94@gmail.com">Email Us</a>
+      </div>
+      <div class="footer-disc">
+        Mutual Fund investments are subject to market risks. Please read all
+        scheme-related documents carefully before investing. Past performance is
+        not indicative of future results. This material is for informational
+        purposes only and does not constitute financial advice. Vegi Ramesh is
+        registered with AMFI as a Mutual Fund Distributor – ARN-349739.
+      </div>
+    </footer>
+
+    <!-- Mobile FAB: Begin Profiling -->
+    <a
+      href="./RiskProfiler.html"
+      class="fab-profiling"
+      aria-label="Begin Profiling"
+    >
+      <span>📋</span> Begin Profiling
+    </a>
+
+    <!-- Mobile FAB: WhatsApp -->
+    <a
+      href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments."
+      class="fab-whatsapp-mobile"
+      target="_blank"
+      rel="noopener"
+      aria-label="Chat on WhatsApp"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+
+    <script>
+      // ── VERIFY CARD TOGGLE ──
+      (function () {
+        var trigger = document.getElementById('verify-trigger');
+        var body = document.getElementById('verify-body');
+        var chevron = document.getElementById('verify-chevron');
+        if (trigger) {
+          trigger.addEventListener('click', function () {
+            var isOpen = body.style.gridTemplateRows === '1fr';
+            body.style.gridTemplateRows = isOpen ? '0fr' : '1fr';
+            chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+          });
+        }
+      })();
+
+      // ── HOLDINGS CARDS TOGGLE ──
+      (function () {
+        document.querySelectorAll('.holdings-trigger').forEach(function (trigger) {
+          var card = trigger.parentElement;
+          var body = card.querySelector('.holdings-body');
+          var chevron = trigger.querySelector('.holdings-chevron');
+          trigger.addEventListener('click', function () {
+            var isOpen = body.style.gridTemplateRows === '1fr';
+            var triggerTop = trigger.getBoundingClientRect().top;
+            // Close all holdings cards
+            document.querySelectorAll('.holdings-trigger').forEach(function(t) {
+              t.parentElement.querySelector('.holdings-body').style.gridTemplateRows = '0fr';
+              t.querySelector('.holdings-chevron').style.transform = '';
+            });
+            // Open this one if it was closed
+            if (!isOpen) {
+              body.style.gridTemplateRows = '1fr';
+              chevron.style.transform = 'rotate(180deg)';
+            }
+            var newTriggerTop = trigger.getBoundingClientRect().top;
+            window.scrollBy({ top: newTriggerTop - triggerTop, behavior: 'instant' });
+          });
+        });
+      })();
+
+      // ── USE CASE CARDS TOGGLE ──
+      (function () {
+        document.querySelectorAll('.usecase-card').forEach(function (card) {
+          var trigger = card.querySelector('.usecase-card-trigger');
+          trigger.addEventListener('click', function () {
+            var isOpen = card.classList.contains('open');
+            var triggerTop = trigger.getBoundingClientRect().top;
+            document.querySelectorAll('.usecase-card').forEach(function(c) {
+              c.classList.remove('open');
+            });
+            if (!isOpen) { card.classList.add('open'); }
+            var newTriggerTop = trigger.getBoundingClientRect().top;
+            window.scrollBy({ top: newTriggerTop - triggerTop, behavior: 'instant' });
+          });
+        });
+      })();
+
+      // ── ORIGIN CARDS TOGGLE ──
+      (function () {
+        document.querySelectorAll('.origin-card').forEach(function (card) {
+          var trigger = card.querySelector('.origin-card-trigger');
+          trigger.addEventListener('click', function () {
+            var isOpen = card.classList.contains('open');
+            var triggerTop = trigger.getBoundingClientRect().top;
+            document.querySelectorAll('.origin-card').forEach(function(c) {
+              c.classList.remove('open');
+            });
+            if (!isOpen) { card.classList.add('open'); }
+            var newTriggerTop = trigger.getBoundingClientRect().top;
+            window.scrollBy({ top: newTriggerTop - triggerTop, behavior: 'instant' });
+          });
+        });
+      })();
+
+      // ── THEME TOGGLE ──
+      function toggleTheme() {
+        var html = document.documentElement;
+        var isDark = html.getAttribute("data-theme") !== "light";
+        html.setAttribute("data-theme", isDark ? "light" : "dark");
+        try {
+          localStorage.setItem("theme", isDark ? "light" : "dark");
+        } catch (e) {}
+      }
+      // Restore saved theme
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t) document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+        // Reveal toggle only after theme is correctly set — prevents flash
+        var btn = document.querySelector(".theme-toggle");
+        if (btn) btn.classList.add("ready");
+      })();
+
+      // ── SUBNAV ACTIVE HIGHLIGHT ──
+      (function () {
+        var subnav = document.getElementById("subnav");
+        var links = document.querySelectorAll(".subnav a");
+        var sections = Array.from(links).map(function (a) {
+          var href = a.getAttribute("href");
+          if (!href || !href.startsWith("#")) return null;
+          try { return document.querySelector(href); } catch (e) { return null; }
+        });
+        var lastActive = -1;
+        var OFFSET = 110; // height of sticky nav (60px) + subnav (42px) + a little buffer
+        function onScroll() {
+          var active = null;
+          var closestDist = Infinity;
+          sections.forEach(function (sec, i) {
+            if (!sec) return;
+            var top = sec.getBoundingClientRect().top;
+            if (top <= OFFSET) {
+              var dist = OFFSET - top; // how far past the line
+              if (dist < closestDist) {
+                closestDist = dist;
+                active = i;
+              }
+            }
+          });
+          if (active === lastActive) return;
+          lastActive = active;
+          links.forEach(function (a) { a.classList.remove("active"); });
+          if (active !== null && links[active]) {
+            links[active].classList.add("active");
+            links[active].scrollIntoView({
+              behavior: "smooth",
+              block: "nearest",
+              inline: "center",
+            });
+          }
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+      })();
+    </script>
+  </body>
+</html>

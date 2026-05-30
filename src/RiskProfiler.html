@@ -1,0 +1,4513 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Investor Profiling · Vegi Ramesh · ARN-349739</title>
+    <meta name="description" content="Discover your investor risk profile in 15 minutes. A guided questionnaire by Vegi Ramesh (ARN-349739) that helps match your personality, goals, and comfort with risk to the right mutual fund portfolio." />
+    <meta name="keywords" content="investor risk profiling, risk assessment questionnaire, mutual fund risk profile, investor personality, ARN-349739, Vegi Ramesh, conservative aggressive moderate investor" />
+    <meta name="author" content="Vegi Ramesh" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Investor Risk Profiler · Vegi Ramesh" />
+    <meta property="og:description" content="Find out your investor risk profile in 15 minutes — a guided questionnaire that matches your goals and comfort with risk to the right mutual fund portfolio." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Investor Risk Profiler · Vegi Ramesh" />
+    <meta name="twitter:description" content="Find out your investor risk profile in 15 minutes — a guided questionnaire that matches your goals and comfort with risk to the right mutual fund portfolio." />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      [data-theme="light"] {
+        --gold: #c9982a;
+        --gold-light: #f0c84a;
+        --gold-pale: rgba(201, 152, 42, 0.12);
+        --cream: #fbf6ec;
+        --dark: #1a1208;
+        --mid: #4a2e0a;
+        --muted: #8c7355;
+        --card: #fffdf7;
+        --border: rgba(201, 152, 42, 0.25);
+        --shadow: 0 8px 40px rgba(26, 18, 8, 0.12);
+        --green: #2e7d52;
+        --blue: #1e5fa8;
+        --red: #b84040;
+      }
+
+      [data-theme="dark"] {
+        --gold: #c8a96e;
+        --gold-light: #dfc08a;
+        --gold-pale: rgba(200, 169, 110, 0.12);
+        --cream: #0b0f1a;
+        --dark: #e8e4dc;
+        --mid: #c8a96e;
+        --muted: #8a9ab5;
+        --card: #111827;
+        --border: rgba(255, 255, 255, 0.07);
+        --shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+        --green: #4caf82;
+        --blue: #6b8cba;
+        --red: #e05c5c;
+      }
+
+      /* ── DARK MODE HARDCODED OVERRIDES ── */
+      [data-theme="dark"] body::before {
+        background:
+          radial-gradient(ellipse 80% 60% at 10% 0%, rgba(200,169,110,0.05) 0%, transparent 60%),
+          radial-gradient(ellipse 60% 50% at 90% 100%, rgba(200,169,110,0.04) 0%, transparent 60%);
+      }
+      [data-theme="dark"] header {
+        background: linear-gradient(135deg, #0b0f1a 0%, #1a2236 60%, #0b0f1a 100%);
+      }
+      [data-theme="dark"] footer {
+        background: linear-gradient(135deg, #0b0f1a, #111827);
+      }
+      [data-theme="dark"] .res-banner {
+        background: linear-gradient(135deg, #111827, #1a2236);
+      }
+      [data-theme="dark"] .contact-banner {
+        background: linear-gradient(135deg, #0b0f1a 0%, #1a2236 50%, #0b0f1a 100%);
+      }
+      [data-theme="dark"] .share-card-head--cta {
+        background: linear-gradient(135deg, #111827 0%, #1a2236 100%);
+      }
+      [data-theme="dark"] .start-strip,
+      [data-theme="dark"] .start-strip2 {
+        background: #111827;
+        border: 1px solid rgba(200, 169, 110, 0.15);
+      }
+      [data-theme="dark"] .toast {
+        background: #111827;
+      }
+      [data-theme="dark"] .q-opt-radio {
+        background: #1a2236;
+      }
+      [data-theme="dark"] .docs-check {
+        background: #1a2236;
+      }
+      [data-theme="dark"] .kyc-input {
+        background: #1a2236;
+        color: var(--dark);
+      }
+      [data-theme="dark"] .share-btn-gmail {
+        background: #1a2236;
+        color: var(--dark);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+      [data-theme="dark"] .share-btn-gmail:hover {
+        background: #222f45;
+      }
+
+      /* ── THEME TOGGLE BUTTON ── */
+      .theme-toggle {
+        background: transparent;
+        border: 1.5px solid rgba(201, 152, 42, 0.4);
+        color: var(--gold-light);
+        font-size: 15px;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        position: relative;
+        z-index: 1;
+        padding: 0;
+        flex-shrink: 0;
+        line-height: 1;
+      }
+      .theme-toggle:hover {
+        background: rgba(201, 152, 42, 0.15);
+        transform: scale(1.12);
+        box-shadow: 0 0 10px rgba(201, 152, 42, 0.25);
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Outfit", sans-serif;
+        background: var(--cream);
+        color: var(--dark);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-x: hidden;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background:
+          radial-gradient(
+            ellipse 80% 60% at 10% 0%,
+            rgba(201, 152, 42, 0.07) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 60% 50% at 90% 100%,
+            rgba(201, 152, 42, 0.06) 0%,
+            transparent 60%
+          );
+        pointer-events: none;
+      }
+
+      /* HEADER */
+      header {
+        width: 100%;
+        background: linear-gradient(
+          135deg,
+          #1a1208 0%,
+          #3a2208 60%,
+          #1a1208 100%
+        );
+        border-bottom: 2px solid var(--gold);
+        padding: 18px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        position: relative;
+        overflow: hidden;
+        z-index: 100;
+      }
+      header::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 24px,
+          rgba(201, 152, 42, 0.04) 24px,
+          rgba(201, 152, 42, 0.04) 25px
+        );
+        pointer-events: none;
+      }
+      .logo {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(22px, 4vw, 28px);
+        font-weight: 700;
+        color: #fff;
+        position: relative;
+        z-index: 1;
+      }
+      .logo span {
+        color: var(--gold-light);
+      }
+      .logo-sub {
+        font-size: clamp(8px, 1.5vw, 10px);
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-top: 2px;
+      }
+      .arn {
+        font-size: 10px;
+        font-weight: 500;
+        color: var(--gold-light);
+        border: 1px solid rgba(201, 152, 42, 0.4);
+        background: rgba(201, 152, 42, 0.1);
+        padding: 4px 12px;
+        border-radius: 20px;
+        letter-spacing: 1px;
+        position: relative;
+        z-index: 1;
+      }
+      .arn2 {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--gold-light);
+        border: 1px solid rgba(201, 152, 42, 0.4);
+        background: rgba(201, 152, 42, 0.1);
+        padding: 6px 14px;
+        border-radius: 20px;
+        letter-spacing: 1px;
+        position: relative;
+        z-index: 1;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      @keyframes heartbeat {
+        0%   { transform: scale(1);    box-shadow: 0 3px 14px rgba(201,152,42,0.45); }
+        14%  { transform: scale(1.08); box-shadow: 0 6px 22px rgba(201,152,42,0.75); }
+        28%  { transform: scale(1);    box-shadow: 0 3px 14px rgba(201,152,42,0.45); }
+        42%  { transform: scale(1.05); box-shadow: 0 5px 18px rgba(201,152,42,0.65); }
+        70%  { transform: scale(1);    box-shadow: 0 3px 14px rgba(201,152,42,0.45); }
+        100% { transform: scale(1);    box-shadow: 0 3px 14px rgba(201,152,42,0.45); }
+      }
+
+      .about-link {
+        font-size: 13px;
+        font-weight: 700;
+        color: #1a1208;
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        padding: 9px 18px;
+        border-radius: 24px;
+        letter-spacing: 0.3px;
+        position: relative;
+        z-index: 1;
+        text-decoration: none;
+        cursor: pointer;
+        box-shadow: 0 3px 14px rgba(201, 152, 42, 0.45);
+        transition: all 0.2s;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        white-space: nowrap;
+        animation: heartbeat 2s ease-in-out infinite;
+        transform-origin: center;
+      }
+      .about-link.about-link--floating {
+        position: fixed;
+        top: 16px;
+        right: 20px;
+        z-index: 999;
+      }
+      .about-link:hover,
+      .about-link:active {
+        animation-play-state: paused;
+        transform: scale(1.08);
+        box-shadow: 0 8px 28px rgba(201,152,42,0.8);
+      }
+
+      main {
+        width: 100%;
+        max-width: 780px;
+        padding: 40px 20px 60px;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* INTRO */
+      #sectionIntro {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: fadeUp 0.6s ease both;
+      }
+      .intro-eyebrow {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 12px;
+        text-align: center;
+      }
+      .intro-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(26px, 6vw, 52px);
+        font-weight: 700;
+        line-height: 1.1;
+        color: var(--dark);
+        text-align: center;
+        margin-bottom: 14px;
+      }
+      .intro-title em {
+        font-style: italic;
+        color: var(--mid);
+      }
+      .intro-sub {
+        font-size: 14px;
+        color: var(--muted);
+        font-weight: 300;
+        text-align: center;
+        margin-bottom: 36px;
+        max-width: 520px;
+        line-height: 1.7;
+      }
+      .intro-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        width: 100%;
+        margin-bottom: 36px;
+      }
+      @media (max-width: 480px) {
+        .intro-stats {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 8px;
+        }
+        .intro-stat {
+          padding: 10px 6px;
+          border-radius: 10px;
+          text-align: center;
+        }
+        .intro-stat-num {
+          font-size: 20px;
+        }
+        .intro-stat-label {
+          font-size: 10px;
+          line-height: 1.3;
+          margin-top: 4px;
+        }
+      }
+      .intro-stat {
+        background: var(--card);
+        border: 1.5px solid var(--border);
+        border-radius: 14px;
+        padding: 18px 16px;
+        text-align: center;
+      }
+      .intro-stat-num {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--gold);
+      }
+      .intro-stat-label {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 3px;
+        font-weight: 300;
+        line-height: 1.4;
+      }
+      /* WHY BOX – ACCORDION */
+      .why-box {
+        width: 100%;
+        background: var(--card);
+        border: 1.5px solid var(--border);
+        border-radius: 18px;
+        margin-bottom: 32px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        transition: border-color 0.2s;
+      }
+      .why-box:has(#whyContent:not(.why-content--open)) {
+        border-color: rgba(201, 152, 42, 0.2);
+      }
+      .why-box-trigger {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 16px 20px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.18s;
+      }
+      .why-box-trigger:hover {
+        background: rgba(201, 152, 42, 0.06);
+      }
+      .why-trigger-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .why-trigger-icon {
+        font-size: 18px;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+      .why-trigger-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--gold);
+        letter-spacing: 0.2px;
+      }
+      .why-chevron {
+        font-size: 20px;
+        color: var(--gold);
+        line-height: 1;
+        flex-shrink: 0;
+        transition: transform 0.3s ease;
+        display: inline-block;
+        transform: rotate(0deg);
+      }
+      .why-chevron--open {
+        transform: rotate(90deg);
+      }
+      .why-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.3s ease;
+        padding: 0 20px;
+      }
+      .why-content--open {
+        max-height: 600px;
+        padding: 0 20px 20px;
+      }
+      .why-box-sub {
+        font-size: 13px;
+        color: var(--muted);
+        font-weight: 300;
+        line-height: 1.6;
+        margin-bottom: 16px;
+        padding-top: 4px;
+        border-top: 1px solid var(--border);
+        padding-top: 14px;
+      }
+      .why-box-sub em {
+        color: var(--gold);
+        font-style: normal;
+        font-weight: 500;
+      }
+      .why-items {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .why-item {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 12px 14px;
+        background: rgba(201, 152, 42, 0.05);
+        border: 1px solid rgba(201, 152, 42, 0.15);
+        border-radius: 12px;
+        transition: border-color 0.2s, background 0.2s;
+      }
+      .why-item:hover {
+        border-color: rgba(201, 152, 42, 0.35);
+        background: rgba(201, 152, 42, 0.09);
+      }
+      .why-icon {
+        font-size: 20px;
+        flex-shrink: 0;
+        line-height: 1;
+        margin-top: 1px;
+      }
+      .why-body { flex: 1; }
+      .why-item-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--dark);
+        margin-bottom: 3px;
+        line-height: 1.3;
+      }
+      .why-item-desc {
+        font-size: 12px;
+        color: var(--muted);
+        font-weight: 300;
+        line-height: 1.55;
+      }
+      @media (max-width: 480px) {
+        .why-box-trigger { padding: 14px 16px; }
+        .why-content--open { padding: 0 14px 16px; }
+        .why-item { padding: 10px 12px; }
+      }
+
+      .start-btn {
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        color: var(--dark);
+        font-family: "Outfit", sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        padding: 14px 40px;
+        border-radius: 40px;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 6px 24px rgba(201, 152, 42, 0.35);
+        transition: all 0.2s;
+        letter-spacing: 0.5px;
+        animation: heartbeat 2s ease-in-out infinite;
+        transform-origin: center;
+      }
+      .start-btn:hover,
+      .start-btn:active {
+        animation-play-state: paused;
+        transform: scale(1.08);
+        box-shadow: 0 8px 28px rgba(201,152,42,0.8);
+      }
+
+      /* QUIZ */
+      #sectionQuiz {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* PROGRESS */
+      .progress-shell {
+        width: 100%;
+        margin-bottom: 32px;
+      }
+      .progress-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      .progress-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--gold);
+        letter-spacing: 1px;
+      }
+      .progress-pct {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .progress-track {
+        height: 4px;
+        background: rgba(201, 152, 42, 0.18);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--gold), var(--gold-light));
+        border-radius: 2px;
+        transition: width 0.5s ease;
+        width: 0%;
+      }
+
+      /* STEP DOTS */
+      .step-dots {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 28px;
+      }
+      .step-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(201, 152, 42, 0.2);
+        transition: all 0.3s;
+      }
+      .step-dot.done {
+        background: var(--gold);
+      }
+      .step-dot.active {
+        background: var(--gold-light);
+        width: 24px;
+        border-radius: 4px;
+      }
+
+      /* Q CARD */
+      .q-wrap {
+        width: 100%;
+        animation: fadeUp 0.45s ease both;
+      }
+      .q-category-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: linear-gradient(
+          135deg,
+          rgba(201, 152, 42, 0.15),
+          rgba(201, 152, 42, 0.05)
+        );
+        border: 1px solid rgba(201, 152, 42, 0.3);
+        color: var(--gold);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 5px 14px;
+        border-radius: 20px;
+        margin-bottom: 18px;
+      }
+      .q-card {
+        background: var(--card);
+        border: 1.5px solid var(--border);
+        border-radius: 18px;
+        padding: 28px 28px 24px;
+        box-shadow: var(--shadow);
+        margin-bottom: 20px;
+      }
+      .q-num {
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--gold);
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+      }
+      .q-text {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(18px, 3.5vw, 24px);
+        font-weight: 700;
+        color: var(--dark);
+        line-height: 1.35;
+        margin-bottom: 6px;
+      }
+      .q-hint {
+        font-size: 12px;
+        color: var(--muted);
+        font-weight: 300;
+        margin-bottom: 20px;
+        line-height: 1.5;
+        font-style: italic;
+      }
+      .q-options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .q-opt {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        cursor: pointer;
+        padding: 13px 16px;
+        border-radius: 10px;
+        border: 1.5px solid transparent;
+        background: rgba(201, 152, 42, 0.04);
+        transition: all 0.18s;
+        user-select: none;
+        position: relative;
+        overflow: hidden;
+      }
+      .q-opt::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, var(--gold-pale), transparent);
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .q-opt:hover {
+        border-color: rgba(201, 152, 42, 0.4);
+        background: rgba(201, 152, 42, 0.07);
+      }
+      .q-opt:hover::before {
+        opacity: 1;
+      }
+      .q-opt.selected {
+        border-color: var(--gold);
+        background: linear-gradient(
+          90deg,
+          rgba(201, 152, 42, 0.12),
+          rgba(201, 152, 42, 0.03)
+        );
+      }
+      .q-opt.selected::before {
+        opacity: 1;
+      }
+      .q-opt-radio {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: 2px solid rgba(201, 152, 42, 0.4);
+        flex-shrink: 0;
+        margin-top: 1px;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.15s;
+      }
+      .q-opt.selected .q-opt-radio {
+        border-color: var(--gold);
+        background: var(--gold);
+      }
+      .q-opt.selected .q-opt-radio::after {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #fff;
+        display: block;
+      }
+      .q-opt-body {
+        flex: 1;
+        position: relative;
+        z-index: 1;
+      }
+      .q-opt-label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--dark);
+        line-height: 1.35;
+      }
+      .q-opt-sub {
+        font-size: 11px;
+        color: var(--muted);
+        font-weight: 300;
+        margin-top: 2px;
+        line-height: 1.4;
+      }
+
+      /* ── MOBILE FIXES ── */
+      @media (max-width: 480px) {
+        /* Quiz cards — tighter padding */
+        .q-opt {
+          padding: 10px 12px;
+          gap: 10px;
+        }
+        .q-opt-label {
+          font-size: 13px;
+        }
+        .q-opt-sub {
+          font-size: 10px;
+        }
+        .q-card {
+          padding: 20px 18px 18px;
+        }
+
+        /* Share buttons — full width, shorter */
+        .share-btn {
+          min-width: unset;
+          width: 100%;
+          padding: 11px 16px;
+          font-size: 13px;
+        }
+        .share-btns {
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        /* KYC section label spacing */
+        .kyc-section-label {
+          margin-top: 20px;
+          padding-top: 16px;
+        }
+
+        /* Score bands — hide all, show only active via JS */
+        .score-band-item {
+          display: none;
+        }
+        .score-band-item.active {
+          display: block;
+          font-size: 11px;
+          text-align: center;
+          width: 100%;
+          margin-top: 6px;
+        }
+        .score-bands {
+          justify-content: center;
+        }
+      }
+
+      /* NAV */
+      .q-nav {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-top: 4px;
+      }
+      .nav-btn {
+        font-family: "Outfit", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 11px 28px;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.2s;
+        outline: none;
+        border: none;
+      }
+      .btn-back {
+        background: transparent;
+        border: 1.5px solid var(--border);
+        color: var(--muted);
+      }
+      .btn-back:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+        background: var(--gold-pale);
+      }
+
+      /* RESULT */
+      #sectionResult {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 22px;
+        animation: fadeUp 0.6s ease both;
+      }
+
+      .res-banner {
+        width: 100%;
+        background: linear-gradient(135deg, #1a1208, #3a2208);
+        border-radius: 20px;
+        border: 2px solid var(--gold);
+        overflow: hidden;
+        box-shadow: 0 12px 48px rgba(26, 18, 8, 0.2);
+        position: relative;
+        animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      }
+      .res-banner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 22px,
+          rgba(201, 152, 42, 0.04) 22px,
+          rgba(201, 152, 42, 0.04) 23px
+        );
+        pointer-events: none;
+      }
+      .res-banner-inner {
+        position: relative;
+        z-index: 1;
+        padding: 28px 32px 24px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .res-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        flex-shrink: 0;
+        box-shadow: 0 6px 20px rgba(201, 152, 42, 0.4);
+      }
+      .res-text-block {
+        flex: 1;
+        min-width: 200px;
+      }
+      .res-eyebrow {
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 500;
+        margin-bottom: 4px;
+      }
+      .res-profile-name {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(22px, 4.5vw, 30px);
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.15;
+      }
+      .res-profile-tag {
+        font-size: 11.5px;
+        color: var(--gold-light);
+        opacity: 0.85;
+        margin-top: 4px;
+        font-weight: 300;
+        letter-spacing: 0.5px;
+      }
+      .res-badges {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+      .res-badge {
+        background: rgba(201, 152, 42, 0.18);
+        border: 1px solid rgba(201, 152, 42, 0.35);
+        color: var(--gold-light);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 4px 12px;
+        border-radius: 20px;
+      }
+
+      /* SCORE METER */
+      .score-meter {
+        width: 100%;
+        background: var(--card);
+        border: 1.5px solid var(--border);
+        border-radius: 16px;
+        padding: 20px 24px;
+        box-shadow: 0 4px 20px rgba(26, 18, 8, 0.07);
+      }
+      .score-meter-top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 14px;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .score-meter-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      .score-meter-value {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--dark);
+      }
+      .score-meter-value span {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--muted);
+        font-family: "Outfit", sans-serif;
+      }
+      .score-track {
+        width: 100%;
+        height: 8px;
+        background: rgba(201, 152, 42, 0.15);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 10px;
+      }
+      .score-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--gold), var(--gold-light));
+        border-radius: 4px;
+        width: 0;
+        transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .score-bands {
+        display: flex;
+        justify-content: space-between;
+      }
+      .score-band-item {
+        font-size: 8.5px;
+        color: var(--muted);
+        font-weight: 400;
+        text-align: center;
+        flex: 1;
+        line-height: 1.3;
+      }
+      .score-band-item.active {
+        color: var(--gold);
+        font-weight: 700;
+      }
+
+      /* PIE + ALLOC */
+      .alloc-card {
+        width: 100%;
+        background: var(--card);
+        border: 1.5px solid var(--border);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+      .alloc-card-head {
+        padding: 18px 24px 14px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .alloc-card-icon {
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+      }
+      .alloc-card-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--dark);
+      }
+      .alloc-card-sub {
+        font-size: 11px;
+        color: var(--muted);
+        font-weight: 300;
+      }
+      .alloc-body {
+        padding: 24px;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 28px;
+        align-items: center;
+      }
+      @media (max-width: 480px) {
+        .alloc-body {
+          grid-template-columns: 1fr;
+          justify-items: center;
+        }
+      }
+      .pie-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      #pieCanvas {
+        border-radius: 50%;
+        filter: drop-shadow(0 4px 16px rgba(26, 18, 8, 0.12));
+      }
+      .pie-cap {
+        font-size: 9px;
+        color: var(--muted);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .alloc-rows {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+      }
+      .alloc-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .alloc-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .alloc-meta {
+        display: flex;
+        justify-content: space-between;
+        width: 200px;
+        flex-shrink: 0;
+      }
+      .alloc-name {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--dark);
+      }
+      .alloc-pct {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--mid);
+      }
+      .alloc-bar-wrap {
+        flex: 1;
+        height: 6px;
+        background: rgba(0, 0, 0, 0.06);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .alloc-bar {
+        height: 100%;
+        border-radius: 3px;
+        width: 0;
+        transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .alloc-ideal {
+        margin: 0 24px 20px;
+        background: linear-gradient(
+          90deg,
+          rgba(201, 152, 42, 0.1),
+          transparent
+        );
+        border-left: 3px solid var(--gold);
+        border-radius: 0 8px 8px 0;
+        padding: 10px 14px;
+        font-size: 13px;
+        color: var(--mid);
+        font-style: italic;
+        line-height: 1.5;
+      }
+
+      /* START STRIP */
+      .start-strip {
+        width: 100%;
+        background: var(--dark);
+        border-radius: 12px;
+        padding: 16px 24px;
+        text-align: center;
+        font-size: clamp(13px, 2.5vw, 15px);
+        font-weight: 500;
+        color: var(--gold-light);
+        line-height: 1.5;
+      }
+      .start-strip span {
+        color: #fff;
+        font-weight: 600;
+      }
+
+      /* START STRIP 2*/
+      .start-strip2 {
+        width: 100%;
+        background: var(--dark);
+        border-radius: 12px;
+        padding: 16px 24px;
+        text-align: center;
+        font-size: clamp(13px, 2.5vw, 15px);
+        font-weight: 500;
+        color: var(--gold-light);
+        line-height: 1.5;
+        margin-top: 10px;
+      }
+      .start-strip2 span {
+        color: #fff;
+        font-weight: 600;
+      }
+
+      /* CONTACT */
+      .contact-banner {
+        width: 100%;
+        background: linear-gradient(
+          135deg,
+          #1a1208 0%,
+          #3d2509 50%,
+          #1a1208 100%
+        );
+        border-radius: 16px;
+        border: 1.5px solid var(--gold);
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(26, 18, 8, 0.18);
+        position: relative;
+      }
+      .contact-banner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 22px,
+          rgba(201, 152, 42, 0.04) 22px,
+          rgba(201, 152, 42, 0.04) 23px
+        );
+        pointer-events: none;
+      }
+      .contact-banner-top {
+        padding: 20px 28px 16px;
+        text-align: center;
+        border-bottom: 1px solid rgba(201, 152, 42, 0.2);
+        position: relative;
+        z-index: 1;
+      }
+      .contact-banner-eyebrow {
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 500;
+        margin-bottom: 6px;
+      }
+      .contact-banner-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(20px, 4.5vw, 28px);
+        font-weight: 700;
+        color: #fff;
+      }
+      .contact-banner-title span {
+        color: var(--gold-light);
+      }
+      .contact-banner-sub {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.55);
+        margin-top: 5px;
+        font-weight: 300;
+      }
+      .contact-banner-items {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 1;
+      }
+      .contact-banner-item {
+        flex: 1;
+        min-width: 160px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        padding: 18px 20px;
+        border-right: 1px solid rgba(201, 152, 42, 0.15);
+        transition: background 0.2s;
+        text-decoration: none;
+      }
+      .contact-banner-item:last-child {
+        border-right: none;
+      }
+      .contact-banner-item:hover {
+        background: rgba(201, 152, 42, 0.07);
+      }
+      .contact-banner-item a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .cbi-icon {
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        color: #1a1208;
+        font-weight: 700;
+        box-shadow: 0 3px 10px rgba(201, 152, 42, 0.35);
+      }
+      .cbi-label {
+        font-size: 9px;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      .cbi-value {
+        font-size: 13px;
+        font-weight: 600;
+        color: #fff;
+        text-align: center;
+      }
+      @media (max-width: 480px) {
+        .contact-banner-items {
+          flex-direction: column;
+        }
+        .contact-banner-item {
+          border-right: none;
+          border-bottom: 1px solid rgba(201, 152, 42, 0.15);
+        }
+        .contact-banner-item:last-child {
+          border-bottom: none;
+        }
+      }
+
+      /* DOCS */
+      .docs-section {
+        width: 100%;
+        background: var(--card);
+        border: 1.5px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 24px rgba(26, 18, 8, 0.08);
+      }
+      .docs-header {
+        padding: 18px 24px 14px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .docs-header-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        flex-shrink: 0;
+        box-shadow: 0 3px 10px rgba(201, 152, 42, 0.3);
+      }
+      .docs-eyebrow {
+        font-size: 9px;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 500;
+        margin-bottom: 2px;
+      }
+      .docs-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--dark);
+      }
+      .docs-subtitle {
+        font-size: 11.5px;
+        color: var(--muted);
+        font-weight: 300;
+        padding: 10px 24px 14px;
+        border-bottom: 1px solid var(--border);
+        line-height: 1.5;
+      }
+      .docs-body {
+        padding: 16px 24px 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 28px;
+      }
+      @media (max-width: 500px) {
+        .docs-body {
+          grid-template-columns: 1fr;
+        }
+      }
+      .docs-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 9px 0;
+        border-bottom: 1px dashed rgba(201, 152, 42, 0.15);
+      }
+      .docs-check {
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--border);
+        border-radius: 5px;
+        flex-shrink: 0;
+        margin-top: 1px;
+        position: relative;
+        background: #fff;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .docs-check:hover {
+        border-color: var(--gold);
+      }
+      .docs-check.checked {
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        border-color: var(--gold);
+      }
+      .docs-check.checked::after {
+        content: "✓";
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+        color: #1a1208;
+      }
+      .docs-item-name {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--dark);
+      }
+      .docs-item-hint {
+        font-size: 10.5px;
+        color: var(--muted);
+        font-weight: 300;
+        margin-top: 1px;
+      }
+      .docs-nominee-block {
+        grid-column: 1/-1;
+        background: linear-gradient(
+          135deg,
+          rgba(201, 152, 42, 0.06),
+          rgba(201, 152, 42, 0.02)
+        );
+        border: 1px solid rgba(201, 152, 42, 0.2);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 8px;
+      }
+      .docs-nominee-header {
+        padding: 8px 14px;
+        background: rgba(201, 152, 42, 0.1);
+        border-bottom: 1px solid rgba(201, 152, 42, 0.15);
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .docs-nominee-label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--mid);
+      }
+      .docs-nominee-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 8px 14px 12px;
+        gap: 0 20px;
+      }
+      @media (max-width: 400px) {
+        .docs-nominee-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .docs-nominee-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 6px 0;
+        border-bottom: 1px dashed rgba(201, 152, 42, 0.1);
+      }
+      .docs-nominee-item:last-child {
+        border-bottom: none;
+      }
+      .docs-progress-wrap {
+        padding: 12px 24px 16px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .docs-progress-bar-outer {
+        flex: 1;
+        height: 6px;
+        background: rgba(0, 0, 0, 0.07);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .docs-progress-bar-inner {
+        height: 100%;
+        background: linear-gradient(90deg, var(--gold), var(--gold-light));
+        border-radius: 3px;
+        width: 0%;
+        transition: width 0.4s ease;
+      }
+      .docs-progress-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--gold);
+        white-space: nowrap;
+      }
+
+      .kyc-section-label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin: 16px 0 8px;
+        padding-top: 14px;
+        border-top: 1px dashed rgba(201, 152, 42, 0.2);
+      }
+      .kyc-section-label:first-of-type {
+        border-top: none;
+        margin-top: 12px;
+      }
+      .kyc-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      @media (max-width: 500px) {
+        .kyc-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .kyc-field {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .kyc-field--full {
+        grid-column: 1/-1;
+      }
+      .kyc-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--mid);
+        display: flex;
+        align-items: baseline;
+        gap: 5px;
+      }
+      .kyc-req {
+        color: var(--red);
+        font-size: 12px;
+      }
+      .kyc-hint {
+        font-size: 10px;
+        font-weight: 300;
+        color: var(--muted);
+        font-style: italic;
+      }
+      .kyc-input {
+        font-family: "Outfit", sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--dark);
+        background: #fff;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        padding: 9px 12px;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        width: 100%;
+      }
+      .kyc-input:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(201, 152, 42, 0.12);
+      }
+      .kyc-input--error {
+        border-color: var(--red) !important;
+        box-shadow: 0 0 0 3px rgba(224, 92, 92, 0.15) !important;
+      }
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        20%       { transform: translateX(-5px); }
+        40%       { transform: translateX(5px); }
+        60%       { transform: translateX(-4px); }
+        80%       { transform: translateX(4px); }
+      }
+      .kyc-input--shake {
+        animation: shake 0.4s ease;
+      }
+      .kyc-field-error {
+        display: none;
+        color: var(--red);
+        font-size: 11.5px;
+        font-weight: 500;
+        margin-top: 5px;
+        padding-left: 2px;
+      }
+      @keyframes successPop {
+        0%   { transform: scale(0.5); opacity: 0; }
+        70%  { transform: scale(1.15); opacity: 1; }
+        100% { transform: scale(1); }
+      }
+      .kyc-form-locked {
+        pointer-events: none;
+        opacity: 0.45;
+        filter: grayscale(0.3);
+        transition: opacity 0.4s ease, filter 0.4s ease;
+      }
+      .kyc-input::placeholder {
+        color: rgba(140, 115, 85, 0.45);
+      }
+      .kyc-privacy-note {
+        font-size: 11.5px;
+        color: var(--muted);
+        font-style: italic;
+        line-height: 1.6;
+        background: var(--gold-pale);
+        border-left: 3px solid var(--gold);
+        border-radius: 0 8px 8px 0;
+        padding: 9px 13px;
+        margin-top: 16px;
+      }
+
+      /* CASH SLIDER */
+      .cash-slider-wrap {
+        background: var(--gold-pale);
+        border: 1.5px solid var(--border);
+        border-radius: 12px;
+        padding: 16px 18px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .cash-slider-display {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+      }
+      .cash-slider-value {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--gold);
+        line-height: 1;
+      }
+      .cash-slider-label {
+        font-size: 11px;
+        color: var(--muted);
+        font-weight: 300;
+      }
+      .cash-slider-hint {
+        font-size: 10.5px;
+        color: var(--muted);
+        font-style: italic;
+        font-weight: 300;
+      }
+      input[type="range"].cash-slider {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 4px;
+        border-radius: 2px;
+        background: rgba(201, 152, 42, 0.2);
+        outline: none;
+        cursor: pointer;
+      }
+      input[type="range"].cash-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        border: 2px solid #fff;
+        box-shadow: 0 2px 8px rgba(201, 152, 42, 0.45);
+        cursor: pointer;
+        transition: transform 0.15s;
+      }
+      input[type="range"].cash-slider::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+      }
+      input[type="range"].cash-slider::-moz-range-thumb {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        border: 2px solid #fff;
+        box-shadow: 0 2px 8px rgba(201, 152, 42, 0.45);
+        cursor: pointer;
+      }
+      .cash-slider-ticks {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2px;
+      }
+      .cash-slider-tick {
+        font-size: 9px;
+        color: var(--muted);
+        font-weight: 300;
+      }
+
+      .investor-type-btn {
+        font-family: "Outfit", sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 13px 28px;
+        border-radius: 40px;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: none;
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        color: var(--dark);
+        box-shadow: 0 4px 16px rgba(201, 152, 42, 0.3);
+        flex: 1;
+        min-width: 200px;
+      }
+      .investor-type-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(201, 152, 42, 0.45);
+      }
+      .investor-type-btn--secondary {
+        background: transparent;
+        border: 1.5px solid var(--border);
+        color: var(--muted);
+        box-shadow: none;
+      }
+      .investor-type-btn--secondary:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+        background: var(--gold-pale);
+        box-shadow: none;
+      }
+
+      .reset-btn {
+        background: transparent;
+        border: 1.5px solid var(--border);
+        color: var(--muted);
+        font-family: "Outfit", sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 10px 24px;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .reset-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+        background: var(--gold-pale);
+      }
+
+      /* SHARE CARD */
+      .share-card {
+        width: 100%;
+        background: var(--card);
+        border: 2.5px solid var(--gold);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow:
+          0 0 0 4px rgba(201, 152, 42, 0.1),
+          var(--shadow);
+      }
+      .share-card--animating {
+        animation: shareCardPulse 2s ease-in-out infinite;
+      }
+      /* Show only the relevant Gmail button per device */
+      @media (max-width: 480px) { .share-btn-gmail-desktop { display: none !important; } }
+      @media (min-width: 481px) { .share-btn-gmail-mobile  { display: none !important; } }
+
+      @keyframes stickySendPulse {
+        0%, 100% { box-shadow: 0 6px 28px rgba(201,152,42,0.55); transform: translateY(0) scale(1); }
+        50%       { box-shadow: 0 10px 44px rgba(201,152,42,0.95), 0 0 0 6px rgba(201,152,42,0.25); transform: translateY(-2px) scale(1.02); }
+      }
+      #stickyScrollBtn:hover,
+      #stickyScrollBtn:active {
+        transform: translateY(-2px) scale(1.03) !important;
+        box-shadow: 0 12px 40px rgba(201,152,42,0.9), 0 0 0 6px rgba(201,152,42,0.2) !important;
+        animation-play-state: paused;
+      }
+      @keyframes shareCardPulse {
+        0%, 100% {
+          box-shadow:
+            0 0 0 4px rgba(201, 152, 42, 0.1),
+            var(--shadow);
+          border-color: var(--gold);
+        }
+        50% {
+          box-shadow:
+            0 0 0 8px rgba(201, 152, 42, 0.28),
+            0 0 24px rgba(201, 152, 42, 0.35),
+            var(--shadow);
+          border-color: var(--gold-light);
+        }
+      }
+      .share-card-head {
+        padding: 18px 24px 14px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .share-card-head--cta {
+        background: linear-gradient(135deg, #1a1208 0%, #3a2208 100%);
+        padding: 20px 24px 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        border-bottom: 2px solid var(--gold);
+      }
+      .share-step-badge {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        color: var(--gold);
+        background: rgba(201, 152, 42, 0.18);
+        border: 1px solid rgba(201, 152, 42, 0.4);
+        padding: 3px 10px;
+        border-radius: 20px;
+      }
+      .share-card-title-cta {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(18px, 4vw, 22px);
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.2;
+      }
+      .share-card-sub-cta {
+        font-size: 12.5px;
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 300;
+      }
+      .share-card-icon {
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+      }
+      .share-card-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--dark);
+      }
+      .share-card-sub {
+        font-size: 11px;
+        color: var(--muted);
+        font-weight: 300;
+      }
+      .share-card-body {
+        padding: 20px 24px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .share-question {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--dark);
+        text-align: center;
+        margin-bottom: 4px;
+      }
+      .investor-type-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 8px;
+      }
+      @media (max-width: 480px) {
+        .investor-type-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .investor-choice-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        padding: 20px 14px;
+        border-radius: 14px;
+        border: 2px solid var(--border);
+        background: var(--card);
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: "Outfit", sans-serif;
+        text-align: center;
+      }
+      .investor-choice-btn:hover {
+        border-color: var(--gold);
+        background: var(--gold-pale);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(201, 152, 42, 0.2);
+      }
+      .investor-choice-new {
+        border-color: rgba(46, 125, 82, 0.35);
+      }
+      .investor-choice-new:hover {
+        border-color: var(--green);
+        background: rgba(46, 125, 82, 0.06);
+      }
+      .investor-choice-existing {
+        border-color: rgba(201, 152, 42, 0.35);
+      }
+      .investor-choice-existing:hover {
+        border-color: var(--gold);
+      }
+      .investor-choice-icon {
+        font-size: 28px;
+        line-height: 1;
+      }
+      .investor-choice-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--dark);
+      }
+      .investor-choice-sub {
+        font-size: 11px;
+        color: var(--muted);
+        font-weight: 300;
+        line-height: 1.4;
+      }
+      .share-note {
+        font-size: 12.5px;
+        color: var(--muted);
+        font-weight: 300;
+        line-height: 1.6;
+        background: var(--gold-pale);
+        border-left: 3px solid var(--gold);
+        border-radius: 0 8px 8px 0;
+        padding: 10px 14px;
+      }
+      .share-btns {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .share-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-family: "Outfit", sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 13px 24px;
+        border-radius: 40px;
+        cursor: pointer;
+        text-decoration: none;
+        border: none;
+        transition: all 0.2s;
+        flex: 1;
+        justify-content: center;
+        min-width: 160px;
+      }
+      .share-btn-wa {
+        background: #25d366;
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(37, 211, 102, 0.3);
+      }
+      .share-btn-wa:hover {
+        background: #20c05c;
+        box-shadow: 0 6px 22px rgba(37, 211, 102, 0.45);
+        transform: translateY(-1px);
+      }
+      .share-btn-gmail {
+        background: #fff;
+        color: #3c4043;
+        border: 1.5px solid #dadce0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+      .share-btn-gmail:hover {
+        background: #f8f9fa;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.13);
+        transform: translateY(-1px);
+      }
+      .share-btn-email {
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        color: var(--dark);
+        box-shadow: 0 4px 16px rgba(201, 152, 42, 0.3);
+      }
+      .share-btn-email:hover {
+        box-shadow: 0 6px 22px rgba(201, 152, 42, 0.45);
+        transform: translateY(-1px);
+      }
+      .share-btn-icon {
+        font-size: 18px;
+        line-height: 1;
+      }
+
+      footer {
+        width: 100%;
+        background: linear-gradient(135deg, #1a1208, #3a2208);
+        border-top: 2px solid var(--gold);
+        padding: 16px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        position: relative;
+        z-index: 10;
+        margin-top: auto;
+      }
+      .footer-brand {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 16px;
+        font-weight: 700;
+        color: #fff;
+      }
+      .footer-brand span {
+        color: var(--gold-light);
+      }
+      .footer-contacts {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+      .fci {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 11px;
+      }
+      .fcicon {
+        width: 18px;
+        height: 18px;
+        background: var(--gold);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 8px;
+        font-weight: 700;
+        color: #1a1208;
+      }
+      .footer-disc {
+        width: 100%;
+        font-size: 8px;
+        color: rgba(255, 255, 255, 0.3);
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 8px;
+        margin-top: 4px;
+        line-height: 1.6;
+      }
+
+      .name-input-wrap {
+        width: 100%;
+        max-width: 360px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+        margin-bottom: 20px;
+      }
+      .name-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      .name-input {
+        font-family: "Outfit", sans-serif;
+        font-size: 17px;
+        font-weight: 500;
+        color: var(--dark);
+        background: var(--card);
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        padding: 12px 18px;
+        outline: none;
+        width: 100%;
+        text-align: center;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+      .name-input:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(201, 152, 42, 0.14);
+      }
+      .name-input::placeholder {
+        color: rgba(140, 115, 85, 0.4);
+        font-weight: 300;
+      }
+      .name-date-row {
+        font-size: 11px;
+        color: var(--muted);
+        font-weight: 300;
+      }
+      .name-error {
+        font-size: 12px;
+        color: var(--red);
+        margin-top: 10px;
+        font-weight: 500;
+      }
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: #1a1208;
+        color: var(--gold-light);
+        font-size: 13px;
+        font-weight: 500;
+        padding: 11px 22px;
+        border-radius: 30px;
+        border: 1px solid var(--gold);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+        opacity: 0;
+        transition:
+          opacity 0.3s,
+          transform 0.3s;
+        z-index: 9999;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes popIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.88);
+        }
+        70% {
+          transform: scale(1.02);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+      <a href="index.html" style="text-decoration:none; color:inherit;">
+        <div class="logo">
+          Mutual Fund and NPS distribution services by <span>Vegi</span> Ramesh
+        </div>
+        <div class="logo-sub">Smart Investing · Bright Futures</div>
+      </a>
+      </div>
+      <div class="arn">ARN-349739</div>
+      <button class="theme-toggle" id="themeToggle" title="Toggle light / dark mode">☀️</button>
+      <a
+        href="./AboutMe.html"
+        target="_blank"
+        rel="noopener"
+        class="about-link"
+        >🔗 About
+        <span style="display:block; font-size:9px; font-weight:400; letter-spacing:0.3px; opacity:0.75; margin-top:1px;">Mutual Funds &amp; Me</span>
+        </a>
+    </header>
+
+    <main>
+      <!-- INTRO -->
+      <div id="sectionIntro">
+        <div class="intro-eyebrow">Investor Profiling</div>
+        <h1 class="intro-title">Find Your <em>Risk-Aligned Portfolio</em></h1>
+        <p class="intro-sub">
+          Answer 13 quick scenarios to calculate your true risk profile and
+          unlock a portfolio allocation tailored to your investing style.
+        </p>
+
+        <!-- WHY THIS MATTERS SECTION (accordion) -->
+        <div class="why-box" id="whyBox">
+          <button class="why-box-trigger" id="whyTrigger" onclick="toggleWhyBox()" aria-expanded="false" aria-controls="whyContent">
+            <span class="why-trigger-left">
+              <span class="why-trigger-icon">🤔</span>
+              <span class="why-trigger-label">Why are you being asked this?</span>
+            </span>
+            <span class="why-chevron" id="whyChevron">›</span>
+          </button>
+          <div class="why-content" id="whyContent" aria-hidden="true">
+            <div class="why-box-sub">Before I show you a single fund, I need to understand <em>you</em> — not just your money.</div>
+            <div class="why-items">
+              <div class="why-item">
+                <div class="why-icon">🎯</div>
+                <div class="why-body">
+                  <div class="why-item-title">Get funds suited to your temperament</div>
+                  <div class="why-item-desc">The same fund that works for your colleague can be completely wrong for you. Your profile helps me show you only the funds that genuinely suit how you think about money and risk.</div>
+                </div>
+              </div>
+              <div class="why-item">
+                <div class="why-icon">😴</div>
+                <div class="why-body">
+                  <div class="why-item-title">Sleep better when markets fall</div>
+                  <div class="why-item-desc">If your portfolio isn't aligned to your risk comfort, you'll panic-sell at the worst time. This profiler prevents that by making sure you're in funds you can actually hold through volatility.</div>
+                </div>
+              </div>
+              <div class="why-item">
+                <div class="why-icon">📋</div>
+                <div class="why-body">
+                  <div class="why-item-title">AMFI suitability norms — required before distribution</div>
+                  <div class="why-item-desc">As a SEBI-registered MFD, I'm required to assess your risk profile before distributing any mutual fund to you. This isn't paperwork — it's what ensures the fund I show you is genuinely suitable for you.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END WHY BOX -->
+
+        <div class="intro-stats">
+          <div class="intro-stat">
+            <div class="intro-stat-num">13</div>
+            <div class="intro-stat-label">
+              Validated questions<br />based on global research
+            </div>
+          </div>
+          <div class="intro-stat">
+            <div class="intro-stat-num">5</div>
+            <div class="intro-stat-label">Risk profiles<br />scored 13–47</div>
+          </div>
+          <div class="intro-stat">
+            <div class="intro-stat-num">~15</div>
+            <div class="intro-stat-label">
+              Minutes to complete<br />&amp; better understand yourself
+            </div>
+          </div>
+        </div>
+        <div class="name-input-wrap">
+          <label class="name-label" for="investorName"
+            >What should I call you?</label
+          >
+          <input
+            type="text"
+            id="investorName"
+            class="name-input"
+            placeholder="e.g. Riyansh"
+            autocomplete="given-name"
+            maxlength="60"
+          />
+          <div class="name-date-row">
+            <span class="name-date-label" id="todayDateDisplay"></span>
+          </div>
+        </div>
+        <button class="start-btn" id="startBtn">Begin Profiling ✦</button>
+        <div class="name-error" id="nameError" style="display: none">
+          Please enter your name to begin.
+        </div>
+                <div class="start-strip2">
+          ✦ &nbsp;Invest as little as
+          <span>₹100 with zero monthly pressure</span> — your future self will
+          thank you &nbsp;✦
+        </div>
+      </div>
+
+      <!-- QUIZ -->
+      <div id="sectionQuiz">
+        <div class="progress-shell">
+          <div class="progress-top">
+            <span class="progress-label" id="progLabel">Question 1 of 13</span>
+            <span class="progress-pct" id="progPct">0% complete</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progFill"></div>
+          </div>
+        </div>
+        <div class="step-dots" id="stepDots"></div>
+        <div id="qArea"></div>
+        <div class="q-nav">
+          <button class="nav-btn btn-back" id="backBtn">← Back</button>
+        </div>
+      </div>
+
+      <!-- RESULT -->
+      <div id="sectionResult">
+        <div class="res-banner">
+          <div class="res-banner-inner">
+            <div class="res-icon" id="resIcon">⚖️</div>
+            <div class="res-text-block">
+              <div class="res-eyebrow" id="resEyebrow">
+                Your Investor Profile
+              </div>
+              <div class="res-profile-name" id="resName">—</div>
+              <div class="res-profile-tag" id="resTag">—</div>
+              <div class="res-badges" id="resBadges"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCORE METER -->
+        <div class="score-meter">
+          <div class="score-meter-top">
+            <span class="score-meter-label">Risk Tolerance Score</span>
+            <span class="score-meter-value" id="resScoreDisplay"
+              >— <span>/ 47</span></span
+            >
+          </div>
+          <div class="score-track">
+            <div class="score-fill" id="scoreBarFill"></div>
+          </div>
+          <div class="score-bands">
+            <div class="score-band-item" id="band0">
+              Conservative<br />13–18
+            </div>
+            <div class="score-band-item" id="band1">
+              Mod. Conservative<br />19–22
+            </div>
+            <div class="score-band-item" id="band2">Balanced<br />23–28</div>
+            <div class="score-band-item" id="band3">Growth<br />29–32</div>
+            <div class="score-band-item" id="band4">Aggressive<br />33–47</div>
+          </div>
+        </div>
+
+
+        <!-- UNIFIED SHARE + KYC CARD -->
+        <div class="share-card" id="shareCard">
+          <div class="share-card-head share-card-head--cta">
+            <div class="share-step-badge">NEXT STEP</div>
+            <div class="share-card-title-cta">
+              📤 Follow options below to send the details to me.
+            </div>
+            <div class="share-card-sub-cta">
+              Your profile is almost ready — choose the relevant option below.
+            </div>
+          </div>
+          <div class="share-card-body">
+            <!-- STEP 1: Are you new? -->
+            <div id="stepInvestorType">
+              <div class="share-question">
+                Are you investing with me for the first time?
+              </div>
+              <div class="investor-type-grid">
+                <button
+                  class="investor-choice-btn investor-choice-new"
+                  onclick="setInvestorType('new')"
+                >
+                  <span class="investor-choice-icon">🌱</span>
+                  <span class="investor-choice-title">I'm New</span>
+                  <span class="investor-choice-sub"
+                    >First time investing with me</span
+                  >
+                </button>
+                <button
+                  class="investor-choice-btn investor-choice-existing"
+                  onclick="setInvestorType('existing')"
+                >
+                  <span class="investor-choice-icon">✅</span>
+                  <span class="investor-choice-title">Already Invested with Me</span>
+                  <span class="investor-choice-sub"
+                    >You have an active portfolio set up by me — not Other person/apps</span
+                  >
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 2a: NEW investor — fill KYC details -->
+            <div id="stepNewKyc" style="display: none">
+              <div class="share-note">
+                Fill in your details below. Once done, click
+                <strong>Send via Gmail or Whatsapp</strong> — the content will
+                be ready to send, no editing needed.
+              </div>
+
+              <!-- Aadhaar -->
+              <div class="kyc-section-label">🪪 Aadhaar Card</div>
+              <div class="kyc-grid">
+                <div class="kyc-field">
+                  <label class="kyc-label"
+                    >Full Name <span class="kyc-req">*</span>
+                    <span class="kyc-hint">as per Aadhaar</span></label
+                  ><input
+                    class="kyc-input"
+                    id="kycAadhaarName"
+                    type="text"
+                    placeholder="Your Full Name"
+                  />
+                  <span class="kyc-field-error" id="kycAadhaarNameError">⚠️ Please enter your full name as per Aadhaar.</span>
+                </div>
+                <div class="kyc-field">
+                  <label class="kyc-label"
+                    >Aadhaar Number
+                    <span class="kyc-hint"> (Last 4 digits)</span></label
+                  ><input
+                    class="kyc-input"
+                    id="kycAadhaarNum"
+                    type="text"
+                    placeholder="XXXX"
+                    maxlength="4"
+                    inputmode="numeric"
+                    oninput="this.value = this.value.replace(/\D/g, '')"
+                  />
+                </div>
+                <div class="kyc-field">
+                  <label class="kyc-label"
+                    >Date of Birth <span class="kyc-req">*</span></label
+                  ><input class="kyc-input" id="kycDob" type="date" />
+                  <span class="kyc-field-error" id="kycDobError">⚠️ Please select your date of birth.</span>
+                </div>
+                <div class="kyc-field">
+                  <label class="kyc-label"
+                    >Place of Birth <span class="kyc-req">*</span>
+                    <span class="kyc-hint">only city name</span></label
+                  ><input
+                    class="kyc-input"
+                    id="kycPob"
+                    type="text"
+                    placeholder="e.g. Hyderabad"
+                  />
+                  <span class="kyc-field-error" id="kycPobError">⚠️ Please enter your city of birth.</span>
+                </div>
+                <div class="kyc-field kyc-field--full">
+                  <label class="kyc-label"
+                    >Registered Address <span class="kyc-req">*</span>
+                    <span class="kyc-hint">as per Aadhaar</span></label
+                  ><input
+                    class="kyc-input"
+                    id="kycAddress"
+                    type="text"
+                    placeholder="Full address as on Aadhaar"
+                  />
+                  <span class="kyc-field-error" id="kycAddressError">⚠️ Please enter your registered address.</span>
+                </div>
+              </div>
+
+
+
+              <!-- PAN & Bank — Collected on Call -->
+              <div class="kyc-section-label">🔐 PAN &amp; Bank Details</div>
+              <div style="
+                background: var(--gold-pale);
+                border: 1.5px solid rgba(201,152,42,0.35);
+                border-left: 4px solid var(--gold);
+                border-radius: 0 10px 10px 0;
+                padding: 14px 16px;
+                margin-bottom: 4px;
+              ">
+                <div style="font-size:13px; font-weight:600; color:var(--dark); margin-bottom:5px;">
+                  📞 These details will be collected on our onboarding call
+                </div>
+                <div style="font-size:12px; color:var(--muted); font-weight:300; line-height:1.7;">
+                  For your security, I do <strong>not</strong> collect your <strong>PAN number</strong> or <strong>bank account details</strong> through this form.
+                  I will reach out to you personally to gather this information over a call in a safe and compliant manner.
+                </div>
+              </div>
+
+              <!-- Onboarding Call Time Preference -->
+              <div style="margin-top:14px; background:var(--gold-pale); border:1.5px solid rgba(201,152,42,0.25); border-radius:12px; padding:16px 18px 20px;">
+                <div style="font-size:13px; font-weight:600; color:var(--dark); margin-bottom:3px;">🕐 When's a good time to call you?</div>
+                <div style="font-size:12px; color:var(--muted); font-weight:300; margin-bottom:16px; line-height:1.6;">Drag to set your preferred window — I'll schedule the call within it.</div>
+
+                <!-- Time display -->
+                <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:20px;">
+                  <div style="text-align:center; min-width:80px;">
+                    <div id="callTimeFrom" style="font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:700; color:var(--gold); letter-spacing:0.5px;">10:00 AM</div>
+                    <div style="font-size:10px; color:var(--muted); margin-top:1px;">From</div>
+                  </div>
+                  <div style="display:flex; flex-direction:column; align-items:center; gap:2px;">
+                    <div id="callTimeEmoji" style="font-size:20px; line-height:1;">🌤️</div>
+                    <div id="callTimePeriod" style="font-size:11px; color:var(--muted); font-weight:500;">Morning</div>
+                  </div>
+                  <div style="text-align:center; min-width:80px;">
+                    <div id="callTimeTo" style="font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:700; color:var(--gold); letter-spacing:0.5px;">12:00 PM</div>
+                    <div style="font-size:10px; color:var(--muted); margin-top:1px;">To</div>
+                  </div>
+                </div>
+
+                <!-- Custom dual-thumb track — touch + mouse safe -->
+                <div id="callRangeWrap" style="position:relative; height:36px; margin:0 10px; touch-action:none; user-select:none;">
+                  <!-- track bg -->
+                  <div style="position:absolute; left:0; right:0; top:50%; transform:translateY(-50%); height:5px; border-radius:4px; background:rgba(201,152,42,0.18);"></div>
+                  <!-- filled range -->
+                  <div id="callTrackFill" style="position:absolute; top:50%; transform:translateY(-50%); height:5px; border-radius:4px; background:var(--gold); left:25%; right:50%;"></div>
+                  <!-- noon marker -->
+                  <div id="callNoonMark" style="position:absolute; top:50%; transform:translate(-50%,-50%); width:2px; height:11px; background:rgba(201,152,42,0.55); border-radius:2px;"></div>
+                  <!-- thumb FROM -->
+                  <div id="callThumbA" aria-label="Call start time" role="slider"
+                    style="position:absolute; top:50%; transform:translate(-50%,-50%); width:28px; height:28px; border-radius:50%; background:var(--gold); border:2.5px solid var(--card); box-shadow:0 2px 10px rgba(0,0,0,0.4); cursor:grab; touch-action:none; left:25%; z-index:3;"></div>
+                  <!-- thumb TO -->
+                  <div id="callThumbB" aria-label="Call end time" role="slider"
+                    style="position:absolute; top:50%; transform:translate(-50%,-50%); width:28px; height:28px; border-radius:50%; background:var(--gold); border:2.5px solid var(--card); box-shadow:0 2px 10px rgba(0,0,0,0.4); cursor:grab; touch-action:none; left:50%; z-index:3;"></div>
+                </div>
+
+                <!-- Tick labels -->
+                <div style="display:flex; justify-content:space-between; padding:0 10px; margin-top:4px;">
+                  <span style="font-size:10px; color:var(--muted);">8 AM</span>
+                  <span style="font-size:10px; color:var(--muted);">10 AM</span>
+                  <span style="font-size:10px; color:rgba(201,152,42,0.8); font-weight:600;">12 PM</span>
+                  <span style="font-size:10px; color:var(--muted);">2 PM</span>
+                  <span style="font-size:10px; color:var(--muted);">4 PM</span>
+                  <span style="font-size:10px; color:var(--muted);">6 PM</span>
+                  <span style="font-size:10px; color:var(--muted);">8 PM</span>
+                </div>
+
+                <!-- Flexible toggle -->
+                <div style="margin-top:14px; display:flex; align-items:center; gap:8px; cursor:pointer;" onclick="toggleCallFlexible()">
+                  <div id="callFlexBox" style="width:16px; height:16px; border-radius:4px; border:1.5px solid rgba(201,152,42,0.5); background:transparent; flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:all 0.2s;"></div>
+                  <span style="font-size:12px; color:var(--muted);">I'm flexible — call me any time during business hours</span>
+                </div>
+              </div>
+
+              <!-- Contact -->
+              <div class="kyc-section-label">📬 Contact Details</div>
+              <div class="kyc-grid">
+                <div class="kyc-field">
+                  <label class="kyc-label"
+                    >Email ID <span class="kyc-req">*</span></label
+                  ><input
+                    class="kyc-input"
+                    id="kycEmail"
+                    type="email"
+                    placeholder="your@email.com"
+                  />
+                  <span class="kyc-field-error" id="kycEmailError">⚠️ Please enter a valid email address.</span>
+                </div>
+                <div class="kyc-field">
+                  <label class="kyc-label"
+                    ><span>Mobile Number
+                    <span class="kyc-req">*</span>
+                    <span class="kyc-hint"
+                      >Aadhaar-linked preferred</span
+                    ></label
+                  ><input
+                    class="kyc-input"
+                    id="kycMobile"
+                    type="tel"
+                    placeholder="10-digit mobile number"
+                    maxlength="10"
+                    inputmode="numeric"
+                    oninput="this.value = this.value.replace(/\D/g, '')"
+                  />
+                  <span class="kyc-field-error" id="kycMobileError">⚠️ Please enter your 10-digit mobile number.</span>
+                </div>
+              </div>
+
+              <!-- Nominee -->
+              <div class="kyc-section-label" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+                <span>👤 Nominee Details</span>
+                <label style="display:flex; align-items:center; gap:8px; font-size:13px; font-weight:500; color:var(--muted); cursor:pointer; user-select:none;">
+                  <input
+                    type="checkbox"
+                    id="nomineeToggle"
+                    checked
+                    onchange="toggleNomineeFields(this)"
+                    style="width:16px; height:16px; accent-color:var(--gold); cursor:pointer;"
+                  />
+                  Add a nominee <span style="color:var(--muted); font-weight:300;">— recommended, avoids hassle for your family later</span>
+                </label>
+              </div>
+
+              <div id="nomineeFields">
+                <div class="kyc-grid">
+                  <div class="kyc-field">
+                    <label class="kyc-label">Nominee Full Name <span class="kyc-req">*</span></label
+                    ><input
+                      class="kyc-input"
+                      id="kycNomName"
+                      type="text"
+                      placeholder="Nominee's Full Name"
+                    />
+                    <span class="kyc-field-error" id="kycNomNameError">⚠️ Please enter the nominee's full name.</span>
+                  </div>
+                  <div class="kyc-field">
+                    <label class="kyc-label">Nominee DOB <span class="kyc-req">*</span></label
+                    ><input class="kyc-input" id="kycNomDob" type="date" />
+                    <span class="kyc-field-error" id="kycNomDobError">⚠️ Please select the nominee's date of birth.</span>
+                  </div>
+                  <div class="kyc-field">
+                    <label class="kyc-label">Nominee Email ID <span class="kyc-req">*</span></label
+                    ><input
+                      class="kyc-input"
+                      id="kycNomEmail"
+                      type="email"
+                      placeholder="Nominee's email"
+                    />
+                    <span class="kyc-field-error" id="kycNomEmailError">⚠️ Please enter a valid email address for the nominee.</span>
+                  </div>
+                  <div class="kyc-field">
+                    <label class="kyc-label">Nominee Mobile Number <span class="kyc-req">*</span></label
+                    ><input
+                      class="kyc-input"
+                      id="kycNomMobile"
+                      type="tel"
+                      placeholder="Nominee's contact"
+                      maxlength="10"
+                      inputmode="numeric"
+                      oninput="this.value = this.value.replace(/\D/g, '')"
+                    />
+                    <span class="kyc-field-error" id="kycNomMobileError">⚠️ Please enter the nominee's 10-digit mobile number.</span>
+                  </div>
+                  <div class="kyc-field">
+                    <label class="kyc-label">Nominee Aadhaar (Last 4 digits) <span class="kyc-req">*</span></label
+                    ><input
+                      class="kyc-input"
+                      id="kycNomAadhaar"
+                      type="text"
+                      placeholder="XXXX"
+                      maxlength="4"
+                      inputmode="numeric"
+                      oninput="this.value = this.value.replace(/\D/g, '')"
+                    />
+                    <span class="kyc-field-error" id="kycNomAadhaarError">⚠️ Please enter the last 4 digits of nominee's Aadhaar.</span>
+                  </div>
+                  <div class="kyc-field kyc-field--full">
+                    <label class="kyc-label">Nominee Address <span class="kyc-req">*</span></label
+                    ><input
+                      class="kyc-input"
+                      id="kycNomAddress"
+                      type="text"
+                      placeholder="Nominee's current residential address"
+                    />
+                    <span class="kyc-field-error" id="kycNomAddressError">⚠️ Please enter the nominee's address.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="kyc-privacy-note">
+                🔒 Your details are used solely for KYC registration and handled
+                with complete confidentiality as per SEBI &amp; AMFI guidelines.
+                PAN and bank account details are collected separately over a secure onboarding call — never through this form.
+              </div>
+
+              <!-- Cash Needs -->
+              <div class="kyc-section-label">💵 Cash Requirements</div>
+              <div class="kyc-field kyc-field--full">
+                <label class="kyc-label"
+                  >How much cash do you foresee needing in the next 12 months?
+                  <span class="kyc-hint"
+                    >Helps plan your liquid vs invested ratio</span
+                  ></label
+                >
+                <div class="cash-slider-wrap">
+                  <div class="cash-slider-display">
+                    <span class="cash-slider-value" id="cashNeedsNewDisplay"
+                      >₹0</span
+                    >
+                    <span class="cash-slider-label" id="cashNeedsNewLabel"
+                      >No foreseeable cash needs</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    class="cash-slider"
+                    id="cashNeedsNew"
+                    min="0"
+                    max="1500000"
+                    step="10000"
+                    value="0"
+                    oninput="
+                      updateCashSlider(
+                        'cashNeedsNew',
+                        'cashNeedsNewDisplay',
+                        'cashNeedsNewLabel',
+                      )
+                    "
+                  />
+                  <div class="cash-slider-ticks">
+                    <span class="cash-slider-tick">₹0</span>
+                    <span class="cash-slider-tick">₹3.75L</span>
+                    <span class="cash-slider-tick">₹7.5L</span>
+                    <span class="cash-slider-tick">₹11.25L</span>
+                    <span class="cash-slider-tick">₹15L+</span>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                id="kycError"
+                style="
+                  display: none;
+                  color: var(--red);
+                  font-size: 12px;
+                  font-weight: 500;
+                  margin-top: 8px;
+                "
+              >
+                Please fill in all required fields (marked *) before sending.
+              </div>
+              <div style="font-size:13px; font-weight:600; color:var(--gold); margin: 16px 0 10px; text-align:center;">
+                Send your profile using WhatsApp or Gmail below
+              </div>
+              <div class="share-btns" style="margin-top: 0">
+                <button
+                  class="share-btn share-btn-wa"
+                  onclick="if(validateKyc()){ buildAndOpenWa(this); showSendModal(this,'WhatsApp'); }"
+                >
+                  <span class="share-btn-icon">💬</span> Send via WhatsApp
+                </button>
+                <button
+                  class="share-btn share-btn-email share-btn-gmail-mobile"
+                  onclick="if(validateKyc()){ buildAndOpenEmail(this); showSendModal(this,'Gmail'); }"
+                >
+                  <span class="share-btn-icon">✉️</span> Send via Gmail
+                </button>
+                <button
+                  class="share-btn share-btn-gmail share-btn-gmail-desktop"
+                  onclick="if(validateKyc()){ buildAndOpenGmail(this); showSendModal(this,'Gmail'); }"
+                >
+                  <span class="share-btn-icon">✉️</span> Send via Gmail
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 2b: EXISTING investor — just share profile -->
+            <div id="stepExisting" style="display: none">
+              <div class="share-note">
+                Welcome back! Your investor profile and answers will be shared
+                with <strong>Me</strong> so I can review your updated risk
+                details.
+              </div>
+
+              <!-- Cash Needs -->
+              <div class="kyc-section-label">💵 Cash Requirements</div>
+              <div
+                class="kyc-field kyc-field--full"
+                style="margin-bottom: 14px"
+              >
+                <label class="kyc-label"
+                  >How much cash do you foresee needing in the next 12 months?
+                  <span class="kyc-hint"
+                    >Helps plan savings for your immediate and important
+                    needs.</span
+                  ></label
+                >
+                <div class="cash-slider-wrap">
+                  <div class="cash-slider-display">
+                    <span
+                      class="cash-slider-value"
+                      id="cashNeedsExistingDisplay"
+                      >₹0</span
+                    >
+                    <span class="cash-slider-label" id="cashNeedsExistingLabel"
+                      >No foreseeable cash needs</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    class="cash-slider"
+                    id="cashNeedsExisting"
+                    min="0"
+                    max="1500000"
+                    step="10000"
+                    value="0"
+                    oninput="
+                      updateCashSlider(
+                        'cashNeedsExisting',
+                        'cashNeedsExistingDisplay',
+                        'cashNeedsExistingLabel',
+                      )
+                    "
+                  />
+                  <div class="cash-slider-ticks">
+                    <span class="cash-slider-tick">₹0</span>
+                    <span class="cash-slider-tick">₹3.75L</span>
+                    <span class="cash-slider-tick">₹7.5L</span>
+                    <span class="cash-slider-tick">₹11.25L</span>
+                    <span class="cash-slider-tick">₹15L+</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="font-size:13px; font-weight:600; color:var(--gold); margin: 16px 0 10px; text-align:center;">
+                Send your profile using WhatsApp or Gmail below
+              </div>
+              <div class="share-btns">
+                <button
+                  class="share-btn share-btn-wa"
+                  onclick="buildAndOpenWa(this); showSendModal(this,'WhatsApp');"
+                >
+                  <span class="share-btn-icon">💬</span> Send via WhatsApp
+                </button>
+                <button
+                  class="share-btn share-btn-email share-btn-gmail-mobile"
+                  onclick="buildAndOpenEmail(this); showSendModal(this,'Gmail');"
+                >
+                  <span class="share-btn-icon">✉️</span> Send via Gmail
+                </button>
+                <button
+                  class="share-btn share-btn-gmail share-btn-gmail-desktop"
+                  onclick="buildAndOpenGmail(this); showSendModal(this,'Gmail (Browser)');"
+                >
+                  <span class="share-btn-icon">✉️</span> Send via Gmail
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="start-strip">
+          ✦ &nbsp;Invest as little as
+          <span>₹100 with zero monthly pressure</span> — your future self will
+          thank you &nbsp;✦
+        </div>
+
+        <!-- STATUS BANNER — shown only after confirmed sent -->
+        <div id="statusBanner" style="display:none; width:100%; animation: fadeUp 0.4s ease both;">
+
+          <!-- ✅ Success hero -->
+          <div style="
+            border-radius: 16px;
+            padding: 28px 24px 24px;
+            text-align: center;
+            background: var(--gold-pale);
+            border: 1.5px solid rgba(201,152,42,0.35);
+            margin-bottom: 16px;
+          ">
+            <!-- Animated checkmark -->
+            <div style="
+              width: 60px; height: 60px; border-radius: 50%;
+              background: linear-gradient(135deg, var(--gold), var(--gold-light));
+              display: flex; align-items: center; justify-content: center;
+              margin: 0 auto 16px;
+              box-shadow: 0 6px 24px rgba(201,152,42,0.4);
+              animation: successPop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both;
+            ">
+              <span style="font-size: 26px; line-height:1;">✓</span>
+            </div>
+            <div style="font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:700; color:var(--dark); margin-bottom:6px;">Profile Sent Successfully!</div>
+            <div style="font-size:13px; color:var(--muted); font-weight:300; line-height:1.7; max-width:320px; margin:0 auto;">
+              Your investor profile and KYC details have been shared with <strong style="color:var(--dark);">me</strong>. Sit back — I'll take it from here.
+            </div>
+            <div style="margin-top:18px; display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+              <a href="tel:8329450580" style="
+                color:var(--gold); font-size:12px; font-weight:600;
+                text-decoration:none; display:flex; align-items:center; gap:6px;
+                border:1px solid rgba(201,152,42,0.35); border-radius:20px; padding:6px 14px;
+              ">☎ 8329450580</a>
+              <a href="mailto:rameshvegi94@gmail.com" style="
+                color:var(--gold); font-size:12px; font-weight:600;
+                text-decoration:none; display:flex; align-items:center; gap:6px;
+                border:1px solid rgba(201,152,42,0.35); border-radius:20px; padding:6px 14px;
+              ">✉ rameshvegi94@gmail.com</a>
+            </div>
+          </div>
+
+          <!-- 🎯 Goal Calculator CTA -->
+          <div style="
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, rgba(200,169,110,0.12), rgba(200,169,110,0.06));
+            border: 1.5px solid rgba(201,152,42,0.4);
+            text-align: center;
+          ">
+            <div style="font-size: 28px; margin-bottom: 10px;">🎯</div>
+            <div style="font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:700; color:var(--dark); margin-bottom:6px;">While you wait, plan your goals</div>
+            <div style="font-size:12px; color:var(--muted); font-weight:300; line-height:1.7; max-width:300px; margin:0 auto 18px;">
+              Use the Goal Calculator to estimate how much you need to invest to reach your financial goals.
+            </div>
+            <a href="./calculator.html" target="_blank" rel="noopener" style="
+              display: inline-flex;
+              align-items: center;
+              gap: 8px;
+              background: linear-gradient(135deg, var(--gold), var(--gold-light));
+              color: #1a1208;
+              font-family: 'Outfit', sans-serif;
+              font-size: 14px;
+              font-weight: 700;
+              padding: 13px 28px;
+              border-radius: 40px;
+              text-decoration: none;
+              letter-spacing: 0.3px;
+              box-shadow: 0 4px 18px rgba(201,152,42,0.35);
+            ">
+              Open Goal Calculator →
+            </a>
+          </div>
+
+          <!-- 📋 What happens next -->
+          <div style="
+            border-radius: 16px;
+            padding: 22px 24px;
+            background: var(--card);
+            border: 1.5px solid var(--border);
+          ">
+            <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:18px;">What Happens Next</div>
+
+            <!-- Step 1 -->
+            <div style="display:flex; gap:16px; margin-bottom:18px;">
+              <div style="
+                flex-shrink:0; width:36px; height:36px; border-radius:50%;
+                background:linear-gradient(135deg,var(--gold),var(--gold-light));
+                display:flex; align-items:center; justify-content:center;
+                font-size:15px; box-shadow:0 3px 10px rgba(201,152,42,0.3);
+              ">📋</div>
+              <div>
+                <div style="font-size:13px; font-weight:600; color:var(--dark); margin-bottom:3px;">I study your goals</div>
+                <div style="font-size:12px; color:var(--muted); font-weight:300; line-height:1.6;">I'll review your risk profile and connect with you to discuss suitable mutual fund categories. If you haven't already, the <a href="./calculator.html" target="_blank" rel="noopener" style="color:var(--gold); font-weight:500; text-decoration:none;">Goal Calculator</a> above can help you get a clearer picture of what you're working towards.</div>
+              </div>
+            </div>
+
+            <!-- Connector -->
+            <div style="width:2px; height:14px; background:rgba(201,152,42,0.25); margin:0 17px 18px;"></div>
+
+            <!-- Step 2 -->
+            <div style="display:flex; gap:16px; margin-bottom:18px;">
+              <div style="
+                flex-shrink:0; width:36px; height:36px; border-radius:50%;
+                background:linear-gradient(135deg,var(--gold),var(--gold-light));
+                display:flex; align-items:center; justify-content:center;
+                font-size:15px; box-shadow:0 3px 10px rgba(201,152,42,0.3);
+              ">📞</div>
+              <div>
+                <div style="font-size:13px; font-weight:600; color:var(--dark); margin-bottom:3px;">We get on a call</div>
+                <div style="font-size:12px; color:var(--muted); font-weight:300; line-height:1.6;">I'll reach out within your preferred time window for a quick call to collect your PAN &amp; bank details securely.</div>
+              </div>
+            </div>
+
+            <!-- Connector -->
+            <div style="width:2px; height:14px; background:rgba(201,152,42,0.25); margin:0 17px 18px;"></div>
+
+            <!-- Step 3 -->
+            <div style="display:flex; gap:16px;">
+              <div style="
+                flex-shrink:0; width:36px; height:36px; border-radius:50%;
+                background:linear-gradient(135deg,var(--gold),var(--gold-light));
+                display:flex; align-items:center; justify-content:center;
+                font-size:15px; box-shadow:0 3px 10px rgba(201,152,42,0.3);
+              ">🎯</div>
+              <div>
+                <div style="font-size:13px; font-weight:600; color:var(--dark); margin-bottom:3px;">Your money starts working</div>
+                <div style="font-size:12px; color:var(--muted); font-weight:300; line-height:1.6;">Once KYC is done, I'll help you get started with a mutual fund that aligns with your risk profile and investment horizon.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="reset-btn" id="resetBtn">← Retake Questionnaire</button>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-brand">
+        Mutual Fund and NPS distribution services by <span>Vegi</span> Ramesh
+      </div>
+      <div class="footer-contacts">
+        <div class="fci">
+          <div class="fcicon">☎</div>
+          <a href="tel:8329450580" style="color: inherit; text-decoration: none"
+            >8329450580</a
+          >
+        </div>
+        <div class="fci">
+          <div class="fcicon">@</div>
+          <span>rameshvegi94@gmail.com</span>
+        </div>
+        <div class="fci">
+          <div class="fcicon">✦</div>
+          <span>ARN-349739</span>
+        </div>
+      </div>
+      <div class="footer-disc">
+        Mutual Fund investments are subject to market risks. Please read all
+        scheme-related documents carefully before investing. Past performance is
+        not indicative of future results. This material is for informational
+        purposes only and does not constitute financial advice. Vegi Ramesh is
+        registered with AMFI as a Mutual Fund Distributor – ARN-349739.
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        "use strict";
+
+        /* ═══════════════════════════════════════════════════════════════════
+   QUESTIONS — 13 items based on the Grable-Lytton (1999) validated
+   risk tolerance instrument, fully adapted for Indian retail investors.
+   Language simplified where needed; answer structures kept intact.
+
+   Scoring key:
+     Q1 : a=4  b=3  c=2  d=1
+     Q2 : a=1  b=2  c=3  d=4
+     Q3 : a=1  b=2  c=3  d=4
+     Q4 : a=1  b=2  c=3
+     Q5 : a=1  b=2  c=3
+     Q6 : a=1  b=2  c=3  d=4
+     Q7 : a=1  b=2  c=3  d=4
+     Q8 : a=1  b=2  c=3  d=4
+     Q9 : a=1  b=3         (Prospect Theory — gain frame)
+     Q10: a=1  b=3         (Prospect Theory — loss frame)
+     Q11: a=1  b=2  c=3  d=4
+     Q12: a=1  b=2  c=3
+     Q13: a=1  b=2  c=3  d=4
+
+   Minimum score: 13  |  Maximum score: 47
+   ═══════════════════════════════════════════════════════════════════ */
+
+        var QUESTIONS = [
+          /* ── Q1 · Self-perception as a risk taker ── */
+          {
+            category: "How Others See You",
+            icon: "🧠",
+            q: "If your best friend had to describe how you handle money, which would they say fits you best?",
+            hint: "",
+            options: [
+              { label: "Jumps at big opportunities without hesitating", sub: "", points: 4 },
+              { label: "Researches first, then goes for it", sub: "", points: 3 },
+              { label: "Likes to play it safe", sub: "", points: 2 },
+              { label: "Stays away from anything uncertain", sub: "", points: 1 },
+            ],
+          },
+
+          /* ── Q2 · Risk appetite — no math ── */
+          {
+            category: "What Feels Right?",
+            icon: "🎰",
+            q: "You have ₹10,000 to invest. What feels right to you?",
+            hint: "",
+            options: [
+              { label: "Keep it completely safe — even if it grows very slowly", sub: "", points: 1 },
+              { label: "Grow it steadily — small ups and downs are okay", sub: "", points: 2 },
+              { label: "Go for strong growth — I can handle some bad months", sub: "", points: 3 },
+              { label: "Shoot for maximum returns — even if it could drop a lot", sub: "", points: 4 },
+            ],
+          },
+
+          /* ── Q3 · Response to income shock ── */
+          {
+            category: "Handling a Surprise",
+            icon: "💼",
+            q: "You lose your job unexpectedly. You have some savings set aside. What's your first instinct?",
+            hint: "",
+            options: [
+              { label: "Stop all investments immediately — protect every rupee", sub: "", points: 1 },
+              { label: "Pause and review — reduce investments but don't stop entirely", sub: "", points: 2 },
+              { label: "Keep my investments going — this is a temporary setback", sub: "", points: 3 },
+              { label: "Invest more if I can — markets might be cheaper now", sub: "", points: 4 },
+            ],
+          },
+
+          /* ── Q4 · Unexpected windfall ── */
+          {
+            category: "Surprise Money",
+            icon: "💰",
+            q: "You suddenly receive ₹2,00,000. Where do you put it?",
+            hint: "",
+            options: [
+              { label: "Keep it safe — guaranteed returns, no risk to principal", sub: "", points: 1 },
+              { label: "Split it — mostly safe, a portion for growth", sub: "", points: 2 },
+              { label: "Put it all toward growth — I'm okay with ups and downs", sub: "", points: 3 },
+            ],
+          },
+
+          /* ── Q5 · Experience & comfort with market investments ── */
+          {
+            category: "Market Comfort",
+            icon: "📈",
+            q: "How do you feel about investments where the value can go up or down?",
+            hint: "",
+            options: [
+              { label: "Not comfortable — I prefer knowing exactly what I'll get back", sub: "", points: 1 },
+              { label: "Somewhat comfortable — I've tried it but don't follow it closely", sub: "", points: 2 },
+              { label: "Very comfortable — I invest regularly and don't panic when it dips", sub: "", points: 3 },
+            ],
+          },
+
+          /* ── Q6 · Word association with "risk" ── */
+          {
+            category: "Your Money Mindset",
+            icon: "🔍",
+            q: "When someone says \"risk\" in the context of money or investing, what's the first thing that comes to your mind?",
+            hint: "",
+            options: [
+              { label: "The fear of losing what I've worked hard for", sub: "", points: 1 },
+              { label: "Stepping into the unknown — uncertain but manageable", sub: "", points: 2 },
+              { label: "A necessary part of growing money", sub: "", points: 3 },
+              { label: "The thrill — I enjoy high-stakes decisions", sub: "", points: 4 },
+            ],
+          },
+
+          /* ── Q7 · Asset reallocation scenario ── */
+          {
+            category: "Would You Switch?",
+            icon: "🔄",
+            q: "Your FD is up for renewal. Your advisor says mutual funds have given much better returns. What do you do?",
+            hint: "",
+            options: [
+              { label: "Renew the FD — I trust what I know", sub: "", points: 1 },
+              { label: "Move a small part to mutual funds, keep the rest in FD", sub: "", points: 2 },
+              { label: "Move most of it to mutual funds", sub: "", points: 3 },
+              { label: "Move everything to mutual funds — and maybe top it up", sub: "", points: 4 },
+            ],
+          },
+
+          /* ── Q8 · Reaction to a market drop ── */
+          {
+            category: "When Markets Fall",
+            icon: "📊",
+            q: "Your investment just dropped 20% in value. What do you do?",
+            hint: "",
+            options: [
+              { label: "Sell everything — I can't afford to lose more", sub: "", points: 1 },
+              { label: "Sell some — reduce the damage and wait", sub: "", points: 2 },
+              { label: "Do nothing — I'll wait for it to recover", sub: "", points: 3 },
+              { label: "Buy more — this is a good opportunity", sub: "", points: 4 },
+            ],
+          },
+
+          /* ── Q9 · Prospect theory — gain frame ── */
+          {
+            category: "Sure Thing vs. Chance",
+            icon: "🎯",
+            q: "You're given ₹10,000. You can keep it — or gamble it for a chance to double it. What do you do?",
+            hint: "",
+            options: [
+              { label: "Keep it — I'll take the sure thing", sub: "", points: 1 },
+              { label: "Gamble it — double or nothing", sub: "", points: 3 },
+            ],
+          },
+
+          /* ── Q10 · Prospect theory — loss frame ── */
+          {
+            category: "Handling a Loss",
+            icon: "⚡",
+            q: "You owe a friend money. You can pay a fixed amount now — or gamble it, with a chance of paying nothing or paying double. What do you do?",
+            hint: "",
+            options: [
+              { label: "Pay the fixed amount — settle it and move on", sub: "", points: 1 },
+              { label: "Gamble it — chance of paying nothing", sub: "", points: 3 },
+            ],
+          },
+
+          /* ── Q11 · Inheritance allocation ── */
+          {
+            category: "A Big Decision",
+            icon: "🏛️",
+            q: "A relative passes away and leaves you ₹10,00,000. You must put the entire amount into just ONE option. What do you pick?",
+            hint: "",
+            options: [
+              { label: "Safe and guaranteed — I know exactly what I'll get back", sub: "", points: 1 },
+              { label: "Mostly safe with some growth potential", sub: "", points: 2 },
+              { label: "Growth-focused — value will go up and down but grows over time", sub: "", points: 3 },
+              { label: "High risk, high reward — maximum growth potential with big swings", sub: "", points: 4 },
+            ],
+          },
+
+          /* ── Q12 · Portfolio allocation preference ── */
+          {
+            category: "How Would You Split It?",
+            icon: "🗂️",
+            q: "If you had ₹2,00,000 to invest today, how would you split it?",
+            hint: "",
+            options: [
+              { label: "Mostly safe — just a small portion for growth", sub: "", points: 1 },
+              { label: "Equal parts safe and growth", sub: "", points: 2 },
+              { label: "Mostly growth — just a small portion kept safe", sub: "", points: 3 },
+            ],
+          },
+
+          /* ── Q13 · Speculative opportunity ── */
+          {
+            category: "A Risky Opportunity",
+            icon: "🚀",
+            q: "A trusted friend asks you to invest in their new startup. High risk — but the returns could be massive. Would you invest?",
+            hint: "",
+            options: [
+              { label: "No — I won't put money into something this uncertain", sub: "", points: 1 },
+              { label: "A small amount — mostly to support my friend", sub: "", points: 2 },
+              { label: "A meaningful amount — the potential upside justifies it", sub: "", points: 3 },
+              { label: "A large amount — when I believe in something, I back it fully", sub: "", points: 4 },
+            ],
+          },
+        ];
+
+        /* ═══════════════════════════════════════════════════
+   PROFILES — 5 score-band based risk profiles
+   Score range: 13 (lowest) to 47 (highest)
+   ═══════════════════════════════════════════════════ */
+        var PROFILES = [
+          {
+            minScore: 33,
+            bandIndex: 4,
+            icon: "🚀",
+            name: "Aggressive Growth Investor",
+            tag: "High risk tolerance — equity-led, long-horizon wealth creation",
+            badges: ["Aggressive", "Long Horizon", "High Conviction"],
+            ideal:
+              "You are highly comfortable with market volatility and have a strong appetite for equity. A growth-oriented portfolio heavily tilted towards flexi-cap, mid/small-cap equity, and multifactor strategies maximises your long-term compounding potential. Stay invested through market cycles.",
+            alloc: [
+              {
+                label: "Flexi Cap / Mid-Small Cap Equity",
+                pct: 50,
+                color: "#2E6DB4",
+              },
+              {
+                label: "Multifactor ETFs / Factor FoF",
+                pct: 25,
+                color: "#6B3FA0",
+              },
+              { label: "Arbitrage Fund", pct: 15, color: "#8A9BAD" },
+              { label: "Gold ETF", pct: 10, color: "#C9982A" },
+            ],
+            sub: "Equity-led, high-conviction — built for maximum long-term wealth creation",
+          },
+          {
+            minScore: 29,
+            bandIndex: 3,
+            icon: "📈",
+            name: "Growth-Oriented Investor",
+            tag: "Above-average risk tolerance — disciplined, equity-focused compounder",
+            badges: ["Growth", "Equity-Focused", "Disciplined"],
+            ideal:
+              "You have above-average risk tolerance and a clear long-term horizon. A predominantly equity portfolio blending active fund management with factor-based strategies captures both alpha and systematic market premia. Patience and consistency are your greatest allies.",
+            alloc: [
+              { label: "Flexi Cap Equity (Active)", pct: 40, color: "#2E6DB4" },
+              {
+                label: "Multifactor FoF / Factor ETFs",
+                pct: 25,
+                color: "#6B3FA0",
+              },
+              { label: "Arbitrage Fund", pct: 20, color: "#8A9BAD" },
+              { label: "Gold ETF", pct: 15, color: "#C9982A" },
+            ],
+            sub: "Active + factor blend — confident compounding with managed risk",
+          },
+          {
+            minScore: 23,
+            bandIndex: 2,
+            icon: "⚖️",
+            name: "Balanced / Moderate Investor",
+            tag: "Average risk tolerance — steady, diversified, all-weather portfolio",
+            badges: ["Balanced", "Diversified", "Moderate Risk"],
+            ideal:
+              "You seek a healthy balance between capital growth and stability. A multi-asset approach with meaningful equity exposure, supported by arbitrage and gold, delivers steady compounding without the extremes of a pure equity portfolio. Review annually.",
+            alloc: [
+              { label: "Flexi Cap Equity", pct: 35, color: "#2E6DB4" },
+              {
+                label: "Multi Asset Allocation Fund",
+                pct: 25,
+                color: "#3A9B5C",
+              },
+              { label: "Arbitrage Fund", pct: 25, color: "#8A9BAD" },
+              { label: "Gold ETF", pct: 15, color: "#C9982A" },
+            ],
+            sub: "Balanced equity-debt blend — steady compounding with managed volatility",
+          },
+          {
+            minScore: 19,
+            bandIndex: 1,
+            icon: "🌱",
+            name: "Moderately Conservative Investor",
+            tag: "Below-average risk tolerance — capital preservation with measured growth",
+            badges: ["Conservative Leaning", "Capital Safe", "Stability First"],
+            ideal:
+              "You value capital safety above all, but recognise that FDs alone won't beat inflation meaningfully over time. A Balanced Advantage Fund dynamically manages equity allocation, while gold and arbitrage anchor the portfolio against volatility.",
+            alloc: [
+              { label: "Balanced Advantage Fund", pct: 35, color: "#3A9B5C" },
+              {
+                label: "Arbitrage / Short Duration Debt",
+                pct: 30,
+                color: "#8A9BAD",
+              },
+              { label: "Gold ETF", pct: 20, color: "#C9982A" },
+              { label: "Large Cap Index Fund", pct: 15, color: "#2E6DB4" },
+            ],
+            sub: "Capital protection priority with measured, inflation-beating participation",
+          },
+          {
+            minScore: 0,
+            bandIndex: 0,
+            icon: "🏦",
+            name: "Conservative Investor",
+            tag: "Low risk tolerance — capital protection and income above all else",
+            badges: ["Conservative", "Capital Protected", "Income Focused"],
+            ideal:
+              "Protecting your principal is your primary objective. A conservative portfolio anchored in liquid and arbitrage funds, complemented by short-duration debt and a gold allocation for purchasing-power protection, is the right starting point. Build confidence over time.",
+            alloc: [
+              { label: "Liquid / Arbitrage Fund", pct: 40, color: "#8A9BAD" },
+              { label: "Short Duration Debt Fund", pct: 25, color: "#3A9B5C" },
+              { label: "Gold ETF", pct: 20, color: "#C9982A" },
+              { label: "Large Cap Index Fund", pct: 15, color: "#2E6DB4" },
+            ],
+            sub: "Safety-first — capital preservation with purchasing-power protection",
+          },
+        ];
+
+        /* ═══════════════════════════════════════════════════
+   STATE
+   answers[i] = selected option object (or null)
+   ═══════════════════════════════════════════════════ */
+        var current = 0;
+        var answers = new Array(QUESTIONS.length).fill(null);
+
+
+        /* ═══════════════════════════════════════════════════
+   RENDERING
+   ═══════════════════════════════════════════════════ */
+        function buildDots() {
+          var c = document.getElementById("stepDots");
+          c.innerHTML = "";
+          QUESTIONS.forEach(function (_, i) {
+            var d = document.createElement("div");
+            d.className = "step-dot";
+            d.id = "dot" + i;
+            c.appendChild(d);
+          });
+        }
+
+        function refreshDots() {
+          QUESTIONS.forEach(function (_, i) {
+            var d = document.getElementById("dot" + i);
+            if (!d) return;
+            d.className =
+              "step-dot" +
+              (i < current ? " done" : i === current ? " active" : "");
+          });
+        }
+
+        function refreshProgress() {
+          var done = answers.filter(function (a) {
+            return a !== null;
+          }).length;
+          var pct = Math.round((done / QUESTIONS.length) * 100);
+          document.getElementById("progFill").style.width = pct + "%";
+          document.getElementById("progPct").textContent = pct + "% complete";
+          document.getElementById("progLabel").textContent =
+            "Question " + (current + 1) + " of " + QUESTIONS.length;
+          refreshDots();
+        }
+
+        function renderQuestion(idx) {
+          var q = QUESTIONS[idx];
+          var area = document.getElementById("qArea");
+          area.innerHTML = "";
+          var wrap = document.createElement("div");
+          wrap.className = "q-wrap";
+
+          var pill = document.createElement("div");
+          pill.className = "q-category-pill";
+          pill.innerHTML = q.icon + " " + q.category;
+          wrap.appendChild(pill);
+
+          var card = document.createElement("div");
+          card.className = "q-card";
+          var num = document.createElement("div");
+          num.className = "q-num";
+          num.textContent = "QUESTION " + (idx + 1);
+          var qtext = document.createElement("div");
+          qtext.className = "q-text";
+          qtext.textContent = q.q;
+          var hintText =
+            typeof q.hint === "function"
+              ? q.hint(window._investorName || "there")
+              : q.hint;
+          var hint = document.createElement("div");
+          hint.className = "q-hint";
+          hint.textContent = hintText;
+          var opts = document.createElement("div");
+          opts.className = "q-options";
+          card.appendChild(num);
+          card.appendChild(qtext);
+          card.appendChild(hint);
+          card.appendChild(opts);
+          wrap.appendChild(card);
+          area.appendChild(wrap);
+
+          q.options.forEach(function (opt) {
+            var isSelected =
+              answers[idx] !== null && answers[idx].label === opt.label;
+            var lbl = document.createElement("div");
+            lbl.className = "q-opt" + (isSelected ? " selected" : "");
+            lbl.setAttribute("tabindex", "0");
+            lbl.setAttribute("role", "radio");
+            lbl.setAttribute("aria-checked", isSelected ? "true" : "false");
+            lbl.innerHTML =
+              '<div class="q-opt-radio">' +
+              (isSelected
+                ? '<span style="width:6px;height:6px;border-radius:50%;background:#fff;display:block;"></span>'
+                : "") +
+              "</div>" +
+              '<div class="q-opt-body">' +
+              '<div class="q-opt-label">' +
+              opt.label +
+              "</div>" +
+              (opt.sub ? '<div class="q-opt-sub">' + opt.sub + "</div>" : "") +
+              "</div>";
+
+            lbl.addEventListener("keydown", function (e) {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                lbl.click();
+              }
+            });
+            lbl.addEventListener("click", function () {
+              answers[idx] = opt; /* store the option object */
+              document.querySelectorAll(".q-opt").forEach(function (o) {
+                o.classList.remove("selected");
+                var r = o.querySelector(".q-opt-radio");
+                if (r) r.innerHTML = "";
+              });
+              lbl.classList.add("selected");
+              var r = lbl.querySelector(".q-opt-radio");
+              if (r)
+                r.innerHTML =
+                  '<span style="width:6px;height:6px;border-radius:50%;background:#fff;display:block;"></span>';
+              refreshProgress();
+              setTimeout(function () {
+                if (current < QUESTIONS.length - 1) {
+                  current++;
+                  renderQuestion(current);
+                  document.getElementById("sectionQuiz").scrollIntoView({ behavior: "smooth", block: "start" });
+                } else {
+                  showResult();
+                }
+              }, 320);
+            });
+            opts.appendChild(lbl);
+          });
+
+          document.getElementById("backBtn").style.visibility =
+            idx === 0 ? "hidden" : "visible";
+          refreshProgress();
+        }
+
+        /* ═══════════════════════════════════════════════════
+   SCORING — sum of opt.points across all answers
+   Range: 13 (min) to 47 (max)
+   ═══════════════════════════════════════════════════ */
+        function calcProfile() {
+          var totalScore = answers.reduce(function (sum, opt) {
+            return sum + (opt ? opt.points : 0);
+          }, 0);
+          /* Find the matching profile (profiles sorted highest minScore first) */
+          for (var i = 0; i < PROFILES.length; i++) {
+            if (totalScore >= PROFILES[i].minScore)
+              return { profile: PROFILES[i], score: totalScore };
+          }
+          return {
+            profile: PROFILES[PROFILES.length - 1],
+            score: totalScore,
+          }; /* fallback: most conservative */
+        }
+
+        /* ═══════════════════════════════════════════════════
+   SHOW RESULT
+   ═══════════════════════════════════════════════════ */
+        function showResult() {
+          var result = calcProfile();
+          var p = result.profile;
+          var totalScore = result.score;
+
+          /* Reset share card step */
+          document.getElementById("stepInvestorType").style.display = "block";
+          document.getElementById("stepNewKyc").style.display = "none";
+          document.getElementById("stepExisting").style.display = "none";
+
+          /* Switch sections */
+          document.getElementById("sectionQuiz").style.display = "none";
+          document.getElementById("sectionIntro").style.display = "none";
+          var sr = document.getElementById("sectionResult");
+          sr.style.display = "flex";
+
+          /* Start share card pulse animation now that results are visible */
+          if (window.startShareCardAnim) window.startShareCardAnim();
+
+          /* Show sticky send bar and attach scroll listener */
+          var ssb = document.getElementById("stickySendBar");
+          if (ssb) ssb.style.display = "block";
+          if (window.initStickyBarObserver) window.initStickyBarObserver();
+
+          /* Profile banner */
+          var nameLabel = window._investorName
+            ? window._investorName + ", here\u2019s your investor profile"
+            : "Your Investor Profile";
+          document.getElementById("resEyebrow").textContent = nameLabel;
+          document.getElementById("resIcon").textContent = p.icon;
+          document.getElementById("resName").textContent = p.name;
+          /* Update page title */
+          document.title =
+            (window._investorName ? window._investorName + "'s" : "My") +
+            " Profile — " +
+            p.name +
+            " · Vegi Ramesh";
+          document.getElementById("resTag").textContent = p.tag;
+
+          /* Badges */
+          var bd = document.getElementById("resBadges");
+          bd.innerHTML = "";
+          p.badges.forEach(function (b) {
+            var s = document.createElement("span");
+            s.className = "res-badge";
+            s.textContent = b;
+            bd.appendChild(s);
+          });
+
+          /* Score meter */
+          document.getElementById("resScoreDisplay").innerHTML =
+            totalScore + " <span>/ 47</span>";
+          var scorePct = Math.round(((totalScore - 13) / (47 - 13)) * 100);
+          /* Highlight active band */
+          for (var b = 0; b <= 4; b++) {
+            document.getElementById("band" + b).classList.remove("active");
+          }
+          document.getElementById("band" + p.bandIndex).classList.add("active");
+
+          /* Animate score bar */
+          setTimeout(function () {
+            document.getElementById("scoreBarFill").style.width =
+              scorePct + "%";
+          }, 150);
+
+          window.scrollTo({ top: 0, behavior: "smooth" });
+
+          /* ── Build share text ── */
+          var bandName = [
+            "Conservative (Score 13–18)",
+            "Moderately Conservative (Score 19–22)",
+            "Balanced (Score 23–28)",
+            "Growth (Score 29–32)",
+            "Aggressive (Score 33–47)",
+          ][p.bandIndex];
+          var investorName = window._investorName || "";
+          var profileDate = window._todayStr || "";
+          var lines = [];
+          lines.push("✦ Investor Risk Profile ✦");
+          lines.push("");
+          if (investorName) lines.push("Name     : " + investorName);
+          if (profileDate) lines.push("Date     : " + profileDate);
+          lines.push("Profile  : " + p.name);
+          lines.push("Tag      : " + p.tag);
+          lines.push("Score    : " + totalScore + " / 47  (" + bandName + ")");
+          lines.push("");
+          lines.push("My Answers:");
+          QUESTIONS.forEach(function (q, i) {
+            var ans = answers[i];
+            var optLabel = ans ? ans.label : "(skipped)";
+            lines.push("  " + (i + 1) + ". " + q.category + ": " + optLabel);
+          });
+          lines.push("");
+
+          window._shareText = lines.join("\n");
+          var nameForSubj = window._investorName
+            ? window._investorName + "'s"
+            : "My";
+          window._emailSubject =
+            nameForSubj +
+            " Investor Profile: " +
+            p.name +
+            " (Score " +
+            totalScore +
+            "/47)";
+        }
+
+        /* ═══════════════════════════════════════════════════
+   PIE
+   ═══════════════════════════════════════════════════ */
+        function drawPie(id, alloc) {
+          var canvas = document.getElementById(id);
+          if (!canvas) return;
+          var dpr = window.devicePixelRatio || 1,
+            size = 180;
+          canvas.width = size * dpr;
+          canvas.height = size * dpr;
+          canvas.style.width = size + "px";
+          canvas.style.height = size + "px";
+          var ctx = canvas.getContext("2d");
+          ctx.scale(dpr, dpr);
+          var cx = size / 2,
+            cy = size / 2,
+            r = size / 2 - 5;
+          var total = alloc.reduce(function (a, b) {
+            return a + b.pct;
+          }, 0);
+          var dur = 900,
+            t0 = performance.now();
+          function ease(t) {
+            return 1 - Math.pow(1 - t, 3);
+          }
+          function frame(now) {
+            var t = Math.min((now - t0) / dur, 1),
+              pp = ease(t);
+            ctx.clearRect(0, 0, size, size);
+            var angle = -Math.PI / 2;
+            alloc.forEach(function (item) {
+              var fs = (item.pct / total) * 2 * Math.PI,
+                s = fs * pp;
+              ctx.beginPath();
+              ctx.moveTo(cx, cy);
+              ctx.arc(cx, cy, r, angle, angle + s);
+              ctx.closePath();
+              ctx.fillStyle = item.color;
+              ctx.fill();
+              ctx.strokeStyle = "#FFFDF7";
+              ctx.lineWidth = 2;
+              ctx.stroke();
+              if (pp > 0.85) {
+                var mid = angle + s / 2,
+                  al = Math.min((pp - 0.85) / 0.15, 1);
+                var lx = cx + r * 0.64 * Math.cos(mid),
+                  ly = cy + r * 0.64 * Math.sin(mid);
+                ctx.globalAlpha = al;
+                ctx.fillStyle = "#fff";
+                ctx.font = "bold 10px Outfit,sans-serif";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText(item.pct + "%", lx, ly);
+                ctx.globalAlpha = 1;
+              }
+              angle += s;
+            });
+            ctx.beginPath();
+            ctx.arc(cx, cy, r * 0.36, 0, 2 * Math.PI);
+            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--card').trim() || '#FFFDF7';
+            ctx.fill();
+            if (pp > 0.9) {
+              var a2 = Math.min((pp - 0.9) / 0.1, 1);
+              ctx.globalAlpha = a2;
+              ctx.fillStyle = "#4A2E0A";
+              ctx.font = "bold 10px Outfit,sans-serif";
+              ctx.textAlign = "center";
+              ctx.textBaseline = "middle";
+              ctx.fillText("Portfolio", cx, cy - 6);
+              ctx.font = "500 9px Outfit,sans-serif";
+              ctx.fillStyle = "#8C7355";
+              ctx.fillText("Mix", cx, cy + 6);
+              ctx.globalAlpha = 1;
+            }
+            if (t < 1) requestAnimationFrame(frame);
+          }
+          requestAnimationFrame(frame);
+        }
+
+        /* ═══════════════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════════════ */
+        document.addEventListener("DOMContentLoaded", function () {
+          buildDots();
+
+          document
+            .getElementById("investorName")
+            .addEventListener("keydown", function (e) {
+              if (e.key === "Enter")
+                document.getElementById("startBtn").click();
+            });
+
+          /* Set today's date display */
+          var today = new Date();
+          var dayNames = [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+          ];
+          var monthNames = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ];
+          var todayStr =
+            dayNames[today.getDay()] +
+            ", " +
+            today.getDate() +
+            " " +
+            monthNames[today.getMonth()] +
+            " " +
+            today.getFullYear();
+          window._todayStr = todayStr;
+          var dispEl = document.getElementById("todayDateDisplay");
+          if (dispEl) dispEl.textContent = "📅 " + todayStr;
+
+          document
+            .getElementById("startBtn")
+            .addEventListener("click", function () {
+              var nameVal = (
+                document.getElementById("investorName").value || ""
+              ).trim();
+              if (!nameVal) {
+                document.getElementById("nameError").style.display = "block";
+                document.getElementById("investorName").focus();
+                return;
+              }
+              document.getElementById("nameError").style.display = "none";
+              window._investorName = nameVal;
+              document.getElementById("sectionIntro").style.display = "none";
+              var sq = document.getElementById("sectionQuiz");
+              sq.style.display = "flex";
+              current = 0;
+              answers = new Array(QUESTIONS.length).fill(null);
+              renderQuestion(current);
+              document.getElementById("sectionQuiz").scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+
+          document
+            .getElementById("backBtn")
+            .addEventListener("click", function () {
+              if (current > 0) {
+                current--;
+                renderQuestion(current);
+                document.getElementById("sectionQuiz").scrollIntoView({ behavior: "smooth", block: "start" });
+              }
+            });
+
+          document
+            .getElementById("resetBtn")
+            .addEventListener("click", function () {
+              answers = new Array(QUESTIONS.length).fill(null);
+              current = 0;
+              document.getElementById("sectionResult").style.display = "none";
+              document.getElementById("sectionQuiz").style.display = "none";
+              document.getElementById("stepInvestorType").style.display = "block";
+              document.getElementById("stepNewKyc").style.display = "none";
+              document.getElementById("stepExisting").style.display = "none";
+              window._investorName = "";
+              document.getElementById("investorName").value = "";
+
+              // ── Reset KYC form fields ──
+              var kycFields = [
+                "kycAadhaarName","kycAadhaarNum","kycDob","kycPob","kycAddress",
+                "kycEmail","kycMobile","kycNomName","kycNomDob","kycNomEmail",
+                "kycNomMobile","kycNomAadhaar","kycNomAddress"
+              ];
+              kycFields.forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) el.value = "";
+              });
+              // ── Reset nominee toggle to checked + show fields ──
+              var nomToggle = document.getElementById("nomineeToggle");
+              var nomFields = document.getElementById("nomineeFields");
+              if (nomToggle) nomToggle.checked = true;
+              if (nomFields) nomFields.style.display = "block";
+
+              // ── Reset cash sliders ──
+              ["cashNeedsNew","cashNeedsExisting"].forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) {
+                  el.value = 0;
+                  el.style.background = "linear-gradient(90deg, var(--gold) 0%, rgba(201,152,42,0.2) 0%)";
+                }
+              });
+              var nd = document.getElementById("cashNeedsNewDisplay");
+              var nl = document.getElementById("cashNeedsNewLabel");
+              var ed = document.getElementById("cashNeedsExistingDisplay");
+              var el2 = document.getElementById("cashNeedsExistingLabel");
+              if (nd) nd.textContent = "₹0";
+              if (nl) nl.textContent = "No foreseeable cash needs";
+              if (ed) ed.textContent = "₹0";
+              if (el2) el2.textContent = "No foreseeable cash needs";
+
+              // ── Reset call time slider ──
+              window._callRangeInited = false;
+              window._callFlexible = false;
+              var flexBox = document.getElementById("callFlexBox");
+              var wrap    = document.getElementById("callRangeWrap");
+              if (flexBox) { flexBox.innerHTML = ""; flexBox.style.background = "transparent"; flexBox.style.borderColor = "rgba(201,152,42,0.5)"; }
+              if (wrap)    { wrap.style.opacity = "1"; wrap.style.pointerEvents = "auto"; }
+              // Reset display labels back to defaults
+              var ftEl = document.getElementById("callTimeFrom");
+              var ttEl = document.getElementById("callTimeTo");
+              var emEl = document.getElementById("callTimeEmoji");
+              var peEl = document.getElementById("callTimePeriod");
+              if (ftEl) ftEl.textContent = "—";
+              if (ttEl) ttEl.textContent = "—";
+              if (emEl) emEl.textContent = "🕐";
+              if (peEl) peEl.textContent = "Not set";
+
+              // ── Hide validation error if visible ──
+              var errEl = document.getElementById("kycError");
+              if (errEl) errEl.style.display = "none";
+
+              // ── Reset share card animation state for next run ──
+              var shareCard = document.getElementById("shareCard");
+              if (shareCard) {
+                shareCard.classList.remove("share-card--animating");
+                shareCard.style.animation = "";
+              }
+
+              var si = document.getElementById("sectionIntro");
+              si.style.display = "flex";
+              si.style.animation = "none";
+              void si.offsetWidth;
+              si.style.animation = "";
+
+              // ── Hide sticky send bar and reset status banner ──
+              if (window.destroyStickyBarObserver) window.destroyStickyBarObserver();
+              var ssb = document.getElementById("stickySendBar");
+              if (ssb) ssb.style.display = "none";
+              // ── Hide banner on retake ──
+              var banner = document.getElementById("statusBanner");
+              if (banner) banner.style.display = "none";
+
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        });
+      })();
+
+      /* ═══════════════════════════════════════════════════
+   INVESTOR TYPE + KYC EMAIL BUILDERS (global for onclick)
+   ═══════════════════════════════════════════════════ */
+      window.setInvestorType = function (type) {
+        document.getElementById("stepInvestorType").style.display = "none";
+        if (type === "new") {
+          document.getElementById("stepNewKyc").style.display = "block";
+          document.getElementById("stepExisting").style.display = "none";
+          if (!window._callRangeInited) {
+            window._callRangeInited = true;
+            window.initCallRange();
+          }
+        } else {
+          document.getElementById("stepNewKyc").style.display = "none";
+          document.getElementById("stepExisting").style.display = "block";
+        }
+      };
+
+      /* ── CALL TIME RANGE SLIDER — custom pointer-event impl ── */
+      (function() {
+        var MIN = 480, MAX = 1200, STEP = 15, MIN_GAP = 30;
+        var state = { from: 600, to: 720 };
+        var dragging = null; // 'from' | 'to' | null
+
+        function snap(val) {
+          return Math.round(val / STEP) * STEP;
+        }
+        function clamp(val, lo, hi) {
+          return Math.max(lo, Math.min(hi, val));
+        }
+        function fmt(m) {
+          var h = Math.floor(m / 60), mn = m % 60;
+          var ap = h >= 12 ? "PM" : "AM";
+          var h12 = h % 12 === 0 ? 12 : h % 12;
+          return h12 + ":" + (mn === 0 ? "00" : mn) + " " + ap;
+        }
+        function pctOf(val) {
+          return ((val - MIN) / (MAX - MIN)) * 100;
+        }
+
+        function render() {
+          var fPct = pctOf(state.from);
+          var tPct = pctOf(state.to);
+
+          document.getElementById("callTimeFrom").textContent = fmt(state.from);
+          document.getElementById("callTimeTo").textContent   = fmt(state.to);
+          document.getElementById("callTrackFill").style.left  = fPct + "%";
+          document.getElementById("callTrackFill").style.right = (100 - tPct) + "%";
+          document.getElementById("callThumbA").style.left = fPct + "%";
+          document.getElementById("callThumbB").style.left = tPct + "%";
+
+          // Noon mark
+          var noonPct = pctOf(720);
+          document.getElementById("callNoonMark").style.left = noonPct + "%";
+
+          // Emoji + label
+          var mid = (state.from + state.to) / 2;
+          var emoji, period;
+          if      (mid < 600)  { emoji = "🌅"; period = "Early Morning"; }
+          else if (mid < 720)  { emoji = "🌤️"; period = "Morning"; }
+          else if (mid < 900)  { emoji = "☀️";  period = "Late Morning"; }
+          else if (mid < 1020) { emoji = "🌞"; period = "Afternoon"; }
+          else if (mid < 1140) { emoji = "🌆"; period = "Evening"; }
+          else                 { emoji = "🌙"; period = "Night"; }
+          document.getElementById("callTimeEmoji").textContent  = emoji;
+          document.getElementById("callTimePeriod").textContent = period;
+        }
+
+        function pxToVal(clientX) {
+          var wrap = document.getElementById("callRangeWrap");
+          var rect = wrap.getBoundingClientRect();
+          var pct  = clamp((clientX - rect.left) / rect.width, 0, 1);
+          return snap(MIN + pct * (MAX - MIN));
+        }
+
+        function onMove(clientX) {
+          if (!dragging) return;
+          var val = pxToVal(clientX);
+          if (dragging === "from") {
+            state.from = clamp(val, MIN, state.to - MIN_GAP);
+          } else {
+            state.to = clamp(val, state.from + MIN_GAP, MAX);
+          }
+          render();
+        }
+
+        function attachThumb(thumbId, which) {
+          var el = document.getElementById(thumbId);
+          if (!el) return;
+          el.addEventListener("pointerdown", function(e) {
+            e.preventDefault();
+            dragging = which;
+            el.setPointerCapture(e.pointerId);
+            el.style.cursor = "grabbing";
+            el.style.transform = "translate(-50%,-50%) scale(1.2)";
+          });
+          el.addEventListener("pointermove", function(e) {
+            if (dragging !== which) return;
+            e.preventDefault();
+            onMove(e.clientX);
+          });
+          el.addEventListener("pointerup", function(e) {
+            dragging = null;
+            el.style.cursor = "grab";
+            el.style.transform = "translate(-50%,-50%) scale(1)";
+          });
+          el.addEventListener("pointercancel", function() {
+            dragging = null;
+            el.style.cursor = "grab";
+            el.style.transform = "translate(-50%,-50%) scale(1)";
+          });
+        }
+
+        window.initCallRange = function() {
+          // Smart default: next clean hour from now, or 10 AM fallback
+          var now = new Date();
+          var nowMins = now.getHours() * 60 + now.getMinutes();
+          var smartFrom = Math.ceil((nowMins + 60) / STEP) * STEP;
+          if (smartFrom < MIN || smartFrom > MAX - MIN_GAP) smartFrom = 600;
+          var smartTo = Math.min(smartFrom + 120, MAX);
+          state.from = smartFrom;
+          state.to   = smartTo;
+
+          attachThumb("callThumbA", "from");
+          attachThumb("callThumbB", "to");
+          render();
+        };
+
+        window.updateCallRange  = function() { render(); };
+
+        window.getCallTimeText = function() {
+          if (window._callFlexible) return "Flexible — any time during business hours";
+          return fmt(state.from) + " – " + fmt(state.to);
+        };
+      })();
+
+      window._callFlexible = false;
+
+      window.toggleCallFlexible = function() {
+        window._callFlexible = !window._callFlexible;
+        var box  = document.getElementById("callFlexBox");
+        var wrap = document.getElementById("callRangeWrap");
+        var fromD = document.getElementById("callTimeFrom");
+        var toD   = document.getElementById("callTimeTo");
+        if (window._callFlexible) {
+          box.innerHTML = '<span style="color:var(--gold);font-size:11px;line-height:1;">✓</span>';
+          box.style.background   = "var(--gold-pale)";
+          box.style.borderColor  = "var(--gold)";
+          wrap.style.opacity     = "0.35";
+          wrap.style.pointerEvents = "none";
+          fromD.textContent = "Flexible";
+          toD.textContent   = "";
+          document.getElementById("callTimeEmoji").textContent  = "🗓️";
+          document.getElementById("callTimePeriod").textContent = "Any time";
+        } else {
+          box.innerHTML = "";
+          box.style.background   = "transparent";
+          box.style.borderColor  = "rgba(201,152,42,0.5)";
+          wrap.style.opacity     = "1";
+          wrap.style.pointerEvents = "auto";
+          window.updateCallRange();
+        }
+      };
+
+      window.updateCashSlider = function (sliderId, displayId, labelId) {
+        var val = parseInt(document.getElementById(sliderId).value);
+        var display = document.getElementById(displayId);
+        var label = document.getElementById(labelId);
+        var slider = document.getElementById(sliderId);
+        var pct = (val / 1500000) * 100;
+        slider.style.background =
+          "linear-gradient(90deg, var(--gold) " +
+          pct +
+          "%, rgba(201,152,42,0.2) " +
+          pct +
+          "%)";
+        if (val === 0) {
+          display.textContent = "₹0";
+          label.textContent = "No foreseeable cash needs";
+        } else if (val >= 1500000) {
+          display.textContent = "₹15L+";
+          label.textContent = "Above ₹15,00,000";
+        } else {
+          var formatted = "₹" + val.toLocaleString("en-IN");
+          display.textContent = formatted;
+          label.textContent = "Approx. " + formatted + " needed";
+        }
+      };
+
+      function buildCombinedEmail() {
+        var v = function (id) {
+          return (document.getElementById(id) || {}).value || "";
+        };
+        var profileText = window._shareText || "";
+
+        var newEl = document.getElementById("cashNeedsNew");
+        var exEl = document.getElementById("cashNeedsExisting");
+        var cashVal = 0;
+        if (
+          newEl &&
+          document.getElementById("stepNewKyc").style.display !== "none"
+        ) {
+          cashVal = parseInt(newEl.value);
+        } else if (
+          exEl &&
+          document.getElementById("stepExisting").style.display !== "none"
+        ) {
+          cashVal = parseInt(exEl.value);
+        }
+        var cashText =
+          cashVal === 0
+            ? "No foreseeable cash needs"
+            : cashVal >= 1500000
+              ? "Above ₹15,00,000"
+              : "Approx. ₹" + cashVal.toLocaleString("en-IN");
+
+        var headerLines = [];
+        var cashLine = [
+          "",
+          "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+          "💵 CASH NEEDS (NEXT 12 MONTHS)",
+          "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+          "Expected Cash Need : " + cashText,
+        ];
+
+        var isNew =
+          document.getElementById("stepNewKyc").style.display !== "none";
+        var kycLines = isNew
+          ? [
+              "",
+              "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+              "✦ KYC & DOCUMENT DETAILS ✦",
+              "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+              "",
+              "── PERSONAL DETAILS ──",
+              "Full Name       : " + v("kycAadhaarName"),
+              "Aadhaar (Last 4): " + v("kycAadhaarNum"),
+              "Date of Birth   : " + (window.fmtDate ? window.fmtDate("kycDob") : ""),
+              "Place of Birth  : " + v("kycPob"),
+              "Address         : " + v("kycAddress"),
+              "",
+              "── CONTACT ──",
+              "Email ID        : " + v("kycEmail"),
+              "Mobile Number   : " + v("kycMobile"),
+              "",
+            ].concat(
+              (document.getElementById("nomineeToggle") || {}).checked
+              ? [
+                  "── NOMINEE ──",
+                  "Full Name       : " + v("kycNomName"),
+                  "Date of Birth   : " + (window.fmtDate ? window.fmtDate("kycNomDob") : ""),
+                  "Email ID        : " + v("kycNomEmail"),
+                  "Mobile Number   : " + v("kycNomMobile"),
+                  "Aadhaar (Last 4): " + v("kycNomAadhaar"),
+                  "Address         : " + v("kycNomAddress"),
+                  "",
+                ]
+              : [
+                  "── NOMINEE ──",
+                  "Nominee: Not adding a nominee at this time.",
+                  "",
+                ]
+            ).concat([
+              "── PAN & BANK DETAILS ──",
+              "To be collected securely on onboarding call.",
+              "Preferred Call Time : " + (window.getCallTimeText ? window.getCallTimeText() : "Not specified"),
+              "",
+              "Thank you!",
+            ])
+          : ["", "Let us get started on my portfolio. Thanks!"];
+        return (
+          headerLines.join("\n") +
+          "\n" +
+          profileText +
+          cashLine.join("\n") +
+          kycLines.join("\n")
+        );
+      }
+
+      window.buildAndOpenGmail = function () {
+        var body = buildCombinedEmail();
+        var subj = window._emailSubject || "My Investor Profile";
+        var url  = "https://mail.google.com/mail/?view=cm&to=rameshvegi94@gmail.com&su=" +
+          encodeURIComponent(subj) + "&body=" + encodeURIComponent(body);
+        var a = document.createElement("a");
+        a.href   = url;
+        a.target = "_blank";
+        a.rel    = "noopener";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast("✓ Opening Gmail in browser…");
+        return false;
+      };
+
+      window.buildAndOpenEmail = function () {
+        var body = buildCombinedEmail();
+        var subj = window._emailSubject || "My Investor Profile";
+        window.location.href =
+          "mailto:rameshvegi94@gmail.com?subject=" +
+          encodeURIComponent(subj) +
+          "&body=" +
+          encodeURIComponent(body);
+        showToast("✓ Opening Gmail app…");
+        return false;
+      };
+
+      function showToast(msg) {
+        var t = document.getElementById("shareToast");
+        if (!t) return;
+        t.textContent = msg;
+        t.classList.add("show");
+        setTimeout(function () {
+          t.classList.remove("show");
+        }, 3000);
+      }
+
+      window.buildAndOpenWa = function () {
+        var body = buildCombinedEmail();
+        var url  = "https://wa.me/918329450580?text=" + encodeURIComponent(body);
+        var a = document.createElement("a");
+        a.href   = url;
+        a.target = "_blank";
+        a.rel    = "noopener";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast("✓ Opening WhatsApp…");
+        return false;
+      };
+
+      window.toggleNomineeFields = function (checkbox) {
+        var fields = document.getElementById("nomineeFields");
+        if (!fields) return;
+        fields.style.display = checkbox.checked ? "block" : "none";
+      };
+
+      window.validateKyc = function () {
+        // Field definitions: id, error element id, custom validator (optional)
+        var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var allFields = [
+          { id: "kycAadhaarName",  errId: "kycAadhaarNameError" },
+          { id: "kycDob",          errId: "kycDobError" },
+          { id: "kycPob",          errId: "kycPobError" },
+          { id: "kycAddress",      errId: "kycAddressError" },
+          { id: "kycEmail",        errId: "kycEmailError",   validate: function(v){ return emailRe.test(v); } },
+          { id: "kycMobile",       errId: "kycMobileError" },
+        ];
+        var nomineeChecked = (document.getElementById("nomineeToggle") || {}).checked;
+        if (nomineeChecked) {
+          allFields = allFields.concat([
+            { id: "kycNomName",    errId: "kycNomNameError" },
+            { id: "kycNomDob",     errId: "kycNomDobError" },
+            { id: "kycNomEmail",   errId: "kycNomEmailError",  validate: function(v){ return emailRe.test(v); } },
+            { id: "kycNomMobile",  errId: "kycNomMobileError" },
+            { id: "kycNomAadhaar", errId: "kycNomAadhaarError" },
+            { id: "kycNomAddress", errId: "kycNomAddressError" },
+          ]);
+        }
+
+        // Helper: mark a field as errored
+        function markError(el, errEl) {
+          el.classList.add("kyc-input--error");
+          void el.offsetWidth; // reflow to restart animation
+          el.classList.add("kyc-input--shake");
+          el.addEventListener("animationend", function() {
+            el.classList.remove("kyc-input--shake");
+          }, { once: true });
+          if (errEl) errEl.style.display = "block";
+          // Auto-clear on correction
+          el.addEventListener("input", function clearErr() {
+            el.classList.remove("kyc-input--error");
+            if (errEl) errEl.style.display = "none";
+            el.removeEventListener("input", clearErr);
+          });
+        }
+
+        // Helper: clear a field's error state
+        function clearError(el, errEl) {
+          if (el) el.classList.remove("kyc-input--error", "kyc-input--shake");
+          if (errEl) errEl.style.display = "none";
+        }
+
+        var firstErrorEl = null;
+        var hasError = false;
+
+        allFields.forEach(function(field) {
+          var el    = document.getElementById(field.id);
+          var errEl = document.getElementById(field.errId);
+          if (!el) return;
+
+          var val   = el.value || "";
+          var empty = !val.trim();
+          var invalid = !empty && field.validate && !field.validate(val);
+
+          clearError(el, errEl);
+
+          if (empty || invalid) {
+            hasError = true;
+            markError(el, errEl);
+            if (!firstErrorEl) firstErrorEl = el;
+          }
+        });
+
+        var banner = document.getElementById("kycError");
+        if (hasError) {
+          if (banner) {
+            banner.textContent = "Please fix the highlighted fields before sending.";
+            banner.style.display = "block";
+          }
+          // Scroll to and focus the first broken field
+          if (firstErrorEl) {
+            firstErrorEl.scrollIntoView({ behavior: "smooth", block: "center" });
+            firstErrorEl.focus();
+          }
+          return false;
+        }
+
+        if (banner) banner.style.display = "none";
+        return true;
+      };
+
+      /* Format type=date value as DD/MM/YYYY for email */
+      window.fmtDate = function (id) {
+        var el = document.getElementById(id);
+        if (!el || !el.value) return "";
+        var parts = el.value.split("-");
+        if (parts.length !== 3) return el.value;
+        return parts[2] + "/" + parts[1] + "/" + parts[0];
+      };
+      /* ── FLOATING ABOUT BUTTON on scroll ── */
+      (function () {
+        var btn    = document.querySelector('.about-link');
+        var header = document.querySelector('header');
+        if (!btn || !header) return;
+        window.addEventListener('scroll', function () {
+          var headerGone = header.getBoundingClientRect().bottom < 0;
+          btn.classList.toggle('about-link--floating', headerGone);
+        }, { passive: true });
+      })();
+
+      /* ── WHY BOX ACCORDION ── */
+      window.toggleWhyBox = function() {
+        var content  = document.getElementById('whyContent');
+        var chevron  = document.getElementById('whyChevron');
+        var trigger  = document.getElementById('whyTrigger');
+        var icon     = document.querySelector('.why-trigger-icon');
+        var isOpen   = content.classList.contains('why-content--open');
+        content.classList.toggle('why-content--open', !isOpen);
+        chevron.classList.toggle('why-chevron--open',  !isOpen);
+        trigger.setAttribute('aria-expanded', String(!isOpen));
+        content.setAttribute('aria-hidden',   String(isOpen));
+        if (icon) icon.textContent = isOpen ? '🤔' : '💡';
+        var label = document.querySelector('.why-trigger-label');
+        if (label) label.textContent = isOpen ? 'Why are you being asked this?' : 'Hide explanation';
+      };
+
+
+
+      /* ═══════════════════════════════════════════════════
+   THEME TOGGLE
+   ═══════════════════════════════════════════════════ */
+      (function () {
+        var btn = document.getElementById("themeToggle");
+        var html = document.documentElement;
+
+        function applyTheme(theme) {
+          html.setAttribute("data-theme", theme);
+          btn.textContent = theme === "dark" ? "☀️" : "🌙";
+          btn.title = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+          try { localStorage.setItem("vr-theme", theme); } catch(e) {}
+        }
+
+        // Restore saved preference, fall back to dark
+        var saved;
+        try { saved = localStorage.getItem("vr-theme"); } catch(e) {}
+        applyTheme(saved === "light" ? "light" : "dark");
+
+        btn.addEventListener("click", function () {
+          applyTheme(html.getAttribute("data-theme") === "dark" ? "light" : "dark");
+        });
+      })();
+    </script>
+    <div class="toast" id="shareToast"></div>
+
+    <!-- STICKY SEND BAR -->
+    <div id="stickySendBar" style="
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 8000;
+      padding: 12px 16px 16px;
+      background: linear-gradient(to top, var(--cream) 70%, transparent);
+    ">
+      <button id="stickyScrollBtn" onclick="scrollToShareCard()" style="
+        width: 100%;
+        max-width: 540px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin: 0 auto;
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        color: #1a1208;
+        font-family: 'Outfit', sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        padding: 14px 24px;
+        border-radius: 40px;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 6px 28px rgba(201,152,42,0.55);
+        letter-spacing: 0.3px;
+        animation: stickySendPulse 2.5s ease-in-out infinite;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      ">
+        <span style="font-size:15px; opacity:0.8;">↓</span>
+        Scroll down to complete
+        <span style="font-size:15px; opacity:0.8;">↓</span>
+      </button>
+    </div>
+
+    <!-- SEND CONFIRMATION MODAL -->
+    <div id="sendConfirmModal" style="
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      background:rgba(0,0,0,0.6);
+      backdrop-filter:blur(4px);
+      -webkit-backdrop-filter:blur(4px);
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    ">
+      <div style="
+        background:var(--card);
+        border:1.5px solid var(--border);
+        border-radius:20px;
+        padding:28px 24px 24px;
+        max-width:360px;
+        width:100%;
+        box-shadow:0 20px 60px rgba(0,0,0,0.5);
+        text-align:center;
+        animation: fadeUp 0.25s ease both;
+      ">
+        <div style="font-size:32px; margin-bottom:12px;" id="sendModalEmoji">💬</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:700; color:var(--dark); margin-bottom:8px;">Did you send it?</div>
+        <div style="font-size:13px; color:var(--muted); font-weight:300; line-height:1.6; margin-bottom:24px;" id="sendModalText">
+          Once you've sent the message on <strong id="sendModalChannel">WhatsApp</strong>, tap below to confirm.
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <button onclick="confirmSent()" style="
+            background:linear-gradient(135deg,var(--gold),var(--gold-light));
+            color:#1a1208;
+            font-family:'Outfit',sans-serif;
+            font-size:14px;
+            font-weight:700;
+            padding:13px 20px;
+            border-radius:40px;
+            border:none;
+            cursor:pointer;
+            letter-spacing:0.3px;
+          ">✓ Yes, I've sent it</button>
+          <button onclick="cancelSent()" style="
+            background:transparent;
+            color:var(--muted);
+            font-family:'Outfit',sans-serif;
+            font-size:13px;
+            font-weight:400;
+            padding:10px 20px;
+            border-radius:40px;
+            border:1.5px solid var(--border);
+            cursor:pointer;
+          ">✗ I didn't send yet</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ── Start share card animation when results are shown, stop on first interaction ──
+      window.startShareCardAnim = function() {
+        var card = document.getElementById('shareCard');
+        if (!card) return;
+        // Re-enable animation (in case of retake)
+        card.classList.add('share-card--animating');
+
+        function stopShareCardAnim() {
+          card.classList.remove('share-card--animating');
+          card.style.animation = 'none';
+          ['click','input','change','touchstart'].forEach(function(evt) {
+            document.removeEventListener(evt, stopShareCardAnim, true);
+          });
+        }
+        ['click','input','change','touchstart'].forEach(function(evt) {
+          document.addEventListener(evt, stopShareCardAnim, true);
+        });
+      };
+
+      // ── SEND CONFIRMATION MODAL ──
+      var _pendingSendBtn = null;
+
+      window.showSendModal = function(btn, channel) {
+        _pendingSendBtn = btn;
+        document.getElementById('sendModalChannel').textContent = channel;
+        var emojiMap = { 'WhatsApp': '💬', 'Gmail (App)': '✉️', 'Gmail (Browser)': '📧' };
+        document.getElementById('sendModalEmoji').textContent = emojiMap[channel] || '📤';
+        var modal = document.getElementById('sendConfirmModal');
+        modal.style.display = 'flex';
+      };
+
+      window.confirmSent = function() {
+        // Close modal
+        document.getElementById('sendConfirmModal').style.display = 'none';
+        // Lock the KYC form so nothing can be edited or re-submitted
+        var kycStep = document.getElementById('stepNewKyc') || document.getElementById('stepExisting');
+        if (kycStep) kycStep.classList.add('kyc-form-locked');
+        // Grey out all send buttons
+        ['share-btn-wa','share-btn-email','share-btn-gmail'].forEach(function(cls) {
+          document.querySelectorAll('.' + cls).forEach(function(btn) {
+            btn.style.opacity = '0.45';
+            btn.style.pointerEvents = 'none';
+            var icon = btn.querySelector('.share-btn-icon');
+            if (icon) icon.textContent = '✓';
+          });
+        });
+        // Show success banner
+        var banner = document.getElementById('statusBanner');
+        if (banner) {
+          banner.style.display = 'block';
+          // Scroll it into view smoothly after a short delay for the animation to kick in
+          setTimeout(function() {
+            banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
+        }
+        // Hide sticky send bar permanently and stop observing
+        if (window.destroyStickyBarObserver) window.destroyStickyBarObserver();
+        var ssb = document.getElementById('stickySendBar');
+        if (ssb) ssb.style.display = 'none';
+        _pendingSendBtn = null;
+      };
+
+      window.cancelSent = function() {
+        document.getElementById('sendConfirmModal').style.display = 'none';
+        _pendingSendBtn = null;
+      };
+
+      window.scrollToShareCard = function() {
+        var card = document.getElementById('shareCard');
+        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+
+      // ── Scroll listener: show sticky bar until share card is 50% into viewport ──
+      (function() {
+        var scrollHandler = null;
+
+        window.initStickyBarObserver = function() {
+          var card = document.getElementById('shareCard');
+          var bar  = document.getElementById('stickySendBar');
+          if (!card || !bar) return;
+
+          // If already confirmed sent, don't show bar
+          var banner = document.getElementById('statusBanner');
+          if (banner && banner.style.display === 'block') return;
+
+          // Remove any previous listener
+          if (scrollHandler) window.removeEventListener('scroll', scrollHandler);
+
+          scrollHandler = function() {
+            var rect = card.getBoundingClientRect();
+            var vh = window.innerHeight;
+            // Hide bar once top of share card is above 50% of viewport
+            var cardVisible = rect.top < vh * 0.5;
+            bar.style.display = cardVisible ? 'none' : 'block';
+          };
+
+          window.addEventListener('scroll', scrollHandler, { passive: true });
+          // Run once immediately to set initial state
+          scrollHandler();
+        };
+
+        window.destroyStickyBarObserver = function() {
+          if (scrollHandler) {
+            window.removeEventListener('scroll', scrollHandler);
+            scrollHandler = null;
+          }
+        };
+      })();
+    </script>
+
+    <style>
+      .fab-whatsapp-mobile {
+        display: none;
+      }
+      @media (max-width: 480px) {
+        .fab-whatsapp-mobile {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          position: fixed;
+          bottom: 1.4rem;
+          right: 1.2rem;
+          z-index: 200;
+          background: #25d366;
+          color: #fff;
+          border: none;
+          text-decoration: none;
+          font-size: 0.88rem;
+          font-weight: 500;
+          letter-spacing: 0.04em;
+          padding: 0.7rem 1.2rem;
+          border-radius: 999px;
+          box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+          transition: opacity 0.2s, transform 0.2s;
+          white-space: nowrap;
+        }
+        .fab-whatsapp-mobile:active {
+          opacity: 0.85;
+          transform: scale(0.97);
+        }
+      }
+    </style>
+
+    <a
+      href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments."
+      class="fab-whatsapp-mobile"
+      target="_blank"
+      rel="noopener"
+      aria-label="Chat on WhatsApp"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#fff">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      </svg>
+    </a>
+
+  </body>
+</html>

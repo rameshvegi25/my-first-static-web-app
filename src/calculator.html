@@ -1,0 +1,3545 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Goal Calculator · Vegi Ramesh · ARN-349739</title>
+    <meta name="description" content="Plan any financial goal with clarity — home, education, retirement, or anything else. Calculate your SIP, lumpsum, or a combination, with inflation-adjusted projections and affordability insights." />
+    <meta name="keywords" content="SIP calculator, goal based investment, lumpsum calculator, mutual fund goal planner, financial goal calculator, inflation adjusted SIP, investment planner India" />
+    <meta name="author" content="Vegi Ramesh" />
+    <meta name="robots" content="index, follow" />
+    <meta name="google-site-verification" content="kZ0XtTXaSK68U4Ga6u6XQICiito_vsGN4Gw432yEPYw" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Goal Calculator · Vegi Ramesh" />
+    <meta property="og:description" content="Plan any financial goal with clarity — calculate your SIP, lumpsum, or both, with inflation-adjusted projections and affordability insights." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Goal Calculator · Vegi Ramesh" />
+    <meta name="twitter:description" content="Plan any financial goal with clarity — calculate your SIP, lumpsum, or both, with inflation-adjusted projections and affordability insights." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+      :root {
+        --bg: #0b0f1a;
+        --surface: #111827;
+        --surface2: #1a2236;
+        --border: rgba(255, 255, 255, 0.07);
+        --accent: #c8a96e;
+        --accent-dim: rgba(200, 169, 110, 0.15);
+        --accent-glow: rgba(200, 169, 110, 0.08);
+        --text: #e8e4dc;
+        --muted: #8a9ab5;
+        --danger: #e05c5c;
+        --safe: #4caf82;
+        --neutral: #6b8cba;
+        --warn: #e0a34a;
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --sans: "DM Sans", sans-serif;
+        --nav-bg: rgba(11, 15, 26, 0.92);
+        --prose-text: #b8bfcc;
+        --footer-disc: #6b7280;
+        --subnav-bg: rgba(17, 24, 39, 0.95);
+      }
+      [data-theme="light"] {
+        --bg: #f7f4ef;
+        --surface: #ffffff;
+        --surface2: #f0ebe0;
+        --border: rgba(0, 0, 0, 0.09);
+        --accent: #a67c32;
+        --accent-dim: rgba(166, 124, 50, 0.12);
+        --accent-glow: rgba(166, 124, 50, 0.06);
+        --text: #1c1a14;
+        --muted: #6b6353;
+        --danger: #c0392b;
+        --safe: #2e7d5e;
+        --neutral: #3d6491;
+        --warn: #b5780a;
+        --nav-bg: rgba(247, 244, 239, 0.94);
+        --prose-text: #4a4535;
+        --footer-disc: #7a7060;
+        --subnav-bg: rgba(240, 235, 224, 0.97);
+      }
+
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html {
+        scroll-behavior: smooth;
+        /* Firefox */
+        scrollbar-width: thin;
+        scrollbar-color: var(--accent) var(--bg);
+      }
+
+      /* ── GOLDEN SCROLLBAR (Chromium / Safari) ── */
+      ::-webkit-scrollbar {
+        width: 7px;
+        height: 7px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--accent);
+        border-radius: 99px;
+        border: 2px solid var(--bg);
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: color-mix(in srgb, var(--accent) 80%, white 20%);
+      }
+      ::-webkit-scrollbar-corner {
+        background: var(--bg);
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--nav-bg);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 0 clamp(1.5rem, 5vw, 4rem);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+      }
+      .nav-brand {
+        font-family: var(--serif);
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--text);
+        letter-spacing: 0.03em;
+        text-decoration: none;
+      }
+      .nav-brand span { color: var(--accent); font-style: italic; }
+      .nav-arn {
+        font-size: 0.72rem;
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .nav-profiling-btn {
+        background: var(--accent);
+        color: var(--bg);
+        border-radius: 6px;
+        padding: 0.35rem 0.9rem;
+        font-size: 0.78rem;
+        font-weight: 500;
+        font-family: var(--sans);
+        text-decoration: none;
+        letter-spacing: 0.04em;
+        transition: opacity 0.2s;
+        white-space: nowrap;
+      }
+      .nav-profiling-btn:hover { opacity: 0.82; }
+      .nav-whatsapp-btn {
+        background: rgba(37, 211, 102, 0.12);
+        color: #25d366;
+        border: 1px solid rgba(37, 211, 102, 0.3);
+        border-radius: 6px;
+        padding: 0.35rem 0.9rem;
+        font-size: 0.78rem;
+        font-weight: 500;
+        font-family: var(--sans);
+        text-decoration: none;
+        letter-spacing: 0.04em;
+        transition: background 0.2s;
+        white-space: nowrap;
+      }
+      .nav-whatsapp-btn:hover { background: rgba(37, 211, 102, 0.2); }
+      @media (max-width: 480px) {
+        .nav-profiling-btn, .nav-whatsapp-btn { display: none; }
+      }
+
+      /* ── THEME TOGGLE ── */
+      .theme-toggle {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        border-radius: 20px;
+        padding: 0.3rem 0.55rem;
+        font-size: 0.78rem;
+        font-family: var(--sans);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: color 0.2s, background 0.2s, opacity 0.15s;
+        white-space: nowrap;
+        opacity: 0;
+      }
+      .theme-toggle.ready { opacity: 1; }
+      .theme-toggle:hover { color: var(--accent); }
+      .theme-toggle .icon-dark { display: inline; }
+      .theme-toggle .icon-light { display: none; }
+      [data-theme="light"] .theme-toggle .icon-dark { display: none; }
+      [data-theme="light"] .theme-toggle .icon-light { display: inline; }
+
+      /* ── HERO ── */
+      .hero {
+        text-align: center;
+        padding: clamp(3.5rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem) clamp(2.5rem, 5vw, 4rem);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(200, 169, 110, 0.07) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      .hero-eyebrow {
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.2rem;
+      }
+      .hero-eyebrow::before, .hero-eyebrow::after { content: " ✦ "; opacity: 0.6; }
+      .hero h1 {
+        font-family: var(--serif);
+        font-size: clamp(2.2rem, 5vw, 3.6rem);
+        font-weight: 600;
+        line-height: 1.15;
+        margin-bottom: 1rem;
+        color: var(--text);
+      }
+      .hero h1 em { color: var(--accent); font-style: italic; }
+      .hero-sub {
+        max-width: 540px;
+        margin: 0 auto;
+        color: var(--muted);
+        font-size: 1rem;
+        font-weight: 300;
+      }
+      /* ── HERO SUBTITLE PHRASE ANIMATION ── */
+      @keyframes hero-phrase-in {
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .hero-sub .phrase {
+        display: inline;
+        opacity: 0;
+        animation: hero-phrase-in 0.55s ease forwards;
+      }
+      .hero-sub .phrase-1 { animation-delay: 0.3s; }
+      .hero-sub .phrase-2 { animation-delay: 0.85s; }
+      .hero-sub .phrase .key { color: var(--accent); font-weight: 400; }
+      .hero-sub .phrase .hero-icon {
+        display: inline-block;
+        font-size: 0.85em;
+        vertical-align: middle;
+        margin-right: 0.1em;
+        opacity: 0.85;
+      }
+
+      /* ── SECTION ── */
+      .section {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 5vw, 2rem);
+      }
+      .section-label {
+        font-size: 0.68rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .section-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+      .section h2 {
+        font-family: var(--serif);
+        font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+        font-weight: 600;
+        line-height: 1.2;
+        margin-bottom: 1.8rem;
+      }
+      .section h2 em { color: var(--accent); font-style: italic; }
+
+      /* ── CALCULATOR CARD ── */
+      .calc-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+        margin-bottom: 1.5rem;
+      }
+      .calc-card-title {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 1.6rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .calc-card-title-icon {
+        width: 30px;
+        height: 30px;
+        background: var(--accent-dim);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+        flex-shrink: 0;
+      }
+
+      /* ── FORM GRID ── */
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem 2rem;
+      }
+      @media (max-width: 600px) {
+        .form-grid { grid-template-columns: 1fr; }
+      }
+      .form-field { display: flex; flex-direction: column; gap: 0.45rem; }
+      .form-field.full-width { grid-column: 1 / -1; }
+      .field-label {
+        font-size: 0.74rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      /* ── INFO TOOLTIP ── */
+      .field-hint {
+        font-size: 0.78rem;
+        color: var(--muted);
+        font-weight: 300;
+        margin: 0.2rem 0 0.6rem;
+        line-height: 1.5;
+      }
+      .tip-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 0.62rem;
+        font-style: normal;
+        font-weight: 600;
+        cursor: pointer;
+        vertical-align: middle;
+        margin-left: 0.3rem;
+        flex-shrink: 0;
+        transition: background 0.15s, color 0.15s, border-color 0.15s;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      .tip-icon:hover,
+      .tip-icon.tip-open {
+        background: var(--accent-dim);
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      #tipPopover {
+        position: fixed;
+        z-index: 9999;
+        max-width: min(280px, calc(100vw - 24px));
+        background: var(--surface);
+        border: 1px solid rgba(200,169,110,0.35);
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        font-size: 0.8rem;
+        font-family: var(--sans);
+        font-weight: 300;
+        line-height: 1.6;
+        color: var(--prose-text);
+        box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+        pointer-events: none;
+        opacity: 0;
+        transform: translateY(4px);
+        transition: opacity 0.15s, transform 0.15s;
+      }
+      #tipPopover.tip-visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      #tipPopover::before {
+        content: "";
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: var(--surface);
+        border: 1px solid rgba(200,169,110,0.35);
+        transform: rotate(45deg);
+      }
+      #tipPopover.arrow-top::before {
+        top: -5px;
+        border-bottom: none;
+        border-right: none;
+      }
+      #tipPopover.arrow-bottom::before {
+        bottom: -5px;
+        border-top: none;
+        border-left: none;
+      }
+
+      /* Text inputs */
+      .text-input {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.65rem 0.9rem;
+        font-size: 0.95rem;
+        font-family: var(--sans);
+        color: var(--text);
+        width: 100%;
+        transition: border-color 0.2s;
+        outline: none;
+      }
+      .text-input:focus { border-color: var(--accent); }
+      .text-input.field-error { border-color: var(--danger) !important; box-shadow: 0 0 0 3px rgba(224,92,92,0.15); }
+      .field-error-msg {
+        font-size: 0.72rem;
+        color: var(--danger);
+        margin-top: 0.25rem;
+        display: none;
+      }
+      .field-error-msg.show { display: block; }
+      .text-input::placeholder { color: var(--muted); opacity: 0.6; }
+      .input-prefix-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .input-prefix {
+        position: absolute;
+        left: 0.9rem;
+        color: var(--accent);
+        font-weight: 500;
+        font-size: 0.95rem;
+        pointer-events: none;
+      }
+      .input-prefix-wrap .text-input { padding-left: 1.9rem; }
+
+      /* Sliders */
+      .slider-wrap { display: flex; flex-direction: column; gap: 0.5rem; }
+      .slider-row {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        flex: 1;
+        height: 4px;
+        border-radius: 2px;
+        background: var(--border);
+        outline: none;
+        cursor: pointer;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--accent);
+        border: 2px solid var(--bg);
+        box-shadow: 0 0 0 1px var(--accent);
+        cursor: pointer;
+        transition: transform 0.15s;
+      }
+      input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+      input[type="range"]::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--accent);
+        border: 2px solid var(--bg);
+        cursor: pointer;
+      }
+      .slider-value-input {
+        min-width: 52px;
+        width: 58px;
+        text-align: center;
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: var(--accent);
+        font-family: var(--sans);
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 0.15rem 0.4rem;
+        outline: none;
+        cursor: text;
+        transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+        -moz-appearance: textfield;
+      }
+      .slider-value-input::-webkit-outer-spin-button,
+      .slider-value-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+      .slider-value-input:hover {
+        border-color: var(--accent);
+      }
+      .slider-value-input:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(200,169,110,0.18);
+        background: var(--surface);
+      }
+      .slider-limits {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.68rem;
+        color: var(--muted);
+        opacity: 0.7;
+      }
+      .return-zone-label {
+        font-size: 0.67rem;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        font-weight: 500;
+        text-align: right;
+        margin-top: 0.1rem;
+        transition: color 0.35s ease;
+        opacity: 0.85;
+      }
+
+      /* ── INFLATION BREAKDOWN ACCORDION ── */
+      .inflation-accordion {
+        border: 1px solid rgba(200,169,110,0.2);
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--surface);
+        margin-bottom: 1.5rem;
+        display: none;
+      }
+      .inflation-accordion.visible { display: block; }
+      .inflation-trigger {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.2rem 1.6rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: var(--sans);
+        font-size: 0.88rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: var(--accent);
+        text-align: left;
+        gap: 1rem;
+        transition: background 0.15s;
+      }
+      .inflation-trigger:hover { background: var(--accent-glow); }
+      .inflation-chevron {
+        font-size: 1rem;
+        color: var(--accent);
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+      }
+      .inflation-trigger[aria-expanded="true"] .inflation-chevron {
+        transform: rotate(180deg);
+      }
+      .inflation-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
+      .inflation-body.open { max-height: 600px; }
+      .inflation-content {
+        padding: 1.2rem 1.6rem 1.6rem;
+        border-top: 1px solid rgba(200,169,110,0.12);
+      }
+      @media (max-width: 480px) {
+        .inflation-content { padding: 1rem 1.1rem 1.3rem; }
+        .inflation-trigger { padding: 1rem 1.1rem; }
+      }
+      .inflation-bar-wrap {
+        margin: 0.6rem 0 1.2rem;
+      }
+      .inflation-bar {
+        height: 10px;
+        border-radius: 5px;
+        overflow: hidden;
+        display: flex;
+        margin-bottom: 0.85rem;
+      }
+      .inflation-bar-segment {
+        transition: width 0.6s ease;
+        height: 100%;
+      }
+      .inflation-bar-segment.yours   { background: var(--neutral); }
+      .inflation-bar-segment.infl    { background: #c8734a; }
+      .inflation-bar-segment.real    { background: var(--safe); }
+      .inflation-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.2rem;
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+      @media (max-width: 600px) {
+        .inflation-legend { gap: 0.45rem 1rem; font-size: 0.74rem; }
+      }
+      .inflation-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .inflation-legend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 3px;
+        flex-shrink: 0;
+      }
+      .inflation-legend-dot.yours { background: var(--neutral); }
+      .inflation-legend-dot.infl  { background: #c8734a; }
+      .inflation-legend-dot.real  { background: var(--safe); }
+      .inflation-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: visible;
+        margin-top: 1.2rem;
+      }
+      @media (max-width: 600px) {
+        .inflation-stats {
+          grid-template-columns: 1fr;
+          overflow: hidden;
+          border-radius: 10px;
+        }
+      }
+      .inflation-stat {
+        background: var(--surface);
+        padding: 1rem 1.1rem;
+        min-width: 0;
+      }
+      .inflation-stat-label {
+        font-size: 0.67rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.35rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .inflation-stat-value {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        font-weight: 600;
+        line-height: 1.1;
+        word-break: break-word;
+      }
+      .inflation-stat-value.yours { color: var(--neutral); }
+      .inflation-stat-value.infl  { color: #c8734a; }
+      .inflation-stat-value.real  { color: var(--safe); }
+      .inflation-stat-sub {
+        font-size: 0.72rem;
+        color: var(--muted);
+        margin-top: 0.2rem;
+        font-weight: 300;
+      }
+      .inflation-note {
+        font-size: 0.8rem;
+        color: var(--muted);
+        font-weight: 300;
+        line-height: 1.6;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border);
+      }
+
+      /* ── INFLATION ACCORDION PULSE ── */
+      @keyframes accordion-pulse {
+        0%   { box-shadow: 0 0 0 0 rgba(200, 169, 110, 0.35); }
+        60%  { box-shadow: 0 0 0 6px rgba(200, 169, 110, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(200, 169, 110, 0); }
+      }
+      .inflation-accordion.pulse-once {
+        animation: accordion-pulse 0.8s ease 5;
+      }
+
+      /* ── DANGER TINT (return > 22%) ── */
+      #mainCalcCard {
+        transition: border-color 0.5s ease, box-shadow 0.5s ease, background 0.5s ease;
+      }
+      #mainCalcCard.danger-zone {
+        border-color: rgba(192, 52, 40, 0.6);
+        background: linear-gradient(
+          135deg,
+          rgba(192, 52, 40, 0.045) 0%,
+          rgba(192, 52, 40, 0.03) 100%
+        );
+        box-shadow:
+          0 0 0 1px rgba(192, 52, 40, 0.25),
+          0 4px 32px rgba(192, 52, 40, 0.12);
+      }
+
+      /* ── EXTREME ZONE (return > 24.5%) ── */
+      #mainCalcCard.extreme-zone {
+        border-color: rgba(192, 52, 40, 0.85);
+        background: linear-gradient(
+          135deg,
+          rgba(192, 52, 40, 0.08) 0%,
+          rgba(192, 52, 40, 0.05) 100%
+        );
+        box-shadow:
+          0 0 0 2px rgba(192, 52, 40, 0.45),
+          0 4px 40px rgba(192, 52, 40, 0.22);
+      }
+
+      /* ── SHAKE ANIMATION ── */
+      @keyframes danger-shake {
+        0%, 100% { transform: translateX(0); }
+        15%       { transform: translateX(-6px); }
+        30%       { transform: translateX(6px); }
+        45%       { transform: translateX(-5px); }
+        60%       { transform: translateX(5px); }
+        75%       { transform: translateX(-3px); }
+        90%       { transform: translateX(3px); }
+      }
+      #mainCalcCard.danger-shake {
+        animation: danger-shake 0.5s ease;
+      }
+
+      /* ── RESULTS CARD ── */
+      .results-card {
+        background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+        border: 1px solid rgba(200, 169, 110, 0.2);
+        border-radius: 16px;
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+        margin-bottom: 1.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .results-card::before {
+        content: "✦";
+        position: absolute;
+        right: 1.8rem;
+        top: 1rem;
+        font-size: 5rem;
+        color: var(--accent);
+        opacity: 0.05;
+        line-height: 1;
+        pointer-events: none;
+      }
+      .results-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        margin-top: 1.4rem;
+      }
+      @media (max-width: 500px) {
+        .results-grid { grid-template-columns: 1fr; }
+      }
+      .result-cell {
+        background: var(--surface);
+        padding: 1.3rem 1.4rem;
+        transition: background 0.2s;
+      }
+      .result-cell:hover { background: var(--surface2); }
+      .result-cell.primary {
+        background: var(--accent-dim);
+        border-bottom: 2px solid var(--accent);
+        position: relative;
+      }
+      .result-cell.primary:hover { background: rgba(200,169,110,0.22); }
+      .result-cell.primary .result-label { color: var(--accent); opacity: 0.85; }
+      .result-cell.primary .result-value { font-size: clamp(1.7rem, 4vw, 2.3rem); }
+      .result-label {
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.4rem;
+      }
+      .result-value {
+        font-family: var(--serif);
+        font-size: clamp(1.4rem, 3vw, 1.9rem);
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.1;
+      }
+      .result-value.accent   { color: var(--accent); }
+      .result-value.safe     { color: var(--safe); }
+      .result-value.neutral  { color: var(--neutral); }
+      .result-sub {
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-top: 0.25rem;
+        font-weight: 300;
+      }
+      .result-sub.split {
+        margin-top: 0.35rem;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .result-sub.split .split-yours {
+        color: var(--neutral);
+        font-weight: 400;
+      }
+      .result-sub.split .split-returns {
+        color: var(--safe);
+        font-weight: 400;
+      }
+      .delay-delta {
+        color: var(--danger);
+        font-weight: 500;
+        font-size: 0.82rem;
+      }
+
+      /* ── CHART CARD ── */
+      .chart-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+        margin-bottom: 1.5rem;
+      }
+      .chart-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-bottom: 1.4rem;
+      }
+      .chart-title {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .chart-legend {
+        display: flex;
+        gap: 1.2rem;
+        flex-wrap: wrap;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.75rem;
+        color: var(--muted);
+        font-weight: 400;
+      }
+      .legend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+      .chart-wrap { position: relative; height: 300px; }
+
+      /* ── SHARE CARD ── */
+      .share-card {
+        background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+        border: 1px solid rgba(200, 169, 110, 0.25);
+        border-radius: 16px;
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+        margin-bottom: 1.5rem;
+      }
+      .share-heading {
+        font-family: var(--serif);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.4rem;
+      }
+      .share-sub {
+        font-size: 0.88rem;
+        color: var(--muted);
+        font-weight: 300;
+        margin-bottom: 1.4rem;
+        line-height: 1.5;
+      }
+      .share-btns {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+      }
+      .share-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.72rem 1.4rem;
+        border-radius: 8px;
+        font-size: 0.88rem;
+        font-family: var(--sans);
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+        letter-spacing: 0.03em;
+        transition: opacity 0.2s, transform 0.15s;
+        text-decoration: none;
+      }
+      .share-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+      .share-btn:active { transform: scale(0.97); }
+      .share-btn-wa {
+        background: #25d366;
+        color: #fff;
+      }
+      .share-btn-gmail {
+        background: var(--surface2);
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+      .share-btn-email {
+        background: var(--surface2);
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+      @media (max-width: 480px) {
+        .share-btn-gmail-desktop { display: none !important; }
+      }
+      @media (min-width: 481px) {
+        .share-btn-gmail-mobile { display: none !important; }
+      }
+
+      /* ── TOAST ── */
+      .toast {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: var(--surface);
+        border: 1px solid rgba(200, 169, 110, 0.3);
+        color: var(--text);
+        border-radius: 8px;
+        padding: 0.65rem 1.3rem;
+        font-size: 0.88rem;
+        font-family: var(--sans);
+        z-index: 999;
+        opacity: 0;
+        transition: opacity 0.25s, transform 0.25s;
+        pointer-events: none;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+      .toast-undo {
+        color: var(--accent);
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+        background: none;
+        font-family: var(--sans);
+        font-size: 0.88rem;
+        padding: 0;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+      .toast-undo:hover { opacity: 0.8; }
+
+      /* ── MODE TOGGLE ── */
+      .mode-toggle-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.8rem;
+      }
+      .mode-toggle {
+        display: flex;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 4px;
+        gap: 4px;
+        position: relative;
+      }
+      .mode-btn {
+        position: relative;
+        z-index: 1;
+        padding: 0.5rem 1.6rem;
+        border-radius: 7px;
+        font-size: 0.88rem;
+        font-weight: 500;
+        font-family: var(--sans);
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+        transition: color 0.22s;
+        white-space: nowrap;
+      }
+      .mode-btn.active {
+        background: var(--accent);
+        color: var(--bg);
+        box-shadow: 0 2px 10px rgba(200,169,110,0.3);
+      }
+      .mode-btn:not(.active):hover { color: var(--text); }
+
+      /* ── SEND RESULTS LINK ── */
+      .send-results-link {
+        display: none;
+        text-align: center;
+        margin-top: 0.75rem;
+        margin-bottom: 0.5rem;
+      }
+      .send-results-link a {
+        font-size: 0.82rem;
+        color: var(--accent);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        cursor: pointer;
+        font-family: var(--sans);
+        font-weight: 400;
+        opacity: 0.85;
+        transition: opacity 0.2s;
+      }
+      .send-results-link a:hover { opacity: 1; }
+
+      /* ── SEPARATOR ── */
+      hr.section-sep {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 0;
+      }
+
+      .delay-callout {
+        margin-top: 1.2rem;
+        padding: 0.9rem 1.1rem;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+      .delay-title {
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.5rem;
+      }
+      .delay-line {
+        font-size: 0.88rem;
+        font-weight: 300;
+        color: var(--prose-text);
+        line-height: 1.7;
+      }
+      .delay-line strong {
+        font-weight: 500;
+        color: var(--text);
+      }
+
+      /* ── PHILOSOPHY ACCORDION ── */
+      .philosophy-accordion {
+        border: 1px solid rgba(200,169,110,0.2);
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--surface);
+      }
+      .philosophy-trigger {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.2rem 1.6rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: var(--sans);
+        font-size: 0.88rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: var(--accent);
+        text-align: left;
+        gap: 1rem;
+        transition: background 0.15s;
+      }
+      .philosophy-trigger:hover { background: var(--accent-glow); }
+      .philosophy-chevron {
+        font-size: 1rem;
+        color: var(--accent);
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+      }
+      .philosophy-trigger[aria-expanded="true"] .philosophy-chevron {
+        transform: rotate(180deg);
+      }
+      .philosophy-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
+      .philosophy-body.open {
+        max-height: 2000px;
+      }
+      .philosophy-content {
+        padding: 1.2rem 1.6rem 1.6rem;
+        border-top: 1px solid rgba(200,169,110,0.12);
+      }
+      @media (max-width: 480px) {
+        .philosophy-content {
+          padding: 1rem 1.1rem 1.3rem;
+        }
+        .philosophy-trigger {
+          padding: 1rem 1.1rem;
+        }
+      }
+      .philosophy-content p {
+        font-size: 0.92rem;
+        font-weight: 300;
+        line-height: 1.75;
+        color: var(--prose-text);
+        margin: 0 0 1rem;
+        overflow-wrap: break-word;
+        word-break: break-word;
+      }
+      .philosophy-content p:last-child { margin-bottom: 0; }
+      .philosophy-closing {
+        font-size: 0.95rem !important;
+        font-weight: 500 !important;
+        color: var(--accent) !important;
+        font-style: italic;
+        margin-top: 1.4rem !important;
+      }
+      .philosophy-caution {
+        font-size: 0.95rem !important;
+        font-weight: 500 !important;
+        color: #c8734a !important;
+        font-style: italic;
+      }
+      .philosophy-header {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        margin-bottom: 1.1rem;
+        color: var(--accent);
+        font-size: 0.68rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        opacity: 0.65;
+      }
+      .philosophy-header::before,
+      .philosophy-header::after {
+        content: "✦";
+        font-size: 0.58rem;
+      }
+      .philosophy-pull {
+        border-left: 2px solid var(--accent);
+        margin: 1.3rem 0;
+        padding: 0.4rem 0 0.4rem 1.1rem;
+      }
+      .philosophy-pull p {
+        font-family: var(--serif) !important;
+        font-size: 1.05rem !important;
+        font-weight: 400 !important;
+        font-style: italic;
+        color: var(--text) !important;
+        line-height: 1.55 !important;
+        margin: 0 !important;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+        text-align: center;
+      }
+      .footer-brand {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        color: var(--text);
+        margin-bottom: 0.5rem;
+      }
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+      .footer-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.82rem;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover { color: var(--accent); }
+      .footer-disc {
+        font-size: 0.82rem;
+        color: var(--footer-disc);
+        max-width: 700px;
+        margin: 1rem auto 0;
+        line-height: 1.6;
+      }
+
+
+
+      /* ── GOAL PRESETS ── */
+      .presets-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.6rem;
+      }
+      .preset-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.38rem 0.85rem;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: var(--surface2);
+        color: var(--muted);
+        font-size: 0.8rem;
+        font-family: var(--sans);
+        font-weight: 400;
+        cursor: pointer;
+        transition: background 0.18s, border-color 0.18s, color 0.18s;
+        white-space: nowrap;
+      }
+      .preset-chip:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: var(--accent-dim);
+      }
+      .preset-chip.selected {
+        background: var(--accent-dim);
+        border-color: var(--accent);
+        color: var(--accent);
+        font-weight: 500;
+      }
+
+      /* ── AFFORDABILITY CARD ── */
+      .afford-card {
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: var(--surface2);
+        padding: 1.2rem 1.4rem;
+        margin-top: 1.4rem;
+        transition: border-color 0.3s, background 0.3s;
+      }
+      .afford-card.hidden { display: none; }
+      .afford-income-row {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+      }
+      .afford-income-row + .afford-income-row {
+        margin-top: 0.9rem;
+      }
+      .afford-income-label {
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .afford-income-input-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex: 1;
+        min-width: 160px;
+      }
+      .afford-income-prefix {
+        position: absolute;
+        left: 0.9rem;
+        color: var(--accent);
+        font-weight: 500;
+        font-size: 0.95rem;
+        pointer-events: none;
+      }
+      .afford-income-input {
+        background: var(--surface);
+        border: 1.5px solid var(--accent);
+        border-radius: 8px;
+        padding: 0.6rem 0.9rem 0.6rem 1.9rem;
+        font-size: 0.95rem;
+        font-family: var(--sans);
+        color: var(--text);
+        width: 100%;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .afford-income-input:focus {
+        box-shadow: 0 0 0 3px rgba(200,169,110,0.18);
+      }
+      .afford-income-input::placeholder { color: var(--muted); opacity: 0.6; }
+      .afford-income-input.field-error {
+        border-color: var(--danger) !important;
+        box-shadow: 0 0 0 3px rgba(224,92,92,0.15);
+      }
+      .afford-expenses-error {
+        font-size: 0.72rem;
+        color: var(--danger);
+        margin-top: 0.3rem;
+        display: none;
+        font-style: normal;
+      }
+      .afford-expenses-error.show { display: block; }
+      .afford-surplus-row {
+        display: none;
+        align-items: center;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        margin-top: 0.9rem;
+      }
+      .afford-surplus-row.show { display: flex; }
+      .afford-surplus-input {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.6rem 0.9rem 0.6rem 1.9rem;
+        font-size: 0.95rem;
+        font-family: var(--sans);
+        color: var(--safe);
+        font-weight: 500;
+        width: 100%;
+        outline: none;
+        cursor: default;
+        pointer-events: none;
+      }
+      .afford-nudge {
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-top: 0.5rem;
+        font-weight: 300;
+        font-style: italic;
+        animation: pulseNudge 2s ease-in-out infinite;
+      }
+      @keyframes pulseNudge {
+        0%, 100% { opacity: 0.7; }
+        50% { opacity: 1; }
+      }
+      .afford-verdict {
+        margin-top: 1rem;
+        border-radius: 10px;
+        padding: 1rem 1.2rem;
+        display: none;
+        gap: 0.8rem;
+        align-items: flex-start;
+      }
+      .afford-verdict.show { display: flex; }
+      .afford-verdict-icon {
+        font-size: 1.3rem;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+      }
+      .afford-verdict-body {}
+      .afford-verdict-title {
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        margin-bottom: 0.3rem;
+      }
+      .afford-verdict-msg {
+        font-size: 0.84rem;
+        font-weight: 300;
+        line-height: 1.6;
+        color: var(--prose-text);
+      }
+      .afford-verdict-msg strong { font-weight: 500; }
+      .afford-skills-nudge {
+        margin-top: 0.8rem;
+        padding-top: 0.8rem;
+        border-top: 1px solid rgba(255,255,255,0.07);
+        font-size: 0.82rem;
+        font-weight: 300;
+        line-height: 1.65;
+        color: var(--prose-text);
+        font-style: italic;
+      }
+      [data-theme="light"] .afford-skills-nudge { border-top-color: rgba(0,0,0,0.08); }
+      .afford-skills-nudge strong { font-style: normal; font-weight: 500; color: var(--text); }
+      /* colour variants */
+      .afford-verdict.green  { background: rgba(76,175,130,0.1);  border: 1px solid rgba(76,175,130,0.3); }
+      .afford-verdict.amber  { background: rgba(224,163,74,0.1);  border: 1px solid rgba(224,163,74,0.3); }
+      .afford-verdict.orange { background: rgba(224,120,50,0.1);  border: 1px solid rgba(224,120,50,0.3); }
+      .afford-verdict.red    { background: rgba(224,92,92,0.1);   border: 1px solid rgba(224,92,92,0.3); }
+      .afford-verdict.green  .afford-verdict-title { color: var(--safe); }
+      .afford-verdict.amber  .afford-verdict-title { color: var(--warn); }
+      .afford-verdict.orange .afford-verdict-title { color: #e07832; }
+      .afford-verdict.red    .afford-verdict-title { color: var(--danger); }
+      .scroll-up-link {
+        display: inline-block;
+        margin-top: 0.4rem;
+        font-size: 0.78rem;
+        color: var(--accent);
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        font-style: normal;
+        font-weight: 500;
+        padding: 0.2rem 0; /* easier tap target */
+      }
+      @media (max-width: 480px) {
+        .scroll-up-link {
+          display: block;
+          padding: 0.4rem 0;
+          font-size: 0.82rem;
+        }
+      }
+
+      /* ── MOBILE: new elements ── */
+      @media (max-width: 480px) {
+        /* Mode toggle — full width on small screens */
+        .mode-toggle-wrap { margin-bottom: 1.4rem; }
+        .mode-btn { padding: 0.55rem 1.1rem; font-size: 0.85rem; }
+
+        /* Preset chips — slightly larger tap targets */
+        .preset-chip {
+          padding: 0.45rem 0.9rem;
+          font-size: 0.82rem;
+        }
+        .presets-wrap { gap: 0.45rem; }
+
+        /* Affordability income row — stack vertically */
+        .afford-income-row {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0.5rem;
+        }
+        .afford-income-row + .afford-income-row {
+          margin-top: 1.2rem;
+        }
+        .afford-surplus-row {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0.5rem;
+        }
+        .afford-income-input-wrap { min-width: unset; width: 100%; }
+        .afford-income-label { font-size: 0.75rem; }
+
+        /* Verdict card padding tighten */
+        .afford-card { padding: 1rem; }
+        .afford-verdict { padding: 0.85rem 1rem; gap: 0.6rem; }
+        .afford-verdict-icon { font-size: 1.1rem; }
+        .afford-verdict-title { font-size: 0.8rem; }
+        .afford-verdict-msg { font-size: 0.82rem; }
+        .afford-skills-nudge { font-size: 0.8rem; }
+
+
+      }
+
+      @media (max-width: 360px) {
+        .mode-btn { padding: 0.5rem 0.8rem; font-size: 0.8rem; }
+        .preset-chip { padding: 0.4rem 0.7rem; font-size: 0.78rem; }
+      }
+
+      /* ── EMPTY STATE ── */
+      .results-placeholder {
+        text-align: center;
+        padding: 2.5rem 1rem;
+        color: var(--muted);
+        font-size: 0.92rem;
+        font-weight: 300;
+      }
+      .results-placeholder .placeholder-icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.8rem;
+        opacity: 0.4;
+      }
+
+      /* ── EMBED MODE (hide chrome when loaded inside iframe) ── */
+      body.embedded nav,
+      body.embedded header.hero,
+      body.embedded footer {
+        display: none !important;
+      }
+      body.embedded {
+        background: transparent;
+      }
+    </style>
+  </head>
+  <body>
+
+    <script>
+      // Apply .embedded instantly to avoid flash of nav/footer
+      if (new URLSearchParams(window.location.search).get('embed') === 'true') {
+        document.body.classList.add('embedded');
+      }
+    </script>
+
+    <!-- ── NAV ── -->
+    <nav>
+      <a href="index.html" class="nav-brand">Vegi <span>Ramesh</span></a>
+      <div class="nav-actions">
+        <div class="nav-arn">✦ ARN-349739</div>
+        <a
+          href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments."
+          class="nav-whatsapp-btn"
+          target="_blank"
+          rel="noopener"
+        ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="currentColor" style="vertical-align:middle;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+        <a href="./RiskProfiler.html" class="nav-profiling-btn">Begin Profiling ✦</a>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <span class="icon-dark">☀️</span>
+          <span class="icon-light">🌙</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <header class="hero">
+      <div class="hero-eyebrow">Goal Planning Calculator</div>
+      <h1>Plan today.<br /><em>Buy it when ready.</em></h1>
+      <p class="hero-sub">
+        <span class="phrase phrase-1">Enter your goal and expected costs —</span>
+        <span class="phrase phrase-2"> then find out <span class="key">how much to invest</span> monthly via <span class="key"><span class="hero-icon">📅</span> SIP</span>, as a one-time <span class="key"><span class="hero-icon">💰</span> lumpsum</span>, or a <span class="key"><span class="hero-icon">💰+📅</span> combination of both</span>.</span>
+      </p>
+    </header>
+
+    <hr class="section-sep" />
+
+    <!-- ── CALCULATOR SECTION ── -->
+    <section class="section">
+
+      <!-- Inputs Card -->
+      <div class="calc-card" id="mainCalcCard">
+        <div class="calc-card-title">
+          <div class="calc-card-title-icon">🎯</div>
+          <span id="goalCardTitle">Your Goal Details &mdash; <span id="goalCardMode" style="color:var(--accent);font-style:italic;">Monthly SIP</span></span>
+          <button onclick="resetForm()" style="margin-left:auto;background:none;border:none;color:var(--muted);font-size:0.75rem;font-family:var(--sans);cursor:pointer;padding:0.2rem 0.5rem;border-radius:4px;letter-spacing:0.04em;transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">↺ Reset</button>
+        </div>
+
+        <!-- Mode Toggle -->
+        <div class="mode-toggle-wrap" style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.4rem;">
+          <div class="mode-toggle">
+            <button class="mode-btn active" id="btnSIP" onclick="setMode('sip')">📅</button>
+            <button class="mode-btn" id="btnLumpsum" onclick="setMode('lumpsum')">💰</button>
+            <button class="mode-btn" id="btnBoth" onclick="setMode('both')">💰+📅</button>
+          </div>
+        </div>
+
+
+        <!-- Goal Presets -->
+        <div style="margin-bottom:0.4rem;">
+          <div class="field-label" style="margin-bottom:0.6rem;">Not sure where to start? Pick a goal below and adjust from there.</div>
+          <div class="presets-wrap" id="presetsWrap">
+            <button class="preset-chip" onclick="applyPreset(this,'🚗 Car','8,00,000',8,5)">🚗 Car</button>
+            <button class="preset-chip" onclick="applyPreset(this,'🏠 Down Payment','15,00,000',10,7)">🏠 Down Payment</button>
+            <button class="preset-chip" onclick="applyPreset(this,'✈️ Vacation','2,00,000',6,2)">✈️ Vacation</button>
+            <button class="preset-chip" onclick="applyPreset(this,'🎓 Education','10,00,000',10,10)">🎓 Education</button>
+            <button class="preset-chip" onclick="applyPreset(this,'💍 Wedding','12,00,000',8,3)">💍 Wedding</button>
+            <button class="preset-chip" onclick="applyPreset(this,'🏦 Emergency Fund','3,00,000',5,1)">🏦 Emergency Fund</button>
+            <button class="preset-chip" onclick="applyCustomPreset(this)">✏️ Other</button>
+          </div>
+        </div>
+
+        <div class="form-grid">
+
+          <!-- Goal Name -->
+          <div class="form-field full-width">
+            <label class="field-label" for="goalName">Goal Name</label>
+            <input
+              class="text-input"
+              id="goalName"
+              type="text"
+              placeholder="e.g. Child's Education, Own a House"
+              autocomplete="off"
+              oninput="onAnyInput(); clearFieldError('goalName')"
+            />
+            <div class="field-error-msg" id="goalNameErr">Please name your goal to continue.</div>
+          </div>
+          <div class="form-field full-width">
+            <label class="field-label" for="currentCost">Current Cost of Goal (in Rupees) <span class="tip-icon" data-tip="How much would this cost if you had to pay for it today? E.g. if you want a car that costs ₹8 lakh right now, enter 8,00,000.">ℹ</span></label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">₹</span>
+              <input
+                class="text-input"
+                id="currentCost"
+                type="text"
+                placeholder="e.g. 8,50,000"
+                autocomplete="off"
+                inputmode="numeric"
+                oninput="formatCostInput(this); onAnyInput();"
+              />
+            </div>
+          </div>
+
+          <!-- Lumpsum Amount (Both mode only) -->
+          <div class="form-field full-width" id="lumpsumAmountField" style="display:none;">
+            <label class="field-label" for="lumpsumAmount">Lumpsum I Can Invest Today <span class="tip-icon" data-tip="A one-time amount you can put in right now. This money starts growing immediately, and your monthly SIP fills the rest of the gap.">ℹ</span></label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">₹</span>
+              <input
+                class="text-input"
+                id="lumpsumAmount"
+                type="text"
+                placeholder="e.g. 50,000"
+                autocomplete="off"
+                inputmode="numeric"
+                oninput="formatCostInput(this); onAnyInput();"
+              />
+            </div>
+          </div>
+
+          <!-- Years to Goal -->
+          <div class="form-field full-width">
+            <label class="field-label" for="yearsToGoal">Years to Goal <span class="tip-icon" data-tip="How many years from now do you want to reach this goal? The more time you give yourself, the smaller your monthly investment needs to be.">ℹ</span></label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="yearsToGoal" min="1" max="35" value="7" oninput="syncSlider('yearsToGoal','yearsVal'); onAnyInput();" />
+                <input class="slider-value-input" id="yearsVal" type="number" min="1" max="35" step="1" value="7" oninput="syncValInput('yearsToGoal','yearsVal'); onAnyInput();" onblur="clampValInput('yearsToGoal','yearsVal'); onAnyInput();" />
+              </div>
+              <div class="slider-limits"><span>1 yr</span><span>35 yrs</span></div>
+            </div>
+          </div>
+
+          <!-- Price Inflation Rate -->
+          <div class="form-field full-width">
+            <label class="field-label" for="priceInflation">Expected Annual Inflation <span class="tip-icon" data-tip="Prices rise every year. This is how much more expensive your goal will get annually. E.g. a ₹8L car today costs ₹14L in 7 years at 8% inflation. For most goals, 6–8% is a safe estimate.">ℹ</span></label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="priceInflation" min="2" max="12" value="8" step="0.5" oninput="syncSlider('priceInflation','inflationVal'); onAnyInput();" />
+                <input class="slider-value-input" id="inflationVal" type="number" min="2" max="12" step="0.5" value="8" oninput="syncValInput('priceInflation','inflationVal'); onAnyInput();" onblur="clampValInput('priceInflation','inflationVal'); onAnyInput();" />
+              </div>
+              <div class="slider-limits"><span>2% p.a.</span><span>12% p.a.</span></div>
+            </div>
+          </div>
+
+          <!-- Expected Annual Return -->
+          <div class="form-field full-width">
+            <label class="field-label" for="investmentReturn">Expected Annual Return <span class="tip-icon" data-tip="How much do you expect your investments to grow each year? Equity mutual fund returns have varied significantly over time. Past performance is not a reliable guide to future returns — use a number you're comfortable with, and consult me if unsure.">ℹ</span></label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="investmentReturn" min="3" max="25" value="12" step="0.1" oninput="syncSlider('investmentReturn','returnVal'); onAnyInput();" />
+                <input class="slider-value-input" id="returnVal" type="number" min="3" max="25" step="0.1" value="12" oninput="syncValInput('investmentReturn','returnVal'); onAnyInput();" onblur="clampValInput('investmentReturn','returnVal'); onAnyInput();" />
+              </div>
+              <div class="slider-limits"><span>3% p.a.</span><span>25% p.a.</span></div>
+              <div class="return-zone-label" id="returnZoneLabel"></div>
+            </div>
+          </div>
+
+          <!-- Step-Up (SIP only) -->
+          <div class="form-field full-width" id="stepUpField">
+            <label class="field-label" for="stepUp">Approx. Annual Increase in SIP <span class="tip-icon" data-tip="As your salary grows, you can increase your SIP a little each year. This lets you start with a smaller amount today. E.g. start at ₹5,000, increase by 10% → pay ₹5,500 next year, ₹6,050 the year after.">ℹ</span></label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="stepUp" min="0" max="20" value="10" step="1" oninput="syncSlider('stepUp','stepUpVal'); onAnyInput();" />
+                <input class="slider-value-input" id="stepUpVal" type="number" min="0" max="20" step="1" value="10" oninput="syncValInput('stepUp','stepUpVal'); onAnyInput();" onblur="clampValInput('stepUp','stepUpVal'); onAnyInput();" />
+              </div>
+              <div class="slider-limits"><span>0% (flat SIP)</span><span>20% p.a.</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Card -->
+      <div class="results-card" id="resultsCard">
+        <div class="section-label">Results</div>
+        <div class="section h2" style="padding:0;margin:0;">
+          <h2 id="resultsHeading" style="font-family:var(--serif);font-size:clamp(1.4rem,3vw,2rem);margin-bottom:0;">
+            <em>Enter your details above</em>
+          </h2>
+        </div>
+
+        <div id="resultsBody">
+          <div class="results-placeholder">
+            <div class="placeholder-icon">📊</div>
+            <div>Fill in your goal details to see<br/>your personalised investment plan.</div>
+          </div>
+        </div>
+
+        <!-- Affordability Check -->
+        <div class="afford-card hidden" id="affordCard">
+          <div class="afford-income-row">
+            <div class="afford-income-label">Your Monthly Income <span class="tip-icon" data-tip="Enter your take-home salary after all deductions — tax, PF, and any other amounts deducted at source. Use the amount that actually reaches your bank account.">i</span></div>
+            <div class="afford-income-input-wrap">
+              <span class="afford-income-prefix">₹</span>
+              <input
+                class="afford-income-input"
+                id="monthlyIncome"
+                type="text"
+                placeholder="e.g. 60,000"
+                autocomplete="off"
+                inputmode="numeric"
+                oninput="formatIncomeInput(this); onIncomeInput();"
+              />
+            </div>
+          </div>
+          <div class="afford-income-row" id="expensesRow">
+            <div class="afford-income-label">Monthly Commitments <span class="tip-icon" data-tip="Everything that goes out monthly — rent, EMIs, groceries, utilities, subscriptions, existing SIPs, and anything else you spend regularly.">i</span></div>
+            <div class="afford-income-input-wrap">
+              <span class="afford-income-prefix">₹</span>
+              <input
+                class="afford-income-input"
+                id="monthlyExpenses"
+                type="text"
+                placeholder="e.g. 30,000"
+                autocomplete="off"
+                inputmode="numeric"
+                oninput="formatIncomeInput(this); clearExpensesError(); onIncomeInput();"
+              />
+            </div>
+          </div>
+          <div class="afford-expenses-error" id="expensesError">Please enter your monthly commitments to calculate your surplus.</div>
+          <div class="afford-surplus-row" id="surplusRow">
+            <div class="afford-income-label">Monthly Surplus <span class="tip-icon" data-tip="Your surplus is what's left after all monthly commitments — this is the pool your SIP comes from. A healthy goal uses 50% or less of this amount.">ℹ</span></div>
+            <div class="afford-income-input-wrap">
+              <span class="afford-income-prefix">₹</span>
+              <input class="afford-surplus-input" id="surplusDisplay" type="text" readonly tabindex="-1" value="" />
+            </div>
+          </div>
+          <div class="afford-nudge" id="affordNudge">↑ Enter your income (and expenses) to see if this plan is within your means</div>
+          <div class="afford-verdict" id="affordVerdict">
+            <div class="afford-verdict-icon" id="affordIcon"></div>
+            <div class="afford-verdict-body">
+              <div class="afford-verdict-title" id="affordTitle"></div>
+              <div class="afford-verdict-msg" id="affordMsg"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Send Results Link -->
+      <div class="send-results-link" id="sendResultsLink">
+        <a onclick="scrollToShare()">↓ Send results to me</a>
+      </div>
+
+      <!-- Chart Card -->
+      <div class="chart-card" id="chartCard" style="display:none;">
+        <div class="chart-header">
+          <div class="chart-title" style="font-family:var(--serif);">Corpus Growth Over Time</div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#6b8cba;"></div>
+              <span id="legendInvested">Amount Invested</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#c8a96e;"></div>
+              Corpus Value
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#e05c5c; opacity:0.7;"></div>
+              <span id="legendTarget">Target Cost</span>
+            </div>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="growthChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Inflation Breakdown Accordion -->
+      <div class="inflation-accordion" id="inflationAccordion">
+        <button class="inflation-trigger" onclick="toggleInflation()" aria-expanded="false">
+          <span>🔍 Curious what inflation does to your plan?</span>
+          <span class="inflation-chevron">▾</span>
+        </button>
+        <div class="inflation-body" id="inflationBody">
+          <div class="inflation-content">
+            <div class="inflation-bar-wrap">
+              <div class="inflation-bar" id="inflationBar">
+                <div class="inflation-bar-segment yours" id="inflBarYours" style="width:0%"></div>
+                <div class="inflation-bar-segment infl"  id="inflBarInfl"  style="width:0%"></div>
+                <div class="inflation-bar-segment real"  id="inflBarReal"  style="width:0%"></div>
+              </div>
+              <div class="inflation-legend">
+                <div class="inflation-legend-item">
+                  <div class="inflation-legend-dot yours"></div>
+                  <span>You put in</span>
+                </div>
+                <div class="inflation-legend-item">
+                  <div class="inflation-legend-dot infl"></div>
+                  <span>Growth eaten by inflation</span>
+                </div>
+                <div class="inflation-legend-item">
+                  <div class="inflation-legend-dot real"></div>
+                  <span>Projected real gains</span>
+                </div>
+              </div>
+            </div>
+            <div class="inflation-stats">
+              <div class="inflation-stat">
+                <div class="inflation-stat-label">You Put In <i class="tip-icon" data-tip="Every rupee you contributed through your SIP — your discipline, month after month.">i</i></div>
+                <div class="inflation-stat-value yours" id="inflStatYours">—</div>
+                <div class="inflation-stat-sub" id="inflStatYoursPct">—</div>
+              </div>
+              <div class="inflation-stat">
+                <div class="inflation-stat-label">Inflation Adjustment <i class="tip-icon" data-tip="Inflation silently reduces what your money can buy over time. This is how much of your corpus simply keeps pace with rising prices — not real growth.">i</i></div>
+                <div class="inflation-stat-value infl" id="inflStatInfl">—</div>
+                <div class="inflation-stat-sub" id="inflStatInflPct">—</div>
+              </div>
+              <div class="inflation-stat">
+                <div class="inflation-stat-label">Real Gains <i class="tip-icon" data-tip="Genuine wealth created above and beyond inflation. The market did this work for you, compounding at a rate higher than inflation.">i</i></div>
+                <div class="inflation-stat-value real" id="inflStatReal">—</div>
+                <div class="inflation-stat-sub" id="inflStatRealPct">—</div>
+              </div>
+            </div>
+            <div class="inflation-note" id="inflationNote"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Share Card -->
+      <div class="share-card" id="shareCard" style="display:none;">
+        <div class="share-heading">Share Your Results</div>
+        <div class="share-sub">
+          Share your results with me and we can discuss suitable options to help you work towards your goal.
+        </div>
+        <div style="margin-bottom:1.2rem;">
+          <label class="field-label" for="userName" style="margin-bottom:0.45rem;display:flex;">Your Name</label>
+          <input
+            class="text-input"
+            id="userName"
+            type="text"
+            placeholder="What should I call you?"
+            autocomplete="off"
+            oninput="clearFieldError('userName')"
+          />
+          <div class="field-error-msg" id="userNameErr">Please enter your name so I know who sent this.</div>
+        </div>
+        <div class="share-btns">
+          <button class="share-btn share-btn-wa" onclick="buildAndOpenWa()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Send via WhatsApp
+          </button>
+          <button class="share-btn share-btn-email share-btn-gmail-mobile" onclick="buildAndOpenEmail()">
+            ✉️ Send via Gmail
+          </button>
+          <button class="share-btn share-btn-gmail share-btn-gmail-desktop" onclick="buildAndOpenGmail()">
+            ✉️ Send via Gmail
+          </button>
+        </div>
+      </div>
+
+      <!-- Disclaimer -->
+      <div id="noteCard" style="
+        display: none;
+        border-left: 3px solid var(--accent);
+        background: var(--accent-glow);
+        border-radius: 0 10px 10px 0;
+        padding: 1.1rem 1.4rem;
+        margin-bottom: 1.2rem;
+      ">
+        <div style="
+          font-size: 0.7rem;
+          font-weight: 500;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--accent);
+          margin-bottom: 0.45rem;
+        ">✦ A Note on These Numbers</div>
+        <p style="font-size:0.88rem; color:var(--prose-text); font-weight:300; line-height:1.65; margin-bottom:0.6rem;">
+          These figures are <strong style="color:var(--text); font-weight:500;">approximate estimates</strong> based on the assumptions you've entered. Real-world inflation and investment returns will vary year to year — this calculator gives you a direction, not a guarantee.
+        </p>
+        <p style="font-size:0.88rem; color:var(--prose-text); font-weight:300; line-height:1.65; margin-bottom:0;">
+          That said — <strong style="color:var(--text); font-weight:500;">an imperfect plan started today beats a perfect plan that never begins.</strong> Even a rough monthly SIP gets your money working. You can always refine the amount as you go.
+        </p>
+      </div>
+
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- PHILOSOPHY ACCORDION -->
+    <section class="section" style="padding-top:1rem;">
+      <div class="philosophy-accordion" id="philosophyAccordion">
+        <button class="philosophy-trigger" onclick="togglePhilosophy()" aria-expanded="false">
+          <span>The thinking behind this</span>
+          <span class="philosophy-chevron">▾</span>
+        </button>
+        <div class="philosophy-body" id="philosophyBody">
+          <div class="philosophy-content">
+            <div class="philosophy-header">A note on the thinking behind this</div>
+            <p>Most calculators start by asking how much you can invest. I never understood why.</p>
+            <p>Nobody lies awake thinking about SIPs. They think about the house they want to come home to, the college they want their child to walk into, the day they can finally stop worrying about money. The goal comes first. The money is just how you get there.</p>
+            <p>So I built this the other way around.</p>
+            <p>Tell me what you want. When you need it. I'll work out what it might cost by then — and what you need to start doing today. Not someday, not when you're ready, but today.</p>
+            <p>The step-up option is there for the same reason. You don't need to be a big investor today. You just need to start. Your income will grow, your SIP will grow with it, and your goal will be waiting right where you left it.</p>
+            <p>One number deserves more of your attention than the rest. <span class="philosophy-closing" style="margin-top:0!important;">The years.</span></p>
+            <p>Move it by two. Watch what happens.</p>
+            <p>The return percentage? You can adjust it — but understand what it means. <span class="philosophy-caution">Every extra percent of return comes with extra uncertainty.</span> What looks better on the calculator may rarely happen in real life. A realistic return will keep you invested. An inflated one may leave you unprepared when reality hits.</p>
+            <div class="philosophy-pull">
+              <p>A year of delay will cost you more than chasing an extra percent will ever give back.</p>
+            </div>
+            <p>Here's something most calculators don't tell you. Not all of that corpus is really yours. Some of it just covers the rising cost of things over the years — that's inflation quietly eating into your money. <a id="inflationPhilosophyLink" href="#inflationAccordion" onclick="var b=document.getElementById('inflationBody');if(!b.classList.contains('open'))toggleInflation();setTimeout(function(){document.getElementById('inflationAccordion').scrollIntoView({behavior:'smooth',block:'center'});},50);return false;" style="color:var(--muted);text-decoration:none;cursor:default;pointer-events:none;">The inflation breakdown</a> shows you exactly how much is inflation's share, and how much is wealth you actually built. The final number looks very different once you know that.</p>
+            <p class="philosophy-closing">The goal was always yours. Now the plan is too.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-sep" />
+    <footer>
+      <div class="footer-brand">Mutual Fund and NPS distribution services by Vegi Ramesh</div>
+      <div class="footer-links">
+        <a href="./RiskProfiler.html">Investor Profiling</a>
+        <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments." target="_blank" rel="noopener">WhatsApp</a>
+        <a href="tel:8329450580">Call Us</a>
+        <a href="mailto:rameshvegi94@gmail.com">Email Us</a>
+      </div>
+      <div class="footer-disc">
+        Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Past performance is not indicative of future results. This material is for informational purposes only and does not constitute financial advice. Vegi Ramesh is registered with AMFI as a Mutual Fund Distributor – ARN-349739.
+      </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="shareToast"></div>
+
+    <!-- Tooltip Popover -->
+    <div id="tipPopover"></div>
+
+    <script>
+      // ── CURRENT MODE ──
+      var _mode = "sip"; // "sip" | "lumpsum" | "both"
+      var _undoSnapshot = null;
+      var _undoTimer = null;
+
+      function captureSnapshot() {
+        return {
+          mode:      _mode,
+          goalName:  document.getElementById("goalName").value,
+          cost:      document.getElementById("currentCost").value,
+          income:    document.getElementById("monthlyIncome").value,
+          expenses:  document.getElementById("monthlyExpenses").value,
+          lumpsum:   document.getElementById("lumpsumAmount").value,
+          years:     document.getElementById("yearsToGoal").value,
+          inflation: document.getElementById("priceInflation").value,
+          ret:       document.getElementById("investmentReturn").value,
+          stepUp:    document.getElementById("stepUp").value
+        };
+      }
+
+      function restoreSnapshot(snap) {
+        applyMode(snap.mode);
+        document.getElementById("goalName").value      = snap.goalName;
+        document.getElementById("currentCost").value   = snap.cost;
+        document.getElementById("monthlyIncome").value = snap.income;
+        if (snap.expenses) { document.getElementById("monthlyExpenses").value = snap.expenses; }
+        document.getElementById("lumpsumAmount").value = snap.lumpsum;
+        document.getElementById("yearsToGoal").value   = snap.years;    syncSlider("yearsToGoal","yearsVal");
+        document.getElementById("priceInflation").value= snap.inflation; syncSlider("priceInflation","inflationVal");
+        document.getElementById("investmentReturn").value = snap.ret;    syncSlider("investmentReturn","returnVal");
+        document.getElementById("stepUp").value        = snap.stepUp;   syncSlider("stepUp","stepUpVal");
+        onAnyInput();
+      }
+
+      function setMode(mode) {
+        if (_mode === mode) return;
+        var snap = captureSnapshot();
+        applyMode(mode);
+        var modeNames = { sip: "Monthly SIP", lumpsum: "One-Time Lumpsum", both: "Lumpsum + SIP" };
+        showUndoToast("Switched to " + modeNames[mode] + ".", snap);
+      }
+
+      var _modeTitles = { sip: "Monthly SIP", lumpsum: "One-Time Lumpsum", both: "Lumpsum + SIP" };
+
+      function updateGoalCardTitle(mode) {
+        var el = document.getElementById("goalCardMode");
+        if (el) el.textContent = _modeTitles[mode] || "";
+      }
+
+      function applyMode(mode) {
+        _mode = mode;
+        document.getElementById("btnSIP").classList.toggle("active", mode === "sip");
+        document.getElementById("btnLumpsum").classList.toggle("active", mode === "lumpsum");
+        document.getElementById("btnBoth").classList.toggle("active", mode === "both");
+        document.getElementById("stepUpField").style.display = (mode === "lumpsum") ? "none" : "";
+        document.getElementById("lumpsumAmountField").style.display = (mode === "both") ? "" : "none";
+        updateGoalCardTitle(mode);
+        clearAll();
+      }
+
+      function showUndoToast(msg, snap) {
+        if (_undoTimer) clearTimeout(_undoTimer);
+        var t = document.getElementById("shareToast");
+        if (!t) return;
+        t.innerHTML = '<span>' + msg + '</span><button class="toast-undo" onclick="undoModeSwitch()">Undo</button>';
+        _undoSnapshot = snap;
+        t.classList.add("show");
+        _undoTimer = setTimeout(function() {
+          t.classList.remove("show");
+          _undoSnapshot = null;
+        }, 5000);
+      }
+
+      function undoModeSwitch() {
+        if (!_undoSnapshot) return;
+        if (_undoTimer) clearTimeout(_undoTimer);
+        var snap = _undoSnapshot;
+        _undoSnapshot = null;
+        var t = document.getElementById("shareToast");
+        if (t) t.classList.remove("show");
+        restoreSnapshot(snap);
+      }
+
+      function clearAll() {
+        document.getElementById("goalName").value = "";
+        document.getElementById("currentCost").value = "";
+        document.getElementById("monthlyIncome").value = "";
+        document.getElementById("monthlyExpenses").value = "";
+        document.getElementById("lumpsumAmount").value = "";
+        // Reset sliders
+        document.getElementById("yearsToGoal").value = 7;    syncSlider("yearsToGoal","yearsVal");
+        document.getElementById("priceInflation").value = 8; syncSlider("priceInflation","inflationVal");
+        document.getElementById("investmentReturn").value = 12; syncSlider("investmentReturn","returnVal");
+        document.getElementById("stepUp").value = 10;        syncSlider("stepUp","stepUpVal");
+        // Reset results
+        document.getElementById("resultsHeading").innerHTML = "<em>Enter your details above</em>";
+        document.getElementById("resultsBody").innerHTML = '<div class="results-placeholder"><div class="placeholder-icon">📊</div><div>Fill in your goal details to see<br/>your personalised investment plan.</div></div>';
+        document.getElementById("shareCard").style.display = "none";
+        document.getElementById("noteCard").style.display = "none";
+        document.getElementById("affordCard").classList.add("hidden");
+        document.getElementById("affordVerdict").className = "afford-verdict";
+        document.getElementById("affordNudge").style.display = "";
+        document.getElementById("chartCard").style.display = "none";
+        if (_chartInstance) { _chartInstance.destroy(); _chartInstance = null; window._chartInstance = null; }
+        if (typeof _activePreset !== "undefined" && _activePreset) { _activePreset.classList.remove("selected"); _activePreset = null; }
+        hideScrollHint();
+      }
+
+      // ── THEME TOGGLE ──
+      function toggleTheme() {
+        var html = document.documentElement;
+        var isDark = html.getAttribute("data-theme") !== "light";
+        html.setAttribute("data-theme", isDark ? "light" : "dark");
+        try { localStorage.setItem("theme", isDark ? "light" : "dark"); } catch(e){}
+        if (window._chartInstance) updateChartColors();
+      }
+      (function() {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t) document.documentElement.setAttribute("data-theme", t);
+        } catch(e){}
+        var btn = document.querySelector(".theme-toggle");
+        if (btn) btn.classList.add("ready");
+      })();
+
+      // ── RETURN SLIDER COLOUR LOGIC ──
+      function lerpColor(c1, c2, t) {
+        t = Math.max(0, Math.min(1, t));
+        return [
+          Math.round(c1[0] + (c2[0] - c1[0]) * t),
+          Math.round(c1[1] + (c2[1] - c1[1]) * t),
+          Math.round(c1[2] + (c2[2] - c1[2]) * t)
+        ];
+      }
+
+      function getReturnColor(val) {
+        // Anchors: tarnished → gold → orangish-gold → golden-red
+        var muted  = [105, 90, 58];   // tarnished gold  (0–9%)
+        var gold   = [200, 169, 110]; // accent gold      (9–14%)
+        var orange = [212, 120, 45];  // orangish gold    (14–20%)
+        var red    = [192, 52, 40];   // golden red       (20%+)
+        var rgb;
+        if (val <= 8)       rgb = lerpColor(muted, gold, (val - 3) / 5);
+        else if (val <= 14) rgb = gold;
+        else if (val <= 19) rgb = lerpColor(gold, orange, (val - 14) / 5);
+        else                rgb = lerpColor(orange, red, Math.min(1, (val - 19) / 5));
+        return "rgb(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ")";
+      }
+
+      function getReturnZoneLabel(val) {
+        if (val <= 8)  return "Returns are modest — but relatively stable and predictable";
+        if (val <= 14) return "Historically, this is where most investors have landed";
+        if (val <= 19) return "Only a few funds have done this, for a few years";
+        return "⚠ Extremely rare — risky to plan around";
+      }
+
+      function applyReturnColor(val) {
+        var color = getReturnColor(val);
+        var returnValEl = document.getElementById("returnVal");
+        if (returnValEl) returnValEl.style.color = color;
+        var label = document.getElementById("returnZoneLabel");
+        if (label) { label.textContent = getReturnZoneLabel(val); label.style.color = color; }
+        // Danger tint on calculator card above 22%
+        var card = document.getElementById("mainCalcCard");
+        if (card) {
+          card.classList.toggle("danger-zone", val > 22);
+          // Extreme zone: intensified red above 24.5%
+          var wasExtreme = card.classList.contains("extreme-zone");
+          var isExtreme  = val > 24.5;
+          card.classList.toggle("extreme-zone", isExtreme);
+          // One-shot shake when crossing INTO extreme zone
+          if (isExtreme && !wasExtreme) {
+            card.classList.remove("danger-shake");
+            void card.offsetWidth; // force reflow to restart animation
+            card.classList.add("danger-shake");
+            card.addEventListener("animationend", function() {
+              card.classList.remove("danger-shake");
+            }, { once: true });
+          }
+        }
+      }
+
+      // ── SLIDER SYNC ──
+      function syncSlider(sliderId, valId) {
+        var slider = document.getElementById(sliderId);
+        var val = parseFloat(slider.value);
+        var valInput = document.getElementById(valId);
+        if (valInput) valInput.value = val;
+        var min = parseFloat(slider.min), max = parseFloat(slider.max);
+        var pct = ((val - min) / (max - min)) * 100;
+        var fillColor = (sliderId === "investmentReturn") ? getReturnColor(val) : "var(--accent)";
+        slider.style.background = "linear-gradient(to right, " + fillColor + " " + pct + "%, var(--border) " + pct + "%)";
+        if (sliderId === "investmentReturn") applyReturnColor(val);
+      }
+
+      function clampValInput(sliderId, valId) {
+        var slider = document.getElementById(sliderId);
+        var valInput = document.getElementById(valId);
+        var min = parseFloat(slider.min), max = parseFloat(slider.max);
+        var step = parseFloat(slider.step) || 1;
+        var num = parseFloat(valInput.value);
+        if (isNaN(num)) num = parseFloat(slider.value);
+        num = Math.round(num / step) * step;
+        num = Math.min(max, Math.max(min, num));
+        num = parseFloat(num.toFixed(10));
+        slider.value = num;
+        valInput.value = num;
+        var pct = ((num - min) / (max - min)) * 100;
+        var fillColor = (sliderId === "investmentReturn") ? getReturnColor(num) : "var(--accent)";
+        slider.style.background = "linear-gradient(to right, " + fillColor + " " + pct + "%, var(--border) " + pct + "%)";
+        if (sliderId === "investmentReturn") applyReturnColor(num);
+      }
+
+      function syncValInput(sliderId, valId) {
+        var slider = document.getElementById(sliderId);
+        var valInput = document.getElementById(valId);
+        var raw = valInput.value.trim();
+        // Don't process empty or incomplete input — let user finish typing
+        if (raw === "" || raw === "-") return;
+        var num = parseFloat(raw);
+        if (isNaN(num)) return;
+        var min = parseFloat(slider.min), max = parseFloat(slider.max);
+        var step = parseFloat(slider.step) || 1;
+        // Round to nearest step
+        num = Math.round(num / step) * step;
+        // Clamp to range
+        num = Math.min(max, Math.max(min, num));
+        num = parseFloat(num.toFixed(10));
+        slider.value = num;
+        var pct = ((num - min) / (max - min)) * 100;
+        var fillColor = (sliderId === "investmentReturn") ? getReturnColor(num) : "var(--accent)";
+        slider.style.background = "linear-gradient(to right, " + fillColor + " " + pct + "%, var(--border) " + pct + "%)";
+        if (sliderId === "investmentReturn") applyReturnColor(num);
+      }
+      ["yearsToGoal","priceInflation","investmentReturn","stepUp"].forEach(function(id) {
+        var valIds = { yearsToGoal:"yearsVal", priceInflation:"inflationVal", investmentReturn:"returnVal", stepUp:"stepUpVal" };
+        syncSlider(id, valIds[id]);
+      });
+
+      // ── COST INPUT FORMATTER ──
+      function formatCostInput(el) {
+        var raw = el.value.replace(/[^0-9]/g, "");
+        if (!raw) { el.value = ""; return; }
+        el.value = formatIndian(parseInt(raw, 10));
+      }
+
+      function formatIndian(n) {
+        if (isNaN(n)) return "";
+        var s = n.toString();
+        if (s.length <= 3) return s;
+        var last3 = s.slice(-3);
+        var rest = s.slice(0, -3);
+        rest = rest.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+        return rest + "," + last3;
+      }
+
+      function parseCost(val) {
+        return parseInt(val.replace(/[^0-9]/g, ""), 10) || 0;
+      }
+
+      // ── STEP-UP SIP: solve starting SIP using binary search ──
+      // Given annual step-up rate s, find P0 such that
+      // sum over 12*n months of growing SIP compounded = futureCost
+      function calcStepUpSIP(futureCost, years, monthlyRate, annualStepUp) {
+        var s = annualStepUp / 100;
+        if (s === 0) {
+          // flat SIP formula
+          if (monthlyRate === 0) return futureCost / (years * 12);
+          return futureCost * monthlyRate / (Math.pow(1 + monthlyRate, years * 12) - 1);
+        }
+        // FV of step-up SIP with P0 starting, s annual step-up, r monthly rate, n years:
+        // FV = P0 * sum_{y=0}^{n-1} (1+s)^y * sum_{m=1}^{12} (1+r)^(remaining months)
+        // remaining months from month m of year y to end = (n-y)*12 - m + 1... simplified:
+        // FV(P0=1) calculated iteratively
+        function fvPerUnit(r, s, n) {
+          var fv = 0;
+          for (var y = 0; y < n; y++) {
+            var monthlyAmount = Math.pow(1 + s, y); // P0=1
+            for (var m = 1; m <= 12; m++) {
+              var monthsLeft = (n - y) * 12 - (m - 1);
+              fv += monthlyAmount * Math.pow(1 + r, monthsLeft);
+            }
+          }
+          return fv;
+        }
+        var fv1 = fvPerUnit(monthlyRate, s, years);
+        return futureCost / fv1;
+      }
+
+      // total invested with step-up
+      function calcStepUpTotalInvested(startingSIP, years, annualStepUp) {
+        var s = annualStepUp / 100;
+        var total = 0;
+        for (var y = 0; y < years; y++) {
+          total += startingSIP * Math.pow(1 + s, y) * 12;
+        }
+        return total;
+      }
+
+      // ── CALCULATION CORE ──
+      function calculate() {
+        var currentCost    = parseCost(document.getElementById("currentCost").value);
+        var yearsToGoal    = parseFloat(document.getElementById("yearsToGoal").value);
+        var priceInflation = parseFloat(document.getElementById("priceInflation").value);
+        var investReturn   = parseFloat(document.getElementById("investmentReturn").value);
+        var stepUp         = parseFloat(document.getElementById("stepUp").value) || 0;
+
+        if (!currentCost || currentCost <= 0) return null;
+
+        var futureCost = currentCost * Math.pow(1 + priceInflation / 100, yearsToGoal);
+        var monthlyRate = investReturn / 1200;
+
+        if (_mode === "lumpsum") {
+          // Lumpsum needed today: PV = FV / (1+r_annual)^n
+          var annualRate = investReturn / 100;
+          var lumpsum = futureCost / Math.pow(1 + annualRate, yearsToGoal);
+          var totalGain = futureCost - lumpsum;
+          return {
+            mode: "lumpsum",
+            currentCost: currentCost,
+            futureCost: futureCost,
+            lumpsum: lumpsum,
+            totalGain: totalGain,
+            yearsToGoal: yearsToGoal,
+            monthlyRate: monthlyRate,
+            annualRate: annualRate,
+            investReturn: investReturn,
+            priceInflation: priceInflation
+          };
+        } else if (_mode === "both") {
+          var annualRate2 = investReturn / 100;
+          var lumpsumRaw = parseCost(document.getElementById("lumpsumAmount").value);
+          if (!lumpsumRaw || lumpsumRaw <= 0) return null;
+          var lumpsumFV = lumpsumRaw * Math.pow(1 + annualRate2, yearsToGoal);
+          var remaining = futureCost - lumpsumFV;
+          var monthlySIP2 = 0, totalSIPPaid = 0, lumpsumCoversGoal = false;
+          if (remaining <= 0) {
+            lumpsumCoversGoal = true;
+            remaining = 0;
+          } else {
+            monthlySIP2 = calcStepUpSIP(remaining, yearsToGoal, monthlyRate, stepUp);
+            totalSIPPaid = stepUp > 0
+              ? calcStepUpTotalInvested(monthlySIP2, yearsToGoal, stepUp)
+              : monthlySIP2 * yearsToGoal * 12;
+          }
+          var totalInvested2 = lumpsumRaw + totalSIPPaid;
+          var totalGain2 = futureCost - totalInvested2;
+          return {
+            mode: "both",
+            currentCost: currentCost,
+            futureCost: futureCost,
+            lumpsumAmount: lumpsumRaw,
+            lumpsumFV: lumpsumFV,
+            lumpsumCoversGoal: lumpsumCoversGoal,
+            monthlySIP: monthlySIP2,
+            totalSIPPaid: totalSIPPaid,
+            totalInvested: totalInvested2,
+            totalGain: totalGain2 > 0 ? totalGain2 : 0,
+            yearsToGoal: yearsToGoal,
+            monthlyRate: monthlyRate,
+            annualRate: annualRate2,
+            investReturn: investReturn,
+            priceInflation: priceInflation,
+            stepUp: stepUp
+          };
+        } else {
+          // SIP mode
+          var monthlySIP = calcStepUpSIP(futureCost, yearsToGoal, monthlyRate, stepUp);
+          var totalInvested = stepUp > 0
+            ? calcStepUpTotalInvested(monthlySIP, yearsToGoal, stepUp)
+            : monthlySIP * yearsToGoal * 12;
+          var totalGain = futureCost - totalInvested;
+          return {
+            mode: "sip",
+            currentCost: currentCost,
+            futureCost: futureCost,
+            monthlySIP: monthlySIP,
+            totalInvested: totalInvested,
+            totalGain: totalGain,
+            months: yearsToGoal * 12,
+            yearsToGoal: yearsToGoal,
+            monthlyRate: monthlyRate,
+            investReturn: investReturn,
+            priceInflation: priceInflation,
+            stepUp: stepUp
+          };
+        }
+      }
+
+      // ── BUILD CHART DATA ──
+      function buildChartData(result) {
+        var labels = [], invested = [], corpus = [], target = [];
+        var totalYears = result.yearsToGoal;
+        var isMobile = window.innerWidth < 480;
+        var isTablet = window.innerWidth < 720;
+        var step;
+        if (isMobile)       step = totalYears <= 5 ? 1 : totalYears <= 10 ? 2 : totalYears <= 20 ? 4 : 5;
+        else if (isTablet)  step = totalYears <= 10 ? 1 : totalYears <= 20 ? 2 : 3;
+        else                step = totalYears <= 15 ? 1 : totalYears <= 25 ? 2 : 3;
+
+        if (result.mode === "lumpsum") {
+          var lumpsum = result.lumpsum;
+          var r = result.annualRate;
+          for (var y = 1; y <= totalYears; y++) {
+            var isStep = (Math.round(y) % step === 0);
+            var isLast = (y === totalYears);
+            if (isStep || isLast) {
+              labels.push("Yr " + y);
+              var corpusVal = lumpsum * Math.pow(1 + r, y);
+              invested.push(Math.round(lumpsum));
+              corpus.push(Math.round(corpusVal));
+              target.push(Math.round(result.currentCost * Math.pow(1 + result.priceInflation / 100, y)));
+            }
+          }
+        } else if (result.mode === "both") {
+          var rB = result.annualRate;
+          var r2B = result.monthlyRate;
+          var sipB = result.monthlySIP;
+          var stepUpRateB = (result.stepUp || 0) / 100;
+          var monthsB = totalYears * 12;
+          for (var yB = 1; yB <= totalYears; yB++) {
+            var isStepB = (Math.round(yB) % step === 0);
+            var isLastB = (yB === totalYears);
+            if (isStepB || isLastB) {
+              labels.push("Yr " + yB);
+              var mB = yB * 12;
+              var lumpsumFV_y = result.lumpsumAmount * Math.pow(1 + rB, yB);
+              var sipCorpus = 0, sipPaid = 0;
+              if (sipB > 0) {
+                for (var mmB = 1; mmB <= mB; mmB++) {
+                  var yiB = Math.floor((mmB - 1) / 12);
+                  var msB = sipB * Math.pow(1 + stepUpRateB, yiB);
+                  sipCorpus += msB * Math.pow(1 + r2B, mB - mmB + 1);
+                  sipPaid += msB;
+                }
+              }
+              invested.push(Math.round(result.lumpsumAmount + sipPaid));
+              corpus.push(Math.round(lumpsumFV_y + sipCorpus));
+              target.push(Math.round(result.currentCost * Math.pow(1 + result.priceInflation / 100, yB)));
+            }
+          }
+        } else {
+          var r2 = result.monthlyRate;
+          var sip = result.monthlySIP;
+          var stepUpRate = (result.stepUp || 0) / 100;
+          var months = result.months;
+
+          for (var m = 1; m <= months; m++) {
+            var yr = m / 12;
+            var isStepM = (m % 12 === 0 && Math.round(yr) % step === 0);
+            var isLastM = (m === months);
+            if (isStepM || isLastM) {
+              labels.push("Yr " + Math.round(yr));
+              // corpus: accumulate step-up SIP
+              var corpusVal2 = 0;
+              var inv2 = 0;
+              for (var mm = 1; mm <= m; mm++) {
+                var yearIndex = Math.floor((mm - 1) / 12);
+                var monthSIP = sip * Math.pow(1 + stepUpRate, yearIndex);
+                corpusVal2 += monthSIP * Math.pow(1 + r2, m - mm + 1);
+                inv2 += monthSIP;
+              }
+              invested.push(Math.round(inv2));
+              corpus.push(Math.round(corpusVal2));
+              target.push(Math.round(result.currentCost * Math.pow(1 + result.priceInflation / 100, yr)));
+            }
+          }
+        }
+        return { labels: labels, invested: invested, corpus: corpus, target: target };
+      }
+
+      var _chartInstance = null;
+
+      function renderChart(result) {
+        var card = document.getElementById("chartCard");
+        card.style.display = "block";
+        var data = buildChartData(result);
+        var ctx = document.getElementById("growthChart").getContext("2d");
+        var isDark = document.documentElement.getAttribute("data-theme") !== "light";
+        var gridColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)";
+        var tickColor = isDark ? "#8a9ab5" : "#6b6353";
+
+        if (_chartInstance) { _chartInstance.destroy(); }
+
+        // update chart legend label for lumpsum vs sip vs both
+        var investedLabel = result.mode === "lumpsum" ? "Lumpsum Invested" : result.mode === "both" ? "Total Invested" : "Amount Invested";
+        document.getElementById("legendInvested").textContent = investedLabel;
+        var targetLabel = "Inflating Goal Cost";
+        document.getElementById("legendTarget").textContent = targetLabel;
+
+        _chartInstance = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: data.labels,
+            datasets: [
+              {
+                label: investedLabel,
+                data: data.invested,
+                backgroundColor: "rgba(107,140,186,0.55)",
+                borderColor: "rgba(107,140,186,0.9)",
+                borderWidth: 1,
+                borderRadius: 3,
+                order: 2
+              },
+              {
+                label: "Corpus Value",
+                data: data.corpus,
+                backgroundColor: "rgba(200,169,110,0.55)",
+                borderColor: "rgba(200,169,110,0.9)",
+                borderWidth: 1,
+                borderRadius: 3,
+                order: 2
+              },
+              {
+                label: targetLabel,
+                data: data.target,
+                type: "line",
+                borderColor: "rgba(224,92,92,0.7)",
+                borderWidth: 2,
+                borderDash: [6, 4],
+                pointRadius: 0,
+                fill: false,
+                tension: 0,
+                order: 1
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "index", intersect: false },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: isDark ? "#111827" : "#fff",
+                titleColor: isDark ? "#e8e4dc" : "#1c1a14",
+                bodyColor: isDark ? "#8a9ab5" : "#6b6353",
+                borderColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+                borderWidth: 1,
+                padding: 12,
+                callbacks: {
+                  label: function(ctx) {
+                    return " " + ctx.dataset.label + ": ₹" + formatIndian(ctx.parsed.y);
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: { color: gridColor },
+                ticks: { color: tickColor, font: { size: 11, family: "'DM Sans', sans-serif" } }
+              },
+              y: {
+                grid: { color: gridColor },
+                ticks: {
+                  color: tickColor,
+                  font: { size: 11, family: "'DM Sans', sans-serif" },
+                  callback: function(v) {
+                    if (v >= 10000000) return "₹" + (v/10000000).toFixed(1) + "Cr";
+                    if (v >= 100000)   return "₹" + (v/100000).toFixed(1) + "L";
+                    if (v >= 1000)     return "₹" + (v/1000).toFixed(0) + "K";
+                    return "₹" + v;
+                  }
+                }
+              }
+            }
+          }
+        });
+        window._chartInstance = _chartInstance;
+      }
+
+      function updateChartColors() {
+        if (!_chartInstance) return;
+        var isDark = document.documentElement.getAttribute("data-theme") !== "light";
+        var gridColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)";
+        var tickColor = isDark ? "#8a9ab5" : "#6b6353";
+        _chartInstance.options.scales.x.grid.color = gridColor;
+        _chartInstance.options.scales.x.ticks.color = tickColor;
+        _chartInstance.options.scales.y.grid.color = gridColor;
+        _chartInstance.options.scales.y.ticks.color = tickColor;
+        _chartInstance.options.plugins.tooltip.backgroundColor = isDark ? "#111827" : "#fff";
+        _chartInstance.options.plugins.tooltip.titleColor = isDark ? "#e8e4dc" : "#1c1a14";
+        _chartInstance.options.plugins.tooltip.bodyColor = isDark ? "#8a9ab5" : "#6b6353";
+        _chartInstance.options.plugins.tooltip.borderColor = isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)";
+        _chartInstance.update();
+      }
+
+      // ── FORMAT HELPERS ──
+      function fmtINR(n) {
+        return "₹" + formatIndian(Math.round(n));
+      }
+      function shortINR(n) {
+        if (n >= 10000000) return "₹" + (n/10000000).toFixed(2) + " Cr";
+        if (n >= 100000)   return "₹" + (n/100000).toFixed(2) + " L";
+        if (n >= 1000)     return "₹" + (n/1000).toFixed(1) + "K";
+        return fmtINR(n);
+      }
+
+      // ── RENDER RESULTS ──
+      function renderResults(result) {
+        var heading = document.getElementById("resultsHeading");
+        var html;
+
+        if (result.mode === "lumpsum") {
+          heading.innerHTML = "Invest <em>" + fmtINR(result.lumpsum) + "</em> today for " + result.yearsToGoal + " years";
+          var lumpsumMultiple = (result.futureCost / result.lumpsum).toFixed(1);
+          var lumpsumGain = result.totalGain > 0 ? result.totalGain : 0;
+          var lumpsumYoursPct = Math.round((result.lumpsum / result.futureCost) * 100);
+          var lumpsumReturnsPct = 100 - lumpsumYoursPct;
+          var lumpsumAbsMultiple = Math.pow(1 + result.investReturn / 100, result.yearsToGoal).toFixed(1);
+          var realRateL = (result.investReturn - result.priceInflation) / 100;
+          var lumpsumRealMultiple = Math.pow(1 + realRateL, result.yearsToGoal).toFixed(2);
+          html = '<div class="results-grid">'
+            + resultCellPrimary("Lumpsum to Invest Today", fmtINR(result.lumpsum), "accent", "One-time investment needed now")
+            + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "What it'll cost in " + result.yearsToGoal + " years (" + result.priceInflation + "% inflation/yr)")
+            + resultCellDual("Return Multiple", lumpsumAbsMultiple + "×", "Absolute", lumpsumRealMultiple + "×", "Real")
+            + resultCellSplit(result.lumpsum, lumpsumGain, result.futureCost, lumpsumYoursPct, lumpsumReturnsPct)
+            + '</div>';
+
+        } else if (result.mode === "both") {
+          if (result.lumpsumCoversGoal) {
+            heading.innerHTML = "Your lumpsum alone is <em>enough</em> — no SIP needed!";
+            var surplus = result.lumpsumFV - result.futureCost;
+            var bothMultiple = (result.lumpsumFV / result.lumpsumAmount).toFixed(1);
+            html = '<div class="results-grid">'
+              + resultCellPrimary("Lumpsum Invested Today", fmtINR(result.lumpsumAmount), "accent", "Your one-time investment")
+              + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "What it'll cost in " + result.yearsToGoal + " years (" + result.priceInflation + "% inflation/yr)")
+              + resultCell("Your Lumpsum Grows To", fmtINR(result.lumpsumFV), "safe", "At " + result.investReturn + "% p.a. — " + bothMultiple + "× return")
+              + resultCell("Surplus Above Goal", fmtINR(surplus > 0 ? surplus : 0), "safe", "Extra corpus beyond your goal")
+              + '</div>'
+              + '<div style="margin-top:1rem;padding:0.9rem 1.1rem;background:rgba(76,175,130,0.08);border:1px solid rgba(76,175,130,0.25);border-radius:10px;font-size:0.85rem;color:var(--safe);">✅ Your lumpsum of ' + fmtINR(result.lumpsumAmount) + ' is enough to meet this goal. No monthly SIP required.</div>';
+          } else {
+            var stepUp = result.stepUp || 0;
+            if (stepUp > 0) {
+              heading.innerHTML = "Invest <em>" + fmtINR(result.lumpsumAmount) + "</em> today + <em>" + fmtINR(result.monthlySIP) + "</em>/mo SIP, increasing by " + stepUp + "% each year";
+            } else {
+              heading.innerHTML = "Invest <em>" + fmtINR(result.lumpsumAmount) + "</em> today + <em>" + fmtINR(result.monthlySIP) + "</em> / month";
+            }
+            var sipSubLabel = stepUp > 0 ? "Starting SIP, grows " + stepUp + "% yearly" : "Invest this every month";
+            var bothYoursPct = Math.round((result.totalInvested / result.futureCost) * 100);
+            var bothReturnsPct = 100 - bothYoursPct;
+            var bothAbsMultiple = Math.pow(1 + result.investReturn / 100, result.yearsToGoal).toFixed(1);
+            var bothRealRate = (result.investReturn - result.priceInflation) / 100;
+            var bothRealMultiple = Math.pow(1 + bothRealRate, result.yearsToGoal).toFixed(2);
+            var pureSIP = calcStepUpSIP(result.futureCost, result.yearsToGoal, result.monthlyRate, stepUp);
+            var monthlySaving = Math.round(pureSIP - result.monthlySIP);
+            html = '<div class="results-grid">'
+              + resultCellPrimary("Lumpsum Invested Today", fmtINR(result.lumpsumAmount), "accent", "Your one-time investment")
+              + resultCellPrimary("Monthly SIP Needed", fmtINR(result.monthlySIP), "accent", sipSubLabel)
+              + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "What it'll cost in " + result.yearsToGoal + " years (" + result.priceInflation + "% inflation/yr)")
+              + resultCellSplit(result.totalInvested, result.totalGain > 0 ? result.totalGain : 0, result.futureCost, bothYoursPct, bothReturnsPct)
+              + resultCellDual("Return Multiple", bothAbsMultiple + "×", "Absolute", bothRealMultiple + "×", "Real")
+              + resultCell("SIP Relief from Lumpsum", fmtINR(monthlySaving), "safe", "Without it, you'd need " + fmtINR(Math.round(pureSIP)) + "/month")
+              + '</div>';
+          }
+
+        } else {
+          var stepUp = result.stepUp || 0;
+          if (stepUp > 0) {
+            heading.innerHTML = "Start with <em>" + fmtINR(result.monthlySIP) + "</em> / month, increasing your SIP by " + stepUp + "% each year";
+          } else {
+            heading.innerHTML = "Save <em>" + fmtINR(result.monthlySIP) + "</em> / month for " + result.yearsToGoal + " years";
+          }
+          var sipSubLabel = stepUp > 0 ? "Starting SIP — you increase this amount by " + stepUp + "% each year" : "Invest this every month";
+          var sipYoursPct = Math.round((result.totalInvested / result.futureCost) * 100);
+          var sipReturnsPct = 100 - sipYoursPct;
+          var sipAbsMultiple = Math.pow(1 + result.investReturn / 100, result.yearsToGoal).toFixed(1);
+          var realRate = (result.investReturn - result.priceInflation) / 100;
+          var sipRealMultiple = Math.pow(1 + realRate, result.yearsToGoal).toFixed(2);
+          html = '<div class="results-grid">'
+            + resultCellPrimary("Monthly SIP Needed", fmtINR(result.monthlySIP), "accent", sipSubLabel)
+            + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "What it'll cost in " + result.yearsToGoal + " years (" + result.priceInflation + "% inflation/yr)")
+            + resultCellSplit(result.totalInvested, result.totalGain > 0 ? result.totalGain : 0, result.futureCost, sipYoursPct, sipReturnsPct)
+            + resultCellDual("Return Multiple", sipAbsMultiple + "×", "Absolute", sipRealMultiple + "×", "Real")
+            + '</div>';
+        }
+
+        // Delay cost — lumpsum mode
+        if (result.mode === "lumpsum" && result.yearsToGoal >= 3) {
+          var annualRate = result.investReturn / 100;
+          var lumpsum1yr = result.futureCost / Math.pow(1 + annualRate, result.yearsToGoal - 1);
+          var delta1L = lumpsum1yr - result.lumpsum;
+          var lumpsum2yr = result.futureCost / Math.pow(1 + annualRate, result.yearsToGoal - 2);
+          var delta2L = lumpsum2yr - result.lumpsum;
+          html += '<div class="delay-callout">'
+            + '<div class="delay-title">Cost of waiting</div>'
+            + '<div class="delay-line">If you delay investing by 1 year, you\'d need <strong>' + fmtINR(Math.round(lumpsum1yr)) + ' as lumpsum</strong> <span class="delay-delta">(+' + fmtINR(Math.round(delta1L)) + ' more)</span>.</div>'
+            + (result.yearsToGoal >= 4 ? '<div class="delay-line">If you delay by 2 years, it rises to <strong>' + fmtINR(Math.round(lumpsum2yr)) + '</strong> <span class="delay-delta">(+' + fmtINR(Math.round(delta2L)) + ' more)</span>.</div>' : '')
+            + '</div>';
+          document.getElementById("resultsBody").innerHTML = html;
+        }
+
+        // Delay cost — only for SIP/both modes and years >= 3
+        if (result.mode !== "lumpsum" && result.yearsToGoal >= 3) {
+          var r = result.monthlyRate;
+          var su = result.stepUp || 0;
+          var currentSIP = result.monthlySIP || 0;
+          var sip1yr = calcStepUpSIP(result.futureCost, result.yearsToGoal - 1, r, su);
+          var sip2yr = calcStepUpSIP(result.futureCost, result.yearsToGoal - 2, r, su);
+          var delta1 = sip1yr - currentSIP;
+          var delta2 = sip2yr - currentSIP;
+          html += '<div class="delay-callout">'
+            + '<div class="delay-title">Cost of waiting</div>'
+            + '<div class="delay-line">If you delay starting by 1 year, your SIP would be <strong>' + fmtINR(sip1yr) + '/month</strong> <span class="delay-delta">(+' + fmtINR(delta1) + ' more)</span>.</div>'
+            + (result.yearsToGoal >= 4 ? '<div class="delay-line">If you delay starting by 2 years, it rises to <strong>' + fmtINR(sip2yr) + '/month</strong> <span class="delay-delta">(+' + fmtINR(delta2) + ' more)</span>.</div>' : '')
+            + '</div>';
+        }
+
+        document.getElementById("resultsBody").innerHTML = html;
+        document.getElementById("shareCard").style.display = "block";
+        document.getElementById("noteCard").style.display = "block";
+        autoOpenPhilosophy();
+
+        // Income affordability: only for SIP and Both modes
+        if (result.mode === "lumpsum") {
+          document.getElementById("affordCard").classList.add("hidden");
+          // Lumpsum has no affordability step — show link straight away
+          showScrollHint();
+        } else {
+          document.getElementById("affordCard").classList.remove("hidden");
+          hideScrollHint(); // wait for income + expenses before showing
+          renderAffordability(result);
+        }
+      }
+
+      function resultCell(label, value, colorClass, sub, splitSub) {
+        var subHtml;
+        if (splitSub) {
+          subHtml = '<div class="result-sub split">'
+            + '<span class="split-yours">' + splitSub.yours + '</span>'
+            + '<span>·</span>'
+            + '<span class="split-returns">' + splitSub.returns + '</span>'
+            + '</div>';
+        } else {
+          subHtml = '<div class="result-sub">' + sub + '</div>';
+        }
+        return '<div class="result-cell">'
+          + '<div class="result-label">' + label + '</div>'
+          + '<div class="result-value' + (colorClass ? ' ' + colorClass : '') + '">' + value + '</div>'
+          + subHtml
+          + '</div>';
+      }
+      function resultCellPrimary(label, value, colorClass, sub) {
+        return '<div class="result-cell primary">'
+          + '<div class="result-label">' + label + '</div>'
+          + '<div class="result-value' + (colorClass ? ' ' + colorClass : '') + '">' + value + '</div>'
+          + '<div class="result-sub">' + sub + '</div>'
+          + '</div>';
+      }
+      function resultCellSplit(invested, gains, futureCost, yoursPct, returnsPct) {
+        var tipInvested = 'This is every rupee you put in yourself — through discipline, every single month. No magic here, just your commitment showing up.';
+        var tipGains = 'This is the bonus your money earned by being invested. The market did this work for you, while you slept. The longer you stay invested, the bigger this gets.';
+        return '<div class="result-cell">'          + '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;">'          +   '<div>'          +     '<div class="result-label">You Put In <i class="tip-icon" data-tip="' + tipInvested + '">i</i></div>'          +     '<div class="result-value neutral">' + fmtINR(invested) + '</div>'          +   '</div>'          +   '<div style="text-align:right;">'          +     '<div class="result-label">Projected Gains <i class="tip-icon" data-tip="' + tipGains + '">i</i></div>'          +     '<div class="result-value safe">' + fmtINR(gains) + '</div>'          +   '</div>'          + '</div>'          + '<div style="height:4px;border-radius:3px;overflow:hidden;display:flex;margin-top:0.7rem;">'          +   '<div style="width:' + yoursPct + '%;background:var(--neutral);transition:width 0.5s ease;"></div>'          +   '<div style="width:' + returnsPct + '%;background:var(--safe);transition:width 0.5s ease;"></div>'          + '</div>'          + '</div>';
+      }
+
+      function resultCellDual(label, val1, label1, val2, label2) {
+        var tip1 = 'If you invest \u20b91 today at this return rate, it grows to ' + val1 + ' over these years \u2014 no inflation adjustment. Just the raw growth of your money.';
+        var tip2 = 'Inflation-adjusted. Prices rise every year, so your money buys less over time. After removing that effect, ' + val2 + ' is how much your real purchasing power actually grows. This is what truly matters.';
+        return '<div class="result-cell">'
+          + '<div class="result-label">' + label + '</div>'
+          + '<div style="display:flex;gap:2.5rem;align-items:baseline;flex-wrap:wrap;margin-top:0.15rem;">'
+          + '<div>'
+          +   '<div class="result-value accent">' + val1 + '</div>'
+          +   '<div class="result-sub">' + label1 + ' <i class="tip-icon" data-tip="' + tip1 + '">i</i></div>'
+          + '</div>'
+          + '<div style="color:var(--border);font-size:1.2rem;align-self:center;">|</div>'
+          + '<div>'
+          +   '<div class="result-value safe">' + val2 + '</div>'
+          +   '<div class="result-sub">' + label2 + ' <i class="tip-icon" data-tip="' + tip2 + '">i</i></div>'
+          + '</div>'
+          + '</div>'
+          + '</div>';
+      }
+
+      // ── MAIN INPUT HANDLER ──
+      function onAnyInput() {
+        var result = calculate();
+        if (!result) {
+          document.getElementById("resultsHeading").innerHTML = "<em>Enter your details above</em>";
+          document.getElementById("resultsBody").innerHTML = '<div class="results-placeholder"><div class="placeholder-icon">📊</div><div>Fill in your goal details to see<br/>your personalised investment plan.</div></div>';
+          document.getElementById("chartCard").style.display = "none";
+          document.getElementById("shareCard").style.display = "none";
+          document.getElementById("noteCard").style.display = "none";
+          document.getElementById("affordCard").classList.add("hidden");
+          hideScrollHint();
+          return;
+        }
+        renderResults(result);
+        renderChart(result);
+        renderInflationBreakdown(result);
+      }
+
+      // ── SEND RESULTS LINK ──
+      function showScrollHint() {
+        var shareCard = document.getElementById("shareCard");
+        var rect = shareCard.getBoundingClientRect();
+        if (rect.top > window.innerHeight) {
+          document.getElementById("sendResultsLink").style.display = "block";
+        }
+      }
+      function hideScrollHint() {
+        document.getElementById("sendResultsLink").style.display = "none";
+      }
+      function scrollToShare() {
+        hideScrollHint();
+        document.getElementById("shareCard").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      window.addEventListener("scroll", function() {
+        var shareCard = document.getElementById("shareCard");
+        if (!shareCard || shareCard.style.display === "none") return;
+        var rect = shareCard.getBoundingClientRect();
+        if (rect.top <= window.innerHeight) {
+          hideScrollHint();
+        }
+      });
+
+      // ── BUILD SHARE MESSAGE ──
+      // ── FIELD VALIDATION ──
+      function validateShareFields() {
+        var nameEl = document.getElementById("userName");
+        var goalEl = document.getElementById("goalName");
+        var nameVal = nameEl.value.trim();
+        var goalVal = goalEl.value.trim();
+        var valid = true;
+
+        if (!nameVal) {
+          nameEl.classList.add("field-error");
+          document.getElementById("userNameErr").classList.add("show");
+          if (valid) { nameEl.scrollIntoView({ behavior: "smooth", block: "center" }); nameEl.focus(); }
+          valid = false;
+        }
+        if (!goalVal) {
+          goalEl.classList.add("field-error");
+          document.getElementById("goalNameErr").classList.add("show");
+          if (valid) { goalEl.scrollIntoView({ behavior: "smooth", block: "center" }); goalEl.focus(); }
+          valid = false;
+        }
+        return valid;
+      }
+
+      function clearFieldError(id) {
+        var el = document.getElementById(id);
+        el.classList.remove("field-error");
+        var errEl = document.getElementById(id + "Err");
+        if (errEl) errEl.classList.remove("show");
+      }
+
+      function buildShareMessage() {
+        var name   = document.getElementById("userName").value.trim();
+        var goal   = document.getElementById("goalName").value.trim();
+        var result = calculate();
+        if (!result) return "";
+
+        var incomeRaw = document.getElementById("monthlyIncome").value.replace(/[^0-9]/g, "");
+        var income = parseInt(incomeRaw, 10) || 0;
+        var expensesRaw = document.getElementById("monthlyExpenses").value.replace(/[^0-9]/g, "");
+        var expenses = parseInt(expensesRaw, 10) || 0;
+        var savingsCapacity = income > expenses ? income - expenses : 0;
+
+        var lines = [
+          "Hi Ramesh, I'm " + name + ".",
+          "",
+          "I used your Goal Planning Calculator and here are my results:",
+          "",
+          "── GOAL DETAILS ──",
+          "Goal Name            : " + goal,
+          "Investment Type      : " + (result.mode === "lumpsum" ? "Lumpsum (One-Time)" : result.mode === "both" ? "Lumpsum + SIP (Combined)" : "SIP (Monthly)"),
+          "Current Cost         : " + fmtINR(result.currentCost),
+          "Years to Goal        : " + result.yearsToGoal + " years",
+          "Inflation Rate       : " + result.priceInflation + "% p.a.",
+          "Expected Return      : " + result.investReturn + "% p.a.",
+        ];
+
+        if ((result.mode === "sip" || result.mode === "both") && result.stepUp > 0) {
+          lines.push("Annual SIP Step-Up    : " + result.stepUp + "% p.a.");
+        }
+
+        if (income > 0) {
+          lines.push("Monthly Income        : " + fmtINR(income));
+        }
+        if (expenses > 0) {
+          lines.push("Monthly Commitments  : " + fmtINR(expenses));
+        }
+        if (income > 0 && expenses > 0) {
+          lines.push("Savings Capacity     : " + fmtINR(savingsCapacity));
+        }
+
+        lines.push("");
+        lines.push("── RESULTS ──");
+        lines.push("Future Cost of Goal  : " + fmtINR(result.futureCost));
+
+        if (result.mode === "lumpsum") {
+          lines.push("Lumpsum Needed Today : " + fmtINR(result.lumpsum));
+          lines.push("Projected Gains       : " + fmtINR(result.totalGain > 0 ? result.totalGain : 0));
+        } else if (result.mode === "both") {
+          lines.push("Lumpsum You'll Put In: " + fmtINR(result.lumpsumAmount));
+          if (result.lumpsumCoversGoal) {
+            lines.push("Monthly SIP Needed   : Not required — lumpsum covers the goal");
+          } else {
+            var sipLabel2 = result.stepUp > 0 ? "Starting SIP (grows " + result.stepUp + "% yearly)" : "Monthly SIP Needed";
+            lines.push(sipLabel2 + "   : " + fmtINR(result.monthlySIP));
+            lines.push("You'll Put In        : " + fmtINR(result.totalInvested));
+          }
+          lines.push("Projected Gains       : " + fmtINR(result.totalGain));
+        } else {
+          var sipLabel = result.stepUp > 0
+            ? "Starting SIP (grows " + result.stepUp + "% yearly)"
+            : "Monthly SIP Needed";
+          lines.push(sipLabel + "   : " + fmtINR(result.monthlySIP));
+          lines.push("You'll Put In        : " + fmtINR(result.totalInvested));
+          lines.push("Projected Gains       : " + fmtINR(result.totalGain > 0 ? result.totalGain : 0));
+        }
+
+        if (income > 0 && result.mode !== "lumpsum") {
+          var sipAmt = result.monthlySIP || 0;
+          if (sipAmt > 0) {
+            var base = savingsCapacity > 0 ? savingsCapacity : income;
+            var baseLabel = savingsCapacity > 0 ? "Savings Capacity" : "Income";
+            var pct = ((sipAmt / base) * 100).toFixed(0);
+            lines.push("SIP as % of " + baseLabel + "  : " + pct + "%");
+          }
+        }
+
+        lines.push("");
+        lines.push("Could you help me plan this investment?");
+        lines.push("Thank you!");
+        return lines.join("\n");
+      }
+
+      // ── SHARE FUNCTIONS ──
+      window.copyShareLink = function() {
+        var result = calculate();
+        if (!result) { showToast("⚠ Please fill in your goal details first."); return; }
+        var params = new URLSearchParams();
+        params.set("mode", _mode);
+        params.set("goal", document.getElementById("goalName").value.trim());
+        params.set("cost", document.getElementById("currentCost").value.replace(/,/g,""));
+        params.set("years", document.getElementById("yearsToGoal").value);
+        params.set("inflation", document.getElementById("priceInflation").value);
+        params.set("ret", document.getElementById("investmentReturn").value);
+        params.set("stepup", document.getElementById("stepUp").value);
+        var income = document.getElementById("monthlyIncome").value.replace(/,/g,"");
+        if (income) params.set("income", income);
+        var expenses = document.getElementById("monthlyExpenses").value.replace(/,/g,"");
+        if (expenses) params.set("expenses", expenses);
+        var lumpsum = document.getElementById("lumpsumAmount").value.replace(/,/g,"");
+        if (lumpsum) params.set("lumpsum", lumpsum);
+        var url = window.location.origin + window.location.pathname + "?" + params.toString();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(function() {
+            showToast("✓ Link copied to clipboard!");
+          }).catch(function() {
+            prompt("Copy this link:", url);
+          });
+        } else {
+          prompt("Copy this link:", url);
+        }
+      };
+
+      window.buildAndOpenWa = function() {
+        if (!validateShareFields()) return false;
+        var body = buildShareMessage();
+        if (!body) { showToast("⚠ Please fill in your goal details first."); return false; }
+        var url = "https://wa.me/918329450580?text=" + encodeURIComponent(body);
+        var a = document.createElement("a");
+        a.href = url; a.target = "_blank"; a.rel = "noopener";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        showToast("✓ Opening WhatsApp…");
+        return false;
+      };
+      window.buildAndOpenGmail = function() {
+        if (!validateShareFields()) return false;
+        var body = buildShareMessage();
+        if (!body) { showToast("⚠ Please fill in your goal details first."); return false; }
+        var goal = document.getElementById("goalName").value.trim();
+        var name = document.getElementById("userName").value.trim();
+        var subj = "Goal Calculator Results — " + goal + " (" + name + ")";
+        var url = "https://mail.google.com/mail/?view=cm&to=rameshvegi94@gmail.com&su="
+          + encodeURIComponent(subj) + "&body=" + encodeURIComponent(body);
+        var a = document.createElement("a");
+        a.href = url; a.target = "_blank"; a.rel = "noopener";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        showToast("✓ Opening Gmail in browser…");
+        return false;
+      };
+      window.buildAndOpenEmail = function() {
+        if (!validateShareFields()) return false;
+        var body = buildShareMessage();
+        if (!body) { showToast("⚠ Please fill in your goal details first."); return false; }
+        var goal = document.getElementById("goalName").value.trim();
+        var name = document.getElementById("userName").value.trim();
+        var subj = "Goal Calculator Results — " + goal + " (" + name + ")";
+        window.location.href = "mailto:rameshvegi94@gmail.com?subject="
+          + encodeURIComponent(subj) + "&body=" + encodeURIComponent(body);
+        showToast("✓ Opening email app…");
+        return false;
+      };
+
+      function showToast(msg) {
+        if (_undoTimer) return; // don't clobber an active undo toast
+        var t = document.getElementById("shareToast");
+        if (!t) return;
+        t.innerHTML = '<span>' + msg + '</span>';
+        t.classList.add("show");
+        setTimeout(function() { t.classList.remove("show"); }, 3000);
+      }
+      // ── GOAL PRESETS ──
+      var _activePreset = null;
+      function applyCustomPreset(el) {
+        if (_activePreset) _activePreset.classList.remove("selected");
+        el.classList.add("selected");
+        _activePreset = el;
+        clearAll();
+        document.getElementById("goalName").focus();
+      }
+
+      function applyPreset(el, name, cost, inflation, years) {
+        // toggle off if same chip clicked again
+        if (_activePreset === el) {
+          el.classList.remove("selected");
+          _activePreset = null;
+          return;
+        }
+        if (_activePreset) _activePreset.classList.remove("selected");
+        el.classList.add("selected");
+        _activePreset = el;
+
+        document.getElementById("goalName").value = name;
+        document.getElementById("currentCost").value = cost;
+
+        var inflSlider = document.getElementById("priceInflation");
+        inflSlider.value = inflation;
+        syncSlider("priceInflation", "inflationVal");
+
+        var yearsSlider = document.getElementById("yearsToGoal");
+        yearsSlider.value = years;
+        syncSlider("yearsToGoal", "yearsVal");
+
+        onAnyInput();
+      }
+
+      // clear selected preset if user manually edits goal name or cost
+      document.getElementById("goalName").addEventListener("input", function() {
+        if (_activePreset) { _activePreset.classList.remove("selected"); _activePreset = null; }
+      });
+      document.getElementById("currentCost").addEventListener("input", function() {
+        if (_activePreset) { _activePreset.classList.remove("selected"); _activePreset = null; }
+      });
+
+      // ── INCOME INPUT FORMATTER ──
+      function formatIncomeInput(el) {
+        var raw = el.value.replace(/[^0-9]/g, "");
+        if (!raw) { el.value = ""; return; }
+        el.value = formatIndian(parseInt(raw, 10));
+      }
+
+      // ── AFFORDABILITY LOGIC ──
+      function onIncomeInput() {
+        var result = calculate();
+        if (!result) return;
+        renderAffordability(result);
+      }
+
+      function clearExpensesError() {
+        document.getElementById("monthlyExpenses").classList.remove("field-error");
+        document.getElementById("expensesError").classList.remove("show");
+      }
+
+      function renderAffordability(result) {
+        var incomeRaw = document.getElementById("monthlyIncome").value.replace(/[^0-9]/g, "");
+        var income = parseInt(incomeRaw, 10) || 0;
+        var expensesRaw = document.getElementById("monthlyExpenses").value.replace(/[^0-9]/g, "");
+        var expenses = parseInt(expensesRaw, 10) || 0;
+        var verdict  = document.getElementById("affordVerdict");
+        var nudge    = document.getElementById("affordNudge");
+        var surplusRow = document.getElementById("surplusRow");
+        var surplusDisplay = document.getElementById("surplusDisplay");
+
+        // No income — reset everything
+        if (!income) {
+          verdict.className = "afford-verdict";
+          nudge.style.display = "";
+          surplusRow.classList.remove("show");
+          clearExpensesError();
+          return;
+        }
+        nudge.style.display = "none";
+
+        // Income entered but no expenses — make expenses mandatory
+        if (!expenses) {
+          verdict.className = "afford-verdict";
+          document.getElementById("affordMsg").innerHTML = "";
+          document.getElementById("affordIcon").textContent = "";
+          document.getElementById("affordTitle").textContent = "";
+          surplusRow.classList.remove("show");
+          document.getElementById("monthlyExpenses").classList.add("field-error");
+          document.getElementById("expensesError").classList.add("show");
+          return;
+        }
+
+        var surplus = income - expenses;
+
+        // Show surplus read-only field
+        surplusRow.classList.add("show");
+        surplusDisplay.value = surplus > 0 ? formatIndian(surplus) : "0";
+
+        // If expenses >= income — no capacity
+        if (surplus <= 0) {
+          verdict.className = "afford-verdict show red";
+          document.getElementById("affordIcon").textContent = "🔴";
+          document.getElementById("affordTitle").textContent = "No Savings Capacity";
+          document.getElementById("affordMsg").innerHTML = "Your expenses equal or exceed your income, leaving nothing to invest. Reducing expenses or growing your income is the first step before planning for this goal.";
+          var existingSkills = verdict.querySelector(".afford-skills-nudge");
+          if (existingSkills) existingSkills.remove();
+          return;
+        }
+
+        var base = surplus;
+
+        var sipAmount, modeIsLumpsum;
+        if (result.mode === "lumpsum") {
+          sipAmount = result.lumpsum / (result.yearsToGoal * 12);
+          modeIsLumpsum = true;
+        } else if (result.mode === "both") {
+          sipAmount = result.monthlySIP;
+          modeIsLumpsum = false;
+        } else {
+          sipAmount = result.monthlySIP;
+          modeIsLumpsum = false;
+        }
+
+        var pct = (sipAmount / base) * 100;
+        var stepUp = result.stepUp || 0;
+        var baseLabel = "your monthly surplus";
+
+        var tier, icon, title, msg, skills;
+
+        if (pct <= 50) {
+          tier  = "green";
+          icon  = "✅";
+          title = "Comfortable — " + pct.toFixed(0) + "% of " + baseLabel;
+          msg   = "This goal fits well within your surplus. You can reach it without putting pressure on your lifestyle.";
+          skills = null;
+
+        } else if (pct <= 80) {
+          tier  = "amber";
+          icon  = "🟡";
+          title = "Moderate — " + pct.toFixed(0) + "% of " + baseLabel;
+          if (!modeIsLumpsum && stepUp === 0) {
+            msg = "Doable with discipline — you'll need to be intentional about spending."
+              + "<br><br>💡 <strong>A step-up SIP lets you start smaller and increase each year</strong> — <span class='scroll-up-link' onclick='scrollToStepUp()'>↑ try the slider above</span>. Growing your income will make this easier over time.";
+          } else {
+            msg = "Doable with discipline — you'll need to be intentional about spending. Growing your income will give you more breathing room.";
+          }
+          skills = null;
+
+        } else if (pct <= 100) {
+          tier  = "orange";
+          icon  = "⚠️";
+          title = "Challenging — " + pct.toFixed(0) + "% of " + baseLabel;
+          var r = result.monthlyRate;
+          var sip2yr = calcStepUpSIP(result.futureCost, result.yearsToGoal + 2, r, stepUp);
+          var sip5yr = calcStepUpSIP(result.futureCost, result.yearsToGoal + 5, r, stepUp);
+          var pct2yr = (sip2yr / base) * 100;
+          var pct5yr = (sip5yr / base) * 100;
+          var delayMsg = "<br><br>⏳ <strong>Extending your timeline helps:</strong> Adding 2 years brings your SIP to " + fmtINR(sip2yr) + " (" + pct2yr.toFixed(0) + "% of " + baseLabel + "). Adding 5 years brings it to " + fmtINR(sip5yr) + " (" + pct5yr.toFixed(0) + "% of " + baseLabel + ").";
+          if (!modeIsLumpsum && stepUp === 0) {
+            var suggestedSIP = calcStepUpSIP(result.futureCost, result.yearsToGoal, r, 10);
+            var suggestedPct = (suggestedSIP / base) * 100;
+            msg = pct.toFixed(0) + "% of " + baseLabel + " leaves very little buffer."
+              + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + fmtINR(suggestedSIP) + " — that's " + suggestedPct.toFixed(0) + "% of " + baseLabel + ".</strong> "
+              + "<span class='scroll-up-link' onclick='scrollToStepUp()'>↑ Try the step-up slider</span>"
+              + delayMsg
+              + "<br><br>Growing your income is the most direct path to making this comfortable.";
+          } else if (!modeIsLumpsum && stepUp > 0) {
+            msg = "Even with a " + stepUp + "% step-up, " + pct.toFixed(0) + "% of " + baseLabel + " leaves very little room."
+              + delayMsg
+              + "<br><br>Growing your income will change the math more than anything else.";
+          } else {
+            msg = "This lumpsum is " + pct.toFixed(0) + "% of " + baseLabel + " — a significant commitment. Consider building it over time with a SIP."
+              + delayMsg;
+          }
+          skills = null;
+
+        } else {
+          tier  = "red";
+          icon  = "🔴";
+          title = "Exceeds Your Surplus";
+          var r2 = result.monthlyRate;
+          var sip2yrR = calcStepUpSIP(result.futureCost, result.yearsToGoal + 2, r2, stepUp);
+          var sip5yrR = calcStepUpSIP(result.futureCost, result.yearsToGoal + 5, r2, stepUp);
+          var pct2yrR = (sip2yrR / base) * 100;
+          var pct5yrR = (sip5yrR / base) * 100;
+          var delayMsgR = "<br><br>⏳ <strong>Extending your timeline helps significantly:</strong> Adding 2 years brings your SIP to " + fmtINR(sip2yrR) + " (" + pct2yrR.toFixed(0) + "% of " + baseLabel + "). Adding 5 years brings it to " + fmtINR(sip5yrR) + " (" + pct5yrR.toFixed(0) + "% of " + baseLabel + ").";
+          if (!modeIsLumpsum && stepUp === 0) {
+            var suggestedSIP2 = calcStepUpSIP(result.futureCost, result.yearsToGoal, r2, 10);
+            var suggestedPct2 = (suggestedSIP2 / base) * 100;
+            if (suggestedPct2 <= 80) {
+              msg = "This SIP exceeds your current surplus — it can't be funded from what's left after expenses."
+                + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + fmtINR(suggestedSIP2) + " — that's " + suggestedPct2.toFixed(0) + "% of " + baseLabel + ".</strong> "
+                + "<span class='scroll-up-link' onclick='scrollToStepUp()'>↑ Try the step-up slider</span>"
+                + delayMsgR
+                + "<br><br>Growing your income is the most direct path to closing this gap.";
+            } else {
+              msg = "This SIP exceeds your current surplus. Even a step-up approach would be a stretch."
+                + delayMsgR
+                + "<br><br>Adjusting the goal amount or growing your income will make the biggest difference.";
+            }
+          } else {
+            msg = "This SIP exceeds your current surplus — the goal can't be funded from what's left after expenses."
+              + delayMsgR
+              + "<br><br>Growing your income is the most direct path to closing this gap.";
+          }
+          skills = null;
+        }
+
+        verdict.className = "afford-verdict show " + tier;
+        document.getElementById("affordIcon").textContent = icon;
+        document.getElementById("affordTitle").textContent = title;
+
+        var msgHtml = '<div class="afford-verdict-msg">' + msg + '</div>';
+        if (skills) {
+          msgHtml += '<div class="afford-skills-nudge">' + skills + '</div>';
+        }
+        document.getElementById("affordMsg").outerHTML = '<div id="affordMsg"></div>';
+        // re-query after replacement
+        document.getElementById("affordMsg").innerHTML = msg;
+
+        // Handle skills nudge separately
+        var existing = verdict.querySelector(".afford-skills-nudge");
+        if (existing) existing.remove();
+        if (skills) {
+          var skillsEl = document.createElement("div");
+          skillsEl.className = "afford-skills-nudge";
+          skillsEl.innerHTML = skills;
+          verdict.querySelector(".afford-verdict-body").appendChild(skillsEl);
+        }
+
+        // All details filled — show send link
+        showScrollHint();
+      }
+
+      function scrollToStepUp() {
+        document.getElementById("stepUpField").scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+
+      // ── INFLATION BREAKDOWN ──
+      function toggleInflation() {
+        var body = document.getElementById("inflationBody");
+        var btn  = document.getElementById("inflationAccordion").querySelector(".inflation-trigger");
+        var isOpen = body.classList.contains("open");
+        if (!isOpen) {
+          body.classList.add("open");
+          body.style.maxHeight = body.scrollHeight + "px";
+          // Animate bar segments in after open
+          setTimeout(renderInflationBar, 50);
+        } else {
+          body.style.maxHeight = body.scrollHeight + "px";
+          requestAnimationFrame(function() {
+            body.style.maxHeight = "0px";
+            body.classList.remove("open");
+          });
+        }
+        btn.setAttribute("aria-expanded", String(!isOpen));
+      }
+
+      var _inflationData = null;
+
+      function renderInflationBreakdown(result) {
+        var accordion = document.getElementById("inflationAccordion");
+        if (!result) { accordion.classList.remove("visible"); return; }
+        var wasVisible = accordion.classList.contains("visible");
+        accordion.classList.add("visible");
+
+        // Set up IntersectionObserver to pulse once when scrolled into view
+        if (!wasVisible && !accordion._pulseObserverSet) {
+          accordion._pulseObserverSet = true;
+          var observer = new IntersectionObserver(function(entries, obs) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                accordion.classList.remove("pulse-once");
+                void accordion.offsetWidth;
+                accordion.classList.add("pulse-once");
+                accordion.addEventListener("animationend", function() {
+                  accordion.classList.remove("pulse-once");
+                }, { once: true });
+                obs.disconnect();
+              }
+            });
+          }, { threshold: 0.5 });
+          observer.observe(accordion);
+        }
+
+        var futureCost  = result.futureCost;
+        var currentCost = result.currentCost;
+        var totalInvested, fvAtInflation, inflationCut, realGain;
+
+        if (result.mode === "lumpsum") {
+          // Lumpsum: FV at inflation rate = lumpsum * (1+inflation)^years
+          totalInvested = result.lumpsum;
+          var fvLumpsumAtInflation = result.lumpsum * Math.pow(1 + result.priceInflation / 100, result.yearsToGoal);
+          inflationCut = fvLumpsumAtInflation - totalInvested;
+          if (inflationCut < 0) inflationCut = 0;
+          realGain = futureCost - fvLumpsumAtInflation;
+          if (realGain < 0) realGain = 0;
+        } else {
+          // SIP / Both: FV of contributions compounded at inflation rate
+          totalInvested = result.totalInvested;
+          var inflMonthlyRate = result.priceInflation / 1200;
+          var months = result.yearsToGoal * 12;
+          var startingSIP = result.monthlySIP || 0;
+          var stepUpRate  = (result.stepUp || 0) / 100;
+          fvAtInflation = 0;
+          for (var m = 1; m <= months; m++) {
+            var yi = Math.floor((m - 1) / 12);
+            var mSIP = startingSIP * Math.pow(1 + stepUpRate, yi);
+            fvAtInflation += mSIP * Math.pow(1 + inflMonthlyRate, months - m + 1);
+          }
+          // Also include lumpsum component for "both" mode
+          if (result.mode === "both" && result.lumpsumAmount) {
+            fvAtInflation += result.lumpsumAmount * Math.pow(1 + result.priceInflation / 100, result.yearsToGoal);
+          }
+          inflationCut = fvAtInflation - totalInvested;
+          if (inflationCut < 0) inflationCut = 0;
+          realGain = futureCost - fvAtInflation;
+          if (realGain < 0) realGain = 0;
+        }
+
+        var total = totalInvested + inflationCut + realGain;
+        var yoursPct = Math.round((totalInvested / total) * 100);
+        var inflPct  = Math.round((inflationCut  / total) * 100);
+        var realPct  = 100 - yoursPct - inflPct;
+        if (realPct < 0) realPct = 0;
+
+        _inflationData = { yoursPct, inflPct, realPct, totalInvested, inflationCut, realGain, result };
+
+        // Update stat cells
+        document.getElementById("inflStatYours").textContent    = fmtINR(totalInvested);
+        document.querySelector("#inflationAccordion .inflation-stat-label").childNodes[0].textContent = result.mode === "lumpsum" ? "Lumpsum Invested " : "You Put In ";
+        document.getElementById("inflStatYoursPct").textContent = yoursPct + "% of corpus";
+        document.getElementById("inflStatInfl").textContent     = fmtINR(inflationCut);
+        document.getElementById("inflStatInflPct").textContent  = inflPct + "% of corpus";
+        document.getElementById("inflStatReal").textContent     = fmtINR(realGain);
+        document.getElementById("inflStatRealPct").textContent  = realPct + "% of corpus";
+
+        // Note
+        var noteEl = document.getElementById("inflationNote");
+        var realReturn = ((( 1 + result.investReturn / 100) / (1 + result.priceInflation / 100)) - 1) * 100;
+        noteEl.innerHTML = "At " + result.investReturn + "% return and " + result.priceInflation + "% inflation, your real return is roughly <strong>" + realReturn.toFixed(1) + "% p.a.</strong>. Of your <strong>" + fmtINR(futureCost) + "</strong> corpus, <strong>" + fmtINR(Math.round(inflationCut)) + "</strong> is what inflation accounts for — and <strong>" + fmtINR(Math.round(realGain)) + "</strong> is genuine wealth created above and beyond inflation.";
+
+        // If body is already open, update bar directly (no animation delay needed)
+        var body = document.getElementById("inflationBody");
+        if (body.classList.contains("open")) {
+          renderInflationBar();
+        } else {
+          // Reset bar to 0 so it animates fresh on next open
+          document.getElementById("inflBarYours").style.width = "0%";
+          document.getElementById("inflBarInfl").style.width  = "0%";
+          document.getElementById("inflBarReal").style.width  = "0%";
+        }
+      }
+
+      function renderInflationBar() {
+        if (!_inflationData) return;
+        document.getElementById("inflBarYours").style.width = _inflationData.yoursPct + "%";
+        document.getElementById("inflBarInfl").style.width  = _inflationData.inflPct  + "%";
+        document.getElementById("inflBarReal").style.width  = _inflationData.realPct  + "%";
+      }
+
+      // ── RESET FORM ──
+      function resetForm() {
+        clearAll();
+      }
+
+      // ── RESTORE FROM URL PARAMS (new tab flow) ──
+      (function() {
+        var params = new URLSearchParams(window.location.search);
+        var mode = params.get("mode");
+        var cost = params.get("cost");
+        if (!mode && !cost) return;
+
+        if (mode && ["sip","lumpsum","both"].indexOf(mode) !== -1) {
+          _mode = mode;
+          document.getElementById("btnSIP").classList.toggle("active", mode === "sip");
+          document.getElementById("btnLumpsum").classList.toggle("active", mode === "lumpsum");
+          document.getElementById("btnBoth").classList.toggle("active", mode === "both");
+          document.getElementById("stepUpField").style.display = (mode === "lumpsum") ? "none" : "";
+          document.getElementById("lumpsumAmountField").style.display = (mode === "both") ? "" : "none";
+          updateGoalCardTitle(mode);
+        }
+
+        if (cost) document.getElementById("currentCost").value = formatIndian(parseInt(cost.replace(/,/g,""), 10));
+        var goal = params.get("goal");
+        if (goal) document.getElementById("goalName").value = goal;
+        var years = params.get("years");
+        if (years) { document.getElementById("yearsToGoal").value = years; syncSlider("yearsToGoal","yearsVal"); }
+        var inflation = params.get("inflation");
+        if (inflation) { document.getElementById("priceInflation").value = inflation; syncSlider("priceInflation","inflationVal"); }
+        var ret = params.get("ret");
+        if (ret) { document.getElementById("investmentReturn").value = ret; syncSlider("investmentReturn","returnVal"); }
+        var stepup = params.get("stepup");
+        if (stepup) { document.getElementById("stepUp").value = stepup; syncSlider("stepUp","stepUpVal"); }
+        var income = params.get("income");
+        if (income) document.getElementById("monthlyIncome").value = formatIndian(parseInt(income.replace(/,/g,""), 10));
+        var expenses = params.get("expenses");
+        if (expenses) document.getElementById("monthlyExpenses").value = formatIndian(parseInt(expenses.replace(/,/g,""), 10));
+
+        onAnyInput();
+      })();
+    </script>
+
+    <script>
+      // ── SMART TOOLTIP ──
+      (function() {
+        var popover = document.getElementById("tipPopover");
+        var currentIcon = null;
+        var _justShown = false;   // guard: prevents scroll/resize from closing tooltip immediately after open
+        var _justShownTimer = null;
+
+        function positionAndShow(icon) {
+          // Use visualViewport when available (accurate on mobile with keyboard open)
+          var vvp = window.visualViewport;
+          var viewW = vvp ? vvp.width  : window.innerWidth;
+          var viewH = vvp ? vvp.height : window.innerHeight;
+          var vvpOffsetX = vvp ? vvp.offsetLeft : 0;
+          var vvpOffsetY = vvp ? vvp.offsetTop  : 0;
+
+          var iconRect = icon.getBoundingClientRect();
+          var popW = popover.offsetWidth;
+          var popH = popover.offsetHeight;
+          var margin = 8;
+
+          // Decide vertical: prefer below, flip above if not enough room
+          // Adjust iconRect relative to visualViewport offset
+          var iconBottom = iconRect.bottom - vvpOffsetY;
+          var iconTop    = iconRect.top    - vvpOffsetY;
+          var spaceBelow = viewH - iconBottom;
+          var spaceAbove = iconTop;
+          var below = spaceBelow >= popH + margin || spaceBelow >= spaceAbove;
+
+          var top, arrowClass;
+          if (below) {
+            top = iconRect.bottom + margin;
+            arrowClass = "arrow-top";
+          } else {
+            top = iconRect.top - popH - margin;
+            arrowClass = "arrow-bottom";
+          }
+
+          // Horizontal: centre on icon, then clamp to screen
+          var iconCentreX = iconRect.left + iconRect.width / 2 - vvpOffsetX;
+          var idealLeft   = iconCentreX - popW / 2 + vvpOffsetX;
+          var left = Math.max(margin + vvpOffsetX, Math.min(idealLeft, vvpOffsetX + viewW - popW - margin));
+
+          // Arrow horizontal position (relative to popover)
+          var arrowLeft = (iconRect.left + iconRect.width / 2) - left - 4;
+          arrowLeft = Math.max(10, Math.min(arrowLeft, popW - 20));
+          popover.style.setProperty("--arrow-left", arrowLeft + "px");
+
+          popover.classList.remove("arrow-top", "arrow-bottom");
+          popover.style.left = left + "px";
+          popover.style.top  = top  + "px";
+          popover.classList.add(arrowClass);
+
+          requestAnimationFrame(function() {
+            popover.classList.add("tip-visible");
+          });
+        }
+
+        function showTip(icon) {
+          if (currentIcon === icon) { hideTip(); return; }
+          if (currentIcon) currentIcon.classList.remove("tip-open");
+          currentIcon = icon;
+          icon.classList.add("tip-open");
+
+          popover.textContent = icon.getAttribute("data-tip");
+
+          // Make it visible offscreen first to measure its size
+          popover.style.left = "-9999px";
+          popover.style.top  = "-9999px";
+          popover.classList.remove("tip-visible", "arrow-top", "arrow-bottom");
+          popover.style.display = "block";
+
+          // Guard: ignore resize/scroll events fired immediately after showing
+          // (e.g. soft keyboard dismissing when another element loses focus)
+          clearTimeout(_justShownTimer);
+          _justShown = true;
+          _justShownTimer = setTimeout(function() { _justShown = false; }, 350);
+
+          positionAndShow(icon);
+        }
+
+        function hideTip() {
+          if (currentIcon) { currentIcon.classList.remove("tip-open"); currentIcon = null; }
+          popover.classList.remove("tip-visible");
+        }
+
+        // Apply arrow left position via CSS var
+        var style = document.createElement("style");
+        style.textContent = "#tipPopover::before { left: var(--arrow-left, 16px); }";
+        document.head.appendChild(style);
+
+        // Desktop: hover
+        document.addEventListener("mouseover", function(e) {
+          var icon = e.target.closest(".tip-icon");
+          if (icon) { showTip(icon); return; }
+          if (!popover.contains(e.target)) hideTip();
+        });
+
+        // ── MOBILE FIX ──
+        // On touchstart: preventDefault stops the browser blurring the focused
+        // input (which would dismiss the keyboard and fire a resize → hideTip).
+        // Because preventDefault also cancels the synthetic click, we fire
+        // showTip ourselves on touchend instead.
+        var _touchHandled = false;
+
+        document.addEventListener("touchstart", function(e) {
+          var icon = e.target.closest(".tip-icon");
+          if (icon) {
+            e.preventDefault();   // keep input focus / keyboard open
+            _touchHandled = true;
+          }
+        }, { passive: false });
+
+        document.addEventListener("touchend", function(e) {
+          var icon = e.target.closest(".tip-icon");
+          if (icon) {
+            e.preventDefault();
+            showTip(icon);
+            _touchHandled = true; // suppress the fallback click below
+            return;
+          }
+          if (!popover.contains(e.target)) hideTip();
+        }, { passive: false });
+
+        // Desktop click (and mobile fallback when touch events weren't involved)
+        document.addEventListener("click", function(e) {
+          if (_touchHandled) { _touchHandled = false; return; } // already handled via touchend
+          var icon = e.target.closest(".tip-icon");
+          if (icon) { e.stopPropagation(); showTip(icon); return; }
+          if (!popover.contains(e.target)) hideTip();
+        });
+
+        // Close on scroll or resize — but not if we just opened the tooltip
+        window.addEventListener("scroll", function() { if (!_justShown) hideTip(); }, { passive: true });
+        window.addEventListener("resize", function() { if (!_justShown) hideTip(); }, { passive: true });
+      })();
+    </script>
+
+
+    <script>
+      var _philosophyAutoOpened = false;
+
+      function autoOpenPhilosophy() {
+        if (_philosophyAutoOpened) return;
+        var body = document.getElementById("philosophyBody");
+        var btn  = document.getElementById("philosophyAccordion").querySelector(".philosophy-trigger");
+        if (body.classList.contains("open")) { _philosophyAutoOpened = true; return; }
+        setTimeout(function() {
+          body.classList.add("open");
+          body.style.maxHeight = body.scrollHeight + "px";
+          btn.setAttribute("aria-expanded", "true");
+          _philosophyAutoOpened = true;
+        }, 800);
+      }
+
+      function togglePhilosophy() {
+        var body = document.getElementById("philosophyBody");
+        var btn  = document.getElementById("philosophyAccordion").querySelector(".philosophy-trigger");
+        var isOpen = body.classList.contains("open");
+        if (!isOpen) {
+          body.classList.add("open");
+          body.style.maxHeight = body.scrollHeight + "px";
+        } else {
+          body.style.maxHeight = body.scrollHeight + "px";
+          requestAnimationFrame(function() {
+            body.style.maxHeight = "0px";
+            body.classList.remove("open");
+          });
+        }
+        btn.setAttribute("aria-expanded", String(!isOpen));
+      }
+    </script>
+
+    <script>
+      // ── INFLATION PHILOSOPHY LINK ACTIVATION ──
+      (function() {
+        var accordion = document.getElementById("inflationAccordion");
+        var link = document.getElementById("inflationPhilosophyLink");
+        if (!accordion || !link) return;
+        var observer = new MutationObserver(function() {
+          if (accordion.classList.contains("visible")) {
+            link.style.color = "var(--accent)";
+            link.style.textDecoration = "underline";
+            link.style.textUnderlineOffset = "3px";
+            link.style.cursor = "pointer";
+            link.style.pointerEvents = "auto";
+          } else {
+            link.style.color = "var(--muted)";
+            link.style.textDecoration = "none";
+            link.style.cursor = "default";
+            link.style.pointerEvents = "none";
+          }
+        });
+        observer.observe(accordion, { attributes: true, attributeFilter: ["class"] });
+      })();
+    </script>
+  </body>
+</html>
