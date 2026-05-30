@@ -1963,7 +1963,7 @@
         document.getElementById("goalName").value      = snap.goalName;
         document.getElementById("currentCost").value   = snap.cost;
         document.getElementById("monthlyIncome").value = snap.income;
-        if (snap.expenses) { document.getElementById("monthlyExpenses").value = snap.expenses; }
+        document.getElementById("monthlyExpenses").value = snap.expenses || "";
         document.getElementById("lumpsumAmount").value = snap.lumpsum;
         document.getElementById("yearsToGoal").value   = snap.years;    syncSlider("yearsToGoal","yearsVal");
         document.getElementById("priceInflation").value= snap.inflation; syncSlider("priceInflation","inflationVal");
@@ -2040,9 +2040,23 @@
         document.getElementById("affordCard").classList.add("hidden");
         document.getElementById("affordVerdict").className = "afford-verdict";
         document.getElementById("affordNudge").style.display = "";
+        // Bug 1 fix: reset surplus row and expenses error state
+        document.getElementById("surplusRow").classList.remove("show");
+        document.getElementById("surplusDisplay").value = "";
+        document.getElementById("expensesError").classList.remove("show");
+        document.getElementById("monthlyExpenses").classList.remove("field-error");
         document.getElementById("chartCard").style.display = "none";
         if (_chartInstance) { _chartInstance.destroy(); _chartInstance = null; window._chartInstance = null; }
         if (typeof _activePreset !== "undefined" && _activePreset) { _activePreset.classList.remove("selected"); _activePreset = null; }
+        // Bug 2 fix: collapse and hide inflation accordion
+        var inflAcc = document.getElementById("inflationAccordion");
+        var inflBody = document.getElementById("inflationBody");
+        var inflTrigger = inflAcc.querySelector(".inflation-trigger");
+        inflAcc.classList.remove("visible");
+        inflBody.classList.remove("open");
+        inflBody.style.maxHeight = "0px";
+        inflTrigger.setAttribute("aria-expanded", "false");
+        _inflationData = null;
         hideScrollHint();
       }
 
@@ -2616,27 +2630,45 @@
         }
 
         // Delay cost — lumpsum mode
+        // Bug 1 fixed: removed stray innerHTML assignment inside this block (was overwriting before line 2649)
+        // Lumpsum delay: goal inflates further if you wait, so recompute futureCost for shorter horizons
         if (result.mode === "lumpsum" && result.yearsToGoal >= 3) {
           var annualRate = result.investReturn / 100;
-          var lumpsum1yr = result.futureCost / Math.pow(1 + annualRate, result.yearsToGoal - 1);
+          var futureCost1yrL = result.currentCost * Math.pow(1 + result.priceInflation / 100, result.yearsToGoal - 1);
+          var futureCost2yrL = result.currentCost * Math.pow(1 + result.priceInflation / 100, result.yearsToGoal - 2);
+          var lumpsum1yr = futureCost1yrL / Math.pow(1 + annualRate, result.yearsToGoal - 1);
           var delta1L = lumpsum1yr - result.lumpsum;
-          var lumpsum2yr = result.futureCost / Math.pow(1 + annualRate, result.yearsToGoal - 2);
+          var lumpsum2yr = futureCost2yrL / Math.pow(1 + annualRate, result.yearsToGoal - 2);
           var delta2L = lumpsum2yr - result.lumpsum;
           html += '<div class="delay-callout">'
             + '<div class="delay-title">Cost of waiting</div>'
             + '<div class="delay-line">If you delay investing by 1 year, you\'d need <strong>' + fmtINR(Math.round(lumpsum1yr)) + ' as lumpsum</strong> <span class="delay-delta">(+' + fmtINR(Math.round(delta1L)) + ' more)</span>.</div>'
             + (result.yearsToGoal >= 4 ? '<div class="delay-line">If you delay by 2 years, it rises to <strong>' + fmtINR(Math.round(lumpsum2yr)) + '</strong> <span class="delay-delta">(+' + fmtINR(Math.round(delta2L)) + ' more)</span>.</div>' : '')
             + '</div>';
-          document.getElementById("resultsBody").innerHTML = html;
         }
 
-        // Delay cost — only for SIP/both modes and years >= 3
+        // Delay cost — SIP / both modes
+        // Bug 3 fixed: recompute futureCost for shorter horizons (goal costs less if reached sooner)
+        // Bug 2 fixed: for "both" mode, subtract the lumpsum's FV at the shorter horizon from the target
         if (result.mode !== "lumpsum" && result.yearsToGoal >= 3) {
           var r = result.monthlyRate;
           var su = result.stepUp || 0;
           var currentSIP = result.monthlySIP || 0;
-          var sip1yr = calcStepUpSIP(result.futureCost, result.yearsToGoal - 1, r, su);
-          var sip2yr = calcStepUpSIP(result.futureCost, result.yearsToGoal - 2, r, su);
+          var futureCost1yr = result.currentCost * Math.pow(1 + result.priceInflation / 100, result.yearsToGoal - 1);
+          var futureCost2yr = result.currentCost * Math.pow(1 + result.priceInflation / 100, result.yearsToGoal - 2);
+          var target1yr, target2yr;
+          if (result.mode === "both") {
+            var annualRateB = result.investReturn / 100;
+            var lumpsumFV1yr = result.lumpsumAmount * Math.pow(1 + annualRateB, result.yearsToGoal - 1);
+            var lumpsumFV2yr = result.lumpsumAmount * Math.pow(1 + annualRateB, result.yearsToGoal - 2);
+            target1yr = Math.max(0, futureCost1yr - lumpsumFV1yr);
+            target2yr = Math.max(0, futureCost2yr - lumpsumFV2yr);
+          } else {
+            target1yr = futureCost1yr;
+            target2yr = futureCost2yr;
+          }
+          var sip1yr = calcStepUpSIP(target1yr, result.yearsToGoal - 1, r, su);
+          var sip2yr = calcStepUpSIP(target2yr, result.yearsToGoal - 2, r, su);
           var delta1 = sip1yr - currentSIP;
           var delta2 = sip2yr - currentSIP;
           html += '<div class="delay-callout">'
@@ -3059,7 +3091,14 @@
 
         var sipAmount, modeIsLumpsum;
         if (result.mode === "lumpsum") {
-          sipAmount = result.lumpsum / (result.yearsToGoal * 12);
+          // Lumpsum affordability: convert to equivalent monthly SIP at the same return rate
+          // so the % of surplus comparison is financially meaningful
+          var lMonthlyRate = result.monthlyRate;
+          if (lMonthlyRate === 0) {
+            sipAmount = result.lumpsum / (result.yearsToGoal * 12);
+          } else {
+            sipAmount = result.lumpsum * lMonthlyRate / (Math.pow(1 + lMonthlyRate, result.yearsToGoal * 12) - 1);
+          }
           modeIsLumpsum = true;
         } else if (result.mode === "both") {
           sipAmount = result.monthlySIP;
