@@ -2987,12 +2987,8 @@
       }
 
       function applyPreset(el, name, cost, inflation, years) {
-        // toggle off if same chip clicked again
-        if (_activePreset === el) {
-          el.classList.remove("selected");
-          _activePreset = null;
-          return;
-        }
+        // second click on same chip does nothing
+        if (_activePreset === el) return;
         if (_activePreset) _activePreset.classList.remove("selected");
         el.classList.add("selected");
         _activePreset = el;
