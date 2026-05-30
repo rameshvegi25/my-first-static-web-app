@@ -1969,6 +1969,95 @@
         z-index: 10;
         margin-top: auto;
       }
+      /* ── BRIEFING POPUP ── */
+      #briefingOverlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9000;
+        background: rgba(0,0,0,0.7);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+      }
+      #briefingOverlay.show { display: flex; }
+      .briefing-box {
+        background: var(--card);
+        border: 1px solid rgba(201,152,42,0.3);
+        border-radius: 20px;
+        max-width: 480px;
+        width: 100%;
+        padding: 2rem 2rem 1.75rem;
+        position: relative;
+        box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+        animation: popIn 0.35s ease;
+      }
+      .briefing-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: rgba(201,152,42,0.15);
+        border: 1px solid rgba(201,152,42,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        margin-bottom: 1.25rem;
+      }
+      .briefing-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--dark);
+        margin-bottom: 0.35rem;
+        line-height: 1.2;
+      }
+      .briefing-subtitle {
+        font-size: 0.78rem;
+        color: var(--gold);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 1.25rem;
+      }
+      .briefing-body {
+        font-size: 0.9rem;
+        color: var(--muted);
+        line-height: 1.75;
+        margin-bottom: 1.5rem;
+      }
+      .briefing-body p { margin-bottom: 0.85rem; }
+      .briefing-body p:last-child { margin-bottom: 0; }
+      .briefing-body strong { color: var(--dark); font-weight: 500; }
+      .briefing-body em {
+        color: var(--gold);
+        font-style: italic;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1rem;
+      }
+      .briefing-divider {
+        height: 1px;
+        background: rgba(201,152,42,0.15);
+        margin: 0 0 1.25rem;
+      }
+      .briefing-cta {
+        width: 100%;
+        padding: 0.85rem 1.5rem;
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        color: #1a1208;
+        font-family: "Outfit", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        letter-spacing: 0.04em;
+        transition: opacity 0.2s;
+      }
+      .briefing-cta:hover { opacity: 0.88; }
+
       .footer-brand {
         font-family: "Cormorant Garamond", serif;
         font-size: 16px;
@@ -3660,6 +3749,15 @@
               }
               document.getElementById("nameError").style.display = "none";
               window._investorName = nameVal;
+              // Show briefing popup before starting quiz
+              var overlay = document.getElementById("briefingOverlay");
+              var greeting = document.getElementById("briefingGreeting");
+              if (greeting) greeting.textContent = nameVal.split(" ")[0] + ", a quick note before we begin";
+              overlay.classList.add("show");
+            });
+
+          document.getElementById("briefingCta").addEventListener("click", function() {
+              document.getElementById("briefingOverlay").classList.remove("show");
               document.getElementById("sectionIntro").style.display = "none";
               var sq = document.getElementById("sectionQuiz");
               sq.style.display = "flex";
@@ -4509,5 +4607,21 @@
       </svg>
     </a>
 
+    <!-- BRIEFING POPUP -->
+    <div id="briefingOverlay">
+      <div class="briefing-box">
+        <div class="briefing-icon">🧠</div>
+        <div class="briefing-subtitle">Before You Begin</div>
+        <div class="briefing-title" id="briefingGreeting">A quick note before we begin</div>
+        <div class="briefing-divider"></div>
+        <div class="briefing-body">
+          <p>You may notice some questions feel similar to each other. <strong>That's entirely intentional.</strong></p>
+          <p>This questionnaire uses a technique called <strong>psychometric cross-validation</strong> — the same methodology used by professional financial institutions worldwide. Asking the same idea in different ways, and in different emotional contexts, helps surface your <em>true</em> relationship with risk — not just your first instinct.</p>
+          <p>Your first answer to a question and your answer when the same idea is reframed often differ. That gap is precisely what reveals how you'd actually behave when markets move — and that's what matters most for building the right portfolio for you.</p>
+          <p><strong>There are no right or wrong answers. Only honest ones.</strong></p>
+        </div>
+        <button class="briefing-cta" id="briefingCta">I understand — let's begin ✦</button>
+      </div>
+    </div>
   </body>
 </html>
