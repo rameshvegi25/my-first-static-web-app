@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="6" fill="#0b0f1a"/>
+  <rect x="1" y="1" width="30" height="30" rx="5.2" fill="none" stroke="#c8a96e" stroke-width="0.8" stroke-opacity="0.35"/>
+  <!-- V -->
+  <text
+    x="5"
+    y="23"
+    font-family="Georgia, 'Cormorant Garamond', serif"
+    font-size="17"
+    font-weight="600"
+    fill="#c8a96e"
+    letter-spacing="-0.5"
+  >VR</text>
+  <!-- Subtle gold dot accent -->
+  <circle cx="16" cy="28" r="1.2" fill="#c8a96e" opacity="0.5"/>
+</svg>
