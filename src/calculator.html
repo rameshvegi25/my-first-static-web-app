@@ -1248,10 +1248,10 @@
         transition: background 0.18s, border-color 0.18s, color 0.18s;
         white-space: nowrap;
       }
-      .preset-chip:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-        background: var(--accent-dim);
+      .preset-chip:hover:not(.selected) {
+        border-color: rgba(200, 169, 110, 0.4);
+        color: var(--text);
+        background: var(--surface);
       }
       .preset-chip.selected {
         background: var(--accent-dim);
@@ -3099,8 +3099,10 @@
           icon  = "⚠️";
           title = "Challenging — " + pct.toFixed(0) + "% of " + baseLabel;
           var r = result.monthlyRate;
-          var sip2yr = calcStepUpSIP(result.futureCost, result.yearsToGoal + 2, r, stepUp);
-          var sip5yr = calcStepUpSIP(result.futureCost, result.yearsToGoal + 5, r, stepUp);
+          var futureCost2yr = result.currentCost * Math.pow(1 + result.priceInflation / 100, result.yearsToGoal + 2);
+          var futureCost5yr = result.currentCost * Math.pow(1 + result.priceInflation / 100, result.yearsToGoal + 5);
+          var sip2yr = calcStepUpSIP(futureCost2yr, result.yearsToGoal + 2, r, stepUp);
+          var sip5yr = calcStepUpSIP(futureCost5yr, result.yearsToGoal + 5, r, stepUp);
           var pct2yr = (sip2yr / base) * 100;
           var pct5yr = (sip5yr / base) * 100;
           var delayMsg = "<br><br>⏳ <strong>Extending your timeline helps:</strong> Adding 2 years brings your SIP to " + fmtINR(sip2yr) + " (" + pct2yr.toFixed(0) + "% of " + baseLabel + "). Adding 5 years brings it to " + fmtINR(sip5yr) + " (" + pct5yr.toFixed(0) + "% of " + baseLabel + ").";
@@ -3127,8 +3129,10 @@
           icon  = "🔴";
           title = "Exceeds Your Surplus";
           var r2 = result.monthlyRate;
-          var sip2yrR = calcStepUpSIP(result.futureCost, result.yearsToGoal + 2, r2, stepUp);
-          var sip5yrR = calcStepUpSIP(result.futureCost, result.yearsToGoal + 5, r2, stepUp);
+          var futureCost2yrR = result.currentCost * Math.pow(1 + result.priceInflation / 100, result.yearsToGoal + 2);
+          var futureCost5yrR = result.currentCost * Math.pow(1 + result.priceInflation / 100, result.yearsToGoal + 5);
+          var sip2yrR = calcStepUpSIP(futureCost2yrR, result.yearsToGoal + 2, r2, stepUp);
+          var sip5yrR = calcStepUpSIP(futureCost5yrR, result.yearsToGoal + 5, r2, stepUp);
           var pct2yrR = (sip2yrR / base) * 100;
           var pct5yrR = (sip5yrR / base) * 100;
           var delayMsgR = "<br><br>⏳ <strong>Extending your timeline helps significantly:</strong> Adding 2 years brings your SIP to " + fmtINR(sip2yrR) + " (" + pct2yrR.toFixed(0) + "% of " + baseLabel + "). Adding 5 years brings it to " + fmtINR(sip5yrR) + " (" + pct5yrR.toFixed(0) + "% of " + baseLabel + ").";
