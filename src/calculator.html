@@ -1607,6 +1607,7 @@
                 autocomplete="off"
                 inputmode="numeric"
                 oninput="formatCostInput(this); onAnyInput();"
+                onkeydown="handleMoneyKeydown(event)"
               />
             </div>
           </div>
@@ -1624,6 +1625,7 @@
                 autocomplete="off"
                 inputmode="numeric"
                 oninput="formatCostInput(this); onAnyInput();"
+                onkeydown="handleMoneyKeydown(event)"
               />
             </div>
           </div>
@@ -1710,6 +1712,7 @@
                 autocomplete="off"
                 inputmode="numeric"
                 oninput="formatIncomeInput(this); onIncomeInput();"
+                onkeydown="handleMoneyKeydown(event)"
               />
             </div>
           </div>
@@ -1725,6 +1728,7 @@
                 autocomplete="off"
                 inputmode="numeric"
                 oninput="formatIncomeInput(this); clearExpensesError(); onIncomeInput();"
+                onkeydown="handleMoneyKeydown(event)"
               />
             </div>
           </div>
@@ -2191,11 +2195,82 @@
         syncSlider(id, valIds[id]);
       });
 
+      // ── SHARED: skip-comma-on-backspace ──
+      // When cursor is right after a comma (or a selection covers only commas),
+      // treat Backspace as deleting the digit immediately before the comma.
+      function handleMoneyKeydown(e) {
+        if (e.key !== "Backspace") return;
+        var el = e.target;
+        var val = el.value;
+        var start = el.selectionStart;
+        var end   = el.selectionEnd;
+
+        // If there's a real selection (more than just a comma), let default handle it
+        if (end - start > 0) {
+          var sel = val.slice(start, end);
+          if (sel.replace(/,/g, "").length > 0) return; // selection contains digits — default ok
+        }
+
+        // Cursor is collapsed or selection is only commas — find nearest digit to the left
+        var pos = start;
+        // skip back over any commas
+        while (pos > 0 && val[pos - 1] === ",") pos--;
+        if (pos === 0) { e.preventDefault(); return; } // nothing to delete
+        if (pos !== start) {
+          // There was at least one comma between cursor and the digit — delete the digit at pos-1
+          e.preventDefault();
+          var newVal = val.slice(0, pos - 1) + val.slice(end);
+          // Count digits before pos-1 to restore cursor after reformat
+          var digitsKept = newVal.replace(/[^0-9]/g, "").length;
+          // We want cursor after (digitsKept - (digits from pos-1 onward that were removed))
+          // Actually: digits before deletion point = digits in val.slice(0, pos-1)
+          var digitsBeforeDeletion = val.slice(0, pos - 1).replace(/[^0-9]/g, "").length;
+          var raw = newVal.replace(/[^0-9]/g, "");
+          if (!raw) { el.value = ""; return; }
+          var formatted = formatIndian(parseInt(raw, 10));
+          el.value = formatted;
+          // Restore cursor after digitsBeforeDeletion digits
+          var seen = 0, newPos = formatted.length;
+          for (var i = 0; i < formatted.length; i++) {
+            if (/[0-9]/.test(formatted[i])) {
+              seen++;
+              if (seen === digitsBeforeDeletion) { newPos = i + 1; break; }
+            }
+          }
+          if (digitsBeforeDeletion === 0) newPos = 0;
+          el.setSelectionRange(newPos, newPos);
+          // Trigger oninput-bound logic manually
+          el.dispatchEvent(new Event("input", { bubbles: true }));
+        }
+        // else: cursor is right after a digit — default Backspace is fine
+      }
+
       // ── COST INPUT FORMATTER ──
       function formatCostInput(el) {
-        var raw = el.value.replace(/[^0-9]/g, "");
+        var selStart = el.selectionStart;
+        var oldVal   = el.value;
+
+        // Count digits before cursor in old value
+        var digitsBeforeCursor = oldVal.slice(0, selStart).replace(/[^0-9]/g, "").length;
+
+        var raw = oldVal.replace(/[^0-9]/g, "");
         if (!raw) { el.value = ""; return; }
-        el.value = formatIndian(parseInt(raw, 10));
+        var newVal = formatIndian(parseInt(raw, 10));
+        el.value = newVal;
+
+        // Restore cursor: find position after the same number of digits in new value
+        var digitsSeen = 0;
+        var newPos = newVal.length; // fallback: end
+        for (var i = 0; i < newVal.length; i++) {
+          if (/[0-9]/.test(newVal[i])) {
+            digitsSeen++;
+            if (digitsSeen === digitsBeforeCursor) {
+              newPos = i + 1;
+              break;
+            }
+          }
+        }
+        el.setSelectionRange(newPos, newPos);
       }
 
       function formatIndian(n) {
@@ -3017,9 +3092,30 @@
 
       // ── INCOME INPUT FORMATTER ──
       function formatIncomeInput(el) {
-        var raw = el.value.replace(/[^0-9]/g, "");
+        var selStart = el.selectionStart;
+        var oldVal   = el.value;
+
+        // Count digits before cursor in old value
+        var digitsBeforeCursor = oldVal.slice(0, selStart).replace(/[^0-9]/g, "").length;
+
+        var raw = oldVal.replace(/[^0-9]/g, "");
         if (!raw) { el.value = ""; return; }
-        el.value = formatIndian(parseInt(raw, 10));
+        var newVal = formatIndian(parseInt(raw, 10));
+        el.value = newVal;
+
+        // Restore cursor: find position after the same number of digits in new value
+        var digitsSeen = 0;
+        var newPos = newVal.length; // fallback: end
+        for (var i = 0; i < newVal.length; i++) {
+          if (/[0-9]/.test(newVal[i])) {
+            digitsSeen++;
+            if (digitsSeen === digitsBeforeCursor) {
+              newPos = i + 1;
+              break;
+            }
+          }
+        }
+        el.setSelectionRange(newPos, newPos);
       }
 
       // ── AFFORDABILITY LOGIC ──
