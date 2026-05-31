@@ -2062,6 +2062,16 @@
         inflTrigger.setAttribute("aria-expanded", "false");
         _inflationData = null;
         hideScrollHint();
+        // Collapse philosophy accordion and allow it to auto-open again on next result
+        var philBody = document.getElementById("philosophyBody");
+        var philBtn  = document.getElementById("philosophyAccordion").querySelector(".philosophy-trigger");
+        philBody.style.maxHeight = philBody.scrollHeight + "px";
+        requestAnimationFrame(function() {
+          philBody.style.maxHeight = "0px";
+          philBody.classList.remove("open");
+          philBtn.setAttribute("aria-expanded", "false");
+        });
+        if (typeof _philosophyAutoOpened !== "undefined") _philosophyAutoOpened = false;
       }
 
       // ── THEME TOGGLE ──
