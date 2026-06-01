@@ -234,7 +234,13 @@
         gap: 1.25rem;
       }
 
-      @media (max-width: 768px) {
+      @media (max-width: 900px) {
+        .cards-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
         .cards-grid {
           grid-template-columns: 1fr;
           gap: 1rem;
@@ -261,6 +267,7 @@
       .card:nth-child(1) { animation-delay: 0.55s; }
       .card:nth-child(2) { animation-delay: 0.7s; }
       .card:nth-child(3) { animation-delay: 0.85s; }
+      .card:nth-child(4) { animation-delay: 1.0s; }
 
       .card::before {
         content: "";
@@ -679,7 +686,24 @@
           <div class="card-title">Plan your<br /><em>goal.</em></div>
           <p class="card-desc">Home, education, retirement — or anything else. Calculate your SIP, lumpsum, or a mix, with inflation-adjusted projections.</p>
           <div class="card-cta">
-            <span>Open Calculator</span>
+            <span>Plan my goal</span>
+            <span class="card-cta-arrow">→</span>
+          </div>
+        </a>
+
+        <!-- Card 4: Savings Corpus Calculator -->
+        <a href="SavingsCorpusCalculator.html" class="card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+              <polyline points="16 7 22 7 22 13"/>
+            </svg>
+          </div>
+          <div class="card-step">Corpus Creation</div>
+          <div class="card-title">See what you'll<br /><em>build.</em></div>
+          <p class="card-desc">Start with what you can save — monthly SIP, lumpsum, or both. See your corpus grow with inflation-adjusted projections and real-return insights.</p>
+          <div class="card-cta">
+            <span>See what I'll build</span>
             <span class="card-cta-arrow">→</span>
           </div>
         </a>
@@ -696,6 +720,7 @@
         <a href="AboutMe.html">About Me</a>
         <a href="RiskProfiler.html">Investor Profiling</a>
         <a href="calculator.html">Goal Calculator</a>
+        <a href="SavingsCorpusCalculator.html">Corpus Calculator</a>
         <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments." target="_blank" rel="noopener">WhatsApp</a>
         <a href="tel:8329450580">Call Us</a>
         <a href="mailto:rameshvegi94@gmail.com">Email Us</a>
