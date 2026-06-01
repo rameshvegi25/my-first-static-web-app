@@ -418,6 +418,131 @@
         line-height: 1.6;
       }
 
+      /* ── MAIN CONTENT WRAPPER ── */
+      .main-content {
+        display: flex;
+        flex-direction: column;
+      }
+
+      @media (max-width: 600px) {
+        .main-content {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      /* ── QUOTE WIDGET ── */
+      .quote-section {
+        position: relative;
+        z-index: 1;
+        max-width: 720px;
+        margin: 0 auto 0;
+        padding: 0 1.5rem 3rem;
+      }
+
+      .quote-widget {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 2.5rem 3rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        animation: fadeUp 0.7s ease 0.65s forwards;
+      }
+
+      .quote-widget::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 80% 60% at 50% 0%, var(--accent-glow), transparent 70%);
+        pointer-events: none;
+      }
+
+      .quote-eyebrow {
+        font-size: 0.68rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-family: var(--sans);
+        font-weight: 400;
+        opacity: 0.75;
+        margin-bottom: 1.25rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .quote-mark {
+        font-family: var(--serif);
+        font-size: 4rem;
+        line-height: 0.5;
+        color: var(--accent);
+        opacity: 0.35;
+        margin-bottom: 1rem;
+        user-select: none;
+      }
+
+      .quote-text {
+        font-family: var(--serif);
+        font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+        font-style: italic;
+        font-weight: 400;
+        color: var(--text);
+        line-height: 1.65;
+        max-width: 560px;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1.75rem;
+      }
+
+      .quote-divider {
+        width: 28px;
+        height: 1px;
+        background: var(--accent);
+        opacity: 0.5;
+        margin-bottom: 1.25rem;
+      }
+
+      .quote-author {
+        font-family: var(--sans);
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--accent);
+        letter-spacing: 0.06em;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 0.3rem;
+      }
+
+      .quote-label {
+        font-family: var(--sans);
+        font-size: 0.7rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        position: relative;
+        z-index: 1;
+      }
+
+      @media (max-width: 600px) {
+        .quote-section {
+          order: 2;
+          padding: 0 1rem 2rem;
+          margin-top: 0;
+        }
+        .quote-widget {
+          padding: 1.75rem 1.5rem;
+        }
+        .cards-section {
+          order: 1;
+        }
+      }
+
       /* ── ANIMATIONS ── */
       @keyframes fadeUp {
         from { opacity: 0; transform: translateY(18px); }
@@ -480,6 +605,20 @@
       <p class="hero-sub">No hype. No fear. Just clear thinking, honest distribution, and a plan that grows with you.</p>
       <div class="hero-divider"></div>
     </header>
+
+    <div class="main-content">
+
+    <!-- QUOTE WIDGET -->
+    <section class="quote-section">
+      <div class="quote-widget">
+        <div class="quote-eyebrow">✦ Thought for the Day ✦</div>
+        <div class="quote-mark">"</div>
+        <p class="quote-text" id="quote-text"></p>
+        <div class="quote-divider"></div>
+        <div class="quote-author" id="quote-author"></div>
+        <div class="quote-label" id="quote-label"></div>
+      </div>
+    </section>
 
     <!-- CARDS -->
     <section class="cards-section">
@@ -548,6 +687,8 @@
       </div>
     </section>
 
+    </div><!-- /main-content -->
+
     <!-- FOOTER -->
     <footer>
       <div class="footer-brand">Mutual Fund and NPS distribution services by Vegi Ramesh</div>
@@ -591,5 +732,53 @@
         if (btn) btn.classList.add("ready");
       })();
     </script>
+    <script>
+      (function () {
+        var quotes = [
+          { text: "Far more money has been lost in waiting for corrections than in the corrections themselves.", author: "Peter Lynch", label: "Legendary Fund Manager" },
+          { text: "Know what you own, and know why you own it.", author: "Peter Lynch", label: "Legendary Fund Manager" },
+          { text: "The real key to making money in stocks is not to get scared out of them.", author: "Peter Lynch", label: "Legendary Fund Manager" },
+          { text: "In the stock market, the most important organ is the stomach. It's not the brain.", author: "Peter Lynch", label: "Legendary Fund Manager" },
+          { text: "Someone is sitting in the shade today because someone planted a tree a long time ago.", author: "Warren Buffett", label: "Chairman, Berkshire Hathaway" },
+          { text: "The stock market is a device for transferring money from the impatient to the patient.", author: "Warren Buffett", label: "Chairman, Berkshire Hathaway" },
+          { text: "Be fearful when others are greedy and greedy when others are fearful.", author: "Warren Buffett", label: "Chairman, Berkshire Hathaway" },
+          { text: "Our favourite holding period is forever.", author: "Warren Buffett", label: "Chairman, Berkshire Hathaway" },
+          { text: "The first rule of compounding: Never interrupt it unnecessarily.", author: "Charlie Munger", label: "Vice Chairman, Berkshire Hathaway" },
+          { text: "The desire to get rich fast is pretty dangerous.", author: "Charlie Munger", label: "Vice Chairman, Berkshire Hathaway" },
+          { text: "It's waiting that helps you as an investor, and a lot of people just can't stand to wait.", author: "Charlie Munger", label: "Vice Chairman, Berkshire Hathaway" },
+          { text: "The big money is made in the long term.", author: "Charlie Munger", label: "Vice Chairman, Berkshire Hathaway" },
+          { text: "The two greatest enemies of the equity fund investor are expenses and emotions.", author: "John Bogle", label: "Founder, Vanguard Group" },
+          { text: "Don't look for the needle in the haystack. Just buy the haystack!", author: "John Bogle", label: "Founder, Vanguard Group" },
+          { text: "Stay the course.", author: "John Bogle", label: "Founder, Vanguard Group" },
+          { text: "The investor's chief problem — and even his worst enemy — is likely to be himself.", author: "Benjamin Graham", label: "Father of Value Investing" },
+          { text: "Successful investing is about managing risk, not avoiding it.", author: "Benjamin Graham", label: "Father of Value Investing" },
+          { text: "The individual investor should act consistently as an investor and not as a speculator.", author: "Benjamin Graham", label: "Father of Value Investing" },
+          { text: "The single greatest edge an investor can have is a long-term orientation.", author: "Seth Klarman", label: "Founder, Baupost Group" },
+          { text: "You can't predict, but you can prepare.", author: "Howard Marks", label: "Co-Founder, Oaktree Capital" },
+          { text: "The best way to make money is to avoid losing it.", author: "Jack Meyer", label: "Former CIO, Harvard Endowment" },
+          { text: "Investing should be more like watching paint dry or watching grass grow. If you want excitement, take $800 and go to Las Vegas.", author: "Paul Samuelson", label: "Nobel Laureate in Economics" },
+          { text: "The reason index funds will outperform most actively managed funds is because of costs. Costs matter.", author: "William Bernstein", label: "Author & Investment Theorist" },
+          { text: "In investing, what is comfortable is rarely profitable.", author: "Robert Arnott", label: "Founder, Research Affiliates" },
+          { text: "The four most dangerous words in investing are: 'This time it's different.'", author: "Sir John Templeton", label: "Pioneer of Global Investing" },
+          { text: "Risk comes from not knowing what you are doing.", author: "Warren Buffett", label: "Chairman, Berkshire Hathaway" },
+          { text: "Time in the market beats timing the market.", author: "Ken Fisher", label: "Founder, Fisher Investments" },
+          { text: "An investment in knowledge pays the best interest.", author: "Benjamin Franklin", label: "Founding Father & Polymath" },
+          { text: "Do not save what is left after spending, but spend what is left after saving.", author: "Warren Buffett", label: "Chairman, Berkshire Hathaway" },
+          { text: "Compound interest is the eighth wonder of the world. He who understands it, earns it; he who doesn't, pays it.", author: "Albert Einstein", label: "Nobel Laureate in Physics" },
+          { text: "Markets can remain irrational longer than you can remain solvent.", author: "John Maynard Keynes", label: "Economist & Investor" }
+        ];
+
+        // Seed using today's date so the quote stays consistent all day
+        var now = new Date();
+        var seed = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
+        var index = seed % quotes.length;
+
+        var q = quotes[index];
+        document.getElementById("quote-text").textContent = q.text;
+        document.getElementById("quote-author").textContent = q.author;
+        document.getElementById("quote-label").textContent = q.label;
+      })();
+    </script>
+
   </body>
 </html>
