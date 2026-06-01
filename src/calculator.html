@@ -2727,8 +2727,8 @@
           var delta2L = lumpsum2yr - result.lumpsum;
           html += '<div class="delay-callout">'
             + '<div class="delay-title">Cost of waiting</div>'
-            + '<div class="delay-line">If you delay investing by 1 year, you\'d need <strong>' + shortINR(Math.round(lumpsum1yr)) + ' as lumpsum</strong> <span class="delay-delta">(+' + shortINR(Math.round(delta1L)) + ' more)</span>.</div>'
-            + (result.yearsToGoal >= 4 ? '<div class="delay-line">If you delay by 2 years, it rises to <strong>' + shortINR(Math.round(lumpsum2yr)) + '</strong> <span class="delay-delta">(+' + shortINR(Math.round(delta2L)) + ' more)</span>.</div>' : '')
+            + '<div class="delay-line">If you delay investing by 1 year, you\'d need <strong>' + shortINR(Math.round(lumpsum1yr)) + ' as lumpsum</strong> <span class="delay-delta">(+' + fmtINR(Math.round(delta1L)) + ' more)</span>.</div>'
+            + (result.yearsToGoal >= 4 ? '<div class="delay-line">If you delay by 2 years, it rises to <strong>' + shortINR(Math.round(lumpsum2yr)) + '</strong> <span class="delay-delta">(+' + fmtINR(Math.round(delta2L)) + ' more)</span>.</div>' : '')
             + '</div>';
         }
 
@@ -2758,8 +2758,8 @@
           var delta2 = sip2yr - currentSIP;
           html += '<div class="delay-callout">'
             + '<div class="delay-title">Cost of waiting</div>'
-            + '<div class="delay-line">If you delay starting by 1 year, your SIP would be <strong>' + shortINR(sip1yr) + '/month</strong> <span class="delay-delta">(+' + shortINR(delta1) + ' more)</span>.</div>'
-            + (result.yearsToGoal >= 4 ? '<div class="delay-line">If you delay starting by 2 years, it rises to <strong>' + shortINR(sip2yr) + '/month</strong> <span class="delay-delta">(+' + shortINR(delta2) + ' more)</span>.</div>' : '')
+            + '<div class="delay-line">If you delay starting by 1 year, your SIP would be <strong>' + fmtINR(sip1yr) + '/month</strong> <span class="delay-delta">(+' + fmtINR(delta1) + ' more)</span>.</div>'
+            + (result.yearsToGoal >= 4 ? '<div class="delay-line">If you delay starting by 2 years, it rises to <strong>' + fmtINR(sip2yr) + '/month</strong> <span class="delay-delta">(+' + fmtINR(delta2) + ' more)</span>.</div>' : '')
             + '</div>';
         }
 
@@ -3246,12 +3246,12 @@
           var sip5yr = calcStepUpSIP(futureCost5yr, result.yearsToGoal + 5, r, stepUp);
           var pct2yr = (sip2yr / base) * 100;
           var pct5yr = (sip5yr / base) * 100;
-          var delayMsg = "<br><br>⏳ <strong>Extending your timeline helps:</strong> Adding 2 years brings your SIP to " + shortINR(sip2yr) + " (" + pct2yr.toFixed(0) + "% of " + baseLabel + "). Adding 5 years brings it to " + shortINR(sip5yr) + " (" + pct5yr.toFixed(0) + "% of " + baseLabel + ").";
+          var delayMsg = "<br><br>⏳ <strong>Extending your timeline helps:</strong> Adding 2 years brings your SIP to " + fmtINR(sip2yr) + " (" + pct2yr.toFixed(0) + "% of " + baseLabel + "). Adding 5 years brings it to " + fmtINR(sip5yr) + " (" + pct5yr.toFixed(0) + "% of " + baseLabel + ").";
           if (!modeIsLumpsum && stepUp === 0) {
             var suggestedSIP = calcStepUpSIP(result.futureCost, result.yearsToGoal, r, 10);
             var suggestedPct = (suggestedSIP / base) * 100;
             msg = pct.toFixed(0) + "% of " + baseLabel + " leaves very little buffer."
-              + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + shortINR(suggestedSIP) + " — that's " + suggestedPct.toFixed(0) + "% of " + baseLabel + ".</strong> "
+              + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + fmtINR(suggestedSIP) + " — that's " + suggestedPct.toFixed(0) + "% of " + baseLabel + ".</strong> "
               + "<span class='scroll-up-link' onclick='scrollToStepUp()'>↑ Try the step-up slider</span>"
               + delayMsg
               + "<br><br>Growing your income is the most direct path to making this comfortable.";
@@ -3276,13 +3276,13 @@
           var sip5yrR = calcStepUpSIP(futureCost5yrR, result.yearsToGoal + 5, r2, stepUp);
           var pct2yrR = (sip2yrR / base) * 100;
           var pct5yrR = (sip5yrR / base) * 100;
-          var delayMsgR = "<br><br>⏳ <strong>Extending your timeline helps significantly:</strong> Adding 2 years brings your SIP to " + shortINR(sip2yrR) + " (" + pct2yrR.toFixed(0) + "% of " + baseLabel + "). Adding 5 years brings it to " + shortINR(sip5yrR) + " (" + pct5yrR.toFixed(0) + "% of " + baseLabel + ").";
+          var delayMsgR = "<br><br>⏳ <strong>Extending your timeline helps significantly:</strong> Adding 2 years brings your SIP to " + fmtINR(sip2yrR) + " (" + pct2yrR.toFixed(0) + "% of " + baseLabel + "). Adding 5 years brings it to " + fmtINR(sip5yrR) + " (" + pct5yrR.toFixed(0) + "% of " + baseLabel + ").";
           if (!modeIsLumpsum && stepUp === 0) {
             var suggestedSIP2 = calcStepUpSIP(result.futureCost, result.yearsToGoal, r2, 10);
             var suggestedPct2 = (suggestedSIP2 / base) * 100;
             if (suggestedPct2 <= 80) {
               msg = "This SIP exceeds your current surplus — it can't be funded from what's left after expenses."
-                + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + shortINR(suggestedSIP2) + " — that's " + suggestedPct2.toFixed(0) + "% of " + baseLabel + ".</strong> "
+                + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + fmtINR(suggestedSIP2) + " — that's " + suggestedPct2.toFixed(0) + "% of " + baseLabel + ".</strong> "
                 + "<span class='scroll-up-link' onclick='scrollToStepUp()'>↑ Try the step-up slider</span>"
                 + delayMsgR
                 + "<br><br>Growing your income is the most direct path to closing this gap.";
