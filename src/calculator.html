@@ -2651,7 +2651,7 @@
           var lumpsumRealMultiple = Math.pow(1 + realRateL, result.yearsToGoal).toFixed(2);
           html = '<div class="results-grid">'
             + resultCellPrimary("Lumpsum to Invest Today", fmtINR(result.lumpsum), "accent", "One-time investment needed now")
-            + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "What it'll cost in " + result.yearsToGoal + " years (" + result.priceInflation + "% inflation/yr)")
+            + resultCell("Future Cost of Goal", shortINR(result.futureCost), "", "What it'll cost in " + result.yearsToGoal + " years (" + result.priceInflation + "% inflation/yr)")
             + resultCellDual("Return Multiple", lumpsumAbsMultiple + "×", "Absolute", lumpsumRealMultiple + "×", "Real")
             + resultCellSplit(result.lumpsum, lumpsumGain, result.futureCost, lumpsumYoursPct, lumpsumReturnsPct)
             + '</div>';
@@ -2663,9 +2663,9 @@
             var bothMultiple = (result.lumpsumFV / result.lumpsumAmount).toFixed(1);
             html = '<div class="results-grid">'
               + resultCellPrimary("Lumpsum Invested Today", fmtINR(result.lumpsumAmount), "accent", "Your one-time investment")
-              + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "What it'll cost in " + result.yearsToGoal + " years (" + result.priceInflation + "% inflation/yr)")
-              + resultCell("Your Lumpsum Grows To", fmtINR(result.lumpsumFV), "safe", "At " + result.investReturn + "% p.a. — " + bothMultiple + "× return")
-              + resultCell("Surplus Above Goal", fmtINR(surplus > 0 ? surplus : 0), "safe", "Extra corpus beyond your goal")
+              + resultCell("Future Cost of Goal", shortINR(result.futureCost), "", "What it'll cost in " + result.yearsToGoal + " years (" + result.priceInflation + "% inflation/yr)")
+              + resultCell("Your Lumpsum Grows To", shortINR(result.lumpsumFV), "safe", "At " + result.investReturn + "% p.a. — " + bothMultiple + "× return")
+              + resultCell("Surplus Above Goal", shortINR(surplus > 0 ? surplus : 0), "safe", "Extra corpus beyond your goal")
               + '</div>'
               + '<div style="margin-top:1rem;padding:0.9rem 1.1rem;background:rgba(76,175,130,0.08);border:1px solid rgba(76,175,130,0.25);border-radius:10px;font-size:0.85rem;color:var(--safe);">✅ Your lumpsum of ' + fmtINR(result.lumpsumAmount) + ' is enough to meet this goal. No monthly SIP required.</div>';
           } else {
@@ -2686,7 +2686,7 @@
             html = '<div class="results-grid">'
               + resultCellPrimary("Lumpsum Invested Today", fmtINR(result.lumpsumAmount), "accent", "Your one-time investment")
               + resultCellPrimary("Monthly SIP Needed", fmtINR(result.monthlySIP), "accent", sipSubLabel)
-              + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "What it'll cost in " + result.yearsToGoal + " years (" + result.priceInflation + "% inflation/yr)")
+              + resultCell("Future Cost of Goal", shortINR(result.futureCost), "", "What it'll cost in " + result.yearsToGoal + " years (" + result.priceInflation + "% inflation/yr)")
               + resultCellSplit(result.totalInvested, result.totalGain > 0 ? result.totalGain : 0, result.futureCost, bothYoursPct, bothReturnsPct)
               + resultCellDual("Return Multiple", bothAbsMultiple + "×", "Absolute", bothRealMultiple + "×", "Real")
               + resultCell("SIP Relief from Lumpsum", fmtINR(monthlySaving), "safe", "Without it, you'd need " + fmtINR(Math.round(pureSIP)) + "/month")
@@ -2708,7 +2708,7 @@
           var sipRealMultiple = Math.pow(1 + realRate, result.yearsToGoal).toFixed(2);
           html = '<div class="results-grid">'
             + resultCellPrimary("Monthly SIP Needed", fmtINR(result.monthlySIP), "accent", sipSubLabel)
-            + resultCell("Future Cost of Goal", fmtINR(result.futureCost), "", "What it'll cost in " + result.yearsToGoal + " years (" + result.priceInflation + "% inflation/yr)")
+            + resultCell("Future Cost of Goal", shortINR(result.futureCost), "", "What it'll cost in " + result.yearsToGoal + " years (" + result.priceInflation + "% inflation/yr)")
             + resultCellSplit(result.totalInvested, result.totalGain > 0 ? result.totalGain : 0, result.futureCost, sipYoursPct, sipReturnsPct)
             + resultCellDual("Return Multiple", sipAbsMultiple + "×", "Absolute", sipRealMultiple + "×", "Real")
             + '</div>';
@@ -2727,8 +2727,8 @@
           var delta2L = lumpsum2yr - result.lumpsum;
           html += '<div class="delay-callout">'
             + '<div class="delay-title">Cost of waiting</div>'
-            + '<div class="delay-line">If you delay investing by 1 year, you\'d need <strong>' + fmtINR(Math.round(lumpsum1yr)) + ' as lumpsum</strong> <span class="delay-delta">(+' + fmtINR(Math.round(delta1L)) + ' more)</span>.</div>'
-            + (result.yearsToGoal >= 4 ? '<div class="delay-line">If you delay by 2 years, it rises to <strong>' + fmtINR(Math.round(lumpsum2yr)) + '</strong> <span class="delay-delta">(+' + fmtINR(Math.round(delta2L)) + ' more)</span>.</div>' : '')
+            + '<div class="delay-line">If you delay investing by 1 year, you\'d need <strong>' + shortINR(Math.round(lumpsum1yr)) + ' as lumpsum</strong> <span class="delay-delta">(+' + shortINR(Math.round(delta1L)) + ' more)</span>.</div>'
+            + (result.yearsToGoal >= 4 ? '<div class="delay-line">If you delay by 2 years, it rises to <strong>' + shortINR(Math.round(lumpsum2yr)) + '</strong> <span class="delay-delta">(+' + shortINR(Math.round(delta2L)) + ' more)</span>.</div>' : '')
             + '</div>';
         }
 
@@ -2758,8 +2758,8 @@
           var delta2 = sip2yr - currentSIP;
           html += '<div class="delay-callout">'
             + '<div class="delay-title">Cost of waiting</div>'
-            + '<div class="delay-line">If you delay starting by 1 year, your SIP would be <strong>' + fmtINR(sip1yr) + '/month</strong> <span class="delay-delta">(+' + fmtINR(delta1) + ' more)</span>.</div>'
-            + (result.yearsToGoal >= 4 ? '<div class="delay-line">If you delay starting by 2 years, it rises to <strong>' + fmtINR(sip2yr) + '/month</strong> <span class="delay-delta">(+' + fmtINR(delta2) + ' more)</span>.</div>' : '')
+            + '<div class="delay-line">If you delay starting by 1 year, your SIP would be <strong>' + shortINR(sip1yr) + '/month</strong> <span class="delay-delta">(+' + shortINR(delta1) + ' more)</span>.</div>'
+            + (result.yearsToGoal >= 4 ? '<div class="delay-line">If you delay starting by 2 years, it rises to <strong>' + shortINR(sip2yr) + '/month</strong> <span class="delay-delta">(+' + shortINR(delta2) + ' more)</span>.</div>' : '')
             + '</div>';
         }
 
@@ -2807,7 +2807,7 @@
       function resultCellSplit(invested, gains, futureCost, yoursPct, returnsPct) {
         var tipInvested = 'This is every rupee you put in yourself — through discipline, every single month. No magic here, just your commitment showing up.';
         var tipGains = 'This is the bonus your money earned by being invested. The market did this work for you, while you slept. The longer you stay invested, the bigger this gets.';
-        return '<div class="result-cell">'          + '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;">'          +   '<div>'          +     '<div class="result-label">You Put In <i class="tip-icon" data-tip="' + tipInvested + '">i</i></div>'          +     '<div class="result-value neutral">' + fmtINR(invested) + '</div>'          +   '</div>'          +   '<div style="text-align:right;">'          +     '<div class="result-label">Projected Gains <i class="tip-icon" data-tip="' + tipGains + '">i</i></div>'          +     '<div class="result-value safe">' + fmtINR(gains) + '</div>'          +   '</div>'          + '</div>'          + '<div style="height:4px;border-radius:3px;overflow:hidden;display:flex;margin-top:0.7rem;">'          +   '<div style="width:' + yoursPct + '%;background:var(--neutral);transition:width 0.5s ease;"></div>'          +   '<div style="width:' + returnsPct + '%;background:var(--safe);transition:width 0.5s ease;"></div>'          + '</div>'          + '</div>';
+        return '<div class="result-cell">'          + '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;">'          +   '<div>'          +     '<div class="result-label">You Put In <i class="tip-icon" data-tip="' + tipInvested + '">i</i></div>'          +     '<div class="result-value neutral">' + shortINR(invested) + '</div>'          +   '</div>'          +   '<div style="text-align:right;">'          +     '<div class="result-label">Projected Gains <i class="tip-icon" data-tip="' + tipGains + '">i</i></div>'          +     '<div class="result-value safe">' + shortINR(gains) + '</div>'          +   '</div>'          + '</div>'          + '<div style="height:4px;border-radius:3px;overflow:hidden;display:flex;margin-top:0.7rem;">'          +   '<div style="width:' + yoursPct + '%;background:var(--neutral);transition:width 0.5s ease;"></div>'          +   '<div style="width:' + returnsPct + '%;background:var(--safe);transition:width 0.5s ease;"></div>'          + '</div>'          + '</div>';
       }
 
       function resultCellDual(label, val1, label1, val2, label2) {
@@ -3246,12 +3246,12 @@
           var sip5yr = calcStepUpSIP(futureCost5yr, result.yearsToGoal + 5, r, stepUp);
           var pct2yr = (sip2yr / base) * 100;
           var pct5yr = (sip5yr / base) * 100;
-          var delayMsg = "<br><br>⏳ <strong>Extending your timeline helps:</strong> Adding 2 years brings your SIP to " + fmtINR(sip2yr) + " (" + pct2yr.toFixed(0) + "% of " + baseLabel + "). Adding 5 years brings it to " + fmtINR(sip5yr) + " (" + pct5yr.toFixed(0) + "% of " + baseLabel + ").";
+          var delayMsg = "<br><br>⏳ <strong>Extending your timeline helps:</strong> Adding 2 years brings your SIP to " + shortINR(sip2yr) + " (" + pct2yr.toFixed(0) + "% of " + baseLabel + "). Adding 5 years brings it to " + shortINR(sip5yr) + " (" + pct5yr.toFixed(0) + "% of " + baseLabel + ").";
           if (!modeIsLumpsum && stepUp === 0) {
             var suggestedSIP = calcStepUpSIP(result.futureCost, result.yearsToGoal, r, 10);
             var suggestedPct = (suggestedSIP / base) * 100;
             msg = pct.toFixed(0) + "% of " + baseLabel + " leaves very little buffer."
-              + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + fmtINR(suggestedSIP) + " — that's " + suggestedPct.toFixed(0) + "% of " + baseLabel + ".</strong> "
+              + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + shortINR(suggestedSIP) + " — that's " + suggestedPct.toFixed(0) + "% of " + baseLabel + ".</strong> "
               + "<span class='scroll-up-link' onclick='scrollToStepUp()'>↑ Try the step-up slider</span>"
               + delayMsg
               + "<br><br>Growing your income is the most direct path to making this comfortable.";
@@ -3276,13 +3276,13 @@
           var sip5yrR = calcStepUpSIP(futureCost5yrR, result.yearsToGoal + 5, r2, stepUp);
           var pct2yrR = (sip2yrR / base) * 100;
           var pct5yrR = (sip5yrR / base) * 100;
-          var delayMsgR = "<br><br>⏳ <strong>Extending your timeline helps significantly:</strong> Adding 2 years brings your SIP to " + fmtINR(sip2yrR) + " (" + pct2yrR.toFixed(0) + "% of " + baseLabel + "). Adding 5 years brings it to " + fmtINR(sip5yrR) + " (" + pct5yrR.toFixed(0) + "% of " + baseLabel + ").";
+          var delayMsgR = "<br><br>⏳ <strong>Extending your timeline helps significantly:</strong> Adding 2 years brings your SIP to " + shortINR(sip2yrR) + " (" + pct2yrR.toFixed(0) + "% of " + baseLabel + "). Adding 5 years brings it to " + shortINR(sip5yrR) + " (" + pct5yrR.toFixed(0) + "% of " + baseLabel + ").";
           if (!modeIsLumpsum && stepUp === 0) {
             var suggestedSIP2 = calcStepUpSIP(result.futureCost, result.yearsToGoal, r2, 10);
             var suggestedPct2 = (suggestedSIP2 / base) * 100;
             if (suggestedPct2 <= 80) {
               msg = "This SIP exceeds your current surplus — it can't be funded from what's left after expenses."
-                + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + fmtINR(suggestedSIP2) + " — that's " + suggestedPct2.toFixed(0) + "% of " + baseLabel + ".</strong> "
+                + "<br><br>💡 <strong>At 10% annual step-up, your starting SIP drops to " + shortINR(suggestedSIP2) + " — that's " + suggestedPct2.toFixed(0) + "% of " + baseLabel + ".</strong> "
                 + "<span class='scroll-up-link' onclick='scrollToStepUp()'>↑ Try the step-up slider</span>"
                 + delayMsgR
                 + "<br><br>Growing your income is the most direct path to closing this gap.";
@@ -3420,18 +3420,18 @@
         _inflationData = { yoursPct, inflPct, realPct, totalInvested, inflationCut, realGain, result };
 
         // Update stat cells
-        document.getElementById("inflStatYours").textContent    = fmtINR(totalInvested);
+        document.getElementById("inflStatYours").textContent    = shortINR(totalInvested);
         document.querySelector("#inflationAccordion .inflation-stat-label").childNodes[0].textContent = result.mode === "lumpsum" ? "Lumpsum Invested " : "You Put In ";
         document.getElementById("inflStatYoursPct").textContent = yoursPct + "% of corpus";
-        document.getElementById("inflStatInfl").textContent     = fmtINR(inflationCut);
+        document.getElementById("inflStatInfl").textContent     = shortINR(inflationCut);
         document.getElementById("inflStatInflPct").textContent  = inflPct + "% of corpus";
-        document.getElementById("inflStatReal").textContent     = fmtINR(realGain);
+        document.getElementById("inflStatReal").textContent     = shortINR(realGain);
         document.getElementById("inflStatRealPct").textContent  = realPct + "% of corpus";
 
         // Note
         var noteEl = document.getElementById("inflationNote");
         var realReturn = ((( 1 + result.investReturn / 100) / (1 + result.priceInflation / 100)) - 1) * 100;
-        noteEl.innerHTML = "At " + result.investReturn + "% return and " + result.priceInflation + "% inflation, your real return is roughly <strong>" + realReturn.toFixed(1) + "% p.a.</strong>. Of your <strong>" + fmtINR(futureCost) + "</strong> corpus, <strong>" + fmtINR(Math.round(inflationCut)) + "</strong> is what inflation accounts for — and <strong>" + fmtINR(Math.round(realGain)) + "</strong> is genuine wealth created above and beyond inflation.";
+        noteEl.innerHTML = "At " + result.investReturn + "% return and " + result.priceInflation + "% inflation, your real return is roughly <strong>" + realReturn.toFixed(1) + "% p.a.</strong>. Of your <strong>" + shortINR(futureCost) + "</strong> corpus, <strong>" + shortINR(Math.round(inflationCut)) + "</strong> is what inflation accounts for — and <strong>" + shortINR(Math.round(realGain)) + "</strong> is genuine wealth created above and beyond inflation.";
 
         // If body is already open, update bar directly (no animation delay needed)
         var body = document.getElementById("inflationBody");
