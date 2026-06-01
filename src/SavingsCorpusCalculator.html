@@ -1107,8 +1107,8 @@
           var tipG = 'The bonus your money earned by being invested. The market did this work for you, while you slept.';
           return '<div class="result-cell">'
             + '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;">'
-            + '<div><div class="result-label">You Put In <i class="tip-icon" data-tip="' + tipI + '">i</i></div><div class="result-value neutral">' + fmtINR(invested) + '</div></div>'
-            + '<div style="text-align:right;"><div class="result-label">Projected Gains <i class="tip-icon" data-tip="' + tipG + '">i</i></div><div class="result-value safe">' + fmtINR(gains) + '</div></div>'
+            + '<div><div class="result-label">You Put In <i class="tip-icon" data-tip="' + tipI + '">i</i></div><div class="result-value neutral">' + shortINR(invested) + '</div></div>'
+            + '<div style="text-align:right;"><div class="result-label">Projected Gains <i class="tip-icon" data-tip="' + tipG + '">i</i></div><div class="result-value safe">' + shortINR(gains) + '</div></div>'
             + '</div>'
             + '<div style="height:4px;border-radius:3px;overflow:hidden;display:flex;margin-top:0.7rem;">'
             + '<div style="width:' + yoursPct + '%;background:var(--neutral);transition:width 0.5s ease;"></div>'
@@ -1131,8 +1131,8 @@
           var dLabel = result.deferYears > 0 ? " + " + result.deferYears + " yr" + (result.deferYears > 1 ? "s" : "") + " deferred" : "";
           heading.innerHTML = "Your <em>" + fmtINR(result.lumpsum) + "</em> grows to <em>" + fmtINR(result.finalFV) + "</em> in " + result.totalYears + " years";
           html = '<div class="results-grid">'
-            + rCellPrimary("Corpus at Year " + result.totalYears, fmtINR(result.finalFV), "Nominal — at " + result.investReturn + "% p.a." + dLabel)
-            + rCellSafePrimary("Real Value (Today's ₹)", fmtINR(result.realFV), "After " + result.inflation + "% inflation p.a.")
+            + rCellPrimary("Corpus at Year " + result.totalYears, shortINR(result.finalFV), "Nominal — at " + result.investReturn + "% p.a." + dLabel)
+            + rCellSafePrimary("Real Value (Today's ₹)", shortINR(result.realFV), "After " + result.inflation + "% inflation p.a.")
             + rCellInvestedSplit(result.lumpsum, result.gains > 0 ? result.gains : 0)
             + rCellDual("Return Multiple", result.multiple + "×", "Absolute", result.realMultiple + "×", "Real (Infl-Adj.)")
             + '</div>';
@@ -1141,8 +1141,8 @@
           if (result.deferYears > 0) {
             html += '<div class="delay-callout" style="border-left:3px solid var(--accent);background:var(--accent-glow);border-radius:0 10px 10px 0;">'
               + '<div class="delay-title" style="color:var(--accent);">✦ Deferred compounding phase</div>'
-              + '<div class="delay-line">After investing for <strong>' + result.years + ' years</strong>, your corpus stands at <strong>' + fmtINR(result.fv) + '</strong>.</div>'
-              + '<div class="delay-line">You stop all contributions and wait <strong>' + result.deferYears + ' more year' + (result.deferYears > 1 ? 's' : '') + '</strong>. With no new money added, it grows to <strong>' + fmtINR(result.finalFV) + '</strong> <span class="gain-delta">(+' + fmtINR(result.finalFV - result.fv) + ' from compounding alone)</span>.</div>'
+              + '<div class="delay-line">After investing for <strong>' + result.years + ' years</strong>, your corpus stands at <strong>' + shortINR(result.fv) + '</strong>.</div>'
+              + '<div class="delay-line">You stop all contributions and wait <strong>' + result.deferYears + ' more year' + (result.deferYears > 1 ? 's' : '') + '</strong>. With no new money added, it grows to <strong>' + shortINR(result.finalFV) + '</strong> <span class="gain-delta">(+' + shortINR(result.finalFV - result.fv) + ' from compounding alone)</span>.</div>'
               + '</div>';
           }
 
@@ -1153,8 +1153,8 @@
             var lost1 = result.fv - fv1yr;
             var lost2 = result.fv - fv2yr;
             html += '<div class="delay-callout"><div class="delay-title">What early investing gives you</div>'
-              + '<div class="delay-line">Investing 1 year earlier would have grown your money to <strong>' + fmtINR(fv1yr + lost1) + '</strong> <span class="gain-delta">(+' + fmtINR(lost1) + ' extra)</span>.</div>'
-              + (result.years >= 4 ? '<div class="delay-line">Investing 2 years earlier: <strong>' + fmtINR(fv2yr + lost2) + '</strong> <span class="gain-delta">(+' + fmtINR(lost2) + ' extra)</span>.</div>' : '')
+              + '<div class="delay-line">Investing 1 year earlier would have grown your money to <strong>' + shortINR(fv1yr + lost1) + '</strong> <span class="gain-delta">(+' + shortINR(lost1) + ' extra)</span>.</div>'
+              + (result.years >= 4 ? '<div class="delay-line">Investing 2 years earlier: <strong>' + shortINR(fv2yr + lost2) + '</strong> <span class="gain-delta">(+' + shortINR(lost2) + ' extra)</span>.</div>' : '')
               + '</div>';
           }
 
@@ -1167,20 +1167,20 @@
             heading.innerHTML = "Your <em>" + fmtINR(result.lsAmt) + "</em> lumpsum + <em>" + fmtINR(result.sipAmt) + "</em>/mo SIP builds <em>" + fmtINR(result.finalFV) + "</em>";
           }
           html = '<div class="results-grid">'
-            + rCellPrimary("Total Corpus at Year " + result.totalYears, fmtINR(result.finalFV), "Nominal — at " + result.investReturn + "% p.a." + dLabel2)
-            + rCellSafePrimary("Real Value (Today's ₹)", fmtINR(result.realTotalFV), "After " + result.inflation + "% inflation p.a.")
+            + rCellPrimary("Total Corpus at Year " + result.totalYears, shortINR(result.finalFV), "Nominal — at " + result.investReturn + "% p.a." + dLabel2)
+            + rCellSafePrimary("Real Value (Today's ₹)", shortINR(result.realTotalFV), "After " + result.inflation + "% inflation p.a.")
             + rCellInvestedSplit(result.totalInvested, result.gains > 0 ? result.gains : 0)
             + rCellDual("Return Multiple", result.multiple + "×", "Absolute", result.realMultiple + "×", "Real (Infl-Adj.)")
-            + rCell("Lumpsum Grows To", fmtINR(result.lsFV), "accent", "From ₹" + formatIndian(Math.round(result.lsAmt)) + " invested today")
-            + rCell("SIP Builds", fmtINR(result.sipFV), "safe", su > 0 ? "Starting " + fmtINR(result.sipAmt) + ", +" + su + "% each year" : fmtINR(result.sipAmt) + " every month")
+            + rCell("Lumpsum Grows To", shortINR(result.lsFV), "accent", "From " + fmtINR(result.lsAmt) + " invested today")
+            + rCell("SIP Builds", shortINR(result.sipFV), "safe", su > 0 ? "Starting " + fmtINR(result.sipAmt) + ", +" + su + "% each year" : fmtINR(result.sipAmt) + " every month")
             + '</div>';
 
           // Defer phase callout
           if (result.deferYears > 0) {
             html += '<div class="delay-callout" style="border-left:3px solid var(--accent);background:var(--accent-glow);border-radius:0 10px 10px 0;">'
               + '<div class="delay-title" style="color:var(--accent);">✦ Deferred compounding phase</div>'
-              + '<div class="delay-line">After investing for <strong>' + result.years + ' years</strong>, your corpus stands at <strong>' + fmtINR(result.totalFV) + '</strong>.</div>'
-              + '<div class="delay-line">You stop all contributions and wait <strong>' + result.deferYears + ' more year' + (result.deferYears > 1 ? 's' : '') + '</strong>. It grows to <strong>' + fmtINR(result.finalFV) + '</strong> <span class="gain-delta">(+' + fmtINR(result.finalFV - result.totalFV) + ' from compounding alone)</span>.</div>'
+              + '<div class="delay-line">After investing for <strong>' + result.years + ' years</strong>, your corpus stands at <strong>' + shortINR(result.totalFV) + '</strong>.</div>'
+              + '<div class="delay-line">You stop all contributions and wait <strong>' + result.deferYears + ' more year' + (result.deferYears > 1 ? 's' : '') + '</strong>. It grows to <strong>' + shortINR(result.finalFV) + '</strong> <span class="gain-delta">(+' + shortINR(result.finalFV - result.totalFV) + ' from compounding alone)</span>.</div>'
               + '</div>';
           }
 
@@ -1193,8 +1193,8 @@
             var extra1 = (sipFV1 + lsFV1) - result.totalFV;
             var extra5 = (sipFV5 + lsFV5) - result.totalFV;
             html += '<div class="delay-callout"><div class="delay-title">Stay invested longer</div>'
-              + '<div class="delay-line">Staying invested 1 extra year takes your corpus to <strong>' + fmtINR(sipFV1 + lsFV1) + '</strong> <span class="gain-delta">(+' + fmtINR(extra1) + ')</span>.</div>'
-              + '<div class="delay-line">5 extra years: <strong>' + fmtINR(sipFV5 + lsFV5) + '</strong> <span class="gain-delta">(+' + fmtINR(extra5) + ')</span>.</div>'
+              + '<div class="delay-line">Staying invested 1 extra year takes your corpus to <strong>' + shortINR(sipFV1 + lsFV1) + '</strong> <span class="gain-delta">(+' + shortINR(extra1) + ')</span>.</div>'
+              + '<div class="delay-line">5 extra years: <strong>' + shortINR(sipFV5 + lsFV5) + '</strong> <span class="gain-delta">(+' + shortINR(extra5) + ')</span>.</div>'
               + '</div>';
           }
 
@@ -1208,8 +1208,8 @@
             heading.innerHTML = "Saving <em>" + fmtINR(result.sipAmt) + "</em>/month for " + result.years + " years builds <em>" + fmtINR(result.finalFV) + "</em>";
           }
           html = '<div class="results-grid">'
-            + rCellPrimary("Corpus at Year " + result.totalYears, fmtINR(result.finalFV), su > 0 ? "Starting SIP, growing " + su + "% yearly" + dLabel3 : fmtINR(result.sipAmt) + " per month" + dLabel3)
-            + rCellSafePrimary("Real Value (Today's ₹)", fmtINR(result.realFV), "After " + result.inflation + "% inflation p.a.")
+            + rCellPrimary("Corpus at Year " + result.totalYears, shortINR(result.finalFV), su > 0 ? "Starting SIP, growing " + su + "% yearly" + dLabel3 : fmtINR(result.sipAmt) + " per month" + dLabel3)
+            + rCellSafePrimary("Real Value (Today's ₹)", shortINR(result.realFV), "After " + result.inflation + "% inflation p.a.")
             + rCellInvestedSplit(result.totalInvested, result.gains > 0 ? result.gains : 0)
             + rCellDual("Return Multiple", result.multiple + "×", "Absolute", result.realMultiple + "×", "Real (Infl-Adj.)")
             + '</div>';
@@ -1218,8 +1218,8 @@
           if (result.deferYears > 0) {
             html += '<div class="delay-callout" style="border-left:3px solid var(--accent);background:var(--accent-glow);border-radius:0 10px 10px 0;">'
               + '<div class="delay-title" style="color:var(--accent);">✦ Deferred compounding phase</div>'
-              + '<div class="delay-line">After investing for <strong>' + result.years + ' years</strong>, your SIP corpus stands at <strong>' + fmtINR(result.sipFV) + '</strong>.</div>'
-              + '<div class="delay-line">You stop all contributions and wait <strong>' + result.deferYears + ' more year' + (result.deferYears > 1 ? 's' : '') + '</strong>. With no new money added, it grows to <strong>' + fmtINR(result.finalFV) + '</strong> <span class="gain-delta">(+' + fmtINR(result.finalFV - result.sipFV) + ' from compounding alone)</span>.</div>'
+              + '<div class="delay-line">After investing for <strong>' + result.years + ' years</strong>, your SIP corpus stands at <strong>' + shortINR(result.sipFV) + '</strong>.</div>'
+              + '<div class="delay-line">You stop all contributions and wait <strong>' + result.deferYears + ' more year' + (result.deferYears > 1 ? 's' : '') + '</strong>. With no new money added, it grows to <strong>' + shortINR(result.finalFV) + '</strong> <span class="gain-delta">(+' + shortINR(result.finalFV - result.sipFV) + ' from compounding alone)</span>.</div>'
               + '</div>';
           }
 
@@ -1230,8 +1230,8 @@
             var extra1e = fv1e - result.finalFV;
             var extra5e = fv5e - result.finalFV;
             html += '<div class="delay-callout"><div class="delay-title">Stay invested longer</div>'
-              + '<div class="delay-line">One extra year of investing takes your corpus to <strong>' + fmtINR(fv1e) + '</strong> <span class="gain-delta">(+' + fmtINR(extra1e) + ')</span>.</div>'
-              + '<div class="delay-line">5 extra years: <strong>' + fmtINR(fv5e) + '</strong> <span class="gain-delta">(+' + fmtINR(extra5e) + ')</span>.</div>'
+              + '<div class="delay-line">One extra year of investing takes your corpus to <strong>' + shortINR(fv1e) + '</strong> <span class="gain-delta">(+' + shortINR(extra1e) + ')</span>.</div>'
+              + '<div class="delay-line">5 extra years: <strong>' + shortINR(fv5e) + '</strong> <span class="gain-delta">(+' + shortINR(extra5e) + ')</span>.</div>'
               + '</div>';
           }
         }
@@ -1477,15 +1477,15 @@
         var realPct  = Math.max(0, 100 - yoursPct - inflPct);
         _inflationData = { yoursPct, inflPct, realPct, totalInvested, inflationCut, realGain, result };
 
-        document.getElementById("inflStatYours").textContent    = fmtINR(totalInvested);
+        document.getElementById("inflStatYours").textContent    = shortINR(totalInvested);
         document.getElementById("inflStatYoursPct").textContent = yoursPct + "% of corpus";
-        document.getElementById("inflStatInfl").textContent     = fmtINR(inflationCut);
+        document.getElementById("inflStatInfl").textContent     = shortINR(inflationCut);
         document.getElementById("inflStatInflPct").textContent  = inflPct + "% of corpus";
-        document.getElementById("inflStatReal").textContent     = fmtINR(realGain);
+        document.getElementById("inflStatReal").textContent     = shortINR(realGain);
         document.getElementById("inflStatRealPct").textContent  = realPct + "% of corpus";
 
         var realReturn = (((1 + result.investReturn / 100) / (1 + result.inflation / 100)) - 1) * 100;
-        document.getElementById("inflationNote").innerHTML = "At " + result.investReturn + "% return and " + result.inflation + "% inflation, your real return is roughly <strong>" + realReturn.toFixed(1) + "% p.a.</strong>. Of your <strong>" + fmtINR(totalFV) + "</strong> corpus, <strong>" + fmtINR(Math.round(inflationCut)) + "</strong> just keeps pace with inflation — and <strong>" + fmtINR(Math.round(realGain)) + "</strong> is genuine wealth created above it.";
+        document.getElementById("inflationNote").innerHTML = "At " + result.investReturn + "% return and " + result.inflation + "% inflation, your real return is roughly <strong>" + realReturn.toFixed(1) + "% p.a.</strong>. Of your <strong>" + shortINR(totalFV) + "</strong> corpus, <strong>" + shortINR(Math.round(inflationCut)) + "</strong> just keeps pace with inflation — and <strong>" + shortINR(Math.round(realGain)) + "</strong> is genuine wealth created above it.";
 
         var body = document.getElementById("inflationBody");
         if (body.classList.contains("open")) renderInflationBar();
