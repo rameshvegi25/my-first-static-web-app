@@ -1,0 +1,1681 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Savings Corpus Calculator · Vegi Ramesh · ARN-349739</title>
+    <meta name="description" content="Know how much wealth you can build from what you save today. Enter your monthly SIP, lumpsum, or a combination — and see the corpus you'll create over time, with inflation-adjusted projections." />
+    <meta name="keywords" content="SIP corpus calculator, lumpsum returns, mutual fund corpus, savings to wealth, investment growth calculator, India wealth calculator" />
+    <meta name="author" content="Vegi Ramesh" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Savings Corpus Calculator · Vegi Ramesh" />
+    <meta property="og:description" content="Start with what you can save — and see the corpus you'll build. SIP, lumpsum, or both, with inflation-adjusted projections." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Savings Corpus Calculator · Vegi Ramesh" />
+    <meta name="twitter:description" content="Start with what you can save — see the corpus you'll build." />
+    <link rel="icon" href="favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <meta name="theme-color" content="#0b0f1a" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+      :root {
+        --bg: #0b0f1a;
+        --surface: #111827;
+        --surface2: #1a2236;
+        --border: rgba(255, 255, 255, 0.07);
+        --accent: #c8a96e;
+        --accent-dim: rgba(200, 169, 110, 0.15);
+        --accent-glow: rgba(200, 169, 110, 0.08);
+        --text: #e8e4dc;
+        --muted: #8a9ab5;
+        --danger: #e05c5c;
+        --safe: #4caf82;
+        --neutral: #6b8cba;
+        --warn: #e0a34a;
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --sans: "DM Sans", sans-serif;
+        --nav-bg: rgba(11, 15, 26, 0.92);
+        --prose-text: #b8bfcc;
+        --footer-disc: #6b7280;
+        --subnav-bg: rgba(17, 24, 39, 0.95);
+      }
+      [data-theme="light"] {
+        --bg: #f7f4ef;
+        --surface: #ffffff;
+        --surface2: #f0ebe0;
+        --border: rgba(0, 0, 0, 0.09);
+        --accent: #a67c32;
+        --accent-dim: rgba(166, 124, 50, 0.12);
+        --accent-glow: rgba(166, 124, 50, 0.06);
+        --text: #1c1a14;
+        --muted: #6b6353;
+        --danger: #c0392b;
+        --safe: #2e7d5e;
+        --neutral: #3d6491;
+        --warn: #b5780a;
+        --nav-bg: rgba(247, 244, 239, 0.94);
+        --prose-text: #4a4535;
+        --footer-disc: #7a7060;
+        --subnav-bg: rgba(240, 235, 224, 0.97);
+      }
+
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html {
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: var(--accent) var(--bg);
+      }
+      ::-webkit-scrollbar { width: 7px; height: 7px; }
+      ::-webkit-scrollbar-track { background: var(--bg); }
+      ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 99px; border: 2px solid var(--bg); }
+      ::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--accent) 80%, white 20%); }
+      ::-webkit-scrollbar-corner { background: var(--bg); }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--nav-bg);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 0 clamp(1.5rem, 5vw, 4rem);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+      }
+      .nav-brand { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; color: var(--text); letter-spacing: 0.03em; text-decoration: none; }
+      .nav-brand span { color: var(--accent); font-style: italic; }
+      .nav-arn { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
+      .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
+      .nav-profiling-btn { background: var(--accent); color: var(--bg); border-radius: 6px; padding: 0.35rem 0.9rem; font-size: 0.78rem; font-weight: 500; font-family: var(--sans); text-decoration: none; letter-spacing: 0.04em; transition: opacity 0.2s; white-space: nowrap; }
+      .nav-profiling-btn:hover { opacity: 0.82; }
+      .nav-whatsapp-btn { background: rgba(37, 211, 102, 0.12); color: #25d366; border: 1px solid rgba(37, 211, 102, 0.3); border-radius: 6px; padding: 0.35rem 0.9rem; font-size: 0.78rem; font-weight: 500; font-family: var(--sans); text-decoration: none; letter-spacing: 0.04em; transition: background 0.2s; white-space: nowrap; }
+      .nav-whatsapp-btn:hover { background: rgba(37, 211, 102, 0.2); }
+      @media (max-width: 480px) { .nav-profiling-btn, .nav-whatsapp-btn { display: none; } }
+
+      /* ── THEME TOGGLE ── */
+      .theme-toggle { background: var(--surface2); border: 1px solid var(--border); color: var(--muted); border-radius: 20px; padding: 0.3rem 0.55rem; font-size: 0.78rem; font-family: var(--sans); cursor: pointer; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s, background 0.2s, opacity 0.15s; white-space: nowrap; opacity: 0; }
+      .theme-toggle.ready { opacity: 1; }
+      .theme-toggle:hover { color: var(--accent); }
+      .theme-toggle .icon-dark { display: inline; }
+      .theme-toggle .icon-light { display: none; }
+      [data-theme="light"] .theme-toggle .icon-dark { display: none; }
+      [data-theme="light"] .theme-toggle .icon-light { display: inline; }
+
+      /* ── HERO ── */
+      .hero {
+        text-align: center;
+        padding: clamp(3.5rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem) clamp(2.5rem, 5vw, 4rem);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(76, 175, 130, 0.06) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
+      .hero-eyebrow::before, .hero-eyebrow::after { content: " ✦ "; opacity: 0.6; }
+      .hero h1 { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 600; line-height: 1.15; margin-bottom: 1rem; color: var(--text); }
+      .hero h1 em { color: var(--accent); font-style: italic; }
+      .hero-sub { max-width: 560px; margin: 0 auto; color: var(--muted); font-size: 1rem; font-weight: 300; }
+      @keyframes hero-phrase-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+      .hero-sub .phrase { display: inline; opacity: 0; animation: hero-phrase-in 0.55s ease forwards; }
+      .hero-sub .phrase-1 { animation-delay: 0.3s; }
+      .hero-sub .phrase-2 { animation-delay: 0.85s; }
+      .hero-sub .phrase .key { color: var(--accent); font-weight: 400; }
+      .hero-sub .phrase .hero-icon { display: inline-block; font-size: 0.85em; vertical-align: middle; margin-right: 0.1em; opacity: 0.85; }
+
+      /* ── SECTION ── */
+      .section { max-width: 860px; margin: 0 auto; padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 5vw, 2rem); }
+      .section-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+      .section-label::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+      /* ── CALCULATOR CARD ── */
+      .calc-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 1.5rem; transition: border-color 0.5s ease, box-shadow 0.5s ease, background 0.5s ease; }
+      .calc-card-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 1.6rem; display: flex; align-items: center; gap: 0.6rem; }
+      .calc-card-title-icon { width: 30px; height: 30px; background: var(--accent-dim); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
+
+      /* ── FORM GRID ── */
+      .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem 2rem; }
+      @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+      .form-field { display: flex; flex-direction: column; gap: 0.45rem; }
+      .form-field.full-width { grid-column: 1 / -1; }
+      .field-label { font-size: 0.74rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 0.4rem; }
+
+      /* ── INFO TOOLTIP ── */
+      .tip-icon { display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; border-radius: 50%; background: var(--surface2); border: 1px solid var(--border); color: var(--muted); font-size: 0.62rem; font-style: normal; font-weight: 600; cursor: pointer; vertical-align: middle; margin-left: 0.3rem; flex-shrink: 0; transition: background 0.15s, color 0.15s, border-color 0.15s; -webkit-user-select: none; user-select: none; }
+      .tip-icon:hover, .tip-icon.tip-open { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+      #tipPopover { position: fixed; z-index: 9999; max-width: min(280px, calc(100vw - 24px)); background: var(--surface); border: 1px solid rgba(200,169,110,0.35); border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.8rem; font-family: var(--sans); font-weight: 300; line-height: 1.6; color: var(--prose-text); box-shadow: 0 8px 28px rgba(0,0,0,0.28); pointer-events: none; opacity: 0; transform: translateY(4px); transition: opacity 0.15s, transform 0.15s; }
+      #tipPopover.tip-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+      #tipPopover::before { content: ""; position: absolute; width: 8px; height: 8px; background: var(--surface); border: 1px solid rgba(200,169,110,0.35); transform: rotate(45deg); }
+      #tipPopover.arrow-top::before { top: -5px; border-bottom: none; border-right: none; }
+      #tipPopover.arrow-bottom::before { bottom: -5px; border-top: none; border-left: none; }
+
+      /* Text inputs */
+      .text-input { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 0.65rem 0.9rem; font-size: 0.95rem; font-family: var(--sans); color: var(--text); width: 100%; transition: border-color 0.2s; outline: none; }
+      .text-input:focus { border-color: var(--accent); }
+      .text-input.field-error { border-color: var(--danger) !important; box-shadow: 0 0 0 3px rgba(224,92,92,0.15); }
+      .field-error-msg { font-size: 0.72rem; color: var(--danger); margin-top: 0.25rem; display: none; }
+      .field-error-msg.show { display: block; }
+      .text-input::placeholder { color: var(--muted); opacity: 0.6; }
+      .input-prefix-wrap { position: relative; display: flex; align-items: center; }
+      .input-prefix { position: absolute; left: 0.9rem; color: var(--accent); font-weight: 500; font-size: 0.95rem; pointer-events: none; }
+      .input-prefix-wrap .text-input { padding-left: 1.9rem; }
+
+      /* Sliders */
+      .slider-wrap { display: flex; flex-direction: column; gap: 0.5rem; }
+      .slider-row { display: flex; align-items: center; gap: 0.8rem; }
+      input[type="range"] { -webkit-appearance: none; appearance: none; flex: 1; height: 4px; border-radius: 2px; background: var(--border); outline: none; cursor: pointer; }
+      input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); cursor: pointer; box-shadow: 0 0 0 3px var(--accent-dim); transition: box-shadow 0.15s; }
+      input[type="range"]::-webkit-slider-thumb:hover { box-shadow: 0 0 0 5px var(--accent-dim); }
+      input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--accent); cursor: pointer; border: none; }
+      .slider-value-input { width: 56px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 0.28rem 0.4rem; font-size: 0.88rem; font-family: var(--sans); color: var(--accent); text-align: center; outline: none; -moz-appearance: textfield; }
+      .slider-value-input::-webkit-inner-spin-button, .slider-value-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+      .slider-value-input:focus { border-color: var(--accent); }
+      .slider-limits { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--muted); opacity: 0.7; }
+      .return-zone-label { font-size: 0.67rem; letter-spacing: 0.07em; text-transform: uppercase; font-weight: 500; text-align: right; margin-top: 0.1rem; transition: color 0.35s ease; opacity: 0.85; }
+
+      /* ── MODE TOGGLE ── */
+      .mode-toggle-wrap { display: flex; align-items: center; justify-content: center; margin-bottom: 1.8rem; }
+      .mode-toggle { display: flex; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 4px; gap: 4px; }
+      .mode-btn { position: relative; z-index: 1; padding: 0.5rem 1.6rem; border-radius: 7px; font-size: 0.88rem; font-weight: 500; font-family: var(--sans); cursor: pointer; border: none; background: transparent; color: var(--muted); letter-spacing: 0.04em; transition: color 0.22s; white-space: nowrap; }
+      .mode-btn.active { background: var(--accent); color: var(--bg); box-shadow: 0 2px 10px rgba(200,169,110,0.3); }
+      .mode-btn:not(.active):hover { color: var(--text); }
+      @media (max-width: 360px) { .mode-btn { padding: 0.5rem 0.8rem; font-size: 0.8rem; } }
+
+      /* ── DANGER ZONE (return > 22%) ── */
+      #mainCalcCard.danger-zone { border-color: rgba(192, 52, 40, 0.6); background: linear-gradient(135deg, rgba(192, 52, 40, 0.045) 0%, rgba(192, 52, 40, 0.03) 100%); box-shadow: 0 0 0 1px rgba(192, 52, 40, 0.25), 0 4px 32px rgba(192, 52, 40, 0.12); }
+      #mainCalcCard.extreme-zone { border-color: rgba(192, 52, 40, 0.85); background: linear-gradient(135deg, rgba(192, 52, 40, 0.08) 0%, rgba(192, 52, 40, 0.05) 100%); box-shadow: 0 0 0 2px rgba(192, 52, 40, 0.45), 0 4px 40px rgba(192, 52, 40, 0.22); }
+      @keyframes danger-shake { 0%, 100% { transform: translateX(0); } 15% { transform: translateX(-6px); } 30% { transform: translateX(6px); } 45% { transform: translateX(-5px); } 60% { transform: translateX(5px); } 75% { transform: translateX(-3px); } 90% { transform: translateX(3px); } }
+      #mainCalcCard.danger-shake { animation: danger-shake 0.5s ease; }
+
+      /* ── RESULTS CARD ── */
+      .results-card { background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%); border: 1px solid rgba(200, 169, 110, 0.2); border-radius: 16px; padding: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 1.5rem; position: relative; overflow: hidden; }
+      .results-card::before { content: "✦"; position: absolute; right: 1.8rem; top: 1rem; font-size: 5rem; color: var(--accent); opacity: 0.05; line-height: 1; pointer-events: none; }
+      .results-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 1.4rem; }
+      @media (max-width: 500px) { .results-grid { grid-template-columns: 1fr; } }
+      .result-cell { background: var(--surface); padding: 1.3rem 1.4rem; transition: background 0.2s; }
+      .result-cell:hover { background: var(--surface2); }
+      .result-cell.primary { background: var(--accent-dim); border-bottom: 2px solid var(--accent); position: relative; }
+      .result-cell.primary:hover { background: rgba(200,169,110,0.22); }
+      .result-cell.primary .result-label { color: var(--accent); opacity: 0.85; }
+      .result-cell.primary .result-value { font-size: clamp(1.7rem, 4vw, 2.3rem); }
+      .result-cell.safe-primary { background: rgba(76,175,130,0.08); border-bottom: 2px solid var(--safe); }
+      .result-cell.safe-primary .result-label { color: var(--safe); opacity: 0.85; }
+      .result-cell.safe-primary .result-value { font-size: clamp(1.7rem, 4vw, 2.3rem); }
+      .result-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+      .result-value { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 600; color: var(--text); line-height: 1.1; }
+      .result-value.accent { color: var(--accent); }
+      .result-value.safe { color: var(--safe); }
+      .result-value.neutral { color: var(--neutral); }
+      .result-sub { font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem; font-weight: 300; }
+      .result-sub.split { margin-top: 0.35rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+      .result-sub.split .split-yours { color: var(--neutral); font-weight: 400; }
+      .result-sub.split .split-returns { color: var(--safe); font-weight: 400; }
+
+      /* ── CHART CARD ── */
+      .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 1.5rem; }
+      .chart-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 1.4rem; }
+      .chart-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--text); }
+      .chart-legend { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+      .legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--muted); font-weight: 400; }
+      .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+      .chart-wrap { position: relative; height: 300px; }
+
+      /* ── DELAY CALLOUT ── */
+      .delay-callout { margin-top: 1.2rem; padding: 0.9rem 1.1rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; }
+      .delay-title { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+      .delay-line { font-size: 0.88rem; font-weight: 300; color: var(--prose-text); line-height: 1.7; }
+      .delay-line strong { font-weight: 500; color: var(--text); }
+      .gain-delta { color: var(--safe); font-weight: 500; font-size: 0.82rem; }
+
+      /* ── INFLATION BREAKDOWN ACCORDION ── */
+      .inflation-accordion { border: 1px solid rgba(200,169,110,0.2); border-radius: 14px; overflow: hidden; background: var(--surface); margin-bottom: 1.5rem; display: none; }
+      .inflation-accordion.visible { display: block; }
+      .inflation-trigger { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 1.6rem; background: none; border: none; cursor: pointer; font-family: var(--sans); font-size: 0.88rem; font-weight: 500; letter-spacing: 0.04em; color: var(--accent); text-align: left; gap: 1rem; transition: background 0.15s; }
+      .inflation-trigger:hover { background: var(--accent-glow); }
+      .inflation-chevron { font-size: 1rem; color: var(--accent); transition: transform 0.3s ease; flex-shrink: 0; }
+      .inflation-trigger[aria-expanded="true"] .inflation-chevron { transform: rotate(180deg); }
+      .inflation-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+      .inflation-body.open { max-height: 600px; }
+      .inflation-content { padding: 1.2rem 1.6rem 1.6rem; border-top: 1px solid rgba(200,169,110,0.12); }
+      @media (max-width: 480px) { .inflation-content { padding: 1rem 1.1rem 1.3rem; } .inflation-trigger { padding: 1rem 1.1rem; } }
+      .inflation-bar-wrap { margin: 0.6rem 0 1.2rem; }
+      .inflation-bar { height: 10px; border-radius: 5px; overflow: hidden; display: flex; margin-bottom: 0.85rem; }
+      .inflation-bar-segment { transition: width 0.6s ease; height: 100%; }
+      .inflation-bar-segment.yours { background: var(--neutral); }
+      .inflation-bar-segment.infl  { background: #c8734a; }
+      .inflation-bar-segment.real  { background: var(--safe); }
+      .inflation-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; font-size: 0.78rem; color: var(--muted); }
+      @media (max-width: 600px) { .inflation-legend { gap: 0.45rem 1rem; font-size: 0.74rem; } }
+      .inflation-legend-item { display: flex; align-items: center; gap: 0.4rem; }
+      .inflation-legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+      .inflation-legend-dot.yours { background: var(--neutral); }
+      .inflation-legend-dot.infl  { background: #c8734a; }
+      .inflation-legend-dot.real  { background: var(--safe); }
+      .inflation-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: visible; margin-top: 1.2rem; }
+      @media (max-width: 600px) { .inflation-stats { grid-template-columns: 1fr; overflow: hidden; border-radius: 10px; } }
+      .inflation-stat { background: var(--surface); padding: 1rem 1.1rem; min-width: 0; }
+      .inflation-stat-label { font-size: 0.67rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.35rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 0.3rem; }
+      .inflation-stat-value { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; line-height: 1.1; word-break: break-word; }
+      .inflation-stat-value.yours { color: var(--neutral); }
+      .inflation-stat-value.infl  { color: #c8734a; }
+      .inflation-stat-value.real  { color: var(--safe); }
+      .inflation-stat-sub { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; font-weight: 300; }
+      .inflation-note { font-size: 0.8rem; color: var(--muted); font-weight: 300; line-height: 1.6; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+      @keyframes accordion-pulse { 0% { box-shadow: 0 0 0 0 rgba(200, 169, 110, 0.35); } 60% { box-shadow: 0 0 0 6px rgba(200, 169, 110, 0); } 100% { box-shadow: 0 0 0 0 rgba(200, 169, 110, 0); } }
+      .inflation-accordion.pulse-once { animation: accordion-pulse 0.8s ease 5; }
+
+      /* ── SHARE CARD ── */
+      .share-card { background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%); border: 1px solid rgba(200, 169, 110, 0.25); border-radius: 16px; padding: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 1.5rem; }
+      .share-heading { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
+      .share-sub { font-size: 0.88rem; color: var(--muted); font-weight: 300; margin-bottom: 1.4rem; line-height: 1.5; }
+      .share-btns { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+      .share-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.72rem 1.4rem; border-radius: 8px; font-size: 0.88rem; font-family: var(--sans); font-weight: 500; cursor: pointer; border: none; letter-spacing: 0.03em; transition: opacity 0.2s, transform 0.15s; text-decoration: none; }
+      .share-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+      .share-btn:active { transform: scale(0.97); }
+      .share-btn-wa { background: #25d366; color: #fff; }
+      .share-btn-gmail { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+      .share-btn-email { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+      @media (max-width: 480px) { .share-btn-gmail-desktop { display: none !important; } }
+      @media (min-width: 481px) { .share-btn-gmail-mobile { display: none !important; } }
+
+      /* ── TOAST ── */
+      .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--surface); border: 1px solid rgba(200, 169, 110, 0.3); color: var(--text); border-radius: 8px; padding: 0.65rem 1.3rem; font-size: 0.88rem; font-family: var(--sans); z-index: 999; opacity: 0; transition: opacity 0.25s, transform 0.25s; pointer-events: none; white-space: nowrap; display: flex; align-items: center; gap: 0.75rem; }
+      .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+      .toast-undo { color: var(--accent); font-weight: 500; cursor: pointer; border: none; background: none; font-family: var(--sans); font-size: 0.88rem; padding: 0; text-decoration: underline; text-underline-offset: 2px; }
+      .toast-undo:hover { opacity: 0.8; }
+
+      /* ── SEND RESULTS LINK ── */
+      .send-results-link { display: none; text-align: center; margin-top: 0.75rem; margin-bottom: 0.5rem; }
+      .send-results-link a { font-size: 0.82rem; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; font-family: var(--sans); font-weight: 400; opacity: 0.85; transition: opacity 0.2s; }
+      .send-results-link a:hover { opacity: 1; }
+
+      /* ── SEPARATOR ── */
+      hr.section-sep { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+      /* ── RESULTS PLACEHOLDER ── */
+      .results-placeholder { text-align: center; padding: 2.5rem 1rem; color: var(--muted); font-size: 0.92rem; font-weight: 300; }
+      .results-placeholder .placeholder-icon { font-size: 2.5rem; margin-bottom: 0.8rem; opacity: 0.4; }
+
+      /* ── PHILOSOPHY ACCORDION ── */
+      .philosophy-accordion { border: 1px solid rgba(200,169,110,0.2); border-radius: 14px; overflow: hidden; background: var(--surface); }
+      .philosophy-trigger { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 1.6rem; background: none; border: none; cursor: pointer; font-family: var(--sans); font-size: 0.88rem; font-weight: 500; letter-spacing: 0.04em; color: var(--accent); text-align: left; gap: 1rem; transition: background 0.15s; }
+      .philosophy-trigger:hover { background: var(--accent-glow); }
+      .philosophy-chevron { font-size: 1rem; color: var(--accent); transition: transform 0.3s ease; flex-shrink: 0; }
+      .philosophy-trigger[aria-expanded="true"] .philosophy-chevron { transform: rotate(180deg); }
+      .philosophy-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+      .philosophy-body.open { max-height: 2000px; }
+      .philosophy-content { padding: 1.2rem 1.6rem 1.6rem; border-top: 1px solid rgba(200,169,110,0.12); }
+      @media (max-width: 480px) { .philosophy-content { padding: 1rem 1.1rem 1.3rem; } .philosophy-trigger { padding: 1rem 1.1rem; } }
+      .philosophy-content p { font-size: 0.92rem; font-weight: 300; line-height: 1.75; color: var(--prose-text); margin: 0 0 1rem; overflow-wrap: break-word; word-break: break-word; }
+      .philosophy-content p:last-child { margin-bottom: 0; }
+      .philosophy-closing { font-size: 0.95rem !important; font-weight: 500 !important; color: var(--accent) !important; font-style: italic; margin-top: 1.4rem !important; }
+      .philosophy-caution { font-size: 0.95rem !important; font-weight: 500 !important; color: #c8734a !important; font-style: italic; }
+      .philosophy-header { display: flex; align-items: center; gap: 0.55rem; margin-bottom: 1.1rem; color: var(--accent); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.65; }
+      .philosophy-header::before, .philosophy-header::after { content: "✦"; font-size: 0.58rem; }
+      .philosophy-pull { border-left: 2px solid var(--accent); margin: 1.3rem 0; padding: 0.4rem 0 0.4rem 1.1rem; }
+      .philosophy-pull p { font-family: var(--serif) !important; font-size: 1.05rem !important; font-weight: 400 !important; font-style: italic; color: var(--text) !important; line-height: 1.55 !important; margin: 0 !important; }
+
+      /* ── FOOTER ── */
+      footer { border-top: 1px solid var(--border); padding: 2.5rem clamp(1.5rem, 5vw, 4rem); text-align: center; }
+      .footer-brand { font-family: var(--serif); font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem; }
+      .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap; }
+      .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+      .footer-links a:hover { color: var(--accent); }
+      .footer-disc { font-size: 0.82rem; color: var(--footer-disc); max-width: 700px; margin: 1rem auto 0; line-height: 1.6; }
+
+      /* ── EMBED MODE ── */
+      body.embedded nav, body.embedded header.hero, body.embedded footer { display: none !important; }
+      body.embedded { background: transparent; }
+
+      /* ── CROSS-LINK BANNER ── */
+      .cross-link-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--accent);
+        color: var(--bg);
+        border: none;
+        border-radius: 7px;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+        font-family: var(--sans);
+        font-weight: 500;
+        text-decoration: none;
+        transition: opacity 0.2s;
+        margin-top: 1rem;
+      }
+      .cross-link-btn:hover { opacity: 0.85; }
+    </style>
+  </head>
+  <body>
+
+    <script>
+      if (new URLSearchParams(window.location.search).get('embed') === 'true') {
+        document.body.classList.add('embedded');
+      }
+    </script>
+
+    <!-- ── NAV ── -->
+    <nav>
+      <a href="index.html" class="nav-brand">Vegi <span>Ramesh</span></a>
+      <div class="nav-actions">
+        <div class="nav-arn">✦ ARN-349739</div>
+        <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments." class="nav-whatsapp-btn" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="currentColor" style="vertical-align:middle;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+        <a href="./RiskProfiler.html" class="nav-profiling-btn">Begin Profiling ✦</a>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <span class="icon-dark">☀️</span>
+          <span class="icon-light">🌙</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <header class="hero">
+      <div class="hero-eyebrow">Savings Corpus Calculator</div>
+      <h1>Save today.<br /><em>See what you'll build.</em></h1>
+      <p class="hero-sub">
+        <span class="phrase phrase-1">Start with what you can save each month —</span>
+        <span class="phrase phrase-2"> and discover <span class="key">how much corpus you'll build</span> via <span class="key"><span class="hero-icon">📅</span> SIP</span>, a one-time <span class="key"><span class="hero-icon">💰</span> lumpsum</span>, or a <span class="key"><span class="hero-icon">💰+📅</span> combination of both</span>.</span>
+      </p>
+    </header>
+
+    <hr class="section-sep" />
+
+    <!-- ── CALCULATOR SECTION ── -->
+    <section class="section">
+
+      <!-- Cross-link accordion -->
+      <div class="inflation-accordion visible" id="goalLinkAccordion" style="margin-bottom:1.5rem;">
+        <button class="inflation-trigger" onclick="toggleGoalLink()" aria-expanded="false">
+          <span>🎯 Have a specific goal in mind?</span>
+          <span class="inflation-chevron">▾</span>
+        </button>
+        <div class="inflation-body" id="goalLinkBody">
+          <div class="inflation-content" style="padding:1.2rem 1.6rem 1.6rem;">
+            <p style="font-size:0.9rem;color:var(--prose-text);font-weight:300;line-height:1.7;margin:0 0 0.5rem;">
+              This calculator shows you what your savings can become. But if you already have something specific in mind — a house, your child's education, a car, retirement — the <strong style="color:var(--text);font-weight:500;">Goal Calculator</strong> is built for that.
+            </p>
+            <p style="font-size:0.9rem;color:var(--prose-text);font-weight:300;line-height:1.7;margin:0 0 1rem;">
+              It starts from the target amount, accounts for inflation on the goal itself, and works backwards to tell you exactly what to invest today.
+            </p>
+            <a href="calculator.html" class="cross-link-btn">🎯 Open Goal Calculator →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inputs Card -->
+      <div class="calc-card" id="mainCalcCard">
+        <div class="calc-card-title">
+          <div class="calc-card-title-icon">💰</div>
+          <span id="calcCardTitle">Your Savings — <span id="calcCardMode" style="color:var(--accent);font-style:italic;">Monthly SIP</span></span>
+          <button onclick="resetForm()" style="margin-left:auto;background:none;border:none;color:var(--muted);font-size:0.75rem;font-family:var(--sans);cursor:pointer;padding:0.2rem 0.5rem;border-radius:4px;letter-spacing:0.04em;transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">↺ Reset</button>
+        </div>
+
+        <!-- Mode Toggle -->
+        <div class="mode-toggle-wrap">
+          <div class="mode-toggle">
+            <button class="mode-btn active" id="btnSIP" onclick="setMode('sip')">📅 SIP</button>
+            <button class="mode-btn" id="btnLumpsum" onclick="setMode('lumpsum')">💰 Lumpsum</button>
+            <button class="mode-btn" id="btnBoth" onclick="setMode('both')">💰+📅 Both</button>
+          </div>
+        </div>
+
+        <div class="form-grid">
+
+          <!-- Monthly SIP Amount (SIP / Both modes) -->
+          <div class="form-field full-width" id="sipAmountField">
+            <label class="field-label" for="monthlySIP">Monthly SIP Amount <span class="tip-icon" data-tip="How much can you comfortably invest every month? This is your regular monthly contribution to your investment. You can increase this over time using the step-up slider below.">ℹ</span></label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">₹</span>
+              <input class="text-input" id="monthlySIP" type="text" placeholder="e.g. 5,000" autocomplete="off" inputmode="numeric" oninput="formatCostInput(this); onAnyInput();" onkeydown="handleMoneyKeydown(event)" />
+            </div>
+          </div>
+
+          <!-- Lumpsum Amount (Lumpsum / Both modes) -->
+          <div class="form-field full-width" id="lumpsumField" style="display:none;">
+            <label class="field-label" for="lumpsumAmount">Lumpsum to Invest Today <span class="tip-icon" data-tip="A one-time amount you can put in right now. This money starts compounding immediately. In 'Both' mode, your monthly SIP adds to this.">ℹ</span></label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">₹</span>
+              <input class="text-input" id="lumpsumAmount" type="text" placeholder="e.g. 50,000" autocomplete="off" inputmode="numeric" oninput="formatCostInput(this); onAnyInput();" onkeydown="handleMoneyKeydown(event)" />
+            </div>
+          </div>
+
+          <!-- Investment Duration -->
+          <div class="form-field full-width">
+            <label class="field-label" for="investYears">Investment Duration <span class="tip-icon" data-tip="How many years will you stay invested? Time is the most powerful ingredient in wealth creation. Even a couple of extra years can make a dramatic difference to your final corpus.">ℹ</span></label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="investYears" min="1" max="40" value="10" oninput="syncSlider('investYears','yearsVal'); onAnyInput();" />
+                <input class="slider-value-input" id="yearsVal" type="number" min="1" max="40" step="1" value="10" oninput="syncValInput('investYears','yearsVal'); onAnyInput();" onblur="clampValInput('investYears','yearsVal'); onAnyInput();" />
+              </div>
+              <div class="slider-limits"><span>1 yr</span><span>40 yrs</span></div>
+            </div>
+          </div>
+
+          <!-- Expected Annual Return -->
+          <div class="form-field full-width">
+            <label class="field-label" for="investmentReturn">Expected Annual Return <span class="tip-icon" data-tip="How much do you expect your investments to grow each year? Equity mutual fund returns have varied significantly over time. Past performance is not a reliable guide to future returns — use a number you're comfortable with, and consult me if unsure.">ℹ</span></label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="investmentReturn" min="3" max="25" value="12" step="0.1" oninput="syncSlider('investmentReturn','returnVal'); onAnyInput();" />
+                <input class="slider-value-input" id="returnVal" type="number" min="3" max="25" step="0.1" value="12" oninput="syncValInput('investmentReturn','returnVal'); onAnyInput();" onblur="clampValInput('investmentReturn','returnVal'); onAnyInput();" />
+              </div>
+              <div class="slider-limits"><span>3% p.a.</span><span>25% p.a.</span></div>
+              <div class="return-zone-label" id="returnZoneLabel"></div>
+            </div>
+          </div>
+
+          <!-- Inflation Rate -->
+          <div class="form-field full-width">
+            <label class="field-label" for="priceInflation">Expected Annual Inflation <span class="tip-icon" data-tip="Inflation reduces what your money can buy over time. This helps us show your real (inflation-adjusted) corpus — what your money will actually be worth in today's prices, not just in nominal terms.">ℹ</span></label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="priceInflation" min="2" max="12" value="6" step="0.5" oninput="syncSlider('priceInflation','inflationVal'); onAnyInput();" />
+                <input class="slider-value-input" id="inflationVal" type="number" min="2" max="12" step="0.5" value="6" oninput="syncValInput('priceInflation','inflationVal'); onAnyInput();" onblur="clampValInput('priceInflation','inflationVal'); onAnyInput();" />
+              </div>
+              <div class="slider-limits"><span>2% p.a.</span><span>12% p.a.</span></div>
+            </div>
+          </div>
+
+          <!-- Step-Up (SIP / Both modes) -->
+          <div class="form-field full-width" id="stepUpField">
+            <label class="field-label" for="stepUp">Approx. Annual Increase in SIP <span class="tip-icon" data-tip="As your salary grows, you can increase your SIP each year. This lets you start smaller and grow your investment as your income grows. E.g. start ₹5,000, step up 10%/year → ₹5,500 next year, ₹6,050 the year after.">ℹ</span></label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="stepUp" min="0" max="20" value="0" step="1" oninput="syncSlider('stepUp','stepUpVal'); onAnyInput();" />
+                <input class="slider-value-input" id="stepUpVal" type="number" min="0" max="20" step="1" value="0" oninput="syncValInput('stepUp','stepUpVal'); onAnyInput();" onblur="clampValInput('stepUp','stepUpVal'); onAnyInput();" />
+              </div>
+              <div class="slider-limits"><span>0% (flat SIP)</span><span>20% p.a.</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Card -->
+      <div class="results-card" id="resultsCard">
+        <div class="section-label">Results</div>
+        <div style="padding:0;margin:0;">
+          <h2 id="resultsHeading" style="font-family:var(--serif);font-size:clamp(1.4rem,3vw,2rem);margin-bottom:0;font-weight:600;line-height:1.2;">
+            <em>Enter your savings above</em>
+          </h2>
+        </div>
+        <div id="resultsBody">
+          <div class="results-placeholder">
+            <div class="placeholder-icon">📈</div>
+            <div>Enter what you can save to see<br/>the wealth you'll build over time.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Send Results Link -->
+      <div class="send-results-link" id="sendResultsLink">
+        <a onclick="scrollToShare()">↓ Send results to me</a>
+      </div>
+
+      <!-- Chart Card -->
+      <div class="chart-card" id="chartCard" style="display:none;">
+        <div class="chart-header">
+          <div class="chart-title" style="font-family:var(--serif);">Corpus Growth Over Time</div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#6b8cba;"></div>
+              <span id="legendInvested">Amount Invested</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#c8a96e;"></div>
+              Corpus Value
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#4caf82; opacity:0.8;"></div>
+              <span id="legendReal">Real Value (Inflation-Adj.)</span>
+            </div>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="growthChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Inflation Breakdown Accordion -->
+      <div class="inflation-accordion" id="inflationAccordion">
+        <button class="inflation-trigger" onclick="toggleInflation()" aria-expanded="false">
+          <span>🔍 What does inflation do to your corpus?</span>
+          <span class="inflation-chevron">▾</span>
+        </button>
+        <div class="inflation-body" id="inflationBody">
+          <div class="inflation-content">
+            <div class="inflation-bar-wrap">
+              <div class="inflation-bar" id="inflationBar">
+                <div class="inflation-bar-segment yours" id="inflBarYours" style="width:0%"></div>
+                <div class="inflation-bar-segment infl"  id="inflBarInfl"  style="width:0%"></div>
+                <div class="inflation-bar-segment real"  id="inflBarReal"  style="width:0%"></div>
+              </div>
+              <div class="inflation-legend">
+                <div class="inflation-legend-item"><div class="inflation-legend-dot yours"></div><span>You put in</span></div>
+                <div class="inflation-legend-item"><div class="inflation-legend-dot infl"></div><span>Growth eaten by inflation</span></div>
+                <div class="inflation-legend-item"><div class="inflation-legend-dot real"></div><span>Projected real gains</span></div>
+              </div>
+            </div>
+            <div class="inflation-stats">
+              <div class="inflation-stat">
+                <div class="inflation-stat-label">You Put In <i class="tip-icon" data-tip="Every rupee you contributed — your discipline, month after month.">i</i></div>
+                <div class="inflation-stat-value yours" id="inflStatYours">—</div>
+                <div class="inflation-stat-sub" id="inflStatYoursPct">—</div>
+              </div>
+              <div class="inflation-stat">
+                <div class="inflation-stat-label">Inflation Adjustment <i class="tip-icon" data-tip="Inflation silently reduces purchasing power. This is how much of your corpus simply keeps pace with rising prices — not real growth.">i</i></div>
+                <div class="inflation-stat-value infl" id="inflStatInfl">—</div>
+                <div class="inflation-stat-sub" id="inflStatInflPct">—</div>
+              </div>
+              <div class="inflation-stat">
+                <div class="inflation-stat-label">Real Gains <i class="tip-icon" data-tip="Genuine wealth above inflation. The market did this work for you, compounding at a rate higher than inflation.">i</i></div>
+                <div class="inflation-stat-value real" id="inflStatReal">—</div>
+                <div class="inflation-stat-sub" id="inflStatRealPct">—</div>
+              </div>
+            </div>
+            <div class="inflation-note" id="inflationNote"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Share Card -->
+      <div class="share-card" id="shareCard" style="display:none;">
+        <div class="share-heading">Share Your Results</div>
+        <div class="share-sub">Share your savings plan and we can discuss the best mutual fund options to help you build this corpus.</div>
+        <div style="margin-bottom:1.2rem;">
+          <label class="field-label" for="userName" style="margin-bottom:0.45rem;display:flex;">Your Name</label>
+          <input class="text-input" id="userName" type="text" placeholder="What should I call you?" autocomplete="off" oninput="clearFieldError('userName')" />
+          <div class="field-error-msg" id="userNameErr">Please enter your name so I know who sent this.</div>
+        </div>
+        <div class="share-btns">
+          <button class="share-btn share-btn-wa" onclick="buildAndOpenWa()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Send via WhatsApp
+          </button>
+          <button class="share-btn share-btn-email share-btn-gmail-mobile" onclick="buildAndOpenEmail()">✉️ Send via Email</button>
+          <button class="share-btn share-btn-gmail share-btn-gmail-desktop" onclick="buildAndOpenGmail()">✉️ Send via Gmail</button>
+
+        </div>
+      </div>
+
+      <!-- Disclaimer -->
+      <div id="noteCard" style="display:none; border-left: 3px solid var(--accent); background: var(--accent-glow); border-radius: 0 10px 10px 0; padding: 1.1rem 1.4rem; margin-bottom: 1.2rem;">
+        <div style="font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.45rem;">✦ A Note on These Numbers</div>
+        <p style="font-size:0.88rem; color:var(--prose-text); font-weight:300; line-height:1.65; margin-bottom:0.6rem;">
+          These figures are <strong style="color:var(--text); font-weight:500;">approximate projections</strong> based on the assumptions you've entered. Real-world returns and inflation will vary year to year — use this as a compass, not a contract.
+        </p>
+        <p style="font-size:0.88rem; color:var(--prose-text); font-weight:300; line-height:1.65; margin-bottom:0;">
+          The most powerful thing you can do? <strong style="color:var(--text); font-weight:500;">Start now, and stay invested.</strong> Consistency beats chasing perfect timing every single time.
+        </p>
+      </div>
+
+    </section>
+
+    <hr class="section-sep" />
+
+    <!-- PHILOSOPHY ACCORDION -->
+    <section class="section" style="padding-top:1rem;">
+      <div class="philosophy-accordion" id="philosophyAccordion">
+        <button class="philosophy-trigger" onclick="togglePhilosophy()" aria-expanded="false">
+          <span>The thinking behind this</span>
+          <span class="philosophy-chevron">▾</span>
+        </button>
+        <div class="philosophy-body" id="philosophyBody">
+          <div class="philosophy-content">
+            <div class="philosophy-header">A note on the thinking behind this</div>
+            <p>The best way to invest is with a goal in mind. A goal gives your money direction — it tells you how much to save, for how long, and whether you're on track. That's what the <a href="calculator.html" style="color:var(--accent);text-underline-offset:3px;">Goal Calculator</a> is built for.</p>
+            <p>But not everyone starts there. And that's okay.</p>
+            <p>Some people aren't sure what they're saving towards yet. Some just want to see what their money can become before committing to a number. Some need the motivation of watching a corpus grow before a goal feels real to them.</p>
+            <p>This calculator is for those moments. Enter what you can comfortably set aside. See what it becomes over time. Let the numbers do what numbers do best — make the abstract feel possible.</p>
+            <div class="philosophy-pull">
+              <p>Starting without a goal is still starting. And starting is what matters most.</p>
+            </div>
+            <p>Once you see your corpus taking shape, a goal often follows naturally. When it does, the <a href="calculator.html" style="color:var(--accent);text-underline-offset:3px;">Goal Calculator</a> will be waiting — to turn that motivation into a precise, inflation-adjusted plan.</p>
+            <p>The step-up option exists because your income will grow. Raising your SIP by 10% each year quietly transforms a modest start into something significant. You don't need to invest a lot. You need to invest consistently, and let time do its work.</p>
+            <p>The return percentage deserves care. <span class="philosophy-caution">Every extra percent of assumed return comes with extra uncertainty.</span> A number that feels optimistic on paper may rarely show up in real life. Set a return you believe in — not one that makes the chart look best.</p>
+            <p class="philosophy-closing">See what you can build. Then build towards something.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-sep" />
+    <footer>
+      <div class="footer-brand">Mutual Fund and NPS distribution services by Vegi Ramesh</div>
+      <div class="footer-links">
+        <a href="./RiskProfiler.html">Investor Profiling</a>
+        <a href="./calculator.html">Goal Calculator</a>
+        <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments." target="_blank" rel="noopener">WhatsApp</a>
+        <a href="tel:8329450580">Call Us</a>
+        <a href="mailto:rameshvegi94@gmail.com">Email Us</a>
+      </div>
+      <div class="footer-disc">
+        Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Past performance is not indicative of future results. This material is for informational purposes only and does not constitute financial advice. Vegi Ramesh is registered with AMFI as a Mutual Fund Distributor – ARN-349739.
+      </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="shareToast"></div>
+    <!-- Tooltip Popover -->
+    <div id="tipPopover"></div>
+
+    <script>
+      // ── CURRENT MODE ──
+      var _mode = "sip"; // "sip" | "lumpsum" | "both"
+      var _undoSnapshot = null;
+      var _undoTimer = null;
+
+      var _modeTitles = { sip: "Monthly SIP", lumpsum: "One-Time Lumpsum", both: "Lumpsum + SIP" };
+
+      function captureSnapshot() {
+        return {
+          mode:    _mode,
+          sip:     document.getElementById("monthlySIP").value,
+          lumpsum: document.getElementById("lumpsumAmount").value,
+          years:   document.getElementById("investYears").value,
+          ret:     document.getElementById("investmentReturn").value,
+          infl:    document.getElementById("priceInflation").value,
+          stepUp:  document.getElementById("stepUp").value
+        };
+      }
+
+      function restoreSnapshot(snap) {
+        applyMode(snap.mode);
+        document.getElementById("monthlySIP").value    = snap.sip;
+        document.getElementById("lumpsumAmount").value = snap.lumpsum;
+        document.getElementById("investYears").value   = snap.years;   syncSlider("investYears","yearsVal");
+        document.getElementById("investmentReturn").value = snap.ret;  syncSlider("investmentReturn","returnVal");
+        document.getElementById("priceInflation").value = snap.infl;   syncSlider("priceInflation","inflationVal");
+        document.getElementById("stepUp").value         = snap.stepUp; syncSlider("stepUp","stepUpVal");
+        onAnyInput();
+      }
+
+      function setMode(mode) {
+        if (_mode === mode) return;
+        var snap = captureSnapshot();
+        applyMode(mode);
+        showUndoToast("Switched to " + (_modeTitles[mode] || mode) + ".", snap);
+      }
+
+      function updateCalcCardTitle(mode) {
+        var el = document.getElementById("calcCardMode");
+        if (el) el.textContent = _modeTitles[mode] || "";
+      }
+
+      function applyMode(mode) {
+        _mode = mode;
+        document.getElementById("btnSIP").classList.toggle("active", mode === "sip");
+        document.getElementById("btnLumpsum").classList.toggle("active", mode === "lumpsum");
+        document.getElementById("btnBoth").classList.toggle("active", mode === "both");
+        // SIP input: visible for sip + both
+        document.getElementById("sipAmountField").style.display = (mode === "lumpsum") ? "none" : "";
+        // Lumpsum input: visible for lumpsum + both
+        document.getElementById("lumpsumField").style.display = (mode === "sip") ? "none" : "";
+        // Step-up: visible for sip + both
+        document.getElementById("stepUpField").style.display = (mode === "lumpsum") ? "none" : "";
+        updateCalcCardTitle(mode);
+        onAnyInput();
+      }
+
+      function showUndoToast(msg, snap) {
+        if (_undoTimer) clearTimeout(_undoTimer);
+        var t = document.getElementById("shareToast");
+        if (!t) return;
+        t.innerHTML = '<span>' + msg + '</span><button class="toast-undo" onclick="undoModeSwitch()">Undo</button>';
+        _undoSnapshot = snap;
+        t.classList.add("show");
+        _undoTimer = setTimeout(function() { t.classList.remove("show"); _undoSnapshot = null; }, 5000);
+      }
+
+      function undoModeSwitch() {
+        if (!_undoSnapshot) return;
+        if (_undoTimer) clearTimeout(_undoTimer);
+        var snap = _undoSnapshot; _undoSnapshot = null;
+        var t = document.getElementById("shareToast");
+        if (t) t.classList.remove("show");
+        restoreSnapshot(snap);
+      }
+
+      function clearAll() {
+        document.getElementById("monthlySIP").value    = "";
+        document.getElementById("lumpsumAmount").value = "";
+        document.getElementById("investYears").value   = 10;  syncSlider("investYears","yearsVal");
+        document.getElementById("investmentReturn").value = 12; syncSlider("investmentReturn","returnVal");
+        document.getElementById("priceInflation").value = 6;  syncSlider("priceInflation","inflationVal");
+        document.getElementById("stepUp").value         = 0;  syncSlider("stepUp","stepUpVal");
+        document.getElementById("resultsHeading").innerHTML = "<em>Enter your savings above</em>";
+        document.getElementById("resultsBody").innerHTML = '<div class="results-placeholder"><div class="placeholder-icon">📈</div><div>Enter what you can save to see<br/>the wealth you\'ll build over time.</div></div>';
+        document.getElementById("shareCard").style.display = "none";
+        document.getElementById("noteCard").style.display  = "none";
+        document.getElementById("chartCard").style.display = "none";
+        document.getElementById("sendResultsLink").style.display = "none";
+        if (_chartInstance) { _chartInstance.destroy(); _chartInstance = null; window._chartInstance = null; }
+        var inflAcc = document.getElementById("inflationAccordion");
+        var inflBody = document.getElementById("inflationBody");
+        var inflTrigger = inflAcc.querySelector(".inflation-trigger");
+        inflAcc.classList.remove("visible");
+        inflBody.classList.remove("open");
+        inflBody.style.maxHeight = "0px";
+        inflTrigger.setAttribute("aria-expanded", "false");
+        _inflationData = null;
+        var philBody = document.getElementById("philosophyBody");
+        var philBtn  = document.getElementById("philosophyAccordion").querySelector(".philosophy-trigger");
+        philBody.style.maxHeight = philBody.scrollHeight + "px";
+        requestAnimationFrame(function() { philBody.style.maxHeight = "0px"; philBody.classList.remove("open"); philBtn.setAttribute("aria-expanded","false"); });
+        if (typeof _philosophyAutoOpened !== "undefined") _philosophyAutoOpened = false;
+      }
+
+      // ── THEME TOGGLE ──
+      function toggleTheme() {
+        var html = document.documentElement;
+        var isDark = html.getAttribute("data-theme") !== "light";
+        html.setAttribute("data-theme", isDark ? "light" : "dark");
+        try { localStorage.setItem("theme", isDark ? "light" : "dark"); } catch(e){}
+        if (window._chartInstance) updateChartColors();
+      }
+      (function() {
+        try { var t = localStorage.getItem("theme"); if (t) document.documentElement.setAttribute("data-theme", t); } catch(e){}
+        var btn = document.querySelector(".theme-toggle");
+        if (btn) btn.classList.add("ready");
+      })();
+
+      // ── RETURN SLIDER COLOUR ──
+      function lerpColor(c1, c2, t) {
+        t = Math.max(0, Math.min(1, t));
+        return [Math.round(c1[0]+(c2[0]-c1[0])*t), Math.round(c1[1]+(c2[1]-c1[1])*t), Math.round(c1[2]+(c2[2]-c1[2])*t)];
+      }
+      function getReturnColor(val) {
+        var muted  = [105, 90, 58];
+        var gold   = [200, 169, 110];
+        var orange = [212, 120, 45];
+        var red    = [192, 52, 40];
+        var rgb;
+        if (val <= 8)       rgb = lerpColor(muted, gold, (val - 3) / 5);
+        else if (val <= 14) rgb = gold;
+        else if (val <= 19) rgb = lerpColor(gold, orange, (val - 14) / 5);
+        else                rgb = lerpColor(orange, red, Math.min(1, (val - 19) / 5));
+        return "rgb(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ")";
+      }
+      function getReturnZoneLabel(val) {
+        if (val <= 8)  return "Returns are modest — but relatively stable and predictable";
+        if (val <= 14) return "Historically, this is where most investors have landed";
+        if (val <= 19) return "Only a few funds have done this, for a few years";
+        return "⚠ Extremely rare — risky to plan around";
+      }
+      function applyReturnColor(val) {
+        var color = getReturnColor(val);
+        var el = document.getElementById("returnVal");
+        if (el) el.style.color = color;
+        var label = document.getElementById("returnZoneLabel");
+        if (label) { label.textContent = getReturnZoneLabel(val); label.style.color = color; }
+        var card = document.getElementById("mainCalcCard");
+        if (card) {
+          card.classList.toggle("danger-zone", val > 22);
+          var wasExtreme = card.classList.contains("extreme-zone");
+          var isExtreme  = val > 24.5;
+          card.classList.toggle("extreme-zone", isExtreme);
+          if (isExtreme && !wasExtreme) {
+            card.classList.remove("danger-shake"); void card.offsetWidth; card.classList.add("danger-shake");
+            card.addEventListener("animationend", function() { card.classList.remove("danger-shake"); }, { once: true });
+          }
+        }
+      }
+
+      // ── SLIDER SYNC ──
+      function syncSlider(sliderId, valId) {
+        var slider = document.getElementById(sliderId);
+        var val = parseFloat(slider.value);
+        var valInput = document.getElementById(valId);
+        if (valInput) valInput.value = val;
+        var min = parseFloat(slider.min), max = parseFloat(slider.max);
+        var pct = ((val - min) / (max - min)) * 100;
+        var fillColor = (sliderId === "investmentReturn") ? getReturnColor(val) : "var(--accent)";
+        slider.style.background = "linear-gradient(to right, " + fillColor + " " + pct + "%, var(--border) " + pct + "%)";
+        if (sliderId === "investmentReturn") applyReturnColor(val);
+      }
+      function clampValInput(sliderId, valId) {
+        var slider = document.getElementById(sliderId);
+        var valInput = document.getElementById(valId);
+        var min = parseFloat(slider.min), max = parseFloat(slider.max);
+        var step = parseFloat(slider.step) || 1;
+        var num = parseFloat(valInput.value);
+        if (isNaN(num)) num = parseFloat(slider.value);
+        num = Math.round(num / step) * step;
+        num = Math.min(max, Math.max(min, num));
+        num = parseFloat(num.toFixed(10));
+        slider.value = num; valInput.value = num;
+        var pct = ((num - min) / (max - min)) * 100;
+        var fillColor = (sliderId === "investmentReturn") ? getReturnColor(num) : "var(--accent)";
+        slider.style.background = "linear-gradient(to right, " + fillColor + " " + pct + "%, var(--border) " + pct + "%)";
+        if (sliderId === "investmentReturn") applyReturnColor(num);
+      }
+      function syncValInput(sliderId, valId) {
+        var slider = document.getElementById(sliderId);
+        var valInput = document.getElementById(valId);
+        var raw = valInput.value.trim();
+        if (raw === "" || raw === "-") return;
+        var num = parseFloat(raw);
+        if (isNaN(num)) return;
+        var min = parseFloat(slider.min), max = parseFloat(slider.max);
+        var step = parseFloat(slider.step) || 1;
+        num = Math.round(num / step) * step;
+        num = Math.min(max, Math.max(min, num));
+        num = parseFloat(num.toFixed(10));
+        slider.value = num;
+        var pct = ((num - min) / (max - min)) * 100;
+        var fillColor = (sliderId === "investmentReturn") ? getReturnColor(num) : "var(--accent)";
+        slider.style.background = "linear-gradient(to right, " + fillColor + " " + pct + "%, var(--border) " + pct + "%)";
+        if (sliderId === "investmentReturn") applyReturnColor(num);
+      }
+      ["investYears","priceInflation","investmentReturn","stepUp"].forEach(function(id) {
+        var valIds = { investYears:"yearsVal", priceInflation:"inflationVal", investmentReturn:"returnVal", stepUp:"stepUpVal" };
+        syncSlider(id, valIds[id]);
+      });
+
+      // ── SHARED: skip-comma-on-backspace ──
+      function handleMoneyKeydown(e) {
+        if (e.key !== "Backspace") return;
+        var el = e.target; var val = el.value; var start = el.selectionStart; var end = el.selectionEnd;
+        if (end - start > 0) { var sel = val.slice(start, end); if (sel.replace(/,/g, "").length > 0) return; }
+        var pos = start;
+        while (pos > 0 && val[pos - 1] === ",") pos--;
+        if (pos === 0) { e.preventDefault(); return; }
+        if (pos !== start) {
+          e.preventDefault();
+          var newVal = val.slice(0, pos - 1) + val.slice(end);
+          var digitsBeforeDeletion = val.slice(0, pos - 1).replace(/[^0-9]/g, "").length;
+          var raw = newVal.replace(/[^0-9]/g, "");
+          if (!raw) { el.value = ""; return; }
+          var formatted = formatIndian(parseInt(raw, 10));
+          el.value = formatted;
+          var seen = 0, newPos = formatted.length;
+          for (var i = 0; i < formatted.length; i++) {
+            if (/[0-9]/.test(formatted[i])) { seen++; if (seen === digitsBeforeDeletion) { newPos = i + 1; break; } }
+          }
+          if (digitsBeforeDeletion === 0) newPos = 0;
+          el.setSelectionRange(newPos, newPos);
+          el.dispatchEvent(new Event("input", { bubbles: true }));
+        }
+      }
+
+      // ── FORMATTERS ──
+      function formatCostInput(el) {
+        var selStart = el.selectionStart; var oldVal = el.value;
+        var digitsBeforeCursor = oldVal.slice(0, selStart).replace(/[^0-9]/g, "").length;
+        var raw = oldVal.replace(/[^0-9]/g, "");
+        if (!raw) { el.value = ""; return; }
+        var newVal = formatIndian(parseInt(raw, 10));
+        el.value = newVal;
+        var digitsSeen = 0; var newPos = newVal.length;
+        for (var i = 0; i < newVal.length; i++) {
+          if (/[0-9]/.test(newVal[i])) { digitsSeen++; if (digitsSeen === digitsBeforeCursor) { newPos = i + 1; break; } }
+        }
+        el.setSelectionRange(newPos, newPos);
+      }
+      function formatIndian(n) {
+        if (isNaN(n)) return "";
+        var s = n.toString();
+        if (s.length <= 3) return s;
+        var last3 = s.slice(-3); var rest = s.slice(0, -3);
+        rest = rest.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+        return rest + "," + last3;
+      }
+      function parseCost(val) { return parseInt(val.replace(/[^0-9]/g, ""), 10) || 0; }
+      function fmtINR(n) { return "₹" + formatIndian(Math.round(n)); }
+      function shortINR(n) {
+        if (n >= 10000000) return "₹" + (n/10000000).toFixed(2) + " Cr";
+        if (n >= 100000)   return "₹" + (n/100000).toFixed(2) + " L";
+        if (n >= 1000)     return "₹" + (n/1000).toFixed(1) + "K";
+        return fmtINR(n);
+      }
+
+      // ── STEP-UP SIP FV CALCULATION ──
+      // Given starting SIP P0, annual stepup s, monthly rate r, n years → FV
+      function calcStepUpSIPFV(startingSIP, years, monthlyRate, annualStepUp) {
+        var s = (annualStepUp || 0) / 100;
+        var fv = 0;
+        for (var y = 0; y < years; y++) {
+          var monthAmount = startingSIP * Math.pow(1 + s, y);
+          for (var m = 1; m <= 12; m++) {
+            var monthsLeft = (years - y) * 12 - (m - 1);
+            fv += monthAmount * Math.pow(1 + monthlyRate, monthsLeft);
+          }
+        }
+        return fv;
+      }
+      function calcStepUpTotalInvested(startingSIP, years, annualStepUp) {
+        var s = (annualStepUp || 0) / 100;
+        var total = 0;
+        for (var y = 0; y < years; y++) total += startingSIP * Math.pow(1 + s, y) * 12;
+        return total;
+      }
+
+      // ── CALCULATION CORE ──
+      function calculate() {
+        var years      = parseFloat(document.getElementById("investYears").value);
+        var investReturn = parseFloat(document.getElementById("investmentReturn").value);
+        var inflation  = parseFloat(document.getElementById("priceInflation").value);
+        var stepUp     = parseFloat(document.getElementById("stepUp").value) || 0;
+        var monthlyRate = investReturn / 1200;
+        var annualRate  = investReturn / 100;
+        var realRate    = ((1 + annualRate) / (1 + inflation / 100)) - 1;
+
+        if (_mode === "lumpsum") {
+          var lumpsum = parseCost(document.getElementById("lumpsumAmount").value);
+          if (!lumpsum || lumpsum <= 0) return null;
+          var fv = lumpsum * Math.pow(1 + annualRate, years);
+          var realFV = lumpsum * Math.pow(1 + realRate, years);
+          var gains  = fv - lumpsum;
+          var multiple = (fv / lumpsum).toFixed(1);
+          var realMultiple = (realFV / lumpsum).toFixed(2);
+          return { mode: "lumpsum", lumpsum, fv, realFV, gains, multiple, realMultiple, years, annualRate, monthlyRate, investReturn, inflation };
+
+        } else if (_mode === "both") {
+          var sipAmt = parseCost(document.getElementById("monthlySIP").value);
+          var lsAmt  = parseCost(document.getElementById("lumpsumAmount").value);
+          if ((!sipAmt || sipAmt <= 0) && (!lsAmt || lsAmt <= 0)) return null;
+          var sipFV = sipAmt > 0 ? calcStepUpSIPFV(sipAmt, years, monthlyRate, stepUp) : 0;
+          var lsFV  = lsAmt  > 0 ? lsAmt * Math.pow(1 + annualRate, years) : 0;
+          var totalFV = sipFV + lsFV;
+          var sipInvested = sipAmt > 0 ? calcStepUpTotalInvested(sipAmt, years, stepUp) : 0;
+          var totalInvested = sipInvested + (lsAmt || 0);
+          var gains = totalFV - totalInvested;
+          var realTotalFV = totalFV / Math.pow(1 + inflation / 100, years);
+          var realRateB = ((1 + annualRate) / (1 + inflation / 100)) - 1;
+          var multiple = totalInvested > 0 ? (totalFV / totalInvested).toFixed(1) : "—";
+          var realMultiple = (Math.pow(1 + realRateB, years)).toFixed(2);
+          return { mode: "both", sipAmt, lsAmt, sipFV, lsFV, totalFV, realTotalFV, totalInvested, sipInvested, gains, multiple, realMultiple, years, annualRate, monthlyRate, investReturn, inflation, stepUp };
+
+        } else {
+          // SIP
+          var sipAmt2 = parseCost(document.getElementById("monthlySIP").value);
+          if (!sipAmt2 || sipAmt2 <= 0) return null;
+          var sipFV2 = calcStepUpSIPFV(sipAmt2, years, monthlyRate, stepUp);
+          var sipInvested2 = calcStepUpTotalInvested(sipAmt2, years, stepUp);
+          var gains2 = sipFV2 - sipInvested2;
+          var realFV2 = sipFV2 / Math.pow(1 + inflation / 100, years);
+          var realRate2 = ((1 + annualRate) / (1 + inflation / 100)) - 1;
+          var sipMultiple = sipInvested2 > 0 ? (sipFV2 / sipInvested2).toFixed(1) : "—";
+          var realMultiple2 = (Math.pow(1 + realRate2, years)).toFixed(2);
+          return { mode: "sip", sipAmt: sipAmt2, totalFV: sipFV2, realFV: realFV2, totalInvested: sipInvested2, gains: gains2, multiple: sipMultiple, realMultiple: realMultiple2, years, annualRate, monthlyRate, investReturn, inflation, stepUp };
+        }
+      }
+
+      // ── RENDER RESULTS ──
+      function renderResults(result) {
+        var heading = document.getElementById("resultsHeading");
+        var html = "";
+
+        function rCell(label, value, colorClass, sub) {
+          return '<div class="result-cell">'
+            + '<div class="result-label">' + label + '</div>'
+            + '<div class="result-value' + (colorClass ? ' ' + colorClass : '') + '">' + value + '</div>'
+            + '<div class="result-sub">' + (sub || "") + '</div>'
+            + '</div>';
+        }
+        function rCellPrimary(label, value, sub) {
+          return '<div class="result-cell primary">'
+            + '<div class="result-label">' + label + '</div>'
+            + '<div class="result-value accent">' + value + '</div>'
+            + '<div class="result-sub">' + (sub || "") + '</div>'
+            + '</div>';
+        }
+        function rCellSafePrimary(label, value, sub) {
+          return '<div class="result-cell safe-primary">'
+            + '<div class="result-label">' + label + '</div>'
+            + '<div class="result-value safe">' + value + '</div>'
+            + '<div class="result-sub">' + (sub || "") + '</div>'
+            + '</div>';
+        }
+        function rCellInvestedSplit(invested, gains) {
+          var total = invested + gains;
+          var yoursPct = total > 0 ? Math.round((invested / total) * 100) : 0;
+          var gainsPct = 100 - yoursPct;
+          var tipI = 'Every rupee you put in — your discipline, month after month.';
+          var tipG = 'The bonus your money earned by being invested. The market did this work for you, while you slept.';
+          return '<div class="result-cell">'
+            + '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;">'
+            + '<div><div class="result-label">You Put In <i class="tip-icon" data-tip="' + tipI + '">i</i></div><div class="result-value neutral">' + fmtINR(invested) + '</div></div>'
+            + '<div style="text-align:right;"><div class="result-label">Projected Gains <i class="tip-icon" data-tip="' + tipG + '">i</i></div><div class="result-value safe">' + fmtINR(gains) + '</div></div>'
+            + '</div>'
+            + '<div style="height:4px;border-radius:3px;overflow:hidden;display:flex;margin-top:0.7rem;">'
+            + '<div style="width:' + yoursPct + '%;background:var(--neutral);transition:width 0.5s ease;"></div>'
+            + '<div style="width:' + gainsPct + '%;background:var(--safe);transition:width 0.5s ease;"></div>'
+            + '</div></div>';
+        }
+        function rCellDual(label, v1, l1, v2, l2) {
+          var t1 = 'Nominal corpus — your money in future rupees. Does not account for inflation.';
+          var t2 = 'What your corpus will be worth in today\'s purchasing power, after stripping out ' + result.inflation + '% inflation per year.';
+          return '<div class="result-cell">'
+            + '<div class="result-label">' + label + '</div>'
+            + '<div style="display:flex;gap:2.5rem;align-items:baseline;flex-wrap:wrap;margin-top:0.15rem;">'
+            + '<div><div class="result-value accent">' + v1 + '</div><div class="result-sub">' + l1 + ' <i class="tip-icon" data-tip="' + t1 + '">i</i></div></div>'
+            + '<div style="color:var(--border);font-size:1.2rem;align-self:center;">|</div>'
+            + '<div><div class="result-value safe">' + v2 + '</div><div class="result-sub">' + l2 + ' <i class="tip-icon" data-tip="' + t2 + '">i</i></div></div>'
+            + '</div></div>';
+        }
+
+        if (result.mode === "lumpsum") {
+          heading.innerHTML = "Your <em>" + fmtINR(result.lumpsum) + "</em> grows to <em>" + fmtINR(result.fv) + "</em> in " + result.years + " years";
+          html = '<div class="results-grid">'
+            + rCellPrimary("Corpus at Year " + result.years, fmtINR(result.fv), "Nominal — at " + result.investReturn + "% p.a.")
+            + rCellSafePrimary("Real Value (Today's ₹)", fmtINR(result.realFV), "After " + result.inflation + "% inflation p.a.")
+            + rCellInvestedSplit(result.lumpsum, result.gains > 0 ? result.gains : 0)
+            + rCellDual("Return Multiple", result.multiple + "×", "Absolute", result.realMultiple + "×", "Real (Infl-Adj.)")
+            + '</div>';
+
+          // Cost of delay
+          if (result.years >= 3) {
+            var fv1yr = result.lumpsum * Math.pow(1 + result.annualRate, result.years - 1);
+            var fv2yr = result.lumpsum * Math.pow(1 + result.annualRate, result.years - 2);
+            var lost1 = result.fv - fv1yr;
+            var lost2 = result.fv - fv2yr;
+            html += '<div class="delay-callout"><div class="delay-title">What early investing gives you</div>'
+              + '<div class="delay-line">Investing 1 year earlier would have grown your money to <strong>' + fmtINR(fv1yr + lost1) + '</strong> <span class="gain-delta">(+' + fmtINR(lost1) + ' extra)</span>.</div>'
+              + (result.years >= 4 ? '<div class="delay-line">Investing 2 years earlier: <strong>' + fmtINR(fv2yr + lost2) + '</strong> <span class="gain-delta">(+' + fmtINR(lost2) + ' extra)</span>.</div>' : '')
+              + '</div>';
+          }
+
+        } else if (result.mode === "both") {
+          var su = result.stepUp || 0;
+          if (su > 0) {
+            heading.innerHTML = "Your <em>" + fmtINR(result.lsAmt) + "</em> lumpsum + <em>" + fmtINR(result.sipAmt) + "</em>/mo SIP (+" + su + "% p.a.) builds <em>" + fmtINR(result.totalFV) + "</em>";
+          } else {
+            heading.innerHTML = "Your <em>" + fmtINR(result.lsAmt) + "</em> lumpsum + <em>" + fmtINR(result.sipAmt) + "</em>/mo SIP builds <em>" + fmtINR(result.totalFV) + "</em>";
+          }
+          html = '<div class="results-grid">'
+            + rCellPrimary("Total Corpus at Year " + result.years, fmtINR(result.totalFV), "Nominal — at " + result.investReturn + "% p.a.")
+            + rCellSafePrimary("Real Value (Today's ₹)", fmtINR(result.realTotalFV), "After " + result.inflation + "% inflation p.a.")
+            + rCellInvestedSplit(result.totalInvested, result.gains > 0 ? result.gains : 0)
+            + rCellDual("Return Multiple", result.multiple + "×", "Absolute", result.realMultiple + "×", "Real (Infl-Adj.)")
+            + rCell("Lumpsum Grows To", fmtINR(result.lsFV), "accent", "From ₹" + formatIndian(Math.round(result.lsAmt)) + " invested today")
+            + rCell("SIP Builds", fmtINR(result.sipFV), "safe", su > 0 ? "Starting " + fmtINR(result.sipAmt) + ", +" + su + "% each year" : fmtINR(result.sipAmt) + " every month")
+            + '</div>';
+
+          // +1yr, +5yr comparison
+          if (result.years >= 3) {
+            var sipFV1 = calcStepUpSIPFV(result.sipAmt, result.years + 1, result.monthlyRate, su);
+            var lsFV1  = result.lsAmt * Math.pow(1 + result.annualRate, result.years + 1);
+            var sipFV5 = calcStepUpSIPFV(result.sipAmt, result.years + 5, result.monthlyRate, su);
+            var lsFV5  = result.lsAmt * Math.pow(1 + result.annualRate, result.years + 5);
+            var extra1 = (sipFV1 + lsFV1) - result.totalFV;
+            var extra5 = (sipFV5 + lsFV5) - result.totalFV;
+            html += '<div class="delay-callout"><div class="delay-title">Stay invested longer</div>'
+              + '<div class="delay-line">Staying invested 1 extra year takes your corpus to <strong>' + fmtINR(sipFV1 + lsFV1) + '</strong> <span class="gain-delta">(+' + fmtINR(extra1) + ')</span>.</div>'
+              + '<div class="delay-line">5 extra years: <strong>' + fmtINR(sipFV5 + lsFV5) + '</strong> <span class="gain-delta">(+' + fmtINR(extra5) + ')</span>.</div>'
+              + '</div>';
+          }
+
+        } else {
+          // SIP
+          var su = result.stepUp || 0;
+          if (su > 0) {
+            heading.innerHTML = "Starting at <em>" + fmtINR(result.sipAmt) + "</em>/month, stepping up " + su + "% yearly — builds <em>" + fmtINR(result.totalFV) + "</em>";
+          } else {
+            heading.innerHTML = "Saving <em>" + fmtINR(result.sipAmt) + "</em>/month for " + result.years + " years builds <em>" + fmtINR(result.totalFV) + "</em>";
+          }
+          html = '<div class="results-grid">'
+            + rCellPrimary("Corpus at Year " + result.years, fmtINR(result.totalFV), su > 0 ? "Starting SIP, growing " + su + "% yearly" : fmtINR(result.sipAmt) + " per month")
+            + rCellSafePrimary("Real Value (Today's ₹)", fmtINR(result.realFV), "After " + result.inflation + "% inflation p.a.")
+            + rCellInvestedSplit(result.totalInvested, result.gains > 0 ? result.gains : 0)
+            + rCellDual("Return Multiple", result.multiple + "×", "Absolute", result.realMultiple + "×", "Real (Infl-Adj.)")
+            + '</div>';
+
+          // Extend timeline callout
+          if (result.years >= 3) {
+            var fv1e = calcStepUpSIPFV(result.sipAmt, result.years + 1, result.monthlyRate, su);
+            var fv5e = calcStepUpSIPFV(result.sipAmt, result.years + 5, result.monthlyRate, su);
+            var extra1e = fv1e - result.totalFV;
+            var extra5e = fv5e - result.totalFV;
+            html += '<div class="delay-callout"><div class="delay-title">Stay invested longer</div>'
+              + '<div class="delay-line">One extra year of investing takes your corpus to <strong>' + fmtINR(fv1e) + '</strong> <span class="gain-delta">(+' + fmtINR(extra1e) + ')</span>.</div>'
+              + '<div class="delay-line">5 extra years: <strong>' + fmtINR(fv5e) + '</strong> <span class="gain-delta">(+' + fmtINR(extra5e) + ')</span>.</div>'
+              + '</div>';
+          }
+        }
+
+        document.getElementById("resultsBody").innerHTML = html;
+        document.getElementById("shareCard").style.display = "block";
+        document.getElementById("noteCard").style.display  = "block";
+        autoOpenPhilosophy();
+
+        // Show scroll hint if share card is below the fold
+        var shareCard = document.getElementById("shareCard");
+        var rect = shareCard.getBoundingClientRect();
+        if (rect.top > window.innerHeight) document.getElementById("sendResultsLink").style.display = "block";
+        else document.getElementById("sendResultsLink").style.display = "none";
+      }
+
+      // ── CHART ──
+      var _chartInstance = null;
+
+      function buildChartData(result) {
+        var labels = [], invested = [], corpus = [], realVal = [];
+        var totalYears = result.years;
+        var isMobile = window.innerWidth < 480;
+        var isTablet = window.innerWidth < 720;
+        var step;
+        if (isMobile)      step = totalYears <= 5 ? 1 : totalYears <= 10 ? 2 : totalYears <= 20 ? 4 : 5;
+        else if (isTablet) step = totalYears <= 10 ? 1 : totalYears <= 20 ? 2 : 3;
+        else               step = totalYears <= 15 ? 1 : totalYears <= 25 ? 2 : 3;
+
+        var inflFactor = result.inflation / 100;
+
+        if (result.mode === "lumpsum") {
+          for (var y = 1; y <= totalYears; y++) {
+            if ((Math.round(y) % step === 0) || y === totalYears) {
+              labels.push("Yr " + y);
+              var fvY = result.lumpsum * Math.pow(1 + result.annualRate, y);
+              var realY = fvY / Math.pow(1 + inflFactor, y);
+              invested.push(Math.round(result.lumpsum));
+              corpus.push(Math.round(fvY));
+              realVal.push(Math.round(realY));
+            }
+          }
+        } else if (result.mode === "sip") {
+          var sipAmt = result.sipAmt, su = (result.stepUp || 0) / 100, r = result.monthlyRate;
+          for (var yS = 1; yS <= totalYears; yS++) {
+            if ((Math.round(yS) % step === 0) || yS === totalYears) {
+              labels.push("Yr " + yS);
+              var fvS = 0, invS = 0;
+              for (var yy = 0; yy < yS; yy++) {
+                var mAmt = sipAmt * Math.pow(1 + su, yy);
+                for (var mm = 1; mm <= 12; mm++) {
+                  var mLeft = (yS - yy) * 12 - (mm - 1);
+                  fvS += mAmt * Math.pow(1 + r, mLeft);
+                  invS += mAmt;
+                }
+              }
+              var realS = fvS / Math.pow(1 + inflFactor, yS);
+              invested.push(Math.round(invS));
+              corpus.push(Math.round(fvS));
+              realVal.push(Math.round(realS));
+            }
+          }
+        } else {
+          // both
+          var sipA = result.sipAmt, lsA = result.lsAmt, suB = (result.stepUp || 0) / 100, rB = result.monthlyRate;
+          for (var yB = 1; yB <= totalYears; yB++) {
+            if ((Math.round(yB) % step === 0) || yB === totalYears) {
+              labels.push("Yr " + yB);
+              var lsFVy = lsA * Math.pow(1 + result.annualRate, yB);
+              var sipFVy = 0, sipInvY = 0;
+              for (var yyB = 0; yyB < yB; yyB++) {
+                var mAmtB = sipA * Math.pow(1 + suB, yyB);
+                for (var mmB = 1; mmB <= 12; mmB++) {
+                  var mLeftB = (yB - yyB) * 12 - (mmB - 1);
+                  sipFVy += mAmtB * Math.pow(1 + rB, mLeftB);
+                  sipInvY += mAmtB;
+                }
+              }
+              var totalFVy = lsFVy + sipFVy;
+              var realVy = totalFVy / Math.pow(1 + inflFactor, yB);
+              invested.push(Math.round(lsA + sipInvY));
+              corpus.push(Math.round(totalFVy));
+              realVal.push(Math.round(realVy));
+            }
+          }
+        }
+        return { labels, invested, corpus, realVal };
+      }
+
+      function renderChart(result) {
+        var card = document.getElementById("chartCard");
+        card.style.display = "block";
+        var data = buildChartData(result);
+        var ctx  = document.getElementById("growthChart").getContext("2d");
+        var isDark = document.documentElement.getAttribute("data-theme") !== "light";
+        var gridColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)";
+        var tickColor = isDark ? "#8a9ab5" : "#6b6353";
+        if (_chartInstance) _chartInstance.destroy();
+        var investedLabel = result.mode === "lumpsum" ? "Lumpsum Invested" : result.mode === "both" ? "Total Invested" : "Amount Invested";
+        document.getElementById("legendInvested").textContent = investedLabel;
+        _chartInstance = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: data.labels,
+            datasets: [
+              { label: investedLabel, data: data.invested, backgroundColor: "rgba(107,140,186,0.55)", borderColor: "rgba(107,140,186,0.9)", borderWidth: 1, borderRadius: 3, order: 3 },
+              { label: "Corpus Value", data: data.corpus, backgroundColor: "rgba(200,169,110,0.55)", borderColor: "rgba(200,169,110,0.9)", borderWidth: 1, borderRadius: 3, order: 2 },
+              { label: "Real Value (Infl-Adj.)", data: data.realVal, type: "line", borderColor: "rgba(76,175,130,0.8)", borderWidth: 2, borderDash: [6, 4], pointRadius: 0, fill: false, tension: 0, order: 1 }
+            ]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            interaction: { mode: "index", intersect: false },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: isDark ? "#111827" : "#fff",
+                titleColor: isDark ? "#e8e4dc" : "#1c1a14",
+                bodyColor: isDark ? "#8a9ab5" : "#6b6353",
+                borderColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+                borderWidth: 1, padding: 12,
+                callbacks: { label: function(ctx) { return " " + ctx.dataset.label + ": ₹" + formatIndian(ctx.parsed.y); } }
+              }
+            },
+            scales: {
+              x: { grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 11, family: "'DM Sans', sans-serif" } } },
+              y: { grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 11, family: "'DM Sans', sans-serif" }, callback: function(v) {
+                if (v >= 10000000) return "₹" + (v/10000000).toFixed(1) + "Cr";
+                if (v >= 100000)   return "₹" + (v/100000).toFixed(1) + "L";
+                if (v >= 1000)     return "₹" + (v/1000).toFixed(0) + "K";
+                return "₹" + v;
+              }}}
+            }
+          }
+        });
+        window._chartInstance = _chartInstance;
+      }
+
+      function updateChartColors() {
+        if (!_chartInstance) return;
+        var isDark = document.documentElement.getAttribute("data-theme") !== "light";
+        var gridColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)";
+        var tickColor = isDark ? "#8a9ab5" : "#6b6353";
+        _chartInstance.options.scales.x.grid.color = gridColor;
+        _chartInstance.options.scales.x.ticks.color = tickColor;
+        _chartInstance.options.scales.y.grid.color = gridColor;
+        _chartInstance.options.scales.y.ticks.color = tickColor;
+        _chartInstance.options.plugins.tooltip.backgroundColor = isDark ? "#111827" : "#fff";
+        _chartInstance.options.plugins.tooltip.titleColor = isDark ? "#e8e4dc" : "#1c1a14";
+        _chartInstance.options.plugins.tooltip.bodyColor = isDark ? "#8a9ab5" : "#6b6353";
+        _chartInstance.options.plugins.tooltip.borderColor = isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)";
+        _chartInstance.update();
+      }
+
+      // ── MAIN INPUT HANDLER ──
+      function onAnyInput() {
+        var result = calculate();
+        if (!result) {
+          document.getElementById("resultsHeading").innerHTML = "<em>Enter your savings above</em>";
+          document.getElementById("resultsBody").innerHTML = '<div class="results-placeholder"><div class="placeholder-icon">📈</div><div>Enter what you can save to see<br/>the wealth you\'ll build over time.</div></div>';
+          document.getElementById("chartCard").style.display = "none";
+          document.getElementById("shareCard").style.display = "none";
+          document.getElementById("noteCard").style.display  = "none";
+          document.getElementById("sendResultsLink").style.display = "none";
+          var inflAcc = document.getElementById("inflationAccordion");
+          inflAcc.classList.remove("visible");
+          _inflationData = null;
+          return;
+        }
+        renderResults(result);
+        renderChart(result);
+        renderInflationBreakdown(result);
+      }
+
+      // ── INFLATION BREAKDOWN ──
+      var _inflationData = null;
+
+      function toggleGoalLink() {
+        var body = document.getElementById("goalLinkBody");
+        var btn  = document.getElementById("goalLinkAccordion").querySelector(".inflation-trigger");
+        var isOpen = body.classList.contains("open");
+        if (!isOpen) { body.classList.add("open"); body.style.maxHeight = body.scrollHeight + "px"; }
+        else { body.style.maxHeight = body.scrollHeight + "px"; requestAnimationFrame(function() { body.style.maxHeight = "0px"; body.classList.remove("open"); }); }
+        btn.setAttribute("aria-expanded", String(!isOpen));
+      }
+
+      function toggleInflation() {
+        var body = document.getElementById("inflationBody");
+        var btn  = document.getElementById("inflationAccordion").querySelector(".inflation-trigger");
+        var isOpen = body.classList.contains("open");
+        if (!isOpen) { body.classList.add("open"); body.style.maxHeight = body.scrollHeight + "px"; setTimeout(renderInflationBar, 50); }
+        else { body.style.maxHeight = body.scrollHeight + "px"; requestAnimationFrame(function() { body.style.maxHeight = "0px"; body.classList.remove("open"); }); }
+        btn.setAttribute("aria-expanded", String(!isOpen));
+      }
+
+      function renderInflationBreakdown(result) {
+        var accordion = document.getElementById("inflationAccordion");
+        if (!result) { accordion.classList.remove("visible"); return; }
+        var wasVisible = accordion.classList.contains("visible");
+        accordion.classList.add("visible");
+        if (!wasVisible && !accordion._pulseObserverSet) {
+          accordion._pulseObserverSet = true;
+          var observer = new IntersectionObserver(function(entries, obs) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                accordion.classList.remove("pulse-once"); void accordion.offsetWidth; accordion.classList.add("pulse-once");
+                accordion.addEventListener("animationend", function() { accordion.classList.remove("pulse-once"); }, { once: true });
+                obs.disconnect();
+              }
+            });
+          }, { threshold: 0.5 });
+          observer.observe(accordion);
+        }
+
+        var totalFV = result.totalFV || result.fv;
+        var totalInvested = result.totalInvested || result.lumpsum;
+        var inflMonthlyRate = result.inflation / 1200;
+        var fvAtInflation = 0;
+
+        if (result.mode === "lumpsum") {
+          fvAtInflation = result.lumpsum * Math.pow(1 + result.inflation / 100, result.years);
+        } else {
+          // SIP / Both
+          var startingSIP = result.sipAmt || 0;
+          var stepUpRate  = (result.stepUp || 0) / 100;
+          for (var y = 0; y < result.years; y++) {
+            var mAmt = startingSIP * Math.pow(1 + stepUpRate, y);
+            for (var m = 1; m <= 12; m++) {
+              var mLeft = (result.years - y) * 12 - (m - 1);
+              fvAtInflation += mAmt * Math.pow(1 + inflMonthlyRate, mLeft);
+            }
+          }
+          if (result.mode === "both" && result.lsAmt) {
+            fvAtInflation += result.lsAmt * Math.pow(1 + result.inflation / 100, result.years);
+          }
+        }
+
+        var inflationCut = Math.max(0, fvAtInflation - totalInvested);
+        var realGain     = Math.max(0, totalFV - fvAtInflation);
+        var total = totalInvested + inflationCut + realGain;
+        var yoursPct = total > 0 ? Math.round((totalInvested / total) * 100) : 0;
+        var inflPct  = total > 0 ? Math.round((inflationCut  / total) * 100) : 0;
+        var realPct  = Math.max(0, 100 - yoursPct - inflPct);
+        _inflationData = { yoursPct, inflPct, realPct, totalInvested, inflationCut, realGain, result };
+
+        document.getElementById("inflStatYours").textContent    = fmtINR(totalInvested);
+        document.getElementById("inflStatYoursPct").textContent = yoursPct + "% of corpus";
+        document.getElementById("inflStatInfl").textContent     = fmtINR(inflationCut);
+        document.getElementById("inflStatInflPct").textContent  = inflPct + "% of corpus";
+        document.getElementById("inflStatReal").textContent     = fmtINR(realGain);
+        document.getElementById("inflStatRealPct").textContent  = realPct + "% of corpus";
+
+        var realReturn = (((1 + result.investReturn / 100) / (1 + result.inflation / 100)) - 1) * 100;
+        document.getElementById("inflationNote").innerHTML = "At " + result.investReturn + "% return and " + result.inflation + "% inflation, your real return is roughly <strong>" + realReturn.toFixed(1) + "% p.a.</strong>. Of your <strong>" + fmtINR(totalFV) + "</strong> corpus, <strong>" + fmtINR(Math.round(inflationCut)) + "</strong> just keeps pace with inflation — and <strong>" + fmtINR(Math.round(realGain)) + "</strong> is genuine wealth created above it.";
+
+        var body = document.getElementById("inflationBody");
+        if (body.classList.contains("open")) renderInflationBar();
+        else {
+          document.getElementById("inflBarYours").style.width = "0%";
+          document.getElementById("inflBarInfl").style.width  = "0%";
+          document.getElementById("inflBarReal").style.width  = "0%";
+        }
+      }
+
+      function renderInflationBar() {
+        if (!_inflationData) return;
+        document.getElementById("inflBarYours").style.width = _inflationData.yoursPct + "%";
+        document.getElementById("inflBarInfl").style.width  = _inflationData.inflPct  + "%";
+        document.getElementById("inflBarReal").style.width  = _inflationData.realPct  + "%";
+      }
+
+      // ── SCROLL / SHARE HINTS ──
+      function scrollToShare() {
+        document.getElementById("sendResultsLink").style.display = "none";
+        document.getElementById("shareCard").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      window.addEventListener("scroll", function() {
+        var shareCard = document.getElementById("shareCard");
+        if (!shareCard || shareCard.style.display === "none") return;
+        if (shareCard.getBoundingClientRect().top <= window.innerHeight) document.getElementById("sendResultsLink").style.display = "none";
+      });
+
+      // ── PHILOSOPHY ──
+      var _philosophyAutoOpened = false;
+      function autoOpenPhilosophy() {
+        if (_philosophyAutoOpened) return;
+        var body = document.getElementById("philosophyBody");
+        var btn  = document.getElementById("philosophyAccordion").querySelector(".philosophy-trigger");
+        if (body.classList.contains("open")) { _philosophyAutoOpened = true; return; }
+        setTimeout(function() {
+          body.classList.add("open"); body.style.maxHeight = body.scrollHeight + "px";
+          btn.setAttribute("aria-expanded", "true"); _philosophyAutoOpened = true;
+        }, 800);
+      }
+      function togglePhilosophy() {
+        var body = document.getElementById("philosophyBody");
+        var btn  = document.getElementById("philosophyAccordion").querySelector(".philosophy-trigger");
+        var isOpen = body.classList.contains("open");
+        if (!isOpen) { body.classList.add("open"); body.style.maxHeight = body.scrollHeight + "px"; }
+        else { body.style.maxHeight = body.scrollHeight + "px"; requestAnimationFrame(function() { body.style.maxHeight = "0px"; body.classList.remove("open"); }); }
+        btn.setAttribute("aria-expanded", String(!isOpen));
+      }
+
+      // ── RESET ──
+      function resetForm() { clearAll(); }
+
+      // ── FIELD VALIDATION ──
+      function clearFieldError(id) {
+        var el = document.getElementById(id);
+        el.classList.remove("field-error");
+        var errEl = document.getElementById(id + "Err");
+        if (errEl) errEl.classList.remove("show");
+      }
+      function validateShareFields() {
+        var nameEl = document.getElementById("userName");
+        var valid = true;
+        if (!nameEl.value.trim()) {
+          nameEl.classList.add("field-error");
+          document.getElementById("userNameErr").classList.add("show");
+          nameEl.scrollIntoView({ behavior: "smooth", block: "center" }); nameEl.focus();
+          valid = false;
+        }
+        return valid;
+      }
+
+      // ── SHARE MESSAGE ──
+      function buildShareMessage() {
+        var name   = document.getElementById("userName").value.trim();
+        var result = calculate();
+        if (!result) return "";
+        var lines = [
+          "Hi Ramesh, I'm " + name + ".",
+          "",
+          "I used your Savings Corpus Calculator and here are my projections:",
+          "",
+          "── SAVINGS DETAILS ──",
+          "Investment Type      : " + (result.mode === "lumpsum" ? "Lumpsum (One-Time)" : result.mode === "both" ? "Lumpsum + SIP (Combined)" : "SIP (Monthly)"),
+        ];
+        if (result.mode !== "lumpsum" && result.sipAmt) lines.push("Monthly SIP          : " + fmtINR(result.sipAmt));
+        if (result.mode !== "sip" && result.lsAmt)     lines.push("Lumpsum Invested     : " + fmtINR(result.lsAmt));
+        if (result.mode === "lumpsum" && result.lumpsum) lines.push("Lumpsum Invested     : " + fmtINR(result.lumpsum));
+        if ((result.mode === "sip" || result.mode === "both") && result.stepUp > 0) lines.push("Annual SIP Step-Up   : " + result.stepUp + "% p.a.");
+        lines.push("Investment Duration  : " + result.years + " years");
+        lines.push("Expected Return      : " + result.investReturn + "% p.a.");
+        lines.push("Inflation Rate       : " + result.inflation + "% p.a.");
+        lines.push("");
+        lines.push("── PROJECTED CORPUS ──");
+        lines.push("Total Corpus         : " + fmtINR(result.totalFV || result.fv));
+        lines.push("Real Value (Today's ₹): " + fmtINR(result.realFV || result.realTotalFV));
+        lines.push("You'll Put In        : " + fmtINR(result.totalInvested || result.lumpsum));
+        lines.push("Projected Gains      : " + fmtINR(Math.max(0, result.gains)));
+        lines.push("");
+        lines.push("Could you help me choose the right mutual funds for this plan?");
+        lines.push("Thank you!");
+        return lines.join("\n");
+      }
+
+      // ── SHARE FUNCTIONS ──
+      window.copyShareLink = function() {
+        var result = calculate();
+        if (!result) { showToast("⚠ Please fill in your savings details first."); return; }
+        var params = new URLSearchParams();
+        params.set("mode", _mode);
+        params.set("years", document.getElementById("investYears").value);
+        params.set("ret", document.getElementById("investmentReturn").value);
+        params.set("infl", document.getElementById("priceInflation").value);
+        params.set("stepup", document.getElementById("stepUp").value);
+        var sip = document.getElementById("monthlySIP").value.replace(/,/g,"");
+        if (sip) params.set("sip", sip);
+        var ls = document.getElementById("lumpsumAmount").value.replace(/,/g,"");
+        if (ls) params.set("lumpsum", ls);
+        var url = window.location.origin + window.location.pathname + "?" + params.toString();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(function() { showToast("✓ Link copied to clipboard!"); }).catch(function() { prompt("Copy this link:", url); });
+        } else { prompt("Copy this link:", url); }
+      };
+      window.buildAndOpenWa = function() {
+        if (!validateShareFields()) return false;
+        var body = buildShareMessage();
+        if (!body) { showToast("⚠ Please fill in your savings details first."); return false; }
+        var url = "https://wa.me/918329450580?text=" + encodeURIComponent(body);
+        var a = document.createElement("a"); a.href = url; a.target = "_blank"; a.rel = "noopener";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        showToast("✓ Opening WhatsApp…"); return false;
+      };
+      window.buildAndOpenGmail = function() {
+        if (!validateShareFields()) return false;
+        var body = buildShareMessage();
+        if (!body) { showToast("⚠ Please fill in your savings details first."); return false; }
+        var name = document.getElementById("userName").value.trim();
+        var subj = "Savings Corpus Calculator Results (" + name + ")";
+        var url = "https://mail.google.com/mail/?view=cm&to=rameshvegi94@gmail.com&su=" + encodeURIComponent(subj) + "&body=" + encodeURIComponent(body);
+        var a = document.createElement("a"); a.href = url; a.target = "_blank"; a.rel = "noopener";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        showToast("✓ Opening Gmail…"); return false;
+      };
+      window.buildAndOpenEmail = function() {
+        if (!validateShareFields()) return false;
+        var body = buildShareMessage();
+        if (!body) { showToast("⚠ Please fill in your savings details first."); return false; }
+        var name = document.getElementById("userName").value.trim();
+        var subj = "Savings Corpus Calculator Results (" + name + ")";
+        window.location.href = "mailto:rameshvegi94@gmail.com?subject=" + encodeURIComponent(subj) + "&body=" + encodeURIComponent(body);
+        showToast("✓ Opening email app…"); return false;
+      };
+
+      function showToast(msg) {
+        if (_undoTimer) return;
+        var t = document.getElementById("shareToast");
+        if (!t) return;
+        t.innerHTML = '<span>' + msg + '</span>';
+        t.classList.add("show");
+        setTimeout(function() { t.classList.remove("show"); }, 3000);
+      }
+
+      // ── RESTORE FROM URL PARAMS ──
+      (function() {
+        var params = new URLSearchParams(window.location.search);
+        var mode = params.get("mode");
+        if (mode && ["sip","lumpsum","both"].indexOf(mode) !== -1) {
+          _mode = mode;
+          applyMode(mode);
+        }
+        var sip = params.get("sip");
+        if (sip) document.getElementById("monthlySIP").value = formatIndian(parseInt(sip.replace(/,/g,""), 10));
+        var ls = params.get("lumpsum");
+        if (ls) document.getElementById("lumpsumAmount").value = formatIndian(parseInt(ls.replace(/,/g,""), 10));
+        var years = params.get("years");
+        if (years) { document.getElementById("investYears").value = years; syncSlider("investYears","yearsVal"); }
+        var ret = params.get("ret");
+        if (ret) { document.getElementById("investmentReturn").value = ret; syncSlider("investmentReturn","returnVal"); }
+        var infl = params.get("infl");
+        if (infl) { document.getElementById("priceInflation").value = infl; syncSlider("priceInflation","inflationVal"); }
+        var stepup = params.get("stepup");
+        if (stepup) { document.getElementById("stepUp").value = stepup; syncSlider("stepUp","stepUpVal"); }
+        onAnyInput();
+      })();
+    </script>
+
+    <script>
+      // ── SMART TOOLTIP ──
+      (function() {
+        var popover = document.getElementById("tipPopover");
+        var currentIcon = null;
+        var _justShown = false;
+        var _justShownTimer = null;
+
+        function positionAndShow(icon) {
+          var vvp = window.visualViewport;
+          var viewW = vvp ? vvp.width  : window.innerWidth;
+          var viewH = vvp ? vvp.height : window.innerHeight;
+          var vvpOffsetX = vvp ? vvp.offsetLeft : 0;
+          var vvpOffsetY = vvp ? vvp.offsetTop  : 0;
+          var iconRect = icon.getBoundingClientRect();
+          var popW = popover.offsetWidth; var popH = popover.offsetHeight; var margin = 8;
+          var iconBottom = iconRect.bottom - vvpOffsetY; var iconTop = iconRect.top - vvpOffsetY;
+          var spaceBelow = viewH - iconBottom; var spaceAbove = iconTop;
+          var below = spaceBelow >= popH + margin || spaceBelow >= spaceAbove;
+          var top, arrowClass;
+          if (below) { top = iconRect.bottom + margin; arrowClass = "arrow-top"; }
+          else        { top = iconRect.top - popH - margin; arrowClass = "arrow-bottom"; }
+          var iconCentreX = iconRect.left + iconRect.width / 2 - vvpOffsetX;
+          var idealLeft = iconCentreX - popW / 2 + vvpOffsetX;
+          var left = Math.max(margin + vvpOffsetX, Math.min(idealLeft, vvpOffsetX + viewW - popW - margin));
+          var arrowLeft = (iconRect.left + iconRect.width / 2) - left - 4;
+          arrowLeft = Math.max(10, Math.min(arrowLeft, popW - 20));
+          popover.style.setProperty("--arrow-left", arrowLeft + "px");
+          popover.classList.remove("arrow-top", "arrow-bottom");
+          popover.style.left = left + "px"; popover.style.top = top + "px";
+          popover.classList.add(arrowClass);
+          requestAnimationFrame(function() { popover.classList.add("tip-visible"); });
+        }
+
+        function showTip(icon) {
+          if (currentIcon === icon) { hideTip(); return; }
+          if (currentIcon) currentIcon.classList.remove("tip-open");
+          currentIcon = icon; icon.classList.add("tip-open");
+          popover.textContent = icon.getAttribute("data-tip");
+          popover.style.left = "-9999px"; popover.style.top = "-9999px";
+          popover.classList.remove("tip-visible", "arrow-top", "arrow-bottom");
+          popover.style.display = "block";
+          clearTimeout(_justShownTimer); _justShown = true;
+          _justShownTimer = setTimeout(function() { _justShown = false; }, 350);
+          positionAndShow(icon);
+        }
+        function hideTip() {
+          if (currentIcon) { currentIcon.classList.remove("tip-open"); currentIcon = null; }
+          popover.classList.remove("tip-visible");
+        }
+
+        var style = document.createElement("style");
+        style.textContent = "#tipPopover::before { left: var(--arrow-left, 16px); }";
+        document.head.appendChild(style);
+
+        document.addEventListener("mouseover", function(e) {
+          var icon = e.target.closest(".tip-icon");
+          if (icon) { showTip(icon); return; }
+          if (!popover.contains(e.target)) hideTip();
+        });
+
+        var _touchHandled = false;
+        document.addEventListener("touchstart", function(e) {
+          var icon = e.target.closest(".tip-icon");
+          if (icon) { e.preventDefault(); _touchHandled = true; }
+        }, { passive: false });
+        document.addEventListener("touchend", function(e) {
+          var icon = e.target.closest(".tip-icon");
+          if (icon) { e.preventDefault(); showTip(icon); _touchHandled = true; return; }
+          if (!popover.contains(e.target)) hideTip();
+        }, { passive: false });
+        document.addEventListener("click", function(e) {
+          if (_touchHandled) { _touchHandled = false; return; }
+          var icon = e.target.closest(".tip-icon");
+          if (icon) { e.stopPropagation(); showTip(icon); return; }
+          if (!popover.contains(e.target)) hideTip();
+        });
+        window.addEventListener("scroll", function() { if (!_justShown) hideTip(); }, { passive: true });
+        window.addEventListener("resize", function() { if (!_justShown) hideTip(); }, { passive: true });
+      })();
+    </script>
+  </body>
+</html>
