@@ -515,6 +515,19 @@
             </div>
           </div>
 
+          <!-- Defer Years -->
+          <div class="form-field full-width">
+            <label class="field-label" for="deferYears">Defer — stop SIP, let corpus grow for <span class="tip-icon" data-tip="After your investment period ends, stop making new contributions and simply let the accumulated corpus compound on its own. This models the 'Coast FI' strategy — where your money works for you without any new inputs. Total time = Investment years + Defer years.">ℹ</span></label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="deferYears" min="0" max="30" value="0" step="1" oninput="syncSlider('deferYears','deferVal'); onAnyInput();" />
+                <input class="slider-value-input" id="deferVal" type="number" min="0" max="30" step="1" value="0" oninput="syncValInput('deferYears','deferVal'); onAnyInput();" onblur="clampValInput('deferYears','deferVal'); onAnyInput();" />
+              </div>
+              <div class="slider-limits"><span>0 yrs (redeem right away)</span><span>30 yrs</span></div>
+              <div class="return-zone-label" id="deferZoneLabel" style="color:var(--accent);"></div>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -702,7 +715,8 @@
           years:   document.getElementById("investYears").value,
           ret:     document.getElementById("investmentReturn").value,
           infl:    document.getElementById("priceInflation").value,
-          stepUp:  document.getElementById("stepUp").value
+          stepUp:  document.getElementById("stepUp").value,
+          defer:   document.getElementById("deferYears").value
         };
       }
 
@@ -714,6 +728,7 @@
         document.getElementById("investmentReturn").value = snap.ret;  syncSlider("investmentReturn","returnVal");
         document.getElementById("priceInflation").value = snap.infl;   syncSlider("priceInflation","inflationVal");
         document.getElementById("stepUp").value         = snap.stepUp; syncSlider("stepUp","stepUpVal");
+        document.getElementById("deferYears").value     = snap.defer || 0; syncSlider("deferYears","deferVal");
         onAnyInput();
       }
 
@@ -740,6 +755,15 @@
         document.getElementById("lumpsumField").style.display = (mode === "sip") ? "none" : "";
         // Step-up: visible for sip + both
         document.getElementById("stepUpField").style.display = (mode === "lumpsum") ? "none" : "";
+        // Defer: visible for sip + both only
+        document.getElementById("deferYears").closest(".form-field").style.display = (mode === "lumpsum") ? "none" : "";
+        // Reset defer to 0 when switching to lumpsum
+        if (mode === "lumpsum") {
+          document.getElementById("deferYears").value = 0;
+          syncSlider("deferYears", "deferVal");
+          var dLabel = document.getElementById("deferZoneLabel");
+          if (dLabel) dLabel.textContent = "";
+        }
         updateCalcCardTitle(mode);
         onAnyInput();
       }
@@ -770,6 +794,9 @@
         document.getElementById("investmentReturn").value = 12; syncSlider("investmentReturn","returnVal");
         document.getElementById("priceInflation").value = 6;  syncSlider("priceInflation","inflationVal");
         document.getElementById("stepUp").value         = 0;  syncSlider("stepUp","stepUpVal");
+        document.getElementById("deferYears").value      = 0;  syncSlider("deferYears","deferVal");
+        var deferLabel = document.getElementById("deferZoneLabel");
+        if (deferLabel) deferLabel.textContent = "";
         document.getElementById("resultsHeading").innerHTML = "<em>Enter your savings above</em>";
         document.getElementById("resultsBody").innerHTML = '<div class="results-placeholder"><div class="placeholder-icon">📈</div><div>Enter what you can save to see<br/>the wealth you\'ll build over time.</div></div>';
         document.getElementById("shareCard").style.display = "none";
@@ -859,6 +886,16 @@
         var fillColor = (sliderId === "investmentReturn") ? getReturnColor(val) : "var(--accent)";
         slider.style.background = "linear-gradient(to right, " + fillColor + " " + pct + "%, var(--border) " + pct + "%)";
         if (sliderId === "investmentReturn") applyReturnColor(val);
+        if (sliderId === "deferYears") {
+          var dLabel = document.getElementById("deferZoneLabel");
+          if (dLabel) {
+            if (val === 0) dLabel.textContent = "";
+            else if (val <= 5)  dLabel.textContent = "Short coast — small compounding bonus";
+            else if (val <= 10) dLabel.textContent = "Meaningful drift — compounding does real work";
+            else if (val <= 20) dLabel.textContent = "Long coast — corpus can multiply significantly";
+            else                dLabel.textContent = "Very long horizon — powerful but plan carefully";
+          }
+        }
       }
       function clampValInput(sliderId, valId) {
         var slider = document.getElementById(sliderId);
@@ -894,8 +931,8 @@
         slider.style.background = "linear-gradient(to right, " + fillColor + " " + pct + "%, var(--border) " + pct + "%)";
         if (sliderId === "investmentReturn") applyReturnColor(num);
       }
-      ["investYears","priceInflation","investmentReturn","stepUp"].forEach(function(id) {
-        var valIds = { investYears:"yearsVal", priceInflation:"inflationVal", investmentReturn:"returnVal", stepUp:"stepUpVal" };
+      ["investYears","priceInflation","investmentReturn","stepUp","deferYears"].forEach(function(id) {
+        var valIds = { investYears:"yearsVal", priceInflation:"inflationVal", investmentReturn:"returnVal", stepUp:"stepUpVal", deferYears:"deferVal" };
         syncSlider(id, valIds[id]);
       });
 
@@ -980,22 +1017,26 @@
       // ── CALCULATION CORE ──
       function calculate() {
         var years      = parseFloat(document.getElementById("investYears").value);
+        var deferYears = parseFloat(document.getElementById("deferYears").value) || 0;
         var investReturn = parseFloat(document.getElementById("investmentReturn").value);
         var inflation  = parseFloat(document.getElementById("priceInflation").value);
         var stepUp     = parseFloat(document.getElementById("stepUp").value) || 0;
         var monthlyRate = investReturn / 1200;
         var annualRate  = investReturn / 100;
         var realRate    = ((1 + annualRate) / (1 + inflation / 100)) - 1;
+        var totalYears  = years + deferYears;
 
         if (_mode === "lumpsum") {
           var lumpsum = parseCost(document.getElementById("lumpsumAmount").value);
           if (!lumpsum || lumpsum <= 0) return null;
           var fv = lumpsum * Math.pow(1 + annualRate, years);
-          var realFV = lumpsum * Math.pow(1 + realRate, years);
-          var gains  = fv - lumpsum;
-          var multiple = (fv / lumpsum).toFixed(1);
+          var fvDeferred = deferYears > 0 ? fv * Math.pow(1 + annualRate, deferYears) : null;
+          var finalFV = fvDeferred !== null ? fvDeferred : fv;
+          var realFV = lumpsum * Math.pow(1 + realRate, totalYears);
+          var gains  = finalFV - lumpsum;
+          var multiple = (finalFV / lumpsum).toFixed(1);
           var realMultiple = (realFV / lumpsum).toFixed(2);
-          return { mode: "lumpsum", lumpsum, fv, realFV, gains, multiple, realMultiple, years, annualRate, monthlyRate, investReturn, inflation };
+          return { mode: "lumpsum", lumpsum, fv, fvDeferred, finalFV, realFV, gains, multiple, realMultiple, years, deferYears, totalYears, annualRate, monthlyRate, investReturn, inflation };
 
         } else if (_mode === "both") {
           var sipAmt = parseCost(document.getElementById("monthlySIP").value);
@@ -1007,11 +1048,13 @@
           var sipInvested = sipAmt > 0 ? calcStepUpTotalInvested(sipAmt, years, stepUp) : 0;
           var totalInvested = sipInvested + (lsAmt || 0);
           var gains = totalFV - totalInvested;
-          var realTotalFV = totalFV / Math.pow(1 + inflation / 100, years);
+          var fvDeferred = deferYears > 0 ? totalFV * Math.pow(1 + annualRate, deferYears) : null;
+          var finalFV = fvDeferred !== null ? fvDeferred : totalFV;
+          var realTotalFV = finalFV / Math.pow(1 + inflation / 100, totalYears);
           var realRateB = ((1 + annualRate) / (1 + inflation / 100)) - 1;
-          var multiple = totalInvested > 0 ? (totalFV / totalInvested).toFixed(1) : "—";
-          var realMultiple = (Math.pow(1 + realRateB, years)).toFixed(2);
-          return { mode: "both", sipAmt, lsAmt, sipFV, lsFV, totalFV, realTotalFV, totalInvested, sipInvested, gains, multiple, realMultiple, years, annualRate, monthlyRate, investReturn, inflation, stepUp };
+          var multiple = totalInvested > 0 ? (finalFV / totalInvested).toFixed(1) : "—";
+          var realMultiple = (Math.pow(1 + realRateB, totalYears)).toFixed(2);
+          return { mode: "both", sipAmt, lsAmt, sipFV, lsFV, totalFV, fvDeferred, finalFV, realTotalFV, totalInvested, sipInvested, gains: finalFV - totalInvested, multiple, realMultiple, years, deferYears, totalYears, annualRate, monthlyRate, investReturn, inflation, stepUp };
 
         } else {
           // SIP
@@ -1019,12 +1062,14 @@
           if (!sipAmt2 || sipAmt2 <= 0) return null;
           var sipFV2 = calcStepUpSIPFV(sipAmt2, years, monthlyRate, stepUp);
           var sipInvested2 = calcStepUpTotalInvested(sipAmt2, years, stepUp);
-          var gains2 = sipFV2 - sipInvested2;
-          var realFV2 = sipFV2 / Math.pow(1 + inflation / 100, years);
+          var fvDeferred2 = deferYears > 0 ? sipFV2 * Math.pow(1 + annualRate, deferYears) : null;
+          var finalFV2 = fvDeferred2 !== null ? fvDeferred2 : sipFV2;
+          var gains2 = finalFV2 - sipInvested2;
+          var realFV2 = finalFV2 / Math.pow(1 + inflation / 100, totalYears);
           var realRate2 = ((1 + annualRate) / (1 + inflation / 100)) - 1;
-          var sipMultiple = sipInvested2 > 0 ? (sipFV2 / sipInvested2).toFixed(1) : "—";
-          var realMultiple2 = (Math.pow(1 + realRate2, years)).toFixed(2);
-          return { mode: "sip", sipAmt: sipAmt2, totalFV: sipFV2, realFV: realFV2, totalInvested: sipInvested2, gains: gains2, multiple: sipMultiple, realMultiple: realMultiple2, years, annualRate, monthlyRate, investReturn, inflation, stepUp };
+          var sipMultiple = sipInvested2 > 0 ? (finalFV2 / sipInvested2).toFixed(1) : "—";
+          var realMultiple2 = (Math.pow(1 + realRate2, totalYears)).toFixed(2);
+          return { mode: "sip", sipAmt: sipAmt2, sipFV: sipFV2, fvDeferred: fvDeferred2, finalFV: finalFV2, totalFV: finalFV2, realFV: realFV2, totalInvested: sipInvested2, gains: gains2, multiple: sipMultiple, realMultiple: realMultiple2, years, deferYears, totalYears, annualRate, monthlyRate, investReturn, inflation, stepUp };
         }
       }
 
@@ -1083,16 +1128,26 @@
         }
 
         if (result.mode === "lumpsum") {
-          heading.innerHTML = "Your <em>" + fmtINR(result.lumpsum) + "</em> grows to <em>" + fmtINR(result.fv) + "</em> in " + result.years + " years";
+          var dLabel = result.deferYears > 0 ? " + " + result.deferYears + " yr" + (result.deferYears > 1 ? "s" : "") + " deferred" : "";
+          heading.innerHTML = "Your <em>" + fmtINR(result.lumpsum) + "</em> grows to <em>" + fmtINR(result.finalFV) + "</em> in " + result.totalYears + " years";
           html = '<div class="results-grid">'
-            + rCellPrimary("Corpus at Year " + result.years, fmtINR(result.fv), "Nominal — at " + result.investReturn + "% p.a.")
+            + rCellPrimary("Corpus at Year " + result.totalYears, fmtINR(result.finalFV), "Nominal — at " + result.investReturn + "% p.a." + dLabel)
             + rCellSafePrimary("Real Value (Today's ₹)", fmtINR(result.realFV), "After " + result.inflation + "% inflation p.a.")
             + rCellInvestedSplit(result.lumpsum, result.gains > 0 ? result.gains : 0)
             + rCellDual("Return Multiple", result.multiple + "×", "Absolute", result.realMultiple + "×", "Real (Infl-Adj.)")
             + '</div>';
 
-          // Cost of delay
-          if (result.years >= 3) {
+          // Defer phase callout
+          if (result.deferYears > 0) {
+            html += '<div class="delay-callout" style="border-left:3px solid var(--accent);background:var(--accent-glow);border-radius:0 10px 10px 0;">'
+              + '<div class="delay-title" style="color:var(--accent);">✦ Deferred compounding phase</div>'
+              + '<div class="delay-line">After investing for <strong>' + result.years + ' years</strong>, your corpus stands at <strong>' + fmtINR(result.fv) + '</strong>.</div>'
+              + '<div class="delay-line">You stop all contributions and wait <strong>' + result.deferYears + ' more year' + (result.deferYears > 1 ? 's' : '') + '</strong>. With no new money added, it grows to <strong>' + fmtINR(result.finalFV) + '</strong> <span class="gain-delta">(+' + fmtINR(result.finalFV - result.fv) + ' from compounding alone)</span>.</div>'
+              + '</div>';
+          }
+
+          // Cost of delay (only when no defer)
+          if (result.deferYears === 0 && result.years >= 3) {
             var fv1yr = result.lumpsum * Math.pow(1 + result.annualRate, result.years - 1);
             var fv2yr = result.lumpsum * Math.pow(1 + result.annualRate, result.years - 2);
             var lost1 = result.fv - fv1yr;
@@ -1105,13 +1160,14 @@
 
         } else if (result.mode === "both") {
           var su = result.stepUp || 0;
+          var dLabel2 = result.deferYears > 0 ? " + " + result.deferYears + " yr" + (result.deferYears > 1 ? "s" : "") + " deferred" : "";
           if (su > 0) {
-            heading.innerHTML = "Your <em>" + fmtINR(result.lsAmt) + "</em> lumpsum + <em>" + fmtINR(result.sipAmt) + "</em>/mo SIP (+" + su + "% p.a.) builds <em>" + fmtINR(result.totalFV) + "</em>";
+            heading.innerHTML = "Your <em>" + fmtINR(result.lsAmt) + "</em> lumpsum + <em>" + fmtINR(result.sipAmt) + "</em>/mo SIP (+" + su + "% p.a.) builds <em>" + fmtINR(result.finalFV) + "</em>";
           } else {
-            heading.innerHTML = "Your <em>" + fmtINR(result.lsAmt) + "</em> lumpsum + <em>" + fmtINR(result.sipAmt) + "</em>/mo SIP builds <em>" + fmtINR(result.totalFV) + "</em>";
+            heading.innerHTML = "Your <em>" + fmtINR(result.lsAmt) + "</em> lumpsum + <em>" + fmtINR(result.sipAmt) + "</em>/mo SIP builds <em>" + fmtINR(result.finalFV) + "</em>";
           }
           html = '<div class="results-grid">'
-            + rCellPrimary("Total Corpus at Year " + result.years, fmtINR(result.totalFV), "Nominal — at " + result.investReturn + "% p.a.")
+            + rCellPrimary("Total Corpus at Year " + result.totalYears, fmtINR(result.finalFV), "Nominal — at " + result.investReturn + "% p.a." + dLabel2)
             + rCellSafePrimary("Real Value (Today's ₹)", fmtINR(result.realTotalFV), "After " + result.inflation + "% inflation p.a.")
             + rCellInvestedSplit(result.totalInvested, result.gains > 0 ? result.gains : 0)
             + rCellDual("Return Multiple", result.multiple + "×", "Absolute", result.realMultiple + "×", "Real (Infl-Adj.)")
@@ -1119,8 +1175,17 @@
             + rCell("SIP Builds", fmtINR(result.sipFV), "safe", su > 0 ? "Starting " + fmtINR(result.sipAmt) + ", +" + su + "% each year" : fmtINR(result.sipAmt) + " every month")
             + '</div>';
 
-          // +1yr, +5yr comparison
-          if (result.years >= 3) {
+          // Defer phase callout
+          if (result.deferYears > 0) {
+            html += '<div class="delay-callout" style="border-left:3px solid var(--accent);background:var(--accent-glow);border-radius:0 10px 10px 0;">'
+              + '<div class="delay-title" style="color:var(--accent);">✦ Deferred compounding phase</div>'
+              + '<div class="delay-line">After investing for <strong>' + result.years + ' years</strong>, your corpus stands at <strong>' + fmtINR(result.totalFV) + '</strong>.</div>'
+              + '<div class="delay-line">You stop all contributions and wait <strong>' + result.deferYears + ' more year' + (result.deferYears > 1 ? 's' : '') + '</strong>. It grows to <strong>' + fmtINR(result.finalFV) + '</strong> <span class="gain-delta">(+' + fmtINR(result.finalFV - result.totalFV) + ' from compounding alone)</span>.</div>'
+              + '</div>';
+          }
+
+          // +1yr, +5yr comparison (only when no defer)
+          if (result.deferYears === 0 && result.years >= 3) {
             var sipFV1 = calcStepUpSIPFV(result.sipAmt, result.years + 1, result.monthlyRate, su);
             var lsFV1  = result.lsAmt * Math.pow(1 + result.annualRate, result.years + 1);
             var sipFV5 = calcStepUpSIPFV(result.sipAmt, result.years + 5, result.monthlyRate, su);
@@ -1136,24 +1201,34 @@
         } else {
           // SIP
           var su = result.stepUp || 0;
+          var dLabel3 = result.deferYears > 0 ? " + " + result.deferYears + " yr" + (result.deferYears > 1 ? "s" : "") + " deferred" : "";
           if (su > 0) {
-            heading.innerHTML = "Starting at <em>" + fmtINR(result.sipAmt) + "</em>/month, stepping up " + su + "% yearly — builds <em>" + fmtINR(result.totalFV) + "</em>";
+            heading.innerHTML = "Starting at <em>" + fmtINR(result.sipAmt) + "</em>/month, stepping up " + su + "% yearly — builds <em>" + fmtINR(result.finalFV) + "</em>";
           } else {
-            heading.innerHTML = "Saving <em>" + fmtINR(result.sipAmt) + "</em>/month for " + result.years + " years builds <em>" + fmtINR(result.totalFV) + "</em>";
+            heading.innerHTML = "Saving <em>" + fmtINR(result.sipAmt) + "</em>/month for " + result.years + " years builds <em>" + fmtINR(result.finalFV) + "</em>";
           }
           html = '<div class="results-grid">'
-            + rCellPrimary("Corpus at Year " + result.years, fmtINR(result.totalFV), su > 0 ? "Starting SIP, growing " + su + "% yearly" : fmtINR(result.sipAmt) + " per month")
+            + rCellPrimary("Corpus at Year " + result.totalYears, fmtINR(result.finalFV), su > 0 ? "Starting SIP, growing " + su + "% yearly" + dLabel3 : fmtINR(result.sipAmt) + " per month" + dLabel3)
             + rCellSafePrimary("Real Value (Today's ₹)", fmtINR(result.realFV), "After " + result.inflation + "% inflation p.a.")
             + rCellInvestedSplit(result.totalInvested, result.gains > 0 ? result.gains : 0)
             + rCellDual("Return Multiple", result.multiple + "×", "Absolute", result.realMultiple + "×", "Real (Infl-Adj.)")
             + '</div>';
 
-          // Extend timeline callout
-          if (result.years >= 3) {
+          // Defer phase callout
+          if (result.deferYears > 0) {
+            html += '<div class="delay-callout" style="border-left:3px solid var(--accent);background:var(--accent-glow);border-radius:0 10px 10px 0;">'
+              + '<div class="delay-title" style="color:var(--accent);">✦ Deferred compounding phase</div>'
+              + '<div class="delay-line">After investing for <strong>' + result.years + ' years</strong>, your SIP corpus stands at <strong>' + fmtINR(result.sipFV) + '</strong>.</div>'
+              + '<div class="delay-line">You stop all contributions and wait <strong>' + result.deferYears + ' more year' + (result.deferYears > 1 ? 's' : '') + '</strong>. With no new money added, it grows to <strong>' + fmtINR(result.finalFV) + '</strong> <span class="gain-delta">(+' + fmtINR(result.finalFV - result.sipFV) + ' from compounding alone)</span>.</div>'
+              + '</div>';
+          }
+
+          // Extend timeline callout (only when no defer)
+          if (result.deferYears === 0 && result.years >= 3) {
             var fv1e = calcStepUpSIPFV(result.sipAmt, result.years + 1, result.monthlyRate, su);
             var fv5e = calcStepUpSIPFV(result.sipAmt, result.years + 5, result.monthlyRate, su);
-            var extra1e = fv1e - result.totalFV;
-            var extra5e = fv5e - result.totalFV;
+            var extra1e = fv1e - result.finalFV;
+            var extra5e = fv5e - result.finalFV;
             html += '<div class="delay-callout"><div class="delay-title">Stay invested longer</div>'
               + '<div class="delay-line">One extra year of investing takes your corpus to <strong>' + fmtINR(fv1e) + '</strong> <span class="gain-delta">(+' + fmtINR(extra1e) + ')</span>.</div>'
               + '<div class="delay-line">5 extra years: <strong>' + fmtINR(fv5e) + '</strong> <span class="gain-delta">(+' + fmtINR(extra5e) + ')</span>.</div>'
@@ -1500,11 +1575,18 @@
         if (result.mode === "lumpsum" && result.lumpsum) lines.push("Lumpsum Invested     : " + fmtINR(result.lumpsum));
         if ((result.mode === "sip" || result.mode === "both") && result.stepUp > 0) lines.push("Annual SIP Step-Up   : " + result.stepUp + "% p.a.");
         lines.push("Investment Duration  : " + result.years + " years");
+        if (result.deferYears > 0) lines.push("Defer Period         : " + result.deferYears + " years (no new contributions)");
         lines.push("Expected Return      : " + result.investReturn + "% p.a.");
         lines.push("Inflation Rate       : " + result.inflation + "% p.a.");
         lines.push("");
         lines.push("── PROJECTED CORPUS ──");
-        lines.push("Total Corpus         : " + fmtINR(result.totalFV || result.fv));
+        var finalCorpus = result.finalFV || result.totalFV || result.fv;
+        lines.push("Total Corpus (Yr " + result.totalYears + ")  : " + fmtINR(finalCorpus));
+        if (result.deferYears > 0) {
+          var atEndOfSIP = result.sipFV || result.totalFV || result.fv;
+          lines.push("  At end of SIP (Yr " + result.years + "): " + fmtINR(atEndOfSIP));
+          lines.push("  After " + result.deferYears + " yr defer     : " + fmtINR(finalCorpus));
+        }
         lines.push("Real Value (Today's ₹): " + fmtINR(result.realFV || result.realTotalFV));
         lines.push("You'll Put In        : " + fmtINR(result.totalInvested || result.lumpsum));
         lines.push("Projected Gains      : " + fmtINR(Math.max(0, result.gains)));
@@ -1524,6 +1606,8 @@
         params.set("ret", document.getElementById("investmentReturn").value);
         params.set("infl", document.getElementById("priceInflation").value);
         params.set("stepup", document.getElementById("stepUp").value);
+        var defer = document.getElementById("deferYears").value;
+        if (defer && parseInt(defer) > 0) params.set("defer", defer);
         var sip = document.getElementById("monthlySIP").value.replace(/,/g,"");
         if (sip) params.set("sip", sip);
         var ls = document.getElementById("lumpsumAmount").value.replace(/,/g,"");
@@ -1592,6 +1676,8 @@
         if (infl) { document.getElementById("priceInflation").value = infl; syncSlider("priceInflation","inflationVal"); }
         var stepup = params.get("stepup");
         if (stepup) { document.getElementById("stepUp").value = stepup; syncSlider("stepUp","stepUpVal"); }
+        var defer = params.get("defer");
+        if (defer) { document.getElementById("deferYears").value = defer; syncSlider("deferYears","deferVal"); }
         onAnyInput();
       })();
     </script>
