@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>NPS — National Pension System · Vegi Ramesh</title>
+    <meta name="description" content="Open your NPS account with Vegi Ramesh, registered NPS distributor for HDFC NPS Pension Fund. India's most tax-efficient retirement instrument." />
+    <meta name="author" content="Vegi Ramesh" />
+    <link rel="icon" href="favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <meta name="theme-color" content="#0b0f1a" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #0b0f1a;
+        --surface: #111827;
+        --surface2: #1a2236;
+        --border: rgba(255,255,255,0.07);
+        --accent: #c8a96e;
+        --accent-dim: rgba(200,169,110,0.15);
+        --accent-glow: rgba(200,169,110,0.08);
+        --text: #e8e4dc;
+        --muted: #8a9ab5;
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --sans: "DM Sans", sans-serif;
+        --nav-bg: rgba(11,15,26,0.92);
+        --footer-disc: #6b7280;
+      }
+      [data-theme="light"] {
+        --bg: #f7f4ef; --surface: #ffffff; --surface2: #f0ebe0;
+        --border: rgba(0,0,0,0.09); --accent: #a67c32;
+        --accent-dim: rgba(166,124,50,0.12); --accent-glow: rgba(166,124,50,0.06);
+        --text: #1c1a14; --muted: #6b6353; --nav-bg: rgba(247,244,239,0.94);
+        --footer-disc: #7a7060;
+      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--accent) var(--bg); }
+      body { font-family: var(--sans); background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; transition: background 0.3s, color 0.3s; }
+      body::before {
+        content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+        background: radial-gradient(ellipse 70% 50% at 15% 10%, rgba(200,169,110,0.06) 0%, transparent 60%),
+                    radial-gradient(ellipse 50% 40% at 85% 90%, rgba(200,169,110,0.04) 0%, transparent 60%);
+      }
+ 
+      /* NAV */
+      nav {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 0 1.5rem; height: 56px;
+        background: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-brand { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; color: var(--text); text-decoration: none; letter-spacing: 0.01em; }
+      .nav-brand span { color: var(--accent); font-style: italic; }
+      .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
+      .nav-back { font-size: 0.78rem; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; letter-spacing: 0.03em; }
+      .nav-back:hover { color: var(--accent); }
+      .nav-whatsapp-btn { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; color: #25d366; border: 1px solid rgba(37,211,102,0.25); background: transparent; text-decoration: none; transition: background 0.2s; flex-shrink: 0; }
+      .nav-whatsapp-btn:hover { background: rgba(37,211,102,0.12); }
+      .theme-toggle { background: none; border: 1px solid var(--border); border-radius: 20px; padding: 4px 10px; cursor: pointer; font-size: 0.8rem; color: var(--muted); transition: border-color 0.2s, color 0.2s; opacity: 0; pointer-events: none; }
+      .theme-toggle.ready { opacity: 1; pointer-events: auto; }
+      .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+      .icon-dark { display: inline; } .icon-light { display: none; }
+      [data-theme="light"] .icon-dark { display: none; } [data-theme="light"] .icon-light { display: inline; }
+      @media (max-width: 600px) { .nav-back span { display: none; } }
+ 
+      /* HERO */
+      .hero {
+        position: relative; z-index: 1;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        text-align: center; padding: 7rem 1.5rem 4rem; min-height: 55vh;
+      }
+      .hero-eyebrow {
+        font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+        color: var(--accent); margin-bottom: 1.25rem;
+        display: flex; align-items: center; gap: 0.6em;
+        opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards;
+      }
+      .hero-eyebrow::before, .hero-eyebrow::after { content: "✦"; opacity: 0.6; }
+      .hero h1 {
+        font-family: var(--serif); font-size: clamp(2.2rem, 7vw, 4rem);
+        font-weight: 600; line-height: 1.15; margin-bottom: 1.25rem;
+        opacity: 0; animation: fadeUp 0.7s ease 0.25s forwards;
+      }
+      .hero h1 em { color: var(--accent); font-style: italic; }
+      .hero-sub {
+        font-size: 0.95rem; color: var(--muted); max-width: 480px;
+        line-height: 1.75; font-weight: 300;
+        opacity: 0; animation: fadeUp 0.7s ease 0.4s forwards;
+      }
+      .hero-divider { width: 40px; height: 1px; background: var(--accent); margin: 2rem auto 0; opacity: 0; animation: fadeUp 0.7s ease 0.5s forwards; }
+ 
+      /* MAIN */
+      .page { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 0 1.5rem 6rem; }
+ 
+      /* REASONS */
+      .reasons {
+        display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem;
+        margin-bottom: 1.5rem;
+        opacity: 0; animation: fadeUp 0.7s ease 0.6s forwards;
+      }
+      @media (max-width: 600px) { .reasons { grid-template-columns: 1fr; } }
+      .reason {
+        background: var(--surface); border: 1px solid var(--border);
+        border-radius: 14px; padding: 1.5rem 1.4rem;
+      }
+      .reason-icon { font-size: 1.4rem; margin-bottom: 0.75rem; }
+      .reason h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; line-height: 1.25; }
+      .reason h3 em { color: var(--accent); font-style: italic; }
+      .reason p { font-size: 0.83rem; color: var(--muted); line-height: 1.65; font-weight: 300; }
+ 
+      /* TAX GEM */
+      .tax-gem {
+        background: var(--surface); border: 1px solid rgba(200,169,110,0.25);
+        border-radius: 14px; padding: 1.4rem 1.75rem;
+        display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap;
+        margin-bottom: 1.5rem; position: relative; overflow: hidden;
+        opacity: 0; animation: fadeUp 0.7s ease 0.75s forwards;
+      }
+      .tax-gem::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 100% at 0% 50%, var(--accent-glow), transparent 60%); pointer-events: none; }
+      .tax-gem-badge { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; background: var(--accent-dim); color: var(--accent); border-radius: 20px; padding: 3px 10px; white-space: nowrap; font-weight: 500; position: relative; z-index: 1; }
+      .tax-gem-text { flex: 1; min-width: 200px; font-size: 0.88rem; color: var(--muted); line-height: 1.6; font-weight: 300; position: relative; z-index: 1; }
+      .tax-gem-text strong { color: var(--text); font-weight: 500; }
+ 
+      /* LIFECYCLE FUNDS */
+      .lc-section {
+        background: var(--surface); border: 1px solid var(--border);
+        border-radius: 16px; padding: 2rem 2rem 1.75rem;
+        margin-bottom: 1.5rem; position: relative; overflow: hidden;
+        opacity: 0; animation: fadeUp 0.7s ease 0.82s forwards;
+      }
+      .lc-section::before {
+        content: ""; position: absolute; inset: 0;
+        background: radial-gradient(ellipse 60% 50% at 100% 0%, rgba(200,169,110,0.05), transparent 60%);
+        pointer-events: none;
+      }
+      .lc-inner { position: relative; z-index: 1; }
+      .lc-header { margin-bottom: 1.5rem; }
+      .lc-header h2 { font-family: var(--serif); font-size: 1.45rem; font-weight: 600; margin-bottom: 0.35rem; }
+      .lc-header h2 em { color: var(--accent); font-style: italic; }
+      .lc-header p { font-size: 0.83rem; color: var(--muted); line-height: 1.65; font-weight: 300; max-width: 560px; }
+
+      /* Fund cards */
+      .lc-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.9rem; margin-bottom: 1.75rem; }
+      @media (max-width: 600px) { .lc-cards { grid-template-columns: 1fr; } }
+      .lc-card {
+        background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+        padding: 1.1rem 1.2rem; position: relative; overflow: hidden;
+        transition: border-color 0.25s, transform 0.2s;
+      }
+      .lc-card:hover { border-color: rgba(200,169,110,0.35); transform: translateY(-2px); }
+      .lc-card-tag { font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; margin-bottom: 0.5rem; }
+      .lc-card-name { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem; }
+      .lc-card-code { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.85rem; font-weight: 300; }
+      .lc-card-floor {
+        display: inline-flex; align-items: center; gap: 0.4rem;
+        background: var(--accent-dim); border: 1px solid rgba(200,169,110,0.2);
+        border-radius: 8px; padding: 0.3rem 0.7rem; font-size: 0.75rem;
+        font-weight: 500; color: var(--accent);
+      }
+      .lc-card-floor span { font-family: var(--serif); font-size: 1rem; font-weight: 600; }
+      .lc-card-desc { font-size: 0.75rem; color: var(--muted); margin-top: 0.65rem; line-height: 1.5; font-weight: 300; }
+      /* Aggressive = bolder accent bar */
+      .lc-card.aggressive { border-color: rgba(200,169,110,0.25); }
+      .lc-card.aggressive .lc-card-tag { color: var(--accent); }
+      .lc-card.moderate .lc-card-tag { color: #8ab5c8; }
+      .lc-card.conservative .lc-card-tag { color: #8bc8a0; }
+
+      /* Chart */
+      .lc-chart-wrap { margin-top: 0.25rem; }
+      .lc-chart-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; opacity: 0.7; }
+      .lc-chart-svg { width: 100%; display: block; }
+      .lc-legend { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-top: 0.85rem; }
+      .lc-legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--muted); }
+      .lc-legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+      /* ACTIVE CHOICE */
+      .active-choice {
+        background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+        padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; display: flex; gap: 1rem; align-items: flex-start;
+        opacity: 0; animation: fadeUp 0.7s ease 0.88s forwards;
+      }
+      .active-choice-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.1rem; }
+      .active-choice-body { flex: 1; }
+      .active-choice-body .section-label { margin-bottom: 0.35rem; }
+      .active-choice-body h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.4rem; }
+      .active-choice-body p { font-size: 0.81rem; color: var(--muted); line-height: 1.65; font-weight: 300; }
+      .active-choice-body p em { color: var(--text); font-style: italic; }
+
+      /* NPS BASICS GRID */
+      .basics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem; margin-bottom: 1.5rem; }
+      @media (max-width: 600px) { .basics-grid { grid-template-columns: 1fr; } }
+      .basics-card {
+        background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+        padding: 1.2rem 1.4rem; opacity: 0; animation: fadeUp 0.7s ease 0.94s forwards;
+      }
+      .basics-card .section-label { margin-bottom: 0.5rem; }
+      .basics-card h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+      .basics-card h3 em { color: var(--accent); font-style: italic; }
+      .basics-card p { font-size: 0.81rem; color: var(--muted); line-height: 1.65; font-weight: 300; }
+      .basics-card p strong { color: var(--text); font-weight: 500; }
+      .basics-card .pill-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+      .basics-pill {
+        display: inline-flex; align-items: center; gap: 0.4rem;
+        background: var(--accent-dim); border: 1px solid rgba(200,169,110,0.2);
+        border-radius: 100px; padding: 0.25rem 0.75rem;
+        font-size: 0.74rem; color: var(--accent); font-weight: 500;
+      }
+      .basics-pill.muted {
+        background: rgba(138,154,181,0.08); border-color: rgba(138,154,181,0.15);
+        color: var(--muted);
+      }
+      /* exit visual */
+      .exit-bar-wrap { margin-top: 0.85rem; }
+      .exit-bar { height: 10px; border-radius: 100px; display: flex; overflow: hidden; width: 100%; }
+      .exit-bar-lump { background: #c8a96e; flex: 80; border-radius: 100px 0 0 100px; }
+      .exit-bar-annuity { background: rgba(138,154,181,0.35); flex: 20; border-radius: 0 100px 100px 0; }
+      .exit-bar-labels { display: flex; justify-content: space-between; margin-top: 0.5rem; }
+      .exit-bar-labels span { font-size: 0.74rem; color: var(--muted); }
+      .exit-bar-labels span strong { font-weight: 500; }
+      .exit-bar-labels span:first-child strong { color: var(--accent); }
+
+      /* ACTION */
+      .action-section {
+        background: var(--surface); border: 1px solid rgba(200,169,110,0.2);
+        border-radius: 16px; padding: 2.25rem 2rem; position: relative;
+        margin-bottom: 1.5rem;
+        opacity: 0; animation: fadeUp 0.7s ease 0.9s forwards;
+      }
+      .action-section::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--accent-glow), transparent 70%); pointer-events: none; }
+      .action-inner { position: relative; z-index: 1; }
+      .section-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); opacity: 0.75; margin-bottom: 0.5rem; }
+      .action-section h2 { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; margin-bottom: 0.4rem; }
+      .action-section h2 em { color: var(--accent); font-style: italic; }
+      .action-section > .action-inner > p { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.6; font-weight: 300; }
+      .action-buttons { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+      @media (max-width: 640px) { .action-buttons { grid-template-columns: 1fr; } .action-section { padding: 1.75rem 1.4rem; } }
+      .action-btn {
+        display: flex; flex-direction: column; gap: 0.3rem;
+        padding: 1.2rem 1.3rem; border-radius: 12px; text-decoration: none;
+        border: 1px solid var(--border); background: var(--bg);
+        transition: border-color 0.25s, transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden;
+      }
+      .action-btn::before { content: ""; position: absolute; inset: 0; background: var(--accent-glow); opacity: 0; transition: opacity 0.25s; }
+      .action-btn:hover { border-color: rgba(200,169,110,0.4); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
+      .action-btn:hover::before { opacity: 1; }
+      .action-btn.primary { border-color: rgba(200,169,110,0.3); background: var(--accent-dim); }
+      .action-btn-icon { font-size: 1.1rem; position: relative; z-index: 1; }
+      .action-btn-label { font-size: 0.88rem; font-weight: 500; color: var(--text); position: relative; z-index: 1; }
+      .action-btn.primary .action-btn-label { color: var(--accent); }
+      .action-btn-desc { font-size: 0.75rem; color: var(--muted); font-weight: 300; line-height: 1.4; position: relative; z-index: 1; }
+      .action-btn-arrow { margin-top: auto; padding-top: 0.75rem; font-size: 0.75rem; color: var(--accent); font-weight: 500; display: flex; align-items: center; gap: 0.4rem; position: relative; z-index: 1; transition: gap 0.2s; }
+      .action-btn:hover .action-btn-arrow { gap: 0.65rem; }
+ 
+      /* HOW NPS WORKS */
+      .how-section {
+        margin-bottom: 1.5rem;
+        opacity: 0; animation: fadeUp 0.7s ease 0.38s forwards;
+      }
+      .how-header { margin-bottom: 1.1rem; }
+      .how-header h2 { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; }
+      .how-header h2 em { color: var(--accent); font-style: italic; }
+      .how-steps {
+        display: grid; grid-template-columns: repeat(4, 1fr);
+        gap: 0; position: relative;
+      }
+      .how-steps::before {
+        content: ""; position: absolute;
+        top: 22px; left: calc(12.5% + 12px); right: calc(12.5% + 12px);
+        height: 1px; background: linear-gradient(90deg, rgba(200,169,110,0.4), rgba(200,169,110,0.15));
+        z-index: 0;
+      }
+      @media (max-width: 600px) {
+        .how-steps { grid-template-columns: 1fr; gap: 0.75rem; }
+        .how-steps::before { display: none; }
+        .how-step { margin: 0; }
+      }
+      .how-step {
+        background: var(--surface); border: 1px solid var(--border);
+        border-radius: 14px; padding: 1.1rem 1.1rem 1.2rem;
+        position: relative; z-index: 1;
+        margin: 0 0.35rem;
+        transition: border-color 0.2s;
+      }
+      .how-step:first-child { margin-left: 0; }
+      .how-step:last-child { margin-right: 0; }
+      .how-step:hover { border-color: rgba(200,169,110,0.3); }
+      .how-step-num {
+        width: 28px; height: 28px; border-radius: 50%;
+        background: var(--accent-dim); border: 1px solid rgba(200,169,110,0.3);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.72rem; font-weight: 600; color: var(--accent);
+        margin-bottom: 0.75rem; font-family: var(--serif);
+      }
+      .how-step-icon { font-size: 1.1rem; margin-bottom: 0.5rem; }
+      .how-step-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; margin-bottom: 0.4rem; }
+      .how-step-title em { color: var(--accent); font-style: italic; }
+      .how-step-body {
+        font-size: 0.77rem; color: var(--muted); line-height: 1.6; font-weight: 300;
+        margin-top: 0.4rem;
+      }
+      .how-step-body strong { color: var(--text); font-weight: 500; }
+
+      /* CORPUS NUDGE */
+      .corpus-nudge {
+        background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+        padding: 1.4rem 1.75rem; display: flex; align-items: center; justify-content: space-between;
+        gap: 1.25rem; flex-wrap: wrap; margin-bottom: 1.5rem;
+        opacity: 0; animation: fadeUp 0.7s ease 1.05s forwards;
+      }
+      .corpus-nudge-text { flex: 1; min-width: 200px; }
+      .corpus-nudge-text p { font-size: 0.88rem; font-family: var(--serif); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+      .corpus-nudge-text p em { color: var(--accent); font-style: italic; }
+      .corpus-nudge-text span { font-size: 0.8rem; color: var(--muted); font-weight: 300; }
+      .corpus-nudge-btn {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        background: var(--accent-dim); border: 1px solid rgba(200,169,110,0.3);
+        color: var(--accent); border-radius: 10px; padding: 0.65rem 1.25rem;
+        font-size: 0.83rem; font-weight: 500; text-decoration: none; white-space: nowrap;
+        transition: background 0.2s;
+      }
+      .corpus-nudge-btn:hover { background: rgba(200,169,110,0.25); }
+ 
+      /* FOOTER */
+      footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 2rem 1.5rem; text-align: center; background: var(--surface); }
+      .footer-brand { font-family: var(--serif); font-size: 0.9rem; color: var(--muted); margin-bottom: 0.85rem; }
+      .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.25rem; margin-bottom: 1rem; }
+      .footer-links a { font-size: 0.78rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+      .footer-links a:hover { color: var(--accent); }
+      .footer-disc { font-size: 0.7rem; color: var(--footer-disc); max-width: 680px; margin: 0 auto; line-height: 1.6; }
+ 
+      /* MOBILE FAB */
+      .fab-whatsapp { display: none; position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 200; width: 52px; height: 52px; border-radius: 50%; background: #25d366; color: #fff; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); text-decoration: none; transition: transform 0.2s; }
+      .fab-whatsapp:active { transform: scale(0.93); }
+ 
+      /* FLOATING PILL */
+      .float-begin {
+        position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(0);
+        z-index: 150; display: inline-flex; align-items: center; gap: 0.6rem;
+        background: var(--accent); color: #1c1a14; border-radius: 100px;
+        padding: 0.7rem 1.6rem; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em;
+        text-decoration: none; box-shadow: 0 8px 32px rgba(200,169,110,0.35);
+        transition: opacity 0.35s ease, transform 0.35s ease, box-shadow 0.2s;
+        opacity: 0; pointer-events: none;
+      }
+      .float-begin.visible { opacity: 1; pointer-events: auto; }
+      .float-begin.hidden { opacity: 0; transform: translateX(-50%) translateY(12px); pointer-events: none; }
+      .float-begin:hover { box-shadow: 0 12px 40px rgba(200,169,110,0.5); transform: translateX(-50%) translateY(-2px); }
+      .scroll-arrow { display: inline-block; animation: bounce 1.8s ease-in-out infinite; }
+ 
+      @keyframes glowBlip {
+        0%   { opacity: 0; }
+        50%  { opacity: 1; }
+        100% { opacity: 0; }
+      }
+      .action-section.blipping::after {
+        content: "";
+        position: absolute; inset: -1px; border-radius: 17px; pointer-events: none; z-index: 2;
+        border: 2px solid rgba(200,169,110,0.9);
+        box-shadow: 0 0 16px 4px rgba(200,169,110,0.4), inset 0 0 16px 2px rgba(200,169,110,0.15);
+        animation: glowBlip 2s ease-in-out infinite;
+      }
+
+      @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+ 
+      @media (max-width: 600px) { .hero { padding: 6rem 1.25rem 3rem; min-height: auto; } .page { padding: 0 1rem 6rem; } .fab-whatsapp { display: flex; } }
+    </style>
+  </head>
+  <body>
+ 
+    <!-- NAV -->
+    <nav>
+      <a href="index.html" class="nav-brand">Vegi <span>Ramesh</span></a>
+      <div class="nav-actions">
+        <a href="index.html" class="nav-back">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <span>Back to home</span>
+        </a>
+        <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20NPS." class="nav-whatsapp-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        </a>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <span class="icon-dark">☀️</span><span class="icon-light">🌙</span>
+        </button>
+      </div>
+    </nav>
+ 
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-eyebrow">National Pension System · HDFC NPS Pension Fund</div>
+      <h1>A wall between today's you<br />and tomorrow's <em>freedom.</em></h1>
+      <p class="hero-sub">NPS works a lot like a mutual fund — market-linked, professionally managed — except one thing: you cannot touch it until retirement. That's the entire point.</p>
+      <div class="hero-divider"></div>
+    </header>
+ 
+    <div class="page">
+ 
+      <!-- THREE REASONS -->
+      <div class="reasons">
+ 
+        <div class="reason">
+          <div class="reason-icon">🧱</div>
+          <h3>A psychological <em>barrier.</em></h3>
+          <p>When retirement money is separate and locked, you stop treating it as an option during market dips or lifestyle upgrades. The lock-in is not a restriction — it's protection from yourself.</p>
+        </div>
+ 
+        <div class="reason">
+          <div class="reason-icon">🏛️</div>
+          <h3>Backed by the <em>government.</em></h3>
+          <p>NPS is regulated by PFRDA — a statutory authority set up by an Act of Parliament. Your money is managed by SEBI-registered Pension Fund Managers under government oversight.</p>
+        </div>
+ 
+        <div class="reason">
+          <div class="reason-icon">⏳</div>
+          <h3>Start early, <em>pay less.</em></h3>
+          <p>The earlier you start, the less you need to contribute each month for the same retirement corpus. Every year you wait, your required monthly SIP goes up — compounding works both ways.</p>
+        </div>
+ 
+      </div>
+ 
+      <!-- HOW NPS WORKS -->
+      <div class="how-section">
+        <div class="how-header">
+          <div class="section-label">✦ The complete picture</div>
+          <h2>How NPS works — <em>start to finish.</em></h2>
+        </div>
+        <div class="how-steps">
+
+          <div class="how-step">
+            <div class="how-step-num">1</div>
+            <div class="how-step-icon">🪪</div>
+            <div class="how-step-title"><em>Open</em> your account</div>
+            <div class="how-step-body">Any Indian citizen aged <strong>18–70</strong> can open NPS — salaried or self-employed. KYC-based, fully online, done in under 15 minutes.</div>
+          </div>
+
+          <div class="how-step">
+            <div class="how-step-num">2</div>
+            <div class="how-step-icon">💰</div>
+            <div class="how-step-title"><em>Contribute</em> regularly</div>
+            <div class="how-step-body">Start with as little as <strong>₹500</strong> per transaction, <strong>₹1,000</strong> minimum per year. No upper limit — contribute as much as your retirement goal demands.</div>
+          </div>
+
+          <div class="how-step">
+            <div class="how-step-num">3</div>
+            <div class="how-step-icon">📈</div>
+            <div class="how-step-title"><em>Grow</em> through the years</div>
+            <div class="how-step-body">Your money is invested across equity, bonds, and government securities. With Auto-Choice, the allocation <strong>adjusts automatically</strong> as you age — no action needed.</div>
+          </div>
+
+          <div class="how-step">
+            <div class="how-step-num">4</div>
+            <div class="how-step-icon">🏁</div>
+            <div class="how-step-title"><em>Exit</em> at 60</div>
+            <div class="how-step-body">At retirement (age 60), withdraw <strong>80% as a lump sum</strong>, tax-free. The remaining 20% converts into a monthly pension — income for life.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TAX GEM -->
+      <div class="tax-gem">
+        <div class="tax-gem-badge">✦ Rare tax benefit</div>
+        <div class="tax-gem-text">
+          <strong>80CCD(2) works even in the new tax regime.</strong> If your employer routes NPS contribution through your CTC — up to 10% of Basic+DA (14% for govt employees) — it is fully deductible. One of the very few deductions that survived the new regime.
+        </div>
+      </div>
+ 
+      <!-- LIFECYCLE FUND SECTION -->
+      <div class="lc-section">
+        <div class="lc-inner">
+          <div class="lc-header">
+            <div class="section-label">✦ Auto-Choice — My Personal Favourite</div>
+            <h2>Lifecycle funds — equity that <em>ages with you.</em></h2>
+            <p>This is the option I personally recommend. Auto-Choice does the heavy lifting for you — it keeps your money in equities while you're young to grow your corpus, and quietly shifts to safer assets as you near retirement. You make just one decision when you start your NPS journey — which of the three lifecycle options suits you. After that, the fund handles everything automatically.</p>
+            <p style="font-size:0.83rem;color:var(--muted);line-height:1.65;font-weight:300;margin-top:0.65rem;">The logic is simple: equities grow wealth over the long run, but they're volatile — not something you want to depend on right when you retire. Auto-Choice gives you the growth when you have time, and the safety when you need it.</p>
+          </div>
+
+          <div class="lc-cards">
+            <div class="lc-card aggressive">
+              <div class="lc-card-tag">▲ Aggressive</div>
+              <div class="lc-card-name">LC-75</div>
+              <div class="lc-card-code">Lifecycle Fund · 75</div>
+              <div class="lc-card-floor">Equity floor <span>15%</span></div>
+              <div class="lc-card-desc">75% equity up to age 35, then gradually reduces to the 15% floor by age 55. Best for younger investors with a long runway who can absorb market swings.</div>
+            </div>
+            <div class="lc-card moderate">
+              <div class="lc-card-tag">◆ Moderate</div>
+              <div class="lc-card-name">LC-50</div>
+              <div class="lc-card-code">Lifecycle Fund · 50</div>
+              <div class="lc-card-floor">Equity floor <span>10%</span></div>
+              <div class="lc-card-desc">50% equity up to age 35, then gradually reduces to the 10% floor by age 55. A balanced middle path — meaningful growth without the full swings of the aggressive option.</div>
+            </div>
+            <div class="lc-card conservative">
+              <div class="lc-card-tag">▼ Conservative</div>
+              <div class="lc-card-name">LC-25</div>
+              <div class="lc-card-code">Lifecycle Fund · 25</div>
+              <div class="lc-card-floor">Equity floor <span>5%</span></div>
+              <div class="lc-card-desc">25% equity up to age 35, then gradually reduces to the 5% floor by age 55. For those who prefer stability throughout and want to keep equity exposure low at all times.</div>
+            </div>
+          </div>
+
+          <div class="lc-chart-wrap">
+            <div class="lc-chart-label">Equity allocation (%) by age</div>
+            <svg class="lc-chart-svg" viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" aria-label="Equity allocation by age for LC-75, LC-50 and LC-25">
+              <!-- Grid lines -->
+              <line x1="56" y1="10" x2="56" y2="168" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+              <line x1="56" y1="168" x2="656" y2="168" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+              <line x1="56" y1="128" x2="656" y2="128" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="56" y1="88" x2="656" y2="88" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="56" y1="48" x2="656" y2="48" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="56" y1="10" x2="656" y2="10" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4,4"/>
+              <!-- Y-axis labels -->
+              <text x="48" y="172" text-anchor="end" fill="rgba(138,154,181,0.7)" font-size="9" font-family="DM Sans, sans-serif">0%</text>
+              <text x="48" y="132" text-anchor="end" fill="rgba(138,154,181,0.7)" font-size="9" font-family="DM Sans, sans-serif">25%</text>
+              <text x="48" y="92" text-anchor="end" fill="rgba(138,154,181,0.7)" font-size="9" font-family="DM Sans, sans-serif">50%</text>
+              <text x="48" y="52" text-anchor="end" fill="rgba(138,154,181,0.7)" font-size="9" font-family="DM Sans, sans-serif">75%</text>
+              <text x="48" y="14" text-anchor="end" fill="rgba(138,154,181,0.7)" font-size="9" font-family="DM Sans, sans-serif">100%</text>
+              <!-- X-axis labels: ages 18 35 45 55 65 -->
+              <!-- x mapping: age 18→56, age 35→176, age 45→296, age 55→416, age 65→656 -->
+              <!-- Actually let's use: 18→56, 35→221, 45→341, 55→461, 65→656 for even spread -->
+              <text x="56"  y="182" text-anchor="middle" fill="rgba(138,154,181,0.7)" font-size="9" font-family="DM Sans, sans-serif">18</text>
+              <text x="221" y="182" text-anchor="middle" fill="rgba(138,154,181,0.7)" font-size="9" font-family="DM Sans, sans-serif">35</text>
+              <text x="341" y="182" text-anchor="middle" fill="rgba(138,154,181,0.7)" font-size="9" font-family="DM Sans, sans-serif">45</text>
+              <text x="461" y="182" text-anchor="middle" fill="rgba(138,154,181,0.7)" font-size="9" font-family="DM Sans, sans-serif">55</text>
+              <text x="656" y="182" text-anchor="middle" fill="rgba(138,154,181,0.7)" font-size="9" font-family="DM Sans, sans-serif">65</text>
+              <text x="356" y="197" text-anchor="middle" fill="rgba(138,154,181,0.5)" font-size="8" font-family="DM Sans, sans-serif">Age</text>
+
+              <!-- LC-75: 75% flat until age 35, linear drop to 15% at age 55, flat to 65 -->
+              <!-- pct=75 → y=168-118.5=49.5; pct=15 → y=168-23.7=144.3 -->
+              <polyline
+                points="56,49.5 221,49.5 461,144.3 656,144.3"
+                fill="none" stroke="#c8a96e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <polygon
+                points="56,49.5 221,49.5 461,144.3 656,144.3 656,168 56,168"
+                fill="rgba(200,169,110,0.07)"/>
+
+              <!-- LC-50: 50% flat until age 35, linear drop to 10% at age 55, flat to 65 -->
+              <!-- pct=50 → y=168-79=89; pct=10 → y=168-15.8=152.2 -->
+              <polyline
+                points="56,89 221,89 461,152.2 656,152.2"
+                fill="none" stroke="#8ab5c8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <polygon
+                points="56,89 221,89 461,152.2 656,152.2 656,168 56,168"
+                fill="rgba(138,181,200,0.06)"/>
+
+              <!-- LC-25: 25% flat until age 35, linear drop to 5% at age 55, flat to 65 -->
+              <!-- pct=25 → y=168-39.5=128.5; pct=5 → y=168-7.9=160.1 -->
+              <polyline
+                points="56,128.5 221,128.5 461,160.1 656,160.1"
+                fill="none" stroke="#8bc8a0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <polygon
+                points="56,128.5 221,128.5 461,160.1 656,160.1 656,168 56,168"
+                fill="rgba(139,200,160,0.06)"/>
+
+              <!-- Dots at age 35 (start of decline) -->
+              <circle cx="221" cy="49.5" r="4" fill="#c8a96e"/>
+              <circle cx="221" cy="89" r="4" fill="#8ab5c8"/>
+              <circle cx="221" cy="128.5" r="4" fill="#8bc8a0"/>
+              <!-- Dots at age 55 (floor reached) -->
+              <circle cx="461" cy="144.3" r="4" fill="#c8a96e"/>
+              <circle cx="461" cy="152.2" r="4" fill="#8ab5c8"/>
+              <circle cx="461" cy="160.1" r="4" fill="#8bc8a0"/>
+
+              <!-- Floor labels at right edge -->
+              <text x="660" y="148" fill="#c8a96e" font-size="8.5" font-family="DM Sans, sans-serif" font-weight="500">15%</text>
+              <text x="660" y="156" fill="#8ab5c8" font-size="8.5" font-family="DM Sans, sans-serif" font-weight="500">10%</text>
+              <text x="660" y="163" fill="#8bc8a0" font-size="8.5" font-family="DM Sans, sans-serif" font-weight="500">5%</text>
+            </svg>
+            <div class="lc-legend">
+              <div class="lc-legend-item"><div class="lc-legend-dot" style="background:#c8a96e;"></div>LC-75 · Aggressive (floor 15%)</div>
+              <div class="lc-legend-item"><div class="lc-legend-dot" style="background:#8ab5c8;"></div>LC-50 · Moderate (floor 10%)</div>
+              <div class="lc-legend-item"><div class="lc-legend-dot" style="background:#8bc8a0;"></div>LC-25 · Conservative (floor 5%)</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ACTIVE CHOICE -->
+      <div class="active-choice">
+        <div class="active-choice-icon">🎛️</div>
+        <div class="active-choice-body">
+          <div class="section-label">✦ Active Choice</div>
+          <h3>You can also manage it yourself — but do you want to?</h3>
+          <p>Active Choice lets you manually set your own allocation across equity, corporate bonds, and government securities — and rebalance it over time. <em>This puts the decision entirely in your hands for money that is meant to last a lifetime.</em> Unless you're deeply familiar with asset allocation and willing to actively manage it year after year, Auto-Choice is the more sensible path for most people.</p>
+        </div>
+      </div>
+
+      <!-- BASICS GRID -->
+      <div class="basics-grid">
+
+        <div class="basics-card">
+          <div class="section-label">✦ Who can open NPS</div>
+          <h3>Open to <em>salaried & self-employed</em></h3>
+          <p>Any Indian citizen between 18 and 70 years can open an NPS account — whether you're in a job or running your own business. Fully democratised. The only thing you need is the mindset to start.</p>
+          <div class="pill-row">
+            <span class="basics-pill">🏢 Salaried</span>
+            <span class="basics-pill">💼 Self-Employed</span>
+          </div>
+        </div>
+
+        <div class="basics-card">
+          <div class="section-label">✦ Minimum contribution</div>
+          <h3>Start with as little as <em>₹500</em></h3>
+          <p>Minimum contribution is <strong>₹500 per transaction</strong> and <strong>₹1,000 per year</strong> to keep your account active. There's no upper limit — contribute as much as your retirement goals demand.</p>
+          <div class="pill-row">
+            <span class="basics-pill">₹500 min / transaction</span>
+            <span class="basics-pill muted">₹1,000 min / year</span>
+          </div>
+        </div>
+
+        <div class="basics-card">
+          <div class="section-label">✦ When is retirement?</div>
+          <h3>NPS matures at <em>age 60</em></h3>
+          <p>In NPS, retirement means turning 60. That's when you can access your corpus. You can also choose to stay invested up to age 85 if you don't need the money immediately — letting compounding continue in your favour.</p>
+          <div class="pill-row">
+            <span class="basics-pill">🔒 Locked until age 60</span>
+            <span class="basics-pill muted">Stay invested till 85</span>
+          </div>
+        </div>
+
+        <div class="basics-card">
+          <div class="section-label">✦ At retirement — the 80-20 rule</div>
+          <h3>Take <em>80%</em> as lump sum, rest as pension</h3>
+          <p>At 60, you can withdraw up to <strong>80% of your corpus as a lump sum</strong>, tax-free. The remaining <strong>20% goes into an annuity</strong> — a regular monthly pension for life.</p>
+          <div class="exit-bar-wrap">
+            <div class="exit-bar">
+              <div class="exit-bar-lump"></div>
+              <div class="exit-bar-annuity"></div>
+            </div>
+            <div class="exit-bar-labels">
+              <span><strong>80% lump sum</strong> — yours to use</span>
+              <span><strong>20% annuity</strong> — monthly pension</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ACTION SECTION -->
+      <div class="action-section" id="get-started">
+        <div class="action-inner">
+          <div class="section-label">✦ Get started</div>
+          <h2>Ready to secure your <em>retirement?</em></h2>
+          <p>Opening an NPS account takes under 15 minutes.</p>
+          <div class="action-buttons">
+ 
+            <a href="https://cra.kfintech.in/poponline/popverification?AuthID=2A0224764B51C5245F651EA3D6B9F3EE3392122077C1834F5E3305421631F63DE43D232802741DC82070E750520D60456BB3E223C0371FE8CE577D017BA837E9F4A782B4DE5FC221D016807C0A855BF4" target="_blank" rel="noopener" class="action-btn primary">
+              <div class="action-btn-icon">🔐</div>
+              <div class="action-btn-label">New Investor Onboarding</div>
+              <div class="action-btn-desc">Open your NPS Tier I account. KYC-based, takes 10–15 min.</div>
+              <div class="action-btn-arrow">Open account →</div>
+            </a>
+ 
+            <a href="https://cra.kfintech.in/poponline/POPContributeOnline?AuthID=26745DFD703F8325B79A36D4CB53744EB094CB3985AF9B96848BCC0828A07C37" target="_blank" rel="noopener" class="action-btn">
+              <div class="action-btn-icon">💳</div>
+              <div class="action-btn-label">Make a Contribution</div>
+              <div class="action-btn-desc">Already have an account? Make a one-time Tier I contribution.</div>
+              <div class="action-btn-arrow">Contribute now →</div>
+            </a>
+ 
+            <a href="https://cra.kfintech.in/poponline/POPContributeOnline?AuthID=BCCAE8DAAE812CADDEC07C0729CDD8951B0F6D8FA1D5D119DBF31447F33B9CAC" target="_blank" rel="noopener" class="action-btn">
+              <div class="action-btn-icon">🔁</div>
+              <div class="action-btn-label">Register SIP</div>
+              <div class="action-btn-desc">Set up auto-debit for monthly contributions. Consistent and effortless.</div>
+              <div class="action-btn-arrow">Set up SIP →</div>
+            </a>
+ 
+          </div>
+        </div>
+      </div>
+ 
+      <!-- REACH ME -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.4rem 1.75rem;display:flex;align-items:center;justify-content:space-between;gap:1.25rem;flex-wrap:wrap;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.7s ease 1.0s forwards;">
+        <div style="flex:1;min-width:200px;">
+          <div style="font-family:var(--serif);font-size:1.1rem;font-weight:600;margin-bottom:0.25rem;">Not sure where to <em style="color:var(--accent);font-style:italic;">begin?</em></div>
+          <div style="font-size:0.82rem;color:var(--muted);font-weight:300;line-height:1.55;">Which scheme, which fund, how much — reach out and I'll help you figure it out before you click anything.</div>
+        </div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20have%20some%20questions%20about%20NPS%20before%20I%20get%20started." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.25);color:#25d366;border-radius:10px;padding:0.65rem 1.2rem;font-size:0.83rem;font-weight:500;text-decoration:none;white-space:nowrap;transition:background 0.2s;" onmouseover="this.style.background='rgba(37,211,102,0.18)'" onmouseout="this.style.background='rgba(37,211,102,0.1)'">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            WhatsApp
+          </a>
+          <a href="tel:8329450580" style="display:inline-flex;align-items:center;gap:0.5rem;background:var(--accent-dim);border:1px solid rgba(200,169,110,0.25);color:var(--accent);border-radius:10px;padding:0.65rem 1.2rem;font-size:0.83rem;font-weight:500;text-decoration:none;white-space:nowrap;transition:background 0.2s;" onmouseover="this.style.background='rgba(200,169,110,0.25)'" onmouseout="this.style.background='var(--accent-dim)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.69h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 18z"/></svg>
+            Call
+          </a>
+        </div>
+      </div>
+ 
+      <!-- CORPUS NUDGE -->
+      <div class="corpus-nudge">
+        <div class="corpus-nudge-text">
+          <p>How much do you need to <em>retire comfortably?</em></p>
+          <span>Use the goal calculator with retirement presets — inflation-adjusted projections.</span>
+        </div>
+        <a href="retirement-calculator.html" class="corpus-nudge-btn">
+          Calculate my corpus
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+ 
+    </div>
+ 
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-brand">Mutual Fund and NPS distribution services by Vegi Ramesh</div>
+      <div class="footer-links">
+        <a href="AboutMe.html">About Me</a>
+        <a href="RiskProfiler.html">Investor Profiling</a>
+        <a href="calculator.html">Goal Calculator</a>
+        <a href="SavingsCorpusCalculator.html">Corpus Calculator</a>
+        <a href="nps.html">NPS</a>
+        <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20NPS." target="_blank" rel="noopener">WhatsApp</a>
+        <a href="tel:8329450580">Call Us</a>
+        <a href="mailto:rameshvegi94@gmail.com">Email Us</a>
+      </div>
+      <div class="footer-disc">
+        National Pension System (NPS) is regulated by the Pension Fund Regulatory and Development Authority (PFRDA). NPS investments are subject to market risks. Tax benefits are subject to changes in applicable tax laws. This material is for informational purposes only and does not constitute financial advice. Vegi Ramesh is a registered NPS distributor for HDFC NPS Pension Fund. Mutual Fund investments are subject to market risks — ARN-349739.
+      </div>
+    </footer>
+ 
+    <!-- Mobile WhatsApp FAB -->
+    <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20NPS." class="fab-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+ 
+    <!-- Floating Begin pill -->
+    <a href="#get-started" class="float-begin" id="floatBegin">
+      Begin with NPS <span class="scroll-arrow">↓</span>
+    </a>
+ 
+    <script>
+      function toggleTheme() {
+        var html = document.documentElement;
+        var isDark = html.getAttribute("data-theme") !== "light";
+        html.setAttribute("data-theme", isDark ? "light" : "dark");
+        try { localStorage.setItem("theme", isDark ? "light" : "dark"); } catch(e) {}
+      }
+      (function() {
+        try { var t = localStorage.getItem("theme"); if (t) document.documentElement.setAttribute("data-theme", t); } catch(e) {}
+        var btn = document.querySelector(".theme-toggle");
+        if (btn) btn.classList.add("ready");
+      })();
+    </script>
+    <script>
+      (function() {
+        var pill = document.getElementById("floatBegin");
+        var target = document.getElementById("get-started");
+        var footer = document.querySelector("footer");
+        if (!pill || !target) return;
+        setTimeout(function() { pill.classList.add("visible"); }, 900);
+        var visibleCount = 0;
+        function updatePill(isIntersecting) {
+          visibleCount = Math.max(0, visibleCount + (isIntersecting ? 1 : -1));
+          if (visibleCount > 0) {
+            pill.classList.add("hidden"); pill.classList.remove("visible");
+          } else {
+            pill.classList.remove("hidden"); pill.classList.add("visible");
+          }
+        }
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) { updatePill(entry.isIntersecting); });
+        }, { threshold: 0.15 });
+        observer.observe(target);
+        if (footer) observer.observe(footer);
+        pill.addEventListener("click", function(e) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      })();
+    </script>
+    <script>
+      (function() {
+        var section = document.getElementById('get-started');
+        if (!section) return;
+        var triggered = false;
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting && !triggered) {
+              triggered = true;
+              observer.disconnect();
+              setTimeout(function() {
+                section.classList.add('blipping');
+              }, 400);
+            }
+          });
+        }, { threshold: 0.4 });
+        observer.observe(section);
+      })();
+    </script>
+ 
