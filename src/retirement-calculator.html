@@ -1,0 +1,1055 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Retirement Calculator · NPS · Vegi Ramesh · ARN-349739</title>
+    <meta name="description" content="Plan your retirement corpus with NPS. Calculate how much you need, what SIP to start today, and see how your corpus lasts through retirement." />
+    <meta name="author" content="Vegi Ramesh" />
+    <meta name="theme-color" content="#0b0f1a" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+      :root {
+        --bg: #0b0f1a;
+        --surface: #111827;
+        --surface2: #1a2236;
+        --border: rgba(255,255,255,0.07);
+        --accent: #c8a96e;
+        --accent-dim: rgba(200,169,110,0.15);
+        --accent-glow: rgba(200,169,110,0.08);
+        --text: #e8e4dc;
+        --muted: #8a9ab5;
+        --danger: #e05c5c;
+        --safe: #4caf82;
+        --neutral: #6b8cba;
+        --warn: #e0a34a;
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --sans: "DM Sans", sans-serif;
+        --nav-bg: rgba(11,15,26,0.92);
+        --footer-disc: #6b7280;
+        --prose-text: #b8bfcc;
+      }
+      [data-theme="light"] {
+        --bg: #f7f4ef; --surface: #ffffff; --surface2: #f0ebe0;
+        --border: rgba(0,0,0,0.09); --accent: #a67c32;
+        --accent-dim: rgba(166,124,50,0.12); --accent-glow: rgba(166,124,50,0.06);
+        --text: #1c1a14; --muted: #6b6353;
+        --danger: #c0392b; --safe: #2e7d5e; --neutral: #3d6491; --warn: #b5780a;
+        --nav-bg: rgba(247,244,239,0.94);
+        --footer-disc: #7a7060; --prose-text: #4a4535;
+      }
+      *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--accent) var(--bg); }
+      ::-webkit-scrollbar { width: 7px; } ::-webkit-scrollbar-track { background: var(--bg); }
+      ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 99px; border: 2px solid var(--bg); }
+      body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+      body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+        background: radial-gradient(ellipse 70% 50% at 15% 10%, rgba(200,169,110,0.06) 0%, transparent 60%),
+                    radial-gradient(ellipse 50% 40% at 85% 90%, rgba(200,169,110,0.04) 0%, transparent 60%); }
+
+      /* ── NAV ── */
+      nav {
+        position: sticky; top: 0; z-index: 100;
+        background: var(--nav-bg); backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 0 clamp(1.5rem,5vw,4rem);
+        display: flex; align-items: center; justify-content: space-between; height: 60px;
+      }
+      .nav-brand { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; color: var(--text); letter-spacing: 0.03em; text-decoration: none; }
+      .nav-brand span { color: var(--accent); font-style: italic; }
+      .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
+      .nav-arn { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
+      .nav-back { font-size: 0.78rem; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; letter-spacing: 0.03em; }
+      .nav-back:hover { color: var(--accent); }
+      .nav-whatsapp-btn { background: rgba(37,211,102,0.12); color: #25d366; border: 1px solid rgba(37,211,102,0.3); border-radius: 6px; padding: 0.35rem 0.9rem; font-size: 0.78rem; font-weight: 500; font-family: var(--sans); text-decoration: none; letter-spacing: 0.04em; transition: background 0.2s; white-space: nowrap; }
+      .nav-whatsapp-btn:hover { background: rgba(37,211,102,0.2); }
+      .theme-toggle { background: var(--surface2); border: 1px solid var(--border); color: var(--muted); border-radius: 20px; padding: 0.3rem 0.55rem; font-size: 0.78rem; font-family: var(--sans); cursor: pointer; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s, background 0.2s, opacity 0.15s; white-space: nowrap; opacity: 0; }
+      .theme-toggle.ready { opacity: 1; }
+      .theme-toggle:hover { color: var(--accent); }
+      .theme-toggle .icon-dark { display: inline; } .theme-toggle .icon-light { display: none; }
+      [data-theme="light"] .theme-toggle .icon-dark { display: none; } [data-theme="light"] .theme-toggle .icon-light { display: inline; }
+      @media (max-width: 480px) { .nav-whatsapp-btn, .nav-arn { display: none; } }
+
+      /* ── HERO ── */
+      .hero {
+        text-align: center;
+        padding: clamp(3.5rem,8vw,6rem) clamp(1.5rem,5vw,4rem) clamp(2.5rem,5vw,4rem);
+        position: relative; overflow: hidden;
+      }
+      .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(200,169,110,0.07) 0%, transparent 70%); pointer-events: none; }
+      .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
+      .hero-eyebrow::before, .hero-eyebrow::after { content: " ✦ "; opacity: 0.6; }
+      .hero h1 { font-family: var(--serif); font-size: clamp(2.2rem,5vw,3.6rem); font-weight: 600; line-height: 1.15; margin-bottom: 1rem; color: var(--text); }
+      .hero h1 em { color: var(--accent); font-style: italic; }
+      .hero-sub { max-width: 540px; margin: 0 auto; color: var(--muted); font-size: 1rem; font-weight: 300; }
+
+      /* ── SECTION ── */
+      .section { max-width: 860px; margin: 0 auto; padding: clamp(2rem,5vw,3.5rem) clamp(1.5rem,5vw,2rem); }
+      hr.section-sep { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+      /* ── CALC CARD ── */
+      .calc-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: clamp(1.5rem,4vw,2.5rem); margin-bottom: 1.5rem; }
+      .calc-card-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 1.6rem; display: flex; align-items: center; gap: 0.6rem; }
+      .calc-card-title-icon { width: 30px; height: 30px; background: var(--accent-dim); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
+      .section-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+      .section-label::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+      /* ── FORM GRID ── */
+      .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem 2rem; }
+      @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+      .form-field { display: flex; flex-direction: column; gap: 0.45rem; }
+      .form-field.full-width { grid-column: 1/-1; }
+      .field-label { font-size: 0.74rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 0.4rem; }
+
+      /* Tip icon */
+      .tip-icon { display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; border-radius: 50%; background: var(--surface2); border: 1px solid var(--border); color: var(--muted); font-size: 0.62rem; font-style: normal; font-weight: 600; cursor: pointer; vertical-align: middle; margin-left: 0.3rem; flex-shrink: 0; transition: background 0.15s, color 0.15s, border-color 0.15s; -webkit-user-select: none; user-select: none; }
+      .tip-icon:hover, .tip-icon.tip-open { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+      #tipPopover { position: fixed; z-index: 9999; max-width: min(280px,calc(100vw - 24px)); background: var(--surface); border: 1px solid rgba(200,169,110,0.35); border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.8rem; font-family: var(--sans); font-weight: 300; line-height: 1.6; color: var(--prose-text); box-shadow: 0 8px 28px rgba(0,0,0,0.28); pointer-events: none; opacity: 0; transform: translateY(4px); transition: opacity 0.15s, transform 0.15s; }
+      #tipPopover.tip-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+      #tipPopover::before { content: ""; position: absolute; width: 8px; height: 8px; background: var(--surface); border: 1px solid rgba(200,169,110,0.35); transform: rotate(45deg); }
+      #tipPopover.arrow-top::before { top: -5px; border-bottom: none; border-right: none; }
+      #tipPopover.arrow-bottom::before { bottom: -5px; border-top: none; border-left: none; }
+
+      /* Text inputs */
+      .text-input { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 0.65rem 0.9rem; font-size: 0.95rem; font-family: var(--sans); color: var(--text); width: 100%; transition: border-color 0.2s; outline: none; }
+      .text-input:focus { border-color: var(--accent); }
+      .input-prefix-wrap { position: relative; display: flex; align-items: center; }
+      .input-prefix { position: absolute; left: 0.9rem; color: var(--accent); font-weight: 500; font-size: 0.95rem; pointer-events: none; }
+      .input-prefix-wrap .text-input { padding-left: 1.9rem; }
+
+      /* Sliders */
+      .slider-wrap { display: flex; flex-direction: column; gap: 0.5rem; }
+      .slider-row { display: flex; align-items: center; gap: 0.8rem; }
+      input[type="range"] { -webkit-appearance: none; appearance: none; flex: 1; height: 4px; border-radius: 2px; background: var(--border); outline: none; cursor: pointer; }
+      input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); box-shadow: 0 0 0 1px var(--accent); cursor: pointer; transition: transform 0.15s; }
+      input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+      input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); cursor: pointer; }
+      .slider-value-input { min-width: 52px; width: 58px; text-align: center; font-size: 0.88rem; font-weight: 500; color: var(--accent); font-family: var(--sans); background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 0.15rem 0.4rem; outline: none; cursor: text; transition: border-color 0.15s, box-shadow 0.15s; -moz-appearance: textfield; }
+      .slider-value-input::-webkit-outer-spin-button, .slider-value-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+      .slider-value-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,169,110,0.18); }
+      .slider-limits { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--muted); opacity: 0.7; }
+      .return-zone-label { font-size: 0.67rem; letter-spacing: 0.07em; text-transform: uppercase; font-weight: 500; text-align: right; margin-top: 0.1rem; transition: color 0.35s ease; opacity: 0.85; }
+
+      /* ── RESULTS CARD ── */
+      .results-card { background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%); border: 1px solid rgba(200,169,110,0.2); border-radius: 16px; padding: clamp(1.5rem,4vw,2.5rem); margin-bottom: 1.5rem; position: relative; overflow: hidden; }
+      .results-card::before { content: "✦"; position: absolute; right: 1.8rem; top: 1rem; font-size: 5rem; color: var(--accent); opacity: 0.05; line-height: 1; pointer-events: none; }
+      .results-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 1.4rem; }
+      @media (max-width: 500px) { .results-grid { grid-template-columns: 1fr; } }
+      .result-cell { background: var(--surface); padding: 1.3rem 1.4rem; transition: background 0.2s; }
+      .result-cell:hover { background: var(--surface2); }
+      .result-cell.primary { background: var(--accent-dim); border-bottom: 2px solid var(--accent); }
+      .result-cell.primary:hover { background: rgba(200,169,110,0.22); }
+      .result-cell.primary .result-label { color: var(--accent); opacity: 0.85; }
+      .result-cell.primary .result-value { font-size: clamp(1.7rem,4vw,2.3rem); }
+      .result-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+      .result-value { font-family: var(--serif); font-size: clamp(1.4rem,3vw,1.9rem); font-weight: 600; color: var(--text); line-height: 1.1; }
+      .result-value.accent { color: var(--accent); }
+      .result-value.safe { color: var(--safe); }
+      .result-value.neutral { color: var(--neutral); }
+      .result-sub { font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem; font-weight: 300; }
+
+      /* ── CHART CARD ── */
+      .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: clamp(1.5rem,4vw,2.5rem); margin-bottom: 1.5rem; }
+      .chart-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 1.4rem; }
+      .chart-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--text); }
+      .chart-legend { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+      .legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--muted); font-weight: 400; }
+      .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+      .chart-wrap { position: relative; height: 300px; }
+
+
+
+      /* ── SHARE CARD ── */
+      .share-card { background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%); border: 1px solid rgba(200,169,110,0.25); border-radius: 16px; padding: clamp(1.5rem,4vw,2.5rem); margin-bottom: 1.5rem; }
+      .share-heading { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
+      .share-sub { font-size: 0.88rem; color: var(--muted); font-weight: 300; margin-bottom: 1.4rem; line-height: 1.5; }
+      .share-btns { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+      .share-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.72rem 1.4rem; border-radius: 8px; font-size: 0.88rem; font-family: var(--sans); font-weight: 500; cursor: pointer; border: none; letter-spacing: 0.03em; transition: opacity 0.2s, transform 0.15s; text-decoration: none; }
+      .share-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+      .share-btn-wa { background: #25d366; color: #fff; }
+      .share-btn-gmail { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+      @media (max-width: 480px) { .share-btn-gmail-desktop { display: none !important; } }
+      @media (min-width: 481px) { .share-btn-gmail-mobile { display: none !important; } }
+
+      /* ── DISCLAIMER ── */
+      .disc-card { border-left: 3px solid var(--accent); background: var(--accent-glow); border-radius: 0 10px 10px 0; padding: 1.1rem 1.4rem; margin-bottom: 1.2rem; }
+      .disc-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.45rem; }
+      .disc-text { font-size: 0.88rem; color: var(--prose-text); font-weight: 300; line-height: 1.65; }
+
+      /* ── TOAST ── */
+      .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--surface); border: 1px solid rgba(200,169,110,0.3); color: var(--text); border-radius: 8px; padding: 0.65rem 1.3rem; font-size: 0.88rem; font-family: var(--sans); z-index: 999; opacity: 0; transition: opacity 0.25s, transform 0.25s; pointer-events: none; white-space: nowrap; }
+      .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+
+      /* ── PLACEHOLDER ── */
+      .results-placeholder { text-align: center; padding: 2.5rem 1rem; color: var(--muted); font-size: 0.92rem; font-weight: 300; }
+      .results-placeholder .placeholder-icon { font-size: 2.5rem; margin-bottom: 0.8rem; opacity: 0.4; }
+
+      /* ── DANGER ZONE (return > 22%) ── */
+      #mainCalcCard { transition: border-color 0.5s ease, box-shadow 0.5s ease, background 0.5s ease; }
+      #mainCalcCard.danger-zone { border-color: rgba(192,52,40,0.6); background: linear-gradient(135deg, rgba(192,52,40,0.045) 0%, rgba(192,52,40,0.03) 100%); box-shadow: 0 0 0 1px rgba(192,52,40,0.25), 0 4px 32px rgba(192,52,40,0.12); }
+      @keyframes danger-shake { 0%,100%{transform:translateX(0)}15%{transform:translateX(-6px)}30%{transform:translateX(6px)}45%{transform:translateX(-5px)}60%{transform:translateX(5px)}75%{transform:translateX(-3px)}90%{transform:translateX(3px)} }
+      #mainCalcCard.danger-shake { animation: danger-shake 0.5s ease; }
+
+
+
+      /* ── FOOTER ── */
+      footer { border-top: 1px solid var(--border); padding: 2.5rem clamp(1.5rem,5vw,4rem); text-align: center; }
+      .footer-brand { font-family: var(--serif); font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem; }
+      .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap; }
+      .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+      .footer-links a:hover { color: var(--accent); }
+      .footer-disc { font-size: 0.82rem; color: var(--footer-disc); max-width: 700px; margin: 1rem auto 0; line-height: 1.6; }
+
+      @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes hero-phrase-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+      .hero-sub .phrase { display: inline; opacity: 0; animation: hero-phrase-in 0.55s ease forwards; }
+      .hero-sub .phrase-1 { animation-delay: 0.3s; }
+      .hero-sub .phrase-2 { animation-delay: 0.85s; }
+      .hero-sub .phrase .key { color: var(--accent); font-weight: 400; }
+
+      body.embedded nav, body.embedded header.hero, body.embedded footer { display: none !important; }
+      body.embedded { background: transparent; }
+    </style>
+  </head>
+  <body>
+
+    <script>
+      if (new URLSearchParams(window.location.search).get('embed') === 'true') {
+        document.body.classList.add('embedded');
+      }
+    </script>
+
+    <!-- NAV -->
+    <nav>
+      <a href="index.html" class="nav-brand">Vegi <span>Ramesh</span></a>
+      <div class="nav-actions">
+        <div class="nav-arn">✦ ARN-349739</div>
+        <a href="nps.html" class="nav-back">← NPS</a>
+        <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20used%20the%20NPS%20retirement%20calculator%20and%20would%20like%20to%20discuss%20my%20plan." class="nav-whatsapp-btn" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="vertical-align:middle;flex-shrink:0;margin-right:4px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp
+        </a>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <span class="icon-dark">☀️</span><span class="icon-light">🌙</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-eyebrow">NPS Retirement Calculator</div>
+      <h1>How much do you need<br />to <em>never run out?</em></h1>
+      <p class="hero-sub">
+        <span class="phrase phrase-1">Enter what you spend today —</span>
+        <span class="phrase phrase-2"> and find out the <span class="key">corpus you need</span>, the <span class="key">SIP to build it</span>, and exactly <span class="key">how long your money lasts</span>.</span>
+      </p>
+    </header>
+
+    <hr class="section-sep" />
+
+    <section class="section">
+
+      <!-- Inputs -->
+      <div class="calc-card" id="mainCalcCard">
+        <div class="calc-card-title">
+          <div class="calc-card-title-icon">🏖️</div>
+          <span>Your Retirement Plan</span>
+          <button onclick="resetForm()" style="margin-left:auto;background:none;border:none;color:var(--muted);font-size:0.75rem;font-family:var(--sans);cursor:pointer;padding:0.2rem 0.5rem;border-radius:4px;letter-spacing:0.04em;transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">↺ Reset</button>
+        </div>
+
+        <div class="form-grid">
+
+          <!-- Monthly expenses -->
+          <div class="form-field full-width">
+            <label class="field-label" for="monthlyExpenses">Monthly Expenses in Today's Terms <span class="tip-icon" data-tip="How much do you spend per month right now? We'll inflation-adjust this to find what you'll need at retirement. Include rent, food, utilities, lifestyle — everything that sustains your life.">ℹ</span></label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">₹</span>
+              <input class="text-input" id="monthlyExpenses" type="text" placeholder="e.g. 50,000" autocomplete="off" inputmode="numeric" oninput="formatMoneyInput(this); onAnyInput();" onkeydown="handleMoneyKeydown(event)" />
+            </div>
+          </div>
+
+          <!-- Current age -->
+          <div class="form-field">
+            <label class="field-label" for="currentAge">Current Age <span class="tip-icon" data-tip="Your age today. This determines how many years you have to build your corpus.">ℹ</span></label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="currentAge" min="18" max="55" value="25" oninput="syncSlider('currentAge','currentAgeVal'); onAnyInput('slider');" />
+                <input class="slider-value-input" id="currentAgeVal" type="number" min="18" max="55" step="1" value="25" oninput="syncValInput('currentAge','currentAgeVal'); onAnyInput('slider');" onblur="clampValInput('currentAge','currentAgeVal'); onAnyInput('slider');" />
+              </div>
+              <div class="slider-limits"><span>18 yrs</span><span>55 yrs</span></div>
+            </div>
+          </div>
+
+          <!-- Retirement age -->
+          <div class="form-field">
+            <label class="field-label" for="retirementAge">Retirement Age <span class="tip-icon" data-tip="When do you plan to stop working? NPS allows partial withdrawal at 60; full maturity is at 60 for most. You can target an earlier retirement — your SIP will simply be higher.">ℹ</span></label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="retirementAge" min="45" max="70" value="60" oninput="syncSlider('retirementAge','retirementAgeVal'); onAnyInput('slider');" />
+                <input class="slider-value-input" id="retirementAgeVal" type="number" min="45" max="70" step="1" value="60" oninput="syncValInput('retirementAge','retirementAgeVal'); onAnyInput('slider');" onblur="clampValInput('retirementAge','retirementAgeVal'); onAnyInput('slider');" />
+              </div>
+              <div class="slider-limits"><span>45 yrs</span><span>70 yrs</span></div>
+            </div>
+          </div>
+
+
+
+          <!-- Life expectancy -->
+          <div class="form-field">
+            <label class="field-label" for="lifeExpectancy">Life Expectancy <span class="tip-icon" data-tip="How long do you plan to fund your retirement? Plan generously — medical advances mean many people live longer than expected. 85–90 is a safe planning horizon for most.">ℹ</span></label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="lifeExpectancy" min="70" max="100" value="85" oninput="syncSlider('lifeExpectancy','lifeExpectancyVal'); onAnyInput('slider');" />
+                <input class="slider-value-input" id="lifeExpectancyVal" type="number" min="70" max="100" step="1" value="85" oninput="syncValInput('lifeExpectancy','lifeExpectancyVal'); onAnyInput('slider');" onblur="clampValInput('lifeExpectancy','lifeExpectancyVal'); onAnyInput('slider');" />
+              </div>
+              <div class="slider-limits"><span>70 yrs</span><span>100 yrs</span></div>
+            </div>
+          </div>
+
+          <!-- Inflation rate -->
+          <div class="form-field">
+            <label class="field-label" for="inflationRate">Expected Inflation <span class="tip-icon" data-tip="How much will prices rise every year? Used both to inflate your current expenses to retirement-time expenses, and to erode your corpus purchasing power post-retirement. 6% is a reasonable baseline for India.">ℹ</span></label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="inflationRate" min="2" max="12" value="6" step="0.5" oninput="syncSlider('inflationRate','inflationRateVal'); onAnyInput('slider');" />
+                <input class="slider-value-input" id="inflationRateVal" type="number" min="2" max="12" step="0.5" value="6" oninput="syncValInput('inflationRate','inflationRateVal'); onAnyInput('slider');" onblur="clampValInput('inflationRate','inflationRateVal'); onAnyInput('slider');" />
+              </div>
+              <div class="slider-limits"><span>2% p.a.</span><span>12% p.a.</span></div>
+            </div>
+          </div>
+
+          <!-- Accumulation return (pre-retirement) -->
+          <div class="form-field">
+            <label class="field-label" for="accumulationReturn">Return While Accumulating <span class="tip-icon" data-tip="Expected annual return on your NPS investments during the working years. NPS Tier I equity (E) tier has historically returned ~12–14%. A blended E+C+G portfolio might average 10–12%. Be conservative — you'll live with the outcome.">ℹ</span></label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="accumulationReturn" min="5" max="18" value="11" step="0.5" oninput="syncSlider('accumulationReturn','accumulationReturnVal'); onAnyInput('slider');" />
+                <input class="slider-value-input" id="accumulationReturnVal" type="number" min="5" max="18" step="0.5" value="11" oninput="syncValInput('accumulationReturn','accumulationReturnVal'); onAnyInput('slider');" onblur="clampValInput('accumulationReturn','accumulationReturnVal'); onAnyInput('slider');" />
+              </div>
+              <div class="slider-limits"><span>5% p.a.</span><span>18% p.a.</span></div>
+              <div class="return-zone-label" id="accumZoneLabel"></div>
+            </div>
+          </div>
+
+          <!-- Withdrawal return (post-retirement) -->
+          <div class="form-field">
+            <label class="field-label" for="withdrawalReturn">Annuity Rate <span class="tip-icon" data-tip="The annual return on the annuity purchased with your NPS corpus at retirement. Annuity providers in India typically offer 5–7% p.a. This directly determines your fixed monthly income for life.">ℹ</span></label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="withdrawalReturn" min="4" max="9" value="6" step="0.5" oninput="syncSlider('withdrawalReturn','withdrawalReturnVal'); onAnyInput('slider');" />
+                <input class="slider-value-input" id="withdrawalReturnVal" type="number" min="4" max="9" step="0.5" value="6" oninput="syncValInput('withdrawalReturn','withdrawalReturnVal'); onAnyInput('slider');" onblur="clampValInput('withdrawalReturn','withdrawalReturnVal'); onAnyInput('slider');" />
+              </div>
+              <div class="slider-limits"><span>4% p.a.</span><span>9% p.a.</span></div>
+            </div>
+          </div>
+
+          <!-- Step-up -->
+          <div class="form-field">
+            <label class="field-label" for="stepUp">Annual SIP Step-Up <span class="tip-icon" data-tip="As your salary grows, you can increase your SIP each year. A 10% annual step-up lets you start smaller and grow with your income. Setting this to 0 gives a flat SIP.">ℹ</span></label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="stepUp" min="0" max="20" value="10" step="1" oninput="syncSlider('stepUp','stepUpVal'); onAnyInput('slider');" />
+                <input class="slider-value-input" id="stepUpVal" type="number" min="0" max="20" step="1" value="10" oninput="syncValInput('stepUp','stepUpVal'); onAnyInput('slider');" onblur="clampValInput('stepUp','stepUpVal'); onAnyInput('slider');" />
+              </div>
+              <div class="slider-limits"><span>0% (flat)</span><span>20% p.a.</span></div>
+            </div>
+          </div>
+
+          <!-- NPS withdrawal split -->
+          <div class="form-field full-width" style="margin-top:0.5rem;">
+            <label class="field-label" for="lumpsumPct">NPS Lumpsum Withdrawal at Retirement <span class="tip-icon" data-tip="As per updated PFRDA rules, you can withdraw up to 80% of your NPS corpus as a tax-free lumpsum. The remaining (minimum 20%) must be used to purchase an annuity, which gives you a fixed monthly income for life.">ℹ</span></label>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" id="lumpsumPct" min="0" max="80" value="80" step="5" oninput="syncSlider('lumpsumPct','lumpsumPctVal'); onAnyInput('slider');" />
+                <input class="slider-value-input" id="lumpsumPctVal" type="number" min="0" max="80" step="5" value="80" oninput="syncValInput('lumpsumPct','lumpsumPctVal'); onAnyInput('slider');" onblur="clampValInput('lumpsumPct','lumpsumPctVal'); onAnyInput('slider');" />
+              </div>
+              <div class="slider-limits"><span>0% lumpsum</span><span>80% lumpsum</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="results-card" id="resultsCard">
+        <div class="section-label">Results</div>
+        <h2 id="resultsHeading" style="font-family:var(--serif);font-size:clamp(1.4rem,3vw,2rem);margin-bottom:0;font-weight:600;line-height:1.2;">
+          <em>Enter your details above</em>
+        </h2>
+        <div id="resultsBody">
+          <div class="results-placeholder">
+            <div class="placeholder-icon">🏖️</div>
+            <div>Fill in your details to see<br/>your retirement plan.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Growth Chart (pre-retirement) -->
+      <div class="chart-card" id="growthChartCard" style="display:none;">
+        <div class="chart-header">
+          <div class="chart-title">Corpus Growth to Retirement</div>
+          <div class="chart-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#6b8cba;"></div>Amount Invested</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#c8a96e;"></div>Corpus Value</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#e05c5c;opacity:0.7;"></div>Target Corpus</div>
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="growthChart"></canvas></div>
+      </div>
+
+
+
+      <!-- Share card -->
+      <div class="share-card" id="shareCard" style="display:none;">
+        <div class="share-heading">Share Your Retirement Plan</div>
+        <div class="share-sub">Share your numbers with me and we can map out the right NPS plan together.</div>
+        <div style="margin-bottom:1.2rem;">
+          <label class="field-label" for="userName" style="margin-bottom:0.45rem;display:flex;">Your Name</label>
+          <input class="text-input" id="userName" type="text" placeholder="What should I call you?" autocomplete="off" />
+        </div>
+        <div class="share-btns">
+          <button class="share-btn share-btn-wa" onclick="buildAndOpenWa()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Send via WhatsApp
+          </button>
+          <button class="share-btn share-btn-email share-btn-gmail-mobile" onclick="buildAndOpenEmail()">✉️ Send via Gmail</button>
+          <button class="share-btn share-btn-gmail share-btn-gmail-desktop" onclick="buildAndOpenGmail()">✉️ Send via Gmail</button>
+        </div>
+      </div>
+
+      <!-- Disclaimer -->
+      <div id="discCard" style="display:none;">
+        <div class="disc-card">
+          <div class="disc-label">✦ A Note on These Numbers</div>
+          <div class="disc-text">These projections are based on the assumptions you've entered. Real-world returns, inflation, and expenses will vary. NPS at maturity requires a minimum 20% of your corpus to be used for annuity purchase — the annuity rate shown is an assumption, not a guaranteed rate from any provider; actual rates vary by insurer and your age at purchase. <strong style="color:var(--text);">Annuity income is fully taxable as per your income tax slab</strong> — unlike the lumpsum withdrawal which is tax-free. The 60% lumpsum withdrawal at NPS maturity is exempt from tax. Tax treatment and withdrawal rules are subject to change. This is for planning purposes only and does not constitute financial advice.</div>
+        </div>
+      </div>
+
+    </section>
+
+    <hr class="section-sep" />
+    <footer>
+      <div class="footer-brand">Mutual Fund and NPS distribution services by Vegi Ramesh</div>
+      <div class="footer-links">
+        <a href="nps.html">NPS</a>
+        <a href="RiskProfiler.html">Investor Profiling</a>
+        <a href="calculator.html">Goal Calculator</a>
+        <a href="SavingsCorpusCalculator.html">Corpus Calculator</a>
+        <a href="https://wa.me/918329450580" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="tel:8329450580">Call Me</a>
+        <a href="mailto:rameshvegi94@gmail.com">Email Me</a>
+      </div>
+      <div class="footer-disc">
+        NPS is regulated by PFRDA. Mutual Fund investments are subject to market risks. Past performance is not indicative of future results. All projections are illustrative and do not guarantee future performance. Vegi Ramesh is registered with AMFI as a Mutual Fund Distributor – ARN-349739 and is a registered NPS distributor for HDFC NPS Pension Fund.
+      </div>
+    </footer>
+
+    <div class="toast" id="shareToast"></div>
+    <div id="tipPopover"></div>
+
+    <script>
+      // ── THEME ──
+      function toggleTheme() {
+        var html = document.documentElement;
+        var isDark = html.getAttribute("data-theme") !== "light";
+        html.setAttribute("data-theme", isDark ? "light" : "dark");
+        try { localStorage.setItem("theme", isDark ? "light" : "dark"); } catch(e) {}
+        if (window._growthChart) updateChartColors();
+      }
+      (function() {
+        try { var t = localStorage.getItem("theme"); if (t) document.documentElement.setAttribute("data-theme", t); } catch(e) {}
+        var btn = document.querySelector(".theme-toggle");
+        if (btn) btn.classList.add("ready");
+      })();
+
+      // ── FORMATTERS ──
+      function formatIndian(n) {
+        if (isNaN(n)) return "";
+        var s = n.toString();
+        if (s.length <= 3) return s;
+        var last3 = s.slice(-3), rest = s.slice(0,-3);
+        rest = rest.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+        return rest + "," + last3;
+      }
+      function fmtINR(n) { return "₹" + formatIndian(Math.round(n)); }
+      function shortINR(n) {
+        if (n >= 10000000) return "₹" + (n/10000000).toFixed(2) + " Cr";
+        if (n >= 100000)   return "₹" + (n/100000).toFixed(2) + " L";
+        if (n >= 1000)     return "₹" + (n/1000).toFixed(1) + "K";
+        return fmtINR(n);
+      }
+      function parseMoney(v) { return parseInt((v||"").replace(/[^0-9]/g,""),10) || 0; }
+      function formatMoneyInput(el) {
+        var selStart = el.selectionStart, oldVal = el.value;
+        var digBefore = oldVal.slice(0, selStart).replace(/[^0-9]/g,"").length;
+        var raw = oldVal.replace(/[^0-9]/g,"");
+        if (!raw) { el.value = ""; return; }
+        var newVal = formatIndian(parseInt(raw, 10));
+        el.value = newVal;
+        var seen = 0, newPos = newVal.length;
+        for (var i = 0; i < newVal.length; i++) {
+          if (/[0-9]/.test(newVal[i])) { seen++; if (seen === digBefore) { newPos = i+1; break; } }
+        }
+        el.setSelectionRange(newPos, newPos);
+      }
+      function handleMoneyKeydown(e) {
+        if (e.key !== "Backspace") return;
+        var el = e.target, val = el.value, start = el.selectionStart, end = el.selectionEnd;
+        if (end - start > 0) { if (val.slice(start,end).replace(/,/g,"").length > 0) return; }
+        var pos = start;
+        while (pos > 0 && val[pos-1] === ",") pos--;
+        if (pos === 0) { e.preventDefault(); return; }
+        if (pos !== start) {
+          e.preventDefault();
+          var digBefore = val.slice(0, pos-1).replace(/[^0-9]/g,"").length;
+          var newVal2 = (val.slice(0, pos-1) + val.slice(end)).replace(/[^0-9]/g,"");
+          if (!newVal2) { el.value = ""; return; }
+          var fmt2 = formatIndian(parseInt(newVal2,10));
+          el.value = fmt2;
+          var s2 = 0, np = fmt2.length;
+          for (var j = 0; j < fmt2.length; j++) { if (/[0-9]/.test(fmt2[j])) { s2++; if (s2 === digBefore) { np = j+1; break; } } }
+          el.setSelectionRange(np, np);
+          el.dispatchEvent(new Event("input",{bubbles:true}));
+        }
+      }
+
+      // ── SLIDER SYNC ──
+      function lerpColor(c1, c2, t) {
+        t = Math.max(0, Math.min(1, t));
+        return [Math.round(c1[0]+(c2[0]-c1[0])*t), Math.round(c1[1]+(c2[1]-c1[1])*t), Math.round(c1[2]+(c2[2]-c1[2])*t)];
+      }
+      function getReturnColor(val) {
+        var muted=[105,90,58], gold=[200,169,110], orange=[212,120,45], red=[192,52,40];
+        var rgb;
+        if (val <= 8)        rgb = lerpColor(muted, gold, (val - 5) / 3);
+        else if (val <= 12)  rgb = gold;
+        else if (val <= 15)  rgb = lerpColor(gold, orange, (val - 12) / 3);
+        else                 rgb = lerpColor(orange, red, Math.min(1, (val - 15) / 3));
+        return "rgb("+rgb[0]+","+rgb[1]+","+rgb[2]+")";
+      }
+
+      function syncSlider(sliderId, valId) {
+        var slider = document.getElementById(sliderId);
+        var val = parseFloat(slider.value);
+        var vi = document.getElementById(valId);
+        if (vi) vi.value = val;
+        var min = parseFloat(slider.min), max = parseFloat(slider.max);
+        var pct = ((val - min) / (max - min)) * 100;
+        var fc = (sliderId === "accumulationReturn") ? getReturnColor(val) : "var(--accent)";
+        slider.style.background = "linear-gradient(to right, "+fc+" "+pct+"%, var(--border) "+pct+"%)";
+        if (sliderId === "accumulationReturn") {
+          if (vi) vi.style.color = getReturnColor(val);
+          var lbl = document.getElementById("accumZoneLabel");
+          if (lbl) {
+            var zones = val<=8?"Modest — stable and predictable":val<=14?"Historically where most investors land":val<=17?"Few funds have sustained this":"⚠ Rare — risky to plan around";
+            lbl.textContent = zones; lbl.style.color = getReturnColor(val);
+          }
+          var card = document.getElementById("mainCalcCard");
+          if (card) {
+            card.classList.toggle("danger-zone", val > 16);
+            if (val > 17 && !card.classList.contains("_shook")) {
+              card.classList.add("_shook");
+              card.classList.remove("danger-shake"); void card.offsetWidth; card.classList.add("danger-shake");
+              card.addEventListener("animationend", function(){ card.classList.remove("danger-shake"); card.classList.remove("_shook"); }, {once:true});
+            }
+          }
+        }
+        if (["currentAge","retirementAge","lifeExpectancy"].includes(sliderId)) {}
+      }
+      function clampValInput(sliderId, valId) {
+        var slider = document.getElementById(sliderId);
+        var vi = document.getElementById(valId);
+        var min = parseFloat(slider.min), max = parseFloat(slider.max);
+        var step = parseFloat(slider.step) || 1;
+        var num = parseFloat(vi.value);
+        if (isNaN(num)) num = parseFloat(slider.value);
+        num = Math.round(num / step) * step;
+        num = Math.min(max, Math.max(min, num));
+        num = parseFloat(num.toFixed(10));
+        slider.value = num; vi.value = num;
+        syncSlider(sliderId, valId);
+      }
+      function syncValInput(sliderId, valId) {
+        var slider = document.getElementById(sliderId);
+        var vi = document.getElementById(valId);
+        var raw = vi.value.trim();
+        if (raw === "" || raw === "-") return;
+        var num = parseFloat(raw);
+        if (isNaN(num)) return;
+        var min = parseFloat(slider.min), max = parseFloat(slider.max);
+        var step = parseFloat(slider.step) || 1;
+        // Only update slider position, don't clamp the input while typing
+        var clamped = Math.min(max, Math.max(min, Math.round(num / step) * step));
+        slider.value = clamped;
+        var pct = ((clamped - min) / (max - min)) * 100;
+        var fc = (sliderId === "accumulationReturn") ? getReturnColor(clamped) : "var(--accent)";
+        slider.style.background = "linear-gradient(to right, "+fc+" "+pct+"%, var(--border) "+pct+"%)";
+        if (sliderId === "accumulationReturn") {
+          vi.style.color = getReturnColor(num);
+          var lbl = document.getElementById("accumZoneLabel");
+          if (lbl) { var zones = num<=8?"Modest — stable and predictable":num<=14?"Historically where most investors land":num<=17?"Few funds have sustained this":"⚠ Rare — risky to plan around"; lbl.textContent = zones; lbl.style.color = getReturnColor(num); }
+          var card = document.getElementById("mainCalcCard");
+          if (card) { card.classList.toggle("danger-zone", num > 16); }
+        }
+      }
+      // Init all sliders
+      ["currentAge","retirementAge","lifeExpectancy","inflationRate","accumulationReturn","withdrawalReturn","stepUp","lumpsumPct"].forEach(function(id) {
+        var mp = {currentAge:"currentAgeVal",retirementAge:"retirementAgeVal",lifeExpectancy:"lifeExpectancyVal",inflationRate:"inflationRateVal",accumulationReturn:"accumulationReturnVal",withdrawalReturn:"withdrawalReturnVal",stepUp:"stepUpVal",lumpsumPct:"lumpsumPctVal"};
+        syncSlider(id, mp[id]);
+      });
+
+      // ── AGE VISUAL ──
+
+
+      // ── CORE CALCULATION ──
+      // SIP to build a target corpus with step-up
+      function calcStepUpSIP(targetCorpus, years, monthlyRate, annualStepUp) {
+        if (years <= 0) return 0;
+        var s = (annualStepUp || 0) / 100;
+        if (s === 0) {
+          if (monthlyRate === 0) return targetCorpus / (years * 12);
+          return targetCorpus * monthlyRate / (Math.pow(1 + monthlyRate, years * 12) - 1);
+        }
+        var fv1 = 0;
+        for (var y = 0; y < years; y++) {
+          var ma = Math.pow(1 + s, y);
+          for (var m = 1; m <= 12; m++) {
+            var mLeft = (years - y) * 12 - (m - 1);
+            fv1 += ma * Math.pow(1 + monthlyRate, mLeft);
+          }
+        }
+        return targetCorpus / fv1;
+      }
+      function calcStepUpTotalInvested(startSIP, years, annualStepUp) {
+        var s = (annualStepUp || 0) / 100, total = 0;
+        for (var y = 0; y < years; y++) total += startSIP * Math.pow(1 + s, y) * 12;
+        return total;
+      }
+
+      function calculate() {
+        var monthlyExpenses = parseMoney(document.getElementById("monthlyExpenses").value);
+        if (!monthlyExpenses || monthlyExpenses <= 0) return null;
+
+        var ca  = parseInt(document.getElementById("currentAge").value) || 30;
+        var ra  = parseInt(document.getElementById("retirementAge").value) || 60;
+        var le  = parseInt(document.getElementById("lifeExpectancy").value) || 85;
+        var infl = parseFloat(document.getElementById("inflationRate").value) / 100;
+        var accumR = parseFloat(document.getElementById("accumulationReturn").value) / 100;
+        var withR  = parseFloat(document.getElementById("withdrawalReturn").value) / 100;
+        var su  = parseFloat(document.getElementById("stepUp").value) || 0;
+        var lumpsumPct = parseFloat(document.getElementById("lumpsumPct").value) / 100;
+        var annuityPct = 1 - lumpsumPct;
+        var annuityRate = parseFloat(document.getElementById("withdrawalReturn").value) / 100;
+
+        if (ra <= ca) return null;
+        if (le <= ra) return null;
+
+        var yearsAccum      = ra - ca;
+        var yearsRetirement = le - ra;
+        var monthlyRateAccum = accumR / 12;
+
+        // Monthly expenses at retirement (inflation-adjusted)
+        var monthlyExpAtRetirement = monthlyExpenses * Math.pow(1 + infl, yearsAccum);
+        var annualExpAtRetirement  = monthlyExpAtRetirement * 12;
+
+        // At retirement, corpus splits into:
+        //   annuityCorpus  = corpusNeeded * annuityPct  → buys annuity at 6% p.a.
+        //   lumpsumAmount  = corpusNeeded * lumpsumPct  → invested / withdrawn
+        //
+        // Monthly annuity income = annuityCorpus * annuityRate / 12  (fixed, no inflation adj)
+        // Shortfall from invested portion = annualExpAtRetirement - annuityIncome*12 (grows with infl)
+        //
+        // We solve for corpusNeeded such that:
+        //   PV of shortfall stream over yearsRetirement = investedCorpus = corpusNeeded * lumpsumPct
+        //
+        // If lumpsumPct = 0 (all annuity): annuity covers everything (or not)
+        // If lumpsumPct = 1 (no annuity):  standard drawdown
+
+        // Shortfall per year at retirement = annualExp - annuityIncome
+        // annuityIncome = corpusNeeded * annuityPct * annuityRate  (annual, fixed)
+        // shortfall(yr 0) = annualExpAtRetirement - corpusNeeded * annuityPct * annuityRate
+        // shortfall grows at inflation each year
+        // PV of shortfall = corpusNeeded * lumpsumPct   (what the invested corpus must cover)
+        //
+        // Let C = corpusNeeded
+        // PV of growing annuity of shortfall over n years, discounted at withR:
+        //   PV = (annualExp - C * annuityPct * annuityRate) * (1 - ((1+g)/(1+r))^n) / (r - g)   [r != g]
+        // Set PV = C * lumpsumPct and solve for C:
+
+        var r = withR, g = infl, n = yearsRetirement;
+        var pvFactor; // PV factor for a growing annuity of 1 per year
+        if (Math.abs(r - g) < 0.0001) {
+          pvFactor = n / (1 + r);
+        } else {
+          pvFactor = (1 - Math.pow((1+g)/(1+r), n)) / (r - g);
+        }
+
+        var corpusNeeded;
+        if (lumpsumPct === 0) {
+          // All goes to annuity — check if annuity covers expenses
+          // annuityIncome = C * annuityRate
+          // need annuityIncome >= annualExpAtRetirement → C = annualExpAtRetirement / annuityRate
+          corpusNeeded = annualExpAtRetirement / annuityRate;
+        } else {
+          // annualExp * pvFactor = C * lumpsumPct + C * annuityPct * annuityRate * pvFactor
+          // C = annualExp * pvFactor / (lumpsumPct + annuityPct * annuityRate * pvFactor)
+          corpusNeeded = annualExpAtRetirement * pvFactor / (lumpsumPct + annuityPct * annuityRate * pvFactor);
+        }
+
+        var lumpsumAmount  = corpusNeeded * lumpsumPct;
+        var annuityCorpus  = corpusNeeded * annuityPct;
+        var monthlyAnnuityIncome = annuityCorpus * annuityRate / 12;
+        var annualAnnuityIncome  = monthlyAnnuityIncome * 12;
+        var annualShortfall = annualExpAtRetirement - annualAnnuityIncome; // what invested corpus must fund yr 1
+
+        // SIP needed today
+        var monthlySIP = calcStepUpSIP(corpusNeeded, yearsAccum, monthlyRateAccum, su);
+        var totalInvested = calcStepUpTotalInvested(monthlySIP, yearsAccum, su);
+
+        return {
+          monthlyExpenses, ca, ra, le,
+          infl: infl*100, accumR: accumR*100, withR: withR*100, su,
+          lumpsumPct: lumpsumPct*100, annuityPct: annuityPct*100,
+          annuityRate: annuityRate*100,
+          yearsAccum, yearsRetirement,
+          monthlyExpAtRetirement, annualExpAtRetirement,
+          corpusNeeded, lumpsumAmount, annuityCorpus,
+          monthlyAnnuityIncome, annualAnnuityIncome, annualShortfall,
+          monthlySIP, totalInvested,
+          monthlyRateAccum, pvFactor
+        };
+      }
+
+
+
+      // ── BUILD CHART DATA (accumulation phase) ──
+      var _growthChart = null;
+      window._growthChart = null;
+      function buildGrowthChartData(result) {
+        var labels = [], invested = [], corpus = [], target = [];
+        var yearsAccum = result.yearsAccum;
+        var r = result.monthlyRateAccum;
+        var su = (result.su || 0) / 100;
+        var sip = result.monthlySIP;
+        var isMobile = window.innerWidth < 480;
+        var step = isMobile ? (yearsAccum <= 10 ? 2 : yearsAccum <= 20 ? 4 : 5) : (yearsAccum <= 15 ? 1 : yearsAccum <= 25 ? 2 : 3);
+
+        for (var yr = 1; yr <= yearsAccum; yr++) {
+          if ((yr % step === 0) || yr === yearsAccum) {
+            var fv = 0, inv = 0;
+            for (var y2 = 0; y2 < yr; y2++) {
+              var mAmt = sip * Math.pow(1 + su, y2);
+              for (var m = 1; m <= 12; m++) {
+                var mLeft = (yr - y2) * 12 - (m - 1);
+                fv  += mAmt * Math.pow(1 + r, mLeft);
+                inv += mAmt;
+              }
+            }
+            labels.push("Age " + (result.ca + yr));
+            invested.push(Math.round(inv));
+            corpus.push(Math.round(fv));
+            target.push(Math.round(result.corpusNeeded));
+          }
+        }
+        return { labels, invested, corpus, target };
+      }
+
+      function renderGrowthChart(result) {
+        document.getElementById("growthChartCard").style.display = "block";
+        var data = buildGrowthChartData(result);
+        var ctx = document.getElementById("growthChart").getContext("2d");
+        var isDark = document.documentElement.getAttribute("data-theme") !== "light";
+        var gc = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)";
+        var tc = isDark ? "#8a9ab5" : "#6b6353";
+        if (_growthChart) _growthChart.destroy();
+        _growthChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: data.labels,
+            datasets: [
+              { label: "Amount Invested", data: data.invested, backgroundColor: "rgba(107,140,186,0.55)", borderColor: "rgba(107,140,186,0.9)", borderWidth: 1, borderRadius: 3, order: 2 },
+              { label: "Corpus Value",    data: data.corpus,   backgroundColor: "rgba(200,169,110,0.55)", borderColor: "rgba(200,169,110,0.9)", borderWidth: 1, borderRadius: 3, order: 2 },
+              { label: "Target Corpus",  data: data.target,   type: "line", borderColor: "rgba(224,92,92,0.7)", borderWidth: 2, borderDash: [6,4], pointRadius: 0, fill: false, tension: 0, order: 1 }
+            ]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            interaction: { mode: "index", intersect: false },
+            plugins: {
+              legend: { display: false },
+              tooltip: { backgroundColor: isDark?"#111827":"#fff", titleColor: isDark?"#e8e4dc":"#1c1a14", bodyColor: isDark?"#8a9ab5":"#6b6353", borderColor: isDark?"rgba(255,255,255,0.1)":"rgba(0,0,0,0.1)", borderWidth: 1, padding: 12,
+                callbacks: { label: function(c){ return " "+c.dataset.label+": ₹"+formatIndian(c.parsed.y); } }
+              }
+            },
+            scales: {
+              x: { grid:{color:gc}, ticks:{color:tc,font:{size:11,family:"'DM Sans',sans-serif"}} },
+              y: { grid:{color:gc}, ticks:{color:tc,font:{size:11,family:"'DM Sans',sans-serif"}, callback:function(v){ if(v>=10000000)return"₹"+(v/10000000).toFixed(1)+"Cr"; if(v>=100000)return"₹"+(v/100000).toFixed(1)+"L"; if(v>=1000)return"₹"+(v/1000).toFixed(0)+"K"; return"₹"+v; }} }
+            }
+          }
+        });
+        window._growthChart = _growthChart;
+      }
+      function updateChartColors() {
+        if (!_growthChart) return;
+        var isDark = document.documentElement.getAttribute("data-theme") !== "light";
+        var gc = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)";
+        var tc = isDark ? "#8a9ab5" : "#6b6353";
+        _growthChart.options.scales.x.grid.color = gc;
+        _growthChart.options.scales.x.ticks.color = tc;
+        _growthChart.options.scales.y.grid.color = gc;
+        _growthChart.options.scales.y.ticks.color = tc;
+        _growthChart.options.plugins.tooltip.backgroundColor = isDark?"#111827":"#fff";
+        _growthChart.options.plugins.tooltip.titleColor = isDark?"#e8e4dc":"#1c1a14";
+        _growthChart.options.plugins.tooltip.bodyColor = isDark?"#8a9ab5":"#6b6353";
+        _growthChart.options.plugins.tooltip.borderColor = isDark?"rgba(255,255,255,0.1)":"rgba(0,0,0,0.1)";
+        _growthChart.update();
+      }
+
+
+
+
+      // ── RENDER RESULTS ──
+      function renderResults(result) {
+        var heading = document.getElementById("resultsHeading");
+        var stepUpStr = result.su > 0 ? " (growing " + result.su + "% yearly)" : "";
+        heading.innerHTML = "Start with <em>" + fmtINR(result.monthlySIP) + "</em>/month" + stepUpStr + " to retire at " + result.ra;
+
+        var totalGains = result.corpusNeeded - result.totalInvested;
+        var gainsPct   = result.corpusNeeded > 0 ? Math.round((totalGains / result.corpusNeeded) * 100) : 0;
+        var yoursPct   = 100 - gainsPct;
+
+        var html = '<div class="results-grid">';
+
+        // Primary: total corpus
+        html += resultCellPrimary("Total NPS Corpus at Retirement", shortINR(result.corpusNeeded), "accent", "At age " + result.ra + " after " + result.yearsAccum + " years");
+
+        // SIP
+        html += resultCell("Starting Monthly SIP", fmtINR(result.monthlySIP), "accent", result.su > 0 ? "Increases " + result.su + "% per year" : "Flat SIP every month");
+
+        // Corpus split — full width
+        html += '<div class="result-cell" style="grid-column:1/-1;">'
+          + '<div class="result-label">NPS Corpus Split at Retirement</div>'
+          + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:8px;overflow:hidden;margin-top:0.5rem;">'
+          +   '<div style="background:var(--accent-dim);padding:0.85rem 1rem;">'
+          +     '<div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:0.25rem;">' + result.lumpsumPct.toFixed(0) + '% Lumpsum — Tax-Free</div>'
+          +     '<div style="font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--accent);">' + shortINR(result.lumpsumAmount) + '</div>'
+          +     '<div style="font-size:0.72rem;color:var(--muted);margin-top:0.2rem;">One-time withdrawal at retirement</div>'
+          +   '</div>'
+          +   '<div style="background:rgba(76,175,130,0.08);padding:0.85rem 1rem;">'
+          +     '<div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--safe);margin-bottom:0.25rem;">' + result.annuityPct.toFixed(0) + '% Annuity Corpus</div>'
+          +     '<div style="font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--safe);">' + shortINR(result.annuityCorpus) + '</div>'
+          +     '<div style="font-size:0.72rem;color:var(--muted);margin-top:0.2rem;">Buys annuity at ~' + result.annuityRate.toFixed(1) + '% p.a.</div>'
+          +   '</div>'
+          + '</div>'
+          + '</div>';
+
+        // Monthly income breakdown — full width
+        html += '<div class="result-cell" style="grid-column:1/-1;">'
+          + '<div class="result-label">Estimated Monthly Income at Retirement</div>'
+          + '<div style="margin-top:0.5rem;">'
+          +   '<div style="font-family:var(--serif);font-size:1.7rem;font-weight:600;color:var(--safe);">' + fmtINR(result.monthlyAnnuityIncome) + '</div>'
+          +   '<div style="font-size:0.72rem;color:var(--muted);margin-top:0.1rem;">From annuity — fixed income for life at ~' + result.annuityRate.toFixed(1) + '% p.a.</div>'
+          + '</div>'
+          + '<div style="font-size:0.75rem;color:var(--muted);margin-top:0.6rem;font-weight:300;padding-top:0.6rem;border-top:1px solid var(--border);">Today you spend <strong style="color:var(--text)">' + fmtINR(result.monthlyExpenses) + '/mo</strong> — inflation-adjusted to <strong style="color:var(--text)">' + fmtINR(result.monthlyExpAtRetirement) + '/mo</strong> at retirement</div>'
+          + '</div>';
+
+        // You put in vs gains
+        html += '<div class="result-cell">'
+          + '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;">'
+          +   '<div><div class="result-label">You Put In</div><div class="result-value neutral">' + shortINR(result.totalInvested) + '</div></div>'
+          +   '<div style="text-align:right;"><div class="result-label">NPS Grew By</div><div class="result-value safe">' + shortINR(Math.max(0,totalGains)) + '</div></div>'
+          + '</div>'
+          + '<div style="height:4px;border-radius:3px;overflow:hidden;display:flex;margin-top:0.7rem;">'
+          +   '<div style="width:'+yoursPct+'%;background:var(--neutral);transition:width 0.5s ease;"></div>'
+          +   '<div style="width:'+gainsPct+'%;background:var(--safe);transition:width 0.5s ease;"></div>'
+          + '</div>'
+          + '</div>';
+
+        html += resultCell("Retirement Duration", result.yearsRetirement + " years", "safe",
+          "Age " + result.ra + " to " + result.le + (result.lumpsumPct === 0 ? " · Annuity covers full period" : " · Annuity (lifetime) + invested lumpsum"));
+
+        html += '</div>';
+        document.getElementById("resultsBody").innerHTML = html;
+        document.getElementById("shareCard").style.display = "block";
+        document.getElementById("discCard").style.display = "block";
+      }
+      function resultCell(label, value, colorClass, sub) {
+        return '<div class="result-cell"><div class="result-label">'+label+'</div><div class="result-value'+(colorClass?' '+colorClass:'')+'">'+value+'</div><div class="result-sub">'+sub+'</div></div>';
+      }
+      function resultCellPrimary(label, value, colorClass, sub) {
+        return '<div class="result-cell primary"><div class="result-label">'+label+'</div><div class="result-value'+(colorClass?' '+colorClass:'')+'">'+value+'</div><div class="result-sub">'+sub+'</div></div>';
+      }
+
+      // ── MAIN INPUT HANDLER ──
+      function onAnyInput(sourceType) {
+        // Only blur text inputs when triggered by a slider, not by typing
+        if (sourceType === "slider") {
+          var active = document.activeElement;
+          if (active && active.tagName === "INPUT" && active.classList.contains("text-input")) {
+            active.blur();
+          }
+        }
+
+        var result = calculate();
+        if (!result) {
+          document.getElementById("resultsHeading").innerHTML = "<em>Enter your details above</em>";
+          document.getElementById("resultsBody").innerHTML = '<div class="results-placeholder"><div class="placeholder-icon">🏖️</div><div>Fill in your details to see<br/>your retirement plan.</div></div>';
+          document.getElementById("growthChartCard").style.display = "none";
+          document.getElementById("depletionCard").style.display = "none";
+          document.getElementById("shareCard").style.display = "none";
+          document.getElementById("discCard").style.display = "none";
+          if (_growthChart) { _growthChart.destroy(); _growthChart = null; window._growthChart = null; }
+          return;
+        }
+        renderResults(result);
+        renderGrowthChart(result);
+      }
+
+      // ── RESET ──
+      function resetForm() {
+        document.getElementById("monthlyExpenses").value = "";
+        document.getElementById("currentAge").value = 25;      syncSlider("currentAge","currentAgeVal");
+        document.getElementById("retirementAge").value = 60;   syncSlider("retirementAge","retirementAgeVal");
+        document.getElementById("lifeExpectancy").value = 85;  syncSlider("lifeExpectancy","lifeExpectancyVal");
+        document.getElementById("inflationRate").value = 6;    syncSlider("inflationRate","inflationRateVal");
+        document.getElementById("accumulationReturn").value=11;syncSlider("accumulationReturn","accumulationReturnVal");
+        document.getElementById("withdrawalReturn").value = 6; syncSlider("withdrawalReturn","withdrawalReturnVal");
+        document.getElementById("stepUp").value = 10;          syncSlider("stepUp","stepUpVal");
+        document.getElementById("lumpsumPct").value = 80;       syncSlider("lumpsumPct","lumpsumPctVal");
+        onAnyInput();
+      }
+
+      // ── SHARE ──
+      function buildShareMessage() {
+        var name = document.getElementById("userName").value.trim();
+        var result = calculate();
+        if (!result) return "";
+        var monthlyFromInvested = result.lumpsumPct > 0 ? result.annualShortfall / 12 : 0;
+        var totalMonthlyIncome  = result.monthlyAnnuityIncome + monthlyFromInvested;
+        var lines = [
+          "Hi Ramesh, I'm " + (name || "a user") + ".",
+          "",
+          "I used your NPS Retirement Calculator. Here are my details:",
+          "",
+          "── MY INPUTS ──",
+          "Monthly Expenses (today)   : " + fmtINR(result.monthlyExpenses),
+          "Current Age                : " + result.ca,
+          "Retirement Age             : " + result.ra,
+          "Life Expectancy            : " + result.le,
+          "Inflation                  : " + result.infl + "% p.a.",
+          "Return During Accumulation : " + result.accumR + "% p.a.",
+          "Return During Retirement   : " + result.withR + "% p.a.",
+          "Annual SIP Step-Up         : " + result.su + "% p.a.",
+          "Lumpsum Withdrawal         : " + result.lumpsumPct.toFixed(0) + "% (Annuity: " + result.annuityPct.toFixed(0) + "%)",
+          "",
+          "── RESULTS ──",
+          "Total NPS Corpus Needed    : " + shortINR(result.corpusNeeded),
+          "  → Lumpsum (" + result.lumpsumPct.toFixed(0) + "%, tax-free) : " + shortINR(result.lumpsumAmount),
+          "  → Annuity corpus (" + result.annuityPct.toFixed(0) + "%)    : " + shortINR(result.annuityCorpus),
+          "",
+          "── MONTHLY INCOME AT RETIREMENT ──",
+          "Annuity Income (fixed, life): " + fmtINR(result.monthlyAnnuityIncome) + "/month",
+          (result.lumpsumPct > 0 ? "From Invested Lumpsum      : " + fmtINR(monthlyFromInvested) + "/month" : ""),
+          "Total Monthly Income       : " + fmtINR(totalMonthlyIncome) + "/month",
+          "  (vs today's expenses of " + fmtINR(result.monthlyExpenses) + "/month)",
+          "",
+          "── SIP PLAN ──",
+          "Starting Monthly SIP       : " + fmtINR(result.monthlySIP) + (result.su>0 ? " (grows "+result.su+"% yearly)" : ""),
+          "Total You'll Invest        : " + shortINR(result.totalInvested),
+          "Retirement Duration        : " + result.yearsRetirement + " years (age " + result.ra + " to " + result.le + ")",
+          "",
+          "Could you help me set up an NPS plan for this?",
+          "Thank you!"
+        ].filter(function(l){ return l !== undefined; });
+        return lines.join("\n");
+      }
+      window.buildAndOpenWa = function() {
+        var body = buildShareMessage();
+        if (!body) { showToast("⚠ Please fill in your details first."); return; }
+        var url = "https://wa.me/918329450580?text=" + encodeURIComponent(body);
+        var a = document.createElement("a"); a.href = url; a.target = "_blank"; a.rel = "noopener";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        showToast("✓ Opening WhatsApp…");
+      };
+      window.buildAndOpenGmail = function() {
+        var body = buildShareMessage();
+        if (!body) { showToast("⚠ Please fill in your details first."); return; }
+        var subj = "NPS Retirement Calculator Results — " + (document.getElementById("userName").value.trim() || "User");
+        var url = "https://mail.google.com/mail/?view=cm&to=rameshvegi94@gmail.com&su=" + encodeURIComponent(subj) + "&body=" + encodeURIComponent(body);
+        var a = document.createElement("a"); a.href = url; a.target = "_blank"; a.rel = "noopener";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        showToast("✓ Opening Gmail…");
+      };
+      window.buildAndOpenEmail = function() {
+        var body = buildShareMessage();
+        if (!body) { showToast("⚠ Please fill in your details first."); return; }
+        var subj = "NPS Retirement Calculator Results — " + (document.getElementById("userName").value.trim() || "User");
+        window.location.href = "mailto:rameshvegi94@gmail.com?subject=" + encodeURIComponent(subj) + "&body=" + encodeURIComponent(body);
+        showToast("✓ Opening email app…");
+      };
+      function showToast(msg) {
+        var t = document.getElementById("shareToast");
+        t.textContent = msg; t.classList.add("show");
+        setTimeout(function(){ t.classList.remove("show"); }, 3000);
+      }
+    </script>
+
+    <script>
+      // ── SMART TOOLTIP ──
+      (function() {
+        var popover = document.getElementById("tipPopover");
+        var currentIcon = null, _justShown = false, _timer = null;
+        function positionAndShow(icon) {
+          var vvp = window.visualViewport;
+          var vw = vvp ? vvp.width : window.innerWidth;
+          var vh = vvp ? vvp.height : window.innerHeight;
+          var ox = vvp ? vvp.offsetLeft : 0, oy = vvp ? vvp.offsetTop : 0;
+          var r = icon.getBoundingClientRect();
+          var pw = popover.offsetWidth, ph = popover.offsetHeight, mg = 8;
+          var below = (vh - (r.bottom - oy)) >= ph + mg || (vh - (r.bottom - oy)) >= (r.top - oy);
+          var top = below ? r.bottom + mg : r.top - ph - mg;
+          var arrowClass = below ? "arrow-top" : "arrow-bottom";
+          var idealL = (r.left + r.width/2 - ox) - pw/2 + ox;
+          var left = Math.max(mg+ox, Math.min(idealL, ox+vw-pw-mg));
+          var arrowLeft = (r.left + r.width/2) - left - 4;
+          arrowLeft = Math.max(10, Math.min(arrowLeft, pw - 20));
+          popover.style.setProperty("--arrow-left", arrowLeft + "px");
+          popover.classList.remove("arrow-top","arrow-bottom");
+          popover.style.left = left + "px"; popover.style.top = top + "px";
+          popover.classList.add(arrowClass);
+          requestAnimationFrame(function(){ popover.classList.add("tip-visible"); });
+        }
+        function showTip(icon) {
+          if (currentIcon === icon) { hideTip(); return; }
+          if (currentIcon) currentIcon.classList.remove("tip-open");
+          currentIcon = icon; icon.classList.add("tip-open");
+          popover.textContent = icon.getAttribute("data-tip");
+          popover.style.left = "-9999px"; popover.style.top = "-9999px";
+          popover.classList.remove("tip-visible","arrow-top","arrow-bottom");
+          popover.style.display = "block";
+          clearTimeout(_timer); _justShown = true;
+          _timer = setTimeout(function(){ _justShown = false; }, 350);
+          positionAndShow(icon);
+        }
+        function hideTip() {
+          if (currentIcon) { currentIcon.classList.remove("tip-open"); currentIcon = null; }
+          popover.classList.remove("tip-visible");
+        }
+        var style = document.createElement("style");
+        style.textContent = "#tipPopover::before { left: var(--arrow-left, 16px); }";
+        document.head.appendChild(style);
+        document.addEventListener("mouseover", function(e){ var i=e.target.closest(".tip-icon"); if(i){showTip(i);return;} if(!popover.contains(e.target))hideTip(); });
+        var _th=false;
+        document.addEventListener("touchstart", function(e){ if(e.target.closest(".tip-icon")){e.preventDefault();_th=true;} }, {passive:false});
+        document.addEventListener("touchend", function(e){ var i=e.target.closest(".tip-icon"); if(i){e.preventDefault();showTip(i);_th=true;return;} if(!popover.contains(e.target))hideTip(); }, {passive:false});
+        document.addEventListener("click", function(e){ if(_th){_th=false;return;} var i=e.target.closest(".tip-icon"); if(i){e.stopPropagation();showTip(i);return;} if(!popover.contains(e.target))hideTip(); });
+        window.addEventListener("scroll", function(){ if(!_justShown)hideTip(); }, {passive:true});
+        window.addEventListener("resize", function(){ if(!_justShown)hideTip(); }, {passive:true});
+      })();
+    </script>
+
+  </body>
+</html>
