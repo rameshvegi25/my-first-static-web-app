@@ -122,6 +122,16 @@
         color: var(--muted);
         letter-spacing: 0.08em;
         font-family: var(--sans);
+        text-decoration: none;
+      }
+      a.nav-arn-link {
+        transition: color 0.2s;
+        cursor: pointer;
+      }
+      a.nav-arn-link:hover {
+        color: var(--accent);
+        text-decoration: underline;
+        text-underline-offset: 3px;
       }
 
       .nav-whatsapp-btn {
@@ -550,6 +560,22 @@
         }
       }
 
+      /* ── MOBILE ARN BADGE ── */
+      .hero-arn-mobile {
+        display: none;
+        margin-top: 1.25rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        color: var(--muted);
+        font-family: var(--sans);
+        text-transform: uppercase;
+        opacity: 0;
+        animation: fadeUp 0.7s ease 0.65s forwards;
+      }
+      @media (max-width: 600px) {
+        .hero-arn-mobile { display: block; }
+      }
+
       /* ── ANIMATIONS ── */
       @keyframes fadeUp {
         from { opacity: 0; transform: translateY(18px); }
@@ -590,7 +616,14 @@
     <nav>
       <div class="nav-brand">Vegi <span>Ramesh</span></div>
       <div class="nav-actions">
-        <div class="nav-arn">✦ ARN-349739</div>
+        <a
+          href="https://www.amfiindia.com/locate-distributor"
+          class="nav-arn nav-arn-link"
+          target="_blank"
+          rel="noopener"
+          title="Verify on AMFI — search 349739"
+          aria-label="Verify ARN-349739 on AMFI"
+        >✦ ARN-349739</a>
         <a
           href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments."
           class="nav-whatsapp-btn"
@@ -607,11 +640,11 @@
 
     <!-- HERO -->
     <header class="hero">
-      <div class="hero-eyebrow">Mutual Fund Distributor · SEBI Registered</div>
+      <div class="hero-eyebrow">Mutual Fund Distributor</div>
       <h1>Calm investing,<br />built around <em>your life.</em></h1>
       <p class="hero-sub">No hype. No fear. Just clear thinking, honest distribution, and a plan that grows with you.</p>
       <div class="hero-divider"></div>
-    </header>
+      <div class="hero-arn-mobile">AMFI Registered · ARN-349739</div>
 
     <div class="main-content">
 
