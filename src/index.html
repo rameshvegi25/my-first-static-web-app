@@ -178,8 +178,8 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        padding: 7rem 1.5rem 3.5rem;
-        min-height: 52vh;
+        padding: 5.5rem 1.5rem 2rem;
+        min-height: 36vh;
       }
 
       .hero-eyebrow {
@@ -220,13 +220,25 @@
         animation: fadeUp 0.7s ease 0.4s forwards;
       }
 
-      .hero-divider {
-        width: 40px;
-        height: 1px;
-        background: var(--accent);
-        margin: 2rem auto 0;
+      .hero-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4em;
+        margin-top: 1.5rem;
+        padding: 0.6rem 1.4rem;
+        border: 1px solid var(--accent);
+        border-radius: 24px;
+        font-size: 0.82rem;
+        font-weight: 500;
+        color: var(--accent);
+        text-decoration: none;
+        letter-spacing: 0.03em;
+        transition: background 0.2s, color 0.2s;
         opacity: 0;
         animation: fadeUp 0.7s ease 0.55s forwards;
+      }
+      .hero-cta:hover {
+        background: var(--accent-dim);
       }
 
       /* ── CARDS SECTION ── */
@@ -1210,18 +1222,18 @@
 
     <!-- STORY PROGRESS NAV -->
     <div class="story-nav" id="story-nav" aria-label="Page sections">
+      <div class="story-nav-item" data-target="section-thought">
+        <span class="story-nav-label">A Thought</span>
+        <span class="story-nav-dot"></span>
+      </div>
+      <div class="story-nav-connector"></div>
       <div class="story-nav-item" data-target="section-evidence">
-        <span class="story-nav-label">The Evidence</span>
+        <span class="story-nav-label">What the Data Shows</span>
         <span class="story-nav-dot"></span>
       </div>
       <div class="story-nav-connector"></div>
       <div class="story-nav-item" data-target="section-sip">
         <span class="story-nav-label">SIP Power</span>
-        <span class="story-nav-dot"></span>
-      </div>
-      <div class="story-nav-connector"></div>
-      <div class="story-nav-item" data-target="section-thought">
-        <span class="story-nav-label">Thought for the Day</span>
         <span class="story-nav-dot"></span>
       </div>
       <div class="story-nav-connector"></div>
@@ -1234,19 +1246,54 @@
     <!-- HERO -->
     <header class="hero">
       <div class="hero-eyebrow">Mutual Fund Distributor</div>
-      <h1>Calm investing,<br />built around <em>your life.</em></h1>
-      <p class="hero-sub">No hype. No fear. Just clear thinking, honest distribution, and a plan that grows with you.</p>
-      <div class="hero-divider"></div>
+      <h1>Your goals. Your pace.<br /><em>Your plan.</em></h1>
+      <p class="hero-sub" id="hero-social-proof">Walking alongside 6 families towards their financial goals · since February 2026</p>
+      <a href="InvestorDetails.html" class="hero-cta">Start with a 5-minute profile →</a>
       <div class="hero-arn-mobile">AMFI Registered · ARN-349739</div>
 
     <div class="main-content">
 
+    <!-- BRIDGE: Hero → Quote -->
+    <div class="section-bridge">
+      <div class="bridge-inner">
+        <div class="bridge-line">
+          <div class="bridge-rule"></div>
+          <span class="bridge-ornament">✦ ✦ ✦</span>
+          <div class="bridge-rule"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUOTE WIDGET -->
+    <section class="quote-section" id="section-thought">
+      <div class="quote-widget">
+        <div class="quote-eyebrow">✦ A thought I keep coming back to ✦</div>
+        <div class="quote-mark">"</div>
+        <p class="quote-text" id="quote-text"></p>
+        <div class="quote-divider"></div>
+        <div class="quote-author" id="quote-author"></div>
+        <div class="quote-label" id="quote-label"></div>
+      </div>
+    </section>
+
+    <!-- BRIDGE: Quote → Evidence -->
+    <div class="section-bridge">
+      <div class="bridge-inner">
+        <div class="bridge-line">
+          <div class="bridge-rule"></div>
+          <span class="bridge-ornament">✦ ✦ ✦</span>
+          <div class="bridge-rule"></div>
+        </div>
+        <p class="bridge-text">That mindset is backed by something more than intuition — <strong>27 years of real market data.</strong></p>
+      </div>
+    </div>
+
     <!-- THE EVIDENCE (includes chart as supporting proof) -->
     <section class="why-section" id="section-evidence">
       <div class="why-inner">
-        <div class="section-eyebrow">✦ The Evidence ✦</div>
+        <div class="section-eyebrow">✦ What the data shows ✦</div>
         <h2 class="section-title">Why <em>long-term</em> wins</h2>
-        <p class="section-sub">The Nifty 50's <span id='data-years'>27</span>-year history is the most honest argument for staying invested.</p>
+        <p class="section-sub">Twenty-seven years of Nifty 50 data — India's benchmark index of the 50 largest listed companies — no simulations, no theory. Just what actually happened.</p>
         <div class="why-cards">
           <div class="why-card">
             <div class="why-icon">📉</div>
@@ -1369,7 +1416,7 @@
       </div>
     </section>
 
-    <!-- BRIDGE: SIP → Thought for the Day -->
+    <!-- BRIDGE: SIP → Cards/Next Step -->
     <div class="section-bridge">
       <div class="bridge-inner">
         <div class="bridge-line">
@@ -1377,31 +1424,7 @@
           <span class="bridge-ornament">✦ ✦ ✦</span>
           <div class="bridge-rule"></div>
         </div>
-        <p class="bridge-text">Numbers build conviction. But the <strong>mindset that sustains it</strong> — that comes from somewhere deeper.</p>
-      </div>
-    </div>
-
-    <!-- QUOTE WIDGET -->
-    <section class="quote-section" id="section-thought">
-      <div class="quote-widget">
-        <div class="quote-eyebrow">✦ Thought for the Day ✦</div>
-        <div class="quote-mark">"</div>
-        <p class="quote-text" id="quote-text"></p>
-        <div class="quote-divider"></div>
-        <div class="quote-author" id="quote-author"></div>
-        <div class="quote-label" id="quote-label"></div>
-      </div>
-    </section>
-
-    <!-- BRIDGE: Quote → Cards/Next Step -->
-    <div class="section-bridge">
-      <div class="bridge-inner">
-        <div class="bridge-line">
-          <div class="bridge-rule"></div>
-          <span class="bridge-ornament">✦ ✦ ✦</span>
-          <div class="bridge-rule"></div>
-        </div>
-        <p class="bridge-text">You've seen the data. You've felt the philosophy. The only thing left is <strong>where you want to begin.</strong></p>
+        <p class="bridge-text">You've seen the philosophy. You've seen the data. The only thing left is <strong>where you want to begin.</strong></p>
       </div>
     </div>
 
@@ -1410,7 +1433,7 @@
       <div class="cards-heading">
         <div class="section-eyebrow">✦ Your Next Step ✦</div>
         <h2 class="section-title">Where do you want<br>to <em>start?</em></h2>
-        <p class="section-sub" style="margin-bottom:0">Each path is designed for a different kind of investor. Pick what feels right for you.</p>
+        <p class="section-sub" style="margin-bottom:0">Whether you're ready to begin, still exploring, or just curious — there's a path for you.</p>
       </div>
       <div class="cards-grid">
 
@@ -1567,6 +1590,13 @@
     </a>
 
     <script>
+      // ── UPDATE THESE when client count or start date changes ──
+      var FAMILIES_COUNT = 6;
+      var SINCE_DATE     = 'February 2026';
+      // ─────────────────────────────────────────────────────────
+      var el = document.getElementById('hero-social-proof');
+      if (el) el.textContent = 'Walking alongside ' + FAMILIES_COUNT + ' families towards their financial goals · since ' + SINCE_DATE;
+
       function toggleTheme() {
         var html = document.documentElement;
         var isDark = html.getAttribute("data-theme") !== "light";
@@ -2080,7 +2110,7 @@
     (function() {
       var nav = document.getElementById('story-nav');
       var items = document.querySelectorAll('.story-nav-item');
-      var sections = ['section-evidence','section-sip','section-thought','section-start'];
+      var sections = ['section-thought','section-evidence','section-sip','section-start'];
 
       function getActive() {
         var mid = window.scrollY + window.innerHeight * 0.45;
