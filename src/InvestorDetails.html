@@ -1,0 +1,864 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Investor Details · Vegi Ramesh · ARN-349739</title>
+    <meta name="description" content="Share your investor KYC details with Vegi Ramesh (ARN-349739) to get started on your mutual fund investment journey." />
+    <meta name="author" content="Vegi Ramesh" />
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" href="favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <meta name="theme-color" content="#0b0f1a" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      [data-theme="light"] {
+        --gold: #c9982a; --gold-light: #f0c84a; --gold-pale: rgba(201,152,42,0.12);
+        --cream: #fbf6ec; --dark: #1a1208; --mid: #4a2e0a; --muted: #8c7355;
+        --card: #fffdf7; --border: rgba(201,152,42,0.25);
+        --shadow: 0 8px 40px rgba(26,18,8,0.12); --green: #2e7d52; --red: #b84040;
+      }
+      [data-theme="dark"] {
+        --gold: #c8a96e; --gold-light: #dfc08a; --gold-pale: rgba(200,169,110,0.12);
+        --cream: #0b0f1a; --dark: #e8e4dc; --mid: #c8a96e; --muted: #8a9ab5;
+        --card: #111827; --border: rgba(255,255,255,0.07);
+        --shadow: 0 8px 40px rgba(0,0,0,0.5); --green: #4caf82; --red: #e05c5c;
+      }
+      [data-theme="dark"] body::before {
+        background: radial-gradient(ellipse 80% 60% at 10% 0%,rgba(200,169,110,0.05) 0%,transparent 60%),
+                    radial-gradient(ellipse 60% 50% at 90% 100%,rgba(200,169,110,0.04) 0%,transparent 60%);
+      }
+      [data-theme="dark"] header { background: linear-gradient(135deg,#0b0f1a 0%,#1a2236 60%,#0b0f1a 100%); }
+      [data-theme="dark"] footer { background: linear-gradient(135deg,#0b0f1a,#111827); }
+      [data-theme="dark"] .kyc-input { background: #1a2236; color: var(--dark); }
+      [data-theme="dark"] .share-btn-gmail { background: #1a2236; color: var(--dark); border-color: rgba(255,255,255,0.1); }
+      [data-theme="dark"] .share-btn-gmail:hover { background: #222f45; }
+      [data-theme="dark"] .toast { background: #111827; }
+
+      /* ── THEME TOGGLE ── */
+      .theme-toggle {
+        background: transparent; border: 1.5px solid rgba(201,152,42,0.4);
+        color: var(--gold-light); font-size: 15px; width: 34px; height: 34px;
+        border-radius: 50%; cursor: pointer; display: flex; align-items: center;
+        justify-content: center; transition: all 0.2s; padding: 0; flex-shrink: 0; line-height: 1;
+      }
+      .theme-toggle:hover { background: rgba(201,152,42,0.15); transform: scale(1.12); }
+
+      html { scroll-behavior: smooth; }
+      body {
+        font-family: "Outfit", sans-serif; background: var(--cream); color: var(--dark);
+        min-height: 100vh; display: flex; flex-direction: column; align-items: center; overflow-x: hidden;
+      }
+      body::before {
+        content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+        background: radial-gradient(ellipse 80% 60% at 10% 0%,rgba(201,152,42,0.07) 0%,transparent 60%),
+                    radial-gradient(ellipse 60% 50% at 90% 100%,rgba(201,152,42,0.06) 0%,transparent 60%);
+      }
+
+      /* ── HEADER ── */
+      header {
+        width: 100%; background: linear-gradient(135deg,#1a1208 0%,#3a2208 60%,#1a1208 100%);
+        border-bottom: 2px solid var(--gold); padding: 18px 32px;
+        display: flex; align-items: center; justify-content: space-between;
+        flex-wrap: wrap; gap: 10px; position: relative; overflow: hidden; z-index: 100;
+      }
+      header::after {
+        content: ""; position: absolute; inset: 0; pointer-events: none;
+        background: repeating-linear-gradient(45deg,transparent,transparent 24px,rgba(201,152,42,0.04) 24px,rgba(201,152,42,0.04) 25px);
+      }
+      .logo { font-family: "Cormorant Garamond", serif; font-size: clamp(20px,4vw,26px); font-weight: 700; color: #fff; position: relative; z-index: 1; }
+      .logo span { color: var(--gold-light); }
+      .logo-sub { font-size: clamp(8px,1.5vw,10px); font-weight: 300; color: rgba(255,255,255,0.5); letter-spacing: 3px; text-transform: uppercase; margin-top: 2px; }
+      .arn { font-size: 10px; font-weight: 500; color: var(--gold-light); border: 1px solid rgba(201,152,42,0.4); background: rgba(201,152,42,0.1); padding: 4px 12px; border-radius: 20px; letter-spacing: 1px; position: relative; z-index: 1; }
+
+      /* ── MAIN ── */
+      main { width: 100%; max-width: 760px; padding: 40px 20px 60px; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 24px; }
+
+      /* ── PAGE HERO ── */
+      .page-hero { width: 100%; text-align: center; animation: fadeUp 0.6s ease both; }
+      .hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+      .hero-title { font-family: "Cormorant Garamond", serif; font-size: clamp(26px,6vw,46px); font-weight: 700; line-height: 1.1; color: var(--dark); margin-bottom: 12px; }
+      .hero-title em { font-style: italic; color: var(--mid); }
+      .hero-sub { font-size: 14px; color: var(--muted); font-weight: 300; line-height: 1.7; max-width: 500px; margin: 0 auto 10px; }
+      .hero-date { font-size: 12px; color: var(--muted); font-weight: 300; margin-top: 6px; }
+
+      /* ── NAME INPUT ── */
+      .name-wrap { width: 100%; max-width: 400px; display: flex; flex-direction: column; align-items: center; gap: 7px; margin: 0 auto; }
+      .name-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+      .name-input {
+        font-family: "Outfit", sans-serif; font-size: 17px; font-weight: 500; color: var(--dark);
+        background: var(--card); border: 2px solid var(--border); border-radius: 12px;
+        padding: 12px 18px; outline: none; width: 100%; text-align: center;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .name-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,152,42,0.14); }
+      .name-input::placeholder { color: rgba(140,115,85,0.4); font-weight: 300; }
+      .name-error { font-size: 12px; color: var(--red); font-weight: 500; display: none; }
+
+      @keyframes heartbeat {
+        0%   { transform: scale(1);    box-shadow: 0 3px 14px rgba(201,152,42,0.45); }
+        14%  { transform: scale(1.08); box-shadow: 0 6px 22px rgba(201,152,42,0.75); }
+        28%  { transform: scale(1);    box-shadow: 0 3px 14px rgba(201,152,42,0.45); }
+        42%  { transform: scale(1.05); box-shadow: 0 5px 18px rgba(201,152,42,0.65); }
+        70%  { transform: scale(1);    box-shadow: 0 3px 14px rgba(201,152,42,0.45); }
+        100% { transform: scale(1);    box-shadow: 0 3px 14px rgba(201,152,42,0.45); }
+      }
+      .start-btn {
+        background: linear-gradient(135deg,var(--gold),var(--gold-light)); color: var(--dark);
+        font-family: "Outfit", sans-serif; font-size: 15px; font-weight: 700;
+        padding: 14px 40px; border-radius: 40px; border: none; cursor: pointer;
+        box-shadow: 0 6px 24px rgba(201,152,42,0.35); transition: all 0.2s; letter-spacing: 0.5px;
+        animation: heartbeat 2s ease-in-out infinite; transform-origin: center;
+      }
+      .start-btn:hover, .start-btn:active { animation-play-state: paused; transform: scale(1.08); box-shadow: 0 8px 28px rgba(201,152,42,0.8); }
+
+      /* ── CARD ── */
+      .card {
+        width: 100%; background: var(--card); border: 2.5px solid var(--gold); border-radius: 18px;
+        overflow: hidden; box-shadow: 0 0 0 4px rgba(201,152,42,0.1), var(--shadow);
+        display: none; animation: fadeUp 0.5s ease both;
+      }
+      .card-head {
+        background: linear-gradient(135deg,#1a1208 0%,#3a2208 100%); padding: 20px 24px 18px;
+        display: flex; flex-direction: column; gap: 6px; border-bottom: 2px solid var(--gold);
+      }
+      .card-badge { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; color: var(--gold); background: rgba(201,152,42,0.18); border: 1px solid rgba(201,152,42,0.4); padding: 3px 10px; border-radius: 20px; align-self: flex-start; }
+      .card-title { font-family: "Cormorant Garamond", serif; font-size: clamp(18px,4vw,22px); font-weight: 700; color: #fff; line-height: 1.2; }
+      .card-sub { font-size: 12.5px; color: rgba(255,255,255,0.6); font-weight: 300; }
+      .card-body { padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 12px; }
+
+
+      /* ── KYC FORM ── */
+      .kyc-section-label {
+        font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+        color: var(--gold); margin: 16px 0 8px; padding-top: 14px;
+        border-top: 1px dashed rgba(201,152,42,0.2);
+      }
+      .kyc-section-label:first-of-type { border-top: none; margin-top: 4px; }
+      .kyc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      @media (max-width: 500px) { .kyc-grid { grid-template-columns: 1fr; } }
+      .kyc-field { display: flex; flex-direction: column; gap: 4px; }
+      .kyc-field--full { grid-column: 1/-1; }
+      .kyc-label { font-size: 11px; font-weight: 600; color: var(--mid); display: flex; align-items: baseline; gap: 5px; flex-wrap: wrap; }
+      .kyc-req { color: var(--red); font-size: 12px; }
+      .kyc-hint { font-size: 10px; font-weight: 300; color: var(--muted); font-style: italic; }
+      .kyc-input {
+        font-family: "Outfit", sans-serif; font-size: 13px; font-weight: 400; color: var(--dark);
+        background: #fff; border: 1.5px solid var(--border); border-radius: 8px;
+        padding: 9px 12px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; width: 100%;
+      }
+      .kyc-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,152,42,0.12); }
+      .kyc-input--error { border-color: var(--red) !important; box-shadow: 0 0 0 3px rgba(224,92,92,0.15) !important; }
+      @keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-5px)} 40%{transform:translateX(5px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+      .kyc-input--shake { animation: shake 0.4s ease; }
+      .kyc-field-error { display: none; color: var(--red); font-size: 11.5px; font-weight: 500; margin-top: 5px; padding-left: 2px; }
+      .kyc-input::placeholder { color: rgba(140,115,85,0.45); }
+      .kyc-privacy-note { font-size: 11.5px; color: var(--muted); font-style: italic; line-height: 1.6; background: var(--gold-pale); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: 9px 13px; margin-top: 8px; }
+
+      /* ── PAN NOTICE ── */
+      .pan-notice { background: var(--gold-pale); border: 1.5px solid rgba(201,152,42,0.35); border-left: 4px solid var(--gold); border-radius: 0 10px 10px 0; padding: 14px 16px; }
+      .pan-notice-title { font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 5px; }
+      .pan-notice-desc { font-size: 12px; color: var(--muted); font-weight: 300; line-height: 1.7; }
+
+      /* ── CALL TIME SLIDER ── */
+      .call-time-box { background: var(--gold-pale); border: 1.5px solid rgba(201,152,42,0.25); border-radius: 12px; padding: 16px 18px 20px; margin-top: 14px; }
+      .call-time-title { font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 3px; }
+      .call-time-sub { font-size: 12px; color: var(--muted); font-weight: 300; margin-bottom: 16px; line-height: 1.6; }
+      .call-time-display { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px; }
+      .call-time-slot { text-align: center; min-width: 80px; }
+      .call-time-value { font-family: "Cormorant Garamond", serif; font-size: 22px; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; }
+      .call-time-lbl { font-size: 10px; color: var(--muted); margin-top: 1px; }
+
+      /* ── CASH SLIDER ── */
+      .cash-slider-wrap { background: var(--gold-pale); border: 1.5px solid var(--border); border-radius: 12px; padding: 16px 18px 14px; display: flex; flex-direction: column; gap: 10px; }
+      .cash-slider-display { display: flex; align-items: baseline; justify-content: space-between; }
+      .cash-slider-value { font-family: "Cormorant Garamond", serif; font-size: 28px; font-weight: 700; color: var(--gold); line-height: 1; }
+      .cash-slider-label { font-size: 11px; color: var(--muted); font-weight: 300; }
+      input[type="range"].cash-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: 2px; background: rgba(201,152,42,0.2); outline: none; cursor: pointer; }
+      input[type="range"].cash-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg,var(--gold),var(--gold-light)); border: 2px solid #fff; box-shadow: 0 2px 8px rgba(201,152,42,0.45); cursor: pointer; transition: transform 0.15s; }
+      input[type="range"].cash-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+      input[type="range"].cash-slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg,var(--gold),var(--gold-light)); border: 2px solid #fff; box-shadow: 0 2px 8px rgba(201,152,42,0.45); cursor: pointer; }
+      .cash-slider-ticks { display: flex; justify-content: space-between; margin-top: 2px; }
+      .cash-slider-tick { font-size: 9px; color: var(--muted); font-weight: 300; }
+
+      /* ── SHARE NOTE ── */
+      .share-note { font-size: 12.5px; color: var(--muted); font-weight: 300; line-height: 1.6; background: var(--gold-pale); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: 10px 14px; }
+
+      /* ── SHARE BUTTONS ── */
+      .share-send-label { font-size: 13px; font-weight: 600; color: var(--gold); margin: 8px 0 6px; text-align: center; }
+      .share-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+      .share-btn { display: inline-flex; align-items: center; gap: 9px; font-family: "Outfit", sans-serif; font-size: 14px; font-weight: 600; padding: 13px 24px; border-radius: 40px; cursor: pointer; text-decoration: none; border: none; transition: all 0.2s; flex: 1; justify-content: center; min-width: 160px; }
+      .share-btn-wa { background: #25d366; color: #fff; box-shadow: 0 4px 16px rgba(37,211,102,0.3); }
+      .share-btn-wa:hover { background: #20c05c; box-shadow: 0 6px 22px rgba(37,211,102,0.45); transform: translateY(-1px); }
+      .share-btn-gmail { background: #fff; color: #3c4043; border: 1.5px solid #dadce0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+      .share-btn-gmail:hover { background: #f8f9fa; box-shadow: 0 4px 14px rgba(0,0,0,0.13); transform: translateY(-1px); }
+      .share-btn-email { background: linear-gradient(135deg,var(--gold),var(--gold-light)); color: var(--dark); box-shadow: 0 4px 16px rgba(201,152,42,0.3); }
+      .share-btn-email:hover { box-shadow: 0 6px 22px rgba(201,152,42,0.45); transform: translateY(-1px); }
+      .share-btn-icon { font-size: 18px; line-height: 1; }
+      @media (max-width: 480px) { .share-btn-gmail-desktop { display: none !important; } .share-btn { min-width: unset; width: 100%; } .share-btns { flex-direction: column; } }
+      @media (min-width: 481px) { .share-btn-gmail-mobile  { display: none !important; } }
+
+      /* ── KYC ERROR / LOCKED ── */
+      #kycError { display: none; color: var(--red); font-size: 12px; font-weight: 500; margin-top: 8px; }
+      .kyc-form-locked { pointer-events: none; opacity: 0.45; filter: grayscale(0.3); transition: opacity 0.4s ease, filter 0.4s ease; }
+
+      /* ── STATUS BANNER ── */
+      #statusBanner { display: none; width: 100%; animation: fadeUp 0.4s ease both; }
+      @keyframes successPop { 0%{transform:scale(0.5);opacity:0} 70%{transform:scale(1.15);opacity:1} 100%{transform:scale(1)} }
+
+      /* ── START STRIP ── */
+      .start-strip { width: 100%; background: var(--dark); border-radius: 12px; padding: 16px 24px; text-align: center; font-size: clamp(13px,2.5vw,15px); font-weight: 500; color: var(--gold-light); line-height: 1.5; }
+      [data-theme="dark"] .start-strip { background: #111827; border: 1px solid rgba(200,169,110,0.15); }
+      .start-strip span { color: #fff; font-weight: 600; }
+
+      /* ── TOAST ── */
+      .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1a1208; color: var(--gold-light); font-size: 13px; font-weight: 500; padding: 11px 22px; border-radius: 30px; border: 1px solid var(--gold); box-shadow: 0 6px 24px rgba(0,0,0,0.25); opacity: 0; transition: opacity 0.3s, transform 0.3s; z-index: 9999; pointer-events: none; white-space: nowrap; }
+      .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+      /* ── SEND CONFIRM MODAL ── */
+      #sendConfirmModal { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.6); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); align-items:center; justify-content:center; padding:24px; }
+
+      /* ── FOOTER ── */
+      footer { width: 100%; background: linear-gradient(135deg,#1a1208,#3a2208); border-top: 2px solid var(--gold); padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; position: relative; z-index: 10; margin-top: auto; }
+      .footer-brand { font-family: "Cormorant Garamond", serif; font-size: 16px; font-weight: 700; color: #fff; }
+      .footer-brand span { color: var(--gold-light); }
+      .footer-contacts { display: flex; gap: 18px; flex-wrap: wrap; }
+      .fci { display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.75); font-size: 11px; }
+      .fcicon { width: 18px; height: 18px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; color: #1a1208; }
+      .footer-disc { width: 100%; font-size: 8px; color: rgba(255,255,255,0.3); text-align: center; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 8px; margin-top: 4px; line-height: 1.6; }
+
+      @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+      @keyframes popIn { 0%{opacity:0;transform:scale(0.88)} 70%{transform:scale(1.02)} 100%{opacity:1;transform:scale(1)} }
+
+      /* ── FAB WHATSAPP ── */
+      .fab-whatsapp-mobile { display: none; }
+      @media (max-width: 480px) {
+        .fab-whatsapp-mobile { display: flex; align-items: center; gap: 0.5rem; position: fixed; bottom: 1.4rem; right: 1.2rem; z-index: 200; background: #25d366; color: #fff; border: none; text-decoration: none; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.04em; padding: 0.7rem 1.2rem; border-radius: 999px; box-shadow: 0 4px 16px rgba(37,211,102,0.35); transition: opacity 0.2s, transform 0.2s; white-space: nowrap; }
+        .fab-whatsapp-mobile:active { opacity: 0.85; transform: scale(0.97); }
+        .kyc-section-label { margin-top: 20px; padding-top: 16px; }
+      }
+
+      /* ── MOBILE CARD BODY ── */
+      @media (max-width: 480px) { .card-body { padding: 16px 16px 20px; } }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div>
+        <a href="index.html" style="text-decoration:none;color:inherit;">
+          <div class="logo">Mutual Fund and NPS distribution services by <span>Vegi</span> Ramesh</div>
+          <div class="logo-sub">Smart Investing · Bright Futures</div>
+        </a>
+      </div>
+      <div class="arn">ARN-349739</div>
+      <button class="theme-toggle" id="themeToggle" title="Toggle light / dark mode">☀️</button>
+    </header>
+
+    <main>
+      <!-- ── HERO ── -->
+      <div class="page-hero" id="sectionHero">
+        <div class="hero-eyebrow">Investor Onboarding</div>
+        <h1 class="hero-title">Share Your <em>Details</em></h1>
+        <p class="hero-sub">Fill in your details below so I can facilitate your mutual fund investments. This takes about 5 minutes — your data is handled with complete confidentiality.</p>
+        <p class="hero-date" id="todayDateDisplay"></p>
+
+        <div style="height:28px;"></div>
+
+        <div class="name-wrap">
+          <label class="name-label" for="investorName">Your First Name</label>
+          <input class="name-input" id="investorName" type="text" placeholder="e.g. Arjun" autocomplete="given-name" />
+          <div class="name-error" id="nameError">⚠ Please enter your name to continue.</div>
+          <div style="height:6px;"></div>
+          <button class="start-btn" id="startBtn">Let's Get Started ✦</button>
+        </div>
+      </div>
+
+      <!-- ── FORM CARD ── -->
+      <div class="card" id="formCard">
+        <div class="card-head">
+          <div class="card-badge">STEP 1 OF 1</div>
+          <div class="card-title" id="cardTitle">📤 Your Investor Details</div>
+          <div class="card-sub">Fill in the fields below, then send to me via WhatsApp or Gmail.</div>
+        </div>
+
+        <div class="card-body">
+
+          <!-- ── NEW INVESTOR KYC ── -->
+          <div id="stepNewKyc">
+            <div class="share-note">Fill in your details below. Once done, click <strong>Send via Gmail or WhatsApp</strong> — the content will be ready to send, no editing needed.</div>
+
+            <!-- Aadhaar -->
+            <div class="kyc-section-label">🪪 Aadhaar Card</div>
+            <div class="kyc-grid">
+              <div class="kyc-field">
+                <label class="kyc-label">Full Name <span class="kyc-req">*</span> <span class="kyc-hint">as per Aadhaar</span></label>
+                <input class="kyc-input" id="kycAadhaarName" type="text" placeholder="Your Full Name" />
+                <span class="kyc-field-error" id="kycAadhaarNameError">⚠️ Please enter your full name as per Aadhaar.</span>
+              </div>
+              <div class="kyc-field">
+                <label class="kyc-label">Aadhaar Number <span class="kyc-hint">(Last 4 digits)</span></label>
+                <input class="kyc-input" id="kycAadhaarNum" type="text" placeholder="XXXX" maxlength="4" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'')" />
+              </div>
+              <div class="kyc-field">
+                <label class="kyc-label">Date of Birth <span class="kyc-req">*</span></label>
+                <input class="kyc-input" id="kycDob" type="date" />
+                <span class="kyc-field-error" id="kycDobError">⚠️ Please select your date of birth.</span>
+              </div>
+              <div class="kyc-field">
+                <label class="kyc-label">Place of Birth <span class="kyc-req">*</span> <span class="kyc-hint">city only</span></label>
+                <input class="kyc-input" id="kycPob" type="text" placeholder="e.g. Hyderabad" />
+                <span class="kyc-field-error" id="kycPobError">⚠️ Please enter your city of birth.</span>
+              </div>
+              <div class="kyc-field kyc-field--full">
+                <label class="kyc-label">Registered Address <span class="kyc-req">*</span> <span class="kyc-hint">as per Aadhaar</span></label>
+                <input class="kyc-input" id="kycAddress" type="text" placeholder="Full address as on Aadhaar" />
+                <span class="kyc-field-error" id="kycAddressError">⚠️ Please enter your registered address.</span>
+              </div>
+            </div>
+
+            <!-- PAN & Bank -->
+            <div class="kyc-section-label">🔐 PAN &amp; Bank Details</div>
+            <div class="pan-notice">
+              <div class="pan-notice-title">📞 These details will be collected on our onboarding call</div>
+              <div class="pan-notice-desc">For your security, I do <strong>not</strong> collect your <strong>PAN number</strong> or <strong>bank account details</strong> through this form. I will reach out personally to gather this information over a call in a safe and compliant manner.</div>
+            </div>
+
+            <!-- Call Time -->
+            <div class="call-time-box">
+              <div class="call-time-title">🕐 When's a good time to call you?</div>
+              <div class="call-time-sub">Drag to set your preferred window — I'll schedule the call within it.</div>
+              <div class="call-time-display">
+                <div class="call-time-slot">
+                  <div class="call-time-value" id="callTimeFrom">10:00 AM</div>
+                  <div class="call-time-lbl">From</div>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+                  <div id="callTimeEmoji" style="font-size:20px;line-height:1;">🌤️</div>
+                  <div id="callTimePeriod" style="font-size:11px;color:var(--muted);font-weight:500;">Morning</div>
+                </div>
+                <div class="call-time-slot">
+                  <div class="call-time-value" id="callTimeTo">12:00 PM</div>
+                  <div class="call-time-lbl">To</div>
+                </div>
+              </div>
+              <div id="callRangeWrap" style="position:relative;height:36px;margin:0 10px;touch-action:none;user-select:none;">
+                <div style="position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:5px;border-radius:4px;background:rgba(201,152,42,0.18);"></div>
+                <div id="callTrackFill" style="position:absolute;top:50%;transform:translateY(-50%);height:5px;border-radius:4px;background:var(--gold);left:25%;right:50%;"></div>
+                <div id="callNoonMark" style="position:absolute;top:50%;transform:translate(-50%,-50%);width:2px;height:11px;background:rgba(201,152,42,0.55);border-radius:2px;"></div>
+                <div id="callThumbA" aria-label="Call start time" role="slider" style="position:absolute;top:50%;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:var(--gold);border:2.5px solid var(--card);box-shadow:0 2px 10px rgba(0,0,0,0.4);cursor:grab;touch-action:none;left:25%;z-index:3;"></div>
+                <div id="callThumbB" aria-label="Call end time" role="slider" style="position:absolute;top:50%;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:var(--gold);border:2.5px solid var(--card);box-shadow:0 2px 10px rgba(0,0,0,0.4);cursor:grab;touch-action:none;left:50%;z-index:3;"></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:0 10px;margin-top:4px;">
+                <span style="font-size:10px;color:var(--muted);">8 AM</span>
+                <span style="font-size:10px;color:var(--muted);">10 AM</span>
+                <span style="font-size:10px;color:rgba(201,152,42,0.8);font-weight:600;">12 PM</span>
+                <span style="font-size:10px;color:var(--muted);">2 PM</span>
+                <span style="font-size:10px;color:var(--muted);">4 PM</span>
+                <span style="font-size:10px;color:var(--muted);">6 PM</span>
+                <span style="font-size:10px;color:var(--muted);">8 PM</span>
+              </div>
+              <div style="margin-top:14px;display:flex;align-items:center;gap:8px;cursor:pointer;" onclick="toggleCallFlexible()">
+                <div id="callFlexBox" style="width:16px;height:16px;border-radius:4px;border:1.5px solid rgba(201,152,42,0.5);background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.2s;"></div>
+                <span style="font-size:12px;color:var(--muted);">I'm flexible — call me any time during business hours</span>
+              </div>
+            </div>
+
+            <!-- Contact -->
+            <div class="kyc-section-label">📬 Contact Details</div>
+            <div class="kyc-grid">
+              <div class="kyc-field">
+                <label class="kyc-label">Email ID <span class="kyc-req">*</span></label>
+                <input class="kyc-input" id="kycEmail" type="email" placeholder="your@email.com" />
+                <span class="kyc-field-error" id="kycEmailError">⚠️ Please enter a valid email address.</span>
+              </div>
+              <div class="kyc-field">
+                <label class="kyc-label">Mobile Number <span class="kyc-req">*</span> <span class="kyc-hint">Aadhaar-linked preferred</span></label>
+                <input class="kyc-input" id="kycMobile" type="tel" placeholder="10-digit mobile number" maxlength="10" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'')" />
+                <span class="kyc-field-error" id="kycMobileError">⚠️ Please enter your 10-digit mobile number.</span>
+              </div>
+            </div>
+
+            <!-- Nominee -->
+            <div class="kyc-section-label" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+              <span>👤 Nominee Details</span>
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;user-select:none;letter-spacing:0;text-transform:none;border-top:none;padding-top:0;">
+                <input type="checkbox" id="nomineeToggle" checked onchange="toggleNomineeFields(this)" style="width:16px;height:16px;accent-color:var(--gold);cursor:pointer;" />
+                Add a nominee <span style="font-weight:300;">— recommended</span>
+              </label>
+            </div>
+            <div id="nomineeFields">
+              <div class="kyc-grid">
+                <div class="kyc-field">
+                  <label class="kyc-label">Nominee Full Name <span class="kyc-req">*</span></label>
+                  <input class="kyc-input" id="kycNomName" type="text" placeholder="Nominee's Full Name" />
+                  <span class="kyc-field-error" id="kycNomNameError">⚠️ Please enter the nominee's full name.</span>
+                </div>
+                <div class="kyc-field">
+                  <label class="kyc-label">Nominee DOB <span class="kyc-req">*</span></label>
+                  <input class="kyc-input" id="kycNomDob" type="date" />
+                  <span class="kyc-field-error" id="kycNomDobError">⚠️ Please select the nominee's date of birth.</span>
+                </div>
+                <div class="kyc-field">
+                  <label class="kyc-label">Nominee Email ID <span class="kyc-req">*</span></label>
+                  <input class="kyc-input" id="kycNomEmail" type="email" placeholder="Nominee's email" />
+                  <span class="kyc-field-error" id="kycNomEmailError">⚠️ Please enter a valid email for the nominee.</span>
+                </div>
+                <div class="kyc-field">
+                  <label class="kyc-label">Nominee Mobile <span class="kyc-req">*</span></label>
+                  <input class="kyc-input" id="kycNomMobile" type="tel" placeholder="Nominee's contact" maxlength="10" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'')" />
+                  <span class="kyc-field-error" id="kycNomMobileError">⚠️ Please enter the nominee's 10-digit mobile number.</span>
+                </div>
+                <div class="kyc-field">
+                  <label class="kyc-label">Nominee Aadhaar <span class="kyc-req">*</span> <span class="kyc-hint">(Last 4 digits)</span></label>
+                  <input class="kyc-input" id="kycNomAadhaar" type="text" placeholder="XXXX" maxlength="4" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'')" />
+                  <span class="kyc-field-error" id="kycNomAadhaarError">⚠️ Please enter the last 4 digits of nominee's Aadhaar.</span>
+                </div>
+                <div class="kyc-field kyc-field--full">
+                  <label class="kyc-label">Nominee Address <span class="kyc-req">*</span></label>
+                  <input class="kyc-input" id="kycNomAddress" type="text" placeholder="Nominee's current residential address" />
+                  <span class="kyc-field-error" id="kycNomAddressError">⚠️ Please enter the nominee's address.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="kyc-privacy-note">🔒 Your details are used solely for KYC registration and handled with complete confidentiality as per SEBI &amp; AMFI guidelines. PAN and bank account details are collected separately over a secure onboarding call — never through this form.</div>
+
+            <!-- Cash Needs -->
+            <div class="kyc-section-label">💵 Cash Requirements</div>
+            <div class="kyc-field kyc-field--full">
+              <label class="kyc-label">How much cash do you foresee needing in the next 12 months? <span class="kyc-hint">Helps plan your liquid vs invested ratio</span></label>
+              <div class="cash-slider-wrap">
+                <div class="cash-slider-display">
+                  <span class="cash-slider-value" id="cashNeedsNewDisplay">₹0</span>
+                  <span class="cash-slider-label" id="cashNeedsNewLabel">No foreseeable cash needs</span>
+                </div>
+                <input type="range" class="cash-slider" id="cashNeedsNew" min="0" max="1500000" step="10000" value="0" oninput="updateCashSlider('cashNeedsNew','cashNeedsNewDisplay','cashNeedsNewLabel')" />
+                <div class="cash-slider-ticks">
+                  <span class="cash-slider-tick">₹0</span>
+                  <span class="cash-slider-tick">₹3.75L</span>
+                  <span class="cash-slider-tick">₹7.5L</span>
+                  <span class="cash-slider-tick">₹11.25L</span>
+                  <span class="cash-slider-tick">₹15L+</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="kycError">Please fix the highlighted fields before sending.</div>
+            <div class="share-send-label">Send your details using WhatsApp or Gmail below</div>
+            <div class="share-btns">
+              <button class="share-btn share-btn-wa" onclick="if(validateKyc()){buildAndOpenWa(this);showSendModal(this,'WhatsApp');}">
+                <span class="share-btn-icon">💬</span> Send via WhatsApp
+              </button>
+              <button class="share-btn share-btn-email share-btn-gmail-mobile" onclick="if(validateKyc()){buildAndOpenEmail(this);showSendModal(this,'Gmail');}">
+                <span class="share-btn-icon">✉️</span> Send via Gmail
+              </button>
+              <button class="share-btn share-btn-gmail share-btn-gmail-desktop" onclick="if(validateKyc()){buildAndOpenGmail(this);showSendModal(this,'Gmail (Browser)');}">
+                <span class="share-btn-icon">✉️</span> Send via Gmail
+              </button>
+            </div>
+          </div>
+
+        </div><!-- /card-body -->
+      </div><!-- /card -->
+
+      <!-- ── STRIP ── -->
+      <div class="start-strip">✦ &nbsp;Invest as little as <span>₹100 with zero monthly pressure</span> — your future self will thank you &nbsp;✦</div>
+
+      <!-- ── STATUS BANNER ── -->
+      <div id="statusBanner">
+        <div style="border-radius:16px;padding:28px 24px 24px;text-align:center;background:var(--gold-pale);border:1.5px solid rgba(201,152,42,0.35);margin-bottom:16px;">
+          <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 6px 24px rgba(201,152,42,0.4);animation:successPop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both;">
+            <span style="font-size:26px;line-height:1;">✓</span>
+          </div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--dark);margin-bottom:6px;">Details Sent Successfully!</div>
+          <div style="font-size:13px;color:var(--muted);font-weight:300;line-height:1.7;max-width:320px;margin:0 auto;">Your KYC details have been shared with <strong style="color:var(--dark);">me</strong>. Sit back — I'll reach out to complete your mutual fund registration.</div>
+          <div style="margin-top:18px;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">
+            <a href="tel:8329450580" style="color:var(--gold);font-size:12px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:6px;border:1px solid rgba(201,152,42,0.35);border-radius:20px;padding:6px 14px;">☎ 8329450580</a>
+            <a href="mailto:rameshvegi94@gmail.com" style="color:var(--gold);font-size:12px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:6px;border:1px solid rgba(201,152,42,0.35);border-radius:20px;padding:6px 14px;">✉ rameshvegi94@gmail.com</a>
+          </div>
+        </div>
+
+        <div style="border-radius:16px;padding:24px;margin-bottom:16px;background:linear-gradient(135deg,rgba(200,169,110,0.12),rgba(200,169,110,0.06));border:1.5px solid rgba(201,152,42,0.4);text-align:center;">
+          <div style="font-size:28px;margin-bottom:10px;">🎯</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--dark);margin-bottom:6px;">While you wait, plan your goals</div>
+          <div style="font-size:12px;color:var(--muted);font-weight:300;line-height:1.7;max-width:300px;margin:0 auto 18px;">Use the Goal Calculator to estimate how much you need to invest to reach your financial goals.</div>
+          <a href="./calculator.html" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a1208;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:13px 28px;border-radius:40px;text-decoration:none;letter-spacing:0.3px;box-shadow:0 4px 18px rgba(201,152,42,0.35);">Open Goal Calculator →</a>
+        </div>
+
+        <div style="border-radius:16px;padding:22px 24px;background:var(--card);border:1.5px solid var(--border);">
+          <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px;">What Happens Next</div>
+          <div style="display:flex;gap:16px;margin-bottom:18px;">
+            <div style="flex-shrink:0;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 3px 10px rgba(201,152,42,0.3);">📋</div>
+            <div>
+              <div style="font-size:13px;font-weight:600;color:var(--dark);margin-bottom:3px;">I review your details</div>
+              <div style="font-size:12px;color:var(--muted);font-weight:300;line-height:1.6;">I'll go through what you've shared and reach out to complete the onboarding process.</div>
+            </div>
+          </div>
+          <div style="width:2px;height:14px;background:rgba(201,152,42,0.25);margin:0 17px 18px;"></div>
+          <div style="display:flex;gap:16px;margin-bottom:18px;">
+            <div style="flex-shrink:0;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 3px 10px rgba(201,152,42,0.3);">📞</div>
+            <div>
+              <div style="font-size:13px;font-weight:600;color:var(--dark);margin-bottom:3px;">Onboarding call</div>
+              <div style="font-size:12px;color:var(--muted);font-weight:300;line-height:1.6;">I'll call you during your preferred time window to collect PAN and bank details securely.</div>
+            </div>
+          </div>
+          <div style="width:2px;height:14px;background:rgba(201,152,42,0.25);margin:0 17px 18px;"></div>
+          <div style="display:flex;gap:16px;">
+            <div style="flex-shrink:0;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 3px 10px rgba(201,152,42,0.3);">🚀</div>
+            <div>
+              <div style="font-size:13px;font-weight:600;color:var(--dark);margin-bottom:3px;">Your investments get registered</div>
+              <div style="font-size:12px;color:var(--muted);font-weight:300;line-height:1.6;">Once KYC is complete, I'll process your mutual fund subscription through the fund house and you'll be all set to invest.</div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /statusBanner -->
+
+    </main>
+
+    <footer>
+      <div class="footer-brand">Vegi <span>Ramesh</span></div>
+      <div class="footer-contacts">
+        <div class="fci"><div class="fcicon">☎</div><a href="tel:8329450580" style="color:inherit;text-decoration:none;">+91 83294 50580</a></div>
+        <div class="fci"><div class="fcicon">✉</div><a href="mailto:rameshvegi94@gmail.com" style="color:inherit;text-decoration:none;">rameshvegi94@gmail.com</a></div>
+        <div class="fci"><div class="fcicon">🪪</div>ARN-349739</div>
+      </div>
+      <div class="footer-disc">Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Past performance is not indicative of future results.</div>
+    </footer>
+
+    <!-- ── FAB WHATSAPP ── -->
+    <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments." class="fab-whatsapp-mobile" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+
+    <!-- ── TOAST ── -->
+    <div class="toast" id="shareToast"></div>
+
+    <!-- ── SEND CONFIRMATION MODAL ── -->
+    <div id="sendConfirmModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:24px;">
+      <div style="background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:28px 24px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.5);text-align:center;animation:popIn 0.25s ease both;">
+        <div style="font-size:32px;margin-bottom:12px;" id="sendModalEmoji">💬</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--dark);margin-bottom:8px;">Did you send it?</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:300;line-height:1.6;margin-bottom:24px;">Once you've sent the message on <strong id="sendModalChannel">WhatsApp</strong>, tap below to confirm.</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <button onclick="confirmSent()" style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a1208;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:13px 20px;border-radius:40px;border:none;cursor:pointer;letter-spacing:0.3px;">✓ Yes, I've sent it</button>
+          <button onclick="cancelSent()" style="background:transparent;color:var(--muted);font-family:'Outfit',sans-serif;font-size:13px;font-weight:400;padding:10px 20px;border-radius:40px;border:1.5px solid var(--border);cursor:pointer;">✗ I didn't send yet</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    // ── THEME ──
+    (function(){
+      var btn  = document.getElementById("themeToggle");
+      var html = document.documentElement;
+      function applyTheme(t){
+        html.setAttribute("data-theme",t);
+        btn.textContent = t==="dark"?"☀️":"🌙";
+        btn.title = t==="dark"?"Switch to light mode":"Switch to dark mode";
+        try{localStorage.setItem("vr-theme",t);}catch(e){}
+      }
+      var saved; try{saved=localStorage.getItem("vr-theme");}catch(e){}
+      applyTheme(saved==="light"?"light":"dark");
+      btn.addEventListener("click",function(){applyTheme(html.getAttribute("data-theme")==="dark"?"light":"dark");});
+    })();
+
+    // ── TODAY DATE ──
+    (function(){
+      var today=new Date();
+      var days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+      var months=["January","February","March","April","May","June","July","August","September","October","November","December"];
+      window._todayStr=days[today.getDay()]+", "+today.getDate()+" "+months[today.getMonth()]+" "+today.getFullYear();
+      var el=document.getElementById("todayDateDisplay");
+      if(el) el.textContent="📅 "+window._todayStr;
+    })();
+
+    // ── START ──
+    document.getElementById("startBtn").addEventListener("click",function(){
+      var nameVal=(document.getElementById("investorName").value||"").trim();
+      if(!nameVal){
+        document.getElementById("nameError").style.display="block";
+        document.getElementById("investorName").focus();
+        return;
+      }
+      document.getElementById("nameError").style.display="none";
+      window._investorName=nameVal;
+      document.getElementById("sectionHero").style.display="none";
+      var card=document.getElementById("formCard");
+      card.style.display="block";
+      document.getElementById("cardTitle").textContent="📤 "+nameVal+"'s Investor Details";
+      if(!window._callRangeInited){window._callRangeInited=true;window.initCallRange();}
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
+    document.getElementById("investorName").addEventListener("keydown",function(e){if(e.key==="Enter")document.getElementById("startBtn").click();});
+
+
+
+    // ── NOMINEE TOGGLE ──
+    window.toggleNomineeFields=function(checkbox){
+      var fields=document.getElementById("nomineeFields");
+      if(fields) fields.style.display=checkbox.checked?"block":"none";
+    };
+
+    // ── CASH SLIDER ──
+    window.updateCashSlider=function(sliderId,displayId,labelId){
+      var val=parseInt(document.getElementById(sliderId).value);
+      var display=document.getElementById(displayId);
+      var label=document.getElementById(labelId);
+      var slider=document.getElementById(sliderId);
+      var pct=(val/1500000)*100;
+      slider.style.background="linear-gradient(90deg,var(--gold) "+pct+"%, rgba(201,152,42,0.2) "+pct+"%)";
+      if(val===0){display.textContent="₹0";label.textContent="No foreseeable cash needs";}
+      else if(val>=1500000){display.textContent="₹15L+";label.textContent="Above ₹15,00,000";}
+      else{var f="₹"+val.toLocaleString("en-IN");display.textContent=f;label.textContent="Approx. "+f+" needed";}
+    };
+
+    // ── CALL TIME RANGE SLIDER ──
+    (function(){
+      var MIN=480,MAX=1200,STEP=15,MIN_GAP=30;
+      var state={from:600,to:720};
+      var dragging=null;
+      function snap(v){return Math.round(v/STEP)*STEP;}
+      function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+      function fmt(m){var h=Math.floor(m/60),mn=m%60,ap=h>=12?"PM":"AM",h12=h%12===0?12:h%12;return h12+":"+(mn===0?"00":mn)+" "+ap;}
+      function pctOf(v){return((v-MIN)/(MAX-MIN))*100;}
+      function render(){
+        var fP=pctOf(state.from),tP=pctOf(state.to);
+        document.getElementById("callTimeFrom").textContent=fmt(state.from);
+        document.getElementById("callTimeTo").textContent=fmt(state.to);
+        document.getElementById("callTrackFill").style.left=fP+"%";
+        document.getElementById("callTrackFill").style.right=(100-tP)+"%";
+        document.getElementById("callThumbA").style.left=fP+"%";
+        document.getElementById("callThumbB").style.left=tP+"%";
+        document.getElementById("callNoonMark").style.left=pctOf(720)+"%";
+        var mid=(state.from+state.to)/2,emoji,period;
+        if(mid<600){emoji="🌅";period="Early Morning";}
+        else if(mid<720){emoji="🌤️";period="Morning";}
+        else if(mid<900){emoji="☀️";period="Late Morning";}
+        else if(mid<1020){emoji="🌞";period="Afternoon";}
+        else if(mid<1140){emoji="🌆";period="Evening";}
+        else{emoji="🌙";period="Night";}
+        document.getElementById("callTimeEmoji").textContent=emoji;
+        document.getElementById("callTimePeriod").textContent=period;
+      }
+      function pxToVal(clientX){
+        var wrap=document.getElementById("callRangeWrap");
+        var rect=wrap.getBoundingClientRect();
+        var pct=clamp((clientX-rect.left)/rect.width,0,1);
+        return snap(MIN+pct*(MAX-MIN));
+      }
+      function onMove(clientX){
+        if(!dragging)return;
+        var v=pxToVal(clientX);
+        if(dragging==="from")state.from=clamp(v,MIN,state.to-MIN_GAP);
+        else state.to=clamp(v,state.from+MIN_GAP,MAX);
+        render();
+      }
+      function attachThumb(thumbId,which){
+        var el=document.getElementById(thumbId);
+        if(!el)return;
+        el.addEventListener("pointerdown",function(e){e.preventDefault();dragging=which;el.setPointerCapture(e.pointerId);el.style.cursor="grabbing";el.style.transform="translate(-50%,-50%) scale(1.2)";});
+        el.addEventListener("pointermove",function(e){if(dragging!==which)return;e.preventDefault();onMove(e.clientX);});
+        el.addEventListener("pointerup",function(){dragging=null;el.style.cursor="grab";el.style.transform="translate(-50%,-50%) scale(1)";});
+        el.addEventListener("pointercancel",function(){dragging=null;el.style.cursor="grab";el.style.transform="translate(-50%,-50%) scale(1)";});
+      }
+      window.initCallRange=function(){
+        var now=new Date(),nowMins=now.getHours()*60+now.getMinutes();
+        var sf=Math.ceil((nowMins+60)/STEP)*STEP;
+        if(sf<MIN||sf>MAX-MIN_GAP)sf=600;
+        state.from=sf;state.to=Math.min(sf+120,MAX);
+        attachThumb("callThumbA","from");
+        attachThumb("callThumbB","to");
+        render();
+      };
+      window.updateCallRange=function(){render();};
+      window.getCallTimeText=function(){
+        if(window._callFlexible)return"Flexible — any time during business hours";
+        return fmt(state.from)+" – "+fmt(state.to);
+      };
+    })();
+
+    window._callFlexible=false;
+    window.toggleCallFlexible=function(){
+      window._callFlexible=!window._callFlexible;
+      var box=document.getElementById("callFlexBox");
+      var wrap=document.getElementById("callRangeWrap");
+      var fromD=document.getElementById("callTimeFrom");
+      var toD=document.getElementById("callTimeTo");
+      if(window._callFlexible){
+        box.innerHTML='<span style="color:var(--gold);font-size:11px;line-height:1;">✓</span>';
+        box.style.background="var(--gold-pale)";box.style.borderColor="var(--gold)";
+        wrap.style.opacity="0.35";wrap.style.pointerEvents="none";
+        fromD.textContent="Flexible";toD.textContent="";
+        document.getElementById("callTimeEmoji").textContent="🗓️";
+        document.getElementById("callTimePeriod").textContent="Any time";
+      } else {
+        box.innerHTML="";box.style.background="transparent";box.style.borderColor="rgba(201,152,42,0.5)";
+        wrap.style.opacity="1";wrap.style.pointerEvents="auto";
+        window.updateCallRange();
+      }
+    };
+
+    // ── DATE FORMAT ──
+    window.fmtDate=function(id){
+      var el=document.getElementById(id);
+      if(!el||!el.value)return"";
+      var p=el.value.split("-");
+      return p.length!==3?el.value:p[2]+"/"+p[1]+"/"+p[0];
+    };
+
+    // ── VALIDATE KYC ──
+    window.validateKyc=function(){
+      var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      var allFields=[
+        {id:"kycAadhaarName",errId:"kycAadhaarNameError"},
+        {id:"kycDob",errId:"kycDobError"},
+        {id:"kycPob",errId:"kycPobError"},
+        {id:"kycAddress",errId:"kycAddressError"},
+        {id:"kycEmail",errId:"kycEmailError",validate:function(v){return emailRe.test(v);}},
+        {id:"kycMobile",errId:"kycMobileError"},
+      ];
+      var nomToggle=document.getElementById("nomineeToggle");
+      if(nomToggle&&nomToggle.checked){
+        allFields=allFields.concat([
+          {id:"kycNomName",errId:"kycNomNameError"},
+          {id:"kycNomDob",errId:"kycNomDobError"},
+          {id:"kycNomEmail",errId:"kycNomEmailError",validate:function(v){return emailRe.test(v);}},
+          {id:"kycNomMobile",errId:"kycNomMobileError"},
+          {id:"kycNomAadhaar",errId:"kycNomAadhaarError"},
+          {id:"kycNomAddress",errId:"kycNomAddressError"},
+        ]);
+      }
+      function markError(el,errEl){
+        el.classList.add("kyc-input--error");void el.offsetWidth;el.classList.add("kyc-input--shake");
+        el.addEventListener("animationend",function(){el.classList.remove("kyc-input--shake");},{once:true});
+        if(errEl)errEl.style.display="block";
+        el.addEventListener("input",function clearErr(){el.classList.remove("kyc-input--error");if(errEl)errEl.style.display="none";el.removeEventListener("input",clearErr);});
+      }
+      function clearError(el,errEl){if(el)el.classList.remove("kyc-input--error","kyc-input--shake");if(errEl)errEl.style.display="none";}
+      var firstErr=null,hasError=false;
+      allFields.forEach(function(field){
+        var el=document.getElementById(field.id);
+        var errEl=document.getElementById(field.errId);
+        if(!el)return;
+        var val=el.value||"",empty=!val.trim(),invalid=!empty&&field.validate&&!field.validate(val);
+        clearError(el,errEl);
+        if(empty||invalid){hasError=true;markError(el,errEl);if(!firstErr)firstErr=el;}
+      });
+      var banner=document.getElementById("kycError");
+      if(hasError){if(banner){banner.textContent="Please fix the highlighted fields before sending.";banner.style.display="block";}if(firstErr){firstErr.scrollIntoView({behavior:"smooth",block:"center"});firstErr.focus();}return false;}
+      if(banner)banner.style.display="none";
+      return true;
+    };
+
+    // ── BUILD EMAIL BODY ──
+    function buildEmailBody(){
+      var v=function(id){return(document.getElementById(id)||{}).value||"";};
+      var investorName=window._investorName||"";
+      var profileDate=window._todayStr||"";
+      var cashEl=document.getElementById("cashNeedsNew");
+      var cashVal=cashEl?parseInt(cashEl.value):0;
+      var cashText=cashVal===0?"No foreseeable cash needs":cashVal>=1500000?"Above ₹15,00,000":"Approx. ₹"+cashVal.toLocaleString("en-IN");
+      var nomChecked=(document.getElementById("nomineeToggle")||{}).checked;
+
+      var lines=[];
+      lines.push("✦ Investor Details ✦");
+      lines.push("");
+      if(investorName) lines.push("Name     : "+investorName);
+      if(profileDate)  lines.push("Date     : "+profileDate);
+      lines.push("Type     : New Investor");
+      lines.push("");
+      lines.push("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+      lines.push("💵 CASH NEEDS (NEXT 12 MONTHS)");
+      lines.push("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+      lines.push("Expected Cash Need : "+cashText);
+      lines.push("");
+      lines.push("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+      lines.push("✦ KYC & DOCUMENT DETAILS ✦");
+      lines.push("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+      lines.push("");
+      lines.push("── PERSONAL DETAILS ──");
+      lines.push("Full Name       : "+v("kycAadhaarName"));
+      lines.push("Aadhaar (Last 4): "+v("kycAadhaarNum"));
+      lines.push("Date of Birth   : "+window.fmtDate("kycDob"));
+      lines.push("Place of Birth  : "+v("kycPob"));
+      lines.push("Address         : "+v("kycAddress"));
+      lines.push("");
+      lines.push("── CONTACT ──");
+      lines.push("Email ID        : "+v("kycEmail"));
+      lines.push("Mobile Number   : "+v("kycMobile"));
+      lines.push("");
+      if(nomChecked){
+        lines.push("── NOMINEE ──");
+        lines.push("Full Name       : "+v("kycNomName"));
+        lines.push("Date of Birth   : "+window.fmtDate("kycNomDob"));
+        lines.push("Email ID        : "+v("kycNomEmail"));
+        lines.push("Mobile Number   : "+v("kycNomMobile"));
+        lines.push("Aadhaar (Last 4): "+v("kycNomAadhaar"));
+        lines.push("Address         : "+v("kycNomAddress"));
+      } else {
+        lines.push("── NOMINEE ──");
+        lines.push("Nominee: Not adding a nominee at this time.");
+      }
+      lines.push("");
+      lines.push("── PAN & BANK DETAILS ──");
+      lines.push("To be collected securely on onboarding call.");
+      lines.push("Preferred Call Time : "+(window.getCallTimeText?window.getCallTimeText():"Not specified"));
+      lines.push("");
+      lines.push("Thank you!");
+      return lines.join("\n");
+    }
+
+    function buildEmailSubject(){
+      var n=window._investorName?window._investorName+"'s":"My";
+      return n+" Investor Details";
+    }
+
+    // ── SEND FUNCTIONS ──
+    function showToast(msg){var t=document.getElementById("shareToast");if(!t)return;t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},3000);}
+
+    window.buildAndOpenWa=function(){
+      var url="https://wa.me/918329450580?text="+encodeURIComponent(buildEmailBody());
+      var a=document.createElement("a");a.href=url;a.target="_blank";a.rel="noopener";
+      document.body.appendChild(a);a.click();document.body.removeChild(a);
+      showToast("✓ Opening WhatsApp…");return false;
+    };
+    window.buildAndOpenGmail=function(){
+      var url="https://mail.google.com/mail/?view=cm&to=rameshvegi94@gmail.com&su="+encodeURIComponent(buildEmailSubject())+"&body="+encodeURIComponent(buildEmailBody());
+      var a=document.createElement("a");a.href=url;a.target="_blank";a.rel="noopener";
+      document.body.appendChild(a);a.click();document.body.removeChild(a);
+      showToast("✓ Opening Gmail in browser…");return false;
+    };
+    window.buildAndOpenEmail=function(){
+      window.location.href="mailto:rameshvegi94@gmail.com?subject="+encodeURIComponent(buildEmailSubject())+"&body="+encodeURIComponent(buildEmailBody());
+      showToast("✓ Opening Gmail app…");return false;
+    };
+
+    // ── SEND CONFIRMATION MODAL ──
+    window.showSendModal=function(btn,channel){
+      document.getElementById("sendModalChannel").textContent=channel;
+      var emojiMap={"WhatsApp":"💬","Gmail (App)":"✉️","Gmail (Browser)":"📧"};
+      document.getElementById("sendModalEmoji").textContent=emojiMap[channel]||"📤";
+      document.getElementById("sendConfirmModal").style.display="flex";
+    };
+    window.confirmSent=function(){
+      document.getElementById("sendConfirmModal").style.display="none";
+      document.getElementById("stepNewKyc").classList.add("kyc-form-locked");
+      document.querySelectorAll(".share-btn-wa,.share-btn-email,.share-btn-gmail").forEach(function(btn){
+        btn.style.opacity="0.45";btn.style.pointerEvents="none";
+        var icon=btn.querySelector(".share-btn-icon");if(icon)icon.textContent="✓";
+      });
+      var banner=document.getElementById("statusBanner");
+      if(banner){
+        banner.style.display="block";
+        setTimeout(function(){banner.scrollIntoView({behavior:"smooth",block:"start"});},100);
+      }
+    };
+    window.cancelSent=function(){document.getElementById("sendConfirmModal").style.display="none";};
+    </script>
+  </body>
+</html>
