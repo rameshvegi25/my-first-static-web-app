@@ -821,24 +821,6 @@
       .nav-whatsapp-btn:hover {
         background: rgba(37, 211, 102, 0.2);
       }
-      .nav-calculator-btn {
-        background: var(--surface2);
-        border: 1px solid var(--border);
-        color: var(--muted);
-        border-radius: 6px;
-        padding: 0.35rem 0.55rem;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        transition: color 0.2s, background 0.2s;
-        line-height: 1;
-      }
-      .nav-calculator-btn:hover {
-        color: var(--accent);
-        background: var(--accent-dim);
-        border-color: rgba(200,169,110,0.3);
-      }
       @media (max-width: 480px) {
         .nav-profiling-btn, .nav-whatsapp-btn {
           display: none;
@@ -1140,32 +1122,11 @@
           rel="noopener"
           ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="currentColor" style="vertical-align:middle;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a
         >
-        <a
-          href="#calculator"
-          class="nav-calculator-btn"
-          title="Goal Planning Calculator"
-          aria-label="Goal Planning Calculator"
-        ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;flex-shrink:0;display:inline-block;"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="12" y1="18" x2="14" y2="18"/><line x1="16" y1="18" x2="16" y2="18"/></svg></a
-        >
-        <a
-          href="./RiskProfiler.html"
-          class="nav-profiling-btn"
-          >Begin Profiling ✦</a
-        >
-        <button
-          class="theme-toggle"
-          onclick="toggleTheme()"
-          aria-label="Toggle theme"
-        >
-          <span class="icon-dark">☀️</span>
-          <span class="icon-light">🌙</span>
-        </button>
       </div>
     </nav>
 
-    <!-- IN-PAGE SUBNAV -->
-    <nav class="subnav" id="subnav">
-      <a href="#who-is-mfd">Who is an MFD</a>
+    <!-- SUBNAV -->
+    <div class="subnav" id="subnav">
       <a href="#why-mfd">Why an MFD</a>
       <a href="#why-ramesh">Why Me</a>
       <a href="#why-i-chose-this">Why This Role</a>
@@ -1176,8 +1137,7 @@
       <a href="#use-cases">Use Cases</a>
       <a href="#risk-spectrum">Risk Spectrum</a>
       <a href="#whats-next">Get Started</a>
-      <a href="#calculator">Goal Calculator</a>
-    </nav>
+    </div>
 
     <!-- HERO -->
     <header class="hero">
@@ -1188,6 +1148,61 @@
       </p>
       <div class="divider-star">✦ ✦ ✦</div>
     </header>
+
+    
+    <!-- QUICK SUMMARY BOX -->
+    <section style="max-width:860px;margin:0 auto;padding:0 clamp(1.5rem,5vw,2rem) 0;">
+      <div style="
+        background:var(--surface);
+        border:1px solid rgba(200,169,110,0.3);
+        border-left: 3px solid var(--accent);
+        border-radius:14px;
+        padding:1.75rem 2rem;
+        margin-bottom:0.5rem;
+      ">
+        <div style="
+          font-size:0.68rem;
+          letter-spacing:0.2em;
+          text-transform:uppercase;
+          color:var(--accent);
+          margin-bottom:1rem;
+          font-family:var(--sans);
+        ">✦ The Short Version ✦</div>
+        <ul style="
+          list-style:none;
+          display:flex;
+          flex-direction:column;
+          gap:0.75rem;
+          margin:0;
+          padding:0;
+        ">
+          <li style="display:flex;gap:0.75rem;align-items:flex-start;font-size:0.92rem;color:var(--prose-text);font-family:var(--sans);line-height:1.55;">
+            <span style="color:var(--accent);flex-shrink:0;margin-top:0.1em;">✦</span>
+            <span><strong style="color:var(--text);font-weight:500;">Who I am:</strong> Vegi Ramesh — AMFI registered Mutual Fund Distributor, ARN-349739. I help individuals invest in mutual funds in a way that matches their goals, income, and risk comfort.</span>
+          </li>
+          <li style="display:flex;gap:0.75rem;align-items:flex-start;font-size:0.92rem;color:var(--prose-text);font-family:var(--sans);line-height:1.55;">
+            <span style="color:var(--accent);flex-shrink:0;margin-top:0.1em;">✦</span>
+            <span><strong style="color:var(--text);font-weight:500;">What I do:</strong> I understand your goals, build a plan, recommend suitable funds, handle the paperwork, and most importantly — keep you from panic-selling during market falls.</span>
+          </li>
+          <li style="display:flex;gap:0.75rem;align-items:flex-start;font-size:0.92rem;color:var(--prose-text);font-family:var(--sans);line-height:1.55;">
+            <span style="color:var(--accent);flex-shrink:0;margin-top:0.1em;">✦</span>
+            <span><strong style="color:var(--text);font-weight:500;">Why mutual funds:</strong> Professionally managed, SEBI regulated, highly liquid, and proven to beat inflation over the long term — more accessible than stocks, more productive than FDs.</span>
+          </li>
+          <li style="display:flex;gap:0.75rem;align-items:flex-start;font-size:0.92rem;color:var(--prose-text);font-family:var(--sans);line-height:1.55;">
+            <span style="color:var(--accent);flex-shrink:0;margin-top:0.1em;">✦</span>
+            <span><strong style="color:var(--text);font-weight:500;">I invest too:</strong> I personally invest in equity — I believe in the same long-term wealth-building principle I recommend to you. You can see my investment approach on this page.</span>
+          </li>
+          <li style="display:flex;gap:0.75rem;align-items:flex-start;font-size:0.92rem;color:var(--prose-text);font-family:var(--sans);line-height:1.55;">
+            <span style="color:var(--accent);flex-shrink:0;margin-top:0.1em;">✦</span>
+            <span><strong style="color:var(--text);font-weight:500;">Ready to start?</strong> You can <a href="InvestorDetails.html" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.4);">share your details</a> directly, or scroll down for the full story if you'd like to know more first.</span>
+          </li>
+        </ul>
+        <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--border);font-size:0.75rem;color:var(--muted);font-family:var(--sans);">
+          The rest of this page is here for complete transparency — use the navigation bar above to jump to any section that interests you.
+        </div>
+      </div>
+    </section>
+
 
     <hr class="section-sep" />
 
@@ -4383,69 +4398,6 @@
       </div>
     </section>
 
-    <hr class="section-sep" />
-
-    <!-- GOAL CALCULATOR -->
-    <section class="section" id="calculator">
-      <div class="section-label">🧮 Plan Ahead</div>
-      <h2>Goal <em>Calculator</em></h2>
-      <div class="prose" style="margin-bottom: 1.8rem;">
-        <p>Map your financial goals — retirement, education, a home — to a monthly SIP, Lumpsum, or a combination of both. Tweak the numbers and watch your plan come together.</p>
-      </div>
-      <!-- Mobile: show a prominent open-in-app button instead of iframe -->
-      <div class="calc-mobile-cta">
-        <div style="font-size: 2.5rem; margin-bottom: 0.8rem;">🧮</div>
-        <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 1.4rem; font-weight: 300;">
-          The calculator works best in full screen on mobile.
-        </p>
-        <a
-          href="./calculator.html"
-          target="_self"
-          rel="noopener"
-          class="nav-profiling-btn"
-          style="padding: 0.85rem 2.2rem; font-size: 0.95rem; border-radius: 8px; display: inline-block;"
-        >Open Goal Calculator ↗</a>
-      </div>
-
-      <!-- Desktop: embedded iframe -->
-      <div class="calc-desktop-embed" style="
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        overflow: hidden;
-        background: var(--surface);
-        position: relative;
-      ">
-        <div id="calc-loader" style="
-          position: absolute;
-          inset: 0;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 0.8rem;
-          background: var(--surface);
-          z-index: 2;
-          pointer-events: none;
-          transition: opacity 0.4s;
-        ">
-          <div style="color: var(--accent); font-size: 1.6rem;">🧮</div>
-          <div style="color: var(--muted); font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;">Loading Calculator…</div>
-        </div>
-        <iframe
-          src="./calculator.html?embed=true"
-          title="Goal Planning Calculator"
-          width="100%"
-          height="700"
-          style="display: block; border: none;"
-          loading="lazy"
-          onload="var l=document.getElementById('calc-loader'); if(l){l.style.opacity='0'; setTimeout(function(){l.style.display='none'},400);}"
-        ></iframe>
-      </div>
-      <p style="font-size:0.78rem; color: var(--muted); margin-top: 0.8rem; text-align: center;" class="calc-desktop-embed">
-        Having trouble viewing?
-        <a href="./calculator.html" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none;">Open in a new tab ↗</a>
-      </p>
-    </section>
 
     <hr class="section-sep" />
 
@@ -4486,27 +4438,7 @@
         >
           Begin Profiling ✦
         </a>
-        <a
-          href="#calculator"
-          style="
-            display: inline-block;
-            padding: 0.85rem 2.2rem;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-family: var(--sans);
-            font-weight: 500;
-            letter-spacing: 0.04em;
-            text-decoration: none;
-            background: var(--surface2);
-            color: var(--text);
-            border: 1px solid var(--border);
-            transition: border-color 0.2s, color 0.2s;
-          "
-          onmouseover="this.style.borderColor='rgba(200,169,110,0.4)';this.style.color='var(--accent)'"
-          onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'"
-        >
-          🧮 Plan a Goal
-        </a>
+
       </div>
       <div
         style="
@@ -4580,7 +4512,6 @@
         <a href="./RiskProfiler.html"
           >Investor Profiling</a
         >
-        <a href="./calculator.html" target = "_blank">Goal Calculator</a>
         <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments." target="_blank" rel="noopener">WhatsApp</a>
         <a href="tel:8329450580">Call Me</a>
         <a href="mailto:rameshvegi94@gmail.com">Email Me</a>
