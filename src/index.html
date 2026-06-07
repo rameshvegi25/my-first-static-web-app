@@ -937,68 +937,128 @@
         position: relative;
         z-index: 1;
       }
-      .sip-inner { max-width: 1080px; margin: 0 auto; }
-      .sip-cards {
+      .sip-inner { max-width: 860px; margin: 0 auto; }
+
+      .sip-setup {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      .sip-setup-question {
+        font-size: 0.92rem;
+        color: var(--muted);
+        font-family: var(--sans);
+        max-width: 520px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      /* Two-person comparison */
+      .sip-compare {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 1fr 1fr;
         gap: 1.25rem;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
       }
-      @media (max-width: 700px) {
-        .sip-cards { grid-template-columns: 1fr; }
+      @media (max-width: 640px) {
+        .sip-compare { grid-template-columns: 1fr; }
       }
-      .sip-card {
+
+      .sip-person {
         background: var(--surface);
         border: 1px solid var(--border);
         border-radius: 16px;
         padding: 1.75rem 1.5rem;
-        text-align: center;
-        transition: border-color 0.3s, transform 0.3s;
+        position: relative;
       }
-      .sip-card:hover {
-        border-color: rgba(200,169,110,0.25);
-        transform: translateY(-3px);
-      }
-      .sip-card--accent {
+      .sip-person--winner {
+        border-color: rgba(200,169,110,0.45);
+        border-width: 2px;
         background: var(--accent-dim);
-        border-color: rgba(200,169,110,0.3);
       }
-      .sip-monthly {
+      .sip-person-name {
         font-family: var(--serif);
         font-size: 1.2rem;
         font-weight: 600;
-        color: var(--accent);
+        color: var(--text);
         margin-bottom: 0.2rem;
       }
-      .sip-since {
-        font-size: 0.72rem;
+      .sip-person--winner .sip-person-name { color: var(--accent); }
+      .sip-person-meta {
+        font-size: 0.75rem;
         color: var(--muted);
         font-family: var(--sans);
-        margin-bottom: 0.75rem;
+        margin-bottom: 1.25rem;
       }
-      .sip-invested {
-        font-size: 0.78rem;
-        color: var(--muted);
+      .sip-person-badge {
+        display: inline-block;
+        font-size: 0.62rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--bg);
+        background: var(--accent);
+        border-radius: 20px;
+        padding: 2px 9px;
+        margin-bottom: 0.85rem;
         font-family: var(--sans);
-        margin-bottom: 1rem;
-        padding-bottom: 1rem;
+      }
+      .sip-breakdown {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1.1rem;
+        padding-bottom: 1.1rem;
         border-bottom: 1px solid var(--border);
       }
-      .sip-invested strong { color: var(--text); }
-      .sip-value {
+      .sip-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--sans);
+        font-size: 0.82rem;
+      }
+      .sip-row-label { color: var(--muted); }
+      .sip-row-val { color: var(--text); font-weight: 500; }
+      .sip-row--returns .sip-row-val { color: #22c55e; }
+      .sip-total-label {
+        font-size: 0.7rem;
+        color: var(--muted);
+        font-family: var(--sans);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.3rem;
+      }
+      .sip-total-val {
         font-family: var(--serif);
-        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        font-size: clamp(1.7rem, 3.5vw, 2.3rem);
         font-weight: 600;
         color: var(--text);
         line-height: 1;
-        margin-bottom: 0.4rem;
       }
-      .sip-growth {
-        font-size: 0.82rem;
-        color: #22c55e;
+      .sip-person--winner .sip-total-val { color: var(--accent); }
+      .sip-multiplier {
+        font-size: 0.8rem;
+        color: var(--muted);
         font-family: var(--sans);
-        font-weight: 500;
+        margin-top: 0.3rem;
       }
+      .sip-person--winner .sip-multiplier { color: var(--accent); opacity: 0.85; }
+
+      /* Punchline box */
+      .sip-punchline {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent);
+        border-radius: 12px;
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 1.25rem;
+        font-family: var(--sans);
+        font-size: 0.9rem;
+        color: var(--text);
+        line-height: 1.7;
+      }
+      .sip-punchline strong { color: var(--accent); }
+
       .sip-disclaimer {
         font-size: 0.7rem;
         color: var(--muted);
@@ -1388,31 +1448,56 @@
       <div class="sip-inner">
         <div class="section-eyebrow">✦ SIP Power ✦</div>
         <h2 class="section-title">Small steps, <em>big outcomes</em></h2>
-        <p class="section-sub">What a monthly SIP in the Nifty 50 index would have grown to:</p>
-        <div class="sip-cards">
-          <div class="sip-card">
-            <div class="sip-monthly">₹5,000 / month</div>
-            <div class="sip-since">since Jan 2005</div>
-            <div class="sip-invested">Invested: <strong id="sip-invested-5k">₹12.0L</strong></div>
-            <div class="sip-value" id="sip-5k">₹—</div>
-            <div class="sip-growth" id="sip-5k-x">—×</div>
+
+        <div class="sip-setup">
+          <p class="sip-setup-question">₹1,000 / month · Nifty 50 · two people, one started 10 years earlier — here's what that gap cost.</p>
+        </div>
+
+        <div class="sip-compare">
+          <!-- Person A: started 2005 -->
+          <div class="sip-person sip-person--winner">
+            <div class="sip-person-badge">Ayesha · started Jan 2005</div>
+            <div class="sip-person-name">Invested for 20 years</div>
+            <div class="sip-breakdown">
+              <div class="sip-row">
+                <span class="sip-row-label">Put in</span>
+                <span class="sip-row-val" id="sip-principal-2005">—</span>
+              </div>
+              <div class="sip-row sip-row--returns">
+                <span class="sip-row-label">Returns</span>
+                <span class="sip-row-val" id="sip-returns-2005">—</span>
+              </div>
+            </div>
+            <div class="sip-total-label">Corpus today</div>
+            <div class="sip-total-val" id="sip-1k-2005">₹—</div>
+            <div class="sip-multiplier" id="sip-mult-2005">—</div>
           </div>
-          <div class="sip-card sip-card--accent">
-            <div class="sip-monthly">₹10,000 / month</div>
-            <div class="sip-since">since Jan 2005</div>
-            <div class="sip-invested">Invested: <strong id="sip-invested-10k">₹24.0L</strong></div>
-            <div class="sip-value" id="sip-10k">₹—</div>
-            <div class="sip-growth" id="sip-10k-x">—×</div>
-          </div>
-          <div class="sip-card">
-            <div class="sip-monthly">₹25,000 / month</div>
-            <div class="sip-since">since Jan 2005</div>
-            <div class="sip-invested">Invested: <strong id="sip-invested-25k">₹60.0L</strong></div>
-            <div class="sip-value" id="sip-25k">₹—</div>
-            <div class="sip-growth" id="sip-25k-x">—×</div>
+
+          <!-- Person B: started 2015 -->
+          <div class="sip-person">
+            <div class="sip-person-badge" style="background:var(--muted);color:var(--bg);">Ravi · started Jan 2015</div>
+            <div class="sip-person-name">Invested for 10 years</div>
+            <div class="sip-breakdown">
+              <div class="sip-row">
+                <span class="sip-row-label">Put in</span>
+                <span class="sip-row-val" id="sip-principal-2015">—</span>
+              </div>
+              <div class="sip-row sip-row--returns">
+                <span class="sip-row-label">Returns</span>
+                <span class="sip-row-val" id="sip-returns-2015">—</span>
+              </div>
+            </div>
+            <div class="sip-total-label">Corpus today</div>
+            <div class="sip-total-val" id="sip-1k-2015">₹—</div>
+            <div class="sip-multiplier" id="sip-mult-2015">—</div>
           </div>
         </div>
-        <p class="sip-disclaimer">Illustrative only. Based on Nifty 50 monthly closing prices. Past performance is not indicative of future results.</p>
+
+        <div class="sip-punchline" id="sip-punchline">
+          <!-- filled by JS -->
+        </div>
+
+        <p class="sip-disclaimer">Illustrative · Nifty 50 monthly closing prices · past performance is not indicative of future results.</p>
       </div>
     </section>
 
@@ -2046,28 +2131,7 @@
       var doubleEl = document.getElementById('double-years');
       if (doubleEl) doubleEl.textContent = doubleYears;
 
-      // SIP invested amounts — calculate from actual months in RAW since 2005-01
-      var sipStart = '2005-01';
-      var sipStartIdx = RAW.findIndex(function(d) { return d[0] === sipStart; });
-      var sipMonths = sipStartIdx >= 0 ? RAW.length - sipStartIdx : 0;
-
-      function fmtInvested(amount) {
-        var total = amount * sipMonths;
-        if (total >= 10000000) return '₹' + (total/10000000).toFixed(1) + 'Cr';
-        if (total >= 100000)   return '₹' + (total/100000).toFixed(1) + 'L';
-        return '₹' + total.toLocaleString('en-IN');
-      }
-
-      var inv5k  = document.getElementById('sip-invested-5k');
-      var inv10k = document.getElementById('sip-invested-10k');
-      var inv25k = document.getElementById('sip-invested-25k');
-      if (inv5k)  inv5k.textContent  = fmtInvested(5000);
-      if (inv10k) inv10k.textContent = fmtInvested(10000);
-      if (inv25k) inv25k.textContent = fmtInvested(25000);
-
       // ── 3. SIP calculator from RAW data ──
-      // SIP: invest X at start of each month, value = units × current price
-      // Units bought = amount / closing price of that month
       function calcSIP(monthlyAmount, fromLabel) {
         var startIdx = RAW.findIndex(function(d) { return d[0] === fromLabel; });
         if (startIdx < 0) return null;
@@ -2078,7 +2142,8 @@
         var currentValue = totalUnits * last;
         var months = RAW.length - startIdx;
         var invested = monthlyAmount * months;
-        return { value: currentValue, invested: invested, multiple: currentValue / invested };
+        var returns = currentValue - invested;
+        return { value: currentValue, invested: invested, returns: returns, multiple: currentValue / invested };
       }
 
       function fmtCr(v) {
@@ -2087,21 +2152,29 @@
         return '₹' + Math.round(v).toLocaleString('en-IN');
       }
 
-      var sip5k  = calcSIP(5000,  '2005-01');
-      var sip10k = calcSIP(10000, '2005-01');
-      var sip25k = calcSIP(25000, '2005-01');
+      var sip2005 = calcSIP(1000, '2005-01');
+      var sip2015 = calcSIP(1000, '2015-01');
 
-      if (sip5k) {
-        document.getElementById('sip-5k').textContent   = fmtCr(sip5k.value);
-        document.getElementById('sip-5k-x').textContent = sip5k.multiple.toFixed(1) + '× your money';
+      if (sip2005) {
+        document.getElementById('sip-principal-2005').textContent = fmtCr(sip2005.invested);
+        document.getElementById('sip-returns-2005').textContent   = '+' + fmtCr(sip2005.returns);
+        document.getElementById('sip-1k-2005').textContent        = fmtCr(sip2005.value);
+        document.getElementById('sip-mult-2005').textContent      = 'Grew ' + sip2005.multiple.toFixed(1) + '×';
       }
-      if (sip10k) {
-        document.getElementById('sip-10k').textContent   = fmtCr(sip10k.value);
-        document.getElementById('sip-10k-x').textContent = sip10k.multiple.toFixed(1) + '× your money';
+      if (sip2015) {
+        document.getElementById('sip-principal-2015').textContent = fmtCr(sip2015.invested);
+        document.getElementById('sip-returns-2015').textContent   = '+' + fmtCr(sip2015.returns);
+        document.getElementById('sip-1k-2015').textContent        = fmtCr(sip2015.value);
+        document.getElementById('sip-mult-2015').textContent      = 'Grew ' + sip2015.multiple.toFixed(1) + '×';
       }
-      if (sip25k) {
-        document.getElementById('sip-25k').textContent   = fmtCr(sip25k.value);
-        document.getElementById('sip-25k-x').textContent = sip25k.multiple.toFixed(1) + '× your money';
+
+      // Dynamic punchline
+      if (sip2005 && sip2015) {
+        var punchEl = document.getElementById('sip-punchline');
+        if (punchEl) {
+          punchEl.innerHTML =
+            '💡 Ayesha\'s profit alone (' + fmtCr(sip2005.returns) + ') is more than Ravi\'s entire corpus (' + fmtCr(sip2015.value) + ').<br><strong>Just because she started early.</strong>';
+        }
       }
     });
     </script>
