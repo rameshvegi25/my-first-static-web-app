@@ -730,6 +730,19 @@
       return displayH + ':' + displayM + ' ' + period;
     }
 
+    function isSlotPast(slot, now) {
+      var match = slot.match(/(\d+):(\d+)\s(AM|PM)/);
+      if (!match) return false;
+      var h = parseInt(match[1]);
+      var m = parseInt(match[2]);
+      var period = match[3];
+      if (period === 'PM' && h !== 12) h += 12;
+      if (period === 'AM' && h === 12) h = 0;
+      var slotMinutes = h * 60 + m;
+      var nowMinutes = now.getHours() * 60 + now.getMinutes();
+      return slotMinutes <= nowMinutes;
+    }
+
     // ── Date strip: today (future slots only) + next 10 days ──
     function buildDateStrip() {
       var strip = document.getElementById('week-strip');
@@ -781,20 +794,6 @@
 
         strip.appendChild(btn);
       }
-    }
-
-    // Returns true if a slot string like "9:00 AM" is already past (for today)
-    function isSlotPast(slot, now) {
-      var match = slot.match(/^(\d+):(\d+)\s(AM|PM)$/);
-      if (!match) return false;
-      var h = parseInt(match[1]);
-      var m = parseInt(match[2]);
-      var period = match[3];
-      if (period === 'PM' && h !== 12) h += 12;
-      if (period === 'AM' && h === 12) h = 0;
-      var slotMinutes = h * 60 + m;
-      var nowMinutes = now.getHours() * 60 + now.getMinutes();
-      return slotMinutes <= nowMinutes;
     }
 
     function renderSlots(date) {
@@ -874,7 +873,7 @@
       if (!selectedDate) errors.push('Please select a date.');
       if (!selectedSlot) errors.push('Please select a time slot.');
       if (!name) { errors.push('Please enter your name.'); nameInput.classList.add('error'); }
-      if (!phone || !/^[6-9]\d{9}$/.test(phone.replace(/\s/g, ''))) {
+      if (!phone || !/^\d{10}$/.test(phone.replace(/\s/g, ''))) {
         errors.push('Please enter a valid 10-digit mobile number.');
         phoneInput.closest('.phone-wrap').classList.add('error');
         phoneInput.classList.add('error');
@@ -895,7 +894,13 @@
                       MONTH_NAMES_SHORT[selectedDate.getMonth()] + ' ' +
                       selectedDate.getFullYear();
 
-      var message = "Hi Ramesh, I\u2019d like to book a call. Date: " + dateLabel + ", Time: " + selectedSlot + ", Name: " + name + ", Phone: +91" + phone;
+      var message = [
+        "Hi Ramesh, I\u2019d like to book a call regarding mutual funds.",
+        "Date: " + dateLabel,
+        "Time: " + selectedSlot,
+        "Name: " + name,
+        "Phone: +91" + phone
+      ].join("\n");
       var encoded = encodeURIComponent(message);
       var url = 'https://wa.me/918329450580?text=' + encoded;
 
