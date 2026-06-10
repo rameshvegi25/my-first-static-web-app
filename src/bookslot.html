@@ -730,29 +730,36 @@
       return displayH + ':' + displayM + ' ' + period;
     }
 
-    // ── Date strip: tomorrow + 1 more day (book up to 1 day ahead, no same-day) ──
+    // ── Date strip: today (future slots only) + next 10 days ──
     function buildDateStrip() {
       var strip = document.getElementById('week-strip');
       strip.innerHTML = '';
 
-      var today = new Date();
+      var now = new Date();
+      var today = new Date(now);
       today.setHours(0,0,0,0);
 
       var DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
       var MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
-      // Show next 10 days (tomorrow through 10 days ahead), all bookable
-      for (var i = 1; i <= 10; i++) {
+      // Show today (if future slots remain) + next 10 days
+      for (var i = 0; i <= 10; i++) {
         var d = new Date(today);
         d.setDate(today.getDate() + i);
 
-        var isAvailable = true; // all 10 days ahead are bookable
+        // For today, check if any slots remain after current time
+        var isToday = i === 0;
+        var isAvailable = true;
         var dayOfWeek = d.getDay(); // 0=Sun,6=Sat
+
+        if (isToday) {
+          var isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+          var futureSlots = generateSlots(isWeekend).filter(function(s) { return !isSlotPast(s, now); });
+          if (futureSlots.length === 0) continue;
+        }
 
         var btn = document.createElement('button');
         btn.className = 'day-btn';
-        btn.disabled = !isAvailable;
-        if (!isAvailable) btn.setAttribute('aria-disabled', 'true');
 
         btn.innerHTML =
           '<span class="day-name">' + DAY_NAMES[dayOfWeek] + '</span>' +
@@ -776,11 +783,29 @@
       }
     }
 
+    // Returns true if a slot string like "9:00 AM" is already past (for today)
+    function isSlotPast(slot, now) {
+      var match = slot.match(/^(\d+):(\d+)\s(AM|PM)$/);
+      if (!match) return false;
+      var h = parseInt(match[1]);
+      var m = parseInt(match[2]);
+      var period = match[3];
+      if (period === 'PM' && h !== 12) h += 12;
+      if (period === 'AM' && h === 12) h = 0;
+      var slotMinutes = h * 60 + m;
+      var nowMinutes = now.getHours() * 60 + now.getMinutes();
+      return slotMinutes <= nowMinutes;
+    }
+
     function renderSlots(date) {
       var container = document.getElementById('slots-container');
+      var now = new Date();
+      var todayMidnight = new Date(now); todayMidnight.setHours(0,0,0,0);
+      var isToday = date.getTime() === todayMidnight.getTime();
       var dayOfWeek = date.getDay();
       var isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
       var slots = generateSlots(isWeekend);
+      if (isToday) slots = slots.filter(function(s) { return !isSlotPast(s, now); });
 
       var grid = document.createElement('div');
       grid.className = 'slots-grid';
