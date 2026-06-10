@@ -243,6 +243,74 @@
         background: var(--accent-dim);
       }
 
+      /* ── JOURNEY COUNTER ── */
+      .journey-counter {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.55rem;
+        opacity: 0;
+        animation: fadeUp 0.7s ease 0.4s forwards;
+        margin-top: 0.25rem;
+      }
+
+      .journey-pills {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .journey-units {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 0.55rem 1.4rem;
+        box-shadow: 0 0 20px var(--accent-glow);
+      }
+
+      .journey-unit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.1rem;
+        min-width: 2.8rem;
+      }
+
+      .journey-num {
+        font-family: var(--serif);
+        font-size: 1.65rem;
+        font-weight: 600;
+        color: var(--accent);
+        line-height: 1;
+        letter-spacing: -0.01em;
+        transition: transform 0.2s ease;
+      }
+
+      .journey-unit-label {
+        font-size: 0.6rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-family: var(--sans);
+      }
+
+      .journey-sep {
+        font-size: 1.1rem;
+        color: var(--border);
+        line-height: 1;
+        align-self: center;
+        margin-bottom: 0.5rem;
+      }
+
+      @media (max-width: 400px) {
+        .journey-num { font-size: 1.35rem; }
+        .journey-units { padding: 0.5rem 1rem; gap: 0.4rem; }
+        .journey-unit { min-width: 2.2rem; }
+      }
+
       /* ── CARDS SECTION ── */
       .cards-section {
         position: relative;
@@ -1309,7 +1377,33 @@
     <header class="hero">
       <div class="hero-eyebrow">Mutual Fund Distributor</div>
       <h1>Your goals. Your pace.<br /><em>Your plan.</em></h1>
-      <p class="hero-sub" id="hero-social-proof">Walking alongside 8 families towards their financial goals · since February 2026</p>
+      <!-- Journey Counter Widget -->
+      <div class="journey-counter" id="hero-social-proof" aria-label="Journey duration since February 2026">
+        <div class="journey-pills">
+          <div class="journey-units">
+            <div class="journey-unit">
+              <span class="journey-num" id="jc-families">0</span>
+              <span class="journey-unit-label">families</span>
+            </div>
+          </div>
+          <div class="journey-units">
+            <div class="journey-unit">
+              <span class="journey-num" id="jc-years">0</span>
+              <span class="journey-unit-label">years</span>
+            </div>
+            <div class="journey-sep" id="jc-sep-months">·</div>
+            <div class="journey-unit">
+              <span class="journey-num" id="jc-months">0</span>
+              <span class="journey-unit-label">months</span>
+            </div>
+            <div class="journey-sep" id="jc-sep-days">·</div>
+            <div class="journey-unit">
+              <span class="journey-num" id="jc-days">0</span>
+              <span class="journey-unit-label">days</span>
+            </div>
+          </div>
+        </div>
+      </div>
       <a href="bookslot.html" class="hero-cta">Book a call with Me →</a>
       <div class="hero-arn-mobile">AMFI Registered · ARN-349739</div>
 
@@ -1677,12 +1771,51 @@
     </a>
 
     <script>
-      // ── UPDATE THESE when client count or start date changes ──
-      var FAMILIES_COUNT = 8;
-      var SINCE_DATE     = 'February 2026';
-      // ─────────────────────────────────────────────────────────
-      var el = document.getElementById('hero-social-proof');
-      if (el) el.textContent = 'Walking alongside ' + FAMILIES_COUNT + ' families towards their financial goals · since ' + SINCE_DATE;
+      // ── Journey Counter: ticking since 1 Feb 2026 ──
+      (function() {
+        // ── UPDATE THIS when family count changes ──
+        var FAMILIES_COUNT = 8;
+        // ──────────────────────────────────────────
+        var START = new Date('2026-02-01T00:00:00');
+
+        var fEl = document.getElementById('jc-families');
+        if (fEl) fEl.textContent = FAMILIES_COUNT;
+
+        function update() {
+          var now   = new Date();
+          var yrs   = 0, mos = 0, dys = 0;
+
+          var y1 = START.getFullYear(), m1 = START.getMonth(), d1 = START.getDate();
+          var y2 = now.getFullYear(),   m2 = now.getMonth(),   d2 = now.getDate();
+
+          yrs = y2 - y1;
+          mos = m2 - m1;
+          dys = d2 - d1;
+
+          if (dys < 0) {
+            mos--;
+            var prevMonth = new Date(y2, m2, 0);
+            dys += prevMonth.getDate();
+          }
+          if (mos < 0) { yrs--; mos += 12; }
+
+          var yEl = document.getElementById('jc-years');
+          var mEl = document.getElementById('jc-months');
+          var dEl = document.getElementById('jc-days');
+          var ySep = document.getElementById('jc-sep-months');
+          var mSep = document.getElementById('jc-sep-days');
+
+          if (yEl) { yEl.textContent = yrs; yEl.closest('.journey-unit').style.display = yrs === 0 ? 'none' : ''; }
+          if (ySep) ySep.style.display = yrs === 0 ? 'none' : '';
+          if (mEl) { mEl.textContent = mos; mEl.closest('.journey-unit').style.display = mos === 0 ? 'none' : ''; }
+          if (mSep) mSep.style.display = mos === 0 ? 'none' : '';
+          if (dEl) { dEl.textContent = dys; dEl.closest('.journey-unit').style.display = dys === 0 ? 'none' : ''; }
+        }
+
+        update();
+        // refresh every minute
+        setInterval(update, 60000);
+      })();
 
       function toggleTheme() {
         var html = document.documentElement;
