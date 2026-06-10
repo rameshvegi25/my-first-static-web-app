@@ -634,6 +634,23 @@
         z-index: 1;
       }
 
+      .quote-refresh {
+        position: absolute;
+        bottom: 0.85rem;
+        right: 0.95rem;
+        z-index: 2;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.3rem;
+        color: var(--muted);
+        opacity: 0.45;
+        transition: opacity 0.2s, transform 0.4s;
+        line-height: 1;
+      }
+      .quote-refresh:hover { opacity: 0.85; }
+      .quote-refresh.spinning { transform: rotate(360deg); }
+
       @media (max-width: 600px) {
         .quote-section {
           padding: 0 1rem 2rem;
@@ -1429,6 +1446,12 @@
         <div class="quote-divider"></div>
         <div class="quote-author" id="quote-author"></div>
         <div class="quote-label" id="quote-label"></div>
+        <button class="quote-refresh" id="quote-refresh" title="Show another quote" aria-label="Refresh quote">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+          </svg>
+        </button>
       </div>
     </section>
 
@@ -1880,10 +1903,29 @@
         var seed = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
         var index = seed % quotes.length;
 
-        var q = quotes[index];
-        document.getElementById("quote-text").textContent = q.text;
-        document.getElementById("quote-author").textContent = q.author;
-        document.getElementById("quote-label").textContent = q.label;
+        function showQuote(i) {
+          var q = quotes[i];
+          document.getElementById("quote-text").textContent = q.text;
+          document.getElementById("quote-author").textContent = q.author;
+          document.getElementById("quote-label").textContent = q.label;
+        }
+
+        showQuote(index);
+
+        var refreshBtn = document.getElementById("quote-refresh");
+        if (refreshBtn) {
+          refreshBtn.addEventListener("click", function() {
+            var next;
+            do { next = Math.floor(Math.random() * quotes.length); } while (next === index);
+            index = next;
+            showQuote(index);
+            // spin animation
+            refreshBtn.classList.remove("spinning");
+            void refreshBtn.offsetWidth; // reflow
+            refreshBtn.classList.add("spinning");
+            setTimeout(function() { refreshBtn.classList.remove("spinning"); }, 400);
+          });
+        }
       })();
     </script>
 
