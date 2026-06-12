@@ -651,6 +651,20 @@
       .quote-refresh:hover { opacity: 0.85; }
       .quote-refresh.spinning { transform: rotate(360deg); }
 
+      /* Quote transition */
+      .quote-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+      }
+      .quote-body.fading {
+        opacity: 0;
+        transform: translateY(8px);
+        filter: blur(4px);
+      }
+
       @media (max-width: 600px) {
         .quote-section {
           padding: 0 1rem 2rem;
@@ -1441,11 +1455,13 @@
     <section class="quote-section" id="section-thought">
       <div class="quote-widget">
         <div class="quote-eyebrow">✦ Thought I keep coming back to ✦</div>
-        <div class="quote-mark">"</div>
-        <p class="quote-text" id="quote-text"></p>
-        <div class="quote-divider"></div>
-        <div class="quote-author" id="quote-author"></div>
-        <div class="quote-label" id="quote-label"></div>
+        <div class="quote-body" id="quote-body">
+          <div class="quote-mark">"</div>
+          <p class="quote-text" id="quote-text"></p>
+          <div class="quote-divider"></div>
+          <div class="quote-author" id="quote-author"></div>
+          <div class="quote-label" id="quote-label"></div>
+        </div>
         <button class="quote-refresh" id="quote-refresh" title="Show another quote" aria-label="Refresh quote">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="23 4 23 10 17 10"></polyline>
@@ -1910,6 +1926,15 @@
           document.getElementById("quote-label").textContent = q.label;
         }
 
+        function showQuoteAnimated(i) {
+          var body = document.getElementById("quote-body");
+          body.classList.add("fading");
+          setTimeout(function() {
+            showQuote(i);
+            body.classList.remove("fading");
+          }, 300);
+        }
+
         showQuote(index);
 
         var refreshBtn = document.getElementById("quote-refresh");
@@ -1918,7 +1943,7 @@
             var next;
             do { next = Math.floor(Math.random() * quotes.length); } while (next === index);
             index = next;
-            showQuote(index);
+            showQuoteAnimated(index);
             // spin animation
             refreshBtn.classList.remove("spinning");
             void refreshBtn.offsetWidth; // reflow
