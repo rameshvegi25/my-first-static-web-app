@@ -266,7 +266,7 @@
 
           <!-- Monthly expenses -->
           <div class="form-field full-width">
-            <label class="field-label" for="monthlyExpenses">Monthly Expenses in Today's Terms <span class="tip-icon" data-tip="How much do you spend per month right now? We'll inflation-adjust this to find what you'll need at retirement. Include rent, food, utilities, lifestyle — everything that sustains your life.">ℹ</span></label>
+            <label class="field-label" for="monthlyExpenses">Monthly Expenses in Today's Terms <span class="tip-icon" data-tip="How much would you spend per month if you were retired today — with no EMIs, no school fees, just your life as it should be? Imagine you have 2 grown children and 4 grandkids to celebrate occasions with. Include housing, food, utilities, travel, health, and lifestyle. We'll inflation-adjust this to find what you'll actually need at retirement.">ℹ</span></label>
             <div class="input-prefix-wrap">
               <span class="input-prefix">₹</span>
               <input class="text-input" id="monthlyExpenses" type="text" placeholder="e.g. 50,000" autocomplete="off" inputmode="numeric" oninput="formatMoneyInput(this); onAnyInput();" onkeydown="handleMoneyKeydown(event)" />
@@ -299,15 +299,16 @@
 
 
 
-          <!-- Life expectancy -->
+          <!-- NPS Deferral Age -->
           <div class="form-field">
-            <label class="field-label" for="lifeExpectancy">Life Expectancy <span class="tip-icon" data-tip="How long do you plan to fund your retirement? Plan generously — medical advances mean many people live longer than expected. 85–90 is a safe planning horizon for most.">ℹ</span></label>
+            <label class="field-label" for="npsWithdrawalAge">Stay Invested in NPS Until <span class="tip-icon" data-tip="You don't have to withdraw NPS at retirement. You can defer your NPS withdrawal and let it keep compounding — PFRDA allows deferral up to age 75. Set this equal to your retirement age to withdraw immediately, or push it higher to let the corpus grow further before you start drawing down.">ℹ</span></label>
             <div class="slider-wrap">
               <div class="slider-row">
-                <input type="range" id="lifeExpectancy" min="70" max="100" value="85" oninput="syncSlider('lifeExpectancy','lifeExpectancyVal'); onAnyInput('slider');" />
-                <input class="slider-value-input" id="lifeExpectancyVal" type="number" min="70" max="100" step="1" value="85" oninput="syncValInput('lifeExpectancy','lifeExpectancyVal'); onAnyInput('slider');" onblur="clampValInput('lifeExpectancy','lifeExpectancyVal'); onAnyInput('slider');" />
+                <input type="range" id="npsWithdrawalAge" min="60" max="80" value="60" oninput="syncSlider('npsWithdrawalAge','npsWithdrawalAgeVal'); onAnyInput('slider');" />
+                <input class="slider-value-input" id="npsWithdrawalAgeVal" type="number" min="60" max="80" step="1" value="60" oninput="syncValInput('npsWithdrawalAge','npsWithdrawalAgeVal'); onAnyInput('slider');" onblur="clampValInput('npsWithdrawalAge','npsWithdrawalAgeVal'); onAnyInput('slider');" />
               </div>
-              <div class="slider-limits"><span>70 yrs</span><span>100 yrs</span></div>
+              <div class="slider-limits"><span>60 yrs</span><span>80 yrs</span></div>
+              <div id="deferralLabel" style="font-size:0.72rem;margin-top:0.3rem;color:var(--muted);"></div>
             </div>
           </div>
 
@@ -324,27 +325,27 @@
           </div>
 
           <!-- Accumulation return (pre-retirement) -->
-          <div class="form-field">
+          <div class="form-field full-width">
             <label class="field-label" for="accumulationReturn">Return While Accumulating <span class="tip-icon" data-tip="Expected annual return on your NPS investments during the working years. NPS Tier I equity (E) tier has historically returned ~12–14%. A blended E+C+G portfolio might average 10–12%. Be conservative — you'll live with the outcome.">ℹ</span></label>
             <div class="slider-wrap">
               <div class="slider-row">
-                <input type="range" id="accumulationReturn" min="5" max="18" value="11" step="0.5" oninput="syncSlider('accumulationReturn','accumulationReturnVal'); onAnyInput('slider');" />
-                <input class="slider-value-input" id="accumulationReturnVal" type="number" min="5" max="18" step="0.5" value="11" oninput="syncValInput('accumulationReturn','accumulationReturnVal'); onAnyInput('slider');" onblur="clampValInput('accumulationReturn','accumulationReturnVal'); onAnyInput('slider');" />
+                <input type="range" id="accumulationReturn" min="5" max="16" value="10" step="0.5" oninput="syncSlider('accumulationReturn','accumulationReturnVal'); onAnyInput('slider');" />
+                <input class="slider-value-input" id="accumulationReturnVal" type="number" min="5" max="16" step="0.5" value="10" oninput="syncValInput('accumulationReturn','accumulationReturnVal'); onAnyInput('slider');" onblur="clampValInput('accumulationReturn','accumulationReturnVal'); onAnyInput('slider');" />
               </div>
-              <div class="slider-limits"><span>5% p.a.</span><span>18% p.a.</span></div>
+              <div class="slider-limits"><span>5% p.a.</span><span>16% p.a.</span></div>
               <div class="return-zone-label" id="accumZoneLabel"></div>
             </div>
           </div>
 
           <!-- Withdrawal return (post-retirement) -->
           <div class="form-field">
-            <label class="field-label" for="withdrawalReturn">Annuity Rate <span class="tip-icon" data-tip="The annual return on the annuity purchased with your NPS corpus at retirement. Annuity providers in India typically offer 5–7% p.a. This directly determines your fixed monthly income for life.">ℹ</span></label>
+            <label class="field-label" for="withdrawalReturn">Annuity Rate <span class="tip-icon" data-tip="The annual return on the annuity purchased with your NPS corpus at retirement. This rate depends heavily on the annuity type you choose — self-only annuities pay the highest rate; adding a spouse as joint annuitant lowers it; adding 'return of purchase price' to nominees lowers it further. Pick a rate that matches the annuity option you're likely to choose.">ℹ</span></label>
             <div class="slider-wrap">
               <div class="slider-row">
-                <input type="range" id="withdrawalReturn" min="4" max="9" value="6" step="0.5" oninput="syncSlider('withdrawalReturn','withdrawalReturnVal'); onAnyInput('slider');" />
-                <input class="slider-value-input" id="withdrawalReturnVal" type="number" min="4" max="9" step="0.5" value="6" oninput="syncValInput('withdrawalReturn','withdrawalReturnVal'); onAnyInput('slider');" onblur="clampValInput('withdrawalReturn','withdrawalReturnVal'); onAnyInput('slider');" />
+                <input type="range" id="withdrawalReturn" min="4" max="7" value="5.5" step="0.5" oninput="syncSlider('withdrawalReturn','withdrawalReturnVal'); onAnyInput('slider');" />
+                <input class="slider-value-input" id="withdrawalReturnVal" type="number" min="4" max="7" step="0.5" value="5.5" oninput="syncValInput('withdrawalReturn','withdrawalReturnVal'); onAnyInput('slider');" onblur="clampValInput('withdrawalReturn','withdrawalReturnVal'); onAnyInput('slider');" />
               </div>
-              <div class="slider-limits"><span>4% p.a.</span><span>9% p.a.</span></div>
+              <div class="slider-limits"><span>4% p.a.</span><span>7% p.a.</span></div>
             </div>
           </div>
 
@@ -353,22 +354,23 @@
             <label class="field-label" for="stepUp">Annual SIP Step-Up <span class="tip-icon" data-tip="As your salary grows, you can increase your SIP each year. A 10% annual step-up lets you start smaller and grow with your income. Setting this to 0 gives a flat SIP.">ℹ</span></label>
             <div class="slider-wrap">
               <div class="slider-row">
-                <input type="range" id="stepUp" min="0" max="20" value="10" step="1" oninput="syncSlider('stepUp','stepUpVal'); onAnyInput('slider');" />
-                <input class="slider-value-input" id="stepUpVal" type="number" min="0" max="20" step="1" value="10" oninput="syncValInput('stepUp','stepUpVal'); onAnyInput('slider');" onblur="clampValInput('stepUp','stepUpVal'); onAnyInput('slider');" />
+                <input type="range" id="stepUp" min="0" max="10" value="6" step="1" oninput="syncSlider('stepUp','stepUpVal'); onAnyInput('slider');" />
+                <input class="slider-value-input" id="stepUpVal" type="number" min="0" max="10" step="1" value="6" oninput="syncValInput('stepUp','stepUpVal'); onAnyInput('slider');" onblur="clampValInput('stepUp','stepUpVal'); onAnyInput('slider');" />
               </div>
-              <div class="slider-limits"><span>0% (flat)</span><span>20% p.a.</span></div>
+              <div class="slider-limits"><span>0% (flat)</span><span>10% p.a.</span></div>
             </div>
           </div>
 
           <!-- NPS withdrawal split -->
           <div class="form-field full-width" style="margin-top:0.5rem;">
-            <label class="field-label" for="lumpsumPct">NPS Lumpsum Withdrawal at Retirement <span class="tip-icon" data-tip="As per updated PFRDA rules, you can withdraw up to 80% of your NPS corpus as a tax-free lumpsum. The remaining (minimum 20%) must be used to purchase an annuity, which gives you a fixed monthly income for life.">ℹ</span></label>
+            <label class="field-label" for="lumpsumPct">Annuity Percentage <span class="tip-icon" data-tip="What portion of your NPS corpus goes into an annuity at retirement — which pays you a fixed pension for life. PFRDA mandates a minimum of 20% annuity; the rest (up to 80%) can be taken as a tax-free lumpsum, yours to use freely. Your target pension stays the same no matter where you set this slider — a lower annuity % simply means a larger total corpus (and SIP) is needed to fund the same fixed pension, with the difference paid out as a tax-free lumpsum.">ℹ</span></label>
             <div class="slider-wrap">
               <div class="slider-row">
-                <input type="range" id="lumpsumPct" min="0" max="80" value="80" step="5" oninput="syncSlider('lumpsumPct','lumpsumPctVal'); onAnyInput('slider');" />
-                <input class="slider-value-input" id="lumpsumPctVal" type="number" min="0" max="80" step="5" value="80" oninput="syncValInput('lumpsumPct','lumpsumPctVal'); onAnyInput('slider');" onblur="clampValInput('lumpsumPct','lumpsumPctVal'); onAnyInput('slider');" />
+                <input type="range" id="lumpsumPct" min="0" max="80" value="0" step="1" oninput="syncSlider('lumpsumPct','lumpsumPctVal'); onAnyInput('slider');" />
+                <input class="slider-value-input" id="lumpsumPctVal" type="number" min="0" max="80" step="1" value="0" oninput="syncValInput('lumpsumPct','lumpsumPctVal'); onAnyInput('slider');" onblur="clampValInput('lumpsumPct','lumpsumPctVal'); onAnyInput('slider');" />
               </div>
-              <div class="slider-limits"><span>0% lumpsum</span><span>80% lumpsum</span></div>
+              <div class="slider-limits"><span>100% annuity</span><span>20% annuity</span></div>
+              <div id="lumpsumNote" style="display:none; font-size:0.78rem; color:var(--prose-text); font-weight:300; line-height:1.5; margin-top:0.4rem; padding:0.6rem 0.8rem; background:var(--accent-glow); border-left:3px solid var(--accent); border-radius:0 8px 8px 0;"></div>
             </div>
           </div>
 
@@ -426,7 +428,15 @@
       <div id="discCard" style="display:none;">
         <div class="disc-card">
           <div class="disc-label">✦ A Note on These Numbers</div>
-          <div class="disc-text">These projections are based on the assumptions you've entered. Real-world returns, inflation, and expenses will vary. NPS at maturity requires a minimum 20% of your corpus to be used for annuity purchase — the annuity rate shown is an assumption, not a guaranteed rate from any provider; actual rates vary by insurer and your age at purchase. <strong style="color:var(--text);">Annuity income is fully taxable as per your income tax slab</strong> — unlike the lumpsum withdrawal which is tax-free. The 60% lumpsum withdrawal at NPS maturity is exempt from tax. Tax treatment and withdrawal rules are subject to change. This is for planning purposes only and does not constitute financial advice.</div>
+          <ul class="disc-text" style="padding-left:1.1rem; display:flex; flex-direction:column; gap:0.4rem;">
+            <li>These projections are based on the assumptions you've entered — real-world returns, inflation, and expenses will vary.</li>
+            <li>NPS at maturity requires a minimum 20% of your corpus to be used for annuity purchase. The annuity rate shown is an assumption, not a guaranteed rate — actual rates vary by insurer and your age at purchase.</li>
+            <li>Your fixed monthly pension is a planning target that stays constant regardless of the annuity/lumpsum split — a lower annuity allocation simply means a larger total corpus is needed to fund the same pension.</li>
+            <li><strong style="color:var(--text);">Annuity income is fully taxable</strong> as per your income tax slab — unlike the lumpsum withdrawal, which is completely tax-free with no restrictions on how it's used.</li>
+            <li>Annuities pay a fixed pension for the annuitant's actual life — insurers pool this across many annuitants using their own mortality assumptions, priced into the annuity rate. This is independent of any life-expectancy figure you might personally plan around.</li>
+            <li>The "Annuity Percentage" slider is yours to set based on your own view of your life expectancy, health, family history, and other income sources. A higher annuity % means a larger guaranteed pension and smaller lumpsum; a lower annuity % means a smaller (but still lifelong) pension with a larger tax-free lumpsum for other goals.</li>
+            <li>Tax treatment and withdrawal rules are subject to change. This is for planning purposes only and does not constitute financial advice.</li>
+          </ul>
         </div>
       </div>
 
@@ -527,9 +537,9 @@
         var muted=[105,90,58], gold=[200,169,110], orange=[212,120,45], red=[192,52,40];
         var rgb;
         if (val <= 8)        rgb = lerpColor(muted, gold, (val - 5) / 3);
-        else if (val <= 12)  rgb = gold;
-        else if (val <= 15)  rgb = lerpColor(gold, orange, (val - 12) / 3);
-        else                 rgb = lerpColor(orange, red, Math.min(1, (val - 15) / 3));
+        else if (val <= 11)  rgb = gold;
+        else if (val <= 14)  rgb = lerpColor(gold, orange, (val - 11) / 3);
+        else                 rgb = lerpColor(orange, red, Math.min(1, (val - 14) / 2));
         return "rgb("+rgb[0]+","+rgb[1]+","+rgb[2]+")";
       }
 
@@ -546,20 +556,42 @@
           if (vi) vi.style.color = getReturnColor(val);
           var lbl = document.getElementById("accumZoneLabel");
           if (lbl) {
-            var zones = val<=8?"Modest — stable and predictable":val<=14?"Historically where most investors land":val<=17?"Few funds have sustained this":"⚠ Rare — risky to plan around";
+            var zones = val<=8?"Modest — stable and predictable":val<=12?"Historically where most investors land":val<=14?"Few funds have sustained this":"⚠ Rare — risky to plan around";
             lbl.textContent = zones; lbl.style.color = getReturnColor(val);
           }
           var card = document.getElementById("mainCalcCard");
           if (card) {
-            card.classList.toggle("danger-zone", val > 16);
-            if (val > 17 && !card.classList.contains("_shook")) {
+            card.classList.toggle("danger-zone", val > 14);
+            if (val > 15 && !card.classList.contains("_shook")) {
               card.classList.add("_shook");
               card.classList.remove("danger-shake"); void card.offsetWidth; card.classList.add("danger-shake");
               card.addEventListener("animationend", function(){ card.classList.remove("danger-shake"); card.classList.remove("_shook"); }, {once:true});
             }
           }
         }
-        if (["currentAge","retirementAge","lifeExpectancy"].includes(sliderId)) {}
+        if (["currentAge","retirementAge","npsWithdrawalAge"].includes(sliderId)) {
+          var raEl = document.getElementById("retirementAge");
+          var waEl = document.getElementById("npsWithdrawalAge");
+          var waValEl = document.getElementById("npsWithdrawalAgeVal");
+          if (raEl && waEl && waValEl) {
+            var raVal = parseInt(raEl.value) || 60;
+            var minWa = Math.max(60, raVal);
+            waEl.min = minWa;
+            waValEl.min = minWa;
+            if (parseInt(waEl.value) < minWa) { waEl.value = minWa; waValEl.value = minWa; }
+            var deferLbl = document.getElementById("deferralLabel");
+            if (deferLbl) {
+              var diff = parseInt(waEl.value) - raVal;
+              if (diff > 0) {
+                deferLbl.textContent = "+" + diff + " extra year" + (diff > 1 ? "s" : "") + " of compounding after retirement";
+                deferLbl.style.color = "var(--safe)";
+              } else {
+                deferLbl.textContent = "Withdraw at retirement — no deferral";
+                deferLbl.style.color = "var(--muted)";
+              }
+            }
+          }
+        }
       }
       function clampValInput(sliderId, valId) {
         var slider = document.getElementById(sliderId);
@@ -592,14 +624,14 @@
         if (sliderId === "accumulationReturn") {
           vi.style.color = getReturnColor(num);
           var lbl = document.getElementById("accumZoneLabel");
-          if (lbl) { var zones = num<=8?"Modest — stable and predictable":num<=14?"Historically where most investors land":num<=17?"Few funds have sustained this":"⚠ Rare — risky to plan around"; lbl.textContent = zones; lbl.style.color = getReturnColor(num); }
+          if (lbl) { var zones = num<=8?"Modest — stable and predictable":num<=12?"Historically where most investors land":num<=14?"Few funds have sustained this":"⚠ Rare — risky to plan around"; lbl.textContent = zones; lbl.style.color = getReturnColor(num); }
           var card = document.getElementById("mainCalcCard");
-          if (card) { card.classList.toggle("danger-zone", num > 16); }
+          if (card) { card.classList.toggle("danger-zone", num > 14); }
         }
       }
       // Init all sliders
-      ["currentAge","retirementAge","lifeExpectancy","inflationRate","accumulationReturn","withdrawalReturn","stepUp","lumpsumPct"].forEach(function(id) {
-        var mp = {currentAge:"currentAgeVal",retirementAge:"retirementAgeVal",lifeExpectancy:"lifeExpectancyVal",inflationRate:"inflationRateVal",accumulationReturn:"accumulationReturnVal",withdrawalReturn:"withdrawalReturnVal",stepUp:"stepUpVal",lumpsumPct:"lumpsumPctVal"};
+      ["currentAge","retirementAge","npsWithdrawalAge","inflationRate","accumulationReturn","withdrawalReturn","stepUp","lumpsumPct"].forEach(function(id) {
+        var mp = {currentAge:"currentAgeVal",retirementAge:"retirementAgeVal",npsWithdrawalAge:"npsWithdrawalAgeVal",inflationRate:"inflationRateVal",accumulationReturn:"accumulationReturnVal",withdrawalReturn:"withdrawalReturnVal",stepUp:"stepUpVal",lumpsumPct:"lumpsumPctVal"};
         syncSlider(id, mp[id]);
       });
 
@@ -637,7 +669,7 @@
 
         var ca  = parseInt(document.getElementById("currentAge").value) || 30;
         var ra  = parseInt(document.getElementById("retirementAge").value) || 60;
-        var le  = parseInt(document.getElementById("lifeExpectancy").value) || 85;
+        var wa  = parseInt(document.getElementById("npsWithdrawalAge").value) || ra;
         var infl = parseFloat(document.getElementById("inflationRate").value) / 100;
         var accumR = parseFloat(document.getElementById("accumulationReturn").value) / 100;
         var withR  = parseFloat(document.getElementById("withdrawalReturn").value) / 100;
@@ -646,82 +678,75 @@
         var annuityPct = 1 - lumpsumPct;
         var annuityRate = parseFloat(document.getElementById("withdrawalReturn").value) / 100;
 
+        if (wa < ra) wa = ra;
         if (ra <= ca) return null;
-        if (le <= ra) return null;
 
-        var yearsAccum      = ra - ca;
-        var yearsRetirement = le - ra;
+        var yearsWorking    = ra - ca;        // SIP contribution phase: current age → retirement age
+        var yearsDeferred   = wa - ra;        // Silent compounding after retirement, no contributions
         var monthlyRateAccum = accumR / 12;
 
-        // Monthly expenses at retirement (inflation-adjusted)
-        var monthlyExpAtRetirement = monthlyExpenses * Math.pow(1 + infl, yearsAccum);
+        // Monthly expenses at retirement (inflation-adjusted to ra)
+        var monthlyExpAtRetirement = monthlyExpenses * Math.pow(1 + infl, ra - ca);
         var annualExpAtRetirement  = monthlyExpAtRetirement * 12;
 
-        // At retirement, corpus splits into:
-        //   annuityCorpus  = corpusNeeded * annuityPct  → buys annuity at 6% p.a.
-        //   lumpsumAmount  = corpusNeeded * lumpsumPct  → invested / withdrawn
+        // FIXED-ANNUITY-INCOME MODEL:
+        // The user's target is a fixed monthly pension (inflation-adjusted to retirement),
+        // funded entirely by the annuity portion. This target income does NOT change
+        // when the annuity/lumpsum split is adjusted.
         //
-        // Monthly annuity income = annuityCorpus * annuityRate / 12  (fixed, no inflation adj)
-        // Shortfall from invested portion = annualExpAtRetirement - annuityIncome*12 (grows with infl)
+        //   annualAnnuityIncome = annualExpAtRetirement              (the goal — constant)
+        //   annuityCorpus       = annualAnnuityIncome / annuityRate  (constant, since income is fixed)
+        //   corpusNeeded        = annuityCorpus / annuityPct         (grows as annuityPct shrinks)
+        //   lumpsumAmount       = corpusNeeded * lumpsumPct          (tax-free bonus corpus)
         //
-        // We solve for corpusNeeded such that:
-        //   PV of shortfall stream over yearsRetirement = investedCorpus = corpusNeeded * lumpsumPct
+        // So moving the slider toward more lumpsum keeps the pension constant,
+        // but requires a larger total corpus (and hence a larger SIP) to carve
+        // out the same fixed annuity slice — with the lumpsum as an additional,
+        // unrestricted, tax-free payout on top.
         //
-        // If lumpsumPct = 0 (all annuity): annuity covers everything (or not)
-        // If lumpsumPct = 1 (no annuity):  standard drawdown
+        // The annuity itself pays this pension for the annuitant's actual life
+        // (insurer-pooled, per the chosen annuity rate) — independent of any
+        // life-expectancy assumption. Users can lower the annuity % (raise the
+        // lumpsum %) if they prefer a smaller guaranteed pension with a larger
+        // flexible payout, based on their own view of their life expectancy,
+        // health, and other income sources.
 
-        // Shortfall per year at retirement = annualExp - annuityIncome
-        // annuityIncome = corpusNeeded * annuityPct * annuityRate  (annual, fixed)
-        // shortfall(yr 0) = annualExpAtRetirement - corpusNeeded * annuityPct * annuityRate
-        // shortfall grows at inflation each year
-        // PV of shortfall = corpusNeeded * lumpsumPct   (what the invested corpus must cover)
-        //
-        // Let C = corpusNeeded
-        // PV of growing annuity of shortfall over n years, discounted at withR:
-        //   PV = (annualExp - C * annuityPct * annuityRate) * (1 - ((1+g)/(1+r))^n) / (r - g)   [r != g]
-        // Set PV = C * lumpsumPct and solve for C:
-
-        var r = withR, g = infl, n = yearsRetirement;
-        var pvFactor; // PV factor for a growing annuity of 1 per year
-        if (Math.abs(r - g) < 0.0001) {
-          pvFactor = n / (1 + r);
-        } else {
-          pvFactor = (1 - Math.pow((1+g)/(1+r), n)) / (r - g);
-        }
+        var annualAnnuityIncome  = annualExpAtRetirement;
+        var monthlyAnnuityIncome = annualAnnuityIncome / 12;
+        var annuityCorpus        = annualAnnuityIncome / annuityRate;
 
         var corpusNeeded;
-        if (lumpsumPct === 0) {
-          // All goes to annuity — check if annuity covers expenses
-          // annuityIncome = C * annuityRate
-          // need annuityIncome >= annualExpAtRetirement → C = annualExpAtRetirement / annuityRate
-          corpusNeeded = annualExpAtRetirement / annuityRate;
+        if (annuityPct <= 0) {
+          corpusNeeded = annuityCorpus;
         } else {
-          // annualExp * pvFactor = C * lumpsumPct + C * annuityPct * annuityRate * pvFactor
-          // C = annualExp * pvFactor / (lumpsumPct + annuityPct * annuityRate * pvFactor)
-          corpusNeeded = annualExpAtRetirement * pvFactor / (lumpsumPct + annuityPct * annuityRate * pvFactor);
+          corpusNeeded = annuityCorpus / annuityPct;
         }
 
-        var lumpsumAmount  = corpusNeeded * lumpsumPct;
-        var annuityCorpus  = corpusNeeded * annuityPct;
-        var monthlyAnnuityIncome = annuityCorpus * annuityRate / 12;
-        var annualAnnuityIncome  = monthlyAnnuityIncome * 12;
-        var annualShortfall = annualExpAtRetirement - annualAnnuityIncome; // what invested corpus must fund yr 1
+        var lumpsumAmount   = corpusNeeded * lumpsumPct;
+        var lumpsumAmountToday = lumpsumAmount / Math.pow(1 + infl, wa - ca);
 
-        // SIP needed today
-        var monthlySIP = calcStepUpSIP(corpusNeeded, yearsAccum, monthlyRateAccum, su);
-        var totalInvested = calcStepUpTotalInvested(monthlySIP, yearsAccum, su);
+        // Corpus needed at RETIREMENT (before deferral compounding).
+        // After retirement, no contributions — corpus just compounds for yearsDeferred years.
+        // So we back-calculate: corpusAtRetirement * (1 + accumR)^yearsDeferred = corpusNeeded
+        var corpusAtRetirement = yearsDeferred > 0
+          ? corpusNeeded / Math.pow(1 + accumR, yearsDeferred)
+          : corpusNeeded;
+
+        // SIP needed today — contributions only during working years
+        var monthlySIP = calcStepUpSIP(corpusAtRetirement, yearsWorking, monthlyRateAccum, su);
+        var totalInvested = calcStepUpTotalInvested(monthlySIP, yearsWorking, su);
 
         return {
-          monthlyExpenses, ca, ra, le,
+          monthlyExpenses, ca, ra, wa,
           infl: infl*100, accumR: accumR*100, withR: withR*100, su,
           lumpsumPct: lumpsumPct*100, annuityPct: annuityPct*100,
           annuityRate: annuityRate*100,
-          yearsAccum, yearsRetirement,
+          yearsWorking, yearsDeferred,
           monthlyExpAtRetirement, annualExpAtRetirement,
-          corpusNeeded, lumpsumAmount, annuityCorpus,
-          monthlyAnnuityIncome, annualAnnuityIncome, annualShortfall,
+          corpusNeeded, corpusAtRetirement, lumpsumAmount, lumpsumAmountToday, annuityCorpus,
+          monthlyAnnuityIncome, annualAnnuityIncome,
           monthlySIP, totalInvested,
-          monthlyRateAccum, pvFactor
+          monthlyRateAccum
         };
       }
 
@@ -732,15 +757,18 @@
       window._growthChart = null;
       function buildGrowthChartData(result) {
         var labels = [], invested = [], corpus = [], target = [];
-        var yearsAccum = result.yearsAccum;
+        var yearsWorking = result.yearsWorking;
+        var yearsDeferred = result.yearsDeferred;
+        var totalYears = yearsWorking + yearsDeferred;
         var r = result.monthlyRateAccum;
         var su = (result.su || 0) / 100;
         var sip = result.monthlySIP;
         var isMobile = window.innerWidth < 480;
-        var step = isMobile ? (yearsAccum <= 10 ? 2 : yearsAccum <= 20 ? 4 : 5) : (yearsAccum <= 15 ? 1 : yearsAccum <= 25 ? 2 : 3);
+        var step = isMobile ? (totalYears <= 10 ? 2 : totalYears <= 20 ? 4 : 5) : (totalYears <= 15 ? 1 : totalYears <= 25 ? 2 : 3);
 
-        for (var yr = 1; yr <= yearsAccum; yr++) {
-          if ((yr % step === 0) || yr === yearsAccum) {
+        // Phase 1: working years — SIP contributions + compounding
+        for (var yr = 1; yr <= yearsWorking; yr++) {
+          if ((yr % step === 0) || yr === yearsWorking) {
             var fv = 0, inv = 0;
             for (var y2 = 0; y2 < yr; y2++) {
               var mAmt = sip * Math.pow(1 + su, y2);
@@ -756,6 +784,22 @@
             target.push(Math.round(result.corpusNeeded));
           }
         }
+
+        // Phase 2: deferral years — no contributions, corpus compounds on its own
+        if (yearsDeferred > 0) {
+          var corpusAtRetirement = result.corpusAtRetirement;
+          var totalInvested = result.totalInvested;
+          for (var dy = 1; dy <= yearsDeferred; dy++) {
+            if ((dy % step === 0) || dy === yearsDeferred) {
+              var deferredCorpus = corpusAtRetirement * Math.pow(1 + result.accumR / 100, dy);
+              labels.push("Age " + (result.ra + dy));
+              invested.push(Math.round(totalInvested)); // flat — no new contributions
+              corpus.push(Math.round(deferredCorpus));
+              target.push(Math.round(result.corpusNeeded));
+            }
+          }
+        }
+
         return { labels, invested, corpus, target };
       }
 
@@ -817,7 +861,8 @@
       function renderResults(result) {
         var heading = document.getElementById("resultsHeading");
         var stepUpStr = result.su > 0 ? " (growing " + result.su + "% yearly)" : "";
-        heading.innerHTML = "Start with <em>" + fmtINR(result.monthlySIP) + "</em>/month" + stepUpStr + " to retire at " + result.ra;
+        var deferStr  = result.yearsDeferred > 0 ? ", NPS withdrawn at " + result.wa : "";
+        heading.innerHTML = "Start with <em>" + fmtINR(result.monthlySIP) + "</em>/month" + stepUpStr + " to retire at " + result.ra + deferStr;
 
         var totalGains = result.corpusNeeded - result.totalInvested;
         var gainsPct   = result.corpusNeeded > 0 ? Math.round((totalGains / result.corpusNeeded) * 100) : 0;
@@ -826,7 +871,7 @@
         var html = '<div class="results-grid">';
 
         // Primary: total corpus
-        html += resultCellPrimary("Total NPS Corpus at Retirement", shortINR(result.corpusNeeded), "accent", "At age " + result.ra + " after " + result.yearsAccum + " years");
+        html += resultCellPrimary("Total NPS Corpus at Withdrawal", shortINR(result.corpusNeeded), "accent", "At age " + result.wa + " — " + result.yearsWorking + " yr SIP" + (result.yearsDeferred > 0 ? " + " + result.yearsDeferred + " yr deferral" : ""));
 
         // SIP
         html += resultCell("Starting Monthly SIP", fmtINR(result.monthlySIP), "accent", result.su > 0 ? "Increases " + result.su + "% per year" : "Flat SIP every month");
@@ -835,25 +880,37 @@
         html += '<div class="result-cell" style="grid-column:1/-1;">'
           + '<div class="result-label">NPS Corpus Split at Retirement</div>'
           + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:8px;overflow:hidden;margin-top:0.5rem;">'
-          +   '<div style="background:var(--accent-dim);padding:0.85rem 1rem;">'
-          +     '<div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:0.25rem;">' + result.lumpsumPct.toFixed(0) + '% Lumpsum — Tax-Free</div>'
-          +     '<div style="font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--accent);">' + shortINR(result.lumpsumAmount) + '</div>'
-          +     '<div style="font-size:0.72rem;color:var(--muted);margin-top:0.2rem;">One-time withdrawal at retirement</div>'
-          +   '</div>'
           +   '<div style="background:rgba(76,175,130,0.08);padding:0.85rem 1rem;">'
           +     '<div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--safe);margin-bottom:0.25rem;">' + result.annuityPct.toFixed(0) + '% Annuity Corpus</div>'
           +     '<div style="font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--safe);">' + shortINR(result.annuityCorpus) + '</div>'
-          +     '<div style="font-size:0.72rem;color:var(--muted);margin-top:0.2rem;">Buys annuity at ~' + result.annuityRate.toFixed(1) + '% p.a.</div>'
+          +     '<div style="font-size:0.72rem;color:var(--muted);margin-top:0.2rem;">Buys your fixed pension at ~' + result.annuityRate.toFixed(1) + '% p.a.</div>'
+          +   '</div>'
+          +   '<div style="background:var(--accent-dim);padding:0.85rem 1rem;">'
+          +     '<div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:0.25rem;">' + result.lumpsumPct.toFixed(0) + '% Tax-Free Lumpsum</div>'
+          +     '<div style="font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--accent);">' + shortINR(result.lumpsumAmount) + '</div>'
+          +     '<div style="font-size:0.72rem;color:var(--muted);margin-top:0.2rem;">One-time payout at retirement</div>'
+          +     '<div style="font-size:0.72rem;color:var(--muted);margin-top:0.1rem;">≈ ' + shortINR(result.lumpsumAmountToday) + ' today\'s equivalent</div>'
           +   '</div>'
           + '</div>'
           + '</div>';
 
+        // Lumpsum guidance message — only when lumpsum portion is selected
+        if (result.lumpsumPct > 0) {
+          html += '<div class="result-cell" style="grid-column:1/-1;background:var(--accent-glow);border-left:3px solid var(--accent);">'
+            + '<div class="result-label" style="color:var(--accent);">Your Tax-Free Lumpsum</div>'
+            + '<div style="font-size:0.85rem;color:var(--prose-text);font-weight:300;line-height:1.6;margin-top:0.3rem;">'
+            +   'You\'ll receive <strong style="color:var(--text);">' + shortINR(result.lumpsumAmount) + '</strong> as a one-time, tax-free payout at retirement — yours to use freely, with no restrictions. '
+            +   'This is on top of your fixed monthly pension, so it doesn\'t need to fund day-to-day expenses. You can consider planning this amount separately through mutual funds, based on your goals, time horizon, and risk appetite.'
+            + '</div>'
+            + '</div>';
+        }
+
         // Monthly income breakdown — full width
         html += '<div class="result-cell" style="grid-column:1/-1;">'
-          + '<div class="result-label">Estimated Monthly Income at Retirement</div>'
+          + '<div class="result-label">Your Fixed Monthly Pension</div>'
           + '<div style="margin-top:0.5rem;">'
           +   '<div style="font-family:var(--serif);font-size:1.7rem;font-weight:600;color:var(--safe);">' + fmtINR(result.monthlyAnnuityIncome) + '</div>'
-          +   '<div style="font-size:0.72rem;color:var(--muted);margin-top:0.1rem;">From annuity — fixed income for life at ~' + result.annuityRate.toFixed(1) + '% p.a.</div>'
+          +   '<div style="font-size:0.72rem;color:var(--muted);margin-top:0.1rem;">From your annuity at ~' + result.annuityRate.toFixed(1) + '% p.a., paid for life — stays the same regardless of the annuity/lumpsum split</div>'
           + '</div>'
           + '<div style="font-size:0.75rem;color:var(--muted);margin-top:0.6rem;font-weight:300;padding-top:0.6rem;border-top:1px solid var(--border);">Today you spend <strong style="color:var(--text)">' + fmtINR(result.monthlyExpenses) + '/mo</strong> — inflation-adjusted spending will be <strong style="color:var(--text)">' + fmtINR(result.monthlyExpAtRetirement) + '/mo</strong> at retirement</div>'
           + '</div>';
@@ -870,8 +927,8 @@
           + '</div>'
           + '</div>';
 
-        html += resultCell("Retirement Duration", result.yearsRetirement + " years", "safe",
-          "Age " + result.ra + " to " + result.le + (result.lumpsumPct === 0 ? " · Annuity covers full period" : " · Annuity (lifetime) + invested lumpsum"));
+        html += resultCell("NPS Withdrawal Age", result.wa + " yrs", "safe",
+          "Annuity purchased and pension begins at this age" + (result.yearsDeferred > 0 ? " (" + result.yearsDeferred + " yr deferral after retirement)" : "") + ". Pension is paid for life thereafter.");
 
         html += '</div>';
         document.getElementById("resultsBody").innerHTML = html;
@@ -896,17 +953,29 @@
         }
 
         var result = calculate();
+        var noteEl = document.getElementById("lumpsumNote");
         if (!result) {
           document.getElementById("resultsHeading").innerHTML = "<em>Enter your details above</em>";
           document.getElementById("resultsBody").innerHTML = '<div class="results-placeholder"><div class="placeholder-icon">🏖️</div><div>Fill in your details to see<br/>your retirement plan.</div></div>';
           document.getElementById("growthChartCard").style.display = "none";
-          document.getElementById("depletionCard").style.display = "none";
           document.getElementById("shareCard").style.display = "none";
           document.getElementById("discCard").style.display = "none";
+          if (noteEl) noteEl.style.display = "none";
           if (_growthChart) { _growthChart.destroy(); _growthChart = null; window._growthChart = null; }
           return;
         }
         renderResults(result);
+
+        // Live note under the Annuity Percentage slider
+        if (noteEl) {
+          if (result.lumpsumPct > 0) {
+            noteEl.style.display = "block";
+            noteEl.innerHTML = '<strong style="color:var(--text);">' + shortINR(result.lumpsumAmount) + '</strong> (≈ ' + shortINR(result.lumpsumAmountToday) + ' today\'s equivalent) tax-free lumpsum — a health safety buffer or big one-time goal.<br/>↑ Higher % = higher monthly SIP, as a higher one-time lumpsum is being planned.';
+          } else {
+            noteEl.style.display = "none";
+          }
+        }
+
         renderGrowthChart(result);
       }
 
@@ -914,13 +983,13 @@
       function resetForm() {
         document.getElementById("monthlyExpenses").value = "";
         document.getElementById("currentAge").value = 25;      syncSlider("currentAge","currentAgeVal");
-        document.getElementById("retirementAge").value = 60;   syncSlider("retirementAge","retirementAgeVal");
-        document.getElementById("lifeExpectancy").value = 85;  syncSlider("lifeExpectancy","lifeExpectancyVal");
+        document.getElementById("retirementAge").value = 60;    syncSlider("retirementAge","retirementAgeVal");
+        document.getElementById("npsWithdrawalAge").value = 60; syncSlider("npsWithdrawalAge","npsWithdrawalAgeVal");
         document.getElementById("inflationRate").value = 6;    syncSlider("inflationRate","inflationRateVal");
         document.getElementById("accumulationReturn").value=11;syncSlider("accumulationReturn","accumulationReturnVal");
         document.getElementById("withdrawalReturn").value = 6; syncSlider("withdrawalReturn","withdrawalReturnVal");
-        document.getElementById("stepUp").value = 10;          syncSlider("stepUp","stepUpVal");
-        document.getElementById("lumpsumPct").value = 80;       syncSlider("lumpsumPct","lumpsumPctVal");
+        document.getElementById("stepUp").value = 6;            syncSlider("stepUp","stepUpVal");
+        document.getElementById("lumpsumPct").value = 0;        syncSlider("lumpsumPct","lumpsumPctVal");
         onAnyInput();
       }
 
@@ -929,8 +998,6 @@
         var name = document.getElementById("userName").value.trim();
         var result = calculate();
         if (!result) return "";
-        var monthlyFromInvested = result.lumpsumPct > 0 ? result.annualShortfall / 12 : 0;
-        var totalMonthlyIncome  = result.monthlyAnnuityIncome + monthlyFromInvested;
         var lines = [
           "Hi Ramesh, I'm " + (name || "a user") + ".",
           "",
@@ -940,32 +1007,30 @@
           "Monthly Expenses (today)   : " + fmtINR(result.monthlyExpenses),
           "Current Age                : " + result.ca,
           "Retirement Age             : " + result.ra,
-          "Life Expectancy            : " + result.le,
+          "NPS Withdrawal Age         : " + result.wa + (result.yearsDeferred > 0 ? " (+" + result.yearsDeferred + " yr deferral)" : " (at retirement)"),
           "Inflation                  : " + result.infl + "% p.a.",
           "Return During Accumulation : " + result.accumR + "% p.a.",
-          "Return During Retirement   : " + result.withR + "% p.a.",
+          "Annuity Rate               : " + result.withR + "% p.a.",
           "Annual SIP Step-Up         : " + result.su + "% p.a.",
-          "Lumpsum Withdrawal         : " + result.lumpsumPct.toFixed(0) + "% (Annuity: " + result.annuityPct.toFixed(0) + "%)",
+          "Annuity / Lumpsum Split    : " + result.annuityPct.toFixed(0) + "% annuity / " + result.lumpsumPct.toFixed(0) + "% lumpsum",
           "",
           "── RESULTS ──",
           "Total NPS Corpus Needed    : " + shortINR(result.corpusNeeded),
-          "  → Lumpsum (" + result.lumpsumPct.toFixed(0) + "%, tax-free) : " + shortINR(result.lumpsumAmount),
           "  → Annuity corpus (" + result.annuityPct.toFixed(0) + "%)    : " + shortINR(result.annuityCorpus),
+          "  → Lumpsum (" + result.lumpsumPct.toFixed(0) + "%, tax-free) : " + shortINR(result.lumpsumAmount),
           "",
-          "── MONTHLY INCOME AT RETIREMENT ──",
+          "── FIXED MONTHLY PENSION (FOR LIFE) ──",
           "Annuity Income (fixed, life): " + fmtINR(result.monthlyAnnuityIncome) + "/month",
-          (result.lumpsumPct > 0 ? "From Invested Lumpsum      : " + fmtINR(monthlyFromInvested) + "/month" : ""),
-          "Total Monthly Income       : " + fmtINR(totalMonthlyIncome) + "/month",
           "  (vs today's expenses of " + fmtINR(result.monthlyExpenses) + "/month)",
+          (result.lumpsumPct > 0 ? "Plus a one-time tax-free lumpsum of " + shortINR(result.lumpsumAmount) + " — to be planned separately (e.g. via mutual funds)" : ""),
           "",
           "── SIP PLAN ──",
           "Starting Monthly SIP       : " + fmtINR(result.monthlySIP) + (result.su>0 ? " (grows "+result.su+"% yearly)" : ""),
           "Total You'll Invest        : " + shortINR(result.totalInvested),
-          "Retirement Duration        : " + result.yearsRetirement + " years (age " + result.ra + " to " + result.le + ")",
           "",
           "Could you help me set up an NPS plan for this?",
           "Thank you!"
-        ].filter(function(l){ return l !== undefined; });
+        ].filter(function(l){ return l !== undefined && l !== ""; });
         return lines.join("\n");
       }
       window.buildAndOpenWa = function() {
