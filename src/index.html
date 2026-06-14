@@ -1144,6 +1144,103 @@
         .hero h1 { font-size: clamp(2rem, 8vw, 2.8rem); }
         .start-section { padding: 2rem 1rem 4rem; }
       }
+
+      /* ── INSIGHTS ── */
+      .insights-section {
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 2.5rem;
+      }
+
+      .insights-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+        margin-top: 0.5rem;
+      }
+      @media (max-width: 700px) {
+        .insights-grid { grid-template-columns: 1fr; }
+      }
+
+      .insight-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.5rem;
+        text-decoration: none;
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .insight-card::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        opacity: 0.35;
+        transition: opacity 0.3s;
+      }
+      .insight-card:hover {
+        border-color: rgba(200,169,110,0.3);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+      }
+      .insight-card:hover::before { opacity: 0.7; }
+
+      .insight-card.placeholder {
+        border-style: dashed;
+        opacity: 0.4;
+        pointer-events: none;
+      }
+
+      .insight-tag {
+        font-size: 0.65rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-family: var(--sans);
+        opacity: 0.75;
+      }
+
+      .insight-title {
+        font-family: var(--serif);
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.3;
+      }
+
+      .insight-desc {
+        font-size: 0.85rem;
+        color: var(--muted);
+        line-height: 1.7;
+        font-weight: 300;
+        flex: 1;
+      }
+
+      .insight-cta {
+        font-size: 0.82rem;
+        font-weight: 500;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 0.25rem;
+      }
+
+      .insight-date {
+        font-size: 0.7rem;
+        color: var(--muted);
+        opacity: 0.6;
+        letter-spacing: 0.04em;
+      }
     </style>
   </head>
 
@@ -1438,6 +1535,51 @@
             <p class="step-desc">Markets will fall. Life will change. I'm here for the check-ins and the moments you need someone to say <strong>"stay strong, this is normal."</strong></p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- BRIDGE -->
+    <div class="bridge">
+      <div class="bridge-line">
+        <div class="bridge-rule"></div>
+        <span class="bridge-ornament">✦ ✦ ✦</span>
+        <div class="bridge-rule"></div>
+      </div>
+      <p class="bridge-text">A little reading goes a long way. <strong>One idea, every month.</strong></p>
+    </div>
+
+    <!-- INSIGHTS SECTION -->
+    <section class="insights-section" id="insights">
+      <div class="section-eyebrow">✦ Insights ✦</div>
+      <h2 class="section-title">Things worth <em>knowing</em></h2>
+      <p class="section-sub">One article a month. No jargon. Just plain talk about money and how to make it work for you.</p>
+
+      <div class="insights-grid">
+
+        <a href="Sustainable.html" class="insight-card">
+          <div class="insight-tag">Sustainable Wealth · Jun 2026</div>
+          <div class="insight-title">Chasing 2× stories is chasing mirages.</div>
+          <p class="insight-desc">Your neighbour doubled his money. Now everyone wants in. Here's why that tip is already too late — and what quietly works instead.</p>
+          <div class="insight-cta">
+            <span>Read the article</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!--
+        <div class="insight-card placeholder">
+          <div class="insight-tag">Coming next month</div>
+          <div class="insight-title">Next article coming soon.</div>
+          <p class="insight-desc">A new piece every month — plain talk about money, goals, and the things no one explains properly.</p>
+        </div>
+
+        <div class="insight-card placeholder">
+          <div class="insight-tag">Coming soon</div>
+          <div class="insight-title">More on the way.</div>
+          <p class="insight-desc">Check back each month for a fresh perspective on investing, goals, and building wealth the boring — effective — way.</p>
+        </div>
+        -->
+
       </div>
     </section>
 
