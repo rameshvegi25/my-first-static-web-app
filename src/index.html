@@ -4,15 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Vegi Ramesh · ARN-349739 · Mutual Fund Distributor</title>
-    <meta name="description" content="Vegi Ramesh — SEBI-registered Mutual Fund Distributor (ARN-349739). Know your distributor, discover your investor profile, and plan your financial goals." />
+    <meta name="description" content="Vegi Ramesh — SEBI-registered Mutual Fund Distributor (ARN-349739). Goal-based investing, asset allocation, and the right funds for your life stage." />
     <meta name="author" content="Vegi Ramesh" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://rameshvegi.in/index.html" />
     <meta property="og:url" content="https://rameshvegi.in/index.html" />
-
-    <!-- Open Graph -->
     <meta property="og:title" content="Vegi Ramesh · ARN-349739 · Mutual Fund Distributor" />
-    <meta property="og:description" content="SEBI-registered mutual fund distributor. Know your distributor, discover your risk profile, and plan your financial goals." />
+    <meta property="og:description" content="Goal-based investing and asset allocation — not fund tips. Let's map your goals to the right products." />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_IN" />
 
@@ -26,33 +24,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
     <style>
+      /* ── TOKENS ── */
       :root {
         --bg: #0b0f1a;
         --surface: #111827;
         --surface2: #1a2236;
-        --border: rgba(255, 255, 255, 0.07);
+        --border: rgba(255,255,255,0.07);
         --accent: #c8a96e;
-        --accent-dim: rgba(200, 169, 110, 0.15);
-        --accent-glow: rgba(200, 169, 110, 0.08);
+        --accent-dim: rgba(200,169,110,0.15);
+        --accent-glow: rgba(200,169,110,0.08);
         --text: #e8e4dc;
         --muted: #8a9ab5;
         --serif: "Cormorant Garamond", Georgia, serif;
         --sans: "DM Sans", sans-serif;
-        --nav-bg: rgba(11, 15, 26, 0.92);
+        --nav-bg: rgba(11,15,26,0.92);
         --footer-disc: #6b7280;
+        --green: #22c55e;
+        --green-dim: rgba(34,197,94,0.12);
       }
 
       [data-theme="light"] {
         --bg: #f7f4ef;
         --surface: #ffffff;
         --surface2: #f0ebe0;
-        --border: rgba(0, 0, 0, 0.09);
+        --border: rgba(0,0,0,0.09);
         --accent: #a67c32;
-        --accent-dim: rgba(166, 124, 50, 0.12);
-        --accent-glow: rgba(166, 124, 50, 0.06);
+        --accent-dim: rgba(166,124,50,0.12);
+        --accent-glow: rgba(166,124,50,0.06);
         --text: #1c1a14;
         --muted: #6b6353;
-        --nav-bg: rgba(247, 244, 239, 0.94);
+        --nav-bg: rgba(247,244,239,0.94);
         --footer-disc: #7a7060;
       }
 
@@ -73,7 +74,6 @@
         overflow-x: hidden;
       }
 
-      /* Ambient background glow */
       body::before {
         content: "";
         position: fixed;
@@ -88,9 +88,7 @@
       /* ── NAV ── */
       nav {
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
+        top: 0; left: 0; right: 0;
         z-index: 100;
         display: flex;
         align-items: center;
@@ -110,24 +108,19 @@
         letter-spacing: 0.01em;
         color: var(--text);
         text-decoration: none;
+        flex-shrink: 0;
       }
       .nav-brand span { color: var(--accent); font-style: italic; }
 
-      .nav-actions {
+      .nav-links {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        gap: 1.4rem;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
       }
 
-      /* ── NAV LINKS (desktop) ── */
-		.nav-links {
-		  display: flex;
-		  align-items: center;
-		  gap: 1.4rem;
-		  position: absolute;
-		  left: 50%;
-		  transform: translateX(-50%);
-		}
       .nav-link {
         position: relative;
         font-size: 0.82rem;
@@ -141,10 +134,8 @@
       .nav-link::after {
         content: "";
         position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 1px;
+        left: 0; bottom: 0;
+        width: 100%; height: 1px;
         background: var(--accent);
         transform: scaleX(0);
         transform-origin: center;
@@ -152,65 +143,15 @@
       }
       .nav-link:hover { color: var(--accent); }
       .nav-link:hover::after { transform: scaleX(1); }
-      .nav-link.active {
-        color: var(--accent);
-        font-weight: 500;
-      }
+      .nav-link.active { color: var(--accent); font-weight: 500; }
       .nav-link.active::after { transform: scaleX(1); }
-      .nav-mobile-menu .nav-link.active { color: var(--accent); font-weight: 500; }
-      .nav-mobile-menu .nav-link::after { display: none; }
 
-      /* ── HAMBURGER ── */
-      .nav-hamburger {
-        display: none;
+      .nav-actions {
+        display: flex;
         align-items: center;
-        justify-content: center;
-        width: 32px;
-        height: 32px;
-        background: none;
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        color: var(--text);
-        cursor: pointer;
+        gap: 0.75rem;
         flex-shrink: 0;
-        transition: border-color 0.2s, color 0.2s;
       }
-      .nav-hamburger:hover { border-color: var(--accent); color: var(--accent); }
-      .nav-hamburger svg { display: block; }
-      .nav-hamburger .icon-close { display: none; }
-      .nav-hamburger.open .icon-menu { display: none; }
-      .nav-hamburger.open .icon-close { display: block; }
-
-      /* ── MOBILE MENU PANEL ── */
-      .nav-mobile-menu {
-        position: fixed;
-        top: 56px;
-        left: 0;
-        right: 0;
-        z-index: 99;
-        background: var(--nav-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid transparent;
-        display: none;
-        flex-direction: column;
-        padding: 0;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease, padding 0.3s ease, border-color 0.3s ease;
-      }
-      @media (max-width: 820px) {
-        .nav-mobile-menu { display: flex; }
-      }
-      .nav-mobile-menu.open { max-height: 420px; padding: 0.5rem 1.5rem; border-color: var(--border); }
-      .nav-mobile-menu .nav-link {
-        padding: 0.7rem 0;
-        font-size: 0.92rem;
-        color: var(--text);
-        border-bottom: 1px solid var(--border);
-      }
-      .nav-mobile-menu .nav-link:last-child { border-bottom: none; }
-      .nav-mobile-menu .nav-link:hover { color: var(--accent); }
 
       .nav-arn {
         font-size: 0.7rem;
@@ -219,22 +160,14 @@
         font-family: var(--sans);
         text-decoration: none;
       }
-      a.nav-arn-link {
-        transition: color 0.2s;
-        cursor: pointer;
-      }
-      a.nav-arn-link:hover {
-        color: var(--accent);
-        text-decoration: underline;
-        text-underline-offset: 3px;
-      }
+      a.nav-arn-link { transition: color 0.2s; cursor: pointer; }
+      a.nav-arn-link:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 
       .nav-whatsapp-btn {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 32px;
-        height: 32px;
+        width: 32px; height: 32px;
         border-radius: 50%;
         color: #25d366;
         border: 1px solid rgba(37,211,102,0.25);
@@ -243,7 +176,7 @@
         transition: background 0.2s, border-color 0.2s;
         flex-shrink: 0;
       }
-      .nav-whatsapp-btn:hover { background: rgba(37, 211, 102, 0.12); border-color: rgba(37,211,102,0.5); }
+      .nav-whatsapp-btn:hover { background: rgba(37,211,102,0.12); border-color: rgba(37,211,102,0.5); }
 
       .theme-toggle {
         background: none;
@@ -264,6 +197,70 @@
       [data-theme="light"] .icon-dark { display: none; }
       [data-theme="light"] .icon-light { display: inline; }
 
+      /* ── HAMBURGER ── */
+      .nav-hamburger {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 32px; height: 32px;
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: border-color 0.2s, color 0.2s;
+      }
+      .nav-hamburger:hover { border-color: var(--accent); color: var(--accent); }
+      .nav-hamburger svg { display: block; }
+      .nav-hamburger .icon-close { display: none; }
+      .nav-hamburger.open .icon-menu { display: none; }
+      .nav-hamburger.open .icon-close { display: block; }
+
+      /* ── MOBILE MENU ── */
+      .nav-mobile-menu {
+        position: fixed;
+        top: 56px; left: 0; right: 0;
+        z-index: 99;
+        background: var(--nav-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid transparent;
+        display: none;
+        flex-direction: column;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease, border-color 0.3s ease;
+      }
+      @media (max-width: 820px) {
+        .nav-mobile-menu { display: flex; }
+        .nav-links { display: none; }
+        .nav-hamburger { display: flex; }
+        .nav-whatsapp-btn { display: none; }
+      }
+      .nav-mobile-menu.open { max-height: 420px; padding: 0.5rem 1.5rem; border-color: var(--border); }
+      .nav-mobile-menu .nav-link {
+        padding: 0.7rem 0;
+        font-size: 0.92rem;
+        color: var(--text);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-mobile-menu .nav-link:last-child { border-bottom: none; }
+      .nav-mobile-menu .nav-link:hover { color: var(--accent); }
+      .nav-mobile-menu .nav-link.active { color: var(--accent); font-weight: 500; }
+      .nav-mobile-menu .nav-link::after { display: none; }
+
+      /* ── ANIMATIONS ── */
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+
       /* ── HERO ── */
       .hero {
         position: relative;
@@ -274,7 +271,7 @@
         justify-content: center;
         text-align: center;
         padding: 5.5rem 1.5rem 2rem;
-        min-height: 36vh;
+        min-height: 40vh;
       }
 
       .hero-eyebrow {
@@ -284,7 +281,7 @@
         color: var(--accent);
         font-family: var(--sans);
         font-weight: 400;
-        margin-bottom: 1.25rem;
+        margin-bottom: 0.75rem;
         display: flex;
         align-items: center;
         gap: 0.6em;
@@ -295,193 +292,702 @@
 
       .hero h1 {
         font-family: var(--serif);
-        font-size: clamp(2.2rem, 7vw, 4rem);
+        font-size: clamp(2.4rem, 7vw, 4.2rem);
         font-weight: 600;
         line-height: 1.15;
         color: var(--text);
-        margin-bottom: 1.25rem;
+        margin-bottom: 1rem;
+        max-width: 700px;
         opacity: 0;
         animation: fadeUp 0.7s ease 0.25s forwards;
       }
       .hero h1 em { color: var(--accent); font-style: italic; }
 
       .hero-sub {
-        font-size: 0.95rem;
+        font-size: 1rem;
         color: var(--muted);
-        max-width: 480px;
-        line-height: 1.7;
+        max-width: 520px;
+        line-height: 1.8;
         font-weight: 300;
         opacity: 0;
         animation: fadeUp 0.7s ease 0.4s forwards;
+        margin-bottom: 1.25rem;
       }
 
-      .hero-cta {
-        display: inline-flex;
+      .hero-ctas {
+        display: flex;
         align-items: center;
-        gap: 0.4em;
-        margin-top: 1.5rem;
-        padding: 0.6rem 1.4rem;
-        border: 1px solid var(--accent);
-        border-radius: 24px;
-        font-size: 0.82rem;
-        font-weight: 500;
-        color: var(--accent);
-        text-decoration: none;
-        letter-spacing: 0.03em;
-        transition: background 0.2s, color 0.2s;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
         opacity: 0;
         animation: fadeUp 0.7s ease 0.55s forwards;
       }
-      .hero-cta:hover {
-        background: var(--accent-dim);
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4em;
+        padding: 0.65rem 1.5rem;
+        background: var(--accent);
+        color: #0b0f1a;
+        border-radius: 24px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        text-decoration: none;
+        transition: opacity 0.2s, transform 0.2s;
+      }
+      .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4em;
+        padding: 0.65rem 1.5rem;
+        border: 1px solid var(--accent);
+        color: var(--accent);
+        border-radius: 24px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        text-decoration: none;
+        transition: background 0.2s, transform 0.2s;
+      }
+      .btn-secondary:hover { background: var(--accent-dim); transform: translateY(-1px); }
+
+      /* ── INTRO: WHO IS RAMESH ── */
+      .intro-section {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 5rem;
       }
 
-      /* ── JOURNEY COUNTER ── */
-      .journey-counter {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.55rem;
-        opacity: 0;
-        animation: fadeUp 0.7s ease 0.4s forwards;
-        margin-top: 0.25rem;
-      }
-
-      .journey-pills {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .journey-units {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
+      .intro-card {
         background: var(--surface);
         border: 1px solid var(--border);
-        border-radius: 14px;
-        padding: 0.55rem 1.4rem;
-        box-shadow: 0 0 20px var(--accent-glow);
+        border-radius: 20px;
+        padding: 2rem;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 3rem;
+        align-items: start;
+        position: relative;
+        overflow: hidden;
+      }
+      .intro-card::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        opacity: 0.5;
       }
 
-      .journey-unit {
+      .intro-left {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 0.1rem;
-        min-width: 2.8rem;
+        text-align: center;
+        gap: 1rem;
       }
 
-      .journey-num {
+      .intro-avatar {
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        background: var(--accent-dim);
+        border: 2px solid rgba(200,169,110,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-family: var(--serif);
-        font-size: 1.65rem;
+        font-size: 2rem;
         font-weight: 600;
         color: var(--accent);
-        line-height: 1;
-        letter-spacing: -0.01em;
-        transition: transform 0.2s ease;
+        letter-spacing: -0.02em;
       }
 
-      .journey-unit-label {
-        font-size: 0.6rem;
-        letter-spacing: 0.14em;
+      .intro-name {
+        font-family: var(--serif);
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.2;
+      }
+
+      .intro-credential {
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-family: var(--sans);
+        opacity: 0.8;
+      }
+
+      .intro-badges {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        width: 100%;
+      }
+
+      .intro-badge {
+        font-size: 0.72rem;
+        color: var(--muted);
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.4rem 0.75rem;
+        text-align: center;
+        letter-spacing: 0.04em;
+      }
+
+      .intro-right {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+
+      .intro-heading {
+        font-family: var(--serif);
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.3;
+      }
+      .intro-heading em { color: var(--accent); font-style: italic; }
+
+      .intro-body {
+        font-size: 0.95rem;
+        color: var(--muted);
+        line-height: 1.8;
+        font-weight: 300;
+      }
+
+      .intro-body strong { color: var(--text); font-weight: 500; }
+
+      .intro-divider {
+        width: 32px;
+        height: 1px;
+        background: var(--accent);
+        opacity: 0.4;
+      }
+
+      .intro-note {
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.7;
+        font-style: italic;
+        border-left: 2px solid var(--accent-dim);
+        padding-left: 1rem;
+      }
+
+      @media (max-width: 700px) {
+        .intro-card {
+          grid-template-columns: 1fr;
+          padding: 2rem 1.5rem;
+          gap: 2rem;
+        }
+        .intro-left { flex-direction: row; text-align: left; }
+        .intro-avatar { flex-shrink: 0; width: 64px; height: 64px; font-size: 1.5rem; }
+        .intro-badges { display: none; }
+      }
+
+      /* ── SECTION COMMON ── */
+      .section-eyebrow {
+        font-size: 0.68rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-family: var(--sans);
+        font-weight: 400;
+        opacity: 0.75;
+        margin-bottom: 0.6rem;
+        text-align: center;
+      }
+
+      .section-title {
+        font-family: var(--serif);
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.2;
+        text-align: center;
+        margin-bottom: 0.85rem;
+      }
+      .section-title em { color: var(--accent); font-style: italic; }
+
+      .section-sub {
+        font-size: 0.95rem;
+        color: var(--muted);
+        text-align: center;
+        max-width: 540px;
+        margin: 0 auto 1.75rem;
+        line-height: 1.75;
+        font-weight: 300;
+      }
+
+      /* ── BRIDGE ── */
+      .bridge {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1rem 1.5rem;
+        text-align: center;
+      }
+
+      .bridge-line {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .bridge-rule {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      .bridge-ornament {
+        font-size: 0.65rem;
+        color: var(--accent);
+        opacity: 0.5;
+        letter-spacing: 0.3em;
+      }
+
+      .bridge-text {
+        font-size: 0.9rem;
+        color: var(--muted);
+        max-width: 480px;
+        line-height: 1.75;
+        font-weight: 300;
+      }
+      .bridge-text strong { color: var(--text); font-weight: 500; }
+
+      /* ── PROBLEM SECTION ── */
+      .problem-section {
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 2.5rem;
+      }
+
+      .problem-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+        margin-top: 0.5rem;
+      }
+
+      @media (max-width: 700px) {
+        .problem-grid { grid-template-columns: 1fr; }
+      }
+
+      .problem-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+        transition: border-color 0.3s;
+      }
+      .problem-card:hover { border-color: rgba(200,169,110,0.25); }
+
+      .problem-icon {
+        font-size: 1.5rem;
+        line-height: 1;
+      }
+
+      .problem-title {
+        font-family: var(--serif);
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.3;
+      }
+
+      .problem-desc {
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.7;
+        font-weight: 300;
+      }
+      .problem-desc strong { color: var(--text); font-weight: 500; }
+
+      /* ── ASSET ALLOCATION ── */
+      .alloc-section {
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 2.5rem;
+      }
+
+      .alloc-intro {
+        max-width: 620px;
+        margin: 0 auto 3rem;
+        text-align: center;
+      }
+
+      .alloc-visual {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 1.75rem;
+        margin-bottom: 1.25rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .alloc-visual::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        opacity: 0.4;
+      }
+
+      .alloc-bar-wrap {
+        margin-bottom: 1.25rem;
+      }
+
+      .alloc-bar-label {
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--muted);
+        margin-bottom: 0.75rem;
         font-family: var(--sans);
       }
 
-      .journey-sep {
-        font-size: 1.1rem;
-        color: var(--border);
-        line-height: 1;
-        align-self: center;
-        margin-bottom: 0.5rem;
+      .alloc-bar {
+        display: flex;
+        height: 12px;
+        border-radius: 6px;
+        overflow: hidden;
+        gap: 2px;
       }
 
-      @media (max-width: 400px) {
-        .journey-num { font-size: 1.35rem; }
-        .journey-units { padding: 0.5rem 1rem; gap: 0.4rem; }
-        .journey-unit { min-width: 2.2rem; }
+      .alloc-bar-seg {
+        height: 100%;
+        border-radius: 4px;
+        transition: flex 0.6s ease;
+      }
+      .seg-equity   { background: var(--accent); }
+      .seg-debt     { background: #5b8dee; }
+      .seg-liquid   { background: #22c55e; }
+      .seg-gold     { background: #e5b94a; }
+
+      .alloc-legend {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+        margin-top: 1.75rem;
       }
 
-      /* ── CARDS SECTION ── */
-      .cards-section {
+      @media (max-width: 600px) {
+        .alloc-legend { grid-template-columns: 1fr; }
+        .alloc-visual { padding: 1.75rem 1.25rem; }
+      }
+
+      .alloc-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.85rem;
+      }
+
+      .alloc-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-top: 0.3rem;
+        flex-shrink: 0;
+      }
+      .dot-equity { background: var(--accent); }
+      .dot-debt   { background: #5b8dee; }
+      .dot-liquid { background: #22c55e; }
+      .dot-gold   { background: #e5b94a; }
+
+      .alloc-item-content {}
+
+      .alloc-item-name {
+        font-family: var(--serif);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.25rem;
+      }
+
+      .alloc-item-desc {
+        font-size: 0.83rem;
+        color: var(--muted);
+        line-height: 1.65;
+        font-weight: 300;
+      }
+
+      .alloc-slider-wrap {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .alloc-slider-label {
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-bottom: 1rem;
+        font-weight: 300;
+      }
+      .alloc-slider-label strong { color: var(--accent); }
+
+      .alloc-presets {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+      }
+
+      .preset-btn {
+        font-size: 0.78rem;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        background: none;
+        color: var(--muted);
+        cursor: pointer;
+        font-family: var(--sans);
+        transition: border-color 0.2s, color 0.2s, background 0.2s;
+      }
+      .preset-btn:hover { border-color: var(--accent); color: var(--accent); }
+      .preset-btn.active {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: var(--accent-dim);
+      }
+
+      .alloc-note {
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.7;
+        font-weight: 300;
+        padding: 1.25rem 1.5rem;
+        background: var(--surface2);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+      }
+      .alloc-note strong { color: var(--text); font-weight: 500; }
+
+      /* ── GOALS ── */
+      .goals-section {
         position: relative;
         z-index: 1;
-        padding: 1rem 1.5rem 5rem;
-        max-width: 1080px;
+        max-width: 900px;
         margin: 0 auto;
+        padding: 2rem 1.5rem 2.5rem;
       }
 
-      .cards-grid {
+      .horizon-strip {
+        display: flex;
+        align-items: stretch;
+        gap: 0;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        margin-top: 2rem;
+      }
+      .horizon-item {
+        flex: 1;
+        padding: 1.5rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .horizon-item:hover {
+        background: var(--surface);
+      }
+      .horizon-divider {
+        width: 1px;
+        background: var(--border);
+        flex-shrink: 0;
+      }
+      .horizon-label {
+        font-family: var(--serif);
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .horizon-duration {
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        opacity: 0.85;
+      }
+      .horizon-desc {
+        font-size: 0.85rem;
+        color: var(--muted);
+        line-height: 1.65;
+        font-weight: 300;
+        margin-top: 0.35rem;
+      }
+      .horizon-footnote {
+        margin-top: 1.5rem;
+        font-size: 0.82rem;
+        color: var(--muted);
+        text-align: center;
+      }
+      .horizon-link {
+        color: var(--accent);
+        text-decoration: none;
+        letter-spacing: 0.01em;
+        transition: opacity 0.2s;
+      }
+      .horizon-link:hover { opacity: 0.75; }
+      @media (max-width: 640px) {
+        .horizon-strip { flex-direction: column; }
+        .horizon-divider { width: auto; height: 1px; }
+      }
+
+      /* ── HOW I WORK ── */
+      .process-section {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 2.5rem;
+      }
+
+      .process-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        position: relative;
+      }
+
+      .process-step {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 1.25rem;
+        position: relative;
+        padding-bottom: 2.5rem;
+      }
+      .process-step:last-child { padding-bottom: 0; }
+
+      .step-spine {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+      }
+
+      .step-num {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid rgba(200,169,110,0.4);
+        background: var(--surface);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--accent);
+        flex-shrink: 0;
+        z-index: 1;
+      }
+
+      .step-line {
+        flex: 1;
+        width: 1px;
+        background: var(--border);
+        margin-top: 0.5rem;
+      }
+      .process-step:last-child .step-line { display: none; }
+
+      .step-body {
+        padding-top: 0.5rem;
+      }
+
+      .step-title {
+        font-family: var(--serif);
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.4rem;
+      }
+
+      .step-desc {
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.7;
+        font-weight: 300;
+      }
+      .step-desc strong { color: var(--text); font-weight: 500; }
+
+      /* ── START SECTION ── */
+      .start-section {
+        position: relative;
+        z-index: 1;
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 4rem;
+      }
+
+      .start-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 1.25rem;
       }
 
-      @media (max-width: 900px) {
-        .cards-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
+      @media (max-width: 700px) {
+        .start-grid { grid-template-columns: 1fr; }
       }
 
-      @media (max-width: 820px) {
-        .nav-links { display: none; }
-        .nav-hamburger { display: flex; }
-      }
-
-      @media (max-width: 600px) {
-        .cards-grid {
-          grid-template-columns: 1fr;
-          gap: 0.75rem;
-        }
-      }
-
-      .card {
-        position: relative;
+      .start-card {
         background: var(--surface);
         border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 2rem 1.75rem 1.75rem;
+        border-radius: 18px;
+        padding: 1.5rem 1.5rem;
         text-decoration: none;
         color: var(--text);
         display: flex;
         flex-direction: column;
-        gap: 0;
-        overflow: hidden;
+        gap: 0.85rem;
         transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-        opacity: 0;
-        animation: fadeUp 0.6s ease forwards;
+        position: relative;
+        overflow: hidden;
       }
-
-      .card:nth-child(1) { animation-delay: 0.55s; }
-      .card:nth-child(2) { animation-delay: 0.7s; }
-      .card:nth-child(3) { animation-delay: 0.85s; }
-      .card:nth-child(4) { animation-delay: 1.0s; }
-      .card:nth-child(5) { animation-delay: 1.15s; }
-
-      .card::before {
+      .start-card::before {
         content: "";
         position: absolute;
         inset: 0;
         background: var(--accent-glow);
         opacity: 0;
         transition: opacity 0.3s;
-        border-radius: inherit;
       }
-
-      .card:hover {
-        border-color: rgba(200, 169, 110, 0.35);
+      .start-card:hover {
+        border-color: rgba(200,169,110,0.35);
         transform: translateY(-4px);
-        box-shadow: 0 16px 48px rgba(0,0,0,0.3), 0 0 0 1px rgba(200,169,110,0.12);
+        box-shadow: 0 16px 48px rgba(0,0,0,0.3);
       }
-      .card:hover::before { opacity: 1; }
-
-      [data-theme="light"] .card:hover {
-        box-shadow: 0 16px 48px rgba(0,0,0,0.1), 0 0 0 1px rgba(166,124,50,0.15);
+      .start-card:hover::before { opacity: 1; }
+      .start-card.featured {
+        border-color: rgba(200,169,110,0.3);
+        background: linear-gradient(145deg, var(--surface), var(--surface2));
       }
 
-      .card-icon {
+      .start-card-icon {
         width: 44px;
         height: 44px;
         border-radius: 10px;
@@ -489,121 +995,89 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 1.25rem;
         position: relative;
         z-index: 1;
         flex-shrink: 0;
-        transition: background 0.3s;
       }
-      .card:hover .card-icon { background: rgba(200, 169, 110, 0.25); }
+      .start-card-icon svg { color: var(--accent); }
 
-      .card-icon svg { color: var(--accent); }
-
-      .card-step {
+      .start-card-label {
         font-size: 0.65rem;
         letter-spacing: 0.18em;
         text-transform: uppercase;
         color: var(--accent);
         font-family: var(--sans);
-        font-weight: 400;
-        margin-bottom: 0.5rem;
-        position: relative;
-        z-index: 1;
         opacity: 0.75;
+        position: relative;
+        z-index: 1;
       }
 
-      .card-title {
+      .start-card-title {
         font-family: var(--serif);
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         font-weight: 600;
-        line-height: 1.2;
-        margin-bottom: 0.75rem;
+        color: var(--text);
+        line-height: 1.25;
         position: relative;
         z-index: 1;
       }
-      .card-title em { color: var(--accent); font-style: italic; }
+      .start-card-title em { color: var(--accent); font-style: italic; }
 
-      .card-desc {
-        font-size: 0.875rem;
+      .start-card-desc {
+        font-size: 0.85rem;
         color: var(--muted);
-        line-height: 1.65;
+        line-height: 1.7;
         font-weight: 300;
-        flex: 1;
         position: relative;
         z-index: 1;
-        margin-bottom: 1.5rem;
+        flex: 1;
       }
 
-      .card-cta {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.8rem;
-        font-weight: 500;
-        color: var(--accent);
+      .start-card-hint {
+        font-size: 0.72rem;
+        color: var(--muted);
         letter-spacing: 0.04em;
         position: relative;
         z-index: 1;
-        transition: gap 0.2s;
+        opacity: 0.7;
       }
-      .card:hover .card-cta { gap: 0.75rem; }
 
-      .card-cta-arrow {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        border: 1px solid var(--accent);
+      .start-card-cta {
         display: flex;
         align-items: center;
-        justify-content: center;
-        font-size: 0.75rem;
-        flex-shrink: 0;
-        transition: background 0.2s;
-      }
-      .card:hover .card-cta-arrow { background: var(--accent-dim); }
-
-      /* Corner accent on featured card */
-      .card-featured {
-        border-color: rgba(200,169,110,0.2);
-      }
-      .card-featured .card-corner {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, transparent 50%, rgba(200,169,110,0.12) 50%);
-        border-radius: 0 16px 0 0;
+        justify-content: space-between;
+        margin-top: 0.25rem;
+        font-size: 0.82rem;
+        font-weight: 500;
+        color: var(--accent);
+        position: relative;
+        z-index: 1;
       }
 
       /* ── FOOTER ── */
       footer {
         position: relative;
         z-index: 1;
-        border-top: 1px solid var(--border);
-        padding: 2.5rem 1.5rem;
         text-align: center;
-        width: 100%;
+        padding: 1.5rem 1.5rem 2rem;
+        border-top: 1px solid var(--border);
       }
 
-      .footer-inner {
-        max-width: 1080px;
-        margin: 0 auto;
-      }
-
-      .footer-brand {
+      .footer-name {
         font-family: var(--serif);
-        font-size: 0.9rem;
-        color: var(--muted);
-        margin-bottom: 0.85rem;
+        font-size: 1.1rem;
+        color: var(--text);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
       }
+      .footer-name span { color: var(--accent); font-style: italic; }
 
       .footer-links {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         gap: 0.5rem 1.25rem;
-        margin-bottom: 1.25rem;
+        margin-bottom: 1.5rem;
       }
       .footer-links a {
         font-size: 0.78rem;
@@ -621,855 +1095,22 @@
         line-height: 1.6;
       }
 
-      /* ── MAIN CONTENT WRAPPER ── */
-      .main-content {
-        display: flex;
-        flex-direction: column;
-      }
+
 
       @media (max-width: 600px) {
-        .main-content {
-          display: flex;
-          flex-direction: column;
-        }
-      }
-
-      /* ── QUOTE WIDGET ── */
-      .quote-section {
-        position: relative;
-        z-index: 1;
-        max-width: 720px;
-        margin: 0 auto 0;
-        padding: 0 1.5rem 3rem;
-      }
-
-      .quote-widget {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 2.5rem 3rem;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        position: relative;
-        overflow: hidden;
-        opacity: 0;
-        animation: fadeUp 0.7s ease 0.65s forwards;
-      }
-
-      .quote-widget::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background:
-          radial-gradient(ellipse 80% 60% at 50% 0%, var(--accent-glow), transparent 70%);
-        pointer-events: none;
-      }
-
-      .quote-eyebrow {
-        font-size: 0.68rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--accent);
-        font-family: var(--sans);
-        font-weight: 400;
-        opacity: 0.75;
-        margin-bottom: 1.25rem;
-        position: relative;
-        z-index: 1;
-      }
-
-      .quote-mark {
-        font-family: var(--serif);
-        font-size: 4rem;
-        line-height: 0.5;
-        color: var(--accent);
-        opacity: 0.35;
-        margin-bottom: 1rem;
-        user-select: none;
-      }
-
-      .quote-text {
-        font-family: var(--serif);
-        font-size: clamp(1.15rem, 2.5vw, 1.45rem);
-        font-style: italic;
-        font-weight: 400;
-        color: var(--text);
-        line-height: 1.65;
-        max-width: 560px;
-        position: relative;
-        z-index: 1;
-        margin-bottom: 1.75rem;
-      }
-
-      .quote-divider {
-        width: 28px;
-        height: 1px;
-        background: var(--accent);
-        opacity: 0.5;
-        margin-bottom: 1.25rem;
-      }
-
-      .quote-author {
-        font-family: var(--sans);
-        font-size: 0.85rem;
-        font-weight: 500;
-        color: var(--accent);
-        letter-spacing: 0.06em;
-        position: relative;
-        z-index: 1;
-        margin-bottom: 0.3rem;
-      }
-
-      .quote-label {
-        font-family: var(--sans);
-        font-size: 0.7rem;
-        color: var(--muted);
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        position: relative;
-        z-index: 1;
-      }
-
-      .quote-refresh {
-        position: absolute;
-        bottom: 0.85rem;
-        right: 0.95rem;
-        z-index: 2;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0.3rem;
-        color: var(--muted);
-        opacity: 0.45;
-        transition: opacity 0.2s, transform 0.4s;
-        line-height: 1;
-      }
-      .quote-refresh:hover { opacity: 0.85; }
-      .quote-refresh.spinning { transform: rotate(360deg); }
-
-      /* Quote transition */
-      .quote-body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
-      }
-      .quote-body.fading {
-        opacity: 0;
-        transform: translateY(8px);
-        filter: blur(4px);
-      }
-
-      @media (max-width: 600px) {
-        .quote-section {
-          padding: 0 1rem 2rem;
-          margin-top: 0;
-        }
-        .quote-widget {
-          padding: 1.75rem 1.5rem;
-        }
-      }
-
-      /* ── MOBILE ARN BADGE ── */
-      .hero-arn-mobile {
-        display: none;
-        margin-top: 1.25rem;
-        font-size: 0.72rem;
-        letter-spacing: 0.12em;
-        color: var(--muted);
-        font-family: var(--sans);
-        text-transform: uppercase;
-        opacity: 0;
-        animation: fadeUp 0.7s ease 0.65s forwards;
-      }
-      @media (max-width: 600px) {
-        .hero-arn-mobile { display: block; }
-      }
-
-      /* ── ANIMATIONS ── */
-      @keyframes fadeUp {
-        from { opacity: 0; transform: translateY(18px); }
-        to   { opacity: 1; transform: translateY(0); }
-      }
-
-      /* ── MOBILE FAB ── */
-      .fab-whatsapp {
-        display: none;
-        position: fixed;
-        bottom: 1.25rem;
-        right: 1.25rem;
-        z-index: 200;
-        width: 44px;
-        height: 44px;
-        padding: 0;
-        border-radius: 50%;
-        background: var(--surface);
-        border: 1px solid rgba(37,211,102,0.3);
-        color: #25d366;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.35);
-        text-decoration: none;
-        transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, background 0.2s;
-      }
-      .fab-whatsapp:active { transform: scale(0.95); }
-      .fab-whatsapp:hover { background: var(--surface2); border-color: rgba(37,211,102,0.55); }
-
-      @media (max-width: 600px) {
-        .fab-whatsapp { display: flex; }
         .nav-whatsapp-btn { display: none; }
-        .hero { padding: 6rem 1.25rem 2.5rem; min-height: auto; }
-        .cards-section { padding: 0.5rem 1rem 6rem; }
-        .card { padding: 1.25rem 1.25rem 1.25rem; gap: 0; }
-        .card-desc { display: none; }
-        .card-time-hint { display: none; }
-        .card-icon { width: 36px; height: 36px; margin-bottom: 0.85rem; }
-        .card-title { font-size: 1.25rem; margin-bottom: 0.85rem; }
-        .card-step { margin-bottom: 0.3rem; }
+        .hero { padding: 6.5rem 1.25rem 3rem; min-height: auto; }
+        .hero h1 { font-size: clamp(2rem, 8vw, 2.8rem); }
+        .start-section { padding: 2rem 1rem 4rem; }
       }
-
-      /* ── NIFTY 500 CHART SECTION ── */
-      .market-section {
-        position: relative;
-        z-index: 1;
-        padding: 3rem 1.5rem 1rem;
-        max-width: 1080px;
-        margin: 0 auto;
-      }
-
-      .market-header {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 1.25rem;
-      }
-
-      .market-title-group {
-        text-align: center;
-      }
-
-      .market-header .market-badge {
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-
-      .market-eyebrow {
-        font-size: 0.68rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--accent);
-        font-family: var(--sans);
-        font-weight: 400;
-        opacity: 0.75;
-        margin-bottom: 0.4rem;
-        text-align: center;
-      }
-
-      .market-title {
-        font-family: var(--serif);
-        font-size: clamp(1.4rem, 3vw, 1.9rem);
-        font-weight: 600;
-        color: var(--text);
-        line-height: 1.2;
-      }
-      .market-title em { color: var(--accent); font-style: italic; }
-
-      .market-badge {
-        font-size: 0.68rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--muted);
-        font-family: var(--sans);
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        padding: 4px 12px;
-        display: flex;
-        align-items: center;
-        gap: 0.4em;
-      }
-      .market-badge .live-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: #22c55e;
-        animation: pulse-dot 2s infinite;
-        flex-shrink: 0;
-      }
-      @keyframes pulse-dot {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.3; }
-      }
-
-      .market-chart-wrap {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        overflow: hidden;
-        transition: border-color 0.3s;
-      }
-      .market-chart-wrap:hover {
-        border-color: rgba(200, 169, 110, 0.25);
-      }
-
-
-      .market-note {
-        margin-top: 0.75rem;
-        font-size: 0.72rem;
-        color: var(--muted);
-        text-align: right;
-        opacity: 0.7;
-      }
-
-      @media (max-width: 600px) {
-        .market-section { padding: 2rem 1rem 0.5rem; }
-        .market-header { flex-direction: column; }
-        .market-header .market-badge { position: static; transform: none; margin-top: 0.5rem; }
-      }
-
-      /* ── CHART ── */
-      .chart-toolbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1rem 1.25rem 0.75rem;
-        border-bottom: 1px solid var(--border);
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        position: relative;
-        z-index: 2;
-      }
-      .chart-price-group { display: flex; align-items: baseline; gap: 0.6rem; }
-      .chart-price {
-        font-family: var(--serif);
-        font-size: 1.6rem;
-        font-weight: 600;
-        color: var(--text);
-      }
-      .chart-change { font-size: 0.82rem; font-weight: 500; }
-      .chart-change.up   { color: #22c55e; }
-      .chart-change.down { color: #ef4444; }
-      .chart-range-btns {
-        display: flex;
-        gap: 0.25rem;
-        flex-wrap: wrap;
-        align-items: center;
-      }
-      .range-btn {
-        background: none;
-        border: 1px solid transparent;
-        border-radius: 6px;
-        padding: 4px 10px;
-        font-size: 0.75rem;
-        font-family: var(--sans);
-        color: var(--muted);
-        cursor: pointer;
-        transition: all 0.2s;
-      }
-      .range-btn:hover { color: var(--accent); border-color: var(--border); }
-      .range-btn.active { color: var(--accent); border-color: rgba(200,169,110,0.4); background: var(--accent-dim); }
-      @media (max-width: 600px) {
-        .chart-toolbar {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 0.6rem;
-          padding: 0.85rem 1rem 0.75rem;
-        }
-        .chart-range-btns {
-          width: 100%;
-        }
-        .fd-toggle-btn {
-          margin-left: 0;
-          margin-top: 0.1rem;
-        }
-        .chart-canvas-wrap {
-          height: 220px;
-        }
-      }
-      .chart-canvas-wrap {
-        position: relative;
-        height: 320px;
-        padding: 1rem 0.5rem 0.5rem;
-      }
-      #nifty-chart { width: 100% !important; height: 100% !important; font-variant-ligatures: none; }
-      .chart-loading {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 0.75rem;
-        font-size: 0.8rem;
-        color: var(--muted);
-        background: var(--surface);
-        border-radius: 0 0 16px 16px;
-      }
-      .chart-loading.hidden { display: none; }
-      .chart-spinner {
-        width: 24px; height: 24px;
-        border: 2px solid var(--border);
-        border-top-color: var(--accent);
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-      }
-      @keyframes spin { to { transform: rotate(360deg); } }
-    
-
-      /* ── INSIGHT STRIP ── */
-      .insight-strip {
-        max-width: 1080px;
-        margin: 0 auto;
-        padding: 0 1.5rem 0.5rem;
-      }
-      .insight-inner {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        background: var(--accent-dim);
-        border: 1px solid rgba(200,169,110,0.25);
-        border-radius: 12px;
-        padding: 1rem 1.5rem;
-      }
-      .insight-icon { font-size: 1.5rem; flex-shrink: 0; }
-      .insight-text {
-        font-family: var(--sans);
-        font-size: 0.92rem;
-        color: var(--text);
-        line-height: 1.6;
-        margin: 0;
-      }
-      .insight-text strong { color: var(--accent); }
-      .insight-text em { font-style: italic; opacity: 0.8; }
-
-      /* ── SECTION SHARED ── */
-      .section-eyebrow {
-        font-size: 0.68rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--accent);
-        font-family: var(--sans);
-        opacity: 0.75;
-        margin-bottom: 0.5rem;
-        text-align: center;
-      }
-      .section-title {
-        font-family: var(--serif);
-        font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-        font-weight: 600;
-        color: var(--text);
-        text-align: center;
-        line-height: 1.2;
-        margin: 0 0 0.75rem;
-      }
-      .section-title em { color: var(--accent); font-style: italic; }
-      .section-sub {
-        font-family: var(--sans);
-        font-size: 0.9rem;
-        color: var(--muted);
-        text-align: center;
-        max-width: 480px;
-        margin: 0 auto 2rem;
-        line-height: 1.6;
-      }
-
-      /* ── IDLE: suppress hover lifts when mouse hasn't moved ── */
-      body.no-hover .card:hover,
-      body.no-hover .why-card:hover,
-      body.no-hover .sip-card:hover {
-        transform: none;
-        box-shadow: none;
-        border-color: var(--border);
-      }
-      body.no-hover .card:hover::before { opacity: 0; }
-
-      /* ── WHY LONG-TERM WORKS ── */
-      .why-section {
-        padding: 3rem 1.5rem 2rem;
-        position: relative;
-        z-index: 1;
-      }
-      .why-inner { max-width: 1080px; margin: 0 auto; }
-      .why-cards {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.25rem;
-        isolation: isolate;
-      }
-      @media (max-width: 700px) {
-        .why-cards { grid-template-columns: 1fr; }
-      }
-      .why-card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 1.75rem 1.5rem;
-        transition: border-color 0.3s, box-shadow 0.3s;
-      }
-      .why-card:hover {
-        border-color: rgba(200,169,110,0.35);
-        box-shadow: 0 0 0 1px rgba(200,169,110,0.1), inset 0 0 24px rgba(200,169,110,0.05);
-      }
-      .why-card--accent {
-        background: var(--accent-dim);
-        border-color: rgba(200,169,110,0.3);
-      }
-      .why-icon { font-size: 1.75rem; margin-bottom: 1rem; }
-      .why-stat {
-        font-family: var(--serif);
-        font-size: clamp(2rem, 4vw, 2.75rem);
-        font-weight: 600;
-        color: var(--accent);
-        line-height: 1;
-        margin-bottom: 0.4rem;
-      }
-      .why-label {
-        font-family: var(--sans);
-        font-size: 0.78rem;
-        font-weight: 500;
-        color: var(--text);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin-bottom: 0.75rem;
-      }
-      .why-desc {
-        font-family: var(--sans);
-        font-size: 0.84rem;
-        color: var(--muted);
-        line-height: 1.65;
-      }
-
-      /* ── SIP POWER ── */
-      .sip-section {
-        padding: 2rem 1.5rem 3rem;
-        position: relative;
-        z-index: 1;
-      }
-      .sip-inner { max-width: 860px; margin: 0 auto; }
-
-      .sip-setup {
-        text-align: center;
-        margin-bottom: 2rem;
-      }
-      .sip-setup-question {
-        font-size: 0.92rem;
-        color: var(--muted);
-        font-family: var(--sans);
-        max-width: 520px;
-        margin: 0 auto;
-        line-height: 1.6;
-      }
-
-      /* Two-person comparison */
-      .sip-compare {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1.25rem;
-        margin-bottom: 1.5rem;
-      }
-      @media (max-width: 640px) {
-        .sip-compare { grid-template-columns: 1fr; }
-      }
-
-      .sip-person {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 1.75rem 1.5rem;
-        position: relative;
-      }
-      .sip-person--winner {
-        border-color: rgba(200,169,110,0.45);
-        border-width: 2px;
-        background: var(--accent-dim);
-      }
-      .sip-person-name {
-        font-family: var(--serif);
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: var(--text);
-        margin-bottom: 0.2rem;
-      }
-      .sip-person--winner .sip-person-name { color: var(--accent); }
-      .sip-person-meta {
-        font-size: 0.75rem;
-        color: var(--muted);
-        font-family: var(--sans);
-        margin-bottom: 1.25rem;
-      }
-      .sip-person-badge {
-        display: inline-block;
-        font-size: 0.62rem;
-        font-weight: 500;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--bg);
-        background: var(--accent);
-        border-radius: 20px;
-        padding: 2px 9px;
-        margin-bottom: 0.85rem;
-        font-family: var(--sans);
-      }
-      .sip-breakdown {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        margin-bottom: 1.1rem;
-        padding-bottom: 1.1rem;
-        border-bottom: 1px solid var(--border);
-      }
-      .sip-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-family: var(--sans);
-        font-size: 0.82rem;
-      }
-      .sip-row-label { color: var(--muted); }
-      .sip-row-val { color: var(--text); font-weight: 500; }
-      .sip-row--returns .sip-row-val { color: #22c55e; }
-      .sip-total-label {
-        font-size: 0.7rem;
-        color: var(--muted);
-        font-family: var(--sans);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: 0.3rem;
-      }
-      .sip-total-val {
-        font-family: var(--serif);
-        font-size: clamp(1.7rem, 3.5vw, 2.3rem);
-        font-weight: 600;
-        color: var(--text);
-        line-height: 1;
-      }
-      .sip-person--winner .sip-total-val { color: var(--accent); }
-      .sip-multiplier {
-        font-size: 0.8rem;
-        color: var(--muted);
-        font-family: var(--sans);
-        margin-top: 0.3rem;
-      }
-      .sip-person--winner .sip-multiplier { color: var(--accent); opacity: 0.85; }
-
-      /* Punchline box */
-      .sip-punchline {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-left: 3px solid var(--accent);
-        border-radius: 12px;
-        padding: 1.25rem 1.5rem;
-        margin-bottom: 1.25rem;
-        font-family: var(--sans);
-        font-size: 0.9rem;
-        color: var(--text);
-        line-height: 1.7;
-      }
-      .sip-punchline strong { color: var(--accent); }
-
-      .sip-disclaimer {
-        font-size: 0.7rem;
-        color: var(--muted);
-        text-align: center;
-        opacity: 0.6;
-        font-family: var(--sans);
-        line-height: 1.5;
-      }
-
-
-      /* ── FD COMPARE TOGGLE ── */
-      .fd-toggle-btn {
-        display: flex;
-        align-items: center;
-        gap: 0.4em;
-        background: none;
-        border: 1px solid var(--border);
-        border-radius: 6px;
-        padding: 4px 10px;
-        font-size: 0.75rem;
-        font-family: var(--sans);
-        color: var(--muted);
-        cursor: pointer;
-        transition: all 0.2s;
-        margin-left: 0.5rem;
-      }
-      .fd-toggle-btn:hover { border-color: #94a3b8; color: #94a3b8; }
-      .fd-toggle-btn--on {
-        border-color: #94a3b8;
-        color: #94a3b8;
-        background: rgba(148,163,184,0.1);
-      }
-      .fd-toggle-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: var(--muted);
-        transition: background 0.2s;
-        flex-shrink: 0;
-      }
-      .fd-toggle-btn--on .fd-toggle-dot { background: #94a3b8; }
-
-
-      /* ── CARDS SECTION HEADING ── */
-      .cards-heading {
-        text-align: center;
-        padding: 1rem 1.5rem 2rem;
-        max-width: 560px;
-        margin: 0 auto;
-      }
-
-      /* ── STORY PROGRESS NAV (desktop sidebar) ── */
-      .story-nav {
-        position: fixed;
-        right: 1.25rem;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 90;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 0.5rem;
-        opacity: 0;
-        transition: opacity 0.4s;
-      }
-      .story-nav.visible { opacity: 1; }
-      .story-nav.visible.scroll-idle { opacity: 0.08; }
-      @media (max-width: 768px) { .story-nav { display: none; } }
-
-      .story-nav-item {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        cursor: pointer;
-        padding: 4px 0;
-      }
-      .story-nav-label {
-        font-size: 0.65rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--muted);
-        font-family: var(--sans);
-        opacity: 0;
-        transform: translateX(6px);
-        transition: opacity 0.2s, transform 0.2s, color 0.2s;
-        white-space: nowrap;
-      }
-      .story-nav-item:hover .story-nav-label,
-      .story-nav-item.active .story-nav-label {
-        opacity: 1;
-        transform: translateX(0);
-        color: var(--accent);
-      }
-      .story-nav-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        border: 1.5px solid rgba(138, 154, 181, 0.5);
-        background: transparent;
-        transition: background 0.25s, border-color 0.25s, transform 0.25s;
-        flex-shrink: 0;
-      }
-      .story-nav-item.active .story-nav-dot {
-        background: var(--accent);
-        border-color: var(--accent);
-        transform: scale(1.5);
-      }
-      .story-nav-item:hover .story-nav-dot {
-        border-color: var(--accent);
-        background: var(--accent-dim);
-      }
-      /* Connector line between dots */
-      .story-nav-connector {
-        width: 1px;
-        height: 16px;
-        background: var(--border);
-        align-self: flex-end;
-        margin-right: 3.5px;
-      }
-
-      /* ── SECTION BRIDGES (narrative connectors) ── */
-      .section-bridge {
-        max-width: 680px;
-        margin: 0 auto;
-        padding: 0 1.5rem;
-        text-align: center;
-        position: relative;
-        z-index: 1;
-      }
-      .bridge-inner {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.9rem;
-        padding: 1.5rem 0 0.5rem;
-      }
-      .bridge-line {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        width: 100%;
-        max-width: 320px;
-      }
-      .bridge-rule {
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, var(--border), transparent);
-      }
-      .bridge-ornament {
-        font-size: 0.65rem;
-        color: var(--accent);
-        opacity: 0.5;
-        letter-spacing: 0.15em;
-        flex-shrink: 0;
-      }
-      .bridge-text {
-        font-family: var(--sans);
-        font-size: 0.9rem;
-        font-style: normal;
-        color: var(--muted);
-        line-height: 1.6;
-        max-width: 480px;
-      }
-      .bridge-text em {
-        font-family: var(--serif);
-        font-style: italic;
-      }
-      @media (max-width: 600px) {
-        .section-bridge { padding: 0 1.25rem; }
-        .bridge-inner { padding: 1.25rem 0 0.25rem; gap: 0.75rem; }
-        .bridge-text { font-size: 0.88rem; }
-        .bridge-line { max-width: 240px; }
-      }
-
-      /* ── TIME HINT BADGE ── */
-      .card-time-hint {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3em;
-        margin-top: 0.75rem;
-        font-size: 0.72rem;
-        font-family: var(--sans);
-        color: var(--accent);
-        background: var(--accent-dim);
-        border: 1px solid rgba(200,169,110,0.2);
-        border-radius: 20px;
-        padding: 3px 10px;
-        font-weight: 500;
-        letter-spacing: 0.01em;
-      }
-
     </style>
   </head>
 
   <body>
+
     <!-- NAV -->
     <nav>
-      <div class="nav-brand">Vegi <span>Ramesh</span></div>
+      <a href="index.html" class="nav-brand">Vegi <span>Ramesh</span></a>
       <div class="nav-links">
         <a href="index.html" class="nav-link active">Home</a>
         <a href="InvestorDetails.html" class="nav-link">Get Started</a>
@@ -1480,33 +1121,19 @@
         <a href="nps.html" class="nav-link">NPS</a>
       </div>
       <div class="nav-actions">
-        <a
-          href="https://www.amfiindia.com/locate-distributor"
-          class="nav-arn nav-arn-link"
-          target="_blank"
-          rel="noopener"
-          title="Verify on AMFI — search 349739"
-          aria-label="Verify ARN-349739 on AMFI"
-        >✦ ARN-349739</a>
-        <a
-          href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments."
-          class="nav-whatsapp-btn"
-          target="_blank"
-          rel="noopener"
-          aria-label="WhatsApp"
-        ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
-        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <a href="https://www.amfiindia.com/locate-distributor" class="nav-arn nav-arn-link" target="_blank" rel="noopener" title="Verify on AMFI — search 349739" aria-label="Verify ARN-349739 on AMFI">✦ ARN-349739</a>
+        <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments." class="nav-whatsapp-btn" target="_blank" rel="noopener" aria-label="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
           <span class="icon-dark">☀️</span>
           <span class="icon-light">🌙</span>
         </button>
         <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
-          <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-          <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <svg class="icon-menu" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <svg class="icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
       </div>
     </nav>
 
-    <!-- MOBILE NAV MENU -->
     <div class="nav-mobile-menu" id="nav-mobile-menu">
       <a href="index.html" class="nav-link active">Home</a>
       <a href="InvestorDetails.html" class="nav-link">Get Started</a>
@@ -1517,348 +1144,298 @@
       <a href="nps.html" class="nav-link">NPS</a>
     </div>
 
-    <script>
-      (function() {
-        var btn = document.getElementById('nav-hamburger');
-        var menu = document.getElementById('nav-mobile-menu');
-        if (!btn || !menu) return;
-        btn.addEventListener('click', function() {
-          var open = menu.classList.toggle('open');
-          btn.classList.toggle('open', open);
-          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        });
-        menu.querySelectorAll('.nav-link').forEach(function(link) {
-          link.addEventListener('click', function() {
-            menu.classList.remove('open');
-            btn.classList.remove('open');
-            btn.setAttribute('aria-expanded', 'false');
-          });
-        });
-      })();
-    </script>
-
-
-    <!-- STORY PROGRESS NAV -->
-    <div class="story-nav" id="story-nav" aria-label="Page sections">
-      <div class="story-nav-item" data-target="section-thought">
-        <span class="story-nav-label">A Thought</span>
-        <span class="story-nav-dot"></span>
-      </div>
-      <div class="story-nav-connector"></div>
-      <div class="story-nav-item" data-target="section-evidence">
-        <span class="story-nav-label">What the Data Shows</span>
-        <span class="story-nav-dot"></span>
-      </div>
-      <div class="story-nav-connector"></div>
-      <div class="story-nav-item" data-target="section-sip">
-        <span class="story-nav-label">SIP Power</span>
-        <span class="story-nav-dot"></span>
-      </div>
-      <div class="story-nav-connector"></div>
-      <div class="story-nav-item" data-target="section-start">
-        <span class="story-nav-label">Your Next Step</span>
-        <span class="story-nav-dot"></span>
-      </div>
-    </div>
-
     <!-- HERO -->
-    <header class="hero">
-      <div class="hero-eyebrow">Your Mutual Fund Distributor</div>
-      <h1>Your goals. Your pace.<br /><em>Your plan.</em></h1>
-      <!-- Journey Counter Widget -->
-      <div class="journey-counter" id="hero-social-proof" aria-label="Journey duration since December 2025">
-        <div class="journey-pills">
-          <div class="journey-units">
-            <div class="journey-unit">
-              <span class="journey-num" id="jc-families">0</span>
-              <span class="journey-unit-label">families</span>
-            </div>
-          </div>
-          <div class="journey-units">
-            <div class="journey-unit">
-              <span class="journey-num" id="jc-years">0</span>
-              <span class="journey-unit-label">years</span>
-            </div>
-            <div class="journey-sep" id="jc-sep-months">·</div>
-            <div class="journey-unit">
-              <span class="journey-num" id="jc-months">0</span>
-              <span class="journey-unit-label">months</span>
-            </div>
-            <div class="journey-sep" id="jc-sep-days">·</div>
-            <div class="journey-unit">
-              <span class="journey-num" id="jc-days">0</span>
-              <span class="journey-unit-label">days</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a href="bookslot.html" class="hero-cta">Want to be the 9th family? →</a>
-      <div class="hero-arn-mobile">AMFI Registered · ARN-349739</div>
-
-    <div class="main-content">
-
-    <!-- BRIDGE: Hero → Quote -->
-    <div class="section-bridge">
-      <div class="bridge-inner">
-        <div class="bridge-line">
-          <div class="bridge-rule"></div>
-          <span class="bridge-ornament">✦ ✦ ✦</span>
-          <div class="bridge-rule"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- QUOTE WIDGET -->
-    <section class="quote-section" id="section-thought">
-      <div class="quote-widget">
-        <div class="quote-eyebrow">✦ Thought I keep coming back to ✦</div>
-        <div class="quote-body" id="quote-body">
-          <div class="quote-mark">"</div>
-          <p class="quote-text" id="quote-text"></p>
-          <div class="quote-divider"></div>
-          <div class="quote-author" id="quote-author"></div>
-          <div class="quote-label" id="quote-label"></div>
-        </div>
-        <button class="quote-refresh" id="quote-refresh" title="Show another quote" aria-label="Refresh quote">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="23 4 23 10 17 10"></polyline>
-            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-          </svg>
-        </button>
+    <section class="hero">
+      <div class="hero-eyebrow">Mutual Fund Distributor</div>
+      <h1>Your money should work<br>as hard as <em>you do.</em></h1>
+      <p class="hero-sub">
+        Most people keep their savings in FDs and never let it grow.<br>
+        I help you put it to work — simply, safely, with a clear plan.
+      </p>
+      <div class="hero-ctas">
+        <a href="https://wa.me/918329450580" class="btn-primary" target="_blank" rel="noopener">
+          💬 Let's talk on WhatsApp
+        </a>
       </div>
     </section>
 
-    <!-- BRIDGE: Quote → Evidence -->
-    <div class="section-bridge">
-      <div class="bridge-inner">
-        <div class="bridge-line">
-          <div class="bridge-rule"></div>
-          <span class="bridge-ornament">✦ ✦ ✦</span>
-          <div class="bridge-rule"></div>
-        </div>
-        <p class="bridge-text">Such thoughts of investors are backed by <strong>long years of real market data.</strong></p>
-      </div>
-    </div>
-
-    <!-- THE EVIDENCE (includes chart as supporting proof) -->
-    <section class="why-section" id="section-evidence">
-      <div class="why-inner">
-        <div class="section-eyebrow">✦ What the data shows ✦</div>
-        <h2 class="section-title">Why <em>long-term</em> wins</h2>
-        <p class="section-sub">Twenty-seven years of Nifty 50 data — India's benchmark index of the 50 largest listed companies.</p>
-        <div class="why-cards">
-          <div class="why-card">
-            <div class="why-icon">📉</div>
-            <div class="why-stat">−56%</div>
-            <div class="why-label">Worst single-year crash</div>
-            <div class="why-desc">2008 financial crisis. Yet the market fully <strong>recovered within 18 months</strong> and went on to new highs.</div>
+    <!-- INTRO: WHO IS RAMESH -->
+    <section class="intro-section">
+      <div class="intro-card">
+        <div class="intro-left">
+          <div class="intro-avatar">VR</div>
+          <div>
+            <div class="intro-name">Vegi Ramesh</div>
+            <div class="intro-credential">AMFI Registered MFD</div>
           </div>
-          <div class="why-card why-card--accent">
-            <div class="why-icon">🔒</div>
-            <div class="why-stat">0 of <span id="ten-yr-windows">18</span></div>
-            <div class="why-label">10-year periods with negative returns</div>
-            <div class="why-desc">Every single 10-year window since <span id="since-year-1">1999</span> has delivered positive returns. Time eliminates risk.</div>
-          </div>
-          <div class="why-card">
-            <div class="why-icon">⚡</div>
-            <div class="why-stat" id="why-cagr">~14%</div>
-            <div class="why-label">CAGR since <span id="cagr-since">1999</span></div>
-            <div class="why-desc">Money compounding at <span id="cagr-desc">14%</span> roughly<strong>doubles every</strong> <span id="double-years">5</span> years</div>
+          <div class="intro-badges">
+            <div class="intro-badge">ARN-349739</div>
+            <div class="intro-badge">NISM Certified</div>
           </div>
         </div>
 
-        <!-- INSIGHT STRIP (now inside Evidence) -->
-        <section class="insight-strip" style="padding: 1.5rem 0 0;">
-          <div class="insight-inner">
-            <span class="insight-icon">📈</span>
-            <p class="insight-text">
-              ₹1 lakh invested in Nifty 50 in <strong id="insight-start-date">January 1999</strong> would be worth
-              <strong id="insight-value">₹23.5 lakhs</strong> today —
-              <em>simply by staying invested.</em>
-            </p>
-          </div>
-        </section>
-
-        <!-- CHART (evidence in full — moved here from top) -->
-        <div class="market-section" style="padding: 1.5rem 0 0; max-width: 100%;">
-          <div class="market-header">
-            <div class="market-title-group">
-              <div class="market-eyebrow">✦ <span id="data-years-2">27</span> Years of Data ✦</div>
-              <div class="market-title">Nifty <em>50</em> — Long-term History</div>
-            </div>
-            <div class="market-badge" id="market-badge">
-              Historical · NSE India
-            </div>
-          </div>
-          <div class="market-chart-wrap">
-            <div class="chart-toolbar">
-              <div class="chart-price-group">
-                <span class="chart-price" id="nifty-price">—</span>
-                <span class="chart-change" id="nifty-change"></span>
-              </div>
-              <div class="chart-range-btns">
-                <button class="range-btn" data-range="1y">1Y</button>
-                <button class="range-btn" data-range="3y">3Y</button>
-                <button class="range-btn" data-range="5y">5Y</button>
-                <button class="range-btn" data-range="10y">10Y</button>
-                <button class="range-btn" data-range="20y">20Y</button>
-                <button class="range-btn active" data-range="all">All</button>
-                <button class="fd-toggle-btn fd-toggle-btn--on" id="fd-toggle" title="Compare with 9% fixed deposit">
-                  <span class="fd-toggle-dot"></span>
-                  vs 9% FD
-                </button>
-              </div>
-            </div>
-            <div class="chart-canvas-wrap">
-              <canvas id="nifty-chart"></canvas>
-              <div class="chart-loading" id="chart-loading">
-                <div class="chart-spinner"></div>
-                <span id="chart-loading-text">Loading chart…</span>
-              </div>
-            </div>
-          </div>
-          <div class="market-note" id="chart-note">Monthly closing prices · NSE India · <span id="note-range">1999 – 2026</span></div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- BRIDGE: Evidence → Short-term -->
-    <div class="section-bridge">
-      <div class="bridge-inner">
-        <div class="bridge-line">
-          <div class="bridge-rule"></div>
-          <span class="bridge-ornament">✦ ✦ ✦</span>
-          <div class="bridge-rule"></div>
-        </div>
-        <p class="bridge-text">Long-term is powerful — but not every goal is a decade away. The right funds handle shorter horizons <strong>just as well.</strong></p>
-      </div>
-    </div>
-
-    <!-- SHORT-TERM SECTION -->
-    <section class="why-section">
-      <div class="why-inner">
-        <div class="section-eyebrow">✦ For near-term goals ✦</div>
-        <h2 class="section-title">Short-term? Still <em>sorted.</em></h2>
-        <p class="section-sub">Not every goal is 10 years away. For goals within 0–3 years, the right mutual funds offer safety, liquidity, and returns that beat a savings account.</p>
-        <div class="why-cards">
-          <div class="why-card">
-            <div class="why-icon">💧</div>
-            <div class="why-stat">~7%</div>
-            <div class="why-label">Liquid Funds</div>
-            <div class="why-desc">Built for your emergency corpus. Liquid funds have historically returned around <strong>~7% vs ~3.5%</strong> in a typical savings account — with same-day withdrawal available.</div>
-          </div>
-          <div class="why-card why-card--accent">
-            <div class="why-icon">🗓️</div>
-            <div class="why-stat">1–3 yrs</div>
-            <div class="why-label">Short Duration Funds</div>
-            <div class="why-desc">Planning a vacation, buying a car, or saving for a down payment? Short duration funds are designed for <strong>medium-horizon goals</strong> with better returns than fixed deposits.</div>
-          </div>
-          <div class="why-card">
-            <div class="why-icon">🛡️</div>
-            <div class="why-stat">✓</div>
-            <div class="why-label">Never delivered a negative return</div>
-            <div class="why-desc">No liquid fund category has ever delivered <strong>negative returns — not over a year, not even over a month</strong> in India. Stability you can count on for near-term money.</div>
-          </div>
+        <div class="intro-right">
+          <div class="intro-heading">Most people save.<br><em>Very few actually invest.</em></div>
+          <p class="intro-body">
+            The people I meet earn well. But their money sits in a savings account or FD — doing almost nothing. They've heard of mutual funds, maybe even bought one. But the moment markets fell, they panick and pull out. <strong>That's not investing. That's just guessing.</strong>
+          </p>
+          <div class="intro-divider"></div>
+          <p class="intro-body">
+            What actually works is simple: know what you're saving for, pick the right type of fund for that goal, and don't touch it. <strong>My job is to help you do exactly that</strong> — whether it's your child's school fees, buying a home, or just not running out of money.
+          </p>
+          <p class="intro-note">
+            As an MFD, I'm registered with SEBI to distribute mutual funds and can offer incidental guidance on product suitability.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- BRIDGE: Short-term → SIP Power -->
-    <div class="section-bridge">
-      <div class="bridge-inner">
-        <div class="bridge-line">
-          <div class="bridge-rule"></div>
-          <span class="bridge-ornament">✦ ✦ ✦</span>
-          <div class="bridge-rule"></div>
-        </div>
-        <p class="bridge-text">Now that you see <strong>why it works</strong> — here's what it looks like in practice, for an ordinary monthly amount, starting years ago.</p>
+    <!-- BRIDGE -->
+    <div class="bridge">
+      <div class="bridge-line">
+        <div class="bridge-rule"></div>
+        <span class="bridge-ornament">✦ ✦ ✦</span>
+        <div class="bridge-rule"></div>
       </div>
+      <p class="bridge-text">So why do most people still not invest? Usually, it comes down to three things.</p>
     </div>
 
-    <!-- SIP POWER STRIP -->
-    <section class="sip-section" id="section-sip">
-      <div class="sip-inner">
-        <div class="section-eyebrow">✦ SIP Power ✦</div>
-        <h2 class="section-title">Small steps, <em>big outcomes</em></h2>
+    <!-- PROBLEM SECTION -->
+    <section class="problem-section">
+      <div class="section-eyebrow">✦ The Real Problem ✦</div>
+      <h2 class="section-title">Why most people's money <em>doesn't grow</em></h2>
+      <p class="section-sub">It's rarely about picking the wrong fund. It's usually one of these.</p>
 
-        <div class="sip-setup">
-          <p class="sip-setup-question">₹1,000 / month · Nifty 50 · two people, one started 10 years earlier — here's what that gap cost.</p>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-icon">🏦</div>
+          <div class="problem-title">Money sitting idle</div>
+          <p class="problem-desc">FDs, savings accounts, gold at home. These feel safe — but after inflation, <strong>you're barely breaking even.</strong> Your money isn't growing. It's waiting.</p>
         </div>
-
-        <div class="sip-compare">
-          <!-- Person A: started 2005 -->
-          <div class="sip-person sip-person--winner">
-            <div class="sip-person-badge">Ayesha · started Jan 2005</div>
-            <div class="sip-person-name">Invested for 20 years</div>
-            <div class="sip-breakdown">
-              <div class="sip-row">
-                <span class="sip-row-label">Put in</span>
-                <span class="sip-row-val" id="sip-principal-2005">—</span>
-              </div>
-              <div class="sip-row sip-row--returns">
-                <span class="sip-row-label">Returns</span>
-                <span class="sip-row-val" id="sip-returns-2005">—</span>
-              </div>
-            </div>
-            <div class="sip-total-label">Corpus today</div>
-            <div class="sip-total-val" id="sip-1k-2005">₹—</div>
-            <div class="sip-multiplier" id="sip-mult-2005">—</div>
-          </div>
-
-          <!-- Person B: started 2015 -->
-          <div class="sip-person">
-            <div class="sip-person-badge" style="background:var(--muted);color:var(--bg);">Ravi · started Jan 2015</div>
-            <div class="sip-person-name">Invested for 10 years</div>
-            <div class="sip-breakdown">
-              <div class="sip-row">
-                <span class="sip-row-label">Put in</span>
-                <span class="sip-row-val" id="sip-principal-2015">—</span>
-              </div>
-              <div class="sip-row sip-row--returns">
-                <span class="sip-row-label">Returns</span>
-                <span class="sip-row-val" id="sip-returns-2015">—</span>
-              </div>
-            </div>
-            <div class="sip-total-label">Corpus today</div>
-            <div class="sip-total-val" id="sip-1k-2015">₹—</div>
-            <div class="sip-multiplier" id="sip-mult-2015">—</div>
-          </div>
+        <div class="problem-card">
+          <div class="problem-icon">📱</div>
+          <div class="problem-title">Investing on a tip</div>
+          <p class="problem-desc">Buying a fund because someone on Media said so — with no idea why it suits you. <strong>When markets drop, you panic and sell.</strong> Then the cycle repeats.</p>
         </div>
-
-        <div class="sip-punchline" id="sip-punchline">
-          <!-- filled by JS -->
+        <div class="problem-card">
+          <div class="problem-icon">🔀</div>
+          <div class="problem-title">No real plan</div>
+          <p class="problem-desc">Owning five funds that all do the same thing, or putting everything in one place. <strong>More funds isn't diversification</strong> — it's just more confusion.</p>
         </div>
-
-        <p class="sip-disclaimer">Illustrative · Nifty 50 monthly closing prices · past performance is not indicative of future results.</p>
       </div>
     </section>
 
-    <!-- BRIDGE: SIP → Cards/Next Step -->
-    <div class="section-bridge">
-      <div class="bridge-inner">
-        <div class="bridge-line">
-          <div class="bridge-rule"></div>
-          <span class="bridge-ornament">✦ ✦ ✦</span>
-          <div class="bridge-rule"></div>
-        </div>
-        <p class="bridge-text">You've felt the philosophy. You've seen the data. The thing left to choose is <strong>where you want to begin.</strong></p>
+    <!-- BRIDGE -->
+    <div class="bridge">
+      <div class="bridge-line">
+        <div class="bridge-rule"></div>
+        <span class="bridge-ornament">✦ ✦ ✦</span>
+        <div class="bridge-rule"></div>
       </div>
+      <p class="bridge-text">The fix starts with one question — <strong>where does your money need to go, and when?</strong></p>
     </div>
 
-        <!-- CARDS -->
-    <section class="cards-section" id="section-start">
-      <div class="cards-heading">
-        <div class="section-eyebrow">✦ Your Next Step ✦</div>
-        <h2 class="section-title">Where do you want<br>to <em>start?</em></h2>
-        <p class="section-sub" style="margin-bottom:0">Whether you're ready to begin, still exploring, or just curious — there's a path for you.</p>
-      </div>
-      <div class="cards-grid">
+    <!-- ASSET ALLOCATION -->
+    <section class="alloc-section">
+      <div class="section-eyebrow">✦ The Most Important Decision ✦</div>
+      <h2 class="section-title">It's not <em>which</em> fund — it's <em>what kind</em></h2>
+      <p class="section-sub">Research shows over 90% of your returns come from how you split your money — not which specific fund you pick.</p>
 
-        <!-- Card 1: Get Started (KYC) -->
-        <a href="InvestorDetails.html" class="card card-featured">
-          <div class="card-corner"></div>
-          <div class="card-icon">
+      <div class="alloc-visual">
+        <div class="alloc-bar-wrap">
+          <div class="alloc-bar-label">Your portfolio, roughly visualised</div>
+          <div class="alloc-bar" id="alloc-bar">
+            <div class="alloc-bar-seg seg-equity" id="seg-equity" style="flex: 60"></div>
+            <div class="alloc-bar-seg seg-debt"   id="seg-debt"   style="flex: 25"></div>
+            <div class="alloc-bar-seg seg-liquid" id="seg-liquid" style="flex: 10"></div>
+            <div class="alloc-bar-seg seg-gold"   id="seg-gold"   style="flex:  5"></div>
+          </div>
+        </div>
+
+        <div class="alloc-legend">
+          <div class="alloc-item">
+            <div class="alloc-dot dot-equity"></div>
+            <div class="alloc-item-content">
+              <div class="alloc-item-name">Equity Mutual Funds</div>
+              <p class="alloc-item-desc">Invests in company shares. Best for long-term goals (7+ years). Can go up and down, but grows the most over time.</p>
+            </div>
+          </div>
+          <div class="alloc-item">
+            <div class="alloc-dot dot-debt"></div>
+            <div class="alloc-item-content">
+              <div class="alloc-item-name">Debt Funds</div>
+              <p class="alloc-item-desc">Steadier than equity, better than FDs. Good for money you'll need in 1–5 years.</p>
+            </div>
+          </div>
+          <div class="alloc-item">
+            <div class="alloc-dot dot-liquid"></div>
+            <div class="alloc-item-content">
+              <div class="alloc-item-name">Liquid / Emergency</div>
+              <p class="alloc-item-desc">Your rainy-day money. 3–6 months of expenses, back in your account within days if needed.</p>
+            </div>
+          </div>
+          <div class="alloc-item">
+            <div class="alloc-dot dot-gold"></div>
+            <div class="alloc-item-content">
+              <div class="alloc-item-name">Gold (via MFs)</div>
+              <p class="alloc-item-desc">Holds its value when everything else wobbles. A small slice protects the rest of your portfolio.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="alloc-slider-wrap">
+          <div class="alloc-slider-label">How the split changes as you get older — <strong>pick your life stage</strong></div>
+          <div class="alloc-presets">
+            <button class="preset-btn" data-equity="80" data-debt="10" data-liquid="8" data-gold="2">Young &amp; early (25–30)</button>
+            <button class="preset-btn active" data-equity="60" data-debt="25" data-liquid="10" data-gold="5">Building (30–40)</button>
+            <button class="preset-btn" data-equity="45" data-debt="35" data-liquid="12" data-gold="8">Mid-career (40–50)</button>
+            <button class="preset-btn" data-equity="25" data-debt="45" data-liquid="20" data-gold="10">Near retirement (50+)</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="alloc-note">
+        <strong>Just to be clear:</strong> These are rough examples, not personal recommendation. The right split depends on your current goals, income, and your relationship with risk. That's what we figure out together — before picking any fund.
+      </div>
+    </section>
+
+    <!-- BRIDGE -->
+    <div class="bridge">
+      <div class="bridge-line">
+        <div class="bridge-rule"></div>
+        <span class="bridge-ornament">✦ ✦ ✦</span>
+        <div class="bridge-rule"></div>
+      </div>
+      <p class="bridge-text">Once that's clear, each goal gets its own pot of money — and the right fund to go with it.</p>
+    </div>
+
+    <!-- GOAL-BASED INVESTING -->
+    <section class="goals-section">
+      <div class="section-eyebrow">✦ Goal-Based Investing ✦</div>
+      <h2 class="section-title">Every rupee should have <em>a job.</em></h2>
+      <p class="section-sub">Whatever you're saving for — there's a mutual fund suited for it.</p>
+
+      <div class="horizon-strip">
+        <div class="horizon-item">
+          <div class="horizon-label">Short term</div>
+          <div class="horizon-duration">Up to 1 year</div>
+          <div class="horizon-desc">Need money soon? Liquid funds keep it safe and earn more than a savings account — no lock-in.</div>
+        </div>
+        <div class="horizon-divider"></div>
+        <div class="horizon-item">
+          <div class="horizon-label">Medium term</div>
+          <div class="horizon-duration">1 – 7 years</div>
+          <div class="horizon-desc">Saving for a car, a wedding, a down payment? Debt and hybrid funds grow your money without too much risk.</div>
+        </div>
+        <div class="horizon-divider"></div>
+        <div class="horizon-item">
+          <div class="horizon-label">Long term</div>
+          <div class="horizon-duration">7 years +</div>
+          <div class="horizon-desc">Retirement, your child's education, real wealth. Equity funds have time to grow — and time fixes the bumps along the way.</div>
+        </div>
+      </div>
+
+      <p class="horizon-footnote">Want to see use-cases of Mutual Funds? <a href="AboutMe.html#use-cases" class="horizon-link">Have a look here →</a></p>
+    </section>
+
+    <!-- BRIDGE -->
+    <div class="bridge">
+      <div class="bridge-line">
+        <div class="bridge-rule"></div>
+        <span class="bridge-ornament">✦ ✦ ✦</span>
+        <div class="bridge-rule"></div>
+      </div>
+      <p class="bridge-text">Here's what working with me looks like.</p>
+    </div>
+
+    <!-- HOW I WORK -->
+    <section class="process-section">
+      <div class="section-eyebrow">✦ How I Work ✦</div>
+      <h2 class="section-title">Simple steps. <em>No surprises.</em></h2>
+      <p class="section-sub" style="margin-bottom: 1.5rem;">Here's exactly what happens when you reach out.</p>
+
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-spine">
+            <div class="step-num">1</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-body">
+            <div class="step-title">We talk about your life, not markets</div>
+            <p class="step-desc">I ask about your income, your family, what you're saving for, and what keeps you up at night. <strong>Goals first. Funds come later.</strong></p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-spine">
+            <div class="step-num">2</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-body">
+            <div class="step-title">We figure out how much risk suits you</div>
+            <p class="step-desc">Not just a form — a real conversation. If your investment dropped 20% next month, would you hold or panic? <strong>Your honest answers shapes the whole plan.</strong></p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-spine">
+            <div class="step-num">3</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-body">
+            <div class="step-title">Each goal gets its own plan</div>
+            <p class="step-desc">Your child's school fees, your retirement, your emergency fund — each gets a separate right kind of fund. <strong>Not a randomly mixed-up portfolio.</strong></p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-spine">
+            <div class="step-num">4</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-body">
+            <div class="step-title">I stay with you</div>
+            <p class="step-desc">Markets will fall. Life will change. I'm here for the check-ins and the moments you need someone to say <strong>"stay strong, this is normal."</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BRIDGE -->
+    <div class="bridge">
+      <div class="bridge-line">
+        <div class="bridge-rule"></div>
+        <span class="bridge-ornament">✦ ✦ ✦</span>
+        <div class="bridge-rule"></div>
+      </div>
+      <p class="bridge-text">Ready to start? <strong>Pick whatever feels easiest.</strong></p>
+    </div>
+
+    <!-- START SECTION -->
+    <section class="start-section" id="start">
+      <div class="section-eyebrow">✦ Your Next Step ✦</div>
+      <h2 class="section-title">How would you like to <em>begin?</em></h2>
+      <p class="section-sub">No commitment. Just a first step.</p>
+
+      <div class="start-grid">
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/918329450580" class="start-card featured" target="_blank" rel="noopener">
+          <div class="start-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+          </div>
+          <div class="start-card-label">Fastest</div>
+          <div class="start-card-title">Just send me<br><em>a message.</em></div>
+          <p class="start-card-desc">Don't want to fill any form? Just say hi on WhatsApp. I'll reply within a few hours and we'll take it from there.</p>
+          <div class="start-card-hint">No forms. No wait. Just a message.</div>
+          <div class="start-card-cta">
+            <span>Open WhatsApp</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- Investor Details -->
+        <a href="InvestorDetails.html" class="start-card">
+          <div class="start-card-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
               <polyline points="14 2 14 8 20 8"/>
@@ -1866,803 +1443,118 @@
               <line x1="9" y1="15" x2="15" y2="15"/>
             </svg>
           </div>
-          <div class="card-step">Quick Start</div>
-          <div class="card-title">Get started<br /><em>right now.</em></div>
-          <p class="card-desc">Share your basic KYC details and I'll reach out to get you started on your investment journey.</p>
-          <div class="card-time-hint">⚡ 5–7 min · share your details</div>
-          <div class="card-cta">
-            <span>Share my details</span>
-            <span class="card-cta-arrow">→</span>
+          <div class="start-card-label">5 minutes</div>
+          <div class="start-card-title">Fill in your<br><em>details.</em></div>
+          <p class="start-card-desc">Short on time? Share a few basic details and I'll call you back at a time that works for you.</p>
+          <div class="start-card-hint">⚡ 5 min · I'll follow up within 24 hrs</div>
+          <div class="start-card-cta">
+            <span>Fill the form</span>
+            <span>→</span>
           </div>
         </a>
 
-        <!-- Card 2: Risk Profiler -->
-        <a href="RiskProfiler.html" class="card">
-          <div class="card-icon">
+        <!-- Risk Profiler -->
+        <a href="RiskProfiler.html" class="start-card">
+          <div class="start-card-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10"/>
               <path d="M12 16v-4M12 8h.01"/>
             </svg>
           </div>
-          <div class="card-step">Risk Profile</div>
-          <div class="card-title">Know your<br /><em>investor self.</em></div>
-          <p class="card-desc">A guided questionnaire that maps your personality, goals, and comfort with risk to the right mutual fund portfolio.</p>
-          <div class="card-time-hint">⏱ 10–15 min · questionnaire + KYC</div>
-          <div class="card-cta">
-            <span>Find your risk tolerance</span>
-            <span class="card-cta-arrow">→</span>
-          </div>
-        </a>
-
-        <!-- Card 3: About Me -->
-        <a href="AboutMe.html" class="card">
-          <div class="card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-          </div>
-          <div class="card-step">About</div>
-          <div class="card-title">Know your<br /><em>distributor.</em></div>
-          <p class="card-desc">Who I am, why I chose this work, how I earn, and why that matters for your wealth. Full transparency — no surprises.</p>
-          <div class="card-time-hint">📖 1 min summary · full story inside</div>
-          <div class="card-cta">
-            <span>Mutual Funds & My Story</span>
-            <span class="card-cta-arrow">→</span>
-          </div>
-        </a>
-
-        <!-- Card 4: Goal Calculator -->
-        <a href="calculator.html" class="card">
-          <div class="card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="4" y="2" width="16" height="20" rx="2"/>
-              <line x1="8" y1="6" x2="16" y2="6"/>
-              <line x1="8" y1="10" x2="10" y2="10"/>
-              <line x1="12" y1="10" x2="14" y2="10"/>
-              <line x1="16" y1="10" x2="16" y2="10"/>
-              <line x1="8" y1="14" x2="10" y2="14"/>
-              <line x1="12" y1="14" x2="14" y2="14"/>
-              <line x1="16" y1="14" x2="16" y2="14"/>
-              <line x1="8" y1="18" x2="10" y2="18"/>
-              <line x1="12" y1="18" x2="14" y2="18"/>
-            </svg>
-          </div>
-          <div class="card-step">Goal Planning</div>
-          <div class="card-title">Plan your<br /><em>goal.</em></div>
-          <p class="card-desc">Home, education, retirement — or anything else. Calculate your SIP, lumpsum, or a mix, with inflation-adjusted projections.</p>
-          <div class="card-cta">
-            <span>Plan a goal</span>
-            <span class="card-cta-arrow">→</span>
-          </div>
-        </a>
-
-        <!-- Card 5: Savings Corpus Calculator -->
-        <a href="SavingsCorpusCalculator.html" class="card">
-          <div class="card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
-              <polyline points="16 7 22 7 22 13"/>
-            </svg>
-          </div>
-          <div class="card-step">Corpus Creation</div>
-          <div class="card-title">Witness the power of<br /><em>Investing.</em></div>
-          <p class="card-desc">Start with what you can save — monthly, one-time, or both. See your corpus grow with inflation-adjusted projections and real-return insights.</p>
-          <div class="card-cta">
-            <span>See what you can build</span>
-            <span class="card-cta-arrow">→</span>
-          </div>
-        </a>
-
-        <!-- Card 6: NPS -->
-        <a href="nps.html" class="card">
-          <div class="card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-          </div>
-          <div class="card-step">Retirement</div>
-          <div class="card-title">Plan your pension with<br /><em>HDFC NPS</em></div>
-          <p class="card-desc">NPS is India's most tax-efficient retirement plan — and one of the most ignored. A small monthly contribution today builds a pension you and your family won't outlive.</p>
-          <div class="card-cta">
-            <span>Explore NPS</span>
-            <span class="card-cta-arrow">→</span>
+          <div class="start-card-label">10–15 minutes</div>
+          <div class="start-card-title">Find out what kind of<br><em>investor you are.</em></div>
+          <p class="start-card-desc">Not sure how much risk you're comfortable with? Take a short quiz and get a clear picture of the right type of funds for you.</p>
+          <div class="start-card-hint">⏱ Questionnaire + optional KYC details</div>
+          <div class="start-card-cta">
+            <span>Start profiler</span>
+            <span>→</span>
           </div>
         </a>
 
       </div>
     </section>
 
-    </div><!-- /main-content -->
-
     <!-- FOOTER -->
     <footer>
-      <div class="footer-inner">
-        <div class="footer-brand">Mutual Fund and NPS distribution services by Vegi Ramesh</div>
-        <div class="footer-links">
-          <a href="InvestorDetails.html">Get Started</a>
-          <a href="AboutMe.html">About Me</a>
-          <a href="nps.html">NPS</a>
-          <a href="RiskProfiler.html">Investor Profiling</a>
-          <a href="calculator.html">Goal Calculator</a>
-          <a href="SavingsCorpusCalculator.html">Corpus Calculator</a>
-          <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments." target="_blank" rel="noopener">WhatsApp</a>
-          <a href="tel:8329450580">Call Me</a>
-          <a href="mailto:rameshvegi94@gmail.com">Email Me</a>
-        </div>
-        <div class="footer-disc">
-          Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Past performance is not indicative of future results. This material is for informational purposes only and does not constitute financial advice. Vegi Ramesh is registered with AMFI as a Mutual Fund Distributor – ARN-349739.
-        </div>
+      <div class="footer-name">Vegi <span>Ramesh</span></div>
+      <div class="footer-links">
+        <a href="AboutMe.html">About</a>
+        <a href="RiskProfiler.html">Risk Profiler</a>
+        <a href="InvestorDetails.html">Get Started</a>
+        <a href="https://wa.me/918329450580" target="_blank" rel="noopener">WhatsApp</a>
       </div>
+      <p class="footer-disc">
+        Vegi Ramesh · AMFI-registered Mutual Fund Distributor · ARN-349739 · NISM Series V-A certified.
+        Mutual fund investments are subject to market risks. Please read all scheme-related documents carefully before investing.
+        Past performance is not indicative of future returns. This website is for informational purposes only and does not constitute investment advice.
+        Registration with AMFI does not guarantee the quality of services, analysis, or ratings provided.
+      </p>
     </footer>
 
-    <!-- Mobile WhatsApp FAB -->
-    <a
-      href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments."
-      class="fab-whatsapp"
-      target="_blank"
-      rel="noopener"
-      aria-label="WhatsApp"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-    </a>
+
 
     <script>
-      // ── Journey Counter: ticking since 28 Dec 2025 ──
-      (function() {
-        // ── UPDATE THIS when family count changes ──
-        var FAMILIES_COUNT = 8;
-        // ──────────────────────────────────────────
-        var START = new Date('2025-12-28T00:00:00');
-
-        var fEl = document.getElementById('jc-families');
-        if (fEl) fEl.textContent = FAMILIES_COUNT;
-
-        function ordinal(n) {
-          var s = ["th","st","nd","rd"], v = n % 100;
-          return n + (s[(v-20)%10] || s[v] || s[0]);
-        }
-        var ctaEl = document.querySelector('a.hero-cta');
-        if (ctaEl) ctaEl.textContent = 'Want to be the ' + ordinal(FAMILIES_COUNT + 1) + ' family? →';
-
-        function update() {
-          var now   = new Date();
-          var yrs   = 0, mos = 0, dys = 0;
-
-          var y1 = START.getFullYear(), m1 = START.getMonth(), d1 = START.getDate();
-          var y2 = now.getFullYear(),   m2 = now.getMonth(),   d2 = now.getDate();
-
-          yrs = y2 - y1;
-          mos = m2 - m1;
-          dys = d2 - d1;
-
-          if (dys < 0) {
-            mos--;
-            var prevMonth = new Date(y2, m2, 0);
-            dys += prevMonth.getDate();
-          }
-          if (mos < 0) { yrs--; mos += 12; }
-
-          var yEl = document.getElementById('jc-years');
-          var mEl = document.getElementById('jc-months');
-          var dEl = document.getElementById('jc-days');
-          var ySep = document.getElementById('jc-sep-months');
-          var mSep = document.getElementById('jc-sep-days');
-
-          if (yEl) { yEl.textContent = yrs; yEl.closest('.journey-unit').style.display = yrs === 0 ? 'none' : ''; }
-          if (ySep) ySep.style.display = yrs === 0 ? 'none' : '';
-          if (mEl) { mEl.textContent = mos; mEl.closest('.journey-unit').style.display = mos === 0 ? 'none' : ''; }
-          if (mSep) mSep.style.display = mos === 0 ? 'none' : '';
-          if (dEl) { dEl.textContent = dys; dEl.closest('.journey-unit').style.display = dys === 0 ? 'none' : ''; }
-        }
-
-        update();
-        // refresh every minute
-        setInterval(update, 60000);
-      })();
-
-      function toggleTheme() {
-        var html = document.documentElement;
-        var isDark = html.getAttribute("data-theme") !== "light";
-        html.setAttribute("data-theme", isDark ? "light" : "dark");
-        try { localStorage.setItem("theme", isDark ? "light" : "dark"); } catch (e) {}
-      }
-      (function () {
-        try {
-          var t = localStorage.getItem("theme");
-          if (t) document.documentElement.setAttribute("data-theme", t);
-        } catch (e) {}
-        var btn = document.querySelector(".theme-toggle");
-        if (btn) btn.classList.add("ready");
-      })();
-    </script>
-    <script>
-      (function () {
-        var quotes = [
-          { text: "Far more money has been lost in waiting for corrections than in the corrections themselves.", author: "Peter Lynch", label: "Legendary Fund Manager" },
-          { text: "Know what you own, and know why you own it.", author: "Peter Lynch", label: "Legendary Fund Manager" },
-          { text: "The real key to making money in stocks is not to get scared out of them.", author: "Peter Lynch", label: "Legendary Fund Manager" },
-          { text: "In the stock market, the most important organ is the stomach. It's not the brain.", author: "Peter Lynch", label: "Legendary Fund Manager" },
-          { text: "Someone is sitting in the shade today because someone planted a tree a long time ago.", author: "Warren Buffett", label: "Chairman, Berkshire Hathaway" },
-          { text: "The stock market is a device for transferring money from the impatient to the patient.", author: "Warren Buffett", label: "Chairman, Berkshire Hathaway" },
-          { text: "Be fearful when others are greedy and greedy when others are fearful.", author: "Warren Buffett", label: "Chairman, Berkshire Hathaway" },
-          { text: "Our favourite holding period is forever.", author: "Warren Buffett", label: "Chairman, Berkshire Hathaway" },
-          { text: "The first rule of compounding: Never interrupt it unnecessarily.", author: "Charlie Munger", label: "Vice Chairman, Berkshire Hathaway" },
-          { text: "The desire to get rich fast is pretty dangerous.", author: "Charlie Munger", label: "Vice Chairman, Berkshire Hathaway" },
-          { text: "It's waiting that helps you as an investor, and a lot of people just can't stand to wait.", author: "Charlie Munger", label: "Vice Chairman, Berkshire Hathaway" },
-          { text: "The big money is made in the long term.", author: "Charlie Munger", label: "Vice Chairman, Berkshire Hathaway" },
-          { text: "The two greatest enemies of the equity fund investor are expenses and emotions.", author: "John Bogle", label: "Founder, Vanguard Group" },
-          { text: "Don't look for the needle in the haystack. Just buy the haystack!", author: "John Bogle", label: "Founder, Vanguard Group" },
-          { text: "Stay the course.", author: "John Bogle", label: "Founder, Vanguard Group" },
-          { text: "The investor's chief problem — and even his worst enemy — is likely to be himself.", author: "Benjamin Graham", label: "Father of Value Investing" },
-          { text: "Successful investing is about managing risk, not avoiding it.", author: "Benjamin Graham", label: "Father of Value Investing" },
-          { text: "The individual investor should act consistently as an investor and not as a speculator.", author: "Benjamin Graham", label: "Father of Value Investing" },
-          { text: "The single greatest edge an investor can have is a long-term orientation.", author: "Seth Klarman", label: "Founder, Baupost Group" },
-          { text: "You can't predict, but you can prepare.", author: "Howard Marks", label: "Co-Founder, Oaktree Capital" },
-          { text: "The best way to make money is to avoid losing it.", author: "Jack Meyer", label: "Former CIO, Harvard Endowment" },
-          { text: "Investing should be more like watching paint dry or watching grass grow. If you want excitement, take $800 and go to Las Vegas.", author: "Paul Samuelson", label: "Nobel Laureate in Economics" },
-          { text: "The reason index funds will outperform most actively managed funds is because of costs. Costs matter.", author: "William Bernstein", label: "Author & Investment Theorist" },
-          { text: "In investing, what is comfortable is rarely profitable.", author: "Robert Arnott", label: "Founder, Research Affiliates" },
-          { text: "The four most dangerous words in investing are: 'This time it's different.'", author: "Sir John Templeton", label: "Pioneer of Global Investing" },
-          { text: "Risk comes from not knowing what you are doing.", author: "Warren Buffett", label: "Chairman, Berkshire Hathaway" },
-          { text: "Time in the market beats timing the market.", author: "Ken Fisher", label: "Founder, Fisher Investments" },
-          { text: "An investment in knowledge pays the best interest.", author: "Benjamin Franklin", label: "Founding Father & Polymath" },
-          { text: "Do not save what is left after spending, but spend what is left after saving.", author: "Warren Buffett", label: "Chairman, Berkshire Hathaway" },
-          { text: "Compound interest is the eighth wonder of the world. He who understands it, earns it; he who doesn't, pays it.", author: "Albert Einstein", label: "Nobel Laureate in Physics" },
-          { text: "Markets can remain irrational longer than you can remain solvent.", author: "John Maynard Keynes", label: "Economist & Investor" }
-        ];
-
-        // Seed using today's date so the quote stays consistent all day
-        var now = new Date();
-        var seed = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
-        var index = seed % quotes.length;
-
-        function showQuote(i) {
-          var q = quotes[i];
-          document.getElementById("quote-text").textContent = q.text;
-          document.getElementById("quote-author").textContent = q.author;
-          document.getElementById("quote-label").textContent = q.label;
-        }
-
-        function showQuoteAnimated(i) {
-          var body = document.getElementById("quote-body");
-          body.classList.add("fading");
-          setTimeout(function() {
-            showQuote(i);
-            body.classList.remove("fading");
-          }, 300);
-        }
-
-        showQuote(index);
-
-        var refreshBtn = document.getElementById("quote-refresh");
-        if (refreshBtn) {
-          refreshBtn.addEventListener("click", function() {
-            var next;
-            do { next = Math.floor(Math.random() * quotes.length); } while (next === index);
-            index = next;
-            showQuoteAnimated(index);
-            // spin animation
-            refreshBtn.classList.remove("spinning");
-            void refreshBtn.offsetWidth; // reflow
-            refreshBtn.classList.add("spinning");
-            setTimeout(function() { refreshBtn.classList.remove("spinning"); }, 400);
-          });
-        }
-      })();
-    </script>
-
-    <!-- Chart.js from CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-
-    <script>
+    // ── Theme toggle ──
     (function() {
-      'use strict';
+      var toggle = document.getElementById('themeToggle');
+      var root = document.documentElement;
+      var saved = localStorage.getItem('theme') || 'dark';
+      if (saved === 'light') root.setAttribute('data-theme', 'light');
+      setTimeout(function() { toggle.classList.add('ready'); }, 200);
+    })();
+    window.toggleTheme = function() {
+      var root = document.documentElement;
+      var current = root.getAttribute('data-theme');
+      var next = current === 'light' ? 'dark' : 'light';
+      if (next === 'dark') root.removeAttribute('data-theme');
+      else root.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', next);
+    };
+    </script>
 
-      // ── Nifty 50 monthly closing data (Jan 2015 – May 2026) ──
-      // Source: NSE India historical records
-      // Nifty 50 monthly closing prices — Nov 1995 to May 2026 (NSE India)
-      window.RAW = [
-        ['1999-01',1050],['1999-02',1049],['1999-03',1073],['1999-04',1073],
-        ['1999-05',1040],['1999-06',1088],['1999-07',1208],['1999-08',1355],
-        ['1999-09',1419],['1999-10',1580],['1999-11',1608],['1999-12',1592],
-        ['2000-01',1879],['2000-02',1911],['2000-03',1528],['2000-04',1426],
-        ['2000-05',1388],['2000-06',1461],['2000-07',1495],['2000-08',1374],
-        ['2000-09',1354],['2000-10',1266],['2000-11',1268],['2000-12',1264],
-        ['2001-01',1254],['2001-02',1171],['2001-03',1148],['2001-04',1115],
-        ['2001-05',1209],['2001-06',1124],['2001-07',1083],['2001-08',1072],
-        ['2001-09',895], ['2001-10',985], ['2001-11',1040],['2001-12',1059],
-        ['2002-01',1093],['2002-02',1129],['2002-03',1130],['2002-04',1134],
-        ['2002-05',1068],['2002-06',1038],['2002-07',988], ['2002-08',976],
-        ['2002-09',953], ['2002-10',988], ['2002-11',1029],['2002-12',1094],
-        ['2003-01',1055],['2003-02',1050],['2003-03',963], ['2003-04',978],
-        ['2003-05',1008],['2003-06',1120],['2003-07',1259],['2003-08',1356],
-        ['2003-09',1417],['2003-10',1555],['2003-11',1699],['2003-12',1880],
-        ['2004-01',1972],['2004-02',1800],['2004-03',1800],['2004-04',1796],
-        ['2004-05',1388],['2004-06',1505],['2004-07',1631],['2004-08',1632],
-        ['2004-09',1784],['2004-10',1945],['2004-11',2059],['2004-12',2081],
-        ['2005-01',2032],['2005-02',2104],['2005-03',2036],['2005-04',2165],
-        ['2005-05',2220],['2005-06',2220],['2005-07',2312],['2005-08',2603],
-        ['2005-09',2601],['2005-10',2371],['2005-11',2652],['2005-12',2836],
-        ['2006-01',2944],['2006-02',3075],['2006-03',3403],['2006-04',3508],
-        ['2006-05',2963],['2006-06',3128],['2006-07',3143],['2006-08',3413],
-        ['2006-09',3588],['2006-10',3744],['2006-11',3954],['2006-12',3966],
-        ['2007-01',4083],['2007-02',3746],['2007-03',3822],['2007-04',4087],
-        ['2007-05',4295],['2007-06',4319],['2007-07',4529],['2007-08',4464],
-        ['2007-09',5021],['2007-10',5900],['2007-11',5763],['2007-12',6138],
-        ['2008-01',5138],['2008-02',5223],['2008-03',4736],['2008-04',5165],
-        ['2008-05',4870],['2008-06',4041],['2008-07',4332],['2008-08',4360],
-        ['2008-09',3921],['2008-10',2885],['2008-11',2755],['2008-12',2959],
-        ['2009-01',2874],['2009-02',2764],['2009-03',3021],['2009-04',3474],
-        ['2009-05',4448],['2009-06',4291],['2009-07',4636],['2009-08',4732],
-        ['2009-09',5084],['2009-10',4712],['2009-11',5032],['2009-12',5201],
-        ['2010-01',4882],['2010-02',4922],['2010-03',5249],['2010-04',5278],
-        ['2010-05',5086],['2010-06',5313],['2010-07',5368],['2010-08',5402],
-        ['2010-09',6030],['2010-10',6018],['2010-11',5863],['2010-12',6134],
-        ['2011-01',5740],['2011-02',5333],['2011-03',5834],['2011-04',5750],
-        ['2011-05',5560],['2011-06',5648],['2011-07',5482],['2011-08',5001],
-        ['2011-09',4943],['2011-10',5281],['2011-11',4832],['2011-12',4624],
-        ['2012-01',5199],['2012-02',5386],['2012-03',5296],['2012-04',5248],
-        ['2012-05',4924],['2012-06',5279],['2012-07',5229],['2012-08',5259],
-        ['2012-09',5704],['2012-10',5620],['2012-11',5880],['2012-12',5905],
-        ['2013-01',6035],['2013-02',5852],['2013-03',5683],['2013-04',5930],
-        ['2013-05',5986],['2013-06',5842],['2013-07',5909],['2013-08',5471],
-        ['2013-09',5736],['2013-10',6299],['2013-11',6176],['2013-12',6304],
-        ['2014-01',6089],['2014-02',6277],['2014-03',6705],['2014-04',6696],
-        ['2014-05',7229],['2014-06',7611],['2014-07',7721],['2014-08',7954],
-        ['2014-09',7965],['2014-10',8322],['2014-11',8588],['2014-12',8282],
-        ['2015-01',8808],['2015-02',8902],['2015-03',8491],['2015-04',8181],
-        ['2015-05',8433],['2015-06',8368],['2015-07',8533],['2015-08',7971],
-        ['2015-09',7949],['2015-10',8066],['2015-11',7935],['2015-12',7946],
-        ['2016-01',7563],['2016-02',6987],['2016-03',7738],['2016-04',7849],
-        ['2016-05',8160],['2016-06',8288],['2016-07',8639],['2016-08',8786],
-        ['2016-09',8611],['2016-10',8625],['2016-11',8225],['2016-12',8186],
-        ['2017-01',8561],['2017-02',8880],['2017-03',9174],['2017-04',9304],
-        ['2017-05',9621],['2017-06',9521],['2017-07',10020],['2017-08',9917],
-        ['2017-09',9788],['2017-10',10335],['2017-11',10227],['2017-12',10531],
-        ['2018-01',11028],['2018-02',10492],['2018-03',10114],['2018-04',10739],
-        ['2018-05',10736],['2018-06',10714],['2018-07',11356],['2018-08',11680],
-        ['2018-09',10930],['2018-10',10387],['2018-11',10877],['2018-12',10863],
-        ['2019-01',10831],['2019-02',10793],['2019-03',11624],['2019-04',11748],
-        ['2019-05',11945],['2019-06',11788],['2019-07',11118],['2019-08',11023],
-        ['2019-09',11474],['2019-10',11878],['2019-11',12056],['2019-12',12168],
-        ['2020-01',11963],['2020-02',11202],['2020-03',8598],['2020-04',9860],
-        ['2020-05',9580],['2020-06',10302],['2020-07',11073],['2020-08',11387],
-        ['2020-09',11247],['2020-10',11642],['2020-11',12968],['2020-12',13982],
-        ['2021-01',13635],['2021-02',14529],['2021-03',14691],['2021-04',14631],
-        ['2021-05',15582],['2021-06',15721],['2021-07',15763],['2021-08',17132],
-        ['2021-09',17618],['2021-10',17671],['2021-11',17027],['2021-12',17354],
-        ['2022-01',17340],['2022-02',16794],['2022-03',17465],['2022-04',17103],
-        ['2022-05',16584],['2022-06',15780],['2022-07',17158],['2022-08',17760],
-        ['2022-09',17094],['2022-10',18012],['2022-11',18758],['2022-12',18105],
-        ['2023-01',17616],['2023-02',17303],['2023-03',17360],['2023-04',18065],
-        ['2023-05',18534],['2023-06',19189],['2023-07',19754],['2023-08',19675],
-        ['2023-09',19639],['2023-10',19079],['2023-11',20133],['2023-12',21731],
-        ['2024-01',21725],['2024-02',22212],['2024-03',22326],['2024-04',22604],
-        ['2024-05',23307],['2024-06',24010],['2024-07',24951],['2024-08',25235],
-        ['2024-09',26178],['2024-10',24205],['2024-11',24131],['2024-12',23644],
-        ['2025-01',23163],['2025-02',22124],['2025-03',23519],['2025-04',24039],
-        ['2025-05',24667],
-        ['2025-06',25638],['2025-07',25461],['2025-08',24501],['2025-09',24836],
-        ['2025-10',26178],['2025-11',25812],['2025-12',26141],
-        ['2026-01',24739],['2026-02',22182],['2026-03',23508],
-        ['2026-04',24353],['2026-05',24215]
-      ];
-
-      var chartInstance = null;
-
-      function sliceData(range) {
-        var n = RAW.length;
-        if (range === 'all') return RAW;
-        var counts = { '1y': 12, '3y': 36, '5y': 60, '10y': 120, '20y': 240 };
-        var take = counts[range] || RAW.length;
-        return RAW.slice(Math.max(0, n - take));
-      }
-
-      function isDark() {
-        return document.documentElement.getAttribute('data-theme') !== 'light';
-      }
-
-      function formatINR(v) {
-        return new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(v);
-      }
-
-      var showFD = true;
-
-      // Generate FD values indexed to same base as Nifty (starts at same point value)
-      function fdValues(niftyValues) {
-        var base = niftyValues[0];
-        var monthlyRate = Math.pow(1.09, 1/12) - 1;
-        return niftyValues.map(function(_, i) {
-          return +(base * Math.pow(1 + monthlyRate, i)).toFixed(2);
+    <script>
+    // ── Mobile nav ──
+    (function() {
+      var btn = document.getElementById('nav-hamburger');
+      var menu = document.getElementById('nav-mobile-menu');
+      btn.addEventListener('click', function() {
+        var open = menu.classList.toggle('open');
+        btn.classList.toggle('open', open);
+      });
+      menu.querySelectorAll('.nav-link').forEach(function(link) {
+        link.addEventListener('click', function() {
+          menu.classList.remove('open');
+          btn.classList.remove('open');
         });
-      }
+      });
+    })();
+    </script>
 
-      function renderChart(range) {
-        var data = sliceData(range);
-        var labels = data.map(function(d) {
-          var parts = d[0].split('-');
-          var dt = new Date(+parts[0], +parts[1] - 1);
-          return dt.toLocaleDateString('en-IN', { month: 'short', year: '2-digit' });
-        });
-        var values = data.map(function(d) { return d[1]; });
+    <script>
+    // ── Asset allocation preset switcher ──
+    (function() {
+      var btns = document.querySelectorAll('.preset-btn');
+      var segEquity = document.getElementById('seg-equity');
+      var segDebt   = document.getElementById('seg-debt');
+      var segLiquid = document.getElementById('seg-liquid');
+      var segGold   = document.getElementById('seg-gold');
 
-        var first = values[0], last = values[values.length - 1];
-        var isUp = last >= first;
-        var lineColor = isUp ? '#22c55e' : '#ef4444';
-        var fillColor = isUp ? 'rgba(34,197,94,0.08)' : 'rgba(239,68,68,0.08)';
-        var gridColor = isDark() ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.06)';
-        var tickColor = isDark() ? '#8a9ab5' : '#6b6353';
-        var tooltipBg = isDark() ? '#1a2236' : '#ffffff';
-        var tooltipBorder = isDark() ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
-        var tooltipTitle = isDark() ? '#e8e4dc' : '#1c1a14';
-
-        // CAGR display
-        document.getElementById('nifty-price').textContent = formatINR(last) + ' pts';
-        var changeEl = document.getElementById('nifty-change');
-        var months = data.length - 1;
-        var years = months / 12;
-        var cagr = years > 0 ? (Math.pow(last / first, 1 / years) - 1) * 100 : 0;
-        var cagrSign = cagr >= 0 ? '+' : '';
-        var label = years >= 1
-          ? cagrSign + cagr.toFixed(1) + '% CAGR (' + (years < 2 ? months + 'mo' : Math.round(years) + 'Y') + ')'
-          : cagrSign + cagr.toFixed(1) + '% (' + months + ' months)';
-        changeEl.textContent = label;
-        changeEl.className = 'chart-change ' + (cagr >= 0 ? 'up' : 'down');
-
-        var datasets = [{
-          label: 'Nifty 50',
-          data: values,
-          borderColor: lineColor,
-          backgroundColor: showFD ? 'transparent' : fillColor,
-          borderWidth: 2,
-          fill: !showFD,
-          tension: 0.3,
-          pointRadius: 0,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: lineColor,
-          pointHoverBorderColor: '#fff',
-          pointHoverBorderWidth: 2
-        }];
-
-        if (showFD) {
-          var fdVals = fdValues(values);
-          datasets.push({
-            label: '9% FD',
-            data: fdVals,
-            borderColor: '#94a3b8',
-            backgroundColor: 'transparent',
-            borderWidth: 2,
-            borderDash: [5, 4],
-            fill: false,
-            tension: 0.3,
-            pointRadius: 0,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: '#94a3b8',
-            pointHoverBorderColor: '#fff',
-            pointHoverBorderWidth: 2
-          });
-        }
-
-        var ctx = document.getElementById('nifty-chart').getContext('2d');
-        if (chartInstance) chartInstance.destroy();
-
-        chartInstance = new Chart(ctx, {
-          type: 'line',
-          data: { labels: labels, datasets: datasets },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: { mode: 'index', intersect: false },
-            plugins: {
-              legend: {
-                display: showFD,
-                position: 'top',
-                align: 'end',
-                labels: {
-                  color: tickColor,
-                  font: { family: 'DM Sans, sans-serif', size: 11 },
-                  boxWidth: 20,
-                  boxHeight: 2,
-                  padding: 12,
-                  usePointStyle: false
-                }
-              },
-              tooltip: {
-                backgroundColor: tooltipBg,
-                borderColor: tooltipBorder,
-                borderWidth: 1,
-                titleColor: tooltipTitle,
-                bodyColor: tickColor,
-                padding: 10,
-                callbacks: {
-                  label: function(ctx) {
-                    var suffix = ctx.dataset.label === '9% FD' ? ' pts (FD)' : ' pts';
-                    return ctx.dataset.label + ': ' + formatINR(ctx.parsed.y) + suffix;
-                  }
-                }
-              }
-            },
-            scales: {
-              x: {
-                grid: { color: gridColor },
-                ticks: {
-                  color: tickColor,
-                  font: { family: 'DM Sans, sans-serif', size: window.innerWidth < 600 ? 10 : 11 },
-                  maxTicksLimit: window.innerWidth < 600 ? 4 : 10,
-                  maxRotation: 0,
-                  minRotation: 0,
-                  autoSkip: true,
-                  autoSkipPadding: window.innerWidth < 600 ? 16 : 8,
-                  display: window.innerWidth >= 600,
-                  callback: function(value) {
-                    var label = this.getLabelForValue(value);
-                    if (!label) return '';
-                    var year = label.split('-')[0];
-                    if (window.innerWidth < 600) return year;
-                    return label;
-                  }
-                },
-                grid: { display: window.innerWidth >= 600, color: gridColor },
-                border: { display: false }
-              },
-              y: {
-                position: 'right',
-                grid: { color: gridColor },
-                ticks: {
-                  color: tickColor,
-                  font: { family: 'DM Sans, sans-serif', size: 11 },
-                  callback: function(v) {
-                    return new Intl.NumberFormat('en-IN', { notation: 'compact' }).format(v);
-                  }
-                },
-                border: { display: false }
-              }
-            }
-          }
-        });
-
-        document.getElementById('chart-loading').classList.add('hidden');
-      }
-
-      // Range button clicks
-      document.querySelectorAll('.range-btn').forEach(function(btn) {
+      btns.forEach(function(btn) {
         btn.addEventListener('click', function() {
-          document.querySelectorAll('.range-btn').forEach(function(b) { b.classList.remove('active'); });
+          btns.forEach(function(b) { b.classList.remove('active'); });
           btn.classList.add('active');
-          renderChart(btn.dataset.range);
+          var e = parseInt(btn.dataset.equity);
+          var d = parseInt(btn.dataset.debt);
+          var l = parseInt(btn.dataset.liquid);
+          var g = parseInt(btn.dataset.gold);
+          segEquity.style.flex = e;
+          segDebt.style.flex   = d;
+          segLiquid.style.flex = l;
+          segGold.style.flex   = g;
         });
       });
-
-      // FD toggle
-      document.addEventListener('DOMContentLoaded', function() {
-        var fdBtn = document.getElementById('fd-toggle');
-        if (fdBtn) {
-          fdBtn.addEventListener('click', function() {
-            showFD = !showFD;
-            fdBtn.classList.toggle('fd-toggle-btn--on', showFD);
-            var activeRange = (document.querySelector('.range-btn.active') || {}).dataset || {};
-            renderChart(activeRange.range || 'all');
-          });
-        }
-      });
-
-      // Theme toggle — re-render to update colors
-      var origToggle = window.toggleTheme;
-      window.toggleTheme = function() {
-        origToggle();
-        setTimeout(function() {
-          var activeRange = (document.querySelector('.range-btn.active') || {}).dataset || {};
-          renderChart(activeRange.range || '1y');
-        }, 350);
-      };
-
-      // Initial render
-      window.addEventListener('DOMContentLoaded', function() {
-        renderChart('all');
-      });
-      if (document.readyState !== 'loading') renderChart('all');
-
     })();
     </script>
-    <script>
-    // ── Insight strip + Why cards + SIP calculations ──
-    // Runs after RAW is defined by the chart script above
-    window.addEventListener('DOMContentLoaded', function() {
 
-      // RAW is defined in the chart script — grab it
-      // We recompute here using the same dataset
-
-      // ── 1. Insight strip: ₹1L invested Jan 1999 ──
-      var RAW   = window.RAW;
-      var first = RAW[0][1];   // Jan 1999 close
-      var last  = RAW[RAW.length - 1][1]; // latest close
-      var multiple = last / first;
-      var lakhs = (multiple).toFixed(1);
-      var el = document.getElementById('insight-value');
-      if (el) el.textContent = '₹' + lakhs + ' lakhs';
-
-      // ── 2. Why card: CAGR since 1999 ──
-      var years = (RAW.length - 1) / 12;
-      var cagr = (Math.pow(last / first, 1 / years) - 1) * 100;
-      var cagrEl = document.getElementById('why-cagr');
-      if (cagrEl) cagrEl.textContent = cagr.toFixed(1) + '%';
-
-      // ── Dynamic numbers from RAW data ──
-      var startYear  = parseInt(RAW[0][0].split('-')[0]);
-      var startMonth = parseInt(RAW[0][0].split('-')[1]);
-      var endYear    = parseInt(RAW[RAW.length - 1][0].split('-')[0]);
-      var dataYears  = endYear - startYear;
-
-      var monthNames = ['January','February','March','April','May','June',
-                        'July','August','September','October','November','December'];
-
-      // "27" in "27-year history"
-      var yearsEl = document.getElementById('data-years');
-      if (yearsEl) yearsEl.textContent = dataYears;
-      var yearsEl2 = document.getElementById('data-years-2');
-      if (yearsEl2) yearsEl2.textContent = dataYears;
-
-      // "1999 – 2026" in chart note
-      var noteRange = document.getElementById('note-range');
-      if (noteRange) noteRange.textContent = startYear + ' – ' + endYear;
-
-      // "January 1999" in insight strip
-      var insightDate = document.getElementById('insight-start-date');
-      if (insightDate) insightDate.textContent = monthNames[startMonth - 1] + ' ' + startYear;
-
-      // "since 1999" labels
-      document.querySelectorAll('#cagr-since, #since-year-1').forEach(function(el) {
-        el.textContent = startYear;
-      });
-
-      // "0 of 18" ten-year windows — calculate actual number of complete 10Y windows
-      var totalMonths = RAW.length;
-      var tenYrWindows = Math.max(0, Math.floor((totalMonths - 120) / 1) + 1);
-      // More precise: count windows where start is at least 120 months before end
-      tenYrWindows = totalMonths > 120 ? (totalMonths - 120) : 0;
-      // Round to nearest sensible number
-      tenYrWindows = Math.floor(tenYrWindows / 12) * 12 + (tenYrWindows % 12 > 0 ? 1 : 0);
-      tenYrWindows = totalMonths - 120; // actual month-start windows
-      // Express as year-start windows for clarity
-      var tenYrYearWindows = Math.floor((totalMonths - 120) / 12);
-      var tenYrEl = document.getElementById('ten-yr-windows');
-      if (tenYrEl) tenYrEl.textContent = tenYrYearWindows;
-
-      // CAGR % and "doubles every N years" in description
-      var cagrDescEl = document.getElementById('cagr-desc');
-      if (cagrDescEl) cagrDescEl.textContent = cagr.toFixed(1) + '%';
-
-      // Rule of 72: years to double = 72 / CAGR%
-      var doubleYears = Math.round(72 / cagr);
-      var doubleEl = document.getElementById('double-years');
-      if (doubleEl) doubleEl.textContent = doubleYears;
-
-      // ── 3. SIP calculator from RAW data ──
-      function calcSIP(monthlyAmount, fromLabel) {
-        var startIdx = RAW.findIndex(function(d) { return d[0] === fromLabel; });
-        if (startIdx < 0) return null;
-        var totalUnits = 0;
-        for (var i = startIdx; i < RAW.length; i++) {
-          totalUnits += monthlyAmount / RAW[i][1];
-        }
-        var currentValue = totalUnits * last;
-        var months = RAW.length - startIdx;
-        var invested = monthlyAmount * months;
-        var returns = currentValue - invested;
-        return { value: currentValue, invested: invested, returns: returns, multiple: currentValue / invested };
-      }
-
-      function fmtCr(v) {
-        if (v >= 10000000) return '₹' + (v / 10000000).toFixed(2) + ' Cr';
-        if (v >= 100000)   return '₹' + (v / 100000).toFixed(1) + 'L';
-        return '₹' + Math.round(v).toLocaleString('en-IN');
-      }
-
-      var sip2005 = calcSIP(1000, '2005-01');
-      var sip2015 = calcSIP(1000, '2015-01');
-
-      if (sip2005) {
-        document.getElementById('sip-principal-2005').textContent = fmtCr(sip2005.invested);
-        document.getElementById('sip-returns-2005').textContent   = '+' + fmtCr(sip2005.returns);
-        document.getElementById('sip-1k-2005').textContent        = fmtCr(sip2005.value);
-        document.getElementById('sip-mult-2005').textContent      = 'Grew ' + sip2005.multiple.toFixed(1) + '×';
-      }
-      if (sip2015) {
-        document.getElementById('sip-principal-2015').textContent = fmtCr(sip2015.invested);
-        document.getElementById('sip-returns-2015').textContent   = '+' + fmtCr(sip2015.returns);
-        document.getElementById('sip-1k-2015').textContent        = fmtCr(sip2015.value);
-        document.getElementById('sip-mult-2015').textContent      = 'Grew ' + sip2015.multiple.toFixed(1) + '×';
-      }
-
-      // Dynamic punchline
-      if (sip2005 && sip2015) {
-        var punchEl = document.getElementById('sip-punchline');
-        if (punchEl) {
-          punchEl.innerHTML =
-            '💡 Ayesha\'s profit alone (' + fmtCr(sip2005.returns) + ') is more than Ravi\'s entire corpus (' + fmtCr(sip2015.value) + ').<br><strong>Just because she started early.</strong>';
-        }
-      }
-    });
-    </script>
-    <script>
-    // ── Story Nav: scroll tracking ──
-    (function() {
-      var nav = document.getElementById('story-nav');
-      var items = document.querySelectorAll('.story-nav-item');
-      var sections = ['section-thought','section-evidence','section-sip','section-start'];
-
-      function getActive() {
-        var mid = window.scrollY + window.innerHeight * 0.45;
-        var bottom = window.scrollY + window.innerHeight * 0.85;
-        var active = sections[0];
-        sections.forEach(function(id, i) {
-          var el = document.getElementById(id);
-          if (!el) return;
-          var top = el.getBoundingClientRect().top + window.scrollY;
-          // Last section: use looser threshold so it activates before hitting page bottom
-          var threshold = (i === sections.length - 1) ? bottom : mid;
-          if (top <= threshold) active = id;
-        });
-        return active;
-      }
-
-      function update() {
-        if (window.scrollY > 80) {
-          nav.classList.add('visible');
-        } else {
-          nav.classList.remove('visible');
-        }
-        var active = getActive();
-        items.forEach(function(item) {
-          item.classList.toggle('active', item.dataset.target === active);
-        });
-      }
-
-      var scrollIdleTimer;
-      function onScroll() {
-        update();
-        nav.classList.remove('scroll-idle');
-        clearTimeout(scrollIdleTimer);
-        scrollIdleTimer = setTimeout(function() {
-          nav.classList.add('scroll-idle');
-        }, 1500);
-      }
-
-      items.forEach(function(item) {
-        item.addEventListener('click', function() {
-          var el = document.getElementById(item.dataset.target);
-          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          nav.classList.remove('scroll-idle');
-          clearTimeout(scrollIdleTimer);
-          setTimeout(update, 600);
-        });
-      });
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', update, { passive: true });
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', update);
-      } else {
-        requestAnimationFrame(update);
-      }
-    })();
-    </script>
-    <script>
-    // ── Suppress card hovers when mouse is idle ──
-    (function() {
-      var idleTimer;
-      function onMove() {
-        document.body.classList.remove('no-hover');
-        clearTimeout(idleTimer);
-        idleTimer = setTimeout(function() {
-          document.body.classList.add('no-hover');
-        }, 1000);
-      }
-      document.addEventListener('mousemove', onMove, { passive: true });
-      // Start as idle until first mouse movement
-      document.body.classList.add('no-hover');
-    })();
-    </script>
   </body>
 </html>
