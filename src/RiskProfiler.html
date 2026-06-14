@@ -2950,7 +2950,10 @@
 
         </div>
 
-        <button class="reset-btn" id="resetBtn">← Retake Questionnaire</button>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+          <button class="reset-btn" id="changeLastBtn">← Change my last answer</button>
+          <button class="reset-btn" id="resetBtn">↺ Retake Questionnaire</button>
+        </div>
       </div>
     </main>
 
@@ -3415,7 +3418,6 @@
                 if (current < QUESTIONS.length - 1) {
                   current++;
                   renderQuestion(current);
-                  document.getElementById("sectionQuiz").scrollIntoView({ behavior: "smooth", block: "start" });
                 } else {
                   showResult();
                 }
@@ -3720,7 +3722,6 @@
               current = 0;
               answers = new Array(QUESTIONS.length).fill(null);
               renderQuestion(current);
-              document.getElementById("sectionQuiz").scrollIntoView({ behavior: "smooth", block: "start" });
             });
 
           document
@@ -3729,8 +3730,19 @@
               if (current > 0) {
                 current--;
                 renderQuestion(current);
-                document.getElementById("sectionQuiz").scrollIntoView({ behavior: "smooth", block: "start" });
               }
+            });
+
+          document
+            .getElementById("changeLastBtn")
+            .addEventListener("click", function () {
+              current = QUESTIONS.length - 1;
+              answers[current] = null;
+              document.getElementById("sectionResult").style.display = "none";
+              var sq = document.getElementById("sectionQuiz");
+              sq.style.display = "flex";
+              renderQuestion(current);
+              window.scrollTo({ top: 0, behavior: "smooth" });
             });
 
           document
