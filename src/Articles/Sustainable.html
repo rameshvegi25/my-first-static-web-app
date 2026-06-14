@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Sustainable Wealth · Vegi Ramesh · ARN-349739</title>
+    <meta name="description" content="Vegi Ramesh — AMFI-registered Mutual Fund Distributor (ARN-349739). Why chasing hot tips never works — and what actually builds wealth over time." />
+    <meta name="author" content="Vegi Ramesh" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://rameshvegi.in/Sustainable.html" />
+    <meta property="og:url" content="https://rameshvegi.in/Sustainable.html" />
+    <meta property="og:title" content="Sustainable Wealth · Vegi Ramesh · ARN-349739" />
+    <meta property="og:description" content="Chasing 2× stories is chasing mirages. Here's what actually works — quietly, steadily, for years." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_IN" />
+
+    <link rel="icon" href="favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <meta name="theme-color" content="#0b0f1a" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+    <style>
+      /* ── TOKENS ── */
+      :root {
+        --bg: #0b0f1a;
+        --surface: #111827;
+        --surface2: #1a2236;
+        --border: rgba(255,255,255,0.07);
+        --accent: #c8a96e;
+        --accent-dim: rgba(200,169,110,0.15);
+        --accent-glow: rgba(200,169,110,0.08);
+        --text: #e8e4dc;
+        --muted: #8a9ab5;
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --sans: "DM Sans", sans-serif;
+        --nav-bg: rgba(11,15,26,0.92);
+        --footer-disc: #6b7280;
+        --green: #22c55e;
+        --green-dim: rgba(34,197,94,0.12);
+      }
+
+      [data-theme="light"] {
+        --bg: #f7f4ef;
+        --surface: #ffffff;
+        --surface2: #f0ebe0;
+        --border: rgba(0,0,0,0.09);
+        --accent: #a67c32;
+        --accent-dim: rgba(166,124,50,0.12);
+        --accent-glow: rgba(166,124,50,0.06);
+        --text: #1c1a14;
+        --muted: #6b6353;
+        --nav-bg: rgba(247,244,239,0.94);
+        --footer-disc: #7a7060;
+      }
+
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html {
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: var(--accent) var(--bg);
+      }
+
+      body {
+        font-family: var(--sans);
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        transition: background 0.3s, color 0.3s;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background:
+          radial-gradient(ellipse 70% 50% at 15% 10%, rgba(200,169,110,0.06) 0%, transparent 60%),
+          radial-gradient(ellipse 50% 40% at 85% 90%, rgba(200,169,110,0.04) 0%, transparent 60%);
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1.5rem;
+        height: 56px;
+        background: var(--nav-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-brand {
+        font-family: var(--serif);
+        font-size: 1.15rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        color: var(--text);
+        text-decoration: none;
+        flex-shrink: 0;
+      }
+      .nav-brand span { color: var(--accent); font-style: italic; }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.4rem;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .nav-link {
+        position: relative;
+        font-size: 0.82rem;
+        color: var(--muted);
+        text-decoration: none;
+        letter-spacing: 0.02em;
+        transition: color 0.2s;
+        white-space: nowrap;
+        padding-bottom: 4px;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0; bottom: 0;
+        width: 100%; height: 1px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.3s ease;
+      }
+      .nav-link:hover { color: var(--accent); }
+      .nav-link:hover::after { transform: scaleX(1); }
+      .nav-link.active { color: var(--accent); font-weight: 500; }
+      .nav-link.active::after { transform: scaleX(1); }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-shrink: 0;
+      }
+
+      .nav-arn {
+        font-size: 0.7rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        font-family: var(--sans);
+        text-decoration: none;
+      }
+      a.nav-arn-link { transition: color 0.2s; cursor: pointer; }
+      a.nav-arn-link:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+      .nav-whatsapp-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px; height: 32px;
+        border-radius: 50%;
+        color: #25d366;
+        border: 1px solid rgba(37,211,102,0.25);
+        background: transparent;
+        text-decoration: none;
+        transition: background 0.2s, border-color 0.2s;
+        flex-shrink: 0;
+      }
+      .nav-whatsapp-btn:hover { background: rgba(37,211,102,0.12); border-color: rgba(37,211,102,0.5); }
+
+      .theme-toggle {
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 4px 10px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        color: var(--muted);
+        transition: border-color 0.2s, color 0.2s;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .theme-toggle.ready { opacity: 1; pointer-events: auto; }
+      .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+      .icon-dark { display: inline; }
+      .icon-light { display: none; }
+      [data-theme="light"] .icon-dark { display: none; }
+      [data-theme="light"] .icon-light { display: inline; }
+
+      /* ── HAMBURGER ── */
+      .nav-hamburger {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 32px; height: 32px;
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: border-color 0.2s, color 0.2s;
+      }
+      .nav-hamburger:hover { border-color: var(--accent); color: var(--accent); }
+      .nav-hamburger svg { display: block; }
+      .nav-hamburger .icon-close { display: none; }
+      .nav-hamburger.open .icon-menu { display: none; }
+      .nav-hamburger.open .icon-close { display: block; }
+
+      /* ── MOBILE MENU ── */
+      .nav-mobile-menu {
+        position: fixed;
+        top: 56px; left: 0; right: 0;
+        z-index: 99;
+        background: var(--nav-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid transparent;
+        display: none;
+        flex-direction: column;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease, border-color 0.3s ease;
+      }
+      @media (max-width: 820px) {
+        .nav-mobile-menu { display: flex; }
+        .nav-links { display: none; }
+        .nav-hamburger { display: flex; }
+        .nav-whatsapp-btn { display: none; }
+      }
+      .nav-mobile-menu.open { max-height: 420px; padding: 0.5rem 1.5rem; border-color: var(--border); }
+      .nav-mobile-menu .nav-link {
+        padding: 0.7rem 0;
+        font-size: 0.92rem;
+        color: var(--text);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-mobile-menu .nav-link:last-child { border-bottom: none; }
+      .nav-mobile-menu .nav-link:hover { color: var(--accent); }
+      .nav-mobile-menu .nav-link.active { color: var(--accent); font-weight: 500; }
+      .nav-mobile-menu .nav-link::after { display: none; }
+
+      /* ── ANIMATIONS ── */
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+
+      /* ── HERO ── */
+      .hero {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 5.5rem 1.5rem 2rem;
+        min-height: 40vh;
+      }
+
+      .hero-eyebrow {
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-family: var(--sans);
+        font-weight: 400;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6em;
+        opacity: 0;
+        animation: fadeUp 0.7s ease 0.1s forwards;
+      }
+      .hero-eyebrow::before, .hero-eyebrow::after { content: "✦"; opacity: 0.6; }
+
+      .hero h1 {
+        font-family: var(--serif);
+        font-size: clamp(2.4rem, 7vw, 4.2rem);
+        font-weight: 600;
+        line-height: 1.15;
+        color: var(--text);
+        margin-bottom: 1rem;
+        max-width: 700px;
+        opacity: 0;
+        animation: fadeUp 0.7s ease 0.25s forwards;
+      }
+      .hero h1 em { color: var(--accent); font-style: italic; }
+
+      .hero-sub {
+        font-size: 1rem;
+        color: var(--muted);
+        max-width: 520px;
+        line-height: 1.8;
+        font-weight: 300;
+        opacity: 0;
+        animation: fadeUp 0.7s ease 0.4s forwards;
+        margin-bottom: 1.25rem;
+      }
+
+      .hero-ctas {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        opacity: 0;
+        animation: fadeUp 0.7s ease 0.55s forwards;
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4em;
+        padding: 0.65rem 1.5rem;
+        background: var(--accent);
+        color: #0b0f1a;
+        border-radius: 24px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        text-decoration: none;
+        transition: opacity 0.2s, transform 0.2s;
+      }
+      .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4em;
+        padding: 0.65rem 1.5rem;
+        border: 1px solid var(--accent);
+        color: var(--accent);
+        border-radius: 24px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        text-decoration: none;
+        transition: background 0.2s, transform 0.2s;
+      }
+      .btn-secondary:hover { background: var(--accent-dim); transform: translateY(-1px); }
+
+      /* ── SECTION COMMON ── */
+      .section-eyebrow {
+        font-size: 0.68rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-family: var(--sans);
+        font-weight: 400;
+        opacity: 0.75;
+        margin-bottom: 0.6rem;
+        text-align: center;
+      }
+
+      .section-title {
+        font-family: var(--serif);
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.2;
+        text-align: center;
+        margin-bottom: 0.85rem;
+      }
+      .section-title em { color: var(--accent); font-style: italic; }
+
+      .section-sub {
+        font-size: 0.95rem;
+        color: var(--muted);
+        text-align: center;
+        max-width: 540px;
+        margin: 0 auto 1.75rem;
+        line-height: 1.75;
+        font-weight: 300;
+      }
+
+      /* ── BRIDGE ── */
+      .bridge {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1rem 1.5rem;
+        text-align: center;
+      }
+
+      .bridge-line {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .bridge-rule {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      .bridge-ornament {
+        font-size: 0.65rem;
+        color: var(--accent);
+        opacity: 0.5;
+        letter-spacing: 0.3em;
+      }
+
+      .bridge-text {
+        font-size: 0.9rem;
+        color: var(--muted);
+        max-width: 480px;
+        line-height: 1.75;
+        font-weight: 300;
+      }
+      .bridge-text strong { color: var(--text); font-weight: 500; }
+
+      /* ── CONTENT SECTIONS ── */
+      .content-section {
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 2.5rem;
+      }
+
+      /* ── STAT ROW ── */
+      .stat-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+        margin: 2rem 0;
+      }
+      @media (max-width: 600px) {
+        .stat-row { grid-template-columns: 1fr; }
+      }
+
+      .stat-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.5rem 1.25rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.3s;
+      }
+      .stat-card::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        opacity: 0.4;
+      }
+      .stat-card:hover { border-color: rgba(200,169,110,0.25); }
+
+      .stat-number {
+        font-family: var(--serif);
+        font-size: 2.4rem;
+        font-weight: 600;
+        color: var(--accent);
+        line-height: 1;
+        margin-bottom: 0.4rem;
+      }
+
+      .stat-label {
+        font-size: 0.8rem;
+        color: var(--muted);
+        line-height: 1.5;
+        font-weight: 300;
+      }
+
+      /* ── CALLOUT BOX ── */
+      .callout {
+        background: var(--surface2);
+        border: 1px solid rgba(200,169,110,0.2);
+        border-left: 3px solid var(--accent);
+        border-radius: 12px;
+        padding: 1.25rem 1.5rem;
+        margin: 1.75rem 0;
+        font-size: 0.92rem;
+        color: var(--text);
+        line-height: 1.75;
+        font-style: italic;
+      }
+      .callout strong { color: var(--accent); font-style: normal; font-weight: 500; }
+
+      /* ── ASSET CARDS GRID ── */
+      .asset-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+        margin: 1.75rem 0;
+      }
+      @media (max-width: 640px) {
+        .asset-grid { grid-template-columns: 1fr; }
+      }
+
+      .asset-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        transition: border-color 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .asset-card::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        opacity: 0.3;
+      }
+      .asset-card:hover { border-color: rgba(200,169,110,0.25); }
+
+      .asset-icon { font-size: 1.6rem; line-height: 1; }
+
+      .asset-title {
+        font-family: var(--serif);
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .asset-desc {
+        font-size: 0.87rem;
+        color: var(--muted);
+        line-height: 1.7;
+        font-weight: 300;
+      }
+      .asset-desc strong { color: var(--text); font-weight: 500; }
+
+      /* ── COMPARISON TABLE ── */
+      .table-wrap {
+        margin: 2rem 0;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+
+      .compare-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.87rem;
+      }
+
+      .compare-table thead tr {
+        background: var(--surface2);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .compare-table th {
+        padding: 0.85rem 1.25rem;
+        text-align: left;
+        font-family: var(--serif);
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .compare-table th:first-child { color: var(--muted); font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 400; }
+      .compare-table th.col-index { color: var(--accent); }
+
+      .compare-table tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.2s;
+      }
+      .compare-table tbody tr:last-child { border-bottom: none; }
+      .compare-table tbody tr:hover { background: var(--surface); }
+
+      .compare-table td {
+        padding: 0.85rem 1.25rem;
+        color: var(--muted);
+        line-height: 1.5;
+        font-weight: 300;
+      }
+      .compare-table td:first-child { color: var(--text); font-weight: 400; font-size: 0.85rem; }
+
+      .cell-bad { color: #ef4444; }
+      .cell-good { color: var(--green); }
+
+      @media (max-width: 600px) {
+        .compare-table th, .compare-table td { padding: 0.7rem 0.85rem; }
+      }
+
+      /* ── PILLAR CARDS ── */
+      .pillar-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+        margin: 2rem 0;
+      }
+      @media (max-width: 640px) {
+        .pillar-row { grid-template-columns: 1fr; }
+      }
+
+      .pillar-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.5rem 1.25rem;
+        text-align: center;
+        transition: border-color 0.3s;
+      }
+      .pillar-card:hover { border-color: rgba(200,169,110,0.25); }
+
+      .pillar-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+
+      .pillar-title {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.4rem;
+        line-height: 1.3;
+      }
+
+      .pillar-desc {
+        font-size: 0.83rem;
+        color: var(--muted);
+        line-height: 1.65;
+        font-weight: 300;
+      }
+
+      /* ── BULLET LIST ── */
+      .clean-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin: 1.5rem 0;
+        padding: 0;
+      }
+
+      .clean-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        font-size: 0.92rem;
+        color: var(--muted);
+        line-height: 1.65;
+        font-weight: 300;
+      }
+      .clean-list li::before {
+        content: "✦";
+        color: var(--accent);
+        font-size: 0.65rem;
+        flex-shrink: 0;
+        margin-top: 0.35rem;
+        opacity: 0.7;
+      }
+      .clean-list li strong { color: var(--text); font-weight: 500; }
+
+      /* ── PROSE ── */
+      .prose {
+        font-size: 0.95rem;
+        color: var(--muted);
+        line-height: 1.85;
+        font-weight: 300;
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      .prose strong { color: var(--text); font-weight: 500; }
+      .prose p + p { margin-top: 1.1rem; }
+
+      /* ── CTA SECTION ── */
+      .cta-section {
+        position: relative;
+        z-index: 1;
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 4rem;
+        text-align: center;
+      }
+
+      .cta-card {
+        background: var(--surface);
+        border: 1px solid rgba(200,169,110,0.25);
+        border-radius: 20px;
+        padding: 3rem 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-card::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        opacity: 0.6;
+      }
+
+      .cta-title {
+        font-family: var(--serif);
+        font-size: clamp(1.8rem, 4vw, 2.4rem);
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.2;
+        margin-bottom: 0.85rem;
+      }
+      .cta-title em { color: var(--accent); font-style: italic; }
+
+      .cta-sub {
+        font-size: 0.95rem;
+        color: var(--muted);
+        line-height: 1.8;
+        font-weight: 300;
+        max-width: 480px;
+        margin: 0 auto 2rem;
+      }
+
+      .cta-buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 1.5rem 1.5rem 2rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .footer-name {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        color: var(--text);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      .footer-name span { color: var(--accent); font-style: italic; }
+
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem 1.25rem;
+        margin-bottom: 1.5rem;
+      }
+      .footer-links a {
+        font-size: 0.78rem;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover { color: var(--accent); }
+
+      .footer-disc {
+        font-size: 0.7rem;
+        color: var(--footer-disc);
+        max-width: 760px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      @media (max-width: 600px) {
+        .nav-whatsapp-btn { display: none; }
+        .hero { padding: 6.5rem 1.25rem 3rem; min-height: auto; }
+        .hero h1 { font-size: clamp(2rem, 8vw, 2.8rem); }
+        .cta-section { padding: 2rem 1rem 4rem; }
+        .cta-card { padding: 2rem 1.25rem; }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- NAV -->
+    <nav>
+      <a href="index.html" class="nav-brand">Vegi <span>Ramesh</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="InvestorDetails.html" class="nav-link">Get Started</a>
+        <a href="RiskProfiler.html" class="nav-link">Risk Profile</a>
+        <a href="AboutMe.html" class="nav-link">About Me</a>
+        <a href="calculator.html" class="nav-link">Goal Calculator</a>
+        <a href="SavingsCorpusCalculator.html" class="nav-link">Corpus Calculator</a>
+        <a href="nps.html" class="nav-link">NPS</a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://www.amfiindia.com/locate-distributor" class="nav-arn nav-arn-link" target="_blank" rel="noopener" title="Verify on AMFI — search 349739" aria-label="Verify ARN-349739 on AMFI">✦ ARN-349739</a>
+        <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments." class="nav-whatsapp-btn" target="_blank" rel="noopener" aria-label="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <span class="icon-dark">☀️</span>
+          <span class="icon-light">🌙</span>
+        </button>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <svg class="icon-menu" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <svg class="icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <div class="nav-mobile-menu" id="nav-mobile-menu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="InvestorDetails.html" class="nav-link">Get Started</a>
+      <a href="RiskProfiler.html" class="nav-link">Risk Profile</a>
+      <a href="AboutMe.html" class="nav-link">About Me</a>
+      <a href="calculator.html" class="nav-link">Goal Calculator</a>
+      <a href="SavingsCorpusCalculator.html" class="nav-link">Corpus Calculator</a>
+      <a href="nps.html" class="nav-link">NPS</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-eyebrow">Sustainable Wealth</div>
+      <h1>Chasing 2× stories is chasing <em>mirages.</em></h1>
+      <p class="hero-sub">
+        Your neighbour doubled his money last year. Now everyone wants in.<br>That's exactly the trap.
+      </p>
+    </section>
+
+    <!-- BRIDGE -->
+    <div class="bridge">
+      <div class="bridge-line">
+        <div class="bridge-rule"></div>
+        <span class="bridge-ornament">✦ ✦ ✦</span>
+        <div class="bridge-rule"></div>
+      </div>
+      <p class="bridge-text">Beyond index returns, assets hardly sustain. Here's why — and what actually works.</p>
+    </div>
+
+    <!-- SECTION 1: THE REAL STORY -->
+    <section class="content-section" id="real-story">
+      <div class="section-eyebrow">✦ The Real Story ✦</div>
+      <h2 class="section-title">Why the "double your money" tip <em>never works</em></h2>
+      <p class="section-sub">By the time it reaches you on WhatsApp, the opportunity is already gone.</p>
+
+      <div class="prose">
+        <p>
+          Think about the last time you got an investing tip on a family group. A cousin forwarded it. An uncle confirmed it. Someone mentioned their friend made 2× in six months. So it must be real, right?
+        </p>
+        <p>
+          Here's what nobody says: by the time a tip lands on WhatsApp, <strong>hundreds of thousands of people have already heard it.</strong> The early buyers — the ones who actually made that 2× — bought in months ago. They're now selling to you. You're not entering an opportunity. You're becoming the exit for someone else.
+        </p>
+        <p>
+          The tip wasn't shared because someone loves you. It was shared because it sounds exciting. Excitement travels fast. Returns don't.
+        </p>
+      </div>
+
+      <!-- STAT ROW -->
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-number">2×</div>
+          <div class="stat-label">The promise. Sounds exciting. Doesn't survive reality.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">~12%</div>
+          <div class="stat-label">What a solid index fund actually earns per year — year after year.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">300%+</div>
+          <div class="stat-label">What the Sensex gave over 20 years — no tips required.</div>
+        </div>
+      </div>
+
+      <!-- CALLOUT -->
+      <div class="callout">
+        You put in ₹1 lakh. It becomes ₹2 lakh. Then it drops 50%. You're back to <strong>₹1 lakh — and you've lost 2 years.</strong>
+      </div>
+
+      <div class="prose" style="margin-top:1.5rem;">
+        <p>
+          This is the trap nobody warns you about. A 50% drop after a 100% gain doesn't leave you where you started. It leaves you exhausted, confused, and distracted from building real wealth.
+        </p>
+        <p>
+          Here's how this plays out across the assets people chase most.
+        </p>
+      </div>
+
+      <!-- ASSET CARDS -->
+      <div class="asset-grid">
+        <div class="asset-card">
+          <div class="asset-icon">🏠</div>
+          <div class="asset-title">Land &amp; Real Estate</div>
+          <p class="asset-desc">
+            Your relative bought land ten years ago and it's now worth 5×. Great story. But that land sat locked away for a decade — you couldn't touch the money. And that particular location had the right road, the right development, the right timing. <strong>The next plot you buy might wait 20 years for the same story.</strong> You can't forward that part on WhatsApp.
+          </p>
+        </div>
+        <div class="asset-card">
+          <div class="asset-icon">📈</div>
+          <div class="asset-title">Hot Mutual Funds</div>
+          <p class="asset-desc">
+            Last year's top-performing fund almost never leads next year. Fund managers have good runs. Then they have bad ones. By the time a fund lands in the "best funds" list in a magazine, <strong>most of the run is already over.</strong> You're buying yesterday's winner and expecting tomorrow's results.
+          </p>
+        </div>
+        <div class="asset-card">
+          <div class="asset-icon">₿</div>
+          <div class="asset-title">Crypto</div>
+          <p class="asset-desc">
+            Someone made 10× on crypto. It's true. Someone also lost 90% when the market corrected. Both happened. Only one story got forwarded. <strong>There's no underlying business, no earnings, no dividends.</strong> The price goes up because more people buy. That chain has to break at some point — and someone holds the bag.
+          </p>
+        </div>
+        <div class="asset-card">
+          <div class="asset-icon">🪙</div>
+          <div class="asset-title">Gold</div>
+          <p class="asset-desc">
+            Gold is fine as a small protection against bad times. But it's not a growth machine. Over the last 20 years, gold has not beaten a simple index fund over the long term. <strong>It doesn't pay rent, dividends, or salary.</strong> It just sits there. Useful for security — not for building a corpus.
+          </p>
+        </div>
+      </div>
+
+      <div class="callout">
+        We only remember the ones that worked. <strong>People don't forward the losses on WhatsApp.</strong>
+      </div>
+    </section>
+
+    <!-- BRIDGE -->
+    <div class="bridge">
+      <div class="bridge-line">
+        <div class="bridge-rule"></div>
+        <span class="bridge-ornament">✦ ✦ ✦</span>
+        <div class="bridge-rule"></div>
+      </div>
+      <p class="bridge-text">So what's the difference between <strong>chasing a tip</strong> and <strong>actually investing?</strong></p>
+    </div>
+
+    <!-- SECTION 2: TWO PATHS -->
+    <section class="content-section" id="two-paths">
+      <div class="section-eyebrow">✦ Two Paths ✦</div>
+      <h2 class="section-title">Hot tip vs. index fund — <em>side by side</em></h2>
+      <p class="section-sub">One needs luck. The other just needs time.</p>
+
+      <!-- COMPARISON TABLE -->
+      <div class="table-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>The question</th>
+              <th>Hot tip / Hype</th>
+              <th class="col-index">Index Fund</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Can it double your money?</td>
+              <td class="cell-bad">Maybe — but timing has to be perfect</td>
+              <td class="cell-good">Yes, given enough time</td>
+            </tr>
+            <tr>
+              <td>Still growing after 5 years?</td>
+              <td class="cell-bad">Most aren't</td>
+              <td class="cell-good">Almost always</td>
+            </tr>
+            <tr>
+              <td>Can you get your money back fast?</td>
+              <td class="cell-bad">Often stuck — land, locked funds, illiquid assets</td>
+              <td class="cell-good">Yes, within 2–3 working days</td>
+            </tr>
+            <tr>
+              <td>Do you need to guess the right time?</td>
+              <td class="cell-bad">Yes — buy and sell both must be timed right</td>
+              <td class="cell-good">No. Time in market beats timing</td>
+            </tr>
+            <tr>
+              <td>Is real business behind it?</td>
+              <td class="cell-bad">Often not — just price movement</td>
+              <td class="cell-good">Yes — India's top 50 companies</td>
+            </tr>
+            <tr>
+              <td>Government oversight?</td>
+              <td class="cell-bad">Often none</td>
+              <td class="cell-good">SEBI regulated, fully transparent</td>
+            </tr>
+            <tr>
+              <td>Good for long-term goals?</td>
+              <td class="cell-bad">Rarely</td>
+              <td class="cell-good">Built exactly for this</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- CALLOUT -->
+      <div class="callout">
+        If your money doubles then drops 50%, you're back to zero — meanwhile a boring 12% a year turns <strong>₹1 lakh into ₹9.6 lakh over 20 years.</strong>
+      </div>
+
+      <ul class="clean-list">
+        <li><strong>Hot tips travel fast, so you're always late.</strong> By the time the news reaches you, the trade is already done.</li>
+        <li><strong>Time is what grows money — not luck.</strong> Every year you wait to start is a year of compounding you give up forever.</li>
+        <li><strong>To win on a tip, you must be right twice.</strong> Once when you buy — and once when you sell. Getting both right is near impossible.</li>
+        <li><strong>Index funds ask nothing of you.</strong> No research, no news, no guessing. Just keep going.</li>
+      </ul>
+    </section>
+
+    <!-- BRIDGE -->
+    <div class="bridge">
+      <div class="bridge-line">
+        <div class="bridge-rule"></div>
+        <span class="bridge-ornament">✦ ✦ ✦</span>
+        <div class="bridge-rule"></div>
+      </div>
+      <p class="bridge-text">So what does <strong>actually work?</strong></p>
+    </div>
+
+    <!-- SECTION 3: WHAT ACTUALLY WORKS -->
+    <section class="content-section" id="what-works">
+      <div class="section-eyebrow">✦ What Actually Works ✦</div>
+      <h2 class="section-title">Index funds — simple, steady, <em>yours</em></h2>
+      <p class="section-sub">You own a slice of India's top 50 companies all at once.</p>
+
+      <div class="prose">
+        <p>
+          An index fund isn't a bet on one company. It's a bet on India. When you put money into a Nifty 50 index fund, you automatically own a small piece of Reliance, TCS, HDFC, Infosys, and 46 other of the country's biggest businesses. If one does badly, the others carry it. If India grows, your money grows with it.
+        </p>
+        <p>
+          You don't need to read annual reports. You don't need to watch the news every morning. You just need to keep adding money — month after month — and let time do its job.
+        </p>
+      </div>
+
+      <!-- THREE PILLARS -->
+      <div class="pillar-row">
+        <div class="pillar-card">
+          <div class="pillar-icon">🧘</div>
+          <div class="pillar-title">Set it, forget it</div>
+          <p class="pillar-desc">Start a monthly SIP and let it run. No action needed. No decisions to make every month. You invest once, it keeps going.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🌐</div>
+          <div class="pillar-title">Spread across 50 companies</div>
+          <p class="pillar-desc">No single company can sink you. You ride the average of India's best businesses — not the fate of one risky bet.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🇮🇳</div>
+          <div class="pillar-title">Grows with India</div>
+          <p class="pillar-desc">India's economy has grown through wars, recessions, and pandemics. The Sensex was at 3,000 in 2003. It crossed 80,000 in 2024. You just had to stay.</p>
+        </div>
+      </div>
+
+      <ul class="clean-list">
+        <li><strong>Fees among the lowest in the market.</strong> Index funds cost far less than most other funds. More of your money stays invested and keeps growing.</li>
+        <li><strong>No fund manager making bets.</strong> Nobody is gambling your money on their gut feeling. The fund simply follows the index.</li>
+        <li><strong>Fully transparent and SEBI regulated.</strong> Every holding is publicly listed. You can see exactly where your money is, anytime.</li>
+        <li><strong>₹500 a month is enough to start.</strong> You don't need a lump sum. You don't need to wait for the "right time." Start small, start now.</li>
+      </ul>
+
+      <!-- CALLOUT -->
+      <div class="callout">
+        "Sustainable investing means still having your money — and <strong>more of it</strong> — 10, 15, 20 years from now."
+      </div>
+    </section>
+
+    <!-- BRIDGE -->
+    <div class="bridge">
+      <div class="bridge-line">
+        <div class="bridge-rule"></div>
+        <span class="bridge-ornament">✦ ✦ ✦</span>
+        <div class="bridge-rule"></div>
+      </div>
+      <p class="bridge-text">Ready to start? <strong>It takes less than five minutes.</strong></p>
+    </div>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="cta-card">
+        <div class="cta-title">Invest with sustainability,<br>not <em>speculation.</em></div>
+        <p class="cta-sub">
+          No hot tips. No WhatsApp forwards. Just a simple plan that puts your money to work — quietly, steadily, for years.
+        </p>
+        <div class="cta-buttons">
+          <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments." class="btn-primary" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            WhatsApp Me
+          </a>
+          <a href="https://rameshvegi.in/RiskProfiler.html" class="btn-secondary">
+            Know your risk profile →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-name">Vegi <span>Ramesh</span></div>
+      <div class="footer-links">
+        <a href="AboutMe.html">About</a>
+        <a href="RiskProfiler.html">Risk Profiler</a>
+        <a href="InvestorDetails.html">Get Started</a>
+        <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments." target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <p class="footer-disc">
+        Vegi Ramesh · AMFI-registered Mutual Fund Distributor · ARN-349739 · NISM Series V-A certified.
+        Mutual fund investments are subject to market risks. Please read all scheme-related documents carefully before investing.
+        Past performance is not indicative of future returns. This website is for informational purposes only and does not constitute investment advice.
+        Registration with AMFI does not guarantee the quality of services, analysis, or ratings provided.
+      </p>
+    </footer>
+
+    <script>
+    // ── Theme toggle ──
+    (function() {
+      var toggle = document.getElementById('themeToggle');
+      var root = document.documentElement;
+      var saved = localStorage.getItem('theme') || 'dark';
+      if (saved === 'light') root.setAttribute('data-theme', 'light');
+      setTimeout(function() { toggle.classList.add('ready'); }, 200);
+    })();
+    window.toggleTheme = function() {
+      var root = document.documentElement;
+      var current = root.getAttribute('data-theme');
+      var next = current === 'light' ? 'dark' : 'light';
+      if (next === 'dark') root.removeAttribute('data-theme');
+      else root.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', next);
+    };
+    </script>
+
+    <script>
+    // ── Mobile nav ──
+    (function() {
+      var btn = document.getElementById('nav-hamburger');
+      var menu = document.getElementById('nav-mobile-menu');
+      btn.addEventListener('click', function() {
+        var open = menu.classList.toggle('open');
+        btn.classList.toggle('open', open);
+      });
+      menu.querySelectorAll('.nav-link').forEach(function(link) {
+        link.addEventListener('click', function() {
+          menu.classList.remove('open');
+          btn.classList.remove('open');
+        });
+      });
+    })();
+    </script>
+
+  </body>
+</html>
