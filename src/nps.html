@@ -57,18 +57,41 @@
       }
       .nav-brand { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; color: var(--text); text-decoration: none; letter-spacing: 0.01em; }
       .nav-brand span { color: var(--accent); font-style: italic; }
+      .nav-links { display: flex; align-items: center; gap: 1.4rem; position: absolute; left: 50%; transform: translateX(-50%); }
+      .nav-link { position: relative; font-size: 0.82rem; color: var(--muted); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; white-space: nowrap; padding-bottom: 4px; }
+      .nav-link::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: center; transition: transform 0.3s ease; }
+      .nav-link:hover { color: var(--accent); }
+      .nav-link:hover::after { transform: scaleX(1); }
+      .nav-link.active { color: var(--accent); font-weight: 500; }
+      .nav-link.active::after { transform: scaleX(1); }
+      .nav-mobile-menu .nav-link::after { display: none; }
       .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
-      .nav-back { font-size: 0.78rem; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; letter-spacing: 0.03em; }
-      .nav-back:hover { color: var(--accent); }
-      .nav-whatsapp-btn { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; color: #25d366; border: 1px solid rgba(37,211,102,0.25); background: transparent; text-decoration: none; transition: background 0.2s; flex-shrink: 0; }
-      .nav-whatsapp-btn:hover { background: rgba(37,211,102,0.12); }
+      .nav-arn { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; font-family: var(--sans); text-decoration: none; }
+      a.nav-arn-link { transition: color 0.2s; cursor: pointer; }
+      a.nav-arn-link:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+      .nav-whatsapp-btn { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; color: #25d366; border: 1px solid rgba(37,211,102,0.25); background: transparent; text-decoration: none; transition: background 0.2s, border-color 0.2s; flex-shrink: 0; }
+      .nav-whatsapp-btn:hover { background: rgba(37,211,102,0.12); border-color: rgba(37,211,102,0.5); }
+      .nav-hamburger { display: none; align-items: center; justify-content: center; width: 32px; height: 32px; background: none; border: 1px solid var(--border); border-radius: 8px; color: var(--text); cursor: pointer; flex-shrink: 0; transition: border-color 0.2s, color 0.2s; }
+      .nav-hamburger:hover { border-color: var(--accent); color: var(--accent); }
+      .nav-hamburger svg { display: block; }
+      .nav-hamburger .icon-close { display: none; }
+      .nav-hamburger.open .icon-menu { display: none; }
+      .nav-hamburger.open .icon-close { display: block; }
+      .nav-mobile-menu { position: fixed; top: 56px; left: 0; right: 0; z-index: 99; background: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid transparent; display: none; flex-direction: column; padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease, border-color 0.3s ease; }
+      @media (max-width: 820px) { .nav-mobile-menu { display: flex; } }
+      .nav-mobile-menu.open { max-height: 420px; padding: 0.5rem 1.5rem; border-color: var(--border); }
+      .nav-mobile-menu .nav-link { padding: 0.7rem 0; font-size: 0.92rem; color: var(--text); border-bottom: 1px solid var(--border); text-decoration: none; }
+      .nav-mobile-menu .nav-link:last-child { border-bottom: none; }
+      .nav-mobile-menu .nav-link:hover { color: var(--accent); }
+      .nav-mobile-menu .nav-link.active { color: var(--accent); font-weight: 500; }
+      @media (max-width: 820px) { .nav-links { display: none; } .nav-hamburger { display: flex; } .nav-whatsapp-btn { display: none; } }
+ 
       .theme-toggle { background: none; border: 1px solid var(--border); border-radius: 20px; padding: 4px 10px; cursor: pointer; font-size: 0.8rem; color: var(--muted); transition: border-color 0.2s, color 0.2s; opacity: 0; pointer-events: none; }
       .theme-toggle.ready { opacity: 1; pointer-events: auto; }
       .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
       .icon-dark { display: inline; } .icon-light { display: none; }
       [data-theme="light"] .icon-dark { display: none; } [data-theme="light"] .icon-light { display: inline; }
-      @media (max-width: 600px) { .nav-back span { display: none; } }
- 
+
       /* HERO */
       .hero {
         position: relative; z-index: 1;
@@ -327,11 +350,13 @@
       .corpus-nudge-btn:hover { background: rgba(200,169,110,0.25); }
  
       /* FOOTER */
-      footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 2rem 1.5rem; text-align: center; background: var(--surface); }
+      footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 2.5rem 1.5rem; text-align: center; width: 100%; }
+      .footer-inner { max-width: 1080px; margin: 0 auto; }
       .footer-brand { font-family: var(--serif); font-size: 0.9rem; color: var(--muted); margin-bottom: 0.85rem; }
-      .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.25rem; margin-bottom: 1rem; }
+      .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.25rem; margin-bottom: 1.25rem; }
       .footer-links a { font-size: 0.78rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
       .footer-links a:hover { color: var(--accent); }
+      .footer-disc { font-size: 0.7rem; color: var(--footer-disc, #6b7280); max-width: 760px; margin: 0 auto; line-height: 1.6; }
       .footer-disc { font-size: 0.7rem; color: var(--footer-disc); max-width: 680px; margin: 0 auto; line-height: 1.6; }
  
       /* MOBILE FAB */
@@ -377,19 +402,37 @@
     <!-- NAV -->
     <nav>
       <a href="index.html" class="nav-brand">Vegi <span>Ramesh</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="InvestorDetails.html" class="nav-link">Get Started</a>
+        <a href="RiskProfiler.html" class="nav-link">Risk Profile</a>
+        <a href="AboutMe.html" class="nav-link">About Me</a>
+        <a href="calculator.html" class="nav-link">Goal Calculator</a>
+        <a href="SavingsCorpusCalculator.html" class="nav-link">Corpus Calculator</a>
+        <a href="nps.html" class="nav-link active">NPS</a>
+      </div>
       <div class="nav-actions">
-        <a href="index.html" class="nav-back">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          <span>Back to home</span>
-        </a>
-        <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20NPS." class="nav-whatsapp-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        </a>
-        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <a href="https://www.amfiindia.com/locate-distributor" class="nav-arn nav-arn-link" target="_blank" rel="noopener" title="Verify on AMFI — search 349739" aria-label="Verify ARN-349739 on AMFI">✦ ARN-349739</a>
+        <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20NPS." class="nav-whatsapp-btn" target="_blank" rel="noopener" aria-label="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
           <span class="icon-dark">☀️</span><span class="icon-light">🌙</span>
+        </button>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
       </div>
     </nav>
+
+    <div class="nav-mobile-menu" id="nav-mobile-menu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="InvestorDetails.html" class="nav-link">Get Started</a>
+      <a href="RiskProfiler.html" class="nav-link">Risk Profile</a>
+      <a href="AboutMe.html" class="nav-link">About Me</a>
+      <a href="calculator.html" class="nav-link">Goal Calculator</a>
+      <a href="SavingsCorpusCalculator.html" class="nav-link">Corpus Calculator</a>
+      <a href="nps.html" class="nav-link active">NPS</a>
+    </div>
  
     <!-- HERO -->
     <header class="hero">
@@ -710,19 +753,23 @@
  
     <!-- FOOTER -->
     <footer>
-      <div class="footer-brand">Mutual Fund and NPS distribution services by Vegi Ramesh</div>
-      <div class="footer-links">
-        <a href="AboutMe.html">About Me</a>
-        <a href="RiskProfiler.html">Investor Profiling</a>
-        <a href="calculator.html">Goal Calculator</a>
-        <a href="SavingsCorpusCalculator.html">Corpus Calculator</a>
-        <a href="nps.html">NPS</a>
-        <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20NPS." target="_blank" rel="noopener">WhatsApp</a>
-        <a href="tel:8329450580">Call Me</a>
-        <a href="mailto:rameshvegi94@gmail.com">Email Me</a>
-      </div>
-      <div class="footer-disc">
-        National Pension System (NPS) is regulated by the Pension Fund Regulatory and Development Authority (PFRDA). NPS investments are subject to market risks. Tax benefits are subject to changes in applicable tax laws. This material is for informational purposes only and does not constitute financial advice. Vegi Ramesh is a registered NPS distributor for HDFC NPS Pension Fund. Mutual Fund investments are subject to market risks — ARN-349739.
+      <div class="footer-inner">
+        <div class="footer-brand">Mutual Fund and NPS distribution services by Vegi Ramesh</div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="InvestorDetails.html">Get Started</a>
+          <a href="AboutMe.html">About Me</a>
+          <a href="nps.html">NPS</a>
+          <a href="RiskProfiler.html">Investor Profiling</a>
+          <a href="calculator.html">Goal Calculator</a>
+          <a href="SavingsCorpusCalculator.html">Corpus Calculator</a>
+          <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20NPS." target="_blank" rel="noopener">WhatsApp</a>
+          <a href="tel:8329450580">Call Me</a>
+          <a href="mailto:rameshvegi94@gmail.com">Email Me</a>
+        </div>
+        <div class="footer-disc">
+          National Pension System (NPS) is regulated by the Pension Fund Regulatory and Development Authority (PFRDA). NPS investments are subject to market risks. Tax benefits are subject to changes in applicable tax laws. This material is for informational purposes only and does not constitute financial advice. Vegi Ramesh is a registered NPS distributor for HDFC NPS Pension Fund. Mutual Fund investments are subject to market risks — ARN-349739.
+        </div>
       </div>
     </footer>
  
@@ -739,14 +786,34 @@
     <script>
       function toggleTheme() {
         var html = document.documentElement;
-        var isDark = html.getAttribute("data-theme") !== "light";
-        html.setAttribute("data-theme", isDark ? "light" : "dark");
-        try { localStorage.setItem("theme", isDark ? "light" : "dark"); } catch(e) {}
+        var next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        html.setAttribute("data-theme", next);
+        try { localStorage.setItem("vr-theme", next); } catch(e) {}
       }
       (function() {
-        try { var t = localStorage.getItem("theme"); if (t) document.documentElement.setAttribute("data-theme", t); } catch(e) {}
-        var btn = document.querySelector(".theme-toggle");
+        try {
+          var t = localStorage.getItem("vr-theme");
+          document.documentElement.setAttribute("data-theme", t === "light" ? "light" : "dark");
+        } catch(e) {}
+        var btn = document.getElementById("themeToggle");
         if (btn) btn.classList.add("ready");
+      })();
+      (function() {
+        var btn = document.getElementById('nav-hamburger');
+        var menu = document.getElementById('nav-mobile-menu');
+        if (!btn || !menu) return;
+        btn.addEventListener('click', function() {
+          var open = menu.classList.toggle('open');
+          btn.classList.toggle('open', open);
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        menu.querySelectorAll('.nav-link').forEach(function(link) {
+          link.addEventListener('click', function() {
+            menu.classList.remove('open');
+            btn.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+          });
+        });
       })();
     </script>
     <script>
