@@ -694,7 +694,7 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 1.25rem;
-        margin-top: 1.75rem;
+        margin-top: 2rem;
       }
 
       @media (max-width: 600px) {
@@ -737,10 +737,51 @@
         font-weight: 300;
       }
 
+      /* collapsed: hide descriptions, show items inline */
+      .alloc-legend.collapsed {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem 1.25rem;
+        margin-top: 1.25rem;
+      }
+      .alloc-legend.collapsed .alloc-item { align-items: center; }
+      .alloc-legend.collapsed .alloc-dot { margin-top: 0; }
+      .alloc-legend.collapsed .alloc-item-name {
+        font-size: 0.8rem;
+        font-family: var(--sans);
+        font-weight: 400;
+        color: var(--muted);
+        margin-bottom: 0;
+      }
+      .alloc-legend.collapsed .alloc-item-desc { display: none; }
+
+      .alloc-details-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35em;
+        margin-top: 0.85rem;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        font-size: 0.78rem;
+        color: var(--accent);
+        font-family: var(--sans);
+        opacity: 0.75;
+        transition: opacity 0.2s;
+      }
+      .alloc-details-toggle:hover { opacity: 1; }
+      .alloc-details-toggle .toggle-arrow {
+        display: inline-block;
+        transition: transform 0.25s ease;
+      }
+      .alloc-details-toggle.open .toggle-arrow { transform: rotate(180deg); }
+
       .alloc-slider-wrap {
-        margin-top: 2rem;
-        padding-top: 2rem;
-        border-top: 1px solid var(--border);
+        margin-top: 1.25rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 0;
       }
 
       .alloc-slider-label {
@@ -1252,7 +1293,17 @@
           </div>
         </div>
 
-        <div class="alloc-legend">
+        <div class="alloc-slider-wrap">
+          <div class="alloc-slider-label">How the split changes as you get older — <strong>pick your life stage</strong></div>
+          <div class="alloc-presets">
+            <button class="preset-btn" data-equity="80" data-debt="10" data-liquid="8" data-gold="2">Young &amp; early (25–30)</button>
+            <button class="preset-btn active" data-equity="60" data-debt="25" data-liquid="10" data-gold="5">Building (30–40)</button>
+            <button class="preset-btn" data-equity="45" data-debt="35" data-liquid="12" data-gold="8">Mid-career (40–50)</button>
+            <button class="preset-btn" data-equity="25" data-debt="45" data-liquid="20" data-gold="10">Near retirement (50+)</button>
+          </div>
+        </div>
+
+        <div class="alloc-legend collapsed" id="alloc-legend">
           <div class="alloc-item">
             <div class="alloc-dot dot-equity"></div>
             <div class="alloc-item-content">
@@ -1282,16 +1333,9 @@
             </div>
           </div>
         </div>
-
-        <div class="alloc-slider-wrap">
-          <div class="alloc-slider-label">How the split changes as you get older — <strong>pick your life stage</strong></div>
-          <div class="alloc-presets">
-            <button class="preset-btn" data-equity="80" data-debt="10" data-liquid="8" data-gold="2">Young &amp; early (25–30)</button>
-            <button class="preset-btn active" data-equity="60" data-debt="25" data-liquid="10" data-gold="5">Building (30–40)</button>
-            <button class="preset-btn" data-equity="45" data-debt="35" data-liquid="12" data-gold="8">Mid-career (40–50)</button>
-            <button class="preset-btn" data-equity="25" data-debt="45" data-liquid="20" data-gold="10">Near retirement (50+)</button>
-          </div>
-        </div>
+        <button class="alloc-details-toggle" id="alloc-details-toggle" aria-expanded="false">
+          What does each category mean? <span class="toggle-arrow">▾</span>
+        </button>
       </div>
 
       <div class="alloc-note">
@@ -1525,6 +1569,21 @@
           menu.classList.remove('open');
           btn.classList.remove('open');
         });
+      });
+    })();
+    </script>
+
+    <script>
+    // ── Legend details toggle ──
+    (function() {
+      var btn = document.getElementById('alloc-details-toggle');
+      var legend = document.getElementById('alloc-legend');
+      btn.addEventListener('click', function() {
+        var isCollapsed = legend.classList.contains('collapsed');
+        legend.classList.toggle('collapsed', !isCollapsed);
+        btn.classList.toggle('open', isCollapsed);
+        btn.setAttribute('aria-expanded', isCollapsed ? 'true' : 'false');
+        btn.childNodes[0].textContent = isCollapsed ? 'Hide details ' : 'What does each colour mean? ';
       });
     })();
     </script>
