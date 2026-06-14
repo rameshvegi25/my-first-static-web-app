@@ -2447,20 +2447,7 @@
                   />
                   <span class="kyc-field-error" id="kycAadhaarNameError">⚠️ Please enter your full name as per Aadhaar.</span>
                 </div>
-                <div class="kyc-field">
-                  <label class="kyc-label"
-                    >Aadhaar Number
-                    <span class="kyc-hint"> (Last 4 digits)</span></label
-                  ><input
-                    class="kyc-input"
-                    id="kycAadhaarNum"
-                    type="text"
-                    placeholder="XXXX"
-                    maxlength="4"
-                    inputmode="numeric"
-                    oninput="this.value = this.value.replace(/\D/g, '')"
-                  />
-                </div>
+
                 <div class="kyc-field">
                   <label class="kyc-label"
                     >Date of Birth <span class="kyc-req">*</span></label
@@ -2629,6 +2616,29 @@
                       placeholder="Nominee's Full Name"
                     />
                     <span class="kyc-field-error" id="kycNomNameError">⚠️ Please enter the nominee's full name.</span>
+                  </div>
+                  <div class="kyc-field">
+                    <label class="kyc-label">Nominee is your <span class="kyc-req">*</span></label>
+                    <select class="kyc-input" id="kycNomRelation">
+                      <option value="">— Select relationship —</option>
+                      <option value="Spouse">Spouse</option>
+                      <option value="Son">Son</option>
+                      <option value="Daughter">Daughter</option>
+                      <option value="Father">Father</option>
+                      <option value="Mother">Mother</option>
+                      <option value="Brother">Brother</option>
+                      <option value="Sister">Sister</option>
+                      <option value="Grandfather">Grandfather</option>
+                      <option value="Grandmother">Grandmother</option>
+                      <option value="Grandson">Grandson</option>
+                      <option value="Granddaughter">Granddaughter</option>
+                      <option value="Father-in-law">Father-in-law</option>
+                      <option value="Mother-in-law">Mother-in-law</option>
+                      <option value="Son-in-law">Son-in-law</option>
+                      <option value="Daughter-in-law">Daughter-in-law</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    <span class="kyc-field-error" id="kycNomRelationError">⚠️ Please select your relationship with the nominee.</span>
                   </div>
                   <div class="kyc-field">
                     <label class="kyc-label">Nominee DOB <span class="kyc-req">*</span></label
@@ -3795,8 +3805,8 @@
 
               // ── Reset KYC form fields ──
               var kycFields = [
-                "kycAadhaarName","kycAadhaarNum","kycDob","kycPob","kycAddress",
-                "kycEmail","kycMobile","kycNomName","kycNomDob","kycNomEmail",
+                "kycAadhaarName","kycDob","kycPob","kycAddress",
+                "kycEmail","kycMobile","kycNomName","kycNomRelation","kycNomDob","kycNomEmail",
                 "kycNomMobile","kycNomAadhaar","kycNomAddress"
               ];
               kycFields.forEach(function(id) {
@@ -4109,7 +4119,6 @@
               "",
               "── PERSONAL DETAILS ──",
               "Full Name       : " + v("kycAadhaarName"),
-              "Aadhaar (Last 4): " + v("kycAadhaarNum"),
               "Date of Birth   : " + (window.fmtDate ? window.fmtDate("kycDob") : ""),
               "Place of Birth  : " + v("kycPob"),
               "Address         : " + v("kycAddress"),
@@ -4123,6 +4132,7 @@
               ? [
                   "── NOMINEE ──",
                   "Full Name       : " + v("kycNomName"),
+                  "Relationship    : " + v("kycNomRelation"),
                   "Date of Birth   : " + (window.fmtDate ? window.fmtDate("kycNomDob") : ""),
                   "Email ID        : " + v("kycNomEmail"),
                   "Mobile Number   : " + v("kycNomMobile"),
@@ -4225,6 +4235,7 @@
         if (nomineeChecked) {
           allFields = allFields.concat([
             { id: "kycNomName",    errId: "kycNomNameError" },
+            { id: "kycNomRelation", errId: "kycNomRelationError" },
             { id: "kycNomDob",     errId: "kycNomDobError" },
             { id: "kycNomEmail",   errId: "kycNomEmailError",  validate: function(v){ return emailRe.test(v); } },
             { id: "kycNomMobile",  errId: "kycNomMobileError" },
