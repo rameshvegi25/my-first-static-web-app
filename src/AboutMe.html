@@ -812,9 +812,10 @@
         backdrop-filter: blur(10px);
         border-bottom: 1px solid var(--border);
         display: flex;
+        justify-content: space-evenly;
         overflow-x: auto;
         scrollbar-width: none;
-        padding: 0 clamp(1rem, 4vw, 3rem);
+        padding: 0;
         gap: 0;
         -webkit-overflow-scrolling: touch;
       }
@@ -822,8 +823,9 @@
         display: none;
       }
       .subnav a {
-        flex-shrink: 0;
-        padding: 0 1rem;
+        flex: 1;
+        justify-content: center;
+        padding: 0 0.5rem;
         height: 42px;
         display: flex;
         align-items: center;
