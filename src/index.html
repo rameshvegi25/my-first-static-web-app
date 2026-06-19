@@ -1154,15 +1154,24 @@
         padding: 2rem 1.5rem 2.5rem;
       }
 
-      .insights-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.25rem;
+      .insights-carousel {
+        position: relative;
         margin-top: 0.5rem;
       }
-      @media (max-width: 700px) {
-        .insights-grid { grid-template-columns: 1fr; }
+
+      .insights-track {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        gap: 1.25rem;
+        -webkit-overflow-scrolling: touch;
+        /* hide scrollbar across browsers */
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding-bottom: 0.25rem;
       }
+      .insights-track::-webkit-scrollbar { display: none; }
 
       .insight-card {
         background: var(--surface);
@@ -1177,6 +1186,9 @@
         transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
         position: relative;
         overflow: hidden;
+        flex: 0 0 100%;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
       }
       .insight-card::before {
         content: "";
@@ -1194,10 +1206,54 @@
       }
       .insight-card:hover::before { opacity: 0.7; }
 
-      .insight-card.placeholder {
-        border-style: dashed;
-        opacity: 0.4;
-        pointer-events: none;
+      .insights-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        background: var(--nav-bg);
+        backdrop-filter: blur(8px);
+        color: var(--text);
+        font-size: 1.3rem;
+        line-height: 1;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: border-color 0.2s, color 0.2s, opacity 0.2s;
+        z-index: 2;
+      }
+      .insights-arrow:hover { border-color: var(--accent); color: var(--accent); }
+      .insights-arrow-prev { left: -10px; }
+      .insights-arrow-next { right: -10px; }
+      .insights-arrow:disabled { opacity: 0.25; cursor: default; }
+      .insights-arrow:disabled:hover { border-color: var(--border); color: var(--text); }
+      @media (max-width: 700px) {
+        .insights-arrow { display: none; }
+      }
+
+      .insights-dots {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 1.1rem;
+      }
+      .insights-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--border);
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        transition: background 0.25s, transform 0.25s;
+      }
+      .insights-dot.active {
+        background: var(--accent);
+        transform: scale(1.3);
       }
 
       .insight-tag {
@@ -1207,6 +1263,21 @@
         color: var(--accent);
         font-family: var(--sans);
         opacity: 0.75;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .insight-latest {
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--bg);
+        background: var(--accent);
+        opacity: 1;
+        padding: 0.15rem 0.5rem;
+        border-radius: 20px;
+        font-weight: 600;
       }
 
       .insight-title {
@@ -1543,49 +1614,62 @@
     </section>
 
     <!-- BRIDGE -->
-    <!--<div class="bridge">
+    <div class="bridge">
       <div class="bridge-line">
         <div class="bridge-rule"></div>
         <span class="bridge-ornament">✦ ✦ ✦</span>
         <div class="bridge-rule"></div>
       </div>
       <p class="bridge-text">A little reading goes a long way. <strong>One idea, every month.</strong></p>
-    </div>-->
+    </div>
 
     <!-- INSIGHTS SECTION -->
-    <!-- <section class="insights-section" id="insights">
+    <section class="insights-section" id="insights">
       <div class="section-eyebrow">✦ Insights ✦</div>
       <h2 class="section-title">Things worth <em>knowing</em></h2>
-      <p class="section-sub">One article a month. No jargon. Just plain talk about money and how to make it work for you.</p>
+      <p class="section-sub">Lets talk about money and how to make it work for you.</p>
 
-      <div class="insights-grid">
+      <div class="insights-carousel">
+        <div class="insights-track" id="insightsTrack">
 
-        <a href="Articles/Sustainable.html" class="insight-card">
-          <div class="insight-tag">Sustainable Wealth · Jun 2026</div>
-          <div class="insight-title">Chasing 2× stories is chasing mirages.</div>
-          <p class="insight-desc">Your neighbour doubled his money. Now everyone wants in. Here's why that tip is already too late — and what quietly works instead.</p>
-          <div class="insight-cta">
-            <span>Read the article</span>
-            <span>→</span>
-          </div>
-        </a>
+          <a href="Articles/AssetAllocation.html" class="insight-card" target="_blank" rel="noopener">
+            <div class="insight-tag">Asset Allocation <span class="insight-latest">Latest</span></div>
+            <div class="insight-title">Your portfolio's real risk isn't the funds — it's the mix.</div>
+            <p class="insight-desc">Most people pick funds first and allocation never. Here's why the split between equity, debt, and gold matters more than any single scheme.</p>
+            <div class="insight-cta">
+              <span>Read the article</span>
+              <span>→</span>
+            </div>
+          </a>
 
-        <!--
-        <div class="insight-card placeholder">
-          <div class="insight-tag">Coming next month</div>
-          <div class="insight-title">Next article coming soon.</div>
-          <p class="insight-desc">A new piece every month — plain talk about money, goals, and the things no one explains properly.</p>
+          <a href="Articles/Sustainability.html" class="insight-card" target="_blank" rel="noopener">
+            <div class="insight-tag">Sustainable Wealth</div>
+            <div class="insight-title">Chasing 2× stories is chasing mirages.</div>
+            <p class="insight-desc">Your neighbour doubled his money. Now everyone wants in. Here's why that tip is already too late — and what quietly works instead.</p>
+            <div class="insight-cta">
+              <span>Read the article</span>
+              <span>→</span>
+            </div>
+          </a>
+		  
+		  <a href="Articles/MarketSurvival.html" class="insight-card" target="_blank" rel="noopener">
+            <div class="insight-tag">Market Survival Guide</div>
+            <div class="insight-title">A market crash is actually good news for your SIP.</div>
+            <p class="insight-desc">The market going down is not the problem — it has happened many times and bounced back every single time.</p>
+            <div class="insight-cta">
+              <span>Read the article</span>
+              <span>→</span>
+            </div>
+          </a>
+
         </div>
 
-        <div class="insight-card placeholder">
-          <div class="insight-tag">Coming soon</div>
-          <div class="insight-title">More on the way.</div>
-          <p class="insight-desc">Check back each month for a fresh perspective on investing, goals, and building wealth the boring — effective — way.</p>
-        </div>
-        -->
+        <button class="insights-arrow insights-arrow-prev" id="insightsPrev" aria-label="Previous article" type="button">‹</button>
+        <button class="insights-arrow insights-arrow-next" id="insightsNext" aria-label="Next article" type="button">›</button>
 
-      <!--</div>
-    </section>-->
+        <div class="insights-dots" id="insightsDots"></div>
+      </div>
+    </section>
 
     <!-- BRIDGE -->
     <div class="bridge">
@@ -1796,6 +1880,60 @@
           segGold.style.flex   = g;
         });
       });
+    })();
+    </script>
+
+    <script>
+    // ── Insights carousel (swipe / arrows / dots) ──
+    (function() {
+      var track = document.getElementById('insightsTrack');
+      if (!track) return;
+      var dotsWrap = document.getElementById('insightsDots');
+      var prevBtn = document.getElementById('insightsPrev');
+      var nextBtn = document.getElementById('insightsNext');
+      var cards = Array.prototype.slice.call(track.children);
+
+      // Build dots
+      cards.forEach(function(_, i) {
+        var dot = document.createElement('button');
+        dot.className = 'insights-dot';
+        dot.type = 'button';
+        dot.setAttribute('aria-label', 'Go to article ' + (i + 1));
+        dot.addEventListener('click', function() { goTo(i); });
+        dotsWrap.appendChild(dot);
+      });
+      var dots = Array.prototype.slice.call(dotsWrap.children);
+
+      function currentIndex() {
+        var scrollLeft = track.scrollLeft;
+        var width = track.clientWidth;
+        return Math.round(scrollLeft / width);
+      }
+
+      function updateUI() {
+        var idx = currentIndex();
+        dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+        if (prevBtn) prevBtn.disabled = idx === 0;
+        if (nextBtn) nextBtn.disabled = idx === cards.length - 1;
+      }
+
+      function goTo(i) {
+        i = Math.max(0, Math.min(cards.length - 1, i));
+        track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', function() { goTo(currentIndex() - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', function() { goTo(currentIndex() + 1); });
+
+      var scrollTimeout;
+      track.addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(updateUI, 80);
+      }, { passive: true });
+
+      window.addEventListener('resize', updateUI);
+
+      updateUI();
     })();
     </script>
 
