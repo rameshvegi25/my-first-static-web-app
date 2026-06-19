@@ -1,0 +1,1023 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Market Correction Survival Guide · Vegi Ramesh · ARN-349739</title>
+    <meta name="description" content="Stay invested through market crashes. See what really happened in 2008, 2020 and 2022 — and what it cost to panic." />
+    <meta name="author" content="Vegi Ramesh" />
+    <link rel="canonical" href="https://rameshvegi.in/MarketSurvival.html" />
+    <meta property="og:url" content="https://rameshvegi.in/MarketSurvival.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <meta name="theme-color" content="#0b0f1a" />
+
+    <style>
+      :root {
+        --bg: #0b0f1a;
+        --surface: #111827;
+        --surface2: #1a2236;
+        --border: rgba(255,255,255,0.07);
+        --accent: #c8a96e;
+        --accent-dim: rgba(200,169,110,0.15);
+        --accent-glow: rgba(200,169,110,0.08);
+        --text: #e8e4dc;
+        --muted: #8a9ab5;
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --sans: "DM Sans", sans-serif;
+        --nav-bg: rgba(11,15,26,0.92);
+        --footer-disc: #6b7280;
+        --red: #e05252;
+        --red-dim: rgba(224,82,82,0.12);
+        --green: #4caf82;
+        --green-dim: rgba(76,175,130,0.12);
+      }
+      [data-theme="light"] {
+        --bg: #f7f4ef;
+        --surface: #ffffff;
+        --surface2: #f0ebe0;
+        --border: rgba(0,0,0,0.09);
+        --accent: #a67c32;
+        --accent-dim: rgba(166,124,50,0.12);
+        --accent-glow: rgba(166,124,50,0.06);
+        --text: #1c1a14;
+        --muted: #6b6353;
+        --nav-bg: rgba(247,244,239,0.94);
+        --footer-disc: #7a7060;
+      }
+
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--accent) var(--bg); }
+      body {
+        font-family: var(--sans);
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        transition: background 0.3s, color 0.3s;
+        overflow-x: hidden;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background:
+          radial-gradient(ellipse 70% 50% at 15% 10%, rgba(200,169,110,0.06) 0%, transparent 60%),
+          radial-gradient(ellipse 50% 40% at 85% 90%, rgba(200,169,110,0.04) 0%, transparent 60%);
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 0 1.5rem; height: 56px;
+        background: var(--nav-bg);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-brand { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; letter-spacing: 0.01em; color: var(--text); text-decoration: none; flex-shrink: 0; }
+      .nav-brand span { color: var(--accent); font-style: italic; }
+
+      .nav-links {
+        display: flex; align-items: center; gap: 1.4rem;
+        position: absolute; left: 50%; transform: translateX(-50%);
+      }
+      .nav-link {
+        position: relative; font-size: 0.82rem; color: var(--muted);
+        text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s;
+        white-space: nowrap; padding-bottom: 4px;
+      }
+      .nav-link::after {
+        content: ""; position: absolute; left: 0; bottom: 0;
+        width: 100%; height: 1px; background: var(--accent);
+        transform: scaleX(0); transform-origin: center; transition: transform 0.3s ease;
+      }
+      .nav-link:hover { color: var(--accent); }
+      .nav-link:hover::after { transform: scaleX(1); }
+      .nav-link.active { color: var(--accent); font-weight: 500; }
+      .nav-link.active::after { transform: scaleX(1); }
+
+      .nav-actions { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
+      .nav-arn { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; font-family: var(--sans); text-decoration: none; }
+      a.nav-arn-link { transition: color 0.2s; cursor: pointer; }
+      a.nav-arn-link:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+      .nav-whatsapp-btn {
+        display: flex; align-items: center; justify-content: center;
+        width: 32px; height: 32px; border-radius: 50%;
+        color: #25d366; border: 1px solid rgba(37,211,102,0.25);
+        background: transparent; text-decoration: none;
+        transition: background 0.2s, border-color 0.2s; flex-shrink: 0;
+      }
+      .nav-whatsapp-btn:hover { background: rgba(37,211,102,0.12); border-color: rgba(37,211,102,0.5); }
+      .theme-toggle {
+        background: none; border: 1px solid var(--border); border-radius: 20px;
+        padding: 4px 10px; cursor: pointer; font-size: 0.8rem; color: var(--muted);
+        transition: border-color 0.2s, color 0.2s; opacity: 0; pointer-events: none;
+      }
+      .theme-toggle.ready { opacity: 1; pointer-events: auto; }
+      .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+      .icon-dark { display: inline; } .icon-light { display: none; }
+      [data-theme="light"] .icon-dark { display: none; }
+      [data-theme="light"] .icon-light { display: inline; }
+
+      /* ── HAMBURGER ── */
+      .nav-hamburger {
+        display: none; align-items: center; justify-content: center;
+        width: 32px; height: 32px; background: none;
+        border: 1px solid var(--border); border-radius: 8px;
+        color: var(--text); cursor: pointer; flex-shrink: 0;
+        transition: border-color 0.2s, color 0.2s;
+      }
+      .nav-hamburger:hover { border-color: var(--accent); color: var(--accent); }
+      .nav-hamburger svg { display: block; }
+      .nav-hamburger .icon-close { display: none; }
+      .nav-hamburger.open .icon-menu { display: none; }
+      .nav-hamburger.open .icon-close { display: block; }
+
+      /* ── MOBILE MENU ── */
+      .nav-mobile-menu {
+        position: fixed; top: 56px; left: 0; right: 0; z-index: 99;
+        background: var(--nav-bg);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid transparent;
+        display: none; flex-direction: column; padding: 0;
+        max-height: 0; overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease, border-color 0.3s ease;
+      }
+      @media (max-width: 820px) {
+        .nav-mobile-menu { display: flex; }
+        .nav-links { display: none; }
+        .nav-hamburger { display: flex; }
+        .nav-whatsapp-btn { display: none; }
+      }
+      .nav-mobile-menu.open { max-height: 420px; padding: 0.5rem 1.5rem; border-color: var(--border); }
+      .nav-mobile-menu .nav-link {
+        padding: 0.7rem 0; font-size: 0.92rem; color: var(--text);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-mobile-menu .nav-link:last-child { border-bottom: none; }
+      .nav-mobile-menu .nav-link:hover { color: var(--accent); }
+      .nav-mobile-menu .nav-link.active { color: var(--accent); font-weight: 500; }
+      .nav-mobile-menu .nav-link::after { display: none; }
+
+      /* ── ANIMATIONS ── */
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(18px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes lineGrow { from { width: 0; } to { width: var(--w); } }
+
+      /* ── PAGE LAYOUT ── */
+      .page-wrap {
+        position: relative; z-index: 1;
+        max-width: 860px; margin: 0 auto;
+        padding: 5rem 1.5rem 5rem;
+      }
+
+      /* ── HERO ── */
+      .hero {
+        text-align: center;
+        padding: 3rem 0 3.5rem;
+        opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards;
+      }
+      .hero-eyebrow {
+        font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+        color: var(--accent); font-weight: 400; margin-bottom: 1.25rem;
+        display: flex; align-items: center; justify-content: center; gap: 0.6em;
+      }
+      .hero-eyebrow::before, .hero-eyebrow::after { content: "✦"; opacity: 0.6; }
+      .hero h1 {
+        font-family: var(--serif); font-size: clamp(2rem, 6vw, 3.4rem);
+        font-weight: 600; line-height: 1.15; margin-bottom: 1rem;
+      }
+      .hero h1 em { color: var(--accent); font-style: italic; }
+      .hero-sub {
+        font-size: 0.95rem; color: var(--muted); max-width: 520px;
+        margin: 0 auto; line-height: 1.7; font-weight: 300;
+      }
+      .hero-divider { width: 40px; height: 1px; background: var(--accent); margin: 2rem auto 0; opacity: 0.6; }
+
+      /* ── SECTION HEADING ── */
+      .section-eyebrow {
+        font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+        color: var(--accent); opacity: 0.75; margin-bottom: 0.5rem;
+      }
+      .section-title {
+        font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 600; line-height: 1.2; margin-bottom: 0.75rem;
+      }
+      .section-title em { color: var(--accent); font-style: italic; }
+      .section-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.7; font-weight: 300; max-width: 560px; }
+
+      /* ── WIDGET SHELL ── */
+      .widget {
+        background: var(--surface); border: 1px solid var(--border);
+        border-radius: 16px; overflow: hidden;
+        opacity: 0; animation: fadeUp 0.6s ease forwards;
+      }
+      .widget-header {
+        padding: 1.75rem 2rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .widget-body { padding: 2rem; }
+
+      /* ── PANIC TOOL ── */
+      .panic-section { margin-bottom: 3.5rem; animation-delay: 0.3s; }
+      .controls-row {
+        display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      .control-group label {
+        display: block; font-size: 0.7rem; letter-spacing: 0.12em;
+        text-transform: uppercase; color: var(--accent); opacity: 0.8;
+        margin-bottom: 0.5rem;
+      }
+      .control-group select, .control-group input[type="number"] {
+        width: 100%; background: var(--surface2); border: 1px solid var(--border);
+        border-radius: 8px; padding: 0.65rem 0.85rem; color: var(--text);
+        font-family: var(--sans); font-size: 0.88rem;
+        appearance: none; -webkit-appearance: none;
+        transition: border-color 0.2s;
+        outline: none;
+      }
+      .control-group select:focus, .control-group input:focus { border-color: rgba(200,169,110,0.4); }
+      .control-group select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a9ab5' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.75rem center; padding-right: 2rem; }
+      .calc-btn {
+        display: block; width: 100%; padding: 0.85rem;
+        background: var(--accent-dim); border: 1px solid rgba(200,169,110,0.3);
+        border-radius: 10px; color: var(--accent); font-family: var(--sans);
+        font-size: 0.875rem; font-weight: 500; letter-spacing: 0.04em;
+        cursor: pointer; transition: background 0.2s, border-color 0.2s;
+        margin-bottom: 1.75rem;
+      }
+      .calc-btn:hover { background: rgba(200,169,110,0.25); border-color: rgba(200,169,110,0.5); }
+
+      .result-grid {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      .result-box {
+        border-radius: 12px; padding: 1.25rem 1.5rem;
+        border: 1px solid var(--border);
+      }
+      .result-box.panic-box { background: var(--red-dim); border-color: rgba(224,82,82,0.2); }
+      .result-box.calm-box  { background: var(--green-dim); border-color: rgba(76,175,130,0.2); }
+      .result-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.4rem; }
+      .result-box.panic-box .result-label { color: var(--red); }
+      .result-box.calm-box  .result-label { color: var(--green); }
+      .result-amount { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; line-height: 1; margin-bottom: 0.3rem; }
+      .result-box.panic-box .result-amount { color: var(--red); }
+      .result-box.calm-box  .result-amount { color: var(--green); }
+      .result-note { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
+
+      .difference-bar {
+        background: var(--surface2); border: 1px solid var(--border);
+        border-radius: 10px; padding: 1rem 1.5rem;
+        display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      }
+      .diff-label { font-size: 0.78rem; color: var(--muted); }
+      .diff-amount { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--accent); }
+
+      /* ── CHART ── */
+      .chart-wrap { position: relative; height: 200px; margin-bottom: 0.5rem; }
+      canvas#panicChart { width: 100% !important; height: 100% !important; }
+      .chart-legend {
+        display: flex; gap: 1.5rem; justify-content: center;
+        font-size: 0.75rem; color: var(--muted); margin-top: 0.75rem;
+      }
+      .legend-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 0.35rem; }
+
+      /* ── CRISIS TIMELINE ── */
+      .crisis-section { margin-bottom: 3.5rem; animation-delay: 0.45s; }
+      .crisis-cards { display: flex; flex-direction: column; gap: 1px; }
+      .crisis-row {
+        display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 2fr; gap: 1rem;
+        align-items: center; padding: 1.1rem 1.5rem;
+        transition: background 0.2s;
+      }
+      .crisis-row:hover { background: var(--accent-glow); }
+      .crisis-row:not(:last-child) { border-bottom: 1px solid var(--border); }
+      .crisis-row-header {
+        display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 2fr; gap: 1rem;
+        padding: 0.75rem 1.5rem 0.75rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .crisis-row-header span {
+        font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+        color: var(--accent); opacity: 0.7;
+      }
+      .crisis-name { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; }
+      .crisis-year { font-size: 0.78rem; color: var(--muted); margin-top: 0.15rem; }
+      .crisis-fall { font-size: 1.05rem; font-weight: 500; color: var(--red); }
+      .crisis-recovery { font-size: 1.05rem; font-weight: 500; color: var(--green); }
+      .crisis-lesson { font-size: 0.8rem; color: var(--muted); line-height: 1.45; }
+      .crisis-bar-wrap { display: flex; align-items: center; gap: 0.5rem; }
+      .crisis-bar {
+        height: 4px; border-radius: 2px;
+        animation: lineGrow 1s ease 0.5s both;
+      }
+      .bar-fall { background: var(--red); }
+      .bar-recover { background: var(--green); }
+
+      /* ── SIP BLESSING ── */
+      .sip-section { margin-bottom: 3.5rem; animation-delay: 0.55s; }
+      .sip-insight-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+      .sip-card {
+        background: var(--surface2); border: 1px solid var(--border);
+        border-radius: 12px; padding: 1.4rem 1.25rem;
+        text-align: center;
+      }
+      .sip-num { font-family: var(--serif); font-size: 2rem; font-weight: 600; color: var(--accent); margin-bottom: 0.4rem; }
+      .sip-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+      /* ── BIASES ── */
+      .biases-section { margin-bottom: 3.5rem; animation-delay: 0.65s; }
+      .bias-list { display: flex; flex-direction: column; gap: 0; }
+      .bias-item {
+        display: flex; gap: 1.25rem; align-items: flex-start;
+        padding: 1.5rem;
+        transition: background 0.2s;
+      }
+      .bias-item:hover { background: var(--accent-glow); border-radius: 10px; }
+      .bias-item:not(:last-child) { border-bottom: 1px solid var(--border); }
+      .bias-icon {
+        width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+        background: var(--accent-dim); display: flex; align-items: center; justify-content: center;
+        font-size: 1.1rem;
+      }
+      .bias-name { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem; }
+      .bias-name em { color: var(--accent); font-style: italic; }
+      .bias-body { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+      /* ── CHECKLIST ── */
+      .checklist-section { margin-bottom: 3.5rem; animation-delay: 0.75s; }
+      .checklist { display: flex; flex-direction: column; gap: 0; }
+      .check-item {
+        display: flex; align-items: flex-start; gap: 1rem; padding: 1.1rem 1.5rem;
+        cursor: pointer; transition: background 0.2s;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .check-item:not(:last-child) { border-bottom: 1px solid var(--border); }
+      .check-item:hover { background: var(--accent-glow); }
+      .check-box {
+        width: 20px; height: 20px; border-radius: 6px; flex-shrink: 0;
+        border: 1.5px solid var(--border); margin-top: 1px;
+        display: flex; align-items: center; justify-content: center;
+        transition: background 0.2s, border-color 0.2s;
+      }
+      .check-item.checked .check-box { background: var(--accent); border-color: var(--accent); }
+      .check-item.checked .check-box::after { content: "✓"; color: var(--bg); font-size: 0.7rem; font-weight: 600; }
+      .check-content { flex: 1; }
+      .check-q { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.25rem; }
+      .check-item.checked .check-q { color: var(--muted); text-decoration: line-through; opacity: 0.6; }
+      .check-a { font-size: 0.8rem; color: var(--green); font-weight: 400; }
+
+      /* ── NOTE FROM RAMESH ── */
+      .note-section { margin-bottom: 3.5rem; animation-delay: 0.85s; }
+      .note-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent);
+        border-radius: 16px;
+        padding: 2rem 2.25rem;
+        position: relative; overflow: hidden;
+      }
+      .note-card::before {
+        content: ""; position: absolute; inset: 0;
+        background: radial-gradient(ellipse 80% 60% at 0% 50%, var(--accent-glow), transparent 70%);
+        pointer-events: none;
+      }
+      .note-eyebrow {
+        font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+        color: var(--accent); opacity: 0.75; margin-bottom: 1rem; position: relative; z-index: 1;
+      }
+      .note-quote-mark { font-family: var(--serif); font-size: 3rem; line-height: 0.6; color: var(--accent); opacity: 0.3; margin-bottom: 0.75rem; position: relative; z-index: 1; }
+      .note-text {
+        font-family: var(--serif); font-size: 1.1rem; font-style: italic;
+        line-height: 1.8; color: var(--text); margin-bottom: 1.25rem; position: relative; z-index: 1;
+      }
+      .note-sig { font-size: 0.82rem; color: var(--accent); font-weight: 500; position: relative; z-index: 1; }
+      .note-sig span { color: var(--muted); font-weight: 300; }
+
+      /* ── CTA ── */
+      .cta-section { animation-delay: 0.95s; }
+      .cta-card {
+        background: var(--surface); border: 1px solid rgba(200,169,110,0.2);
+        border-radius: 16px; padding: 2.5rem 2rem; text-align: center; position: relative; overflow: hidden;
+      }
+      .cta-card::before {
+        content: ""; position: absolute; inset: 0;
+        background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--accent-glow), transparent 70%);
+        pointer-events: none;
+      }
+      .cta-card-corner {
+        position: absolute; top: 0; right: 0; width: 60px; height: 60px;
+        background: linear-gradient(135deg, transparent 50%, rgba(200,169,110,0.12) 50%);
+        border-radius: 0 16px 0 0;
+      }
+      .cta-title { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; margin-bottom: 0.5rem; position: relative; z-index: 1; }
+      .cta-title em { color: var(--accent); font-style: italic; }
+      .cta-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.75rem; position: relative; z-index: 1; max-width: 420px; margin-left: auto; margin-right: auto; }
+      .cta-btn {
+        display: inline-flex; align-items: center; gap: 0.6rem;
+        padding: 0.85rem 1.75rem; border-radius: 10px;
+        background: #25d366; color: #fff;
+        font-family: var(--sans); font-size: 0.88rem; font-weight: 500;
+        text-decoration: none; letter-spacing: 0.04em;
+        transition: background 0.2s, transform 0.2s;
+        position: relative; z-index: 1;
+      }
+      .cta-btn:hover { background: #1fb358; transform: translateY(-2px); }
+
+      /* ── FOOTER ── */
+      footer {
+        position: relative; z-index: 1;
+        text-align: center;
+        padding: 1.5rem 1.5rem 2rem;
+        border-top: 1px solid var(--border);
+      }
+      .footer-name { font-family: var(--serif); font-size: 1.1rem; color: var(--text); font-weight: 600; margin-bottom: 0.5rem; }
+      .footer-name span { color: var(--accent); font-style: italic; }
+      .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.25rem; margin-bottom: 1.5rem; }
+      .footer-links a { font-size: 0.78rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+      .footer-links a:hover { color: var(--accent); }
+      .footer-disc { font-size: 0.7rem; color: var(--footer-disc); max-width: 760px; margin: 0 auto; line-height: 1.6; }
+
+      /* ── FAB ── */
+      .fab-whatsapp {
+        display: none; position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 200;
+        width: 52px; height: 52px; border-radius: 50%; background: #25d366; color: #fff;
+        align-items: center; justify-content: center;
+        box-shadow: 0 4px 20px rgba(37,211,102,0.4); text-decoration: none;
+        transition: transform 0.2s;
+      }
+      .fab-whatsapp:active { transform: scale(0.93); }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 700px) {
+        .controls-row { grid-template-columns: 1fr; }
+        .result-grid { grid-template-columns: 1fr; }
+        .sip-insight-grid { grid-template-columns: 1fr; }
+        .crisis-row, .crisis-row-header { grid-template-columns: 1fr 1fr; }
+        .crisis-row-header span:nth-child(3),
+        .crisis-row-header span:nth-child(4),
+        .crisis-row > *:nth-child(3),
+        .crisis-row > *:nth-child(4) { display: none; }
+        .fab-whatsapp { display: flex; }
+        .widget-body { padding: 1.25rem; }
+        .bias-item { padding: 1.25rem; }
+        .note-card { padding: 1.5rem 1.25rem; }
+        .page-wrap { padding: 4.5rem 1rem 5rem; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAV -->
+    <nav>
+      <a href="index.html" class="nav-brand">Vegi <span>Ramesh</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="InvestorDetails.html" class="nav-link">Get Started</a>
+        <a href="RiskProfiler.html" class="nav-link">Risk Profile</a>
+        <a href="AboutMe.html" class="nav-link">About Me</a>
+        <a href="calculator.html" class="nav-link">Goal Calculator</a>
+        <a href="SavingsCorpusCalculator.html" class="nav-link">Corpus Calculator</a>
+        <a href="nps.html" class="nav-link">NPS</a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://www.amfiindia.com/locate-distributor" class="nav-arn nav-arn-link" target="_blank" rel="noopener" title="Verify on AMFI — search 349739" aria-label="Verify ARN-349739 on AMFI">✦ ARN-349739</a>
+        <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments." class="nav-whatsapp-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        </a>
+        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <span class="icon-dark">☀️</span><span class="icon-light">🌙</span>
+        </button>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+          <svg class="icon-menu" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <svg class="icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="nav-mobile-menu" id="nav-mobile-menu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="InvestorDetails.html" class="nav-link">Get Started</a>
+      <a href="RiskProfiler.html" class="nav-link">Risk Profile</a>
+      <a href="AboutMe.html" class="nav-link">About Me</a>
+      <a href="calculator.html" class="nav-link">Goal Calculator</a>
+      <a href="SavingsCorpusCalculator.html" class="nav-link">Corpus Calculator</a>
+      <a href="nps.html" class="nav-link">NPS</a>
+    </div>
+
+    <div class="page-wrap">
+
+      <!-- HERO -->
+      <div class="hero">
+        <div class="hero-eyebrow">Market Correction Survival Guide</div>
+        <h1>Markets fall.<br /><em>People panic.</em></h1>
+        <p class="hero-sub">The market going down is not the problem — it has happened many times and bounced back every single time. The real damage happens when investors get scared and pull their money out at the worst possible moment. This page shows you, with real numbers, why staying put is almost always the right call.</p>
+        <div class="hero-divider"></div>
+      </div>
+
+      <!-- 1. PANIC SIMULATOR -->
+      <div class="panic-section widget">
+        <div class="widget-header">
+          <div class="section-eyebrow">Interactive Tool</div>
+          <div class="section-title">What did panic <em>actually cost?</em></div>
+          <p class="section-desc">Both investors put in the same ₹10,000 every month — same money, same duration. The only difference? One panicked and paused. See what that one decision cost them.</p>
+        </div>
+        <div class="widget-body">
+          <div class="controls-row">
+            <div class="control-group">
+              <label>Monthly SIP (₹)</label>
+              <input type="number" id="sipAmount" value="10000" min="500" step="500" />
+            </div>
+            <div class="control-group">
+              <label>Pick a Crisis</label>
+              <select id="crisisSelect">
+                <option value="2008">2008 Global Financial Crisis</option>
+                <option value="2020" selected>2020 COVID Crash</option>
+                <option value="2022">2022 Rate-Hike Correction</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <label>Years after recovery</label>
+              <select id="yearsAfter">
+                <option value="3">3 years</option>
+                <option value="5" selected>5 years</option>
+                <option value="7">7 years</option>
+                <option value="10">10 years</option>
+              </select>
+            </div>
+          </div>
+          <button class="calc-btn" onclick="runCalculator()">Show me the cost of panic →</button>
+
+          <div class="result-grid" id="resultGrid" style="display:none">
+            <div class="result-box panic-box">
+              <div class="result-label">😨 Panicked — paused SIP during the crash</div>
+              <div class="result-amount" id="panicAmount">—</div>
+              <div class="result-note">Stopped SIP when markets fell. Sat in savings/FD. Restarted only after recovery — missing the cheapest months to buy.</div>
+            </div>
+            <div class="result-box calm-box">
+              <div class="result-label">🧘 Stayed calm — SIP continued every month</div>
+              <div class="result-amount" id="calmAmount">—</div>
+              <div class="result-note">Did nothing. Bought more units at lower prices during the crash. Rode the full recovery.</div>
+            </div>
+          </div>
+          <div class="difference-bar" id="diffBar" style="display:none">
+            <div class="diff-label">💸 Gap between them — just from pausing SIP during the crash</div>
+            <div class="diff-amount" id="diffAmount">—</div>
+          </div>
+
+          <p id="calcDisclaimer" style="display:none; font-size:0.72rem; color:var(--muted); line-height:1.6; margin-top:1rem; padding: 0.75rem 1rem; background:var(--surface2); border-radius:8px; border-left: 2px solid rgba(200,169,110,0.3);">
+            <strong style="color:var(--accent); font-weight:500;">Illustration only.</strong> Both paths invest the same monthly amount for the same total duration — the panicked investor simply pauses during the crash and recovery period, then resumes. Equity returns assumed at 12% p.a. Actual returns will vary. This is for educational purposes only and does not constitute financial advice.
+          </p>
+          <div class="chart-wrap" id="chartWrap" style="display:none; margin-top:1.5rem;">
+            <canvas id="panicChart"></canvas>
+          </div>
+          <div class="chart-legend" id="chartLegend" style="display:none">
+            <span><span class="legend-dot" style="background:#e05252"></span>Panicked</span>
+            <span><span class="legend-dot" style="background:#4caf82"></span>Stayed Invested</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. CRISIS TIMELINE -->
+      <div class="crisis-section widget" style="margin-top:3.5rem">
+        <div class="widget-header">
+          <div class="section-eyebrow">Historical Record</div>
+          <div class="section-title">Every single crash <em>came back.</em></div>
+          <p class="section-desc">Not most of them — all of them. Every fall in the Indian market since 2000 has fully recovered. This is not a prediction. It is history.</p>
+        </div>
+        <div class="widget-body" style="padding: 0;">
+          <div class="crisis-row-header">
+            <span>What happened</span>
+            <span>How much it fell</span>
+            <span>Time to recover</span>
+            <span>What we learned</span>
+          </div>
+          <div class="crisis-cards">
+            <div class="crisis-row">
+              <div>
+                <div class="crisis-name">Dot-com Bust</div>
+                <div class="crisis-year">2000 – 2001</div>
+              </div>
+              <div>
+                <div class="crisis-fall">−55%</div>
+                <div class="crisis-bar-wrap"><div class="crisis-bar bar-fall" style="--w:55%; width:55%; max-width:60px"></div></div>
+              </div>
+              <div>
+                <div class="crisis-recovery">~4 yrs</div>
+                <div class="crisis-bar-wrap"><div class="crisis-bar bar-recover" style="--w:80%; width:80%; max-width:60px"></div></div>
+              </div>
+              <div class="crisis-lesson">Tech stocks crashed 55%. People said "this time it's different." It wasn't. Markets recovered fully.</div>
+            </div>
+            <div class="crisis-row">
+              <div>
+                <div class="crisis-name">Global Financial Crisis</div>
+                <div class="crisis-year">2008 – 2009</div>
+              </div>
+              <div>
+                <div class="crisis-fall">−60%</div>
+                <div class="crisis-bar-wrap"><div class="crisis-bar bar-fall" style="--w:60%; width:60%; max-width:60px"></div></div>
+              </div>
+              <div>
+                <div class="crisis-recovery">~2.5 yrs</div>
+                <div class="crisis-bar-wrap"><div class="crisis-bar bar-recover" style="--w:70%; width:70%; max-width:60px"></div></div>
+              </div>
+              <div class="crisis-lesson">The worst crash in living memory — markets halved. Those who didn't sell had doubled their money by 2010.</div>
+            </div>
+            <div class="crisis-row">
+              <div>
+                <div class="crisis-name">COVID-19 Crash</div>
+                <div class="crisis-year">Feb – Mar 2020</div>
+              </div>
+              <div>
+                <div class="crisis-fall">−38%</div>
+                <div class="crisis-bar-wrap"><div class="crisis-bar bar-fall" style="--w:38%; width:38%; max-width:60px"></div></div>
+              </div>
+              <div>
+                <div class="crisis-recovery">5 months</div>
+                <div class="crisis-bar-wrap"><div class="crisis-bar bar-recover" style="--w:30%; width:30%; max-width:60px"></div></div>
+              </div>
+              <div class="crisis-lesson">Markets fell 38% in weeks. Felt like the end. Fully recovered in just 5 months — the fastest in history.</div>
+            </div>
+            <div class="crisis-row">
+              <div>
+                <div class="crisis-name">Interest Rate Scare</div>
+                <div class="crisis-year">2022</div>
+              </div>
+              <div>
+                <div class="crisis-fall">−17%</div>
+                <div class="crisis-bar-wrap"><div class="crisis-bar bar-fall" style="--w:17%; width:17%; max-width:60px"></div></div>
+              </div>
+              <div>
+                <div class="crisis-recovery">~8 months</div>
+                <div class="crisis-bar-wrap"><div class="crisis-bar bar-recover" style="--w:35%; width:35%; max-width:60px"></div></div>
+              </div>
+              <div class="crisis-lesson">News channels made it feel like a disaster. On a 10-year chart, you can barely see it.</div>
+            </div>
+          </div>
+          <div style="padding: 0.85rem 1.5rem; border-top: 1px solid var(--border); font-size:0.7rem; color:var(--muted); line-height:1.6;">
+            ✦ Recovery timelines are based on historical Nifty 50 data and are for illustrative purposes only. Past recovery periods do not indicate that future corrections will recover in similar timeframes.
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. SIP BLESSING -->
+      <div class="sip-section widget" style="margin-top:3.5rem; animation-delay:0.55s">
+        <div class="widget-header">
+          <div class="section-eyebrow">Here's the twist</div>
+          <div class="section-title">A market crash is actually <em>good news</em> for your SIP.</div>
+          <p class="section-desc">Think of your SIP like buying rice every month. When rice goes on sale, you get more for the same money. When markets fall, your ₹10,000 buys more mutual fund units. More units at a lower price = bigger gains when prices come back up.</p>
+        </div>
+        <div class="widget-body">
+          <div class="sip-insight-grid">
+            <div class="sip-card">
+              <div class="sip-num">~2×</div>
+              <div class="sip-desc">During a sharp fall, your monthly SIP can buy roughly twice as many units as it did when markets were at the top — same ₹10,000, just a much better price</div>
+            </div>
+            <div class="sip-card">
+              <div class="sip-num">More returns</div>
+              <div class="sip-desc">Investors who kept their SIPs running through past crashes historically ended up with better long-term returns than those who paused and waited for "the right time"</div>
+            </div>
+            <div class="sip-card">
+              <div class="sip-num">₹0 effort</div>
+              <div class="sip-desc">You don't need to do anything special to benefit from this. Just don't cancel or pause your SIP. That's it.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. BIASES -->
+      <div class="biases-section widget" style="margin-top:3.5rem; animation-delay:0.65s">
+        <div class="widget-header">
+          <div class="section-eyebrow">Why smart people make bad decisions</div>
+          <div class="section-title">Your brain is <em>working against you</em> during a crash.</div>
+          <p class="section-desc">It's not stupidity. It's how human brains are wired. These three thinking patterns cause most investors to sell at the worst possible time.</p>
+        </div>
+        <div class="widget-body" style="padding:0">
+          <div class="bias-list">
+            <div class="bias-item">
+              <div class="bias-icon">⚖️</div>
+              <div>
+                <div class="bias-name"><em>Losses hurt more than gains feel good</em></div>
+                <div class="bias-body">Losing ₹1 lakh feels roughly twice as painful as gaining ₹1 lakh feels happy. So when your portfolio goes red, your brain treats it like an emergency — even if it's just a temporary dip. This pushes you to sell and "stop the bleeding," often right at the bottom, locking in real losses from what was just a paper loss.</div>
+              </div>
+            </div>
+            <div class="bias-item">
+              <div class="bias-icon">🔁</div>
+              <div>
+                <div class="bias-name"><em>Whatever happened recently feels like it will keep happening</em></div>
+                <div class="bias-body">After markets fall 30%, your gut says "they'll keep falling." After they rise 30%, your gut says "this rally will never end." Neither feeling is based on evidence — it's just your brain assuming tomorrow will look like today. What happened last month tells you almost nothing about what happens next year.</div>
+              </div>
+            </div>
+            <div class="bias-item">
+              <div class="bias-icon">🐑</div>
+              <div>
+                <div class="bias-name"><em>If everyone else is running, maybe I should run too</em></div>
+                <div class="bias-body">When your family group chat, your neighbour, and the news anchor are all saying "get out now" — it feels safe to agree. But markets crash hardest precisely when everyone decides to exit at once. The best time to have bought in history always looked terrifying from the inside.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. CHECKLIST -->
+      <div class="checklist-section widget" style="margin-top:3.5rem; animation-delay:0.75s">
+        <div class="widget-header">
+          <div class="section-eyebrow">Before you do anything</div>
+          <div class="section-title">Read this <em>before touching</em> your investments.</div>
+          <p class="section-desc">Markets are down and you're tempted to stop or withdraw. Go through each question first. Tap to check them off.</p>
+        </div>
+        <div class="widget-body" style="padding:0">
+          <div class="checklist" id="checklist">
+            <div class="check-item" onclick="toggleCheck(this)">
+              <div class="check-box"></div>
+              <div class="check-content">
+                <div class="check-q">Am I investing for 5 years or more?</div>
+                <div class="check-a">✓ Then today's fall does not affect your goal. What matters is the price when you sell, not the price today. Keep going.</div>
+              </div>
+            </div>
+            <div class="check-item" onclick="toggleCheck(this)">
+              <div class="check-box"></div>
+              <div class="check-content">
+                <div class="check-q">Do I actually need this money in the next 1–2 years?</div>
+                <div class="check-a">✓ If yes, that money should be in a liquid fund, arbitrage fund, or FD — not in an equity mutual fund. But that's a separate planning issue. It is not a reason to stop your long-term SIP.</div>
+              </div>
+            </div>
+            <div class="check-item" onclick="toggleCheck(this)">
+              <div class="check-box"></div>
+              <div class="check-content">
+                <div class="check-q">Has the Nifty ever gone to zero and stayed there?</div>
+                <div class="check-a">✓ No. Not once in history. A fall in value is not the same as losing your money permanently. It only becomes a real loss if you sell now.</div>
+              </div>
+            </div>
+            <div class="check-item" onclick="toggleCheck(this)">
+              <div class="check-box"></div>
+              <div class="check-content">
+                <div class="check-q">Did I panic and sell during any previous crash?</div>
+                <div class="check-a">✓ If yes — you already know how that felt when markets recovered without you. You paid the price once. You don't have to pay it again.</div>
+              </div>
+            </div>
+            <div class="check-item" onclick="toggleCheck(this)">
+              <div class="check-box"></div>
+              <div class="check-content">
+                <div class="check-q">Is there solid reason to believe markets will never come back this time?</div>
+                <div class="check-a">✓ People asked this exact question in 2000, 2008, 2020, and 2022. Every single time, the markets came back. What has actually changed?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. NOTE FROM RAMESH -->
+      <div class="note-section" style="margin-top:3.5rem; animation-delay:0.85s; opacity:0; animation: fadeUp 0.6s ease 0.85s forwards;">
+        <div class="note-card">
+          <div class="note-eyebrow">✦ A Personal Note</div>
+          <div class="note-quote-mark">"</div>
+          <p class="note-text">
+            I want to be upfront with you — I haven't yet sat with a client whose portfolio is bleeding red during a real crash. But I've gone deep into the history of every single one, and here's what I know for certain: the investors who came out ahead were not the smartest or the luckiest. They were simply the ones who didn't panic.<br /><br />
+            The tricky part is that it feels completely different from the inside. When markets are falling and the news is bad and everyone around you is worried — staying invested takes real courage. That's why I believe the most useful thing I can do for you is not pick a fund — it's to sit with you before the next crash and decide, together, what we do when markets fall 20%, 30%, or even 40%.<br /><br />
+            That way, when it happens, you're not making a scared decision in the moment. You're following a plan we already made with a calm head.
+          </p>
+          <div class="note-sig">Vegi Ramesh <span>· AMFI Registered · ARN-349739</span></div>
+        </div>
+      </div>
+
+      <!-- 7. CTA -->
+      <div class="cta-section widget" style="margin-top:3.5rem">
+        <div class="cta-card">
+          <div class="cta-card-corner"></div>
+          <div class="cta-title">Markets are making you<br /><em>nervous?</em></div>
+          <p class="cta-desc" style="margin-bottom:1.75rem">That's completely normal. Let's have a quick 15-minute conversation. Just a clear look at your situation and what to do next.</p>
+          <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%27m%20worried%20about%20my%20portfolio%20during%20the%20current%20market%20conditions.%20Can%20we%20talk%3F" class="cta-btn" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Lets Talk on WhatsApp
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /page-wrap -->
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-name">Vegi <span>Ramesh</span></div>
+      <div class="footer-links">
+        <a href="AboutMe.html">About</a>
+        <a href="RiskProfiler.html">Risk Profiler</a>
+        <a href="InvestorDetails.html">Get Started</a>
+        <a href="calculator.html">Goal Calculator</a>
+        <a href="SavingsCorpusCalculator.html">Corpus Calculator</a>
+        <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments." target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <p class="footer-disc">
+        Vegi Ramesh · AMFI-registered Mutual Fund Distributor · ARN-349739 · NISM Series V-A certified.
+        Mutual fund investments are subject to market risks. Please read all scheme-related documents carefully before investing.
+        Past performance is not indicative of future returns. This website is for informational purposes only and does not constitute investment advice.
+        Registration with AMFI does not guarantee the quality of services, analysis, or ratings provided.
+      </p>
+    </footer>
+
+    <!-- Mobile FAB -->
+    <a href="https://wa.me/918329450580?text=Hi%20Ramesh%2C%20I%20came%20across%20your%20website%20and%20would%20like%20to%20know%20more%20about%20mutual%20fund%20investments." class="fab-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+
+    <script>
+      /* ── THEME ── */
+      function toggleTheme() {
+        var html = document.documentElement;
+        var isDark = html.getAttribute("data-theme") !== "light";
+        html.setAttribute("data-theme", isDark ? "light" : "dark");
+        try { localStorage.setItem("vr-theme", isDark ? "light" : "dark"); } catch(e){}
+        if (window._chartInstance) drawChart(window._lastPanicData, window._lastCalmData, window._lastLabels);
+      }
+      (function(){
+        try { var t = localStorage.getItem("vr-theme"); if(t) document.documentElement.setAttribute("data-theme",t); } catch(e){}
+        var btn = document.querySelector(".theme-toggle");
+        if(btn) btn.classList.add("ready");
+      })();
+
+      /* ── CHECKLIST ── */
+      function toggleCheck(el) { el.classList.toggle("checked"); }
+
+      /* ── MOBILE NAV ── */
+      (function() {
+        var btn = document.getElementById('nav-hamburger');
+        var menu = document.getElementById('nav-mobile-menu');
+        if (!btn || !menu) return;
+        btn.addEventListener('click', function() {
+          var open = menu.classList.toggle('open');
+          btn.classList.toggle('open', open);
+        });
+        menu.querySelectorAll('.nav-link').forEach(function(link) {
+          link.addEventListener('click', function() {
+            menu.classList.remove('open');
+            btn.classList.remove('open');
+          });
+        });
+      })();
+
+      /* ── CALCULATOR ── */
+      var crisisData = {
+        "2008": { fallMonths: 14, fallPct: 0.60, recoveryMonths: 30, name: "2008 GFC" },
+        "2020": { fallMonths: 2,  fallPct: 0.38, recoveryMonths: 5,  name: "2020 COVID" },
+        "2022": { fallMonths: 6,  fallPct: 0.17, recoveryMonths: 8,  name: "2022 Rate Hike" }
+      };
+
+      function fmt(n) {
+        if(n >= 1e7) return "₹" + (n/1e7).toFixed(2) + " Cr";
+        if(n >= 1e5) return "₹" + (n/1e5).toFixed(2) + " L";
+        return "₹" + Math.round(n).toLocaleString("en-IN");
+      }
+
+      function runCalculator() {
+        var sip = parseFloat(document.getElementById("sipAmount").value) || 10000;
+        var crisis = crisisData[document.getElementById("crisisSelect").value];
+        var yearsAfter = parseInt(document.getElementById("yearsAfter").value);
+        var monthsAfter = yearsAfter * 12;
+        var r = 0.12 / 12; // monthly equity return
+
+        // Both investors invest the same monthly SIP for the SAME total number of months.
+        // The only difference is WHEN they invest:
+        //
+        // CALM: SIP runs every single month without pause.
+        //
+        // PANICKED: During the crash + recovery window (fallMonths + recoveryMonths),
+        //   they freeze — no new SIP, existing corpus just stays in equity (no redemption).
+        //   After recovery they resume SIP in equity.
+        //   Net result: same total money invested, just the crash-period months are skipped
+        //   and added to the end, so total calendar months are longer for the panicked investor.
+        //   We compare both at the END of the calm investor's timeline (totalMonths).
+
+        var crashWindow = crisis.fallMonths + crisis.recoveryMonths;
+        var totalMonths = crashWindow + monthsAfter;
+
+        var panicSeries = [], calmSeries = [], labels = [];
+        var panicCorpus = 0, calmCorpus = 0;
+
+        for (var m = 1; m <= totalMonths; m++) {
+          // CALM: SIP every month — equity grows + new contribution
+          calmCorpus = calmCorpus * (1 + r) + sip;
+
+          // PANICKED: during crash window, no new SIP — corpus just grows in equity
+          if (m <= crashWindow) {
+            panicCorpus = panicCorpus * (1 + r); // no new contribution
+          } else {
+            panicCorpus = panicCorpus * (1 + r) + sip; // resumes after recovery
+          }
+
+          labels.push(m);
+          panicSeries.push(Math.round(panicCorpus));
+          calmSeries.push(Math.round(calmCorpus));
+        }
+
+        var panicFinal = panicSeries[panicSeries.length - 1];
+        var calmFinal  = calmSeries[calmSeries.length - 1];
+        var diff = calmFinal - panicFinal;
+
+        document.getElementById("panicAmount").textContent = fmt(panicFinal);
+        document.getElementById("calmAmount").textContent  = fmt(calmFinal);
+        document.getElementById("diffAmount").textContent  = fmt(Math.abs(diff));
+
+        document.getElementById("resultGrid").style.display     = "grid";
+        document.getElementById("diffBar").style.display        = "flex";
+        document.getElementById("calcDisclaimer").style.display = "block";
+        document.getElementById("chartWrap").style.display      = "block";
+        document.getElementById("chartLegend").style.display    = "flex";
+
+        window._lastPanicData = panicSeries;
+        window._lastCalmData  = calmSeries;
+        window._lastLabels    = labels;
+        drawChart(panicSeries, calmSeries, labels);
+      }
+
+      function drawChart(panicData, calmData, labels) {
+        var canvas = document.getElementById("panicChart");
+        var ctx = canvas.getContext("2d");
+        var isDark = document.documentElement.getAttribute("data-theme") !== "light";
+        var gridColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
+        var textColor = isDark ? "#8a9ab5" : "#6b6353";
+
+        if(window._chartInstance) { window._chartInstance.destroy(); }
+
+        // Thin out labels for readability
+        var step = Math.max(1, Math.floor(labels.length / 12));
+        var displayLabels = labels.map(function(l,i){ return i%step===0 ? l : ""; });
+
+        window._chartInstance = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: displayLabels,
+            datasets: [
+              {
+                label: "Panicked",
+                data: panicData,
+                borderColor: "#e05252",
+                backgroundColor: "rgba(224,82,82,0.07)",
+                borderWidth: 2,
+                pointRadius: 0,
+                fill: true,
+                tension: 0.4
+              },
+              {
+                label: "Stayed Invested",
+                data: calmData,
+                borderColor: "#4caf82",
+                backgroundColor: "rgba(76,175,130,0.07)",
+                borderWidth: 2,
+                pointRadius: 0,
+                fill: true,
+                tension: 0.4
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "index", intersect: false },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: isDark ? "#1a2236" : "#ffffff",
+                borderColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+                borderWidth: 1,
+                titleColor: textColor,
+                bodyColor: textColor,
+                callbacks: {
+                  label: function(ctx) {
+                    return " " + ctx.dataset.label + ": " + fmt(ctx.raw);
+                  }
+                }
+              }
+            },
+            scales: {
+              x: { grid: { color: gridColor }, ticks: { color: textColor, font: { size: 10 } } },
+              y: {
+                grid: { color: gridColor },
+                ticks: {
+                  color: textColor, font: { size: 10 },
+                  callback: function(v) { return fmt(v); }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      // Load Chart.js
+      (function(){
+        var s = document.createElement("script");
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js";
+        s.onload = function(){ runCalculator(); };
+        document.head.appendChild(s);
+      })();
+    </script>
+  </body>
+</html>
