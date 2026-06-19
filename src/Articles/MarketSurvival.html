@@ -402,6 +402,19 @@
       .note-sig { font-size: 0.82rem; color: var(--accent); font-weight: 500; position: relative; z-index: 1; }
       .note-sig span { color: var(--muted); font-weight: 300; }
 
+      /* ── ALLOCATION NUDGE ── */
+      .allocation-nudge {
+        max-width: 620px; margin: 2rem auto 0;
+        padding: 1.1rem 1.4rem;
+        border-left: 2px solid var(--accent);
+        background: var(--accent-glow);
+        border-radius: 0 10px 10px 0;
+        font-size: 0.85rem; color: var(--muted); line-height: 1.6;
+        opacity: 0; animation: fadeUp 0.6s ease 0.9s forwards;
+      }
+      .allocation-nudge a { color: var(--accent); font-weight: 500; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+      .allocation-nudge a:hover { color: var(--text); }
+
       /* ── CTA ── */
       .cta-section { animation-delay: 0.95s; }
       .cta-card {
@@ -765,13 +778,6 @@
                 <div class="check-a">✓ If yes — you already know how that felt when markets recovered without you. You paid the price once. You don't have to pay it again.</div>
               </div>
             </div>
-            <div class="check-item" onclick="toggleCheck(this)">
-              <div class="check-box"></div>
-              <div class="check-content">
-                <div class="check-q">Is there solid reason to believe markets will never come back this time?</div>
-                <div class="check-a">✓ People asked this exact question in 2000, 2008, 2020, and 2022. Every single time, the markets came back. What has actually changed?</div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -788,6 +794,9 @@
           </p>
           <div class="note-sig">Vegi Ramesh <span>· AMFI Registered · ARN-349739</span></div>
         </div>
+        <p class="allocation-nudge">
+          Staying calm is a lot easier when your portfolio was built right in the first place — the right mix of equity, debt, and gold for your timeline takes most of the sting out of a fall like this. <a href="./Articles/AssetAllocation.html">See how asset allocation works →</a>
+        </p>
       </div>
 
       <!-- 7. CTA -->
