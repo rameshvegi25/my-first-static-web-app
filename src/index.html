@@ -1726,7 +1726,7 @@
     (function() {
       var toggle = document.getElementById('themeToggle');
       var root = document.documentElement;
-      var saved = localStorage.getItem('theme') || 'dark';
+      var saved = localStorage.getItem('vr-theme') || 'dark';
       if (saved === 'light') root.setAttribute('data-theme', 'light');
       setTimeout(function() { toggle.classList.add('ready'); }, 200);
     })();
@@ -1736,7 +1736,7 @@
       var next = current === 'light' ? 'dark' : 'light';
       if (next === 'dark') root.removeAttribute('data-theme');
       else root.setAttribute('data-theme', 'light');
-      localStorage.setItem('theme', next);
+      localStorage.setItem('vr-theme', next);
     };
     </script>
 
