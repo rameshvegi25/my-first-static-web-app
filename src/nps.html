@@ -395,6 +395,188 @@
       @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
  
       @media (max-width: 600px) { .hero { padding: 6rem 1.25rem 3rem; min-height: auto; } .page { padding: 0 1rem 6rem; } .fab-whatsapp { display: flex; } }
+
+      /* ─── TIER SECTION ─── */
+      .tier-section { margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s ease 0.35s forwards; }
+      .tier-section .section-label { margin-bottom: 0.5rem; }
+      .tier-section > h2 { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; margin-bottom: 1.1rem; }
+      .tier-section > h2 em { color: var(--accent); font-style: italic; }
+      .tier-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+      @media (max-width: 600px) { .tier-cards { grid-template-columns: 1fr; } }
+      .tier-card {
+        background: var(--surface); border: 1px solid var(--border);
+        border-radius: 16px; padding: 1.5rem 1.6rem; position: relative; overflow: hidden;
+      }
+      .tier-card.tier1 { border-color: rgba(200,169,110,0.28); }
+      .tier-card::before { content: ""; position: absolute; inset: 0; pointer-events: none; }
+      .tier-card.tier1::before { background: radial-gradient(ellipse 80% 60% at 0% 0%, rgba(200,169,110,0.07), transparent 60%); }
+      .tier-card.tier2::before { background: radial-gradient(ellipse 80% 60% at 100% 0%, rgba(138,181,200,0.06), transparent 60%); }
+      .tier-badge {
+        display: inline-flex; align-items: center; gap: 0.4rem;
+        font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600;
+        border-radius: 20px; padding: 3px 10px; margin-bottom: 0.85rem;
+      }
+      .tier1 .tier-badge { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(200,169,110,0.2); }
+      .tier2 .tier-badge { background: rgba(138,181,200,0.1); color: #8ab5c8; border: 1px solid rgba(138,181,200,0.2); }
+      .tier-card h3 { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; margin-bottom: 0.35rem; }
+      .tier-card h3 em { color: var(--accent); font-style: italic; }
+      .tier2 .tier-card h3 em { color: #8ab5c8; }
+      .tier-card-sub { font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; line-height: 1.6; font-weight: 300; }
+      .tier-rows { display: flex; flex-direction: column; gap: 0.45rem; position: relative; z-index: 1; }
+      .tier-row { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; font-size: 0.79rem; }
+      .tier-row-key { color: var(--muted); font-weight: 300; }
+      .tier-row-val { color: var(--text); font-weight: 500; text-align: right; }
+      .tier-row-val.accent { color: var(--accent); }
+      .tier-row-val.blue { color: #8ab5c8; }
+      .tier-divider { height: 1px; background: var(--border); margin: 0.6rem 0; }
+      .tier-note { font-size: 0.73rem; color: var(--muted); font-weight: 300; line-height: 1.55; margin-top: 0.85rem; padding-top: 0.85rem; border-top: 1px solid var(--border); position: relative; z-index: 1; }
+      .tier-note strong { color: var(--text); font-weight: 500; }
+
+      /* ─── ACTIVE CHOICE EXPANDED ─── */
+      .asset-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-top: 1rem; }
+      @media (max-width: 600px) { .asset-grid { grid-template-columns: 1fr; } }
+      .asset-card {
+        background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+        padding: 1rem 1.1rem; transition: border-color 0.2s;
+      }
+      .asset-card:hover { border-color: rgba(200,169,110,0.3); }
+      .asset-letter {
+        width: 32px; height: 32px; border-radius: 8px;
+        display: flex; align-items: center; justify-content: center;
+        font-family: var(--serif); font-size: 1rem; font-weight: 600;
+        margin-bottom: 0.6rem;
+      }
+      .asset-e { background: rgba(200,169,110,0.12); color: var(--accent); }
+      .asset-c { background: rgba(138,181,200,0.1); color: #8ab5c8; }
+      .asset-g { background: rgba(139,200,160,0.1); color: #8bc8a0; }
+      .asset-a { background: rgba(180,130,200,0.1); color: #b482c8; }
+      .asset-name { font-size: 0.88rem; font-weight: 500; color: var(--text); margin-bottom: 0.2rem; }
+      .asset-cap { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.5rem; }
+      .asset-cap strong { color: var(--accent); }
+      .asset-desc { font-size: 0.74rem; color: var(--muted); line-height: 1.55; font-weight: 300; }
+      .active-choice-wrap {
+        background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+        padding: 1.5rem 1.6rem; margin-bottom: 1.5rem;
+        opacity: 0; animation: fadeUp 0.7s ease 0.88s forwards;
+      }
+      .active-choice-wrap .section-label { margin-bottom: 0.4rem; }
+      .active-choice-wrap h2 { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; margin-bottom: 0.35rem; }
+      .active-choice-wrap h2 em { color: var(--accent); font-style: italic; }
+      .active-choice-wrap > p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; font-weight: 300; max-width: 580px; }
+
+      /* ─── MSF SECTION ─── */
+      .msf-section {
+        background: var(--surface); border: 1px solid rgba(200,169,110,0.22);
+        border-radius: 16px; padding: 1.75rem 1.8rem; margin-bottom: 1.5rem;
+        position: relative; overflow: hidden;
+        opacity: 0; animation: fadeUp 0.7s ease 0.9s forwards;
+      }
+      .msf-section::before {
+        content: ""; position: absolute; inset: 0;
+        background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(200,169,110,0.06), transparent 70%);
+        pointer-events: none;
+      }
+      .msf-inner { position: relative; z-index: 1; }
+      .msf-section .section-label { margin-bottom: 0.5rem; }
+      .msf-section h2 { font-family: var(--serif); font-size: 1.45rem; font-weight: 600; margin-bottom: 0.4rem; }
+      .msf-section h2 em { color: var(--accent); font-style: italic; }
+      .msf-intro { font-size: 0.83rem; color: var(--muted); line-height: 1.7; font-weight: 300; max-width: 600px; margin-bottom: 1.5rem; }
+      .msf-funds { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem; }
+      @media (max-width: 600px) { .msf-funds { grid-template-columns: 1fr; } }
+      .msf-fund {
+        background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+        padding: 1.25rem 1.3rem; transition: border-color 0.2s, transform 0.2s;
+      }
+      .msf-fund:hover { border-color: rgba(200,169,110,0.35); transform: translateY(-2px); }
+      .msf-fund-tag { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.5rem; }
+      .msf-fund.equity .msf-fund-tag { color: var(--accent); }
+      .msf-fund.income .msf-fund-tag { color: #8ab5c8; }
+      .msf-fund-name { font-family: var(--serif); font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem; }
+      .msf-fund-tagline { font-size: 0.76rem; color: var(--muted); font-weight: 300; margin-bottom: 0.85rem; line-height: 1.5; }
+      .msf-fund-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+      .msf-pill {
+        display: inline-flex; align-items: center; gap: 0.3rem;
+        font-size: 0.7rem; border-radius: 20px; padding: 0.2rem 0.65rem; font-weight: 500;
+      }
+      .msf-fund.equity .msf-pill { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(200,169,110,0.2); }
+      .msf-fund.income .msf-pill { background: rgba(138,181,200,0.1); color: #8ab5c8; border: 1px solid rgba(138,181,200,0.2); }
+      .msf-note { font-size: 0.75rem; color: var(--muted); line-height: 1.6; font-weight: 300; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 0.9rem 1.1rem; }
+      .msf-note strong { color: var(--text); font-weight: 500; }
+
+      /* ─── TAX TABLE ─── */
+      .tax-section {
+        background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+        padding: 1.5rem 1.6rem; margin-bottom: 1.5rem;
+        opacity: 0; animation: fadeUp 0.7s ease 0.93s forwards;
+      }
+      .tax-section .section-label { margin-bottom: 0.4rem; }
+      .tax-section h2 { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; margin-bottom: 0.35rem; }
+      .tax-section h2 em { color: var(--accent); font-style: italic; }
+      .tax-section > p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; font-weight: 300; margin-bottom: 1.25rem; }
+      .tax-rows { display: flex; flex-direction: column; gap: 0.6rem; }
+      .tax-row {
+        background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+        padding: 0.9rem 1.1rem; display: grid; grid-template-columns: 1fr 2fr;
+        gap: 0.75rem; align-items: start;
+      }
+      @media (max-width: 560px) { .tax-row { grid-template-columns: 1fr; gap: 0.35rem; } }
+      .tax-row-section { font-size: 0.72rem; font-weight: 600; color: var(--accent); letter-spacing: 0.06em; }
+      .tax-row-body { font-size: 0.79rem; color: var(--text); line-height: 1.6; }
+      .tax-row-body span { color: var(--muted); font-weight: 300; display: block; font-size: 0.74rem; margin-top: 0.25rem; }
+      .tax-regime-note { font-size: 0.73rem; color: var(--muted); font-weight: 300; line-height: 1.6; margin-top: 1rem; background: var(--accent-dim); border: 1px solid rgba(200,169,110,0.15); border-radius: 10px; padding: 0.8rem 1rem; }
+      .tax-regime-note strong { color: var(--accent); font-weight: 500; }
+
+      /* ─── WITHDRAWAL / EXIT ─── */
+      .exit-section {
+        background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+        padding: 1.5rem 1.6rem; margin-bottom: 1.5rem;
+        opacity: 0; animation: fadeUp 0.7s ease 0.96s forwards;
+      }
+      .exit-section .section-label { margin-bottom: 0.4rem; }
+      .exit-section h2 { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; margin-bottom: 0.35rem; }
+      .exit-section h2 em { color: var(--accent); font-style: italic; }
+      .exit-section > p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; font-weight: 300; margin-bottom: 1.25rem; }
+      .exit-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.8rem; }
+      @media (max-width: 600px) { .exit-cards { grid-template-columns: 1fr; } }
+      .exit-card {
+        background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+        padding: 1.1rem 1.15rem; transition: border-color 0.2s;
+      }
+      .exit-card:hover { border-color: rgba(200,169,110,0.3); }
+      .exit-card-icon { font-size: 1.2rem; margin-bottom: 0.5rem; }
+      .exit-card-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; margin-bottom: 0.3rem; }
+      .exit-card-title em { color: var(--accent); font-style: italic; }
+      .exit-card-body { font-size: 0.75rem; color: var(--muted); line-height: 1.6; font-weight: 300; }
+      .exit-card-body strong { color: var(--text); font-weight: 500; }
+
+      /* ─── ANNUITY ─── */
+      .annuity-section {
+        background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+        padding: 1.5rem 1.6rem; margin-bottom: 1.5rem;
+        opacity: 0; animation: fadeUp 0.7s ease 0.99s forwards;
+      }
+      .annuity-section .section-label { margin-bottom: 0.4rem; }
+      .annuity-section h2 { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; margin-bottom: 0.35rem; }
+      .annuity-section h2 em { color: var(--accent); font-style: italic; }
+      .annuity-section > p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; font-weight: 300; margin-bottom: 1.25rem; }
+      .annuity-types { display: flex; flex-direction: column; gap: 0.55rem; }
+      .annuity-type { display: flex; gap: 0.9rem; align-items: flex-start; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 0.9rem 1rem; }
+      .annuity-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 5px; }
+      .annuity-type-name { font-size: 0.82rem; font-weight: 500; color: var(--text); margin-bottom: 0.15rem; }
+      .annuity-type-desc { font-size: 0.74rem; color: var(--muted); line-height: 1.55; font-weight: 300; }
+
+      /* ─── VATSALYA ─── */
+      .vatsalya-card {
+        background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+        padding: 1.4rem 1.6rem; margin-bottom: 1.5rem; display: flex; gap: 1.1rem;
+        opacity: 0; animation: fadeUp 0.7s ease 1.02s forwards;
+      }
+      .vatsalya-icon { font-size: 2rem; flex-shrink: 0; }
+      .vatsalya-body .section-label { margin-bottom: 0.35rem; }
+      .vatsalya-body h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; }
+      .vatsalya-body h3 em { color: var(--accent); font-style: italic; }
+      .vatsalya-body p { font-size: 0.81rem; color: var(--muted); line-height: 1.65; font-weight: 300; }
+      .vatsalya-body p strong { color: var(--text); font-weight: 500; }
     </style>
   </head>
   <body>
@@ -501,6 +683,91 @@
             <div class="how-step-icon">🏁</div>
             <div class="how-step-title"><em>Exit</em> at 60</div>
             <div class="how-step-body">At retirement (age 60), withdraw <strong>80% as a lump sum</strong>, tax-free. The remaining 20% converts into a monthly pension — income for life.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TIER I vs TIER II -->
+      <div class="tier-section">
+        <div class="section-label">✦ Account Types</div>
+        <h2>Tier I &amp; Tier II — <em>two different animals.</em></h2>
+        <div class="tier-cards">
+
+          <div class="tier-card tier1">
+            <div class="tier-badge">✦ Tier I — Pension Account</div>
+            <h3>The <em>retirement</em> core</h3>
+            <p class="tier-card-sub">The primary NPS account. This is where your retirement corpus lives — locked, protected, and growing. Mandatory if you want to open NPS at all.</p>
+            <div class="tier-rows">
+              <div class="tier-row">
+                <span class="tier-row-key">Min to open</span>
+                <span class="tier-row-val accent">₹500</span>
+              </div>
+              <div class="tier-row">
+                <span class="tier-row-key">Min per year</span>
+                <span class="tier-row-val">₹1,000 to stay active</span>
+              </div>
+              <div class="tier-row">
+                <span class="tier-row-key">Withdrawal</span>
+                <span class="tier-row-val">Locked till age 60</span>
+              </div>
+              <div class="tier-row">
+                <span class="tier-row-key">Partial withdrawal</span>
+                <span class="tier-row-val">Allowed after 3 years (specific reasons)</span>
+              </div>
+              <div class="tier-row">
+                <span class="tier-row-key">At exit (age 60)</span>
+                <span class="tier-row-val accent">Up to 80% lump sum + 20% annuity</span>
+              </div>
+              <div class="tier-divider"></div>
+              <div class="tier-row">
+                <span class="tier-row-key">Tax benefit</span>
+                <span class="tier-row-val">80CCD(1), 80CCD(1B), 80CCD(2)</span>
+              </div>
+              <div class="tier-row">
+                <span class="tier-row-key">Lump sum at exit</span>
+                <span class="tier-row-val accent">Fully tax-free</span>
+              </div>
+            </div>
+            <div class="tier-note"><strong>This is the NPS.</strong> Every pension benefit, tax deduction, and lifecycle fund — it all lives here. You cannot opt out of Tier I if you want NPS.</div>
+          </div>
+
+          <div class="tier-card tier2">
+            <div class="tier-badge" style="background:rgba(138,181,200,0.1);color:#8ab5c8;border:1px solid rgba(138,181,200,0.2);">◆ Tier II — Savings Account</div>
+            <h3>The <em>flexible</em> layer</h3>
+            <p class="tier-card-sub">An optional, voluntary account linked to your Tier I PRAN. Withdraw anytime — no lock-in, no penalty. Think of it as a flexible investment account under the NPS umbrella.</p>
+            <div class="tier-rows">
+              <div class="tier-row">
+                <span class="tier-row-key">Requires</span>
+                <span class="tier-row-val blue">Active Tier I account</span>
+              </div>
+              <div class="tier-row">
+                <span class="tier-row-key">Min to open</span>
+                <span class="tier-row-val">₹1,000</span>
+              </div>
+              <div class="tier-row">
+                <span class="tier-row-key">Min per contribution</span>
+                <span class="tier-row-val">₹250</span>
+              </div>
+              <div class="tier-row">
+                <span class="tier-row-key">Withdrawal</span>
+                <span class="tier-row-val blue">Anytime — full or partial</span>
+              </div>
+              <div class="tier-row">
+                <span class="tier-row-key">Minimum balance</span>
+                <span class="tier-row-val">₹2,000 to keep account active</span>
+              </div>
+              <div class="tier-divider"></div>
+              <div class="tier-row">
+                <span class="tier-row-key">Tax benefit</span>
+                <span class="tier-row-val" style="color:var(--muted);">No deduction (Old or New regime)</span>
+              </div>
+              <div class="tier-row">
+                <span class="tier-row-key">Gains taxable?</span>
+                <span class="tier-row-val" style="color:var(--muted);">Yes — treated as capital gains</span>
+              </div>
+            </div>
+            <div class="tier-note" style="border-color:rgba(138,181,200,0.15);">Tier II has no tax advantage — it's simply a convenient investment account with NPS's low-cost professional fund management. Not a must-have, but useful if you want to keep things consolidated.</div>
           </div>
 
         </div>
@@ -625,13 +892,207 @@
         </div>
       </div>
 
-      <!-- ACTIVE CHOICE -->
-      <div class="active-choice">
-        <div class="active-choice-icon">🎛️</div>
-        <div class="active-choice-body">
-          <div class="section-label">✦ Active Choice</div>
-          <h3>You can also manage it yourself — but do you want to?</h3>
-          <p>Active Choice lets you manually set your own allocation across equity, corporate bonds, and government securities — and rebalance it over time. <em>This puts the decision entirely in your hands for money that is meant to last a lifetime.</em> Unless you're deeply familiar with asset allocation and willing to actively manage it year after year, Auto-Choice is the more sensible path for most people.</p>
+      <!-- ACTIVE CHOICE EXPANDED -->
+      <div class="active-choice-wrap">
+        <div class="section-label">✦ Active Choice</div>
+        <h2>Build your own <em>allocation.</em></h2>
+        <p>If Auto-Choice is the "set and forget" path, Active Choice is for subscribers who want control. You manually decide how to split your contributions across four asset classes — and you can rebalance once a year.</p>
+
+        <div class="asset-grid">
+          <div class="asset-card">
+            <div class="asset-letter asset-e">E</div>
+            <div class="asset-name">Equity (E)</div>
+            <div class="asset-cap">Max <strong>75%</strong> (Common Schemes) · Up to <strong>100%</strong> under MSF</div>
+            <div class="asset-desc">Invested in stocks via index-tracking strategies. Highest long-term return potential, highest short-term volatility. Equity exposure is capped at 75% in age 50 and reduces 2.5% per year after that under common scheme auto-choice.</div>
+          </div>
+          <div class="asset-card">
+            <div class="asset-letter asset-c">C</div>
+            <div class="asset-name">Corporate Bonds (C)</div>
+            <div class="asset-cap">Max <strong>100%</strong></div>
+            <div class="asset-desc">AA or higher-rated corporate debt. More return than government securities, slightly more risk. A good middle layer for those who want some yield without full equity exposure.</div>
+          </div>
+          <div class="asset-card">
+            <div class="asset-letter asset-g">G</div>
+            <div class="asset-name">Government Securities (G)</div>
+            <div class="asset-cap">Max <strong>100%</strong></div>
+            <div class="asset-desc">Central and state government bonds. Zero credit risk, steady returns. The safest NPS asset class — ideal as you approach retirement or as a capital-preservation layer.</div>
+          </div>
+          <div class="asset-card">
+            <div class="asset-letter asset-a">A</div>
+            <div class="asset-name">Alternative Assets (A)</div>
+            <div class="asset-cap">Max <strong>5%</strong></div>
+            <div class="asset-desc">REITs, InvITs, and other alternative investments. Limited allocation, but adds a layer of diversification beyond traditional debt and equity. Most investors can safely ignore this class.</div>
+          </div>
+        </div>
+
+        <div style="margin-top:1rem;font-size:0.79rem;color:var(--muted);line-height:1.65;font-weight:300;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:0.85rem 1.1rem;">
+          <strong style="color:var(--text);font-weight:500;">My honest take:</strong> Active Choice demands that you revisit your allocation annually, think clearly about rebalancing, and not panic during market downturns. For money that must last a lifetime, most people are better served by Auto-Choice. Active Choice is appropriate if you are deeply familiar with asset allocation and are genuinely committed to managing it over decades.
+        </div>
+      </div>
+
+      <!-- MSF SECTION -->
+      <div class="msf-section">
+        <div class="msf-inner">
+          <div class="section-label">✦ New in 2025 — Multiple Scheme Framework</div>
+          <h2>HDFC's new funds — <em>your choice just got wider.</em></h2>
+          <p class="msf-intro">From 1 October 2025, PFRDA introduced the Multiple Scheme Framework (MSF) — a structural upgrade that allows Pension Fund Managers to offer multiple distinct schemes beyond the traditional Common Schemes (Auto-Choice and Active Choice). Under MSF, private sector subscribers can now invest up to <strong style="color:var(--accent)">100% in equity</strong>, breaking the earlier 75% cap. Each scheme has its own mandate, benchmark, and NAV — making performance tracking cleaner and investment strategy sharper. HDFC Pension was among the first to launch under this framework.</p>
+
+          <div class="msf-funds">
+            <div class="msf-fund equity">
+              <div class="msf-fund-tag">▲ Equity · MSF · HDFC</div>
+              <div class="msf-fund-name">HDFC PF NPS Equity Advantage Fund</div>
+              <div class="msf-fund-tagline">Built for long-horizon investors who want maximum equity exposure. Allows up to 100% equity allocation — a first in NPS — making it genuinely competitive with long-term equity mutual funds, but with the permanent pension orientation of NPS.</div>
+              <div class="msf-fund-pills">
+                <span class="msf-pill">Up to 100% Equity</span>
+                <span class="msf-pill">Tier I & II</span>
+                <span class="msf-pill">Long-term growth</span>
+              </div>
+            </div>
+
+            <div class="msf-fund income">
+              <div class="msf-fund-tag">◆ Balanced · MSF · HDFC</div>
+              <div class="msf-fund-name">HDFC PF NPS Surakshit Income Fund</div>
+              <div class="msf-fund-tagline">A multi-asset fund built for stability and consistent growth. Invests across equity, corporate bonds, and government securities with a risk-balanced approach. Suited for investors who want diversification without managing it themselves.</div>
+              <div class="msf-fund-pills">
+                <span class="msf-pill">Multi-asset</span>
+                <span class="msf-pill">Tier I & II</span>
+                <span class="msf-pill">Risk-balanced</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="msf-note">
+            <strong>MSF vs Common Schemes — what this means for you:</strong> Existing schemes (Auto-Choice LC-75/50/25, Active Choice) remain unchanged and are now referred to as Common Schemes. MSF schemes are new additions — you can hold both simultaneously. One important rule: <strong>Common Scheme funds cannot be switched into MSF schemes.</strong> New contributions, however, can be directed to either. MSF schemes require a minimum vesting period of 15 years (or until age 60, whichever applies). MSF also enables PFMs to offer value-added services like health benefits, will creation, and accident cover as optional add-ons — separate from core NPS charges.
+          </div>
+        </div>
+      </div>
+
+      <!-- TAX BENEFITS -->
+      <div class="tax-section">
+        <div class="section-label">✦ Tax Benefits</div>
+        <h2>Three deductions — <em>stacked.</em></h2>
+        <p>NPS has one of the most generous tax structures in India. Unlike most investments that use a single 80C bucket, NPS offers three separate deduction windows — some exclusive to it.</p>
+
+        <div class="tax-rows">
+          <div class="tax-row">
+            <div class="tax-row-section">80CCD(1)<br/>Self-contribution</div>
+            <div class="tax-row-body">
+              Up to 10% of Salary (Basic+DA) for salaried; up to 20% of Gross Annual Income for self-employed — deductible, within the ₹1.5 lakh 80C limit.
+              <span>This is part of your existing 80C limit, not in addition to it. If your 80C is already full (PPF, ELSS, etc.), only 80CCD(1B) and 80CCD(2) add new room. Old tax regime only.</span>
+            </div>
+          </div>
+          <div class="tax-row">
+            <div class="tax-row-section">80CCD(1B)<br/>Additional self</div>
+            <div class="tax-row-body">
+              Up to <strong style="color:var(--accent)">₹50,000 extra</strong> — exclusively for NPS, completely over and above the ₹1.5 lakh 80C ceiling.
+              <span>This is the real gem. Even if your 80C is completely exhausted, you can still save tax on ₹50,000 more through NPS. Old tax regime only.</span>
+            </div>
+          </div>
+          <div class="tax-row">
+            <div class="tax-row-section">80CCD(2)<br/>Employer's NPS</div>
+            <div class="tax-row-body">
+              If your employer contributes to NPS on your behalf: up to 10% of Salary (Basic+DA) for private employees; up to 14% for government employees — deductible from your taxable income, up to ₹7.5 lakh total.
+              <span>This is the only NPS deduction that works in the <strong style="color:var(--accent)">New Tax Regime</strong>. If your CTC has a voluntary NPS component, this is free money in tax savings — restructure your CTC if needed.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tax-regime-note">
+          <strong>Old vs New Regime:</strong> 80CCD(1) and 80CCD(1B) work only under the Old Tax Regime. If you've opted for the New Regime (which most high-income earners have), your only NPS tax lever is <strong>80CCD(2) via employer contribution</strong>. At retirement, the lump sum withdrawal (up to 80% of corpus) is fully tax-free under both regimes. Annuity income is taxable as per your slab in the year received. Please consult your CA for personalised tax planning.
+        </div>
+      </div>
+
+      <!-- EXIT & WITHDRAWAL -->
+      <div class="exit-section">
+        <div class="section-label">✦ Withdrawal Rules</div>
+        <h2>When and how you can <em>access your money.</em></h2>
+        <p>NPS is built to stay locked — but it's not completely inflexible. There are three distinct scenarios for accessing your NPS corpus.</p>
+
+        <div class="exit-cards">
+          <div class="exit-card">
+            <div class="exit-card-icon">🏁</div>
+            <div class="exit-card-title"><em>Normal exit</em> at 60</div>
+            <div class="exit-card-body">
+              At retirement (age 60), you can withdraw <strong>up to 80% of your corpus as a lump sum</strong> — fully tax-free. The remaining <strong>minimum 20%</strong> must be used to purchase an annuity for a lifelong monthly pension.<br/><br/>
+              If your total corpus at retirement is <strong>below ₹5 lakh</strong>, you can withdraw the entire amount as a lump sum with no annuity requirement.
+            </div>
+          </div>
+
+          <div class="exit-card">
+            <div class="exit-card-icon">⏩</div>
+            <div class="exit-card-title"><em>Premature exit</em> before 60</div>
+            <div class="exit-card-body">
+              If you exit before age 60 (after at least 5 years in NPS), you can only withdraw <strong>20% as lump sum</strong>. The remaining <strong>80% must go into an annuity</strong>.<br/><br/>
+              Exception: if total corpus is below ₹2.5 lakh, full withdrawal is permitted. Premature exit before 5 years is only permitted in limited cases (death, terminal illness).
+            </div>
+          </div>
+
+          <div class="exit-card">
+            <div class="exit-card-icon">🔓</div>
+            <div class="exit-card-title"><em>Partial withdrawal</em></div>
+            <div class="exit-card-body">
+              After <strong>3 years</strong> of joining NPS Tier I, you can withdraw up to <strong>25% of your own contributions</strong> (not employer's) for specific purposes:<br/><br/>
+              Higher education or marriage of children · Construction or purchase of first home · Critical illness treatment · Disability · Startup business (recognised under Startup India) · Skill development.<br/><br/>
+              Permitted <strong>maximum 3 times</strong> in the entire NPS tenure. Tax-free.
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:1rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:0.85rem 1.1rem;">
+          <div style="font-size:0.78rem;color:var(--text);font-weight:500;margin-bottom:0.3rem;">Deferral option — stay invested after 60</div>
+          <div style="font-size:0.76rem;color:var(--muted);line-height:1.6;font-weight:300;">You don't have to withdraw at 60. You can continue staying invested in NPS until <strong style="color:var(--text);font-weight:500;">age 85</strong> (as per current PFRDA rules) if you don't immediately need the corpus. This is especially powerful for early retirees — your corpus keeps compounding while your other income sources cover expenses.</div>
+        </div>
+      </div>
+
+      <!-- ANNUITY -->
+      <div class="annuity-section">
+        <div class="section-label">✦ The Pension Piece</div>
+        <h2>Annuity — your <em>income for life.</em></h2>
+        <p>The portion of your NPS corpus that must be used to buy an annuity (minimum 20% at normal exit) is routed to PFRDA-empanelled Annuity Service Providers (ASPs) — predominantly life insurance companies. The annuity premium is paid to the ASP; they pay you a fixed monthly/quarterly/yearly pension for life based on the plan you choose. The annuity income is taxable as per your income slab at the time of receipt.</p>
+
+        <div class="annuity-types">
+          <div class="annuity-type">
+            <div class="annuity-dot"></div>
+            <div>
+              <div class="annuity-type-name">Life annuity (without return of purchase price)</div>
+              <div class="annuity-type-desc">Pension paid for life. Stops at death. Highest monthly amount for the same corpus since no residual value is returned to nominees. Best if your primary goal is maximum monthly income.</div>
+            </div>
+          </div>
+          <div class="annuity-type">
+            <div class="annuity-dot"></div>
+            <div>
+              <div class="annuity-type-name">Life annuity with return of purchase price</div>
+              <div class="annuity-type-desc">Pension paid for life; the full annuity corpus is returned to nominees on death. Lower monthly amount compared to pure life annuity. Balances income with leaving something behind.</div>
+            </div>
+          </div>
+          <div class="annuity-type">
+            <div class="annuity-dot"></div>
+            <div>
+              <div class="annuity-type-name">Joint life annuity (with spouse)</div>
+              <div class="annuity-type-desc">Pension continues to the surviving spouse after your death. Some variants include return of purchase price on death of last survivor. Essential if your spouse has no independent income.</div>
+            </div>
+          </div>
+          <div class="annuity-type">
+            <div class="annuity-dot"></div>
+            <div>
+              <div class="annuity-type-name">Annuity with guaranteed period (5, 10, 15, 20 years)</div>
+              <div class="annuity-type-desc">Pension paid for life with a guaranteed minimum period. If you die within the guaranteed period, nominees receive the pension for the remainder of that period. After the guaranteed period, pension continues till death.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:1rem;font-size:0.76rem;color:var(--muted);line-height:1.6;font-weight:300;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:0.85rem 1.1rem;">
+          <strong style="color:var(--text);font-weight:500;">My view on annuity:</strong> Annuity rates in India remain low — typically 5–7% per year on the purchase price, with the income fully taxable. This is why I position NPS on the <em>minimum 20%</em> annuity rule — the rest of your retirement corpus is better served by equity mutual funds, which have historically delivered far higher inflation-adjusted returns. NPS does the discipline; mutual funds do the heavy lifting for the lump sum.
+        </div>
+      </div>
+
+      <!-- NPS VATSALYA -->
+      <div class="vatsalya-card">
+        <div class="vatsalya-icon">👧</div>
+        <div class="vatsalya-body">
+          <div class="section-label">✦ NPS Vatsalya</div>
+          <h3>Start NPS for your <em>child.</em></h3>
+          <p>Introduced in 2024, NPS Vatsalya allows parents and guardians to open an NPS account for minors (under 18). The account is managed by the guardian until the child turns 18, after which it can be converted to a regular NPS account and the child takes over. <strong>Minimum contribution: ₹1,000 per year.</strong> No maximum limit. This is one of the most powerful compounding setups you can give a child — a 30-40 year head start on retirement savings. Available under all Pension Fund Managers, including HDFC Pension.</p>
         </div>
       </div>
 
@@ -671,7 +1132,7 @@
         <div class="basics-card">
           <div class="section-label">✦ At retirement — the 80-20 rule</div>
           <h3>Take <em>80%</em> as lump sum, rest as pension</h3>
-          <p>At 60, you can withdraw up to <strong>80% of your corpus as a lump sum</strong>, tax-free. The remaining <strong>20% goes into an annuity</strong> — a regular monthly pension for life.</p>
+          <p>At 60, you can withdraw up to <strong>80% of your corpus as a lump sum</strong>, tax-free. The remaining <strong>20% goes into an annuity</strong> — a regular monthly pension for life. You can choose to take less than 80% lump sum and put more into annuity, but not less than 20% annuity.</p>
           <div class="exit-bar-wrap">
             <div class="exit-bar">
               <div class="exit-bar-lump"></div>
