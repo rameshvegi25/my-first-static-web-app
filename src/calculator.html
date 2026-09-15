@@ -2311,6 +2311,20 @@
         syncSlider(id, valIds[id]);
       });
 
+      // ── MOBILE FIX: blur any focused text field before a slider drag begins ──
+      // On mobile, touching a range slider while a text input is focused can dismiss
+      // the on-screen keyboard *during* the drag, reflowing the page so the touch
+      // point lands back on the text field and steals focus mid-slide. Blurring
+      // proactively on touchstart lets the keyboard close and layout settle first.
+      document.querySelectorAll('input[type="range"]').forEach(function(slider) {
+        slider.addEventListener('touchstart', function() {
+          var active = document.activeElement;
+          if (active && active !== slider && active.tagName === 'INPUT' && active.type !== 'range') {
+            active.blur();
+          }
+        }, { passive: true });
+      });
+
       // ── SHARED: skip-comma-on-backspace ──
       // When cursor is right after a comma (or a selection covers only commas),
       // treat Backspace as deleting the digit immediately before the comma.
